@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon
   id="plugin.video.yeuphim1"
-  version="1.3"
+  version="1.4"
   name="*[COLOR yellow]Yeu-Phim[/COLOR]"
-  provider-name="vinhcomp">
+  provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
