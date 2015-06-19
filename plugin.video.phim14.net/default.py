@@ -230,7 +230,7 @@ def i1IiIiiI ( url ) :
  IIiII = IIiII . replace ( '> <' , '><' )
  return IIiII
  if 80 - 80: ooO00oOoo . iiI1i1
-IIi = xbmc . translatePath ( xbmcaddon . Addon ( 'plugin.video.kodi4vn.phim14.net' ) . getAddonInfo ( 'profile' ) )
+IIi = xbmc . translatePath ( xbmcaddon . Addon ( 'plugin.video.phim14.net' ) . getAddonInfo ( 'profile' ) )
 if 26 - 26: iIi
 if os . path . exists ( IIi ) == False :
  os . mkdir ( IIi )

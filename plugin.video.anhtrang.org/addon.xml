@@ -1,4 +1,4 @@
-<addon id="plugin.video.anhtrang.org" name="*[COLOR yellow]Anh-Trang[/COLOR]" provider-name="Vinh Computer Repair" version="1.5">
+<addon id="plugin.video.anhtrang.org" name="*[COLOR yellow]Anh-Trang[/COLOR]" provider-name="Vinh Computer Repair" version="1.6">
   <requires>
     <import addon="xbmc.python" version="2.1.0" />
     <import addon="script.module.xbmcswift2" version="1.3.1" />

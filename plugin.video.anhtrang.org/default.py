@@ -223,7 +223,7 @@ def O00 ( url ) :
  i1I1iI = i1I1iI . replace ( '> <' , '><' )
  return i1I1iI
  if 93 - 93: iiiIIii1IIi % iiI1i1 * I1IiiI
-Ii11Ii1I = xbmc . translatePath ( xbmcaddon . Addon ( 'plugin.video.kodi4vn.anhtrang.org' ) . getAddonInfo ( 'profile' ) )
+Ii11Ii1I = xbmc . translatePath ( xbmcaddon . Addon ( 'plugin.video.anhtrang.org' ) . getAddonInfo ( 'profile' ) )
 if 72 - 72: iIi / I1IiiI * OOooOOo - O0OOo
 if os . path . exists ( Ii11Ii1I ) == False :
  os . mkdir ( Ii11Ii1I )

@@ -166,7 +166,7 @@ def oOOoO0 ( url , mid ) :
    oo0O0oOOO00oO = zlib . decompress ( oo0O0oOOO00oO , 16 + zlib . MAX_WBITS )
   return oo0O0oOOO00oO
   if 83 - 83: iII111iiiii11
-Iii111II = xbmc . translatePath ( xbmcaddon . Addon ( 'plugin.video.kodi4vn.moviebox' ) . getAddonInfo ( 'profile' ) )
+Iii111II = xbmc . translatePath ( xbmcaddon . Addon ( 'plugin.video.moviebox' ) . getAddonInfo ( 'profile' ) )
 if 9 - 9: I11i
 if os . path . exists ( Iii111II ) == False :
  os . mkdir ( Iii111II )

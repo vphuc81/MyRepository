@@ -1,4 +1,4 @@
-<addon id="plugin.video.moviebox" name="*[COLOR yellow]Movie-Box[/COLOR]" provider-name="Vinh Computer Repair" version="1.4">
+<addon id="plugin.video.moviebox" name="*[COLOR yellow]Movie-Box[/COLOR]" provider-name="Vinh Computer Repair" version="1.6">
   <requires>
     <import addon="xbmc.python" version="2.1.0" />
     <import addon="script.module.xbmcswift2" version="1.3.1" />
