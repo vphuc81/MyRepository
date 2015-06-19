@@ -88,7 +88,7 @@
 
 <addon
   id="plugin.video.hdonlinevn"
-  version="1.4"
+  version="1.5"
   name="*[COLOR yellow]HD-Online[/COLOR]"
   provider-name="Vinh Computer Repair">
   <requires>
