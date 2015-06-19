@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.accessasiatv" name="Accessasia TV" version="1.4" provider-name="Vinh Computer Repair">
+<addon id="plugin.video.accessasiatv" name="*[COLOR yellow]Accessasia-TV[/COLOR]" version="1.4" provider-name="Vinh Computer Repair">
 <requires> 
 	<import addon="xbmc.python" version="2.1.0"/>   
 </requires>
