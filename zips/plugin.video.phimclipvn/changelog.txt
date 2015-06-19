@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon
+  id="plugin.video.kodi4vn.phimclipvn"
+  version="1.0.6"
+  name="*[COLOR yellow]Phim ClipVN[/COLOR]"
+  provider-name="thongld">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.urlresolver" version="0.0.1"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Clip.vn</summary>
+    <description>Watch free Clip.vn (Vietnamese) Videos</description>
+    <platform>all</platform>
+  </extension>
+</addon>

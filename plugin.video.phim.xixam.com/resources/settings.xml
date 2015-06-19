@@ -1,0 +1,3 @@
+<settings>
+	<setting id="HQ" type="bool" label="Auto choose best quality (recommended for high speed internet)" default="false"/>
+</settings>

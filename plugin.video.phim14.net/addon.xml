@@ -1,0 +1,15 @@
+<addon id="plugin.video.phim14.net" name="*[COLOR yellow]Phim-14.net[/COLOR]" provider-name="Vinh Computer Repair" version="1.4">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0" />
+    <import addon="script.module.xbmcswift2" version="1.3.1" />
+    <import addon="plugin.video.youtube" version="4.4.1" />
+  </requires>
+  <extension library="default.py" point="xbmc.python.pluginsource">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary>Watch free movies from phim14.net (phim lồng tiếng, thuyết minh tiếng Việt)</summary>
+    <description>Watch free movies from phim14.net (phim lồng tiếng, thuyết minh tiếng Việt)</description>
+  </extension>
+</addon>

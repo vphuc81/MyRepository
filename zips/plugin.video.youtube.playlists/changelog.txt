@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="plugin.video.kodi4vn.youtube.playlists" name="*[COLOR yellow]VIP Playlists[/COLOR]" version="1.0.2" provider-name="thongld">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary lang="en">Watch VIP YouTube Playlists</summary>
+        <language></language>
+        <description lang="en">Watch VIP YouTube Playlists</description>
+    </extension>
+</addon>

@@ -1,0 +1,15 @@
+<addon id="plugin.video.phimvang.org" name="*[COLOR yellow]Phim-Vang.org[/COLOR]" provider-name="Vinh Computer Repair" version="1.4">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0" />
+    <import addon="script.module.xbmcswift2" version="1.3.1" />
+    <import addon="plugin.video.youtube" version="4.4.1" />
+  </requires>
+  <extension library="default.py" point="xbmc.python.pluginsource">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary>Watch free movies from phimvang.org</summary>
+    <description>Watch free movies from phimvang.org</description>
+  </extension>
+</addon>
