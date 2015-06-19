@@ -5,7 +5,7 @@ from math import radians , sqrt , sin , cos , atan2
 from operator import itemgetter
 import xmltodict
 if 64 - 64: i11iIiiIii
-OO0o = 'plugin.video.kodi4vn.viettv24'
+OO0o = 'plugin.video.viettv24'
 Oo0Ooo = xbmcaddon . Addon ( OO0o )
 O0O0OO0O0O0 = xbmc . translatePath ( Oo0Ooo . getAddonInfo ( 'profile' ) )
 iiiii = int ( sys . argv [ 1 ] )
