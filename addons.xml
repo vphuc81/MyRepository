@@ -174,7 +174,7 @@
 
 <addon
   id="plugin.video.phim.xixam.com"
-  version="1.4"
+  version="1.5"
   name="*[COLOR yellow]Xi-Xam[/COLOR]"
   provider-name="Vinh Computer Repair">
   <requires>
