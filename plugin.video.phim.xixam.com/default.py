@@ -2,7 +2,7 @@
 # coding=utf8
 import xbmc , xbmcaddon , xbmcplugin , xbmcgui , sys , urllib , urllib2 , re , urlresolver , os , zlib , base64
 if 64 - 64: i11iIiiIii
-OO0o = 'plugin.video.kodi4vn.phim.xixam.com'
+OO0o = 'plugin.video.phim.xixam.com'
 Oo0Ooo = xbmcaddon . Addon ( OO0o )
 O0O0OO0O0O0 = int ( sys . argv [ 1 ] )
 iiiii = "http://phim.xixam.com"
