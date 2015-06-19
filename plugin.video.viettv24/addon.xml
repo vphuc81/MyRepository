@@ -2,7 +2,7 @@
 <addon
   id="plugin.video.viettv24"
   version="1.4"
-  name="*[COLOR yellow]VietTV24.com[/COLOR]"
+  name="*[COLOR yellow]Viet-TV24[/COLOR]"
   provider-name="Vinh Computer Repair">
   <requires>
         <import addon="xbmc.python" version="2.1.0"/>
