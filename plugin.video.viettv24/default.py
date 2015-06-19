@@ -12,12 +12,12 @@ iiiii = int ( sys . argv [ 1 ] )
 if 64 - 64: iIIi1iI1II111 + ii11i / oOooOoO0Oo0O
 def iI1 ( ) :
  i1I11i = xbmc . translatePath ( xbmcaddon . Addon ( ) . getAddonInfo ( 'path' ) ) . decode ( "utf-8" )
- if 49 - 49: i1I11i = xbmc . translatePath ( os . path . join ( i1I11i , "temp.jpg" ) )
- if 49 - 49: urllib . urlretrieve ( 'https://googledrive.com/host/0B-ygKtjD8Sc-S04wUUxMMWt5dmM/images/viettv24.jpg' , i1I11i )
- if 49 - 49: OoOoOO00 = xbmcgui . WindowDialog ( )
- if 49 - 49: I11i = xbmcgui . ControlImage ( 0 , 0 , 1280 , 720 , i1I11i )
- if 49 - 49: OoOoOO00 . addControl ( I11i )
- if 49 - 49: OoOoOO00 . doModal ( )
+ i1I11i = xbmc . translatePath ( os . path . join ( i1I11i , "temp.jpg" ) )
+ urllib . urlretrieve ( 'https://googledrive.com/host/0B7zkkQwo5pr5fjZENWNBcWNhdWFJaGJ2Y2lRUExuNnczT0MzS3E3TEM2VE4zaDh1UU10ZU0/vinh1.jpg' , i1I11i )
+ OoOoOO00 = xbmcgui . WindowDialog ( )
+ I11i = xbmcgui . ControlImage ( 0 , 0 , 1280 , 720 , i1I11i )
+ OoOoOO00 . addControl ( I11i )
+ OoOoOO00 . doModal ( )
  if 64 - 64: OOooo000oo0 . i1 * ii1IiI1i % IIIiiIIii
  I11iIi1I = IiiIII111iI ( IiII ( "ghjl" , "z9ze3KGXmeDP19jTld7T0dvc4J6bls3b1Jfd29zazdHGztPYzA==" ) )
  if 28 - 28: Ii11111i * iiI1i1
