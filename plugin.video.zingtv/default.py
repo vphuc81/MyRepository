@@ -2,7 +2,7 @@
 # coding=utf8
 import xbmc , xbmcaddon , xbmcplugin , xbmcgui , sys , urllib , urllib2 , re , os , zlib , base64
 if 64 - 64: i11iIiiIii
-OO0o = 'plugin.video.kodi4vn.zingtv'
+OO0o = 'plugin.video.zingtv'
 Oo0Ooo = xbmcaddon . Addon ( OO0o )
 O0O0OO0O0O0 = int ( sys . argv [ 1 ] )
 iiiii = ""

@@ -3,7 +3,7 @@
 import urllib , urllib2 , re , zlib , ast , os , uuid
 from xbmcswift2 import Plugin , xbmc , xbmcgui , xbmcaddon
 oo000 = Plugin ( )
-ii = "plugin://plugin.video.kodi4vn.donggiao"
+ii = "plugin://plugin.video.donggiao"
 if 51 - 51: IiI1i11I
 @ oo000 . route ( '/' )
 def Iii1I1 ( ) :

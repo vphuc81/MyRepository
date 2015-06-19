@@ -3,7 +3,7 @@
 import urllib , urllib2 , re , os , uuid , json , htmlentitydefs
 from xbmcswift2 import Plugin , xbmc , xbmcgui , xbmcaddon
 oo000 = Plugin ( )
-ii = "plugin://plugin.video.kodi4vn.kenh108.com"
+ii = "plugin://plugin.video.kenh108.com"
 oOOo = 40
 if 59 - 59: Oo0Ooo . OO0OO0O0O0 * iiiIIii1IIi . iII111iiiii11 % I1IiiI
 @ oo000 . route ( '/' )

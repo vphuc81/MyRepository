@@ -4,7 +4,7 @@ import urllib , urllib2 , re , zlib , os
 from xbmcswift2 import Plugin , xbmc , xbmcgui , xbmcaddon
 from operator import itemgetter
 oo000 = Plugin ( ) 
-ii = "plugin://plugin.video.kodi4vn.anhtrang.org"
+ii = "plugin://plugin.video.anhtrang.org"
 oOOo = 24
 if 59 - 59: Oo0Ooo . OO0OO0O0O0 * iiiIIii1IIi . iII111iiiii11 % I1IiiI
 @ oo000 . route ( '/' )

@@ -3,7 +3,7 @@
 import urllib , urllib2 , zlib , json , os , base64
 from xbmcswift2 import Plugin , xbmc , xbmcgui , xbmcaddon
 oo000 = Plugin ( )
-ii = "plugin://plugin.video.kodi4vn.vtvplus"
+ii = "plugin://plugin.video.vtvplus"
 oOOo = 32
 if 59 - 59: Oo0Ooo . OO0OO0O0O0 * iiiIIii1IIi . iII111iiiii11 % I1IiiI
 @ oo000 . route ( '/' )

@@ -2,7 +2,7 @@
 # coding=utf-8
 import os , xbmc , xbmcaddon , xbmcplugin , xbmcgui , sys , urllib , urllib2 , re , json , base64 , random
 if 64 - 64: i11iIiiIii
-OO0o = 'plugin.video.kodi4vn.hayhaytv'
+OO0o = 'plugin.video.hayhaytv'
 Oo0Ooo = xbmcaddon . Addon ( OO0o )
 O0O0OO0O0O0 = int ( sys . argv [ 1 ] )
 iiiii = "http://api.hayhaytv.vn/"

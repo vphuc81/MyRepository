@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import xbmc , xbmcaddon , xbmcplugin , xbmcgui , sys , urllib , urllib2 , re , os , base64
 if 64 - 64: i11iIiiIii
-OO0o = 'plugin.video.kodi4vn.youtube.vnnews'
+OO0o = 'plugin.video.youtube.vnnews'
 Oo0Ooo = xbmcaddon . Addon ( OO0o )
 O0O0OO0O0O0 = int ( sys . argv [ 1 ] )
 if 5 - 5: iiI / ii1I
