@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.vinh" name="[COLOR blue]Vinh[/COLOR] Repository" version="1.0" provider-name="VinhComp">
+	<extension point="xbmc.addon.repository" name="VinhComp Addon Repository">
+		<info compressed="false">https://googledrive.com/host/0B7zkkQwo5pr5flozc2t1b0NhU24wNmNPWkYwS1hhd2ZZMUdTRW8yMU1rSmFOV2xGS2l5RUk/addons.xml</info>
+		<checksum>https://googledrive.com/host/0B7zkkQwo5pr5flozc2t1b0NhU24wNmNPWkYwS1hhd2ZZMUdTRW8yMU1rSmFOV2xGS2l5RUk/addons.xml.md5</checksum>
+		<datadir zip="true">https://googledrive.com/host/0B7zkkQwo5pr5flozc2t1b0NhU24wNmNPWkYwS1hhd2ZZMUdTRW8yMU1rSmFOV2xGS2l5RUk</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>The Best Third Party Addons for KODI</summary>
+		<description>The Best Third Party Addons for Vietnamese</description>
+		<platform>all</platform>
+	</extension>
+</addon>
