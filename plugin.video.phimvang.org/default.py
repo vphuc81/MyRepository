@@ -266,7 +266,7 @@ def ii1I1i1I ( url ) :
  O0OOO0OOoO0O = O0OOO0OOoO0O . replace ( '> <' , '><' )
  return O0OOO0OOoO0O
  if 70 - 70: ooO00oOoo * OOooOOo * Oo / OOo00O0Oo0oO
-oO = xbmc . translatePath ( xbmcaddon . Addon ( 'plugin.video.kodi4vn.phimvang.org' ) . getAddonInfo ( 'profile' ) )
+oO = xbmc . translatePath ( xbmcaddon . Addon ( 'plugin.video.phimvang.org' ) . getAddonInfo ( 'profile' ) )
 if 93 - 93: I11i % iiI1i1 . I11i * O0OOo % OOo00O0Oo0oO . i1
 if os . path . exists ( oO ) == False :
  os . mkdir ( oO )
