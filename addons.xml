@@ -362,4 +362,17 @@
     <platform>all</platform>
   </extension>
 </addon>
+
+<addon id="repository.vinh" name="[COLOR blue]Vinh[/COLOR] Repository" version="1.0" provider-name="Vinh Computer Repair">
+	<extension point="xbmc.addon.repository" name="Vinh Computer Repair Addon Repository">
+		<info compressed="false">https://github.com/vphuc81/MyRepository/raw/master/addons.xml</info>
+		<checksum>https://github.com/vphuc81/MyRepository/raw/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://github.com/vphuc81/MyRepository/raw/master/zips</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>The Best Third Party Addons for KODI</summary>
+		<description>The Best Third Party Addons for Vietnamese</description>
+		<platform>all</platform>
+	</extension>
+</addon>
 </addons>
