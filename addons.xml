@@ -20,18 +20,18 @@
 
 <addon
   id="plugin.video.viettv24"
-  version="1.8"
-  name="*[COLOR yellow]Viet-TV24[/COLOR]"
+  version="1.9"
+  name="*[COLOR yellow]Viet-TV24.com[/COLOR]"
   provider-name="Vinh Computer Repair">
   <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
+        <import addon="xbmc.python" version="2.1.0"/>
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary></summary>
-    <description></description>
+    <summary>VietTV24.com</summary>
+    <description>Watch hundreds of Vietnamesse and English channels from viettv24.com</description>
     <platform>all</platform>
   </extension>
 </addon>
