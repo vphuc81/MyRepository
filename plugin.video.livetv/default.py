@@ -2,7 +2,7 @@
 #coding=utf-8
 import xbmc,xbmcaddon,xbmcplugin,xbmcgui,sys,urllib,urllib2,re,os,codecs
 
-addonID = 'plugin.video.giaitri'
+addonID = 'plugin.video.livetv'
 addon = xbmcaddon.Addon(addonID)
 pluginhandle = int(sys.argv[1])
 
