@@ -12,58 +12,58 @@ def ooO0OO000o ( ) :
   if re . match ( "[0-9a-f]{2}([-:])[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$" , ii11i . lower ( ) ) : break
  oOooOoO0Oo0O = urllib2 . urlopen ( "http://www.viettv24.com/main/checkActivation.php?MacID=%s&app_id=%s" % ( ii11i , "16" ) ) . read ( )
  if "allowed" in oOooOoO0Oo0O :
-  iI1 ( 'Search' , 'http://www.xom50.com/xem/search/%s/1.html' , 'search' , 'http://echipstore.net/addonicons/Search.jpg' )
-  iI1 ( 'Phim Lẻ' , 'http://www.xom50.com/xem/list/phim-dien-anh' , 'index' , 'http://echipstore.net/addonicons/Movies.jpg' )
-  iI1 ( 'Phim Bộ' , 'http://www.xom50.com/xem/list/phim-bo' , 'index' , 'http://echipstore.net/addonicons/Series.jpg' )
-  iI1 ( 'Phim Bộ theo Quốc Gia' , 'http://www.xom02.com/' , 'videosbyregion' , 'http://echipstore.net/addonicons/Regions.jpg' )
-  iI1 ( 'Phim Lẻ theo Thể Loại' , 'http://www.xom02.com/' , 'videosbycategory' , 'http://echipstore.net/addonicons/Categories.jpg' )
- else :
-  iI1 ( 'Search' , 'http://www.xom50.com/xem/search/%s/1.html' , 'search' , 'http://echipstore.net/addonicons/Search.jpg' )
+  iI1 ( 'Search' , 'http://www.xom60.com/xem/search/%s/1.html' , 'search' , 'http://echipstore.net/addonicons/Search.jpg' )
   iI1 ( 'Phim Lẻ' , 'http://www.xom60.com/xem/the-loai/phim-dien-anh' , 'index' , 'http://echipstore.net/addonicons/Movies.jpg' )
   iI1 ( 'Phim Bộ' , 'http://www.xom60.com/xem/the-loai/phim-bo' , 'index' , 'http://echipstore.net/addonicons/Series.jpg' )
-  iI1 ( 'Phim Bộ theo Quốc Gia' , 'http://www.xom02.com/' , 'videosbyregion' , 'http://echipstore.net/addonicons/Regions.jpg' )
-  iI1 ( 'Phim Lẻ theo Thể Loại' , 'http://www.xom02.com/' , 'videosbycategory' , 'http://echipstore.net/addonicons/Categories.jpg' )
+  iI1 ( 'Phim Bộ theo Quốc Gia' , 'http://www.xom60.com/' , 'videosbyregion' , 'http://echipstore.net/addonicons/Regions.jpg' )
+  iI1 ( 'Phim Lẻ theo Thể Loại' , 'http://www.xom60.com/' , 'videosbycategory' , 'http://echipstore.net/addonicons/Categories.jpg' )
+ else :
+  iI1 ( 'Search' , 'http://www.xom60.com/xem/search/%s/1.html' , 'search' , 'http://echipstore.net/addonicons/Search.jpg' )
+  iI1 ( 'Phim Lẻ' , 'http://www.xom60.com/xem/the-loai/phim-dien-anh' , 'index' , 'http://echipstore.net/addonicons/Movies.jpg' )
+  iI1 ( 'Phim Bộ' , 'http://www.xom60.com/xem/the-loai/phim-bo' , 'index' , 'http://echipstore.net/addonicons/Series.jpg' )
+  iI1 ( 'Phim Bộ theo Quốc Gia' , 'http://www.xom60.com/' , 'videosbyregion' , 'http://echipstore.net/addonicons/Regions.jpg' )
+  iI1 ( 'Phim Lẻ theo Thể Loại' , 'http://www.xom60.com/' , 'videosbycategory' , 'http://echipstore.net/addonicons/Categories.jpg' )
   if 73 - 73: III - oo00oOOo * Oooo000o % OOo . OOO
  IiI1ii1 = xbmc . translatePath ( xbmcaddon . Addon ( ) . getAddonInfo ( 'path' ) ) . decode ( "utf-8" )
- if 49 - 49: IiI1ii1 = xbmc . translatePath ( os . path . join ( IiI1ii1 , "temp.jpg" ) )
- if 49 - 49: urllib . urlretrieve ( 'https://googledrive.com/host/0B-ygKtjD8Sc-S04wUUxMMWt5dmM/images/xomgiaitri.jpg' , IiI1ii1 )
- if 49 - 49: oooOOooo = xbmcgui . ControlImage ( 0 , 0 , 1280 , 720 , IiI1ii1 )
- if 49 - 49: o0oo0oo0OO00 = xbmcgui . WindowDialog ( )
- if 49 - 49: o0oo0oo0OO00 . addControl ( oooOOooo )
- if 49 - 49: o0oo0oo0OO00 . doModal ( )
+ #IiI1ii1 = xbmc . translatePath ( os . path . join ( IiI1ii1 , "temp.jpg" ) )
+ #urllib . urlretrieve ( 'https://googledrive.com/host/0B-ygKtjD8Sc-S04wUUxMMWt5dmM/images/xomgiaitri.jpg' , IiI1ii1 )
+ #oooOOooo = xbmcgui . ControlImage ( 0 , 0 , 1280 , 720 , IiI1ii1 )
+ #o0oo0oo0OO00 = xbmcgui . WindowDialog ( )
+ #o0oo0oo0OO00 . addControl ( oooOOooo )
+ #o0oo0oo0OO00 . doModal ( )
  if 20 - 20: i111iII
 def oOOo ( ) :
- iI1 ( "Hồng Kong" , "http://www.xom50.com/xem/category/1/phim-bo-hong-kong.html" , "index" , "" )
- iI1 ( "Hồng Kong (VNLT)" , "http://www.xom50.com/xem/category/28/phim-bo-hong-kong-vnlt.html" , "index" , "" )
- iI1 ( "Hàn Quốc" , "http://www.xom50.com/xem/category/4/phim-bo-han-quoc.html" , "index" , "" )
- iI1 ( "Hàn Quốc (vietsub)" , "http://www.xom50.com/xem/category/29/phim-bo-han-quoc-vietsub.html" , "index" , "" )
- iI1 ( "Trung Quốc" , "http://www.xom50.com/xem/category/2/phim-bo-trung-quoc.html" , "index" , "" )
- iI1 ( "Đài Loan" , "http://www.xom50.com/xem/category/3/phim-bo-dai-loan.html" , "index" , "" )
- iI1 ( "Việt Nam" , "http://www.xom50.com/xem/category/5/phim-bo-viet-nam.html" , "index" , "" )
- iI1 ( "Thái Lan" , "http://www.xom50.com/xem/category/22/phim-bo-thai-lan.html" , "index" , "" )
- iI1 ( "Các Loại Khác" , "http://www.xom50.com/xem/category/7/cac-loai-khac.html" , "index" , "" )
+ iI1 ( "Hồng Kong" , "http://www.xom60.com/xem/category/1/phim-bo-hong-kong.html" , "index" , "" )
+ iI1 ( "Hồng Kong (VNLT)" , "http://www.xom60.com/xem/category/28/phim-bo-hong-kong-vnlt.html" , "index" , "" )
+ iI1 ( "Hàn Quốc" , "http://www.xom60.com/xem/category/4/phim-bo-han-quoc.html" , "index" , "" )
+ iI1 ( "Hàn Quốc (vietsub)" , "http://www.xom60.com/xem/category/29/phim-bo-han-quoc-vietsub.html" , "index" , "" )
+ iI1 ( "Trung Quốc" , "http://www.xom60.com/xem/category/2/phim-bo-trung-quoc.html" , "index" , "" )
+ iI1 ( "Đài Loan" , "http://www.xom60.com/xem/category/3/phim-bo-dai-loan.html" , "index" , "" )
+ iI1 ( "Việt Nam" , "http://www.xom60.com/xem/category/5/phim-bo-viet-nam.html" , "index" , "" )
+ iI1 ( "Thái Lan" , "http://www.xom60.com/xem/category/22/phim-bo-thai-lan.html" , "index" , "" )
+ iI1 ( "Các Loại Khác" , "http://www.xom60.com/xem/category/7/cac-loai-khac.html" , "index" , "" )
  if 25 - 25: O0 + OoOoOoO0o0OO * Ooo0OO0oOO * Ii * o0o - OOO0o0o
 def Ii1iI ( ) :
- iI1 ( "Hành Động" , "http://www.xom50.com/xem/category/8/hanh-dong.html" , "index" , "" )
- iI1 ( "Tình Cảm" , "http://www.xom50.com/xem/category/9/tinh-cam.html" , "index" , "" )
- iI1 ( "Phim Hài" , "http://www.xom50.com/xem/category/10/phim-hai.html" , "index" , "" )
- iI1 ( "Kinh Dị" , "http://www.xom50.com/xem/category/11/kinh-di.html" , "index" , "" )
- iI1 ( "Kiếm Hiệp" , "http://www.xom50.com/xem/category/12/kiem-hiep.html" , "index" , "" )
- iI1 ( "Việt Nam" , "http://www.xom50.com/xem/category/15/viet-nam.html" , "index" , "" )
- iI1 ( "Hài Kịch" , "http://www.xom50.com/xem/category/16/hai-kich.html" , "index" , "" )
- iI1 ( "Ca Nhạc" , "http://www.xom50.com/xem/category/17/ca-nhac.html" , "index" , "" )
- iI1 ( "Cải Lương" , "http://www.xom50.com/xem/category/18/cai-luong.html" , "index" , "" )
- iI1 ( "Phóng Sự" , "http://www.xom50.com/xem/category/19/phong-su.html" , "index" , "" )
- iI1 ( "Các Loại Khác" , "http://www.xom50.com/xem/category/20/cac-loai-khac.html" , "index" , "" )
+ iI1 ( "Hành Động" , "http://www.xom60.com/xem/category/8/hanh-dong.html" , "index" , "" )
+ iI1 ( "Tình Cảm" , "http://www.xom60.com/xem/category/9/tinh-cam.html" , "index" , "" )
+ iI1 ( "Phim Hài" , "http://www.xom60.com/xem/category/10/phim-hai.html" , "index" , "" )
+ iI1 ( "Kinh Dị" , "http://www.xom60.com/xem/category/11/kinh-di.html" , "index" , "" )
+ iI1 ( "Kiếm Hiệp" , "http://www.xom60.com/xem/category/12/kiem-hiep.html" , "index" , "" )
+ iI1 ( "Việt Nam" , "http://www.xom60.com/xem/category/15/viet-nam.html" , "index" , "" )
+ iI1 ( "Hài Kịch" , "http://www.xom60.com/xem/category/16/hai-kich.html" , "index" , "" )
+ iI1 ( "Ca Nhạc" , "http://www.xom60.com/xem/category/17/ca-nhac.html" , "index" , "" )
+ iI1 ( "Cải Lương" , "http://www.xom60.com/xem/category/18/cai-luong.html" , "index" , "" )
+ iI1 ( "Phóng Sự" , "http://www.xom60.com/xem/category/19/phong-su.html" , "index" , "" )
+ iI1 ( "Các Loại Khác" , "http://www.xom60.com/xem/category/20/cac-loai-khac.html" , "index" , "" )
  if 100 - 100: i11Ii11I1Ii1i . ooO - OOoO / ooo0Oo0 * i1 - ooo0Oo0
 def Oooo0000 ( url ) :
  i11 = I11 ( url )
  Oo0o0000o0o0 = re . compile ( '<td align="center"><a href=".(.+?)" title="(.+?)"><img src="(.+?)"[^>]*/></a>' ) . findall ( i11 )
  for oOo0oooo00o , oO0o0o0ooO0oO , oo0o0O00 in Oo0o0000o0o0 :
-  iI1 ( "[B]" + oO0o0o0ooO0oO + "[/B]" , "http://www.xom02.com/xem" + oOo0oooo00o , 'mirrors' , oo0o0O00 )
+  iI1 ( "[B]" + oO0o0o0ooO0oO + "[/B]" , "http://www.xom60.com/xem" + oOo0oooo00o , 'mirrors' , oo0o0O00 )
  oO = re . compile ( '<a class="pagelink" [^>]* href="(.+?)"[^>]*>(.+?)</a>' ) . findall ( i11 . replace ( "'" , '"' ) )
  for oOo0oooo00o , i1iiIIiiI111 in oO :
-  iI1 ( i1iiIIiiI111 , oOo0oooo00o . replace ( "./" , "http://www.xom50.com/xem/" ) , 'index' , "" )
+  iI1 ( i1iiIIiiI111 , oOo0oooo00o . replace ( "./" , "http://www.xom60.com/xem/" ) , 'index' , "" )
   if 62 - 62: i11iIiiIii - Oooo000o
 def IIIiI11ii ( ) :
  try :
@@ -76,6 +76,7 @@ def IIIiI11ii ( ) :
  except : pass
  if 81 - 81: Ooo0OO0oOO * OOoO * OOO0o0o - ooO - OoOoOoO0o0OO
 def OooO0OO ( url ) :
+ print url
  iiiIi = IiIIIiI1I1 ( url )
  i11 = I11 ( iiiIi )
  OoO000 = re . compile ( '<span class="name"[^>]*>(.+?)</span>' ) . findall ( i11 )
@@ -92,7 +93,7 @@ def ii1IOooO0 ( url , name ) :
   O0o0Oo = re . compile ( '<font class="episode_bg_2">(.+?)</font>' ) . findall ( II11iiii1Ii [ 0 ] )
   Oo00OOOOO ( "Part - " + O0o0Oo [ 0 ] . replace ( "&nbsp;" , "" ) . strip ( ) . encode ( "utf-8" ) , url , 'loadvideo' , '' , name . encode ( "utf-8" ) )
  for O0O , O00o0OO in OO0oOoo :
-  Oo00OOOOO ( "Part - " + O00o0OO . replace ( "&nbsp;" , "" ) . strip ( ) . encode ( "utf-8" ) , "http://www.xom02.com/web/" + O0O , 'loadvideo' , '' , name . encode ( "utf-8" ) )
+  Oo00OOOOO ( "Part - " + O00o0OO . replace ( "&nbsp;" , "" ) . strip ( ) . encode ( "utf-8" ) , "http://www.xom60.com/web/" + O0O , 'loadvideo' , '' , name . encode ( "utf-8" ) )
   if 44 - 44: OOoO / iiI % oo00oOOo * Ii + OOO
 def IiIIIiI1I1 ( url ) :
  Ii1I = I11 ( url )
