@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<addon id="repository.superrepo.org.gotham.others.adult" name="SuperRepo Others/Adult [gotham] [please upgrade]" version="0.5.209" provider-name="Bart Otten">
+<requires>
+    <import addon="xbmc.addon" version="12.0.0" />
+</requires>
+        <extension point="xbmc.addon.repository" name="SuperRepo Others/Adult [please upgrade]">     
+                <info compressed="false">http://xml.superrepo.org/v5/.xml/gotham/others/adult/addons.xml</info>
+                <checksum>http://md5.superrepo.org/v5/.md5/gotham/others/adult/addons.xml.md5</checksum>
+                <datadir zip="true">http://redirect.superrepo.org/v5/addons/</datadir>
+                <hashes>true</hashes>
+        </extension>
+        <extension point="xbmc.addon.metadata">
+                <summary>Deprecated version of the SuperRepo.org Others/Adult Repository</summary>
+                <description>This version of the SuperRepo Repository is deprecated. A manual upgrade is needed.[CR][CR] Please visit [B]superrepo.org/upgrade[/B] for upgrade instructions.</description>
+                <disclaimer>This version of the SuperRepo is no longer supported</disclaimer>
+                <platform>all</platform>
+                <website>https://superrepo.org/upgrade</website><forum>http://forums.addons.center/board/15-superrepo/</forum>
+        </extension>   
+</addon>
