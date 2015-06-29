@@ -1,0 +1,5 @@
+v 1.0.1
+Changed icon to HaLong Bay
+
+v 1.0.0
+Initial Release
