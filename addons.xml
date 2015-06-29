@@ -399,7 +399,7 @@
   </extension>
 </addon>
 
-<addon id="repository.xunitytalk" name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk Repository" version="1.0.3" provider-name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
+<addon id="repository.xunitytalk" name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk Repository" version="1.0.6" provider-name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
 	<extension point="xbmc.addon.repository" name="Mikey1234 Addon Repository">
 		<info compressed="false">http://xty.me/xunitytalk/addons/addons.xml</info>
 		<checksum>http://xty.me/xunitytalk/addons/addons.xml.md5</checksum>
