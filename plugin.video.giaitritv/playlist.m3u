@@ -1,10 +1,63 @@
 ﻿#EXTM3U
 
-#EXTINF:-1, [COLOR cyan]*****VP9 CHO NGƯỜI VIỆT Ở NƯỚC NGOÀI - KÊNH TV *******[/COLOR]
+#EXTINF:-1,[COLOR lime]****TV Hải Ngoại****[/COLOR]
+http://www.youtube.com
+
+#EXTINF:-1,BYN TV Houston TX 57.3
+http://stream.onworldtv.com/live/byn/index.m3u8
+#EXTINF:-1,Cải Lương
+http://206.190.136.254/liveStream/cailuong_1/playlist.m3u8
+#EXTINF:-1,Đồng Giao TV
+http://206.190.136.254/liveStream/dgtv_1/playlist.m3u8
+#EXTINF:-1,Hài 24/7
+http://206.190.136.254/liveStream/hai_1/playlist.m3u8
+#EXTINF:-1,IBC TV 57.8 Cali
+http://206.190.136.254/liveStream/ibctv_1/playlist.m3u8
+#EXTINF:-1,KVLA 56.5 Cali
+http://206.190.140.142/liveStream/kvla_1/playlist-2096k.m3u8
+#EXTINF:-1,Little Saigon TV 57.7 Cali
+http://206.190.136.254/liveStream/lstv_1/playlist.m3u8
+#EXTINF:-1,Saigon TV 57.5
+http://206.190.136.254/liveStream/sgtv_1/playlist.m3u8
+#EXTINF:-1,SaigonTV Dallas TX 55.3
+rtmp://origin3-edge1.yourstreamlive.com:1935/live/yourstreamlive/out_1651_211xdnzd?platform=Computer
+#EXTINF:-1,S Channel
+http://54.152.24.55:1935/schannel/myStream/chunklist_w1927396712.m3u8
+#EXTINF:-1,SET TV
+http://206.190.136.254/liveStream/set_1/playlist.m3u8
+#EXTINF:-1,SGN TV Houston TX 51.3
+http://stream.onworldtv.com/live/sgn/index.m3u8
+#EXTINF:-1,Tuổi Thần Tiên
+http://206.190.136.254/liveStream/ttt_1/playlist.m3u8
+#EXTINF:-1,Việt Bay Television 1.4 KAXT - San Jose
+http://64.71.129.2:8080/hls/ius_000104.m3u8
+#EXTINF:-1,VietSun TV
+http://206.190.136.254/liveStream/vietsuntv_1/playlist.m3u8
+#EXTINF:-1,Viet Media TV
+http://206.190.136.254/liveStream/viettv24_1/playlist.m3u8
+#EXTINF:-1,Viet New TV 56.5
+http://206.190.136.254/liveStream/kvla_1/playlist.m3u8
+#EXTINF:-1,VAN TV 55.2 (Houston)
+http://206.190.136.254/liveStream/vantv_1/playlist.m3u8
+#EXTINF:-1,VNA TV 57.3
+http://206.190.136.254/liveStream/vnatv_1/playlist.m3u8
+#EXTINF:-1,VietV California 54.3
+http://206.190.136.254/liveStream/vietvla_1/playlist.m3u8
+#EXTINF:-1,Viet Global Mail
+http://origin1-edge2.yourstreamlive.com:1935/live/yourstreamlive/out_956_2kr6rvfu/playlist.m3u8
+#EXTINF:-1,VBS TV 57.6
+http://206.190.136.254/liveStream/vbstv_1/playlist.m3u8
+#EXTINF:-1,VietFace TV California 57.2
+http://206.190.136.254/liveStream/vface_1/playlist.m3u8
+#EXTINF:-1,VZN TV Houston TX
+http://206.190.136.254/liveStream/vantv_1/playlist.m3u8
+
+#EXTINF:-1, [COLOR cyan]*****TV TRONG NƯỚC - VP9 CHO NGƯỜI VIỆT Ở NƯỚC NGOÀI*******[/COLOR]
 http://www.youtube.com/ 
+
 #EXTINF:-1,Thuần Việt HD - Giải Trí Tổng Hợp
 http://tvod.accessasia.tv:8080/tvod/air/thuanviet.480p/index.m3u8?e=1389744448&st=qyg7wGxdgIptlUnbonBKuQ
-#EXTINF:-1,VTV 4 - Kênh thời sự, kinh tế, văn hóa và giải trí
+#EXTINF:-1,VTV 4 - Kênh thời sự - kinh tế - văn hóa và giải trí
 http://tvod.accessasia.tv:8080/tvod/air/vtv4.480p/index.m3u8
 #EXTINF:-1,VTVcab 1 - Kênh giải trí tổng hợp
 http://tvod.accessasia.tv:8080/live/vctv1.480p/index.m3u8
@@ -26,6 +79,96 @@ http://tvod.accessasia.tv:8080/live/sctvhaihd.480p/index.m3u8
 http://tvod.accessasia.tv:8080/tvod/air/htvcfbnc.480p/index.m3u8
 #EXTINF:-1,Du Lịch Và Cuộc Sống
 http://tvod.accessasia.tv:8080/live/dulichcuocsong.480p/index.m3u8
+#EXTINF:-1,VTC 1
+rtmp://38.107.180.195/live/ playpath=vtc11_h swfUrl=http://p.jwpcdn.com/6/8/jwplayer.flash.swf pageUrl=http://vtc.com.vn/live/1/VTC1.html live=1
+#EXTINF:-1,VTC 2
+rtmp://38.107.180.195/live/ playpath=vtc21 swfUrl=http://p.jwpcdn.com/6/8/jwplayer.flash.swf pageUrl=http://vtc.com.vn/live/75/VTC2.html live=1
+#EXTINF:-1,VTC 10
+rtmp://38.107.180.195/live/ playpath=vtc101_h swfUrl=http://p.jwpcdn.com/6/8/jwplayer.flash.swf pageUrl=http://vtc.com.vn/live/4/VTC10.html live=1
+#EXTINF:-1,HA NOI 1
+rtmp://38.107.180.195/live/ playpath=hanoi11_h swfUrl=http://p.jwpcdn.com/6/8/jwplayer.flash.swf pageUrl=http://vtc.com.vn/live/6/Ha-Noi-1.html live=1
+#EXTINF:-1,HTV 7
+rtmp://38.107.180.195/live/ playpath=htv7_h swfUrl=http://p.jwpcdn.com/6/8/jwplayer.flash.swf pageUrl=http://vtc.com.vn/live/7/HTV7.html live=1
+#EXTINF:-1,HTV 9
+rtmp://38.107.180.195/live/ playpath=htv91_h swfUrl=http://p.jwpcdn.com/6/8/jwplayer.flash.swf pageUrl=http://vtc.com.vn/live/8/HTV9.html live=1
+#EXTINF:-1,VTV 1
+rtmp://38.107.180.195/live/ playpath=vtv11_h swfUrl=http://p.jwpcdn.com/6/8/jwplayer.flash.swf pageUrl=http://vtc.com.vn/live/9/VTV1.html live=1
+#EXTINF:-1,VTV 2
+rtmp://66.160.142.194/live/ playpath=vtv2_h swfUrl=http://p.jwpcdn.com/6/8/jwplayer.flash.swf pageUrl=http://vtc.com.vn/live/10/VTV2.html live=1
+#EXTINF:-1,VTV 3
+rtmp://38.107.180.195/live/ playpath=vtv31_h swfUrl=http://p.jwpcdn.com/6/8/jwplayer.flash.swf pageUrl=http://vtc.com.vn/live/11/VTV3.html live=1
+#EXTINF:-1,VTV 4
+rtmp://38.107.180.195/live/ playpath=vtv4_h swfUrl=http://p.jwpcdn.com/6/8/jwplayer.flash.swf pageUrl=http://vtc.com.vn/live/12/VTV4.html live=1
+#EXTINF:-1,VOV 1
+rtmp://66.160.142.194/live/ playpath=vov1 swfUrl=http://p.jwpcdn.com/6/8/jwplayer.flash.swf pageUrl=http://vtc.com.vn/live/13/VOV1.html live=1
+#EXTINF:-1,VOV 2
+rtmp://38.107.180.195/live/ playpath=vov2 swfUrl=http://p.jwpcdn.com/6/8/jwplayer.flash.swf pageUrl=http://vtc.com.vn/live/14/VOV2.html live=1
+#EXTINF:-1,VOV 3
+rtmp://66.160.142.194/live/ playpath=vov3 swfUrl=http://p.jwpcdn.com/6/8/jwplayer.flash.swf pageUrl=http://vtc.com.vn/live/15/VOV3.html live=1
+#EXTINF:-1,VNews - Truyền Hình Thông Tấn
+rtmp://live.vnanet.vn:1935/Live/ playpath=DRC swfUrl=http://avnews.vnanet.vn/RtmpPlayer/player.swf pageUrl=http://avnews.vnanet.vn/ live=1 timeout=90
+#EXTINF:-1,Truyền Hình An Giang 1
+rtmp://113.161.212.25/live playpath=atv1 swfUrl=http://www.atv.org.vn/player/player.swf swfVfy=true live=true timeout=90
+#EXTINF:-1,Truyền Hình An Giang 2
+rtmp://113.161.212.25/live2 playpath=atv2 swfUrl=http://www.atv.org.vn/player/player.swf swfVfy=true live=true timeout=90
+#EXTINF:-1,Truyền Hình Bà Rịa - Vũng Tàu
+rtmp://113.163.216.24/live playpath=livestream swfUrl=http://thvl.vn/vplayer.swf pageUrl=http://tivihay.net/dia-phuong-vung-tau-k61.html swfVfy=true live=true timeout=90
+#EXTINF:-1,Truyền Hình Bạc Liêu
+rtmp://118.69.205.213/livepkgr/ playpath=livestream1 swfUrl=http://p.jwpcdn.com/6/10/jwplayer.flash.swf pageUrl=http://hktivi.net/tv_truc_tuyen/truyen-hinh-bac-lieu-btv.php swfVfy=true live=true timeout=90
+#EXTINF:-1,Truyền Hình Bắc Ninh
+rtmp://113.160.154.159:5119/live playpath=bntv swfUrl=http://www.umediaserver.net/bin/FlashPlayer/player-quick.swf pageUrl=http://bacninhtv.vn/ live=1 timeout=90
+#EXTINF:-1,Truyền Hình Bến Tre
+rtmp://113.163.94.245/live/ playpath=Stream swfUrl=http://thbt.vn/jwplayer/jwplayer.flash.swf pageUrl=http://thbt.vn/jwplayer/?l=rtmp%3A%2F%2F113.163.94.245%2Flive%2FStream&i=http://thbt.vn/wp-content/uploads/2014/03/nentruct.png&w=400&h=280&a=0 live=1 timeout=90
+#EXTINF:-1,Truyền Hình Bình Dương 1
+rtmp://202.43.109.147/live/btv1.stream live=1
+#EXTINF:-1,Truyền Hình Bình Dương 2
+rtmp://202.43.109.147/rtplive/btv2.stream live=1
+#EXTINF:-1,Truyền Hình Bình Phước 1
+rtmp://113.161.180.136/live/ playpath=thbp1.tv swfUrl=http://www.bptv.com.vn/vplayer.swf pageUrl=http://www.bptv.com.vn/ live=1 timeout=90
+#EXTINF:-1,Truyền Hình Bình Phước 2
+rtmp://113.161.180.136/live/ playpath=thbp2.tv swfUrl=http://www.bptv.com.vn/vplayer.swf pageUrl=http://www.bptv.com.vn/# live=1 timeout=90
+#EXTINF:-1,Truyền Hình Bình Thuận
+mms://123.30.108.114/BTVTruyenhinh
+#EXTINF:-1,Truyền Hình Cà Mau
+rtmp://113.161.220.254/livepkgr/ playpath=livestream1?adbe-live-event=liveevent swfUrl=http://ctvcamau.vn/jwplayer/jwplayer.flash.swf pageUrl=http://ctvcamau.vn/jwplayer/?l=rtmp&i=http://118.69.199.136/wp- content/uploads/2014/01/TVonline_Ctvcamau.jpg&w=400&h=300&a=1 live=1 timeout=90
+#EXTINF:-1,Truyền Hình Cần Thơ
+rtmp://113.161.204.167:1935/livepkgr/ playpath=livestream swfUrl=http://vtvcantho.vn/Content/jwplayer/player.swf pageUrl=http://vtvcantho.vn/ live=1 timeout=90
+#EXTINF:-1,Truyền Hình Dak Nông
+rtmp://222.255.158.22:1935/live playpath=truyenhinh swfUrl=http://fpdownload.adobe.com/strobe/FlashMediaPlayback_101.swf/[[DYNAMIC]]/1 pageUrl=http://www.ptthdaknong.com.vn/truyenhinh.html live=1 timeout=90
+#EXTINF:-1,Truyền Hình Đà Nẵng
+rtmp://yqyydhnc.cdnviet.com/mnrrnlm playpath=drt1 swfUrl=http://www.drt.danang.vn/js/DRTplayer.swf pageUrl=http://www.drt.danang.vn/ live=1 timeout=90
+#EXTINF:-1,Truyền Hình Đồng Nai 1
+rtmp://123.29.75.131:1935/thdn playpath=dn1.stream swfUrl=http://www.dnrtv.org.vn/static/js/flowplayer/flowplayer-3.2.7.swf pageUrl=http://www.dnrtv.org.vn/ live=1 timeout=90
+#EXTINF:-1,Truyền Hình Đồng Nai 2
+rtmp://123.29.75.131:1935/thdn/dn2.stream swfUrl=http://www.dnrtv.org.vn/static/js/flowplayer/flowplayer-3.2.7.swf swfVfy=true live=true timeout=90
+#EXTINF:-1,Truyền Hình Gia Lai
+rtmp://222.255.169.132/live/ playpath=livestream swfUrl=http://p.jwpcdn.com/6/11/jwplayer.flash.swf swfVfy=true live=true timeout=90
+#EXTINF:-1,Truyền Hình Hà Nội
+rtmp://38.107.180.195:1935/live playpath=hanoi11_h swfUrl=http://vtc.com.vn/player_akamai_low.swf pageUrl=http://vtc.com.vn/live/6/Ha-Noi-1.html swfVfy=1 live=1 timeout=90
+#EXTINF:-1,Truyền Hình Hậu Giang
+rtmp://115.78.160.29/live/thhg live=1 swfUrl=http://truyenhinhhaugiang.vn/MediaPlayer/vplayer.swf swfVfy=true live=true timeout=90
+#EXTINF:-1,Truyền Hình Khánh Hòa
+rtmp://118.69.198.109:1935/live/ playpath=video swfUrl=http://hktivi.net/player.swf swfVfy=true live=true timeout=90
+#EXTINF:-1,Truyền Hình Lạng Sơn
+rtmp://123.18.206.40/live/ playpath=livestream swfUrl=http://hktivi.net/player.swf pageUrl=http://hktivi.net/tv_truc_tuyen/langson.php swfVfy=true live=true timeout=90
+#EXTINF:-1,Truyền Hình Ninh Thuận
+rtmp://113.164.108.11/live/ playpath=NTV_VIDEO swfUrl=http://hktivi.net/player.swf swfVfy=true live=true timeout=90
+#EXTINF:-1,Truyền Hình Phú Yên
+rtmp://113.161.4.102/live/ playpath=vtvphuyen.tv swfUrl=http://vtvphuyen.vn/vplayer.swf pageUrl=http://vtvphuyen.vn/ live=1 timeout=90
+#EXTINF:-1,Truyền Hình Quảng Ngãi
+http://113.160.244.44/liveevent.m3u8
+#EXTINF:-1,Truyền Hình Quảng Trị
+rtmp://123.25.117.9:80/live playpath=qtv swfUrl=http://hktivi.net/player.swf swfVfy=true live=true timeout=60
+#EXTINF:-1,Truyền Hình Sóc Trăng
+rtmp://115.78.3.164/live playpath=stv1 swfUrl=http://thst.vn/MediaPlayer/vplayer.swf pageUrl=http://thst.vn/Truyen_hinh.aspx live=1 timeout=90
+#EXTINF:-1,Truyền Hình Thừa Thiên Huế
+rtmp://118.69.176.149/live/trt swfUrl=http://tv.xunghe.vn/player.swf pageUrl=http://tv.xunghe.vn/ live=true timeout=90
+#EXTINF:-1,Truyền Hình Vĩnh Long 1
+rtmp://123.30.108.72/live/ playpath=thvl1 swfUrl=http://www.thvl.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.thvl.vn/jwplayer/jw.php?l=rtmp&i=http://thvl.vn/wp-content/uploads/2014/12/THVL1Online.jpg&w=395&h=325&a=1 live=1 timeout=90
+#EXTINF:-1,Truyền Hình Vĩnh Long 2
+rtmp://123.30.108.72/live/ playpath=thvl2 swfUrl=http://www.thvl.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.thvl.vn/jwplayer/jw.php?l=rtmp2&i=http://thvl.vn/wp-content/uploads/2014/12/THVL2Online.jpg&w=395&h=325&a=1 live=1 timeout=90
+#EXTINF:-1,Truyền Hình Vĩnh Phúc
+rtmp://117.6.162.63/live/ playpath=thvp swfUrl=http://hktivi.net/player.swf pageUrl=http://hktivi.net/kenh/vinhphuc.html swfVfy=true live=true timeout=90
 #EXTINF:-1,VTV1
 http://2co1.vp9.tv/chn/vtv1/v.m3u8|User-Agent=Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.93 Safari/537.36
 #EXTINF:-1,VTV2
