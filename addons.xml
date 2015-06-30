@@ -378,7 +378,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.giaitritv" name="*[COLOR yellow]Giai Tri - TV[/COLOR]" version="0.0.1" provider-name="Vinh Computer Repair">
+<addon id="giaitritv" name="*Giai Tri - TV" version="0.0.1" provider-name="Vinh Computer Repair">
     <requires>
     </requires>
     <extension point="xbmc.python.pluginsource"
