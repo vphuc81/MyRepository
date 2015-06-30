@@ -21,11 +21,11 @@ import xbmc, xbmcgui, xbmcplugin, sys, re
 
 plugin_handle = int(sys.argv[1])
 xbmcplugin.setContent(plugin_handle, "video")
-icon = xbmc.translatePath("special://home/addons/plugin.video.giaitritv-0.0.1/icon.png")
-fanart = xbmc.translatePath("special://home/addons/plugin.video.giaitritv-0.0.1/fanart.jpg")
-xml_playlist = xbmc.translatePath("special://home/addons/plugin.video.giaitritv-0.0.1/playlist.xml")
+icon = xbmc.translatePath("special://home/addons/plugin.video.giaitritv/icon.png")
+fanart = xbmc.translatePath("special://home/addons/plugin.video.giaitritv/fanart.jpg")
+xml_playlist = xbmc.translatePath("special://home/addons/plugin.video.giaitritv/playlist.xml")
 xml_regex = "<title>(.*?)</title>\s*<link>(.*?)</link>\s*<thumbnail>(.*?)</thumbnail>"
-m3u_playlist = xbmc.translatePath("special://home/addons/plugin.video.giaitritv-0.0.1/playlist.m3u")
+m3u_playlist = xbmc.translatePath("special://home/addons/plugin.video.giaitritv/playlist.m3u")
 m3u_regex = "#.+,(.+?)\n(.+?)\n"
 
 def open_file(file):

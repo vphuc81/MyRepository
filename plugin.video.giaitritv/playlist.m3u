@@ -2,6 +2,30 @@
 
 #EXTINF:-1, [COLOR cyan]*****VP9 CHO NGƯỜI VIỆT Ở NƯỚC NGOÀI - KÊNH TV *******[/COLOR]
 http://www.youtube.com/ 
+#EXTINF:-1,Thuần Việt HD - Giải Trí Tổng Hợp
+http://tvod.accessasia.tv:8080/tvod/air/thuanviet.480p/index.m3u8?e=1389744448&st=qyg7wGxdgIptlUnbonBKuQ
+#EXTINF:-1,VTV 4 - Kênh thời sự, kinh tế, văn hóa và giải trí
+http://tvod.accessasia.tv:8080/tvod/air/vtv4.480p/index.m3u8
+#EXTINF:-1,VTVcab 1 - Kênh giải trí tổng hợp
+http://tvod.accessasia.tv:8080/live/vctv1.480p/index.m3u8
+#EXTINF:-1,VTVcab 2 - Kênh phim truyện Việt Nam
+http://tvod.accessasia.tv:8080/tvod/air/vctv2.480p/index.m3u8?e=1389728751&st=ec_kFlx1ytFUw6ErmiEmHg
+#EXTINF:-1,VTVcab 4 - Giải trí tổng hợp
+http://tvod.accessasia.tv:8080/live/vctv4.480p/index.m3u8
+#EXTINF:-1,VTVcab 8 - Giải trí tổng hợp
+http://tvod.accessasia.tv:8080/live/vctv8.480p/index.m3u8
+#EXTINF:-1,VTVcab 10 - Sức khỏe
+http://tvod.accessasia.tv:8080/live/vctv10.480p/index.m3u8
+#EXTINF:-1,VTVcab 17 - Kênh văn hóa giải trí
+http://tvod.accessasia.tv:8080/live/vctv17.480p/index.m3u8
+#EXTINF:-1,SCTV 14 - Kênh phim Việt
+http://tvod.accessasia.tv:8080/live/sctv14.480p/index.m3u8
+#EXTINF:-1,SCTV HD - Hài
+http://tvod.accessasia.tv:8080/live/sctvhaihd.480p/index.m3u8
+#EXTINF:-1,FBNC - Thông Tin Thương Mại
+http://tvod.accessasia.tv:8080/tvod/air/htvcfbnc.480p/index.m3u8
+#EXTINF:-1,Du Lịch Và Cuộc Sống
+http://tvod.accessasia.tv:8080/live/dulichcuocsong.480p/index.m3u8
 #EXTINF:-1,VTV1
 http://2co1.vp9.tv/chn/vtv1/v.m3u8|User-Agent=Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.93 Safari/537.36
 #EXTINF:-1,VTV2
