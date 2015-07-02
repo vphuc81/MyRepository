@@ -1,47 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon
-  id="plugin.video.yeuphim1"
-  version="1.4"
-  name="*[COLOR yellow]Yeu-Phim[/COLOR]"
-  provider-name="Vinh Computer Repair">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary></summary>
-    <description></description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon
-  id="plugin.video.viettv24"
-  version="1.9.6"
-  name="*[COLOR yellow]Viet-TV24.com[/COLOR]"
-  provider-name="Vinh Computer Repair">
-  <requires>
-        <import addon="xbmc.python" version="2.1.0"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>VietTV24.com</summary>
-    <description>Watch hundreds of Vietnamesse and English channels from viettv24.com</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.livetv" name="*[COLOR yellow]Live-TV[/COLOR]" version="1.0" provider-name="Vinh Computer Repair">
-<requires> 
-	<import addon="xbmc.python" version="2.1.0"/>   
+<addon id="plugin.video.accessasiatv" name="*[COLOR yellow]Accessasia-TV[/COLOR]" version="1.4" provider-name="Vinh Computer Repair">
+<requires>
+	<import addon="xbmc.python" version="2.1.0"/>
 </requires>
-<extension point="xbmc.python.pluginsource" library="default.py">  
-	<provides>video</provides>    
+<extension point="xbmc.python.pluginsource" library="default.py">
+	<provides>video</provides>
 </extension>
   <extension point="xbmc.addon.metadata">
     <summary>Danasyentertainment.com</summary>
@@ -51,7 +15,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.anhtrang.org" name="*[COLOR yellow]Anh-Trang.org[/COLOR]" provider-name="Vinh Computer Repair" version="1.6">
+<addon id="plugin.video.anhtrang.org" name="*[COLOR yellow]Anh-Trang[/COLOR]" provider-name="Vinh Computer Repair" version="1.6">
   <requires>
     <import addon="xbmc.python" version="2.1.0" />
     <import addon="script.module.xbmcswift2" version="1.3.1" />
@@ -67,20 +31,18 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.donggiao" name="*[COLOR yellow]Đồng-Giao TV[/COLOR]" provider-name="Vinh Computer Repair" version="1.6">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0" />
-    <import addon="script.module.xbmcswift2" version="1.3.1" />
-    <import addon="plugin.video.youtube" version="4.4.1" />
-  </requires>
-  <extension library="default.py" point="xbmc.python.pluginsource">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <platform>all</platform>
-    <summary>Watch free movies from phim14.net</summary>
-    <description>Watch free movies from phim14.net</description>
-  </extension>
+<addon id="plugin.video.giaitritv" name="*[COLOR yellow]Giai Tri - TV[/COLOR]" version="0.0.4" provider-name="Vinh Computer Repair">
+    <requires>
+    </requires>
+    <extension point="xbmc.python.pluginsource"
+               library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary>Vinh Computer Repair</summary>
+        <description>Addon for Vietnamese</description>
+    </extension>
 </addon>
 
 <addon
@@ -114,7 +76,7 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>hdonline.vn</summary>
-    <description>Xem phim HD Lồng tiếng và Thuyết minh tiếng Việt tại HDonline</description>
+    <description>Xem phim HD Lá»“ng tiáº¿ng vÃ  Thuyáº¿t minh tiáº¿ng Viá»‡t táº¡i HDonline</description>
     <platform>all</platform>
   </extension>
 </addon>
@@ -150,6 +112,21 @@
     <platform>all</platform>
     <summary>Watch free movies from kenh108.com</summary>
     <description>Watch free movies from kenh108.com</description>
+  </extension>
+</addon>
+
+<addon id="plugin.video.livetv" name="*[COLOR yellow]Live-TV[/COLOR]" version="1.0" provider-name="Vinh Computer Repair">
+<requires>
+	<import addon="xbmc.python" version="2.1.0"/>
+</requires>
+<extension point="xbmc.python.pluginsource" library="default.py">
+	<provides>video</provides>
+</extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Danasyentertainment.com</summary>
+    <description>Watch a top selection of 10 Vietnamese TV channels at Accessasia.tv</description>
+<disclaimer>This add-on is streamming video from Accessasia.tv.  This is not responsible for the accuracy, compliance, copyright, legality, decency, or any other aspect of the content of Accessasia.tv and the other sites. If you have any legal issues please contact appropriate media file owners / hosters</disclaimer>
+    <platform>all</platform>
   </extension>
 </addon>
 
@@ -217,8 +194,8 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <platform>all</platform>
-    <summary>Watch free movies from phim14.net (phim lồng tiếng, thuyết minh tiếng Việt)</summary>
-    <description>Watch free movies from phim14.net (phim lồng tiếng, thuyết minh tiếng Việt)</description>
+    <summary>Watch free movies from phim14.net (phim lá»“ng tiáº¿ng, thuyáº¿t minh tiáº¿ng Viá»‡t)</summary>
+    <description>Watch free movies from phim14.net (phim lá»“ng tiáº¿ng, thuyáº¿t minh tiáº¿ng Viá»‡t)</description>
   </extension>
 </addon>
 
@@ -278,6 +255,45 @@
 </addon>
 
 <addon
+  id="plugin.video.SportsDevil"
+  version="1.8.8.2"
+  name="SportsDevil"
+  provider-name="MaxMustermann">
+  <requires>
+   <import addon="xbmc.python" version="2.1.0"/>
+   <import addon="script.common.plugin.cache" version="0.9.1"/>
+  </requires>
+  <extension
+    point="xbmc.python.pluginsource"
+    library="default.py">
+   <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Play videos of different sports streaming sites
+      Downloaded via www.iWillFolo.com</summary>    <description>Play videos of different sports streaming sites</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon
+  id="plugin.video.viettv24"
+  version="1.9.6"
+  name="*[COLOR yellow]Viet-TV24.com[/COLOR]"
+  provider-name="Vinh Computer Repair">
+  <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>VietTV24.com</summary>
+    <description>Watch hundreds of Vietnamesse and English channels from viettv24.com</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon
   id="plugin.video.vtvplus"
   version="1.5"
   name="*[COLOR yellow]VTV-Plus[/COLOR]"
@@ -310,6 +326,24 @@
   <extension point="xbmc.addon.metadata">
     <summary>xomiaitri.com</summary>
     <description>Watch free xomiaitri.com (Vietnamese) Videos</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon
+  id="plugin.video.yeuphim1"
+  version="1.4"
+  name="*[COLOR yellow]Yeu-Phim[/COLOR]"
+  provider-name="Vinh Computer Repair">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary></summary>
+    <description></description>
     <platform>all</platform>
   </extension>
 </addon>
@@ -363,83 +397,6 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.accessasiatv" name="*[COLOR yellow]Accessasia-TV[/COLOR]" version="1.4" provider-name="Vinh Computer Repair">
-<requires> 
-	<import addon="xbmc.python" version="2.1.0"/>   
-</requires>
-<extension point="xbmc.python.pluginsource" library="default.py">  
-	<provides>video</provides>    
-</extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>Danasyentertainment.com</summary>
-    <description>Watch a top selection of 10 Vietnamese TV channels at Accessasia.tv</description>
-<disclaimer>This add-on is streamming video from Accessasia.tv.  This is not responsible for the accuracy, compliance, copyright, legality, decency, or any other aspect of the content of Accessasia.tv and the other sites. If you have any legal issues please contact appropriate media file owners / hosters</disclaimer>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.giaitritv" name="*[COLOR yellow]Giai Tri - TV[/COLOR]" version="0.0.4" provider-name="Vinh Computer Repair">
-    <requires>
-    </requires>
-    <extension point="xbmc.python.pluginsource"
-               library="default.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <platform>all</platform>
-        <summary>Vinh Computer Repair</summary>
-        <description>Addon for Vietnamese</description>
-    </extension>
-</addon>
-
-<addon
-  id="plugin.video.SportsDevil"
-  version="1.8.8.2"
-  name="SportsDevil"
-  provider-name="MaxMustermann">
-  <requires>
-   <import addon="xbmc.python" version="2.1.0"/>
-   <import addon="script.common.plugin.cache" version="0.9.1"/>
-  </requires>
-  <extension 
-    point="xbmc.python.pluginsource"
-    library="default.py">
-   <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>Play videos of different sports streaming sites
-      Downloaded via www.iWillFolo.com</summary>    <description>Play videos of different sports streaming sites</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="repository.xunitytalk" name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk Repository" version="1.0.6" provider-name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
-	<extension point="xbmc.addon.repository" name="Mikey1234 Addon Repository">
-		<info compressed="false">http://xty.me/xunitytalk/addons/addons.xml</info>
-		<checksum>http://xty.me/xunitytalk/addons/addons.xml.md5</checksum>
-		<datadir zip="true">http://xty.me/xunitytalk/addons</datadir>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>The Best Third Party Addons for XBMC, .[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk</summary>
-		<description>The Best Third Party Addons for XBMC, .[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk</description>
-		<platform>all</platform>
-	</extension>
-</addon>
-
-<addon id="repository.traitravinh" name="TraiTraVinh's Testing Repo" version="1.0" provider-name="traitravinh">
-	<extension point="xbmc.addon.repository" name="TraiTraVinh's Testing Repo">
-		<info compressed="false">https://raw.github.com/traitravinh/traitravinh.repository.xbmc/master/addons.xml</info>
-		<checksum>https://raw.github.com/traitravinh/traitravinh.repository.xbmc/master/addons.xml.md5</checksum>
-		<datadir zip="true">https://raw.github.com/traitravinh/traitravinh.repository.xbmc/master/zips</datadir>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>Testing repo</summary>
-		<description>Testing repo</description>
-		<disclaimer></disclaimer>
-		<platform>all</platform>
-	</extension>
-</addon>
-
 <addon id="repository.daveln" name="DaveLN's Repository" version="1.0.1" provider-name="DaveLN">
 	<extension point="xbmc.addon.repository" name="DaveLN Addon Repository">
 		<info compressed="false">https://github.com/daveln/repository.daveln/raw/master/addons.xml</info>
@@ -449,19 +406,6 @@
 	<extension point="xbmc.addon.metadata">
 		<summary>XBMC add-ons</summary>
 		<description>Go through the add-ons and see what you like</description>
-		<platform>all</platform>
-	</extension>
-</addon>
-
-<addon id="repository.shani" name="Shanis Addon Repository" version="2.6" provider-name="Shani">
-	<extension point="xbmc.addon.repository" name="Shanis Addon Repository">
-		<info compressed="false">https://raw.github.com/Shani-08/ShaniXBMCWork/master/addons.xml</info>
-		<checksum>https://raw.github.com/Shani-08/ShaniXBMCWork/master/addons.xml.md5</checksum>
-		<datadir zip="true">https://raw.github.com/Shani-08/ShaniXBMCWork/master/zips</datadir>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>Addons related to XBMC for Zemtv etc</summary>
-		<description>Go though the plugins and see what you like</description>
 		<platform>all</platform>
 	</extension>
 </addon>
@@ -502,11 +446,24 @@
 	</extension>
 </addon>
 
+<addon id="repository.shani" name="Shanis Addon Repository" version="2.6" provider-name="Shani">
+	<extension point="xbmc.addon.repository" name="Shanis Addon Repository">
+		<info compressed="false">https://raw.github.com/Shani-08/ShaniXBMCWork/master/addons.xml</info>
+		<checksum>https://raw.github.com/Shani-08/ShaniXBMCWork/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.github.com/Shani-08/ShaniXBMCWork/master/zips</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Addons related to XBMC for Zemtv etc</summary>
+		<description>Go though the plugins and see what you like</description>
+		<platform>all</platform>
+	</extension>
+</addon>
+
 <addon id="repository.superrepo.org.gotham.all" name="SuperRepo  All [gotham] [please upgrade]" version="0.5.209" provider-name="Bart Otten">
 <requires>
     <import addon="xbmc.addon" version="12.0.0" />
 </requires>
-        <extension point="xbmc.addon.repository" name="SuperRepo  All [please upgrade]">     
+        <extension point="xbmc.addon.repository" name="SuperRepo  All [please upgrade]">
                 <info compressed="false">http://xml.superrepo.org/v5/.xml/gotham/all/addons.xml</info>
                 <checksum>http://md5.superrepo.org/v5/.md5/gotham/all/addons.xml.md5</checksum>
                 <datadir zip="true">http://redirect.superrepo.org/v5/addons/</datadir>
@@ -518,14 +475,14 @@
                 <disclaimer>This version of the SuperRepo is no longer supported</disclaimer>
                 <platform>all</platform>
                 <website>https://superrepo.org/upgrade</website><forum>http://forums.addons.center/board/15-superrepo/</forum>
-        </extension>   
+        </extension>
 </addon>
 
 <addon id="repository.superrepo.org.gotham.others.adult" name="SuperRepo Others/Adult [gotham] [please upgrade]" version="0.5.209" provider-name="Bart Otten">
 <requires>
     <import addon="xbmc.addon" version="12.0.0" />
 </requires>
-        <extension point="xbmc.addon.repository" name="SuperRepo Others/Adult [please upgrade]">     
+        <extension point="xbmc.addon.repository" name="SuperRepo Others/Adult [please upgrade]">
                 <info compressed="false">http://xml.superrepo.org/v5/.xml/gotham/others/adult/addons.xml</info>
                 <checksum>http://md5.superrepo.org/v5/.md5/gotham/others/adult/addons.xml.md5</checksum>
                 <datadir zip="true">http://redirect.superrepo.org/v5/addons/</datadir>
@@ -537,7 +494,21 @@
                 <disclaimer>This version of the SuperRepo is no longer supported</disclaimer>
                 <platform>all</platform>
                 <website>https://superrepo.org/upgrade</website><forum>http://forums.addons.center/board/15-superrepo/</forum>
-        </extension>   
+        </extension>
+</addon>
+
+<addon id="repository.traitravinh" name="TraiTraVinh's Testing Repo" version="1.0" provider-name="traitravinh">
+	<extension point="xbmc.addon.repository" name="TraiTraVinh's Testing Repo">
+		<info compressed="false">https://raw.github.com/traitravinh/traitravinh.repository.xbmc/master/addons.xml</info>
+		<checksum>https://raw.github.com/traitravinh/traitravinh.repository.xbmc/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.github.com/traitravinh/traitravinh.repository.xbmc/master/zips</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Testing repo</summary>
+		<description>Testing repo</description>
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
 </addon>
 
 <addon id="repository.vinh" name="[COLOR blue]Vinh[/COLOR] Repository" version="1.0" provider-name="Vinh Computer Repair">
@@ -549,6 +520,19 @@
 	<extension point="xbmc.addon.metadata">
 		<summary>The Best Third Party Addons for KODI</summary>
 		<description>The Best Third Party Addons for Vietnamese</description>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.xunitytalk" name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk Repository" version="1.0.6" provider-name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
+	<extension point="xbmc.addon.repository" name="Mikey1234 Addon Repository">
+		<info compressed="false">http://xty.me/xunitytalk/addons/addons.xml</info>
+		<checksum>http://xty.me/xunitytalk/addons/addons.xml.md5</checksum>
+		<datadir zip="true">http://xty.me/xunitytalk/addons</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>The Best Third Party Addons for XBMC, .[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk</summary>
+		<description>The Best Third Party Addons for XBMC, .[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk</description>
 		<platform>all</platform>
 	</extension>
 </addon>
