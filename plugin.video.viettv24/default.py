@@ -19,12 +19,9 @@ def iI1 ( ) :
  OoOoOO00 . addControl ( I11i )
  OoOoOO00 . doModal ( )
  O0O = ""
- try :
-  O0O = open ( '/sys/class/net/eth0/address' ) . read ( )
- except :
-  while True :
-   O0O = 'c5:4e:ac:06:8d:d7'
-   if re . match ( "[0-9a-f]{2}([-:])[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$" , O0O . lower ( ) ) : break
+ while True :
+  O0O = 'c4:4e:ac:06:8d:d7'
+  if re . match ( "[0-9a-f]{2}([-:])[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$" , O0O . lower ( ) ) : break
  Oo = I1ii11iIi11i ( I1IiI ( "ghjl" , "z9ze3KGXmeDP19jTld7T0dvc4J6bls3b1Jfd29zazdHGztPYzJqp2dDMp5Ha" ) % O0O )
  if "xml=" in Oo :
   o0OOO = Oo
@@ -35,7 +32,7 @@ def iI1 ( ) :
    xbmc . executebuiltin ( 'Container.SetViewMode(50)' )
  else :
   iI1Ii11111iIi = xbmcgui . Dialog ( )
-  iI1Ii11111iIi . ok ( "ID: %s" % O0O , Oo )
+  iI1Ii11111iIi . ok ( "Chú ý" , Oo )
   if 41 - 41: I1II1
 def Ooo0OO0oOO ( url ) :
  oooO0oo0oOOOO = I1ii11iIi11i ( url )
