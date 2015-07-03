@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<stream>
+<item>
+<title>name of movie 1</title>
+<link>http://sample_video_link_1</link>
+<thumbnail>http://sample_thumbnail_link_1.jpg</thumbnail>
+</item>
+<item>
+<title>[COLOR yellow][B][I]name of movie 2[/I][/B][/COLOR]</title>
+<link>http://sample_video_link_2</link>
+<thumbnail>http://sample_thumbnail_link_2.jpg</thumbnail>
+</item>
+</stream>
+
+
+
