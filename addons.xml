@@ -45,6 +45,21 @@
     </extension>
 </addon>
 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.arabictv" name="*[COLOR yellow]ARABIC - TV[/COLOR]" version="0.0.1" provider-name="Vinh Computer Repair">
+    <requires>
+    </requires>
+    <extension point="xbmc.python.pluginsource"
+               library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary>Vinh Computer Repair</summary>
+        <description>Addon for Arabic</description>
+    </extension>
+</addon>
+
 <addon
   id="plugin.video.hayhaytv"
   version="1.4"
