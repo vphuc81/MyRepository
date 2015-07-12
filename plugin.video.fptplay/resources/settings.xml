@@ -1,0 +1,4 @@
+<settings>
+   <setting id="start_channelid" type="text" label="Start Up Channel Name" default='vtv6-hd'/>
+   <setting id="quality" type="text" label="Quality" default='4'/>
+</settings>
