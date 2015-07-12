@@ -308,7 +308,7 @@
 
 <addon
   id="plugin.video.viettv24"
-  version="1.9.9"
+  version="1.9.10"
   name="*[COLOR yellow]Viet-TV24.com[/COLOR]"
   provider-name="Vinh Computer Repair">
   <requires>
