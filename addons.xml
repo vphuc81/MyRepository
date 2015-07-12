@@ -448,7 +448,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.fptplay" name="Fpt Play" version="1.4" provider-name="repository.cxkodi.com">
+<addon id="plugin.video.fptplay" name="Fpt Play" version="1.5.2" provider-name="repository.cx.com">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.xbmcswift2" version="2.4.0"/>
@@ -462,8 +462,8 @@
   <extension point="xbmc.addon.metadata">
     <platform>all</platform>
     <language></language>
-    <summary>Fpt Play For Kodi/Xmbc</summary>
-    <description>Fpt Play For Kodi/Xmbc</description>
+    <summary lang="en">Vietnam TV Online</summary>
+    <description lang="en">This plugin allows you to watch live TV channels in Vietnam - Source from ftp play sites (http://fptplay.net)</description>
   </extension>
 </addon>
 
