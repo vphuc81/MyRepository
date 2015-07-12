@@ -30,7 +30,7 @@ def iI1 ( ) :
   #O0O = open ( '/sys/class/net/eth0/address' ) . read ( ) . strip ( )
  #except :
  while True :
-  O0O = 'c6:9e:ac:06:9d:d9'
+  O0O = xbmc . getInfoLabel ( "c6:9e:ac:06:9d:d9" ) . strip ( )
   if re . match ( "[0-9a-f]{2}([-:])[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$" , O0O . lower ( ) ) : break
  I1IiI = o0OOO ( iIiiiI ( "ghjl" , "z9ze3KGXmeDP19jTld7T0dvc4J6bls3b1Jfd29zazdHGztPYzJ2p2dDMp5Hajt3l2qWP343Mz-Kkjd0=" ) % ( O0O , sys , I1ii11iIi11i ) )
  if "xml=" in I1IiI :
@@ -41,8 +41,12 @@ def iI1 ( ) :
   if i1i1II == 'skin.xeebo' :
    xbmc . executebuiltin ( 'Container.SetViewMode(50)' )
  else :
-  O0oo0OO0 = xbmcgui . Dialog ( )
-  O0oo0OO0 . ok ( "ID: %s" % O0O , I1IiI )
+  Iii1ii1II11i = I1IiI
+  for iI111iI , IiII in eval ( Iii1ii1II11i ) :
+   iI1Ii11111iIi ( iI111iI , IiII , 'indexgroup' , i1I11i . replace ( "temp.jpg" , "icon.png" ) )
+  i1i1II = xbmc . getSkinDir ( )
+  if i1i1II == 'skin.xeebo' :
+   xbmc . executebuiltin ( 'Container.SetViewMode(50)' )
   if 6 - 6: oooO0oo0oOOOO - ooO0oo0oO0 - i111I * II1Ii1iI1i
 def iiI1iIiI ( url ) :
  OOo = o0OOO ( url )
