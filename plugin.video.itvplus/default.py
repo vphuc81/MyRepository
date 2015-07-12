@@ -427,7 +427,7 @@ def resolveUrl(url):
 		url = re.compile('var responseText = "(.+?)";').findall(content)[0]		
 	elif 'htvonline' in url:
 		content = Get_Url(url)	
-		url = re.compile("file: \"([^\"]*)\"").findall(content)[0]
+		url = re.compile('data\-source=\"([^\"]*)\"').findall(content)[0]
 	elif 'hplus' in url:
 		content = Get_Url(url)	
 		url = re.compile('iosUrl = "(.+?)";').findall(content)[0]
@@ -457,33 +457,22 @@ def resolveUrl(url):
 		content = Get_Url(url)	
 		url=re.compile("var iosUrl = '(.+?)'").findall(content)[0]
 	elif 'phimgiaitri' in url:
-		#xbmc.log(url)	
+		xbmc.log(url)	
 		arr = url.split('/')
-		print arr
 		phimid = arr[len(arr) - 3]
-		print phimid
 		tap = arr[len(arr) - 1]
-		print tap
 		tap2 = tap.split('-')
-		print tap2		
 		tap3 = tap2[1].split('.')
-		print tap3		
 		tap = tap3[0]
-		print tap		
 		url2 = 'http://120.72.85.195/phimgiaitri/mobile/service/getep3.php?phimid=' + phimid
-		print url2
 		content = Get_Url(url2)
-		print content
 		content = content[3:]
-		print content
 		infoJson = json.loads(content)
 		tapindex = int(tap) -1
 		link = infoJson['ep_info'][tapindex]['link']
 		link = link.replace('#','*')
 		url3 ='http://120.72.85.195/phimgiaitri/mobile/service/getdireclink.php?linkpicasa=' + link
-		print url3
 		content = Get_Url(url3)
-		print content		
 		content = content[3:]
 		linkJson = json.loads(content)
 		url = linkJson['linkpi'][0]['link720'] or linkJson['linkpi'][0]['link360']
@@ -604,12 +593,17 @@ elif mode == 'get_m3u':Get_M3U(url,iconimage)
 elif mode == 'search_result':Search_Result(url)
 elif mode == 'search':Search(url)
 	
-elif mode=='stream' or mode=='play':
+elif mode=='stream':
     dialogWait = xbmcgui.DialogProgress()
     dialogWait.create('ITV Plus', 'Đang tải. Vui lòng chờ trong giây lát...')
     resolveUrl(url)
     dialogWait.close()
     del dialogWait	
-
+elif mode=='play':
+    dialogWait = xbmcgui.DialogProgress()
+    dialogWait.create('ITV Plus', 'Đang tải. Vui lòng chờ trong giây lát...')
+    PlayVideo(url,name)
+    dialogWait.close()
+    del dialogWait
 else:Home()
 xbmcplugin.endOfDirectory(int(sysarg))
