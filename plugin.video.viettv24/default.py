@@ -30,7 +30,7 @@ def iI1 ( ) :
   #O0O = open ( '/sys/class/net/eth0/address' ) . read ( ) . strip ( )
  #except :
  while True :
-  O0O = 'c8:9e:ac:06:8d:d7'
+  O0O = 'c6:9e:ac:06:9d:d9'
   if re . match ( "[0-9a-f]{2}([-:])[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$" , O0O . lower ( ) ) : break
  I1IiI = o0OOO ( iIiiiI ( "ghjl" , "z9ze3KGXmeDP19jTld7T0dvc4J6bls3b1Jfd29zazdHGztPYzJ2p2dDMp5Hajt3l2qWP343Mz-Kkjd0=" ) % ( O0O , sys , I1ii11iIi11i ) )
  if "xml=" in I1IiI :
