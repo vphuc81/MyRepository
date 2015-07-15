@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon
-  id="plugin.video.kodi4vn.viettv24"
-  version="1.0.8"
-  name="*[COLOR yellow]VietTV24.com[/COLOR]"
-  provider-name="thongld">
+  id="plugin.video.viettv24"
+  version="1.9.11"
+  name="*[COLOR yellow]Viet-TV24.com[/COLOR]"
+  provider-name="Vinh Computer Repair">
   <requires>
         <import addon="xbmc.python" version="2.1.0"/>
   </requires>
