@@ -17,7 +17,7 @@ def Home():
     #wdlg.addControl(img)
     #wdlg.doModal()
 
-    homemenu = GetUrl("https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/source_file")
+    homemenu = GetUrl("https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/source_file2")
     #homemenu = codecs.open("local_source_file", encoding='utf-8').read()
     for menutitle,menulink in eval(homemenu):
         addDir(menutitle,menulink,'indexgroup',path.replace("temp.jpg","icon.png"))
@@ -139,7 +139,7 @@ elif mode == 'indexgroup':
     IndexGroup(url)
 elif mode=='play':
     dialogWait = xbmcgui.DialogProgress()
-    dialogWait.create('Brought to you by Danasyentertainment.com', 'Loading video. Please wait...')
+    dialogWait.create('Brought to you by Live-TV', 'Loading video. Please wait...')
     PlayVideo(url,name)
     dialogWait.close()
     del dialogWait
