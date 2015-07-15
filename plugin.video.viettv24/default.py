@@ -13,26 +13,20 @@ if 64 - 64: iIIi1iI1II111 + ii11i / oOooOoO0Oo0O
 def iI1 ( ) :
  i1I11i = xbmc . translatePath ( xbmcaddon . Addon ( ) . getAddonInfo ( 'path' ) ) . decode ( "utf-8" )
  i1I11i = xbmc . translatePath ( os . path . join ( i1I11i , "temp.jpg" ) )
- urllib . urlretrieve ( 'https://googledrive.com/host/0B-ygKtjD8Sc-S04wUUxMMWt5dmM/images/viettv24.jpg' , i1I11i )
- OoOoOO00 = xbmcgui . WindowDialog ( )
- I11i = xbmcgui . ControlImage ( 0 , 0 , 1280 , 720 , i1I11i )
- #OoOoOO00 . addControl ( I11i )
- #OoOoOO00 . doModal ( )
- #O0O = ""
- while True :
-  O0O = 'c5:7e:ac:07:8d:d8'
-  if re . match ( "[0-9a-f]{2}([-:])[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$" , O0O . lower ( ) ) : break
- Oo = I1ii11iIi11i ( I1IiI ( "ghjl" , "z9ze3KGXmeDP19jTld7T0dvc4J6bls3b1Jfd29zazdHGztPYzJqp2dDMp5Ha" ) % O0O )
- if "xml=" in Oo :
+ folderpath=Oo0Ooo.getAddonInfo('path')
+ mainfile = xbmc.translatePath(os.path.join(folderpath, 'resources', 'main.txt'))
+ Oo = I1ii11iIi11i (mainfile)
+ if "xml" in Oo :
   o0OOO = Oo
   for iIiiiI , Iii1ii1II11i in eval ( o0OOO ) :
+   Iii1ii1II11i=xbmc.translatePath(os.path.join(folderpath, 'resources', Iii1ii1II11i))
    iI111iI ( iIiiiI , Iii1ii1II11i , 'indexgroup' , i1I11i . replace ( "temp.jpg" , "icon.png" ) )
   IiII = xbmc . getSkinDir ( )
   if IiII == 'skin.xeebo' :
    xbmc . executebuiltin ( 'Container.SetViewMode(50)' )
  else :
   iI1Ii11111iIi = xbmcgui . Dialog ( )
-  iI1Ii11111iIi . ok ( "Chú ý" , Oo )
+  iI1Ii11111iIi . ok ( "ID: %s" % O0O , Oo )
   if 41 - 41: I1II1
 def Ooo0OO0oOO ( url ) :
  oooO0oo0oOOOO = I1ii11iIi11i ( url )
@@ -153,6 +147,7 @@ def i11i1 ( lat1 , lon1 , lat2 , lon2 ) :
  O0o0 = atan2 ( Oo0O0O0ooO0O , IIIIii )
  return Ii11Ii1I * O0o0
  if 71 - 71: I11i1I + Ii % i11iIiiIii + IiI1I1 - o0
+
 def I1ii11iIi11i ( url ) :
  o0oOoO00o = ""
  if os . path . exists ( url ) == True :
@@ -223,68 +218,7 @@ def iiIii ( utm_url ) :
   print ( "GA fail: %s" % utm_url )
  return I111Ii111
  if 75 - 75: i1iIIi1 % i1iIIi1 . OOoo0O0
-def III1iII1I1ii ( group , name ) :
- try :
-  try :
-   from hashlib import md5
-  except :
-   from md5 import md5
-  from random import randint
-  import time
-  from urllib import unquote , quote
-  from os import environ
-  from hashlib import sha1
-  oOOo0 = "4.2.8"
-  oo00O00oO = open ( oO00o0 ) . read ( )
-  iIiIIIi = "VietTV24"
-  ooo00OOOooO = "UA-52209804-2"
-  O00OOOoOoo0O = "www.viettv24.com"
-  O000OOo00oo = "http://www.google-analytics.com/__utm.gif"
-  if name == "None" :
-   oo0OOo = O000OOo00oo + "?" + "utmwv=" + oOOo0 + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmp=" + quote ( iIiIIIi ) + "&utmac=" + ooo00OOOooO + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , oo00O00oO , "1" , "1" , "2" ] )
-   if 64 - 64: o0o0OOO0o0
-   if 22 - 22: OOoOoo00oo + IIII % IiI1I1
-   if 9 - 9: oOooOoO0Oo0O
-   if 62 - 62: I11i1I / iI1OoOooOOOO + IIII / iI1OoOooOOOO . I11iii11IIi
-   if 68 - 68: i11iIiiIii % IiI1I1 + i11iIiiIii
-  else :
-   if group == "None" :
-    oo0OOo = O000OOo00oo + "?" + "utmwv=" + oOOo0 + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmp=" + quote ( iIiIIIi + "/" + name ) + "&utmac=" + ooo00OOOooO + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , oo00O00oO , "1" , "1" , "2" ] )
-    if 31 - 31: I11iii11IIi . OOo0o0
-    if 1 - 1: OOoOoo00oo / i1iIIi1 % o0O0 * o0 . i11iIiiIii
-    if 2 - 2: IiI1I1 * o0o0OOO0o0 - ii11i + OOo0o0 . oOo00Oo00O % o0O0
-    if 92 - 92: o0O0
-    if 25 - 25: OOoOoo00oo - OOo0o0 / oOooOoO0Oo0O / i1iIIi1
-   else :
-    oo0OOo = O000OOo00oo + "?" + "utmwv=" + oOOo0 + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmp=" + quote ( iIiIIIi + "/" + group + "/" + name ) + "&utmac=" + ooo00OOOooO + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , oo00O00oO , "1" , "1" , "2" ] )
-    if 12 - 12: OOo0o0 * o0O0 % I1II1 % ii11i
-    if 20 - 20: I11i1I % IIII / IIII + IIII
-    if 45 - 45: oOo00Oo00O - o0 - oOooOoO0Oo0O - iI1OoOooOOOO . I11iii11IIi / iIIi1iI1II111
-    if 51 - 51: iIIi1iI1II111 + o0O0
-    if 8 - 8: oOo00Oo00O * i1iiIII111ii - IIII - iI1OoOooOOOO * I11i1I % OOo0o0
-    if 48 - 48: iIIi1iI1II111
-  print "============================ POSTING ANALYTICS ============================"
-  iiIii ( oo0OOo )
-  if 11 - 11: o0o0OOO0o0 + oOooOoO0Oo0O - iI1OoOooOOOO / i1iIIi1 + OOoOoo00oo . I11iii11IIi
-  if not group == "None" :
-   i1Iii1i1I = O000OOo00oo + "?" + "utmwv=" + oOOo0 + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmhn=" + quote ( O00OOOoOoo0O ) + "&utmt=" + "events" + "&utme=" + quote ( "5(" + iIiIIIi + "*" + group + "*" + name + ")" ) + "&utmp=" + quote ( iIiIIIi ) + "&utmac=" + ooo00OOOooO + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , "1" , oo00O00oO , "1" , "2" ] )
-   if 91 - 91: IiI1I1 + OOo0o0 . I11i1I * IiI1I1 + OOo0o0 * OOoOoo00oo
-   if 80 - 80: o0O0 % I11i1I % oOo00Oo00O - OOoOoo00oo + OOoOoo00oo
-   if 19 - 19: i1iiIII111ii * I1II1
-   if 14 - 14: o0O0
-   if 11 - 11: o0 * OOo0o0 . ii11i % oOooOoO0Oo0O + o0O0
-   if 78 - 78: iI1OoOooOOOO . I11i1I + iI1OoOooOOOO / o0o0OOO0o0 / iI1OoOooOOOO
-   if 54 - 54: i1iiIII111ii % o0O0
-   if 37 - 37: i1iiIII111ii * OOoOoo00oo / Ii - o0O0 % I11iii11IIi . oOo00Oo00O
-   try :
-    print "============================ POSTING TRACK EVENT ============================"
-    iiIii ( i1Iii1i1I )
-   except :
-    print "============================  CANNOT POST TRACK EVENT ============================"
-    if 88 - 88: o0O0 . I11iii11IIi * I11iii11IIi % OOoo0O0
- except :
-  print "================  CANNOT POST TO ANALYTICS  ================"
-  if 15 - 15: I1II1 * OOo0o0 + i11iIiiIii
+
 I1Ii = oO00O0O0O ( sys . argv [ 2 ] )
 O0oo00o0O = I1Ii . get ( 'mode' )
 i1I1I = I1Ii . get ( 'url' )
@@ -296,13 +230,13 @@ if type ( oOOoo00O0O ) == type ( str ( ) ) :
  if 12 - 12: i11iIiiIii / iI1OoOooOOOO
 o0O = str ( sys . argv [ 1 ] )
 if O0oo00o0O == 'index' :
- III1iII1I1ii ( "Browse" , oOOoo00O0O )
+ #III1iII1I1ii ( "Browse" , oOOoo00O0O )
  O00o0o0000o0o ( i1I1I )
 elif O0oo00o0O == 'indexgroup' :
- III1iII1I1ii ( "Browse" , oOOoo00O0O )
+ #III1iII1I1ii ( "Browse" , oOOoo00O0O )
  Ooo0OO0oOO ( i1I1I )
 elif O0oo00o0O == 'play' :
- III1iII1I1ii ( "Play" , oOOoo00O0O + "/" + i1I1I )
+ #III1iII1I1ii ( "Play" , oOOoo00O0O + "/" + i1I1I )
  if any ( x in i1I1I for x in [ ".jpg" , ".zip" ] ) :
   I11II1i ( i1I1I )
  else :
@@ -312,6 +246,6 @@ elif O0oo00o0O == 'play' :
   IiIIii1iII1II . close ( )
   del IiIIii1iII1II
 else :
- III1iII1I1ii ( "None" , "None" )
+ #III1iII1I1ii ( "None" , "None" )
  iI1 ( )
 xbmcplugin . endOfDirectory ( int ( o0O ) ) # dd678faae9ac167bc83abf78e5cb2f3f0688d3a3
