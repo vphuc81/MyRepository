@@ -31,21 +31,6 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.giaitritv" name="*[COLOR yellow]Giai Tri - TV[/COLOR]" version="0.0.5" provider-name="Vinh Computer Repair">
-    <requires>
-    </requires>
-    <extension point="xbmc.python.pluginsource"
-               library="default.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <platform>all</platform>
-        <summary>Vinh Computer Repair</summary>
-        <description>Addon for Vietnamese</description>
-    </extension>
-</addon>
-
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.arabictv" name="*[COLOR yellow]ARABIC - TV[/COLOR]" version="0.0.1" provider-name="Vinh Computer Repair">
     <requires>
     </requires>
@@ -57,6 +42,55 @@
         <platform>all</platform>
         <summary>Vinh Computer Repair</summary>
         <description>Addon for Arabic</description>
+    </extension>
+</addon>
+
+<addon id="plugin.video.donggiao" name="*[COLOR yellow]Đồng-Giao TV[/COLOR]" provider-name="Vinh Computer Repair" version="1.6">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0" />
+    <import addon="script.module.xbmcswift2" version="1.3.1" />
+    <import addon="plugin.video.youtube" version="4.4.1" />
+  </requires>
+  <extension library="default.py" point="xbmc.python.pluginsource">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary>Watch free movies from phim14.net</summary>
+    <description>Watch free movies from phim14.net</description>
+  </extension>
+</addon>
+
+<addon id="plugin.video.fptplay" name="Fpt Play" version="1.5.2" provider-name="repository.cx.com">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.xbmcswift2" version="2.4.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="addon.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.service"
+			library="start.py" start="startup">
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <language></language>
+    <summary lang="en">Vietnam TV Online</summary>
+    <description lang="en">This plugin allows you to watch live TV channels in Vietnam - Source from ftp play sites (http://fptplay.net)</description>
+  </extension>
+</addon>
+
+<addon id="plugin.video.giaitritv" name="*[COLOR yellow]Giai Tri - TV[/COLOR]" version="0.0.5" provider-name="Vinh Computer Repair">
+    <requires>
+    </requires>
+    <extension point="xbmc.python.pluginsource"
+               library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary>Vinh Computer Repair</summary>
+        <description>Addon for Vietnamese</description>
     </extension>
 </addon>
 
@@ -91,7 +125,7 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>hdonline.vn</summary>
-    <description>Xem phim HD Lá»“ng tiáº¿ng vÃ  Thuyáº¿t minh tiáº¿ng Viá»‡t táº¡i HDonline</description>
+    <description>Xem phim HD Lồng tiếng và Thuyết minh tiếng Việt tại HDonline</description>
     <platform>all</platform>
   </extension>
 </addon>
@@ -114,6 +148,26 @@
   </extension>
 </addon>
 
+<addon id="plugin.video.itvplus"
+       name="ITV Plus"
+       version="1.2.0"
+       provider-name="itv member">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0" optional="true" />
+	<import addon="script.module.simplejson" />
+	<import addon="script.module.simple.downloader" version="1.9.4" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Entertainment</summary>
+    <description>Giải trí trên kodi (xbmc)</description>
+	<disclaimer lang="en">Nguồn data trên web nên chúng tôi không chịu trách nhiệm về sự ổn định.</disclaimer>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="plugin.video.kenh108.com" name="*[COLOR yellow]kenh-108.com[/COLOR]" provider-name="Vinh Computer Repair" version="1.4">
   <requires>
     <import addon="xbmc.python" version="2.1.0" />
@@ -130,12 +184,12 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.livetv" name="*[COLOR yellow]Live-TV[/COLOR]" version="1.1.0" provider-name="Vinh Computer Repair">
-<requires> 
-	<import addon="xbmc.python" version="2.1.0"/>   
+<addon id="plugin.video.livetv" name="**[COLOR yellow]Live-TV[/COLOR]" version="1.2.0" provider-name="Vinh Computer Repair">
+<requires>
+	<import addon="xbmc.python" version="2.1.0"/>
 </requires>
-<extension point="xbmc.python.pluginsource" library="default.py">  
-	<provides>video</provides>    
+<extension point="xbmc.python.pluginsource" library="default.py">
+	<provides>video</provides>
 </extension>
   <extension point="xbmc.addon.metadata">
     <summary>Kodi Addon</summary>
@@ -145,13 +199,12 @@
   </extension>
 </addon>
 
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.livetvinternational" name="*[COLOR yellow]Live TV-International[/COLOR]" version="1.0" provider-name="Vinh Computer Repair">
-<requires> 
-	<import addon="xbmc.python" version="2.1.0"/>   
+<addon id="plugin.video.livetvinternational" name="**[COLOR yellow]Live TV-International[/COLOR]" version="1.2.0" provider-name="Vinh Computer Repair">
+<requires>
+	<import addon="xbmc.python" version="2.1.0"/>
 </requires>
-<extension point="xbmc.python.pluginsource" library="default.py">  
-	<provides>video</provides>    
+<extension point="xbmc.python.pluginsource" library="default.py">
+	<provides>video</provides>
 </extension>
   <extension point="xbmc.addon.metadata">
     <summary>Live TV-International</summary>
@@ -225,8 +278,8 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <platform>all</platform>
-    <summary>Watch free movies from phim14.net (phim lá»“ng tiáº¿ng, thuyáº¿t minh tiáº¿ng Viá»‡t)</summary>
-    <description>Watch free movies from phim14.net (phim lá»“ng tiáº¿ng, thuyáº¿t minh tiáº¿ng Viá»‡t)</description>
+    <summary>Watch free movies from phim14.net (phim lồng tiếng, thuyết minh tiếng Việt)</summary>
+    <description>Watch free movies from phim14.net (phim lồng tiếng, thuyết minh tiếng Việt)</description>
   </extension>
 </addon>
 
@@ -428,45 +481,6 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.itvplus"
-       name="ITV Plus"
-       version="1.2.0"
-       provider-name="itv member">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0" optional="true" />
-	<import addon="script.module.simplejson" />
-	<import addon="script.module.simple.downloader" version="1.9.4" />
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>Entertainment</summary>
-    <description>Giải trí trên kodi (xbmc)</description>
-	<disclaimer lang="en">Nguồn data trên web nên chúng tôi không chịu trách nhiệm về sự ổn định.</disclaimer>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.fptplay" name="Fpt Play" version="1.5.2" provider-name="repository.cx.com">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.xbmcswift2" version="2.4.0"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="addon.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.service"
-			library="start.py" start="startup">
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <platform>all</platform>
-    <language></language>
-    <summary lang="en">Vietnam TV Online</summary>
-    <description lang="en">This plugin allows you to watch live TV channels in Vietnam - Source from ftp play sites (http://fptplay.net)</description>
-  </extension>
-</addon>
-
 <addon id="repository.daveln" name="DaveLN's Repository" version="1.0.1" provider-name="DaveLN">
 	<extension point="xbmc.addon.repository" name="DaveLN Addon Repository">
 		<info compressed="false">https://github.com/daveln/repository.daveln/raw/master/addons.xml</info>
@@ -512,6 +526,28 @@
 		<summary lang="en">4share and Fshare</summary>
 		<description lang="en"></description>
 		<disclaimer lang="en"></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+
+<addon id="repository.itvplus"
+		name="ITV Repository"
+		version="1.0.0"
+		provider-name="ITV member">
+  <requires>
+    <import addon="xbmc.addon" version="12.0.0"/>
+  </requires>
+	<extension point="xbmc.addon.repository"
+		name="ITV Add-on's Repository">
+		<info compressed="true">http://xbmc.itvplus.net/REPO/addons.xml</info>
+		<checksum>http://xbmc.itvplus.net/REPO/addons.xml.md5</checksum>
+		<datadir zip="true">http://xbmc.itvplus.net/REPO</datadir>
+		<hashes>true</hashes>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Entertainment</summary>
+		<description lang="en">Download and install addons from ITV Repository</description>
 		<platform>all</platform>
 	</extension>
 </addon>
@@ -581,40 +617,6 @@
 	</extension>
 </addon>
 
-<addon id="repository.xunitytalk" name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk Repository" version="1.0.6" provider-name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
-	<extension point="xbmc.addon.repository" name="Mikey1234 Addon Repository">
-		<info compressed="false">http://xty.me/xunitytalk/addons/addons.xml</info>
-		<checksum>http://xty.me/xunitytalk/addons/addons.xml.md5</checksum>
-		<datadir zip="true">http://xty.me/xunitytalk/addons</datadir>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>The Best Third Party Addons for XBMC, .[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk</summary>
-		<description>The Best Third Party Addons for XBMC, .[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk</description>
-		<platform>all</platform>
-	</extension>
-</addon>
-
-<addon id="repository.itvplus"
-		name="ITV Repository"
-		version="1.0.0"
-		provider-name="ITV member">
-  <requires>
-    <import addon="xbmc.addon" version="12.0.0"/>
-  </requires>
-	<extension point="xbmc.addon.repository"
-		name="ITV Add-on's Repository">
-		<info compressed="true">http://xbmc.itvplus.net/REPO/addons.xml</info>
-		<checksum>http://xbmc.itvplus.net/REPO/addons.xml.md5</checksum>		
-		<datadir zip="true">http://xbmc.itvplus.net/REPO</datadir>
-		<hashes>true</hashes>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary lang="en">Entertainment</summary>
-		<description lang="en">Download and install addons from ITV Repository</description>
-		<platform>all</platform>
-	</extension>
-</addon>
-
 <addon id="repository.vinh" name="[COLOR blue]Vinh[/COLOR] Repository" version="1.0" provider-name="Vinh Computer Repair">
 	<extension point="xbmc.addon.repository" name="Vinh Computer Repair Addon Repository">
 		<info compressed="false">https://github.com/vphuc81/MyRepository/raw/master/addons.xml</info>
@@ -624,6 +626,19 @@
 	<extension point="xbmc.addon.metadata">
 		<summary>The Best Third Party Addons for KODI</summary>
 		<description>The Best Third Party Addons for Vietnamese</description>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.xunitytalk" name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk Repository" version="1.0.6" provider-name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
+	<extension point="xbmc.addon.repository" name="Mikey1234 Addon Repository">
+		<info compressed="false">http://xty.me/xunitytalk/addons/addons.xml</info>
+		<checksum>http://xty.me/xunitytalk/addons/addons.xml.md5</checksum>
+		<datadir zip="true">http://xty.me/xunitytalk/addons</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>The Best Third Party Addons for XBMC, .[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk</summary>
+		<description>The Best Third Party Addons for XBMC, .[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk</description>
 		<platform>all</platform>
 	</extension>
 </addon>

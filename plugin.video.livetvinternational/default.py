@@ -1,23 +1,24 @@
 #!/usr/bin/python
 #coding=utf-8
-import xbmc,xbmcaddon,xbmcplugin,xbmcgui,sys,urllib,urllib2,re,os,codecs
+import xbmc,xbmcaddon,xbmcplugin,xbmcgui,sys,urllib,urllib2,re,os,codecs,unicodedata,base64
 
 addonID = 'plugin.video.livetvinternational'
 addon = xbmcaddon.Addon(addonID)
 pluginhandle = int(sys.argv[1])
+trans = base64.b64decode
 
 def Home():
     path = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('path') ).decode("utf-8")
     path = xbmc.translatePath(os.path.join(path,"temp.jpg"))
-    #urllib.urlretrieve('http://langsongviet.com/fta4vnForum/upload/images/ads/temp.jpg',path)
-    urllib.urlretrieve('https://www.dropbox.com/s/x38occ8l47x9p0v/tempPat.jpg',path)
+    #urllib.urlretrieve('http://google.com/ooOOoo/vinhad.jpg',path)
+    urllib.urlretrieve('https://www.dropbox.com/ooOOooo/vinhad.jpg',path)
     #urllib.urlretrieve("tempPat.jpg",path)
     img = xbmcgui.ControlImage(360,140,540,360, path)
     wdlg = xbmcgui.WindowDialog()
     #wdlg.addControl(img)
     #wdlg.doModal()
 
-    homemenu = GetUrl("https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/source_file_international")
+    homemenu = GetUrl(trans(oOoo))
     #homemenu = codecs.open("local_source_file", encoding='utf-8').read()
     for menutitle,menulink in eval(homemenu):
         addDir(menutitle,menulink,'indexgroup',path.replace("temp.jpg","icon.png"))
@@ -125,6 +126,7 @@ def parameters_string_to_dict(parameters):
                 paramDict[paramSplits[0]] = paramSplits[1]
     return paramDict
 
+oOoo = 'aHR0cHM6Ly9nb29nbGVkcml2ZS5jb20vaG9zdC8wQjd6a2tRd281cHI1Zm1abGIzbDVNbUV0Ym14dVdscHlWRkZmT0hKMGNWQTVjbXBJVlMxc2VEVlhPRzFmYnkxSGNtRnVOemcvc291cmNlX2ZpbGVfaW50ZXJuYXRpb25hbA=='	
 params=parameters_string_to_dict(sys.argv[2])
 mode=params.get('mode')
 url=params.get('url')
