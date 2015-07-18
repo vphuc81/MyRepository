@@ -184,7 +184,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.livetv" name="**[COLOR yellow]Live-TV[/COLOR]" version="1.2.0" provider-name="Vinh Computer Repair">
+<addon id="plugin.video.livetv" name="**[COLOR yellow]Live-TV[/COLOR]" version="2.0.0" provider-name="Vinh Computer Repair">
 <requires>
 	<import addon="xbmc.python" version="2.1.0"/>
 </requires>
