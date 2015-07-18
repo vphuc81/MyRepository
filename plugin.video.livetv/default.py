@@ -17,21 +17,43 @@ vp9 = 'http://f.vp9.tv/music/'
 tvreplay = 'http://113.160.49.39/tvcatchup/'
 woim = 'http://www.woim.net/'
 
-def Home():
+
+
+
+def TVChannel(url):
+    xmlcontent = GetUrl(url)
+    names = re.compile('<name>(.+?)</name>').findall(xmlcontent)
+    if len(names) == 1:
+        items = re.compile('<item>(.+?)</item>').findall(xmlcontent)
+        for item in items:
+            thumb=""
+            title=""
+            link=""
+            if "/title" in item:
+                title = re.compile('<title>(.+?)</title>').findall(item)[0]
+            if "/link" in item:
+                link = re.compile('<link>(.+?)</link>').findall(item)[0]
+            if "/thumbnail" in item:
+                thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
+            addLink(title, link, 'play', thumb)
+        skin_used = xbmc.getSkinDir()
+        if skin_used == 'skin.xeebo':
+            xbmc.executebuiltin('Container.SetViewMode(52)')
+    else:
+        for name in names:
+            addDir(name, url+"?n="+name, 'index', '')	
+
+		
+
+		
+def Channel():
     content = Get_Url(DecryptData(homeurl))
     match=re.compile("<title>([^<]*)<\/title>\s*<link>([^<]+)<\/link>\s*<thumbnail>(.+?)</thumbnail>").findall(content)	
     for title,url,thumbnail in match:
-        if 'tvcatchup' in url:
-          addDir(title,url,'medialist',logos+thumbnail)
-        elif 'MYPLAYLIST' in url:
-          pass		  
-        else:	
-          addDir(title,url,'menu_group',logos+thumbnail)
-    skin_used = xbmc.getSkinDir()
-    if skin_used == 'skin.xeebo':
-        xbmc.executebuiltin('Container.SetViewMode(51)')	  
-    else:
-        xbmc.executebuiltin('Container.SetViewMode(%d)' % 500)
+		addDir(title,url,'tvchannel',thumbnail)	
+    xbmc.executebuiltin('Container.SetViewMode(%d)' % 500)	
+	
+
 		
 def Menu_Group(url):
     if 'MenuTV' in url:
@@ -483,12 +505,7 @@ def resolveUrl(url):
 	return
 
 def PlayVideo(url,title):
-    if(url.find("youtube") > 0):
-        vidmatch=re.compile('(youtu\.be\/|youtube-nocookie\.com\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v|user)\/))([^\?&"\'>]+)').findall(url)
-        vidlink=vidmatch[0][len(vidmatch[0])-1].replace('v/','')
-        url = 'plugin://plugin.video.youtube?path=/root/video&action=play_video&videoid=' + vidlink.replace('?','')
-        xbmc.executebuiltin("xbmc.PlayMedia("+url+")")	
-    else:
+    
         title = urllib.unquote_plus(title)
         playlist = xbmc.PlayList(1)
         playlist.clear()
@@ -565,7 +582,7 @@ def parameters_string_to_dict(parameters):
     return paramDict
 
 DecryptData = base64.b64decode	
-homeurl = 'aHR0cHM6Ly9nb29nbGVkcml2ZS5jb20vaG9zdC8wQjd6a2tRd281cHI1Zm1abGIzbDVNbUV0Ym14dVdscHlWRkZmT0hKMGNWQTVjbXBJVlMxc2VEVlhPRzFmYnkxSGNtRnVOemcvc291cmNlX2ZpbGUueG1s'
+homeurl = 'aHR0cHM6Ly9nb29nbGVkcml2ZS5jb20vaG9zdC8wQjd6a2tRd281cHI1ZmpOVWNIY3dNRWt5UzBneFVHUnZRbE16YUdweFNEUXRaR050VVZaclN5MWZRemhEU2pKMU5FaG1ibU0vc291cmNlZmlsZS54bWw='
 params=parameters_string_to_dict(sys.argv[2])
 mode=params.get('mode')
 url=params.get('url')
@@ -581,7 +598,8 @@ if type(url)==type(str()):
     url=urllib.unquote_plus(url)
 sysarg=str(sys.argv[1])
 
-if mode == 'index':Index(url,iconimage)
+if mode == 'tvchannel':TVChannel(url)
+elif mode == 'index':Index(url,iconimage)
 elif mode == 'indexgroup':IndexGroup(url)	
 elif mode == 'index_group':Index_Group(url)	
 elif mode == 'menu_group':Menu_Group(url)
@@ -595,15 +613,15 @@ elif mode == 'search':Search(url)
 	
 elif mode=='stream':
     dialogWait = xbmcgui.DialogProgress()
-    dialogWait.create('ITV Plus', 'Đang tải. Vui lòng chờ trong giây lát...')
+    dialogWait.create('Brought to you by Live-TV', 'Loading video. Please wait...')
     resolveUrl(url)
     dialogWait.close()
     del dialogWait	
 elif mode=='play':
     dialogWait = xbmcgui.DialogProgress()
-    dialogWait.create('ITV Plus', 'Đang tải. Vui lòng chờ trong giây lát...')
+    dialogWait.create('Brought to you by Live-TV', 'Loading video. Please wait...')
     PlayVideo(url,name)
     dialogWait.close()
     del dialogWait
-else:Home()
+else:Channel()
 xbmcplugin.endOfDirectory(int(sysarg))
