@@ -1,32 +1,18 @@
 #!/usr/bin/python
 #coding=utf-8
 import xbmc,xbmcaddon,xbmcplugin,xbmcgui,sys,urllib,urllib2,re,os,codecs,unicodedata,base64
+import simplejson as json
 
 addonID = 'plugin.video.livetvinternational'
 addon = xbmcaddon.Addon(addonID)
 pluginhandle = int(sys.argv[1])
-trans = base64.b64decode
+home = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('path') ).decode("utf-8")
+logos = xbmc.translatePath(os.path.join(home,"logos\\"))
+dataPath = xbmc.translatePath(os.path.join(home, 'resources'))
 
-def Home():
-    path = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('path') ).decode("utf-8")
-    path = xbmc.translatePath(os.path.join(path,"temp.jpg"))
-    #urllib.urlretrieve('http://google.com/ooOOoo/vinhad.jpg',path)
-    urllib.urlretrieve('https://www.dropbox.com/ooOOooo/vinhad.jpg',path)
-    #urllib.urlretrieve("tempPat.jpg",path)
-    img = xbmcgui.ControlImage(360,140,540,360, path)
-    wdlg = xbmcgui.WindowDialog()
-    #wdlg.addControl(img)
-    #wdlg.doModal()
 
-    homemenu = GetUrl(trans(oOoo))
-    #homemenu = codecs.open("local_source_file", encoding='utf-8').read()
-    for menutitle,menulink in eval(homemenu):
-        addDir(menutitle,menulink,'indexgroup',path.replace("temp.jpg","icon.png"))
-    skin_used = xbmc.getSkinDir()
-    if skin_used == 'skin.xeebo':
-        xbmc.executebuiltin('Container.SetViewMode(50)')
 
-def IndexGroup(url):
+def TVChannel(url):
     xmlcontent = GetUrl(url)
     names = re.compile('<name>(.+?)</name>').findall(xmlcontent)
     if len(names) == 1:
@@ -47,9 +33,27 @@ def IndexGroup(url):
             xbmc.executebuiltin('Container.SetViewMode(52)')
     else:
         for name in names:
-            addDir(name, url+"?n="+name, 'index', '')
+            addDir(name, url+"?n="+name, 'index', '')	
 
-def Index(url):
+		
+
+		
+def Channel():
+    content = Get_Url(DecryptData(homeurl))
+    match=re.compile("<title>([^<]*)<\/title>\s*<link>([^<]+)<\/link>\s*<thumbnail>(.+?)</thumbnail>").findall(content)	
+    for title,url,thumbnail in match:
+		addDir(title,url,'tvchannel',thumbnail)	
+    xbmc.executebuiltin('Container.SetViewMode(%d)' % 500)	
+	
+
+
+def Get_M3U(url,iconimage):
+  m3ucontent = Get_Url(url)
+  match = re.compile('#EXTINF:-?\d,(.+?)\n(.+)').findall(m3ucontent)
+  for name,url in match:
+	  add_Link(name.replace('TVSHOW - ','').replace('MUSIC - ',''),url,iconimage)
+	  
+def Index(url,iconimage):
     byname = url.split("?n=")[1]
     url = url.split("?")[0]
     xmlcontent = GetUrl(url)
@@ -67,21 +71,95 @@ def Index(url):
                     link = re.compile('<link>(.+?)</link>').findall(item)[0]
                 if "/thumbnail" in item:
                     thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
-                addLink(title, link, 'play', thumb)
+                if "youtube" in link:					
+                    addDir(title, link, 'episodes', thumb)
+                else:					
+                    addLink('' + title + '', link, 'play', thumb)
     skin_used = xbmc.getSkinDir()
     if skin_used == 'skin.xeebo':
-        xbmc.executebuiltin('Container.SetViewMode(52)')
+        xbmc.executebuiltin('Container.SetViewMode(50)')
+		
+def IndexGroup(url):
+    xmlcontent = GetUrl(url)
+    names = re.compile('<name>(.+?)</name>').findall(xmlcontent)
+    if len(names) == 1:
+        items = re.compile('<item>(.+?)</item>').findall(xmlcontent)
+        for item in items:
+            thumb=""
+            title=""
+            link=""
+            if "/title" in item:
+                title = re.compile('<title>(.+?)</title>').findall(item)[0]
+            if "/link" in item:
+                link = re.compile('<link>(.+?)</link>').findall(item)[0]
+            if "/thumbnail" in item:
+                thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
+            add_Link(title, link, thumb)
+        skin_used = xbmc.getSkinDir()
+        if skin_used == 'skin.xeebo':
+            xbmc.executebuiltin('Container.SetViewMode(52)')
+        else:
+            xbmc.executebuiltin('Container.SetViewMode(%d)' % 500)			
+    else:
+        for name in names:
+            addDir('' + name + '', url+"?n="+name, 'index', '')
 
+def Index_Group(url):
+	xmlcontent = GetUrl(url)
+	names = re.compile('<name>(.+?)</name>\s*<thumbnail>(.+?)</thumbnail>').findall(xmlcontent)
+	if len(names) == 1:
+		items = re.compile('<item>(.+?)</item>').findall(xmlcontent)
+		for item in items:
+			thumb=""
+			title=""
+			link=""
+			if "/title" in item:
+				title = re.compile('<title>(.+?)</title>').findall(item)[0]
+			if "/link" in item:
+				link = re.compile('<link>(.+?)</link>').findall(item)[0]
+			if "/thumbnail" in item:
+				thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
+			addLink(title, link, 'play', thumb)
+		skin_used = xbmc.getSkinDir()
+		if skin_used == 'skin.xeebo':
+				xbmc.executebuiltin('Container.SetViewMode(50)')
+	else:
+		for name,thumb in names:
+			addDir(name, url+"?n="+name, 'index', thumb)
+
+def menulist(homepath):
+  try:
+    mainmenu=open(homepath, 'r')  
+    link=mainmenu.read()
+    mainmenu.close()
+    match=re.compile("<title>([^<]*)<\/title>\s*<link>([^<]+)<\/link>\s*<thumbnail>(.+?)</thumbnail>").findall(link)
+    return match
+  except:
+    pass
+
+	
 def PlayVideo(url,title):
-    title = urllib.unquote_plus(title)
-    playlist = xbmc.PlayList(1)
-    playlist.clear()
-    listitem = xbmcgui.ListItem(title)
-    listitem.setInfo('video', {'Title': title})
-    xbmcPlayer = xbmc.Player()
-    playlist.add(url, listitem)
-    xbmcPlayer.play(playlist)
+    
+        title = urllib.unquote_plus(title)
+        playlist = xbmc.PlayList(1)
+        playlist.clear()
+        listitem = xbmcgui.ListItem(title)
+        listitem.setInfo('video', {'Title': title})
+        xbmcPlayer = xbmc.Player()
+        playlist.add(url, listitem)
+        xbmcPlayer.play(playlist)
 
+def Get_Url(url):
+    try:
+		req=urllib2.Request(url)
+		req.add_header('User-Agent', 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)')
+		response=urllib2.urlopen(req)
+		link=response.read()
+		response.close()  
+		return link
+    except:
+		pass
+    
 def GetUrl(url):
     link = ""
     if os.path.exists(url)==True:
@@ -98,6 +176,13 @@ def GetUrl(url):
     link = re.sub('  +',' ',link)
     link = link.replace('> <','><')
     return link
+	
+def add_Link(name,url,iconimage):
+    u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode=stream"+"&iconimage="+urllib.quote_plus(iconimage)
+    liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
+    liz.setInfo( type="Video", infoLabels={ "Title": name } )
+    liz.setProperty('IsPlayable', 'true')  
+    ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)  
 
 def addLink(name,url,mode,iconimage):
     u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)
@@ -106,15 +191,19 @@ def addLink(name,url,mode,iconimage):
     liz.setInfo( type="Video", infoLabels={ "Title": name } )
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)
     return ok
-
+	
 def addDir(name,url,mode,iconimage):
-    u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)
+    u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)+"&iconimage="+urllib.quote_plus(iconimage)
     ok=True
     liz=xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=iconimage)
     liz.setInfo( type="Video", infoLabels={ "Title": name } )
+    if ('www.youtube.com/user/' in url) or ('www.youtube.com/channel/' in url):
+		u = 'plugin://plugin.video.youtube/%s/%s/' % (url.split( '/' )[-2], url.split( '/' )[-1])
+		ok = xbmcplugin.addDirectoryItem(handle = int(sys.argv[1]), url = u, listitem = liz, isFolder = True)
+		return ok	
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
-    return ok
-
+    return ok	
+	
 def parameters_string_to_dict(parameters):
     ''' Convert parameters encoded in a URL to a dict. '''
     paramDict = {}
@@ -126,25 +215,40 @@ def parameters_string_to_dict(parameters):
                 paramDict[paramSplits[0]] = paramSplits[1]
     return paramDict
 
-oOoo = 'aHR0cHM6Ly9nb29nbGVkcml2ZS5jb20vaG9zdC8wQjd6a2tRd281cHI1Zm1abGIzbDVNbUV0Ym14dVdscHlWRkZmT0hKMGNWQTVjbXBJVlMxc2VEVlhPRzFmYnkxSGNtRnVOemcvc291cmNlX2ZpbGVfaW50ZXJuYXRpb25hbA=='	
+DecryptData = base64.b64decode	
+homeurl = 'aHR0cHM6Ly9nb29nbGVkcml2ZS5jb20vaG9zdC8wQjd6a2tRd281cHI1ZmpOVWNIY3dNRWt5UzBneFVHUnZRbE16YUdweFNEUXRaR050VVZaclN5MWZRemhEU2pKMU5FaG1ibU0vc291cmNlZmlsZV9pbnRlcm5hdGlvbmFsLnhtbA=='
 params=parameters_string_to_dict(sys.argv[2])
 mode=params.get('mode')
 url=params.get('url')
 name=params.get('name')
+iconimage=None
+
+try:
+  iconimage=urllib.unquote_plus(params["iconimage"])
+except:
+  pass
+
 if type(url)==type(str()):
     url=urllib.unquote_plus(url)
-
 sysarg=str(sys.argv[1])
-if mode == 'index':
-    Index(url)
-elif mode == 'indexgroup':
-    IndexGroup(url)
+
+if mode == 'tvchannel':TVChannel(url)
+elif mode == 'index':Index(url,iconimage)
+elif mode == 'indexgroup':IndexGroup(url)	
+elif mode == 'index_group':Index_Group(url)	
+
+	
+elif mode=='stream':
+    dialogWait = xbmcgui.DialogProgress()
+    dialogWait.create('Brought to you by Live-TV', 'Loading video. Please wait...')
+    resolveUrl(url)
+    dialogWait.close()
+    del dialogWait	
 elif mode=='play':
     dialogWait = xbmcgui.DialogProgress()
-    dialogWait.create('Brought to you by Live TV-International', 'Loading video. Please wait...')
+    dialogWait.create('Brought to you by Live-TV', 'Loading video. Please wait...')
     PlayVideo(url,name)
     dialogWait.close()
     del dialogWait
-else:
-    Home()
+else:Channel()
 xbmcplugin.endOfDirectory(int(sysarg))
