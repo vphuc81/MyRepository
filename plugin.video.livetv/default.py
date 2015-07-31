@@ -27,13 +27,13 @@ def TVChannel(url):
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]
             if "/thumbnail" in item:
                 thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
-            addLink(title, link, 'play', thumb)
-        skin_used = xbmc.getSkinDir()
-        if skin_used == 'skin.xeebo':
-            xbmc.executebuiltin('Container.SetViewMode(52)')
+            add_Link(title, link, thumb)
+        xbmc.executebuiltin('Container.SetViewMode(52)')		
     else:
         for name in names:
-            addDir(name, url+"?n="+name, 'index', '')	
+            addDir('' + name + '', url+"?n="+name, 'index', '')
+        xbmc.executebuiltin('Container.SetViewMode(52)')
+
 
 		
 
@@ -46,6 +46,31 @@ def Channel():
     xbmc.executebuiltin('Container.SetViewMode(%d)' % 500)	
 	
 
+	
+def resolveUrl(url):
+	if 'xemphimso' in url:
+		content = Get_Url(url)	
+		url = urllib.unquote_plus(re.compile("file=(.+?)&").findall(content)[0])
+	elif 'vtvplay' in url:
+		content = Get_Url(url)
+		url = content.replace("\"", "")
+		url = url[:-5]
+	elif 'vtvplus' in url:
+		content = Get_Url(url)
+		url = re.compile('var responseText = "(.+?)";').findall(content)[0]		
+	elif 'htvonline' in url:
+		content = Get_Url(url)	
+		url = re.compile('data\-source=\"([^\"]*)\"').findall(content)[0]
+	elif 'hplus' in url:
+		content = Get_Url(url)	
+		url = re.compile('iosUrl = "(.+?)";').findall(content)[0]		
+	else:
+		url = url
+	item=xbmcgui.ListItem(path=url)
+	xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, item)	  
+	return	
+	
+	
 
 def Get_M3U(url,iconimage):
   m3ucontent = Get_Url(url)
@@ -149,6 +174,7 @@ def PlayVideo(url,title):
         playlist.add(url, listitem)
         xbmcPlayer.play(playlist)
 
+		
 def Get_Url(url):
     try:
 		req=urllib2.Request(url)
