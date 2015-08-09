@@ -80,7 +80,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="0.0.6" provider-name="Vinh Computer Repair">
+<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.0" provider-name="Vinh Computer Repair">
    <requires>
      <import addon="xbmc.python" version="2.1.0"/>
 	 <import addon="script.module.addon.common" version="2.0.0" />

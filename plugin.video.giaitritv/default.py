@@ -10,7 +10,7 @@ from addon.common.addon import Addon
 from metahandler import metahandlers
 
 
-addon_id = 'plugin.video.mutttsnutz'
+addon_id = 'plugin.video.giaitritv'
 addon = Addon(addon_id, sys.argv)
 Addon = xbmcaddon.Addon(addon_id)
 
@@ -215,7 +215,7 @@ def add2lib( url, name, infol, img, fanart, year ):
     addon.log('Add To Library %s , %s, %s' % (name,year,url))
 
     path = xbmc.translatePath( addon.get_setting('movie-folder') )
-    string = 'plugin://plugin.video.mutttsnutz/?mode=playstream&url='+url+'&name='+name+'&infol='
+    string = 'plugin://plugin.video.giaitritv/?mode=playstream&url='+url+'&name='+name+'&infol='
     filename = '%s.strm' % name
     path = xbmc.makeLegalFilename( xbmc.translatePath(os.path.join( path, name, filename )))
 
