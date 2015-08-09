@@ -25,6 +25,11 @@ def TVChannel(url):
                 title = re.compile('<title>(.+?)</title>').findall(item)[0]
             if "/link" in item:
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]
+            if "viettv24free" in link:
+                try:
+                    xbmc.executebuiltin("RunAddon(plugin.video.viettv24)")
+                except:
+                    pass
             if "/thumbnail" in item:
                 thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
             add_Link(title, link, thumb)
