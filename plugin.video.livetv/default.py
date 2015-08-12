@@ -247,7 +247,7 @@ def parameters_string_to_dict(parameters):
     return paramDict
 
 DecryptData = base64.b64decode	
-homeurl = 'aHR0cHM6Ly9nb29nbGVkcml2ZS5jb20vaG9zdC8wQjd6a2tRd281cHI1ZmpOVWNIY3dNRWt5UzBneFVHUnZRbE16YUdweFNEUXRaR050VVZaclN5MWZRemhEU2pKMU5FaG1ibU0vc291cmNlZmlsZS54bWw='
+homeurl = 'aHR0cHM6Ly9nb29nbGVkcml2ZS5jb20vaG9zdC8wQjd6a2tRd281cHI1ZmpOVWNIY3dNRWt5UzBneFVHUnZRbE16YUdweFNEUXRaR050VVZaclN5MWZRemhEU2pKMU5FaG1ibU0vaG9tZS54bWw='
 params=parameters_string_to_dict(sys.argv[2])
 mode=params.get('mode')
 url=params.get('url')
