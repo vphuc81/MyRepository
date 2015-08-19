@@ -24,24 +24,19 @@ def TVChannel(url):
             if "/title" in item:
                 title = re.compile('<title>(.+?)</title>').findall(item)[0]
             if "/link" in item:
-                link = re.compile('<link>(.+?)</link>').findall(item)[0]
-            if "viettv24free" in link:
-                try:
-                    xbmc.executebuiltin("RunAddon(plugin.video.viettv24)")
-                except:
-                    pass
+                link = re.compile('<link>(.+?)</link>').findall(item)[0]            
             if "/thumbnail" in item:
                 thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
+            if "viettv24free" in link:                   
+                link = re.compile('<link>(.+?)</link>').findall(item)[0] #required but not mean anything
+            if "redirecttofptplay" in link:                   
+                link = re.compile('<link>(.+?)</link>').findall(item)[0] #required but not mean anything            
             add_Link(title, link, thumb)
         xbmc.executebuiltin('Container.SetViewMode(52)')		
     else:
         for name in names:
             addDir('' + name + '', url+"?n="+name, 'index', '')
         xbmc.executebuiltin('Container.SetViewMode(52)')
-
-
-		
-
 		
 def Channel():
     content = Get_Url(DecryptData(homeurl))
@@ -49,7 +44,6 @@ def Channel():
     for title,url,thumbnail in match:
 		addDir(title,url,'tvchannel',thumbnail)	
     xbmc.executebuiltin('Container.SetViewMode(%d)' % 500)	
-	
 
 	
 def resolveUrl(url):
@@ -74,8 +68,6 @@ def resolveUrl(url):
 	item=xbmcgui.ListItem(path=url)
 	xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, item)	  
 	return	
-	
-	
 
 def Get_M3U(url,iconimage):
   m3ucontent = Get_Url(url)
@@ -103,6 +95,8 @@ def Index(url,iconimage):
                     thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
                 if "youtube" in link:					
                     addDir(title, link, 'episodes', thumb)
+                if ("redirecttomovieshd" in link) or ("redirecttonetmovie" in link) or ("redirectto1channel" in link):                   
+                    addDir(title, link, 'episodes', thumb)
                 else:					
                     addLink('' + title + '', link, 'play', thumb)
     skin_used = xbmc.getSkinDir()
@@ -123,7 +117,7 @@ def IndexGroup(url):
             if "/link" in item:
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]
             if "/thumbnail" in item:
-                thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
+                thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]            
             add_Link(title, link, thumb)
         skin_used = xbmc.getSkinDir()
         if skin_used == 'skin.xeebo':
@@ -135,27 +129,27 @@ def IndexGroup(url):
             addDir('' + name + '', url+"?n="+name, 'index', '')
 
 def Index_Group(url):
-	xmlcontent = GetUrl(url)
-	names = re.compile('<name>(.+?)</name>\s*<thumbnail>(.+?)</thumbnail>').findall(xmlcontent)
-	if len(names) == 1:
-		items = re.compile('<item>(.+?)</item>').findall(xmlcontent)
-		for item in items:
-			thumb=""
-			title=""
-			link=""
-			if "/title" in item:
-				title = re.compile('<title>(.+?)</title>').findall(item)[0]
-			if "/link" in item:
-				link = re.compile('<link>(.+?)</link>').findall(item)[0]
-			if "/thumbnail" in item:
-				thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
-			addLink(title, link, 'play', thumb)
-		skin_used = xbmc.getSkinDir()
-		if skin_used == 'skin.xeebo':
-				xbmc.executebuiltin('Container.SetViewMode(50)')
-	else:
-		for name,thumb in names:
-			addDir(name, url+"?n="+name, 'index', thumb)
+    xmlcontent = GetUrl(url)
+    names = re.compile('<name>(.+?)</name>\s*<thumbnail>(.+?)</thumbnail>').findall(xmlcontent)
+    if len(names) == 1:
+        items = re.compile('<item>(.+?)</item>').findall(xmlcontent)
+        for item in items:
+            thumb=""
+            title=""
+            link=""
+            if "/title" in item:
+                title = re.compile('<title>(.+?)</title>').findall(item)[0]
+            if "/link" in item:
+                link = re.compile('<link>(.+?)</link>').findall(item)[0]
+            if "/thumbnail" in item:
+                thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]                      
+            addLink(title, link, 'play', thumb)
+        skin_used = xbmc.getSkinDir()
+        if skin_used == 'skin.xeebo':
+            xbmc.executebuiltin('Container.SetViewMode(50)')
+    else:
+        for name,thumb in names:
+            addDir(name, url+"?n="+name, 'index', thumb)
 
 def menulist(homepath):
   try:
@@ -166,7 +160,6 @@ def menulist(homepath):
     return match
   except:
     pass
-
 	
 def PlayVideo(url,title):
     
@@ -178,7 +171,6 @@ def PlayVideo(url,title):
         xbmcPlayer = xbmc.Player()
         playlist.add(url, listitem)
         xbmcPlayer.play(playlist)
-
 		
 def Get_Url(url):
     try:
@@ -210,9 +202,18 @@ def GetUrl(url):
 	
 def add_Link(name,url,iconimage):
     u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode=stream"+"&iconimage="+urllib.quote_plus(iconimage)
+    ok=True
     liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
     liz.setInfo( type="Video", infoLabels={ "Title": name } )
-    liz.setProperty('IsPlayable', 'true')  
+    liz.setProperty('IsPlayable', 'true')
+    if 'viettv24free' in url:
+        u = 'plugin://plugin.video.viettv24'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'redirecttofptplay' in url:
+        u = 'plugin://plugin.video.fptplay'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)  
 
 def addLink(name,url,mode,iconimage):
@@ -228,10 +229,16 @@ def addDir(name,url,mode,iconimage):
     ok=True
     liz=xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=iconimage)
     liz.setInfo( type="Video", infoLabels={ "Title": name } )
+    if 'redirecttomovieshd' in url:
+        u = 'plugin://plugin.video.giaitritv'
+    if 'redirecttonetmovie' in url:
+        u = 'plugin://plugin.video.netmovie'
+    if 'redirectto1channel' in url:
+        u = 'plugin://plugin.video.1channel'
     if ('www.youtube.com/user/' in url) or ('www.youtube.com/channel/' in url):
-		u = 'plugin://plugin.video.youtube/%s/%s/' % (url.split( '/' )[-2], url.split( '/' )[-1])
-		ok = xbmcplugin.addDirectoryItem(handle = int(sys.argv[1]), url = u, listitem = liz, isFolder = True)
-		return ok	
+        u = 'plugin://plugin.video.youtube/%s/%s/' % (url.split( '/' )[-2], url.split( '/' )[-1])
+        ok = xbmcplugin.addDirectoryItem(handle = int(sys.argv[1]), url = u, listitem = liz, isFolder = True)
+        return ok	
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
     return ok	
 	
