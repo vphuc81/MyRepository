@@ -24,11 +24,17 @@ def TVChannel(url):
             if "/title" in item:
                 title = re.compile('<title>(.+?)</title>').findall(item)[0]
             if "/link" in item:
-                link = re.compile('<link>(.+?)</link>').findall(item)[0]
+                link = re.compile('<link>(.+?)</link>').findall(item)[0]            
             if "/thumbnail" in item:
                 thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
+            if "redirecttopakindia" in link:                   
+                link = re.compile('<link>(.+?)</link>').findall(item)[0] #required but not mean anything
+            if "redirecttoshahidmbc" in link:                   
+                link = re.compile('<link>(.+?)</link>').findall(item)[0] #required but not mean anything
+            if ("redirecttoyoutube" in link) or ("redirecttodailymotion" in link):                   
+                link = re.compile('<link>(.+?)</link>').findall(item)[0] #required but not mean anything              
             add_Link(title, link, thumb)
-        xbmc.executebuiltin('Container.SetViewMode(52)')		
+        xbmc.executebuiltin('Container.SetViewMode(52)')        
     else:
         for name in names:
             addDir('' + name + '', url+"?n="+name, 'index', '')
@@ -94,9 +100,11 @@ def Index(url,iconimage):
                     link = re.compile('<link>(.+?)</link>').findall(item)[0]
                 if "/thumbnail" in item:
                     thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
-                if "youtube" in link:					
+                if "youtube" in link:                   
                     addDir(title, link, 'episodes', thumb)
-                else:					
+                if ("redirecttomovieshd" in link) or ("redirecttonetmovie" in link) or ("redirectto1channel" in link):                   
+                    addDir(title, link, 'episodes', thumb)
+                else:                   
                     addLink('' + title + '', link, 'play', thumb)
     skin_used = xbmc.getSkinDir()
     if skin_used == 'skin.xeebo':
@@ -202,10 +210,27 @@ def GetUrl(url):
 	
 def add_Link(name,url,iconimage):
     u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode=stream"+"&iconimage="+urllib.quote_plus(iconimage)
+    ok=True
     liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
     liz.setInfo( type="Video", infoLabels={ "Title": name } )
-    liz.setProperty('IsPlayable', 'true')  
-    ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)  
+    liz.setProperty('IsPlayable', 'true')
+    if 'redirecttopakindia' in url:
+        u = 'plugin://plugin.video.pakindia'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'redirecttoshahidmbc' in url:
+        u = 'plugin://plugin.video.shahidmbcnet'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'redirecttoyoutube' in url:
+        u = 'plugin://plugin.video.youtube'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'redirecttodailymotion' in url:
+        u = 'plugin://plugin.video.dailymotion_com'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)   
 
 def addLink(name,url,mode,iconimage):
     u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)
@@ -220,10 +245,16 @@ def addDir(name,url,mode,iconimage):
     ok=True
     liz=xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=iconimage)
     liz.setInfo( type="Video", infoLabels={ "Title": name } )
+    if 'redirecttomovieshd' in url:
+        u = 'plugin://plugin.video.giaitritv'
+    if 'redirecttonetmovie' in url:
+        u = 'plugin://plugin.video.netmovie'
+    if 'redirectto1channel' in url:
+        u = 'plugin://plugin.video.1channel'
     if ('www.youtube.com/user/' in url) or ('www.youtube.com/channel/' in url):
-		u = 'plugin://plugin.video.youtube/%s/%s/' % (url.split( '/' )[-2], url.split( '/' )[-1])
-		ok = xbmcplugin.addDirectoryItem(handle = int(sys.argv[1]), url = u, listitem = liz, isFolder = True)
-		return ok	
+        u = 'plugin://plugin.video.youtube/%s/%s/' % (url.split( '/' )[-2], url.split( '/' )[-1])
+        ok = xbmcplugin.addDirectoryItem(handle = int(sys.argv[1]), url = u, listitem = liz, isFolder = True)
+        return ok   
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
     return ok	
 	
