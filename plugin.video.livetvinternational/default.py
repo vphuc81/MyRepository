@@ -100,9 +100,9 @@ def Index(url,iconimage):
                     link = re.compile('<link>(.+?)</link>').findall(item)[0]
                 if "/thumbnail" in item:
                     thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
-                if "youtube" in link:                   
-                    addDir(title, link, 'episodes', thumb)
-                if ("redirecttomovieshd" in link) or ("redirecttonetmovie" in link) or ("redirectto1channel" in link):                   
+                #if "youtube" in link:                   
+                    #addDir(title, link, 'episodes', thumb)
+                if ("youtube" in link) or ("redirecttomovieshd" in link) or ("redirecttonetmovie" in link) or ("redirectto1channel" in link):                   
                     addDir(title, link, 'episodes', thumb)
                 else:                   
                     addLink('' + title + '', link, 'play', thumb)
