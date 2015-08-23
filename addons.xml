@@ -235,9 +235,9 @@
 
 <addon
   id="plugin.video.megafun"
-  version="1.4"
+  version="1.5"
   name="*[COLOR yellow]Mega-Fun.vn[/COLOR]"
-  provider-name="Vinh Computer Repair">
+  provider-name="th">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
@@ -514,6 +514,28 @@
 		<email>bromix at gmx dot net</email>
 		<source>https://github.com/bromix/plugin.video.youtube</source>
 	</extension>
+</addon>
+
+<addon id="plugin.video.dailymotion_com" name="DailyMotion.com" version="2.1.3" provider-name="AddonScriptorDE">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+        <import addon="script.module.simple.downloader" version="1.0.0"/>
+        <import addon="script.module.requests" version="2.4.3"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary lang="en">Movies, TV, Music, User-Clips, 3D and Livestreams</summary>
+        <language></language>
+        <description lang="en">Movies, TV, Music, User-Clips, 3D and Livestreams</description>
+        <disclaimer lang="en">Some parts of this addon may not be legal in your country of residence - please check with your local laws before installing.</disclaimer>
+        <website>http://www.dailymotion.com</website>
+        <source>https://github.com/AddonScriptorDE/plugin.video.dailymotion_com</source>
+        <forum>http://forum.xbmc.org/showthread.php?tid=142626</forum>
+        <email>AddonScriptorDE at yahoo dot de</email>
+    </extension>
 </addon>
 
 <addon
