@@ -102,7 +102,10 @@ def Index(url,iconimage):
                     thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
                 #if "youtube" in link:                   
                     #addDir(title, link, 'episodes', thumb)
-                if ("youtube" in link) or ("redirecttomovieshd" in link) or ("redirecttonetmovie" in link) or ("redirectto1channel" in link):                   
+                if ("youtube" in link) or ("redirecttomovieshd" in link) or ("redirecttonetmovie" in link) or \
+                   ("redirectto1channel" in link) or ("redirecttokenh108" in link) or ("redirecttokenh88" in link) or \
+                   ("redirecttomoviebox" in link) or ("redirecttophimvang" in link) or ("redirecttoxomgiaitri" in link) or \
+                   ("redirecttoxixam" in link) or ("redirecttovkool" in link):                   
                     addDir(title, link, 'episodes', thumb)
                 else:                   
                     addLink('' + title + '', link, 'play', thumb)
@@ -251,6 +254,22 @@ def addDir(name,url,mode,iconimage):
         u = 'plugin://plugin.video.netmovie'
     if 'redirectto1channel' in url:
         u = 'plugin://plugin.video.1channel'
+    if 'redirecttokenh108' in url:
+        u = 'plugin://plugin.video.kenh108.com'
+    if 'redirecttokenh88' in url:
+        u = 'plugin://plugin.video.kenh88'
+    if 'redirecttomoviebox' in url:
+        u = 'plugin://plugin.video.moviebox'
+    if 'redirecttophimvang' in url:
+        u = 'plugin://plugin.video.phimvang.org'
+    if 'redirecttoxomgiaitri' in url:
+        u = 'plugin://plugin.video.xomgiaitri'
+    if 'redirecttoxixam' in url:
+        u = 'plugin://plugin.video.phim.xixam.com'
+    if 'redirecttoxomgiaitri' in url:
+        u = 'plugin://plugin.video.xomgiaitri'
+    if 'redirecttovkool' in url:
+        u = 'plugin://plugin.video.vkool'
     if ('www.youtube.com/user/' in url) or ('www.youtube.com/channel/' in url):
         u = 'plugin://plugin.video.youtube/%s/%s/' % (url.split( '/' )[-2], url.split( '/' )[-1])
         ok = xbmcplugin.addDirectoryItem(handle = int(sys.argv[1]), url = u, listitem = liz, isFolder = True)
