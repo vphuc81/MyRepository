@@ -277,6 +277,7 @@ def add_Link(name,url,iconimage):
     if 'tophoenix' in url:
         u = 'plugin://plugin.video.phstreams'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
     if 'tocartoons8' in url:
         u = 'plugin://plugin.video.cartoons8'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
