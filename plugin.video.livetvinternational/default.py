@@ -34,6 +34,12 @@ def TVChannel(url):
             if ("redirecttoyoutube" in link) or ("redirecttodailymotion" in link):                   
                 link = re.compile('<link>(.+?)</link>').findall(item)[0] #required but not mean anything
             if ("tosportsdevil" in link) or ("tovdubt" in link):                   
+                link = re.compile('<link>(.+?)</link>').findall(item)[0]
+            if ("redirecttomovieshd" in link) or ("toyeuphim" in link) or ("redirecttonetmovie" in link) or \
+               ("redirectto1channel" in link) or ("redirecttokenh108" in link) or ("redirecttokenh88" in link) or \
+               ("redirecttomoviebox" in link) or ("redirecttophimvang" in link) or ("redirecttoxomgiaitri" in link) or \
+               ("redirecttoxixam" in link) or ("redirecttovkool" in link) or ("tomovienight" in link) or ("toyify" in link) or \
+               ("tomovieshd2" in link) or ("tocartoons8" in link) or ("tokiddiecartoons" in link) or ("tonavix" in link): 
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]              
             add_Link(title, link, thumb)
         xbmc.executebuiltin('Container.SetViewMode(52)')        
@@ -102,13 +108,13 @@ def Index(url,iconimage):
                     link = re.compile('<link>(.+?)</link>').findall(item)[0]
                 if "/thumbnail" in item:
                     thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
-                #if "youtube" in link:                   
-                    #addDir(title, link, 'episodes', thumb)
-                if ("youtube" in link) or ("redirecttomovieshd" in link) or ("redirecttonetmovie" in link) or \
-                   ("redirectto1channel" in link) or ("redirecttokenh108" in link) or ("redirecttokenh88" in link) or \
-                   ("redirecttomoviebox" in link) or ("redirecttophimvang" in link) or ("redirecttoxomgiaitri" in link) or \
-                   ("redirecttoxixam" in link) or ("redirecttovkool" in link):                   
+                if "youtube" in link:                   
                     addDir(title, link, 'episodes', thumb)
+                #old version if ("youtube" in link) or ("redirecttomovieshd" in link) or ("redirecttonetmovie" in link) or \
+                   #("redirectto1channel" in link) or ("redirecttokenh108" in link) or ("redirecttokenh88" in link) or \
+                   #("redirecttomoviebox" in link) or ("redirecttophimvang" in link) or ("redirecttoxomgiaitri" in link) or \
+                   #("redirecttoxixam" in link) or ("redirecttovkool" in link):                   
+                    #addDir(title, link, 'episodes', thumb)
                 else:                   
                     addLink('' + title + '', link, 'play', thumb)
     skin_used = xbmc.getSkinDir()
@@ -243,6 +249,78 @@ def add_Link(name,url,iconimage):
         u = 'plugin://plugin.video.vdubt'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
+    if 'redirecttomovieshd' in url:
+        u = 'plugin://plugin.video.giaitritv'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tomovieshd2' in url:
+        u = 'plugin://plugin.video.movieshd'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok        
+    if 'toyify' in url:
+        u = 'plugin://plugin.video.yifymovies.hd'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tomovienight' in url:
+        u = 'plugin://plugin.video.movienight'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tocartoons8' in url:
+        u = 'plugin://plugin.video.cartoons8'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tokiddiecartoons' in url:
+        u = 'plugin://plugin.video.kiddiecartoons'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tonavix' in url:
+        u = 'plugin://plugin.video.navi-x'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'redirecttonetmovie' in url:
+        u = 'plugin://plugin.video.netmovie'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'redirecttonetmovie' in url:
+        u = 'plugin://plugin.video.netmovie'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'redirectto1channel' in url:
+        u = 'plugin://plugin.video.1channel'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'redirecttokenh108' in url:
+        u = 'plugin://plugin.video.kenh108'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'redirecttokenh88' in url:
+        u = 'plugin://plugin.video.kenh88'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'redirecttophimvang' in url:
+        u = 'plugin://plugin.video.phimvang.org'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'redirecttoxomgiaitri' in url:
+        u = 'plugin://plugin.video.xomgiaitri'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'redirecttoxixam' in url:
+        u = 'plugin://plugin.video.phim.xixam.com'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'redirecttoxomgiaitri' in url:
+        u = 'plugin://plugin.video.xomgiaitri'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'redirecttovkool' in url:
+        u = 'plugin://plugin.video.vkool'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'toyeuphim' in url:
+        u = 'plugin://plugin.video.yeuphim1'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)   
 
 def addLink(name,url,mode,iconimage):
@@ -258,6 +336,7 @@ def addDir(name,url,mode,iconimage):
     ok=True
     liz=xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=iconimage)
     liz.setInfo( type="Video", infoLabels={ "Title": name } )
+    '''old version
     if 'redirecttomovieshd' in url:
         u = 'plugin://plugin.video.giaitritv'
     if 'redirecttonetmovie' in url:
@@ -280,6 +359,7 @@ def addDir(name,url,mode,iconimage):
         u = 'plugin://plugin.video.xomgiaitri'
     if 'redirecttovkool' in url:
         u = 'plugin://plugin.video.vkool'
+    '''
     if ('www.youtube.com/user/' in url) or ('www.youtube.com/channel/' in url):
         u = 'plugin://plugin.video.youtube/%s/%s/' % (url.split( '/' )[-2], url.split( '/' )[-1])
         ok = xbmcplugin.addDirectoryItem(handle = int(sys.argv[1]), url = u, listitem = liz, isFolder = True)
