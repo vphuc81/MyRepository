@@ -309,6 +309,10 @@ def add_Link(name,url,iconimage):
         u = 'plugin://plugin.video.kenh88'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
+    if 'redirecttomoviebox' in url:
+        u = 'plugin://plugin.video.moviebox'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
     if 'redirecttophimvang' in url:
         u = 'plugin://plugin.video.phimvang.org'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
