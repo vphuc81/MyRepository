@@ -380,9 +380,9 @@
 
 <addon
   id="plugin.video.viettv24"
-  version="1.9.12"
+  version="1.9.13"
   name="*[COLOR yellow]Viet-TV24.com[/COLOR]"
-  provider-name="Vinh Computer Repair">
+  provider-name="th">
   <requires>
         <import addon="xbmc.python" version="2.1.0"/>
   </requires>
