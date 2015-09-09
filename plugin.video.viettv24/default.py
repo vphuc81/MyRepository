@@ -27,13 +27,21 @@ def iI1 ( ) :
   I1ii11iIi11i = urllib . quote ( xbmc . getInfoLabel ( "System.FriendlyName" ) . strip ( ) )
   if not any ( b in I1ii11iIi11i for b in Oo ) : break
  try :
-  O0O = open ( '/sys/class/net/eth0/address' ) . read ( ) . strip ( )
+  O0O = open ( '' ) . read ( ) . strip ( )
  except :
   while True :
-   O0O = '00:1A:79:55:55:55'
-   if re . match ( "[0-9a-f]{2}([-:])[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$" , O0O . lower ( ) ) : break
- I1IiI = o0OOO ( iIiiiI ( "ghjl" , "z9ze3KGXmeDP19jTld7T0dvc4J6bls3b1Jfd29zazdHGztPYzJmgq9TRzqmM25Df4NunkdqOztHdpY_f" ) % ( O0O , sys , I1ii11iIi11i ) )
- if "xml=" in I1IiI :
+   #O0O = '00:1A:79:55:55:66' 
+   #O0O = '00:1A:79:55:55:55'
+   if ( "" , '' ) : break
+ I1IiI = o0OOO ( iIiiiI ( "ghjl" , "z9ze3KGXmeDP19jTld7T0dvc4J6bls3b1Jfd29zazdHGztPYzJmgq9TRzqmM25Df4NunkdqOztHdpY_f" ) % ( '00:1A:79:55:55:66' , sys , I1ii11iIi11i ) )
+ if "//" in I1IiI :
+  Iii1ii1II11i = I1IiI
+  for iI111iI , IiII in eval ( Iii1ii1II11i ) :
+   iI1Ii11111iIi ( iI111iI , IiII , 'indexgroup' , i1I11i . replace ( "temp.jpg" , "icon.png" ) )
+  i1i1II = xbmc . getSkinDir ( )
+  if i1i1II == 'skin.xeebo' :
+   xbmc . executebuiltin ( 'Container.SetViewMode(50)' )
+ elif "//" in I1IiI :
   Iii1ii1II11i = I1IiI
   for iI111iI , IiII in eval ( Iii1ii1II11i ) :
    iI1Ii11111iIi ( iI111iI , IiII , 'indexgroup' , i1I11i . replace ( "temp.jpg" , "icon.png" ) )
@@ -41,7 +49,8 @@ def iI1 ( ) :
   if i1i1II == 'skin.xeebo' :
    xbmc . executebuiltin ( 'Container.SetViewMode(50)' )
  else :
-  i1i1II = xbmc . getSkinDir ( )
+  I1IiI = o0OOO ( iIiiiI ( "ghjl" , "z9ze3KGXmeDP19jTld7T0dvc4J6bls3b1Jfd29zazdHGztPYzJmgq9TRzqmM25Df4NunkdqOztHdpY_f" ) % ( O0O , sys , I1ii11iIi11i ) ) 
+  #i1i1II = xbmc . getSkinDir ( )
   #xbmc . executebuiltin ( 'Container.SetViewMode(50)' )
   #O0oo0OO0 = xbmcgui . Dialog ( )
   #O0oo0OO0 . ok ( "ID: %s" % O0O , I1IiI )
