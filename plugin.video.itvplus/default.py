@@ -16,9 +16,14 @@ pgt = 'http://phimgiaitri.vn/'
 vp9 = 'http://f.vp9.tv/music/'
 tvreplay = 'http://113.160.49.39/tvcatchup/'
 woim = 'http://www.woim.net/'
+phim7 = 'http://phim7.com'
+
+def alert(message,title="Oops!"):
+  xbmcgui.Dialog().ok(title,"",message)
 
 def Home():
     content = Get_Url(DecryptData(homeurl))
+    #addLink('TEST', '', 'play', '')	
     match=re.compile("<title>([^<]*)<\/title>\s*<link>([^<]+)<\/link>\s*<thumbnail>(.+?)</thumbnail>").findall(content)	
     for title,url,thumbnail in match:
         if 'tvcatchup' in url:
@@ -73,13 +78,14 @@ def Menu_Group(url):
 	  content = Get_Url(url)
 	  names = re.compile('<name>(.+?)</name>\s*<thumbnail>(.+?)</thumbnail>').findall(content)
 	  for name,thumb in names:
-	    addDir(name, url+"?n="+name, 'index', thumb)	  
+	    addDir(name, url+"?n="+name, 'index_tube', thumb)	  
     elif 'SEARCH' in url:
 	  addDir('Tìm Video Nhạc','TimVideo','search',logos+'MUSIC.png')
 	  addDir('Tìm Album Nhạc Không Lời','TimAlbum','search',logos+'MUSIC.png')	  
 	  addDir('Tìm Phim (Kho Phim 1)','TimPhim1','search',logos+'MOVIE.png')
 	  addDir('Tìm Phim (Kho Phim 2)','TimPhim2','search',logos+'MOVIE.png')
-	  addDir('Tìm Phim (Kho Phim 3)','TimPhim3','search',logos+'MOVIE.png')	  
+	  addDir('Tìm Phim (Kho Phim 3)','TimPhim3','search',logos+'MOVIE.png')
+	  addDir('Tìm Phim (Kho Phim 4)','TimPhim4','search',logos+'MOVIE.png')	  
 
 def Categories(url):
     if 'megabox' in url:	  
@@ -91,26 +97,36 @@ def Categories(url):
           addDir(title,url.replace('new',''),'episodes',thumbnail)
         elif 'chieu-rap' in url:
           addDir(title,url,'episodes',thumbnail)		  
-        elif 'phim-le' in url:
-          addDir(title,url,'medialist',thumbnail)
-        elif 'phim-bo' in url:
-          addDir(title,url,'medialist',thumbnail)
+        elif 'phim-lefull' in url:
+          addDir(title,url.replace('full',''),'medialist',thumbnail)
+        elif 'phim-bofull' in url:
+          addDir(title,url.replace('full',''),'medialist',thumbnail)
         else:
           pass		  
     elif 'hdcaphe' in url:    
       match=menulist(dataPath+'/data/Categories.xml')
       for title,url,thumbnail in match:
         if 'hdcaphe' in url:
-          addDir(title,url,'medialist',thumbnail)
+          alert(u'Kho phim đang được nâng cấp. Quý khách vui lòng chờ update!'); return
+          #addDir(title,url,'medialist',thumbnail)		  
         else:
           pass
     elif 'phimgiaitri' in url:    
       match=menulist(dataPath+'/data/Categories.xml')
       for title,url,thumbnail in match:
-        if 'phimgiaitri' in url:
+        if 'Phim%20L%E1%BA%BB' in url:
           addDir(title,url,'medialist',thumbnail)
+        elif 'Phim%20B%E1%BB%99' in url:
+          addDir(title,url,'episodes',thumbnail)
         else:
           pass		  
+    elif 'phim7' in url:    
+      match=menulist(dataPath+'/data/Categories.xml')
+      for title,url,thumbnail in match:
+        if 'phim7' in url:
+          addDir(title,url,'medialist',thumbnail)
+        else:
+          pass		  		  
     elif 'ott.thuynga' in url:
       match=menulist(dataPath+'/data/Categories.xml')
       for title,url,thumbnail in match:	  
@@ -139,6 +155,10 @@ def Search(url):
       Search_Result(url)
     elif 'TimPhim3' in url:  
       url = pgt+'result.php?type=search&keywords='+searchText      
+      Get_Medialist(url,iconimage)
+      Get_Episodes(url)
+    elif 'TimPhim4' in url:  
+      url = phim7 + '/tim-kiem/tat-ca/' + searchText.replace('+', '-') + '.html'      
       Get_Medialist(url,iconimage)	  
   except:
     pass	
@@ -186,7 +206,7 @@ def Get_Medialist(url,iconimage):
       addDir('[UPPERCASE]' + url.replace('detail/movies/','').replace('-',' ').replace('.html','') + '[/UPPERCASE]',hdcaphe + url.replace('detail','video').replace('.html','/play/clip_1.html'),'episodes',hdcaphe + thumbnail)
     match = re.compile("<span class=\"next\"><a href=\"(.+?)\" class=\"next\" title=\"(.+?)\">").findall(content)
     for url,name in match:	
-      addDir('[COLOR yellow]' + name.replace('Go to page','Trang Tiếp Theo') + '[/COLOR]',hdcaphe + url,'medialist',logos+'NEXT.png')  
+      addDir('[COLOR yellow]Trang Tiếp Theo >>>[/COLOR]',hdcaphe + url,'medialist',logos+'NEXT.png')  
   elif 'tvcatchup' in url:
     content = Get_Url(url)
     match = re.compile('href="(\d+)/">(\d+)/<').findall(content)
@@ -224,14 +244,24 @@ def Get_Medialist(url,iconimage):
 	    else:
 		  addDir('Phim '+name, url + href, 'episodes', iconimage)
   elif 'phimgiaitri' in url:
-    match = re.compile('<a style=\'text-decoration:none\' href=\'([^\']*).html\'>\s*<img style=.+?src=(.+?) ><table style.+?:0px\'>(.+?)\s*<\/font>').findall(content)
+    match = re.compile('<a style=\'text-decoration:none\' href=\'([^\']*).html\'>\s*<img style=.+?src=(.+?) ><table style.+?:0px\'>(.+?)\s*<\/font><br \/><font style.+?#F63\'>(.+?)</font>').findall(content)
+    for url,thumbnail,name,oname in match:
+      add_Link(name+' - '+oname,pgt+url+'/Tap-1.html',pgt+thumbnail)
+    match = re.compile('<a style=\'text-decoration:none\' href=\'([^\']*).html\'>\s*<img style=.+?src=(.+?) ><table style.+?:0px\'>(.+?)</b>').findall(content)
     for url,thumbnail,name in match:
-      add_Link(name,pgt+url+'/Tap-1.html',pgt+thumbnail)
-    match = re.compile("<a  href='(.+?)'>(\d+)  <\/a>").findall(content) 
-    for url,name in match:
-      addDir('[COLOR lime]Trang tiếp theo '+name+'[/COLOR]',pgt+url.replace(' ','%20'),'medialist',logos + 'NEXT.png')
+      add_Link(name,pgt+url+'/Tap-1.html',pgt+thumbnail)	  
+    match = re.compile('<a href="(.+?)">>').findall(content)[0:1]
+    for url in match:
+      addDir('[COLOR FF0084EA]Trang Tiếp Theo >>>[/COLOR]',pgt+url.replace(' ','%20'),'medialist',logos + 'NEXT.png')
+	
+  elif 'phim7' in url:
+    match = re.compile('href="(.+?)" title="(.+?)"><span class="poster">\s*<img src=".+?" alt="" />\s*<img class=".+?" src=".+?" data-original="(.+?)"').findall(content)
+    for url, name, thumbnail in match:
+      addDir(name, phim7 + url.replace('/phim/', '/xem-phim/'), 'episodes', thumbnail)
+    match = re.compile("<a href='(.+?)' >&#187;&#187;</a>").findall(content)		
+    for url in match:
+      addDir('[COLOR FF0084EA]Trang Tiếp Theo >>>[/COLOR]', phim7 + url, 'medialist', logos + 'NEXT.png')
 
-  
 def Get_Episodes(url):
   content = Get_Url(url)
   if 'youtube' in url:
@@ -265,19 +295,19 @@ def Get_Episodes(url):
       name=name.split('_')
       name=name[0]+'_'+name[-1]
       if 'VTV1' in name:
-        add_Link(name,url+'/'+href,logos+'VTV1.png')
+        add_Link(name,url+'/'+href,logos+'REP-VTV1.png')
       elif 'VTV2' in name:
-        add_Link(name,url+'/'+href,logos+'VTV2.png')
+        add_Link(name,url+'/'+href,logos+'REP-VTV2.png')
       elif 'VTV3' in name:
-        add_Link(name,url+'/'+href,logos+'VTV3.png')
+        add_Link(name,url+'/'+href,logos+'REP-VTV3.png')
       elif 'VTV6' in name:
-        add_Link(name,url+'/'+href,logos+'VTV6.png')
+        add_Link(name,url+'/'+href,logos+'REP-VTV6.png')
       elif 'TODAYTV' in name:
-        add_Link(name,url+'/'+href,logos+'TODAY-TV.png')		
+        add_Link(name,url+'/'+href,logos+'REP-TODAY-TV.png')		
       elif 'HBO' in name:
-        add_Link(name,url+'/'+href,logos+'HBO.png')
+        add_Link(name,url+'/'+href,logos+'REP-HBO.png')
       elif 'STARMOVIES' in name:
-        add_Link(name,url+'/'+href,logos+'STARMOVIES.png')		
+        add_Link(name,url+'/'+href,logos+'REP-STARMOVIES.png')		
   elif 'woim' in url:
     match=re.compile('<li>\s*<a href="([^"]*)" title="([^"]+)".+?src="(.+?)&w').findall(content)
     for url,name,thumb in match:
@@ -301,10 +331,30 @@ def Get_Episodes(url):
 		  pass		
 	try:	
 	  match = re.compile('class="next"><a href="(.+?)">').findall(content)
-	  addDir('[COLOR red]Trang Tiếp Theo[/COLOR]', megaboxvn + match[0],'episodes', logos + 'NEXT.png')	
+	  addDir('[COLOR red]Trang Tiếp Theo >>>[/COLOR]', megaboxvn + match[0],'episodes', logos + 'NEXT.png')	
 	except: 
 	  pass
-		  
+  elif 'phimgiaitri' in url:
+    match = re.compile("<a style='text-decoration:none' href='(.+?).html'>\s*<img style='.+?' src=(.+?) ><div class='text'>\s*<p>(.+?)</p>\s*</div><table style='.+?'><tr><td style='.+?'><b><font style='.+?:0px'>(.+?)\s*</font><br /><font style='.+?:#F63'> (.+?)</font>").findall(content)
+    for url,thumbnail,epi,name,oname in match:
+      addDir(name+' - '+oname+' '+'[COLOR green]'+epi+'[/COLOR]',pgt+url+'/Tap-1.html','get_listep',pgt+thumbnail)
+    match = re.compile("<a style='text-decoration:none' href='(.+?).html'>\s*<img style='.+?' src=(.+?) ><div class='text'>\s*<p>(.+?)</p>\s*</div><table style='.+?'><tr><td style='.+?'><b><font style='.+?:0px'>(.+?)</b>").findall(content)  
+    for url,thumbnail,epi,name in match:
+      addDir(name+'[COLOR green]'+epi+'[/COLOR]',pgt+url+'/Tap-1.html','get_listep',pgt+thumbnail)	  
+    match = re.compile('<a href="(.+?)">>').findall(content)[0:1]
+    for url in match:
+      addDir('[COLOR orange]Trang Tiếp Theo >>>[/COLOR]',pgt+url.replace(' ','%20'),'episodes',logos + 'NEXT.png')
+  elif 'phim7' in url:
+      match = re.compile('<a href="(.+?)" title="(.+?)" class=".+?">(.+?)<').findall(content)		
+      for url, title, epi in match:
+        if 'Phim' in title:
+          pass
+        elif 'PV' in epi or 'Full' in epi or 'TM' in epi or 'HD' in epi or 'PD' in epi or 'Vietsub' in epi or 'ThuyetMinh' in epi:
+          epi = epi.replace('Full','Server [COLOR yellow]PHIMVANG[/COLOR] - Full').replace('PV','Server [COLOR yellow]PHIMVANG[/COLOR] - Full').replace('TM','Server [COLOR red]VIP[/COLOR] - Full TM').replace('HD','Server VIETNAM - Full').replace('PD','Server VIETNAM - Full').replace('Vietsub','Server VIETNAM - Full Vietsub').replace('ThuyetMinh','Server VIETNAM - Full TM')		
+          add_Link(epi, phim7 + url, '')		  
+        else:
+          add_Link('Server VIETNAM - Part '+epi, phim7 + url, '')
+	  
 def Get_ListEp(url,name):
   content = Get_Url(url)
   if 'woim' in url:
@@ -323,7 +373,14 @@ def Get_ListEp(url,name):
 	match = re.compile("href='(.+?)' >(\d+)<").findall(content)
 	for url, title in match:
 	  add_Link('Tập ' + title, url, iconimage)
+  elif 'phimgiaitri' in url:
+    thumbnail = re.compile("<meta property=\"og:image\" content=\"(.+?)\"").findall(content)
+    add_Link('Tập 1',url,thumbnail[0])
+    match = re.compile("<a href=\"(.+?)\" page=(\d+)>").findall(content)
+    for url,title in match:
+      add_Link('Tập '+title,url,thumbnail[0])
 
+		  
 def Get_M3U(url,iconimage):
   m3ucontent = Get_Url(url)
   match = re.compile('#EXTINF:-?\d,(.+?)\n(.+)').findall(m3ucontent)
@@ -331,6 +388,29 @@ def Get_M3U(url,iconimage):
 	  add_Link(name.replace('TVSHOW - ','').replace('MUSIC - ',''),url,iconimage)
 	  
 def Index(url,iconimage):
+    byname = url.split("?n=")[1]
+    url = url.split("?")[0]
+    xmlcontent = GetUrl(url)
+    channels = re.compile('<channel>(.+?)</channel>').findall(xmlcontent)
+    for channel in channels:
+        if byname in channel:
+            items = re.compile('<item>(.+?)</item>').findall(channel)
+            for item in items:
+                thumb=""
+                title=""
+                link=""
+                if "/title" in item:
+                    title = re.compile('<title>(.+?)</title>').findall(item)[0]
+                if "/link" in item:
+                    link = re.compile('<link>(.+?)</link>').findall(item)[0]
+                if "/thumbnail" in item:
+                    thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]					
+                addLink('' + title + '', link, 'play', thumb)
+    skin_used = xbmc.getSkinDir()
+    if skin_used == 'skin.xeebo':
+        xbmc.executebuiltin('Container.SetViewMode(50)')
+
+def Index_Tube(url,iconimage):
     byname = url.split("?n=")[1]
     url = url.split("?")[0]
     xmlcontent = GetUrl(url)
@@ -431,9 +511,16 @@ def resolveUrl(url):
 	elif 'hplus' in url:
 		content = Get_Url(url)	
 		url = re.compile('iosUrl = "(.+?)";').findall(content)[0]
+	elif 'vnn' in url:
+		content = Get_Url(url)	
+		url = re.compile("file: '(.+?)'").findall(content)[0]		
+		
 	elif 'megabox' in url:
 		content = Get_Url(url)	
-		url = re.compile('var iosUrl = "(.+?)"').findall(content)[0]+'|User-Agent=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36 VietMedia/1.0'		
+		try:
+		  url = re.compile('var iosUrl = "(.+?)"').findall(content)[0].replace('http://media22.megabox.vn','http://113.164.28.48')+'|User-Agent=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36 VietMedia/1.0'
+		except:
+		  url = re.compile('var iosUrl = "(.+?)"').findall(content)[0].replace('http://media22.megabox.vn','http://113.164.28.46')+'|User-Agent=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36 VietMedia/1.0'		  
 	elif 'chiasenhac' in url:
 		content = Get_Url(url)
 		try:
@@ -456,26 +543,36 @@ def resolveUrl(url):
 	elif 'ott.thuynga' in url:
 		content = Get_Url(url)	
 		url=re.compile("var iosUrl = '(.+?)'").findall(content)[0]
+	elif 'phim7' in url:
+		content = Get_Url(url)
+		try:
+		  url = 'https://redirector' + re.compile('file: "https://redirector(.+?)", label:".+?", type: "video/mp4"').findall(content)[-1]
+		except:
+		  url = 'plugin://plugin.video.youtube/play/?video_id=' + re.compile('file : "http://www.youtube.com/watch\?v=(.+?)&amp').findall(content)[0]		
 	elif 'phimgiaitri' in url:
-		xbmc.log(url)	
-		arr = url.split('/')
-		phimid = arr[len(arr) - 3]
-		tap = arr[len(arr) - 1]
-		tap2 = tap.split('-')
-		tap3 = tap2[1].split('.')
-		tap = tap3[0]
-		url2 = 'http://120.72.85.195/phimgiaitri/mobile/service/getep3.php?phimid=' + phimid
-		content = Get_Url(url2)
-		content = content[3:]
-		infoJson = json.loads(content)
-		tapindex = int(tap) -1
-		link = infoJson['ep_info'][tapindex]['link']
-		link = link.replace('#','*')
-		url3 ='http://120.72.85.195/phimgiaitri/mobile/service/getdireclink.php?linkpicasa=' + link
-		content = Get_Url(url3)
-		content = content[3:]
-		linkJson = json.loads(content)
-		url = linkJson['linkpi'][0]['link720'] or linkJson['linkpi'][0]['link360']
+		try:	
+		  xbmc.log(url)	
+		  arr = url.split('/')
+		  phimid = arr[len(arr) - 3]
+		  tap = arr[len(arr) - 1]
+		  tap2 = tap.split('-')
+		  tap3 = tap2[1].split('.')
+		  tap = tap3[0]
+		  url2 = 'http://120.72.85.195/phimgiaitri/mobile/service/getep3.php?phimid=' + phimid
+		  content = Get_Url(url2)
+		  content = content[3:]
+		  infoJson = json.loads(content)
+		  tapindex = int(tap) -1
+		  link = infoJson['ep_info'][tapindex]['link']
+		  link = link.replace('#','*')
+		  url3 ='http://120.72.85.195/phimgiaitri/mobile/service/getdireclink.php?linkpicasa=' + link
+		  content = Get_Url(url3)
+		  content = content[3:]
+		  linkJson = json.loads(content)
+		  url = linkJson['linkpi'][0]['link720'] or linkJson['linkpi'][0]['link360']
+		except:
+		  content = Get_Url(url)
+		  url = re.compile('file: "(.+?)"').findall(content)[0]
 	else:
 		url = url
 	item=xbmcgui.ListItem(path=url)
@@ -498,10 +595,21 @@ def PlayVideo(url,title):
         playlist.add(url, listitem)
         xbmcPlayer.play(playlist)
 
+def get_cookie():
+  from urllib2 import Request, build_opener, HTTPCookieProcessor, HTTPHandler
+  import cookielib
+  cj=cookielib.CookieJar()
+  opener=build_opener(HTTPCookieProcessor(cj), HTTPHandler())
+  req=Request('http://tv.vnn.vn/')
+  f=opener.open(req)
+  for cookie in cj:
+    return "%s=%s" % (cookie.name, cookie.value)		
+		
 def Get_Url(url):
     try:
 		req=urllib2.Request(url)
 		req.add_header('User-Agent', 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)')
+		req.add_header('Cookie', cookieHeader)
 		response=urllib2.urlopen(req)
 		link=response.read()
 		response.close()  
@@ -566,6 +674,7 @@ def parameters_string_to_dict(parameters):
 
 DecryptData = base64.b64decode	
 homeurl = 'aHR0cDovL3hibWMuaXR2cGx1cy5uZXQvTUVOVS9JLU1lbnUueG1s'
+cookieHeader=get_cookie()
 params=parameters_string_to_dict(sys.argv[2])
 mode=params.get('mode')
 url=params.get('url')
@@ -582,6 +691,7 @@ if type(url)==type(str()):
 sysarg=str(sys.argv[1])
 
 if mode == 'index':Index(url,iconimage)
+elif mode == 'index_tube':Index_Tube(url,iconimage)
 elif mode == 'indexgroup':IndexGroup(url)	
 elif mode == 'index_group':Index_Group(url)	
 elif mode == 'menu_group':Menu_Group(url)

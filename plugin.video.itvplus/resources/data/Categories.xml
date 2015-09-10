@@ -125,13 +125,13 @@
 
 <item>
 <title>Phim Lẻ Thể Loại - Quốc Gia</title>
-<link>http://phim.megabox.vn/phim-le</link>
+<link>http://phim.megabox.vn/phim-lefull</link>
 <thumbnail>http://i.imgur.com/G1gYeeo.png</thumbnail>
 </item>
 
 <item>
 <title>Phim Bộ Thể Loại - Quốc Gia</title>
-<link>http://phim.megabox.vn/phim-bo</link>
+<link>http://phim.megabox.vn/phim-bofull</link>
 <thumbnail>http://i.imgur.com/G1gYeeo.png</thumbnail>
 </item>
 
@@ -187,10 +187,71 @@
 
 <item>
 <title>[COLOR FF0084EA](Phim Lẻ)[/COLOR] Thể Loại Khác</title>
-<link>http://phimgiaitri.vn/result.php?type=Phim%20L%E1%BA%BB&search=Ho%E1%BA%A1t%20H%C3%ACnh</link>
+<link>http://phimgiaitri.vn/result.php?type=Phim%20L%E1%BA%BB&search=Kh%C3%A1c</link>
 <thumbnail>http://i.imgur.com/G1gYeeo.png</thumbnail>
 </item>
 
+<item>
+<title>[COLOR orange](Phim Bộ)[/COLOR] Hàn Quốc</title>
+<link>http://phimgiaitri.vn/result.php?type=Phim%20B%E1%BB%99&search=H%C3%A0n%20Qu%E1%BB%91c</link>
+<thumbnail>http://i.imgur.com/G1gYeeo.png</thumbnail>
+</item>
+
+<item>
+<title>[COLOR orange](Phim Bộ)[/COLOR] Trung Quốc - Đài Loan</title>
+<link>http://phimgiaitri.vn/result.php?type=Phim%20B%E1%BB%99&search=Trung%20Qu%E1%BB%91c%20-%20%C4%90%C3%A0i%20Loan</link>
+<thumbnail>http://i.imgur.com/G1gYeeo.png</thumbnail>
+</item>
+
+<item>
+<title>[COLOR orange](Phim Bộ)[/COLOR] Việt Nam</title>
+<link>http://phimgiaitri.vn/result.php?type=Phim%20B%E1%BB%99&search=Vi%E1%BB%87t%20Nam</link>
+<thumbnail>http://i.imgur.com/G1gYeeo.png</thumbnail>
+</item>
+
+<item>
+<title>[COLOR orange](Phim Bộ)[/COLOR] TVB</title>
+<link>http://phimgiaitri.vn/result.php?type=Phim%20B%E1%BB%99&search=TVB</link>
+<thumbnail>http://i.imgur.com/G1gYeeo.png</thumbnail>
+</item>
+
+<item>
+<title>[COLOR orange](Phim Bộ)[/COLOR] Âu Mỹ</title>
+<link>http://phimgiaitri.vn/result.php?type=Phim%20B%E1%BB%99&search=%C3%82u%20M%E1%BB%B9</link>
+<thumbnail>http://i.imgur.com/G1gYeeo.png</thumbnail>
+</item>
+
+<item>
+<title>[COLOR orange](Phim Bộ)[/COLOR] Hoạt Hình</title>
+<link>http://phimgiaitri.vn/result.php?type=Phim%20B%E1%BB%99&search=Ho%E1%BA%A1t%20H%C3%ACnh</link>
+<thumbnail>http://i.imgur.com/G1gYeeo.png</thumbnail>
+</item>
+
+<!------------ PHIM 7 ----------------->
+
+<item>
+<title>Phim Lẻ</title>
+<link>http://phim7.com/phim-le.html</link>
+<thumbnail>http://i.imgur.com/G1gYeeo.png</thumbnail>
+</item>
+
+<item>
+<title>Phim Bộ</title>
+<link>http://phim7.com/phim-bo.html</link>
+<thumbnail>http://i.imgur.com/G1gYeeo.png</thumbnail>
+</item>
+
+<item>
+<title>Phim Mới</title>
+<link>http://phim7.com/phim-moi.html</link>
+<thumbnail>http://i.imgur.com/G1gYeeo.png</thumbnail>
+</item>
+
+<item>
+<title>Phim Xem Nhiều</title>
+<link>http://phim7.com/phim-xem-nhieu.html</link>
+<thumbnail>http://i.imgur.com/G1gYeeo.png</thumbnail>
+</item>
 
 </items>
 </channel>
