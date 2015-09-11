@@ -384,9 +384,9 @@
 
 <addon
   id="plugin.video.viettv24"
-  version="1.9.14"
+  version="1.9.15"
   name="*[COLOR yellow]Viet-TV24.com[/COLOR]"
-  provider-name="th">
+  provider-name="Vinh Modded from Thong">
   <requires>
         <import addon="xbmc.python" version="2.1.0"/>
   </requires>

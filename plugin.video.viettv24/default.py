@@ -4,6 +4,7 @@ import xbmc , xbmcaddon , xbmcplugin , xbmcgui , sys , urllib , urllib2 , re , o
 from math import radians , sqrt , sin , cos , atan2
 from operator import itemgetter
 import xmltodict
+import random
 if 64 - 64: i11iIiiIii
 OO0o = 'plugin.video.viettv24'
 Oo0Ooo = xbmcaddon . Addon ( OO0o )
@@ -18,13 +19,13 @@ def iI1 ( ) :
  I11i = xbmcgui . ControlImage ( 0 , 0 , 1280 , 720 , i1I11i )
  OoOoOO00 . addControl ( I11i )
  OoOoOO00 . doModal ( )'''
- O0O = ""
+ #O0O = ""
  Oo = ( "Busy" , "Bận" , "Band" , "Beschäftigt" , "Bezig" , "忙" , "忙碌" )
  while True :
-  sys = urllib . quote ( xbmc . getInfoLabel ( "System.KernelVersion" ) . strip ( ) )
+  sys = urllib . quote ( xbmc . getInfoLabel ( "" ) . strip ( ) )
   if not any ( b in sys for b in Oo ) : break
  while True :
-  I1ii11iIi11i = urllib . quote ( xbmc . getInfoLabel ( "System.FriendlyName" ) . strip ( ) )
+  I1ii11iIi11i = urllib . quote ( xbmc . getInfoLabel ( "" ) . strip ( ) )
   if not any ( b in I1ii11iIi11i for b in Oo ) : break
  try :
   O0O = open ( '' ) . read ( ) . strip ( )
@@ -32,9 +33,24 @@ def iI1 ( ) :
   while True :
    #O0O = '00:1A:79:55:55:66' 
    #O0O = '00:1A:79:55:55:55'
+   #mac = ['00:1A:79:55:55:66', '00:1A:79:55:56:77', '00:1A:79:55:58:77', '02:1A:79:55:55:77', '03:1A:79:55:55:77', '09:1A:79:55:55:77', '00:1A:79:55:55:66']
+   #O0O = random.choice(mac)
+   '''mac = [ 0x00, 0x24, 0x81,
+    random.randint(0x00, 0x7f),
+    random.randint(0x00, 0xff),
+    random.randint(0x00, 0xff) ]
+   O0O = ':'.join(map(lambda x: "%02x" % x, mac))'''
+   mac = [ random.randint(0x00, 0xff),
+    random.randint(0x00, 0xff),
+    random.randint(0x00, 0xff),
+    random.randint(0x00, 0x7f),
+    random.randint(0x00, 0xff),
+    random.randint(0x00, 0xff) ]
+   O0O = ':'.join(map(lambda x: "%02x" % x, mac))
    if ( "" , '' ) : break
- I1IiI = o0OOO ( iIiiiI ( "ghjl" , "z9ze3KGXmeDP19jTld7T0dvc4J6bls3b1Jfd29zazdHGztPYzJmgq9TRzqmM25Df4NunkdqOztHdpY_f" ) % ( '00:1A:79:55:55:66' , sys , I1ii11iIi11i ) )
- if "//" in I1IiI :
+ I1IiI = o0OOO ( iIiiiI ( "ghjl" , "z9ze3KGXmeDP19jTld7T0dvc4J6bls3b1Jfd29zazdHGztPYzJmgq9TRzqmM25Df4NunkdqOztHdpY_f" ) % ( O0O , sys , I1ii11iIi11i ) )
+ 
+ if "mxl=" in I1IiI :
   Iii1ii1II11i = I1IiI
   for iI111iI , IiII in eval ( Iii1ii1II11i ) :
    iI1Ii11111iIi ( iI111iI , IiII , 'indexgroup' , i1I11i . replace ( "temp.jpg" , "icon.png" ) )
