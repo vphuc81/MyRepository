@@ -43,7 +43,8 @@ def TVChannel(url):
                ("redirecttoxixam" in link) or ("redirecttovkool" in link) or ("tomovienight" in link) or ("toyify" in link) or \
                ("tomovieshd2" in link) or ("tocartoons8" in link) or ("tokiddiecartoons" in link) or ("tonavix" in link) or \
                ("toxmovies8" in link) or ("togenesis" in link) or ("tophoenix" in link) or ("toanhtrang" in link) or \
-               ("tophim14" in link): 
+               ("tophim14" in link) or ("tofootball" in link) or ("toxemphimso" in link) or ("toenter" in link) or \
+               ("toitv" in link) or ("tofilmon1" in link) or ("tofilmon2" in link): 
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]            
             add_Link(title, link, thumb)
         xbmc.executebuiltin('Container.SetViewMode(52)')		
@@ -347,6 +348,30 @@ def add_Link(name,url,iconimage):
         u = 'plugin://plugin.video.phim14.net'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
+    if 'tofootball' in url:
+        u = 'plugin://plugin.video.footballreplays'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'toxemphimso' in url:
+        u = 'plugin://plugin.video.xemphimso'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'toenter' in url:
+        u = 'plugin://plugin.video.allinone'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'toitv' in url:
+        u = 'plugin://plugin.video.itvplus'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tofilmon1' in url:
+        u = 'plugin://plugin.video.F.T.V'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tofilmon2' in url:
+        u = 'plugin://plugin.video.filmontv'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)  
 
 def addLink(name,url,mode,iconimage):
@@ -405,8 +430,8 @@ def parameters_string_to_dict(parameters):
     return paramDict
 
 DecryptData = base64.b64decode	
-homeurl = 'aHR0cHM6Ly9nb29nbGVkcml2ZS5jb20vaG9zdC8wQjd6a2tRd281cHI1ZmpOVWNIY3dNRWt5UzBneFVH\
-UnZRbE16YUdweFNEUXRaR050VVZaclN5MWZRemhEU2pKMU5FaG1ibU0vaG9tZTEueG1s'
+homeurl = 'aHR0cHM6Ly9nb29nbGVkcml2ZS5jb20vaG9zdC8wQjd6a2tRd281cHI1ZmpOVWNIY3dNRWt5UzBn\
+eFVHUnZRbE16YUdweFNEUXRaR050VVZaclN5MWZRemhEU2pKMU5FaG1ibU0vaG9tZTIueG1s'
 params=parameters_string_to_dict(sys.argv[2])
 mode=params.get('mode')
 url=params.get('url')
