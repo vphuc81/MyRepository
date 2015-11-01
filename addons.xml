@@ -281,9 +281,9 @@
 
 <addon
   id="plugin.video.phim.xixam.com"
-  version="1.7"
+  version="1.8"
   name="*[COLOR yellow]Xi-Xam[/COLOR]"
-  provider-name="th">
+  provider-name="Vinh Modded from Thong">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 		<import addon="script.module.urlresolver" version="0.0.1"/>

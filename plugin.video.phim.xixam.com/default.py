@@ -5,7 +5,7 @@ if 64 - 64: i11iIiiIii
 OO0o = 'plugin.video.phim.xixam.com'
 Oo0Ooo = xbmcaddon . Addon ( OO0o )
 O0O0OO0O0O0 = int ( sys . argv [ 1 ] )
-iiiii = "http://phim.xixam.com"
+iiiii = "http://xemphimmienphi.net/"
 if 64 - 64: iIIi1iI1II111 + ii11i / oOooOoO0Oo0O
 def iI1 ( ) :
  i1I11i = ""
@@ -24,19 +24,19 @@ def iI1 ( ) :
    if re . match ( "[0-9a-f]{2}([-:])[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$" , i1I11i . lower ( ) ) : break
  O0O = urllib2 . urlopen ( "http://www.viettv24.com/main/checkActivation.php?MacID=%s&app_id=%s&sys=%s&dev=%s" % ( i1I11i , "9" , sys , I11i ) ) . read ( )
  if "allowed" in O0O :
-  Oo ( 'Search' , 'http://phim.xixam.com/tim-kiem/?tk=' , 'search' , 'http://echipstore.net/addonicons/Search.jpg' )
-  Oo ( 'Movies' , 'http://phim.xixam.com/phim-le/' , 'index' , 'http://echipstore.net/addonicons/Movies.jpg' )
-  Oo ( 'Series' , 'http://phim.xixam.com/phim-bo/' , 'index' , 'http://echipstore.net/addonicons/Series.jpg' )
-  Oo ( 'By Region' , 'http://phim.xixam.com/' , 'videosbyregion' , 'http://echipstore.net/addonicons/Regions.jpg' )
-  Oo ( 'Movies By Category ' , 'http://phim.xixam.com/' , 'videosbycategory' , 'http://echipstore.net/addonicons/Categories.jpg' )
-  Oo ( 'Others ' , 'http://phim.xixam.com/phim-khac/' , 'index' , 'http://echipstore.net/addonicons/Categories.jpg' )
+  Oo ( 'Search' , 'http://xemphimmienphi.net/tim-kiem/?tk=' , 'search' , 'http://echipstore.net/addonicons/Search.jpg' )
+  Oo ( 'Movies' , 'http://xemphimmienphi.net/phim-le/' , 'index' , 'http://echipstore.net/addonicons/Movies.jpg' )
+  Oo ( 'Series' , 'http://xemphimmienphi.net/phim-bo/' , 'index' , 'http://echipstore.net/addonicons/Series.jpg' )
+  Oo ( 'By Region' , 'http://xemphimmienphi.net/' , 'videosbyregion' , 'http://echipstore.net/addonicons/Regions.jpg' )
+  Oo ( 'Movies By Category ' , 'http://xemphimmienphi.net/' , 'videosbycategory' , 'http://echipstore.net/addonicons/Categories.jpg' )
+  Oo ( 'Others ' , 'http://xemphimmienphi.net/phim-khac/' , 'index' , 'http://echipstore.net/addonicons/Categories.jpg' )
  else :
-  Oo ( 'Search' , 'http://phim.xixam.com/tim-kiem/?tk=' , 'search' , 'http://echipstore.net/addonicons/Search.jpg' )
-  Oo ( 'Movies' , 'http://phim.xixam.com/phim-le/' , 'index' , 'http://echipstore.net/addonicons/Movies.jpg' )
-  Oo ( 'Series' , 'http://phim.xixam.com/phim-bo/' , 'index' , 'http://echipstore.net/addonicons/Series.jpg' )
-  Oo ( 'By Region' , 'http://phim.xixam.com/' , 'videosbyregion' , 'http://echipstore.net/addonicons/Regions.jpg' )
-  Oo ( 'Movies By Category ' , 'http://phim.xixam.com/' , 'videosbycategory' , 'http://echipstore.net/addonicons/Categories.jpg' )
-  Oo ( 'Others ' , 'http://phim.xixam.com/phim-khac/' , 'index' , 'http://echipstore.net/addonicons/Categories.jpg' )
+  Oo ( 'Search' , 'http://xemphimmienphi.net/tim-kiem/?tk=' , 'search' , 'http://echipstore.net/addonicons/Search.jpg' )
+  Oo ( 'Movies' , 'http://xemphimmienphi.net/phim-le/' , 'index' , 'http://echipstore.net/addonicons/Movies.jpg' )
+  Oo ( 'Series' , 'http://xemphimmienphi.net/phim-bo/' , 'index' , 'http://echipstore.net/addonicons/Series.jpg' )
+  Oo ( 'By Region' , 'http://xemphimmienphi.net/' , 'videosbyregion' , 'http://echipstore.net/addonicons/Regions.jpg' )
+  Oo ( 'Movies By Category ' , 'http://xemphimmienphi.net/' , 'videosbycategory' , 'http://echipstore.net/addonicons/Categories.jpg' )
+  Oo ( 'Others ' , 'http://xemphimmienphi.net/phim-khac/' , 'index' , 'http://echipstore.net/addonicons/Categories.jpg' )
   if 48 - 48: oO0o / OOooOOo / I11iIi1I / IiiIII111iI
   if 34 - 34: iii1I1I / O00oOoOoO0o0O . O0oo0OO0 + Oo0ooO0oo0oO . I1i1iI1i - II
  OoI1Ii11I1Ii1i = xbmc . translatePath ( xbmcaddon . Addon ( ) . getAddonInfo ( 'path' ) ) . decode ( "utf-8" )
@@ -48,33 +48,33 @@ def iI1 ( ) :
  o0oOoO00o . doModal ( )'''
  if 43 - 43: O0OOo . II1Iiii1111i
 def i1IIi11111i ( ) :
- Oo ( 'Vietnam' , 'http://phim.xixam.com/country/vietnam-9/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Korea' , 'http://phim.xixam.com/country/korea-1/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'China' , 'http://phim.xixam.com/country/china-5/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Hong Kong' , 'http://phim.xixam.com/country/hong-kong-18/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Japan' , 'http://phim.xixam.com/country/japan-11/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Taiwan' , 'http://phim.xixam.com/country/taiwan-2/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Singapore' , 'http://phim.xixam.com/country/singapore-17/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Philippines' , 'http://phim.xixam.com/country/philippines-4/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Thailand' , 'http://phim.xixam.com/country/thailand-3/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'UK' , 'http://phim.xixam.com/country/united-kingdom-52/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'US' , 'http://phim.xixam.com/country/united-states-10/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
+ Oo ( 'Vietnam' , 'http://xemphimmienphi.net/country/vietnam-9/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Korea' , 'http://xemphimmienphi.net/country/korea-1/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'China' , 'http://xemphimmienphi.net/country/china-5/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Hong Kong' , 'http://xemphimmienphi.net/country/hong-kong-18/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Japan' , 'http://xemphimmienphi.net/country/japan-11/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Taiwan' , 'http://xemphimmienphi.net/country/taiwan-2/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Singapore' , 'http://xemphimmienphi.net/country/singapore-17/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Philippines' , 'http://xemphimmienphi.net/country/philippines-4/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Thailand' , 'http://xemphimmienphi.net/country/thailand-3/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'UK' , 'http://xemphimmienphi.net/country/united-kingdom-52/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'US' , 'http://xemphimmienphi.net/country/united-states-10/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
  if 74 - 74: Oo0o00o0Oo0 * ii11
 def I1I1i1 ( ) :
- Oo ( 'Action' , 'http://phim.xixam.com/phim-hanh-dong/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Martial Arts' , 'http://phim.xixam.com/phim-kiem-hiep/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Comedy' , 'http://phim.xixam.com/phim-hai/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Adventure' , 'http://phim.xixam.com/phim-phieu-luu/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Horror' , 'http://phim.xixam.com/phim-kinh-di/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Romance' , 'http://phim.xixam.com/phim-tinh-cam/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Animation' , 'http://phim.xixam.com/phim-hoat-hinh/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Fiction' , 'http://phim.xixam.com/phim-vien-tuong/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Psychological' , 'http://phim.xixam.com/phim-tam-ly/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Comedy (Vietnamesse only)' , 'http://phim.xixam.com/hai-kich/11/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'War/Combat' , 'http://phim.xixam.com/phim-chien-tranh/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Sports' , 'http://phim.xixam.com/the-thao/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'TV Shows' , 'http://phim.xixam.com/talkshow-tivi-show/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
- Oo ( 'Adult Only (18+)' , 'http://phim.xixam.com/phim-18/' , 'index' , 'http://phim.xixam.com/images/logo.png' )
+ Oo ( 'Action' , 'http://xemphimmienphi.net/phim-hanh-dong/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Martial Arts' , 'http://xemphimmienphi.net/phim-kiem-hiep/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Comedy' , 'http://xemphimmienphi.net/phim-hai/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Adventure' , 'http://xemphimmienphi.net/phim-phieu-luu/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Horror' , 'http://xemphimmienphi.net/phim-kinh-di/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Romance' , 'http://xemphimmienphi.net/phim-tinh-cam/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Animation' , 'http://xemphimmienphi.net/phim-hoat-hinh/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Fiction' , 'http://xemphimmienphi.net/phim-vien-tuong/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Psychological' , 'http://xemphimmienphi.net/phim-tam-ly/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Comedy (Vietnamesse only)' , 'http://xemphimmienphi.net/hai-kich/11/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'War/Combat' , 'http://xemphimmienphi.net/phim-chien-tranh/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Sports' , 'http://xemphimmienphi.net/the-thao/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'TV Shows' , 'http://xemphimmienphi.net/talkshow-tivi-show/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
+ Oo ( 'Adult Only (18+)' , 'http://xemphimmienphi.net/phim-18/' , 'index' , 'http://xemphimmienphi.net/images/logo.png' )
  if 18 - 18: iiIIIIi1i1 / OOoOoo00oo - iii1I1I + ii11i / iiIIIIi1i1 + II
 def OOooO ( url ) :
  OOoO00o = II111iiii ( url )
@@ -101,7 +101,7 @@ def O0o0Oo ( ) :
   if 85 - 85: OOoOoo00oo . Oo0o00o0Oo0 - iii1I1I % OOoOoo00oo % OOooOOo
   if ( Oo00OOOOO . isConfirmed ( ) ) :
    OO0o00o = urllib . quote_plus ( Oo00OOOOO . getText ( ) )
-  oOOo0oo = 'http://phim.xixam.com/tim-kiem/?tk=' + OO0o00o
+  oOOo0oo = 'http://xemphimmienphi.net/tim-kiem/?tk=' + OO0o00o
   OOooO ( oOOo0oo )
  except : pass
  if 80 - 80: O0OOo * i11iIiiIii / iiIIIIi1i1
@@ -155,7 +155,7 @@ def IIIii1II1II ( url , name ) :
   if 54 - 54: O0oo0OO0 - I11iIi1I + oOooOoO0Oo0O
 def II111iiii ( url ) :
  O0o0 = urllib2 . Request ( url )
- O0o0 . add_header ( 'Host' , 'phim.xixam.com' )
+ O0o0 . add_header ( 'Host' , 'xemphimmienphi.net' )
  O0o0 . add_header ( 'User-Agent' , 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)' )
  O0o0 . add_header ( 'Accept' , 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' )
  OO00Oo = urllib2 . urlopen ( O0o0 )
@@ -322,7 +322,7 @@ elif iIiIiiIIiIIi == 'episodes' :
 elif iIiIiiIIiIIi == 'loadvideo' :
  o0O00oOoOO ( "Play" , oO0OOOO0 + "/" + oOOo0oo )
  I1i1Iiiii = xbmcgui . DialogProgress ( )
- I1i1Iiiii . create ( 'phim.xixam.com' , 'Loading video. Please wait...' )
+ I1i1Iiiii . create ( 'xemphimmienphi.net' , 'Loading video. Please wait...' )
  IIIii1II1II ( oOOo0oo , oO0OOOO0 )
  I1i1Iiiii . close ( )
  del I1i1Iiiii
