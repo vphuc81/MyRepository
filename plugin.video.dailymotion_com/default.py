@@ -232,7 +232,6 @@ def listUsers(url):
 
 
 def listLive(url):
-    print 'live url ',url
     content = getUrl(url)
     content = json.loads(content)
     for item in content['list']:
@@ -270,10 +269,11 @@ def getStreamUrl(id):
         return ""
     
     else:
-        get_json_code = re.compile(r'dmp\.create\(document\.getElementById\(\'player\'\),\s*([^);]+)').findall(content)[0]
-        #print len(get_json_code)
+        get_json_code = re.compile(r'dmp\.create\(document\.getElementById\(\'player\'\),\s*([^;]+)').findall(content)[0]
+        get_json_code = get_json_code[:len(get_json_code)-1]
+        
         cc= json.loads(get_json_code)['metadata']['qualities']  #['380'][0]['url']
-        #print cc
+        print cc
         if '1080' in cc.keys():
             #print 'found hd'
             return cc['1080'][0]['url']
@@ -629,13 +629,14 @@ elif mode == 'sortVideos2':
 elif mode == 'sortUsers1':
     sortUsers1()
 elif mode == 'sortUsers2':
-    sortUsers2(url)
+    sortUsers2(url)    
 elif mode == 'playVideo':
     #if url.startswith('plugin'):
     #    print 'url @613',url
     #
     #    #liz.setProperty('IsPlayable', 'true')
     #else:    
+    print url
     playVideo(url)
 elif mode == 'playLiveVideo':
     playLiveVideo(url)
