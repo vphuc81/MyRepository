@@ -45,6 +45,29 @@
     </extension>
 </addon>
 
+<addon id="plugin.video.dailymotion_com" name="DailyMotion.com" version="2.1.5" provider-name="AddonScriptorDE">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+        <import addon="script.module.simple.downloader" version="1.0.0"/>
+        <import addon="script.module.requests" version="2.4.3"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary lang="en">Movies, TV, Music, User-Clips, 3D and Livestreams</summary>
+        <language></language>
+        <description lang="en">Movies, TV, Music, User-Clips, 3D and Livestreams</description>
+        <disclaimer lang="en">Some parts of this addon may not be legal in your country of residence - please check with your local laws before installing.</disclaimer>
+        <website>http://www.dailymotion.com</website>
+        <source>https://github.com/AddonScriptorDE/plugin.video.dailymotion_com</source>
+        <forum>http://forum.xbmc.org/showthread.php?tid=142626</forum>
+        <email>AddonScriptorDE at yahoo dot de</email>
+		<alternative_source>https://github.com/Gates33/plugin.video.dailymotion_com/archive/master.zip</alternative_source>
+    </extension>
+</addon>
+
 <addon id="plugin.video.donggiao" name="*[COLOR yellow]Đồng-Giao TV[/COLOR]" provider-name="Vinh Computer Repair" version="1.6">
   <requires>
     <import addon="xbmc.python" version="2.1.0" />
@@ -165,7 +188,6 @@
   </extension>
 </addon>
 
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.itvplus"
        name="[COLOR ffff0000]*ITV*[/COLOR] Plus"
        version="1.5.1"
@@ -180,7 +202,7 @@
   </extension>
   <extension point="xbmc.service"
 			library="autorun.py" start="startup">
-  </extension>  
+  </extension>
   <extension point="xbmc.addon.metadata">
     <summary>Entertainment</summary>
     <description>Giải trí trên kodi (xbmc)</description>
@@ -259,6 +281,34 @@
   <extension point="xbmc.addon.metadata">
     <summary>hayhaytv</summary>
     <description>Watch free megafun.vn (Vietnamese) Videos</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.MoneySports"
+       name="MoneySports"
+       version="1.0.1"
+       provider-name="Shadow Crew">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" />
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary></summary>
+    <description>
+    </description>
     <platform>all</platform>
   </extension>
 </addon>
@@ -449,7 +499,7 @@
   id="plugin.video.yeuphim1"
   version="1.5"
   name="*[COLOR yellow]Yeu-Phim[/COLOR]"
-  provider-name="Vinh Computer Repair">
+  provider-name="th">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
@@ -461,36 +511,6 @@
     <description></description>
     <platform>all</platform>
   </extension>
-</addon>
-
-<addon id="plugin.video.youtube.playlists" name="*[COLOR yellow]VIP-Playlists[/COLOR]" version="1.4" provider-name="Vinh Computer Repair">
-    <requires>
-        <import addon="xbmc.python" version="2.1.0"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <platform>all</platform>
-        <summary lang="en">Watch VIP YouTube Playlists</summary>
-        <language></language>
-        <description lang="en">Watch VIP YouTube Playlists</description>
-    </extension>
-</addon>
-
-<addon id="plugin.video.youtube.vnnews" name="*[COLOR yellow]VN-Daily News[/COLOR]" version="1.4" provider-name="Vinh Computer Repair">
-    <requires>
-        <import addon="xbmc.python" version="2.1.0"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <platform>all</platform>
-        <summary lang="en">Watch Youtube's SBTN, RFA, VOA, NguoivietTV...</summary>
-        <language></language>
-        <description lang="en">Watch Youtube's SBTN, RFA, VOA, NguoivietTV...</description>
-    </extension>
 </addon>
 
 <addon id="plugin.video.youtube" name="YouTube" version="5.1.7" provider-name="bromix">
@@ -528,47 +548,34 @@
 	</extension>
 </addon>
 
-<addon id="plugin.video.dailymotion_com" name="DailyMotion.com" version="2.1.5" provider-name="AddonScriptorDE">
+<addon id="plugin.video.youtube.playlists" name="*[COLOR yellow]VIP-Playlists[/COLOR]" version="1.4" provider-name="Vinh Computer Repair">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
-        <import addon="script.module.simple.downloader" version="1.0.0"/>
-        <import addon="script.module.requests" version="2.4.3"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
         <platform>all</platform>
-        <summary lang="en">Movies, TV, Music, User-Clips, 3D and Livestreams</summary>
+        <summary lang="en">Watch VIP YouTube Playlists</summary>
         <language></language>
-        <description lang="en">Movies, TV, Music, User-Clips, 3D and Livestreams</description>
-        <disclaimer lang="en">Some parts of this addon may not be legal in your country of residence - please check with your local laws before installing.</disclaimer>
-        <website>http://www.dailymotion.com</website>
-        <source>https://github.com/AddonScriptorDE/plugin.video.dailymotion_com</source>
-        <forum>http://forum.xbmc.org/showthread.php?tid=142626</forum>
-        <email>AddonScriptorDE at yahoo dot de</email>
-		<alternative_source>https://github.com/Gates33/plugin.video.dailymotion_com/archive/master.zip</alternative_source>
+        <description lang="en">Watch VIP YouTube Playlists</description>
     </extension>
 </addon>
 
-
-<addon
-  id="plugin.video.zingtv"
-  version="1.4"
-  name="*[COLOR yellow]Zing-TV[/COLOR]"
-  provider-name="Vinh Computer Repair">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-		<import addon="script.module.urlresolver" version="0.0.1"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
+<addon id="plugin.video.youtube.vnnews" name="*[COLOR yellow]VN-Daily News[/COLOR]" version="1.4" provider-name="Vinh Computer Repair">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>tv.zing.vn</summary>
-    <description>Watch Zing TV (Vietnamese) Videos</description>
-    <platform>all</platform>
-  </extension>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary lang="en">Watch Youtube's SBTN, RFA, VOA, NguoivietTV...</summary>
+        <language></language>
+        <description lang="en">Watch Youtube's SBTN, RFA, VOA, NguoivietTV...</description>
+    </extension>
 </addon>
 
 <addon id="plugin.video.zeus" name="[COLOR black].[/COLOR][COLOR yellow]ZEUS VIDEO[/COLOR]" version="1.1.0" provider-name="ZEUS">
@@ -592,36 +599,27 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary lang="en">ZEUS VIDEO - KODI XBMC ADDON</summary>
-    <description lang="en">For Support and news go to http://zeusrepo.com 
+    <description lang="en">For Support and news go to http://zeusrepo.com
 	Video TV Shows Sport Latest and HD Movies 24/7 </description>
     <platform>all</platform>
   </extension>
 </addon>
 
-<addon id="plugin.video.MoneySports"
-       name="MoneySports"
-       version="1.0.1"
-       provider-name="Shadow Crew">
+<addon
+  id="plugin.video.zingtv"
+  version="1.4"
+  name="*[COLOR yellow]Zing-TV[/COLOR]"
+  provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.beautifulsoup" version="3.2.1"/>
-    <import addon="script.module.simple.downloader" version="0.9.4"/>
-    <import addon="script.module.beautifulsoup4" />
-    <import addon="script.module.simple.downloader" version="0.9.4"/>
-    <import addon="script.module.requests" />
-    <import addon="script.module.httplib2" />
-    <import addon="script.module.youtube.dl" optional="true"/>
-    <import addon="plugin.video.youtube" />
-    <import addon="script.module.urlresolver" optional="true"/>
-    <import addon="script.module.simplejson" />    
+		<import addon="script.module.urlresolver" version="0.0.1"/>
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>video</provides>
+        <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary></summary>
-    <description>     
-    </description>
+    <summary>tv.zing.vn</summary>
+    <description>Watch Zing TV (Vietnamese) Videos</description>
     <platform>all</platform>
   </extension>
 </addon>
