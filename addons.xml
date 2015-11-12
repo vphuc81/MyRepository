@@ -207,7 +207,7 @@
 
 <addon id="plugin.video.livetv"
        name="***[COLOR yellow]LIVE-TV[/COLOR]"
-       version="2.1.14"
+       version="2.1.15"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
@@ -227,7 +227,7 @@
 
 <addon id="plugin.video.livetvinternational"
        name="**[COLOR yellow]Live TV - International[/COLOR]"
-       version="2.1.12"
+       version="2.1.13"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
@@ -392,9 +392,9 @@
 
 <addon
   id="plugin.video.viettv24"
-  version="1.9.15"
+  version="1.9.16"
   name="*[COLOR yellow]Viet-TV24.com[/COLOR]"
-  provider-name="Vinh Modded from Thong">
+  provider-name="Dknight - modified by bacha">
   <requires>
         <import addon="xbmc.python" version="2.1.0"/>
   </requires>
@@ -594,6 +594,34 @@
     <summary lang="en">ZEUS VIDEO - KODI XBMC ADDON</summary>
     <description lang="en">For Support and news go to http://zeusrepo.com 
 	Video TV Shows Sport Latest and HD Movies 24/7 </description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.MoneySports"
+       name="MoneySports"
+       version="1.0.1"
+       provider-name="Shadow Crew">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" />
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />    
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary></summary>
+    <description>     
+    </description>
     <platform>all</platform>
   </extension>
 </addon>

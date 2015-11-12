@@ -42,7 +42,8 @@ def TVChannel(url):
                ("tomovieshd2" in link) or ("tocartoons8" in link) or ("tokiddiecartoons" in link) or ("tonavix" in link) or \
                ("toxmovies8" in link) or ("togenesis" in link) or ("tophoenix" in link) or ("toanhtrang" in link) or \
                ("tophim14" in link) or ("tofootball" in link) or ("toxemphimso" in link) or ("toenter" in link) or \
-               ("toitv" in link) or ("tofilmon1" in link) or ("tofilmon2" in link) or ("toirantv" in link) or ("tozeus" in link): 
+               ("toitv" in link) or ("tofilmon1" in link) or ("tofilmon2" in link) or ("toirantv" in link) or ("tozeus" in link) or \
+               ("tomoneysp" in link): 
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]              
             add_Link(title, link, thumb)
         xbmc.executebuiltin('Container.SetViewMode(52)')        
@@ -379,6 +380,10 @@ def add_Link(name,url,iconimage):
     if 'tozeus' in url:
         u = 'plugin://plugin.video.zeus'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tomoneysp' in url and apk:
+        u = 'plugin.video.MoneySports'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)
         return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)   
 

@@ -10,7 +10,9 @@ home = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('path') ).decode("utf-8
 logos = xbmc.translatePath(os.path.join(home,"logos\\"))
 dataPath = xbmc.translatePath(os.path.join(home, 'resources'))
 apk = xbmc . getCondVisibility ( 'system.platform.android' )
-
+Oo00OOO = 'aHR0cHM6Ly9nb29nbGVkcml2ZS5jb20vaG9zdC8='
+e = 'TDNaNExuaHRiQT09'
+oo00o0 = '0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM'
 
 
 def TVChannel(url):
@@ -45,7 +47,8 @@ def TVChannel(url):
                ("tomovieshd2" in link) or ("tocartoons8" in link) or ("tokiddiecartoons" in link) or ("tonavix" in link) or \
                ("toxmovies8" in link) or ("togenesis" in link) or ("tophoenix" in link) or ("toanhtrang" in link) or \
                ("tophim14" in link) or ("tofootball" in link) or ("toxemphimso" in link) or ("toenter" in link) or \
-               ("toitv" in link) or ("tofilmon1" in link) or ("tofilmon2" in link) or ("tozeus" in link) or ("touno" in link): 
+               ("toitv" in link) or ("tofilmon1" in link) or ("tofilmon2" in link) or ("tozeus" in link) or ("touno" in link) or \
+               ("tomoneysp" in link): 
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]            
             add_Link(title, link, thumb)
         xbmc.executebuiltin('Container.SetViewMode(52)')		
@@ -55,7 +58,7 @@ def TVChannel(url):
         xbmc.executebuiltin('Container.SetViewMode(52)')
 		
 def Channel():
-    content = Get_Url(DecryptData(homeurl))
+    content = Get_Url(I1lli + O0Ooo)
     match=re.compile("<title>([^<]*)<\/title>\s*<link>([^<]+)<\/link>\s*<thumbnail>(.+?)</thumbnail>").findall(content)	
     for title,url,thumbnail in match:
 		addDir(title,url,'tvchannel',thumbnail)	
@@ -381,6 +384,10 @@ def add_Link(name,url,iconimage):
         u = xbmc . executebuiltin ( 'StartAndroidActivity ( com.vietuu.hlsplayer )' )  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)
         return ok
+    if 'tomoneysp' in url and apk:
+        u = 'plugin.video.MoneySports'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)
+        return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)  
 
 def addLink(name,url,mode,iconimage):
@@ -438,9 +445,13 @@ def parameters_string_to_dict(parameters):
                 paramDict[paramSplits[0]] = paramSplits[1]
     return paramDict
 
-DecryptData = base64.b64decode	
-homeurl = 'aHR0cHM6Ly9nb29nbGVkcml2ZS5jb20vaG9zdC8wQjd6a2tRd281cHI1ZmpOVWNIY3dNRWt5UzBn\
-eFVHUnZRbE16YUdweFNEUXRaR050VVZaclN5MWZRemhEU2pKMU5FaG1ibU0vdjE0LnhtbA=='
+ii11i = base64.urlsafe_b64decode(Oo00OOO)
+iI11ii = base64.urlsafe_b64decode(e)
+O0Ooo = base64.urlsafe_b64decode(iI11ii)
+I1lli = ii11i + oo00o0
+I11li = base64.b64decode	
+I1111i = 'aHR0cDovL3d3dy5zcG9va3lnaG9zdHRvdXJzLmNvbS93cC1jb250ZW50L3VwbG9hZHMvMjAxNC8w\
+Ny9zY2FyeS1naG9zdC5qcGc='
 params=parameters_string_to_dict(sys.argv[2])
 mode=params.get('mode')
 url=params.get('url')

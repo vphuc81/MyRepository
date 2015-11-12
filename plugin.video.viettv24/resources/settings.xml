@@ -1,0 +1,6 @@
+<settings>
+  <category label="PATH TO XML - ĐƯỜNG DẪN TỚI XML">
+    <setting label="Path to Local XML Playlist - Đường dẫn đến XML trên máy" type="file"  id="local" default="" /> 	
+    <setting label="Path to Online XML Playlist - Đường dẫn tới XML trên mạng" type="text"  id="online" default="" />	
+  </category>
+</settings>

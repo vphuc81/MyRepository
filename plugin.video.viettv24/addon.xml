@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon
   id="plugin.video.viettv24"
-  version="1.9.15"
+  version="1.9.16"
   name="*[COLOR yellow]Viet-TV24.com[/COLOR]"
-  provider-name="Vinh Modded from Thong">
+  provider-name="Dknight - modified by bacha">
   <requires>
         <import addon="xbmc.python" version="2.1.0"/>
   </requires>
