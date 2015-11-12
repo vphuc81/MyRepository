@@ -381,9 +381,9 @@ def add_Link(name,url,iconimage):
         u = 'plugin://plugin.video.zeus'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
-    if 'tomoneysp' in url and apk:
-        u = 'plugin.video.MoneySports'  
-        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)
+    if 'tomoneysp' in url:
+        u = 'plugin://plugin.video.MoneySports'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)   
 
