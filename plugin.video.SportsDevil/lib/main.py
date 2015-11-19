@@ -1,4 +1,4 @@
-# -*- coding: latin-1 -*-
+# -*- coding: utf-8 -*-
 
 # Merge xSopcast and SportsDevil
 #http://forum.xbmc.org/showthread.php?tid=100031&pid=1101338#pid1101338
@@ -13,7 +13,6 @@ import urllib
 
 import common
 
-import utils.encodingUtils as enc
 from utils import fileUtils as fu
 
 from utils.regexUtils import parseText
@@ -28,7 +27,6 @@ import entities.CListItem as ListItem
 
 from utils import xbmcUtils
 
-from syncManager import SyncManager, SyncSourceType
 from dialogs.dialogQuestion import DialogQuestion
 
 from customModulesManager import CustomModulesManager
@@ -73,11 +71,6 @@ class Main:
         self.favouritesManager = FavouritesManager(common.Paths.favouritesFolder)
         self.customModulesManager = CustomModulesManager(common.Paths.customModulesDir, common.Paths.customModulesRepo)
         
-        # todo: cache this (due to limited API calls for github)
-        self.syncManager = SyncManager()
-        #self.syncManager.addSource("Max Mustermann - Catchers", SyncSourceType.CATCHERS, common.Paths.catchersRepo)
-        #self.syncManager.addSource("Max Mustermann - Modules", SyncSourceType.MODULES, common.Paths.modulesRepo)
-        
         if not os.path.exists(common.Paths.customModulesDir):
             os.makedirs(common.Paths.customModulesDir, 0777)
 
@@ -114,7 +107,7 @@ class Main:
 
         title = videoItem['videoTitle']
         if title:
-            listitem.setInfo('video', {'title': enc.clean_safe(title)})
+            listitem.setInfo('video', {'title': title})
 
         if not isAutoplay:
             xbmcplugin.setResolvedUrl(self.handle, True, listitem)
@@ -125,7 +118,7 @@ class Main:
     def launchChrome (self, url, title):
         action = 'RunPlugin(%s)' % ('plugin://plugin.program.chrome.launcher/?kiosk=yes&mode=showSite&stopPlayback=yes&url=' + url)
         common.log('chrome test:' + str(action))
-        xbmc.executebuiltin(enc.unescape(action))
+        xbmc.executebuiltin(action)
         
 
 
@@ -233,16 +226,21 @@ class Main:
         result = self.parser.parse(lItem)
         if result.code == ParsingResult.Code.SUCCESS:
             tmpList = result.list
-        else:
-            if result.code == ParsingResult.Code.CFGFILE_NOT_FOUND:
-                common.showError("Cfg file not found")
-            elif result.code == ParsingResult.Code.CFGSYNTAX_INVALID:
-                common.showError("Cfg syntax invalid")
-            elif result.code == ParsingResult.Code.WEBREQUEST_FAILED:
-                common.showError("Web request failed")
-
+        elif result.code == ParsingResult.Code.CFGFILE_NOT_FOUND:
+            common.showError("Cfg file not found")
             endOfDirectory(False)
             return None
+        elif result.code == ParsingResult.Code.CFGSYNTAX_INVALID:
+            common.showError("Cfg syntax invalid")
+            endOfDirectory(False)
+            return None
+        elif result.code == ParsingResult.Code.WEBREQUEST_FAILED:
+            common.showError("Web request failed")
+            if len(result.list.items) > 0:
+                tmpList = result.list
+            else:
+                endOfDirectory(False)
+                return None
 
         # if it's the main menu, add folder 'Favourites' and 'Custom Modules
         if url == self.MAIN_MENU_FILE:
@@ -253,11 +251,11 @@ class Main:
             tmp['url'] = str(common.Paths.favouritesFile)
             tmpList.items.insert(0, tmp)
             
-            tmp = ListItem.create()
-            tmp['title'] = '[COLOR red]Custom Modules[/COLOR]'
-            tmp['type'] = 'rss'
-            tmp['url'] = os.path.join(common.Paths.customModulesDir, 'custom.cfg')
-            tmpList.items.insert(0, tmp)
+            #tmp = ListItem.create()
+            #tmp['title'] = '[COLOR red]Custom Modules[/COLOR]'
+            #tmp['type'] = 'rss'
+            #tmp['url'] = os.path.join(common.Paths.customModulesDir, 'custom.cfg')
+            #tmpList.items.insert(0, tmp)
 
         # if it's the favourites menu, add item 'Add item'
         elif url == common.Paths.favouritesFile or url.startswith('favfolders'):
@@ -331,7 +329,7 @@ class Main:
             
 
     def createXBMCListItem(self, item):
-        title = enc.clean_safe(item['title'])
+        title = item['title']
 
         m_type = item['type']
 
@@ -404,7 +402,7 @@ class Main:
 
         infoLabels = {}
         for video_info_name in item.infos.keys():
-            infoLabels[video_info_name] = enc.clean_safe(item[video_info_name])
+            infoLabels[video_info_name] = item[video_info_name]
         infoLabels['title'] = title
 
         liz.setInfo('video', infoLabels)
@@ -414,6 +412,7 @@ class Main:
 
         if m_type == 'video':
             liz.setProperty('IsPlayable','true')
+            #liz.setMimeType('text')
 
         return liz
 
@@ -504,19 +503,7 @@ class Main:
     def update(self):
         
         def checkForUpdates():
-            updates = {}          
-            common.showNotification('SportsDevil', common.translate(30275))
-            xbmcUtils.showBusyAnimation()
-                 
-            catchersUpdates = self.syncManager.getUpdates(SyncSourceType.CATCHERS, common.Paths.catchersDir)
-            if len(catchersUpdates) > 0:
-                updates["Catchers"] = catchersUpdates    
-            modulesUpdates = self.syncManager.getUpdates(SyncSourceType.MODULES, common.Paths.modulesDir)
-            if len(modulesUpdates) > 0:
-                updates["Modules"] = modulesUpdates
-            
-            xbmcUtils.hideBusyAnimation()
-            return updates
+            return None
         
         def doUpdates(typeName, updates):
             count = len(updates)
@@ -603,10 +590,10 @@ class Main:
                         p = params[i]
                         if p == 'return':
                             params.remove(p)
-                    path = enc.unescape(params[len(params)-1])
+                    path = params[len(params)-1]
                     xbmc.executebuiltin('Container.Update(' + path + ')')
                     return
-                xbmc.executebuiltin(enc.unescape(url))
+                xbmc.executebuiltin(url)
 
 
     def _parseParameters(self):
@@ -617,6 +604,7 @@ class Main:
             item.infos = self.addon.parse_query(urllib.unquote(queryString),{})
         else:
             item.infos = self.addon.parse_query(queryString,{})
+        item.infos = dict((k.decode('utf8'), v.decode('utf8')) for k, v in item.infos.items())
         return [mode, item]
 
 
@@ -633,6 +621,7 @@ class Main:
         self.handle = handle
         
         paramstring = urllib.unquote_plus(parameter)
+        common.log(paramstring)
         
         try:
             
@@ -641,7 +630,7 @@ class Main:
             if not listItemPath.startswith(self.base):
                 if not('mode=' in paramstring and not 'mode=1&' in paramstring):   
                     xbmcplugin.setPluginFanart(self.handle, common.Paths.pluginFanart)
-                    self.clearCache()                    
+                    self.clearCache()
                      
                     #if common.getSetting('autoupdate') == 'true':    
                     #    self.update()
@@ -734,5 +723,3 @@ class Main:
         except Exception, e:
             common.showError('Error running SportsDevil')
             common.log('Error running SportsDevil. Reason:' + str(e))
-
-

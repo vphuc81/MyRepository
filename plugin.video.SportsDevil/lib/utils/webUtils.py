@@ -1,32 +1,27 @@
-# -*- coding: latin-1 -*-
+# -*- coding: utf-8 -*-
 
 import os
+import re
 import urllib
 import urlparse
-import HTMLParser
-import re
-from fileUtils import setFileContent, getFileContent
-import encodingUtils as enc
-
-from beta.t0mm0.common.net import Net
-
+import requests
+import cookielib
+import socket
+from HTMLParser import HTMLParser
+from fileUtils import fileExists, setFileContent, getFileContent
 
 #------------------------------------------------------------------------------
+socket.setdefaulttimeout(30)
 
-def get_redirected_url(url):
-    head = BaseRequest().getHead(url)
-    if head:
-        return head.get_url()
-    return None
+#use ipv4 only
+origGetAddrInfo = socket.getaddrinfo
 
-def isOnline(url):
-    return BaseRequest().getHead(url) is not None
+def getAddrInfoWrapper(host, port, family=0, socktype=0, proto=0, flags=0):
+    return origGetAddrInfo(host, port, socket.AF_INET, socktype, proto, flags)
 
+# replace the original socket.getaddrinfo by our version
+socket.getaddrinfo = getAddrInfoWrapper
 #------------------------------------------------------------------------------
-
-
-
-
 
 '''
     REQUEST classes
@@ -36,64 +31,78 @@ class BaseRequest(object):
     
     def __init__(self, cookie_file=None):
         self.cookie_file = cookie_file
-        self.net = Net()
-        if cookie_file:
-            self.net.set_cookies(cookie_file)
+        self.s = requests.Session()
+        if fileExists(self.cookie_file):
+            self.s.cookies = self.load_cookies_from_lwp(self.cookie_file)
+        self.s.headers.update({'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'})
+        self.s.headers.update({'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'})
+        self.s.headers.update({'Accept-Language' : 'en-US,en;q=0.5'})
+        self.s.keep_alive = False
         self.url = ''
     
-    def ErrorDecorator(self, fn):
-        '''
-            Decorator for web requests
-        '''
-        def wrap(*args):
-            try:
-                return fn(*args)
-            except ValueError, e:
-                print 'Failed to open "%s".' % self.url
-                print 'url is invalid'
+    def save_cookies_lwp(self, cookiejar, filename):
+        lwp_cookiejar = cookielib.LWPCookieJar()
+        for c in cookiejar:
+            args = dict(vars(c).items())
+            args['rest'] = args['_rest']
+            del args['_rest']
+            c = cookielib.Cookie(**args)
+            lwp_cookiejar.set_cookie(c)
+        lwp_cookiejar.save(filename, ignore_discard=True)
+
+    def load_cookies_from_lwp(self, filename):
+        lwp_cookiejar = cookielib.LWPCookieJar()
+        lwp_cookiejar.load(filename, ignore_discard=True)
+        return lwp_cookiejar
+    
+    def fixurl(self, url):
+        #url is unicode (quoted or unquoted)
+        try:
+            #url is already quoted
+            url = url.encode('ascii')
+        except:
+            #quote url if it is unicode
+            parsed_link = urlparse.urlsplit(url)
+            parsed_link = parsed_link._replace(netloc=parsed_link.netloc.encode('idna'),path=urllib.quote(parsed_link.path.encode('utf-8')))
+            url = parsed_link.geturl().encode('ascii')
+        #url is str (quoted)
+        return url
+
+    def getSource(self, url, form_data, referer, xml=False, mobile=False):
+        url = self.fixurl(url)
+        
+        if 'arenavision.in' in urlparse.urlsplit(url).netloc:
+            self.s.headers.update({'Cookie' : 'beget=begetok'})
             
-            except IOError, e:
-                    #traceback.print_exc(file = sys.stdout)
-                    print 'Failed to open "%s".' % self.url
-                    if hasattr(e, 'code'):
-                        print 'Failed with error code - %s.' % e.code
-                    elif hasattr(e, 'reason'):
-                        print "The error object has the following 'reason' attribute :", e.reason
-                        print "This usually means the server doesn't exist, is down, or we don't have an internet connection."
-            return None
-        return wrap
-    
-    def _headRequest(self, url):
-        def request():
-            return self.net.http_HEAD(url)        
-        self.url = url
-        decorated = self.ErrorDecorator(request)
-        return decorated()
-    
-    def _getRequest(self, url, form_data, headers):
-        def request():
-            return self.net._fetch(url, form_data, headers).content
-        self.url = url
-        decorated = self.ErrorDecorator(request)
-        return decorated()
-    
-    def getHead(self, url):
-        self.url = url
-        return self._headRequest(url)
-    
-    def getSource(self, url, form_data, referer):
-        url = HTMLParser.HTMLParser().unescape(url)
-        parsed_link = urlparse.urlsplit(url.encode('utf8'))
-        parsed_link = parsed_link._replace(path=urllib.quote(parsed_link.path))
-        url = parsed_link.geturl()
+        if 'pushpublish' in urlparse.urlsplit(url).netloc:
+            del self.s.headers['Accept-Encoding']
+            
         if not referer:
             referer = url
+        else:
+            referer = self.fixurl(referer)
+        
         headers = {'Referer': referer}
-        response  = self._getRequest(url, form_data, headers)
-        if response:
+        if mobile:
+            self.s.headers.update({'User-Agent' : 'Mozilla/5.0 (Linux; Android 4.4.2; Nexus 4 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.114 Mobile Safari/537.36'})
+            
+        if xml:
+            headers['X-Requested-With'] = 'XMLHttpRequest'
+        
+        if form_data:
+            r = self.s.post(url, headers=headers, data=form_data, timeout=20)
+            response  = r.text
+        else:
+            try:
+                r = self.s.get(url, headers=headers, timeout=20)
+                response  = r.text
+            except (requests.exceptions.MissingSchema):
+                response  = 'pass'
+        
+        if len(response) > 10:
             if self.cookie_file:
-                self.net.save_cookies(self.cookie_file)
-        return response
+                self.save_cookies_lwp(self.s.cookies, self.cookie_file)
+        return HTMLParser().unescape(response)
 
 #------------------------------------------------------------------------------
 
@@ -102,14 +111,14 @@ class DemystifiedWebRequest(BaseRequest):
     def __init__(self, cookiePath):
         super(DemystifiedWebRequest,self).__init__(cookiePath)
 
-    def getSource(self, url, form_data, referer='', demystify=False):
-        data = super(DemystifiedWebRequest, self).getSource(url, form_data, referer)
+    def getSource(self, url, form_data, referer='', xml=False, mobile=False, demystify=False):
+        data = super(DemystifiedWebRequest, self).getSource(url, form_data, referer, xml, mobile)
         if not data:
             return None
 
         if not demystify:
             # remove comments
-            r = re.compile('<!--.*?(?!//)-->', re.IGNORECASE + re.DOTALL + re.MULTILINE)
+            r = re.compile('<!--.*?(?!//)--!*>', re.IGNORECASE + re.DOTALL + re.MULTILINE)
             m = r.findall(data)
             if m:
                 for comment in m:
@@ -137,22 +146,20 @@ class CachedWebRequest(DemystifiedWebRequest):
     def __getCachedSource(self):
         try:
             data = getFileContent(self.cachedSourcePath)
-            data = enc.smart_unicode(data)
         except:
-            #data = data.decode('utf-8')
             pass
         return data
 
     def getLastUrl(self):
-        url = getFileContent(self.lastUrlPath)
-        return url
+        return getFileContent(self.lastUrlPath)
+        
 
-    def getSource(self, url, form_data, referer='', ignoreCache=False, demystify=False):
-
+    def getSource(self, url, form_data, referer='', xml=False, mobile=False, ignoreCache=False, demystify=False):
+        
         if url == self.getLastUrl() and not ignoreCache:
             data = self.__getCachedSource()
         else:
-            data = enc.smart_unicode(super(CachedWebRequest,self).getSource(url, form_data, referer, demystify))
+            data = super(CachedWebRequest,self).getSource(url, form_data, referer, xml, mobile, demystify)
             if data:
                 # Cache url
                 self.__setLastUrl(url)

@@ -226,7 +226,7 @@ class Addon:
         return self.url + '?' + urllib.urlencode(out_dict)
 
 
-    def log(self, msg, level=xbmc.LOGNOTICE):
+    def log(self, msg, level=xbmc.LOGDEBUG):
         '''
         Writes a string to the XBMC log file. The addon name is inserted into 
         the beginning of the message automatically to help you find relevent 

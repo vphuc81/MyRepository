@@ -1,20 +1,19 @@
-# -*- coding: latin-1 -*-
+# -*- coding: utf-8 -*-
 
 import urllib
 import urlparse
 import re, datetime
+import socket
 
 
 import common
 
-from utils import encodingUtils as enc
 from utils import datetimeUtils as dt
 from utils import regexUtils as reg
+from utils import xppod as xp
 
 from utils.xbmcUtils import select
-from utils.webUtils import isOnline
 from utils.fileUtils import getFileContent, fileExists
-
 
 
 def __parseParams(params):
@@ -27,13 +26,13 @@ def __parseParams(params):
 
 def replaceFromDict(dictFilePath, wrd):
 
-    dictionary = enc.smart_unicode(getFileContent(dictFilePath))
+    dictionary = getFileContent(dictFilePath)
     dictionary = dictionary.replace('\r\n','\n')
 
     p_reg = re.compile('^[^\r\n]+$', re.IGNORECASE + re.DOTALL + re.MULTILINE)
     m_reg = p_reg.findall(dictionary)
 
-    word = enc.smart_unicode(wrd).replace(u'Ãœ','&Uuml;').replace(u'Ã–','&Ouml;').replace(u'Ã„','&Auml;')
+    word = wrd
     try:
         if m_reg and len(m_reg) > 0:
             index = ''
@@ -122,7 +121,6 @@ def getSource(params, src):
 
 
 def parseText(item, params, src):
-    src = enc.smart_unicode(src)
     paramArr = __parseParams(params)
 
     text = paramArr[0].replace('%s',src)
@@ -139,8 +137,7 @@ def parseText(item, params, src):
     return reg.parseText(text, regex, variables)
 
 
-def getInfo(item, params, src):
-    src = enc.smart_unicode(src).encode('utf-8')
+def getInfo(item, params, src, xml=False, mobile=False):
     paramArr = __parseParams(params)
     paramPage = paramArr[0].replace('%s', src)
 
@@ -162,8 +159,11 @@ def getInfo(item, params, src):
             referer = item.getInfo(referer.strip('@'))
     if len(paramArr) > 3:
         variables = paramArr[3].strip("'").split('|')
-    common.log('Get Info from: "'+ paramPage + '" from "' + referer + '"')
-
+        
+    parsed_link = urlparse.urlsplit(referer)
+    parsed_link = parsed_link._replace(netloc=parsed_link.netloc.encode('idna'),path=urllib.quote(parsed_link.path.encode('utf-8')))
+    referer = parsed_link.geturl().encode('utf-8')
+    
     try:
         parts = (paramPage.split('|', 1) + [None] * 2)[:2]
         paramPage, form_data = parts
@@ -171,28 +171,35 @@ def getInfo(item, params, src):
     except: 
         pass
 
-    data = common.getHTML(paramPage, form_data, referer, referer!='',demystify=True)
+    common.log('Get Info from: "'+ paramPage + '" from "' + referer + '"')
+    data = common.getHTML(paramPage, form_data, referer, xml, mobile, ignoreCache=False,demystify=True)
     return reg.parseText(data, paramRegex, variables)
 
 
 def decodeBase64(src):
-    src = src.strip('.js').replace('%3D','=')
-    try:
-        return src.decode('base-64').replace('qo','')
-    except:
-        return src
-
+    from base64 import b64decode
+    return b64decode(src)
 
 def decodeRawUnicode(src):
     try:
-        return enc.decodeRawUnicode(src)
+        return src
+    except:
+        return src
+    
+def resolve(src):
+    try:
+        parsed_link = urlparse.urlsplit(src)
+        tmp_host = parsed_link.netloc.split(':')
+        tmp_host[0] = socket.gethostbyname(tmp_host[0])
+        tmp_host = ':'.join(tmp_host)
+        parsed_link = parsed_link._replace(netloc=tmp_host)
+        return parsed_link.geturl()
     except:
         return src
 
 
 def replace(params, src):
-    src = enc.smart_unicode(src)
-    paramArr = __parseParams(enc.smart_unicode(params))
+    paramArr = __parseParams(params)
     paramstr = paramArr[0].replace('%s', src)
     paramSrch = paramArr[1]
     paramRepl = paramArr[2]
@@ -200,7 +207,6 @@ def replace(params, src):
 
 
 def replaceRegex(params, src):
-    src = enc.smart_unicode(src)
     paramArr = __parseParams(params)
     paramStr = paramArr[0].replace('%s', src)
     paramSrch = paramArr[1]
@@ -264,11 +270,9 @@ def ifExists(item, params, src):
     paramSource = resolveVariable(item, paramArr[0].replace('%s', src))
     paramTrue = resolveVariable(item, paramArr[1].replace('%s', src))
     paramFalse = resolveVariable(item, paramArr[2].replace('%s', src))
+    
+    return paramTrue
 
-    if isOnline(paramSource):
-        return paramTrue
-    else:
-        return paramFalse
 
 
 def urlMerge(params, src):
@@ -277,10 +281,21 @@ def urlMerge(params, src):
     paramFile= paramArr[1].replace('%s', src).replace("\t","")
 
     if not paramFile.startswith('http'):
-        from urlparse import urlparse
-        up = urlparse(urllib.unquote(paramTrunk))
+        up = urlparse.urlparse(urllib.unquote(paramTrunk))
         if paramFile.startswith('/'):
             return urllib.basejoin(up[0] + '://' + up[1], paramFile)
         else:
             return urllib.basejoin(up[0] + '://' + up[1] + '/' + up[2],paramFile)
     return src
+
+def decodeXppod(src):
+    return xp.decode(src)
+
+def decodeXppod_hls(src):
+    return xp.decode_hls(src)
+
+def getCookies(cookieName, url):
+    domain = urlparse.urlsplit(url).netloc
+    return common.getCookies(cookieName, domain)
+    
+    

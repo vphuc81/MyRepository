@@ -1,8 +1,8 @@
-# -*- coding: latin-1 -*-
+# -*- coding: utf-8 -*-
 
 import xbmcgui, xbmc, xbmcplugin
 
-enable_debug = True
+enable_debug = False
 
 #######################################
 # Xbmc Helpers

@@ -1,4 +1,4 @@
-# -*- coding: latin-1 -*-
+# -*- coding: utf-8 -*-
 
 import os
 
@@ -11,9 +11,14 @@ import xbmc, xbmcaddon
 __settings__ = xbmcaddon.Addon(id='plugin.video.SportsDevil')
 __icon__ = xbmcaddon.Addon(id='plugin.video.SportsDevil').getAddonInfo('icon')
 translate = __settings__.getLocalizedString
-log = xbmc.log
 enable_debug = True
 language = xbmc.getLanguage
+
+def log(msg, level=xbmc.LOGDEBUG):
+    plugin = "SportsDevil"
+    msg = msg.encode('utf-8')
+
+    xbmc.log("[%s] %s" % (plugin, msg.__str__()), level)
 
 def getSetting(name):
     return __settings__.getSetting(name)
@@ -70,12 +75,24 @@ def showOSK(defaultText='', title='', hidden=False):
 #------------------------------------------------------------------------------
 from utils.regexUtils import parseTextToGroups
 from utils.webUtils import CachedWebRequest
+import cookielib
 
-def getHTML(url, form_data='', referer='', ignoreCache=False, demystify=False):
+def getHTML(url, form_data='', referer='', xml=False, mobile=False, ignoreCache=False, demystify=False):
     cookiePath = xbmc.translatePath(os.path.join(Paths.cacheDir, 'cookies.lwp'))
     request = CachedWebRequest(cookiePath, Paths.cacheDir)
-    return request.getSource(url, form_data, referer, ignoreCache, demystify)
+    return request.getSource(url, form_data, referer, xml, mobile, ignoreCache, demystify)
 
+def getCookies(cookieName, domain):
+    cookiePath = xbmc.translatePath(os.path.join(Paths.cacheDir, 'cookies.lwp'))
+    
+    def load_cookies_from_lwp(filename):
+        lwp_cookiejar = cookielib.LWPCookieJar()
+        lwp_cookiejar.load(filename, ignore_discard=True)
+        return lwp_cookiejar
+    
+    for cookie in load_cookies_from_lwp(cookiePath):
+        if domain in cookie.domain and cookieName in cookie.name:
+            return cookie.value
 
 def parseWebsite(source, regex, referer='', variables=[]):
     def parseWebsiteToGroups(url, regex, referer=''):
@@ -110,7 +127,6 @@ def parseWebsite(source, regex, referer='', variables=[]):
 class Paths:
     rootDir = xbmc.translatePath(__settings__.getAddonInfo('path')).decode('utf-8')
 
-    cacheDir = os.path.join(rootDir, 'cache')
     resDir = os.path.join(rootDir, 'resources')
     imgDir = os.path.join(resDir, 'images')
     modulesDir = os.path.join(resDir, 'modules')
@@ -122,13 +138,14 @@ class Paths:
     defaultCategoryIcon = os.path.join(imgDir, 'folder.png')    
 
     pluginDataDir = xbmc.translatePath(__settings__.getAddonInfo('profile')).decode('utf-8')
+    cacheDir = os.path.join(pluginDataDir, 'cache')
     favouritesFolder = os.path.join(pluginDataDir, 'favourites')
     favouritesFile = os.path.join(favouritesFolder, 'favourites.cfg')
     customModulesDir = os.path.join(pluginDataDir, 'custom')
     customModulesFile = os.path.join(customModulesDir, 'custom.cfg')
     
-    catchersRepo = 'https://github.com/MusterGit/sportsdevil-catchers/tree/master/catchers'
-    modulesRepo = 'https://github.com/MusterGit/sportsdevil-modules/tree/master/modules'
-    customModulesRepo = 'http://xbmc-development-with-passion.googlecode.com/svn/branches/custom/'
+    catchersRepo = ''
+    modulesRepo = ''
+    customModulesRepo = ''
     
     xbmcFavouritesFile = xbmc.translatePath( 'special://profile/favourites.xml' )

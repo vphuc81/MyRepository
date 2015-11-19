@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="plugin.video.SportsDevil"
-  version="1.8.8.2"
+  version="2015.11.18"
   name="SportsDevil"
   provider-name="MaxMustermann">
   <requires>
-   <import addon="xbmc.python" version="2.1.0"/>
-   <import addon="script.common.plugin.cache" version="0.9.1"/>
+   <import addon="xbmc.python" version="2.14.0"/>
+   <import addon="script.module.requests" />
   </requires>
   <extension 
     point="xbmc.python.pluginsource"
@@ -14,8 +14,8 @@
    <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>Play videos of different sports streaming sites
-      Downloaded via www.iWillFolo.com</summary>    <description>Play videos of different sports streaming sites</description>
+    <summary>Play videos of different sports streaming sites</summary>
+    <description>Play videos of different sports streaming sites</description>
     <platform>all</platform>
   </extension>
 </addon>

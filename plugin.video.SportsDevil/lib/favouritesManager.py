@@ -1,4 +1,4 @@
-# -*- coding: latin-1 -*-
+# -*- coding: utf-8 -*-
 
 import os.path
 import re
@@ -14,7 +14,6 @@ from xml.dom.minidom import parse as parseXml
 from utils import fileUtils as fu
 
 from utils.xbmcUtils import getKeyboard, getImage
-import utils.encodingUtils as enc
 from utils import regexUtils
 
 
@@ -65,8 +64,8 @@ class FavouritesManager:
                 favItems.append(favItem)
         return favItems 
 
-    def _createItem(self, title, m_type, icon, fanart, cfg, url):
-        data = self.cfgBuilder.buildItem(title, m_type, url, icon, fanart, cfg)
+    def _createItem(self, title, m_type, icon, fanart, cfg, url, catcher):
+        data = self.cfgBuilder.buildItem(title, m_type, url, icon, fanart, cfg, catcher)
         return data
 
     def _createFavourite(self, item):
@@ -76,7 +75,8 @@ class FavouritesManager:
         fanart = item.getInfo('fanart')
         cfg = item.getInfo('cfg')
         url = item.getInfo('url')
-        return self._createItem(title, m_type, icon, fanart, cfg, url)
+        catcher = item.getInfo('catcher')
+        return self._createItem(title, m_type, icon, fanart, cfg, url, catcher)
 
 # ----------------------------------------------------------
 # Virtual folders
@@ -310,7 +310,7 @@ class FavouritesManager:
                 # update link
                 item['url'] = self._getShortPath(virtualFolderPath)
             newfav = self._createFavourite(item)
-            new = data.replace(fav, enc.smart_unicode(newfav).encode('utf-8'))
+            new = data.replace(fav, newfav.encode('utf-8'))
             fu.setFileContent(cfgFile, new)
 
 
@@ -319,7 +319,7 @@ class FavouritesManager:
         if found:
             [cfgFile, data, fav] = found
             newfav = self._createFavourite(item, icon=newIcon)
-            new = data.replace(fav, enc.smart_unicode(newfav).encode('utf-8'))
+            new = data.replace(fav, newfav.encode('utf-8'))
             fu.setFileContent(cfgFile, new)
 
     def changeFanart(self, item, newFanart):
@@ -327,7 +327,7 @@ class FavouritesManager:
         if found:
             [cfgFile, data, fav] = found
             newfav = self._createFavourite(item, fanart=newFanart)
-            new = data.replace(fav, enc.smart_unicode(newfav).encode('utf-8'))
+            new = data.replace(fav, newfav.encode('utf-8'))
             fu.setFileContent(cfgFile, new)
 
     def moveToFolder(self, cfgFile, item, newCfgFile):
@@ -415,11 +415,11 @@ class CfgBuilder:
         data = [sepLine, titleLine, sepLine]
         return '\n'.join(data)
     
-    def buildItem(self, title, m_type, url, icon=None, fanart=None, cfg=None):
+    def buildItem(self, title, m_type, url, icon=None, fanart=None, cfg=None, catcher=None):
         sepLine = self.buildSeperator(title)
         data = [
             '\n' + sepLine,
-            'title=' + enc.smart_unicode(title),
+            'title=' + title,
             'type=' + m_type
             ]
         if icon:
@@ -428,5 +428,7 @@ class CfgBuilder:
             data.append('fanart=' + fanart)
         if cfg:
             data.append('cfg=' + cfg)
+        if catcher:
+            data.append('catcher=' + catcher)
         data.append('url=' + url)
         return '\n'.join(data)

@@ -1,4 +1,4 @@
-# -*- coding: latin-1 -*-
+# -*- coding: utf-8 -*-
 
 
 import regexUtils
@@ -9,8 +9,8 @@ import urlparse
 
 def findJS(data):
     idName = '(?:f*id|ch)'
-    jsName = '(.*?\.js)'
-    regex = "(?:java)?scr(?:'\+')?ipt[^<]+" + idName + "\s*=\s*[\"']([^\"']+)[\"'][^<]*</scr(?:'\+')?ipt\s*>[^<]*<scr(?:'\+')?ipt[^<]*src=[\"']" + jsName + "[\"']"
+    jsName = '([^\"\']+?\.js[^\"\']*?)'
+    regex = "(?:java)?scr(?:'\+')?ipt.*?" + idName + "\s*=\s*[\"']([^\"']+)[\"'][^<]*</scr(?:'\+')?ipt\s*>[^<]*<scr(?:'\+')?ipt[^<]*src=[\"']" + jsName + "[\"']"
     
     jscript = regexUtils.findall(data, regex)
     if jscript:
@@ -21,12 +21,12 @@ def findJS(data):
 
 
 def findPHP(data, streamId):
-    regex = "document.write\('.*?src=['\"]*(.*?.php[^&\"]*).*?['\" ]*.*?\)"
+    regex = "document.write\('.*?src=['\"]*(.*?.(?:php|html)[^&\"]*).*?['\" ]*.*?\)"
     php = regexUtils.findall(data, regex)
     if php:
-        return re.sub(r"\'\+\s*(?:f*id|ch)\s*\+\'", "%s" % streamId,php[0])
+        return re.sub(r"\'\+\s*(?:[fc]*id|ch)\s*\+\'", "%s" % streamId,php[0])
     
-    regex = "document.write\('.*?src=['\"]*(.*?(?:f*id|ch)\s*\+'\.html).*?['\" ]*.*?\)"
+    regex = "document.write\('.*?src=['\"]*(.*?(?:f*id|ch)\s*\+'\.html*).*?['\" ]*.*?\)"
     html = regexUtils.findall(data, regex)
     if html:
         return re.sub(r"\'\+\s*(?:f*id|ch)\s*\+\'", "%s" % streamId,html[0])
@@ -136,19 +136,25 @@ def findFrames(data):
 
 def findContentRefreshLink(data):
     
-    maxLength = 100
-    if len(data.replace(' ','')) > maxLength:
-        return None 
-    
     regex = '0;\s*url=([^\'" ]+)'
     links = regexUtils.findall(data, regex)
     if links:
         return links[0]
-    else:
-        regex = 'window.location\s*=\s*[\'"]([^\'"]+)[\'"]'
-        links = regexUtils.findall(data, regex)
-        if links:
-            return links[0]
+    
+    regex = 'window.location\s*=\s*[\'"]([^\'"]+)[\'"]'
+    links = regexUtils.findall(data, regex)
+    if links:
+        return links[0]
+    
+    regex = 'frame\s*scrolling=\"auto\"\s*noresize\s*src\s*=\s*[\'"]([^\'"]+)[\'"]'
+    links = regexUtils.findall(data, regex)
+    if links:
+        return links[0]
+    
+    regex = 'href=[\'"]([^\'"]+)[\'"]\s*target="_blank"><img class="alignnone"'
+    links = regexUtils.findall(data, regex)
+    if links:
+        return links[0]
         
     return None
 
@@ -163,15 +169,6 @@ def findEmbedPHPLink(data):
    
     return None
 
-def findVCods(data):
-    regex = "function getURL03.*?sUrl.*?'([^']+)'.*?cod1.*?'([^']+)'.*?cod2.*?'([^']+)'.*?SWFObject\('([^']+)'"
-    vcods = regexUtils.findall(data, regex)
-    if vcods:
-        return vcods[0]
-    
-    return None
-        
-
 def findVideoFrameLink(page, data):
     
     minheight=300
@@ -181,7 +178,7 @@ def findVideoFrameLink(page, data):
     if not frames:
         return None
     
-    iframes = regexUtils.findall(data, "(frame(?![^>]*cbox\.ws)(?![^>]*chat\d*\.\w+)(?![^>]*ad122m)(?![^>]*capacanal)(?![^>]*programacion)[^>]*\sheight\s*=\s*[\"']*([\%\d]+)(?:px)?[\"']*[^>]*>)")
+    iframes = regexUtils.findall(data, "(frame(?![^>]*cbox\.ws)(?![^>]*Publi)(?![^>]*chat\d*\.\w+)(?![^>]*ad122m)(?![^>]*adshell)(?![^>]*capacanal)(?![^>]*blacktvlive\.com)[^>]*\sheight\s*=\s*[\"']*([\%\d]+)(?:px)?[\"']*[^>]*>)")
 
     if iframes:
         for iframe in iframes:
@@ -197,21 +194,13 @@ def findVideoFrameLink(page, data):
                     else:
                         width = int(m[0])
                     if width > minwidth:
-                        m = regexUtils.findall(iframe[0], '[\'"\s]src=["\']*\s*([^"\' ]+)\s*["\']*')
+                        m = regexUtils.findall(iframe[0], '[\'"\s]src=["\']*\s*([^>"\' ]+)\s*[>"\']*')
                         if m:
-                            link = m[0]
-                            if not link.startswith('http://'):
-                                #if not page.endswith('/'):
-                                #    page += '/'
-                                up = urlparse.urlparse(urllib.unquote(page))
-                                if link.startswith('/'):
-                                    link = urllib.basejoin(up[0] + '://' + up[1],link)
-                                else:
-                                    link = urllib.basejoin(up[0] + '://' + up[1] + '/' + up[2],link)
-                            return link.strip()
+                            return urlparse.urljoin(urllib.unquote(page), m[0]).strip()
+
 
     # Alternative 1
-    iframes = regexUtils.findall(data, "(frame(?![^>]*cbox\.ws)(?![^>]*capacanal)(?![^>]*programacion)[^>]*[\"; ]height:\s*(\d+)[^>]*>)")
+    iframes = regexUtils.findall(data, "(frame(?![^>]*cbox\.ws)(?![^>]*capacanal)(?![^>]*blacktvlive\.com)[^>]*[\"; ]height:\s*(\d+)[^>]*>)")
     if iframes:
         for iframe in iframes:
             height = int(iframe[1])
@@ -220,19 +209,17 @@ def findVideoFrameLink(page, data):
                 if m:
                     width = int(m[0])
                     if width > minwidth:
-                        m = regexUtils.findall(iframe[0], '[\"; ]src=["\']*\s*([^"\' ]+)\s*["\']*')
+                        m = regexUtils.findall(iframe[0], '[\"; ]src=["\']*\s*([^>"\' ]+)\s*[>"\']*')
                         if m:
-                            link = m[0]
-                            if not link.startswith('http://'):
-                                link = urllib.basejoin(page,link)
-                            return link.strip()
+                            return urlparse.urljoin(urllib.unquote(page), m[0]).strip()
 
     # Alternative 2 (Frameset)
-    iframes = regexUtils.findall(data, '<FRAMESET[^>]+100%[^>]+>\s*<FRAME[^>]+src="([^"]+)"')
-    if iframes:
-        link = iframes[0]
-        if not link.startswith('http://'):
-            link = urllib.basejoin(page,link)
-        return link.strip()
+    m = regexUtils.findall(data, '<FRAMESET[^>]+100%[^>]+>\s*<FRAME[^>]+src="([^"]+)"')
+    if m:
+        return urlparse.urljoin(urllib.unquote(page), m[0]).strip()
+    
+    m = regexUtils.findall(data, '<a href="([^"]+)" target="_blank"><img src="[^"]+" height="\d+" width="\d+" longdesc="[^"]+"/></a>')
+    if m:
+        return urlparse.urljoin(urllib.unquote(page), m[0]).strip()
         
     return None

@@ -1,10 +1,10 @@
-# -*- coding: latin-1 -*-
+# -*- coding: utf-8 -*-
 
 import os
 import datetime, time
 import random
-from encodingUtils import smart_unicode
 import hashlib
+import codecs
 
 #######################################
 # File Helpers
@@ -55,7 +55,7 @@ def randomFilename(directory, chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDE
 
 def getFileContent(filename):
     try:
-        f = open(filename,'r')
+        f = codecs.open(filename,'r','utf-8')
         txt = f.read()
         f.close()
         return txt
@@ -69,8 +69,8 @@ def setFileContent(filename, txt, createFolders=False):
             if not os.path.exists(folderPath):
                 os.makedirs(folderPath, 0777)
         
-        f = open(filename, 'w')
-        f.write(smart_unicode(txt).encode('utf-8'))
+        f = codecs.open(filename, 'w','utf-8')
+        f.write(txt)
         f.close()
         return True
     except:
@@ -78,8 +78,8 @@ def setFileContent(filename, txt, createFolders=False):
 
 def appendFileContent(filename, txt):
     try:
-        f = open(filename, 'a')
-        f.write(smart_unicode(txt).encode('utf-8'))
+        f = codecs.open(filename, 'a','utf-8')
+        f.write(txt)
         f.close()
         return True
     except:
@@ -89,7 +89,7 @@ def md5(fileName, excludeLine="", includeLine=""):
     """Compute md5 hash of the specified file"""
     m = hashlib.md5()
     try:
-        fd = open(fileName,"rb")
+        fd = codecs.open(fileName,"rb",'utf-8')
     except IOError:
         print "Unable to open the file in readmode:", fileName
         return
@@ -149,7 +149,7 @@ def GetHashofDirs(directory, verbose=0):
                     print 'Hashing', names
                 filepath = os.path.join(root,names)
                 try:
-                    f1 = open(filepath, 'rb')
+                    f1 = codecs.open(filepath, 'rb','utf-8')
                 except:
                     # You can't open the file for some reason
                     f1.close()

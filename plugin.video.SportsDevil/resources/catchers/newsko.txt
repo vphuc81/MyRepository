@@ -13,7 +13,7 @@ item_info_build=%s
 
 item_info_name=flashvars
 item_info_from=req1
-item_info_convert=getInfo('%s','.*?rtmp":"([^"]+)","streamname":"([^"]+)','@REFERER@','rtmp|file')
+item_info_convert=getInfo('%s','.*?rtmp":"([^"]+)","streamname":"([^"]+)','@pageUrl@','rtmp|file')
 item_info_build=%s
 
 item_info_name=url
