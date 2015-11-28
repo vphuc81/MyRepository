@@ -1,450 +1,236 @@
-import xbmc, xbmcplugin, xbmcaddon, xbmcgui, xbmcvfs
-
-import requests
-import json
-import os
-import re
-import sys
-
-from addon.common.addon import Addon
+import urllib,urllib2,re,xbmcplugin,xbmcgui,urlresolver,sys,xbmc,xbmcaddon,os
+from t0mm0.common.addon import Addon
 from metahandler import metahandlers
 
-
 addon_id = 'plugin.video.giaitritv'
+selfAddon = xbmcaddon.Addon(id=addon_id)
+metaget = metahandlers.MetaData(preparezip=False)
 addon = Addon(addon_id, sys.argv)
-Addon = xbmcaddon.Addon(addon_id)
+ADDON2=xbmcaddon.Addon(id='plugin.video.giaitritv')
+fanart = xbmc.translatePath(os.path.join('special://home/addons/' + addon_id , 'fanart.jpg'))
+icon = xbmc.translatePath(os.path.join('special://home/addons/' + addon_id, 'icon.png'))
+metaset = selfAddon.getSetting('enable_meta')
 
-try:
-    import StorageServer
-except:
-    import storageserverdummy as StorageServer
-cache = StorageServer.StorageServer(addon_id)
+def CATEGORIES():
+        addDir2('Latest Cinema Releases','http://www.moviexk.net/cinema/',1,icon,'',fanart)
+        addDir2('Recently Added','http://www.moviexk.net/new-movies/',1,icon,'',fanart)
+        addDir2('Most Viewed','http://www.moviexk.net/popular-movies/',1,icon,'',fanart)
+        addDir2('HD Movies','http://www.moviexk.net/movies-hd/',1,icon,'',fanart)
+        addDir2('Genres','http://www.moviexk.net',2,icon,'',fanart)      
+        addDir2('Search','url',3,icon,'',fanart)
+        xbmc.executebuiltin('Container.SetViewMode(50)')
+               
+def GETMOVIES(url,name):
+        metaset = selfAddon.getSetting('enable_meta')
+        link = open_url(url)
+        match=re.compile('<a href="(.+?)" title="Movie (.+?)"><img class="lazy"').findall(link)
+        for url,name in match:
+                name=cleanHex(name)
+                if metaset=='false':
+                        addDir(name,url,100,icon,len(match),isFolder=False)
+                else: addDir(name,url,100,'',len(match),isFolder=False)
+        try:
+                match=re.compile("<a href='(.+?)' class='nextpostslink'>").findall(link)
+                for np in match:
+                        npurl = np.split("href='")[-1]
+                        addDir2('Next Page>>>',npurl,1,icon,'',fanart)              
+        except: pass
+        if metaset=='true':
+                setView('movies', 'MAIN')
+        else: xbmc.executebuiltin('Container.SetViewMode(50)')
 
-cookie_path = os.path.join( xbmc.translatePath( addon.get_profile()), 'cookies' )
-cookie_jar = os.path.join( cookie_path , 'cookiejar.lwp')
+def GENRES(url):
+        link = open_url(url)
+        match=re.compile('<li id="menu-item" class="menu-item"><h3><a href="(.+?)">(.+?)</a></h3></li>').findall(link)
+        for url,name in match:
+                addDir2(name,url,1,icon,'',fanart)
 
-try:
-    os.makedirs(os.path.dirname(cookie_jar))
-except OSError:
-    pass
+def cleanHex(text):
+    def fixup(m):
+        text = m.group(0)
+        if text[:3] == "&#x": return unichr(int(text[3:-1], 16)).encode('utf-8')
+        else: return unichr(int(text[2:-1])).encode('utf-8')
+    return re.sub("(?i)&#\w+;", fixup, text.decode('ISO-8859-1').encode('utf-8'))
 
-baseUrl = 'http://m.afdah.org'
-url = addon.queries.get('url', '')
-name = addon.queries.get('name', '')
-year = addon.queries.get('year', '')
-mode = addon.queries.get('mode', '')
-img = addon.queries.get('img', '')
-fanart = addon.queries.get('fanart', '')
-imdb = addon.queries.get('imdb', '')
-infol = addon.queries.get('infol', '')
-cookie = addon.queries.get('cookie', '')
-
-auto_play = addon.get_setting('autoplay')
-def_quality = addon.get_setting('default_quality')
-
-User_Agent = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36'
-
-
-
-menu = [
-    ( 'content', baseUrl, 'Movies'),
-    ( 'content', baseUrl+'/most_viewed', 'Most Viewed'),
-    ( 'content', baseUrl+'/recent_movies', 'Recent Movies'),
-    ( 'year', baseUrl, 'By Year'),
-    ( 'year', baseUrl, 'By Genre'),
-    ( 'search', baseUrl, '[COLOR blue][B]SEARCH[/B][/COLOR]'),
-    ( 'settings', baseUrl, ' Settings'),
-    ]
-
-
-def MAIN( menu ):
-    #TOTALXBMCSUX()
-    for (mode, url, name) in menu:
-        addon.add_directory({'mode': mode, 'url': url, 'name': name},{'title': name})
-    
-    
-
-def settings():
-    addon.add_directory({'mode': 'meta'},{'title': 'Metadata Settings'},
-                        img='https://raw.githubusercontent.com/Eldorados/script.module.metahandler/master/icon.png',
-                        is_folder=False)
-    addon.add_directory({'mode': 'adset'},{'title': 'Addon Settings'},
-                        img=addon.get_icon(),is_folder=False)
-
-def Year( url, name ):
-    addon.log('Year %s'% name)
-
-    res_url = []
-    res_year = []
-
-    headers = {}
-    headers['User-Agent'] = User_Agent
-    html = requests.get(url, headers=headers).text
-
-    if re.search('Year',name, re.I):
-        r = re.findall(r'an\>Years(.*?)\<li class=\"has', html, re.I|re.DOTALL)
-        pattern = 'href=\"(.*?)\"\>\<span\>(\d+)\<\/span\>'
-        title = 'Select Year'
-        
-    if re.search('Genre',name, re.I):
-        r = re.findall(r'an\>Genres(.*?)\<\/ul\>\<\/li\>', html, re.I|re.DOTALL)
-        pattern = 'href=\"(.*?)\"\>\<span\>(.*?)\<\/span'
-        title = 'Select Genre'
-        
-    if r:
-        result = re.findall(r''+pattern+'', r[0])
-        if r:
-            for url, year in result:
-                res_url.append( baseUrl+url )
-                res_year.append( year )
-
-            dialog = xbmcgui.Dialog()
-            ret = dialog.select( title,res_year)
-            if ret == -1:
-                MAIN( menu )
-            elif ret > -1:
-                content( res_url[ret] )
-
-
-def Search( url ):
-    addon.log('Search')
-
-    keyboard = xbmc.Keyboard()
-    keyboard.setHeading(addon.get_name()+': Search [COLOR red][B]*HD*[/COLOR][/B] Movies')
-    
+def SEARCH():
+    search_entered =''
+    keyboard = xbmc.Keyboard(search_entered, 'Search Movies XK')
     keyboard.doModal()
-
     if keyboard.isConfirmed():
-        searcht=keyboard.getText()
-        if not searcht:
-            addon.show_ok_dialog(['empty search not allowed'.title()], addon.get_name())
-            Search( url )
-    else:
-        MAIN( menu )
-    import urllib
-    url = baseUrl+'/results?q=%s' % ( urllib.quote_plus( searcht ))
+        search_entered = keyboard.getText().replace(' ','+')
+    if len(search_entered)>1:
+        url = 'http://www.moviexk.net/search/'+ search_entered
+        link = open_url(url)
+        GETMOVIES(url,name)
 
-    content( url )
-
-    
-def content( url ):
-    headers = {}
-    name = ''
-    headers['User-Agent'] = User_Agent
-    html = requests.get(url, headers=headers).text
-
-    pagen = re.findall(r't_page\"\>(\d+)\<\/a\>\<a\shref=\"(.*?page\=)\d+\".*?ge=(\d+)\"\>\>\>', html, re.I)
-    if len(pagen) == 0:
-        pagen = re.findall(r't_page\"\>(\d+)\<\/a\>\<a\shref=\"(.*?page\=)\d+\"', html, re.I)
-        if len(pagen) != 0:
-            for current, nextp in pagen:
-                name = 'Page %s' % current
-        else:
-            pagen = re.findall(r't_page\"\>(\d+)\<\/a\>\<a\shref=\"(.*?page\=)\d+\"', html, re.I)
-            if len(pagen) == 0:
-                pagen = re.findall(r'ging\"\>\<a\shref=\"(.*?)\".*?nt_page\"\>(\d+)\<\/a', html, re.I)
-                for preurl, current in pagen:
-                    name = 'Page %s' % current
-                    nextp = preurl+'?page='
-    else:
-        for current, nextp, total in pagen:
-            name = 'Page %s of %s Pages Available' % ( current, total )
-            
-    addon.add_item({},{'title': name},is_folder=False)
-
-
-    r = re.findall(r'<h3><a\stitle=\"(.*?)\s\(\d+.*?\"\shref=\"(.*?)\".*?\<b\>Year\<\/b\>\:\s(\d+)\s\-\s\<b\>Quality\<\/b\>\:\s(.*?)$',
-                   html, re.I|re.DOTALL|re.M)
-    totalitems = len(r)
-
-    if r:
-        for name, url, year, quality in r:
-            if '1080p' in quality: quality = '[COLOR blue][B]['+quality+'][/COLOR][/B]'
-            elif '720p' in quality: quality = '[COLOR green][B]['+quality+'][/COLOR][/B]'
-            elif '360' in quality: quality = '[COLOR red][B]['+quality+'][/COLOR][/B]'
-            meta = getMeta( name, year)
-
-            if meta['trailer']:
-                contextmenu_items=[('[COLOR blue][B]W[/B]atch [B]T[/B]railer[/COLOR]', 'XBMC.RunPlugin(%s)' % addon.build_plugin_url({'mode': 'playtrailer', 'url':meta['trailer']}))]
-                meta['title'] = name+' '+quality+' [COLOR gold][B][Trailer Available][/B][/COLOR]'
-            else:
-                contextmenu_items= []
-                meta['title'] = name+' '+quality+' [COLOR gold][B][No Trailer Available][/B][/COLOR]'
-
-            path = pathfromname(name)
-            if not os.path.exists(path):
-                contextmenu_items.append(['[COLOR lime][B]A[/B]dd [B]T[/B]o [B]L[/B]ibrary[/COLOR]','XBMC.RunPlugin(%s)' %
-                                          addon.build_plugin_url({'mode': 'add2lib', 'url': baseUrl+url, 'name': name, 'infol': meta, 'img': meta['cover_url'],
-                                                                  'fanart':meta['backdrop_url'], 'infol': 'libmeta', 'year': year})])
-            if os.path.exists(path):
-                contextmenu_items.append(['[COLOR red][B]R[/B]emove [B]F[/B]rom [B]L[/B]ibrary[/COLOR]','XBMC.RunPlugin(%s)' %
-                                          addon.build_plugin_url({'mode': 'remromlib', 'url': baseUrl+url, 'name': name, 'infol': meta, 'img': meta['cover_url'],
-                                                                  'fanart':meta['backdrop_url'], 'infol': 'libmeta', 'year': year})])
-            
-            addon.add_video_item({'mode': 'playstream', 'url': baseUrl+url, 'name': name, 'infol': meta},
-                                 infolabels=meta, contextmenu_items=contextmenu_items, img=meta['cover_url'],
-                                 fanart=meta['backdrop_url'], resolved=False, total_items=totalitems)
-        try:addon.add_directory({'mode': 'content', 'url':  baseUrl+nextp+str(int(current)+1)},{'title': '>>Next Page>>>'})
-        except:pass
+def PLAYLINK(name,url,iconimage):
+        link = open_url(url)
+        match=re.compile('<a href="(.+?)" title=".+?">').findall(link)[2]
+        link = open_url(match)
         try:
-            if int(current) > 1:
-                addon.add_directory({'mode': 'content', 'url':  baseUrl+nextp+str(int(current)-1)},{'title': '<<<Previous Page<<'})
-        except:pass
-    setView('movies', 'movie-view')
-
-            
-    
-
-def playtrailer( url ):
-    addon.log('Play Trailer %s' % url)
-    notification( addon.get_name(), 'fetching trailer', addon.get_icon())
-    xbmc.executebuiltin("PlayMedia(%s)"%url)
-
-
-            
-
-def getMeta( name, year):
-    mg = metahandlers.MetaData()
-    meta = mg.get_meta('movie', name=name, year=year)
-    return meta
-
-
-def add2lib( url, name, infol, img, fanart, year ):
-
-    img = 'http://oi62.tinypic.com/dvgj1t.jpg'
-    addon.log('Add To Library %s , %s, %s' % (name,year,url))
-
-    path = xbmc.translatePath( addon.get_setting('movie-folder') )
-    string = 'plugin://plugin.video.giaitritv/?mode=playstream&url='+url+'&name='+name+'&infol='
-    filename = '%s.strm' % name
-    path = xbmc.makeLegalFilename( xbmc.translatePath(os.path.join( path, name, filename )))
-
-    if not xbmcvfs.exists(os.path.dirname(path)):
-        try:
-            try: xbmcvfs.mkdirs(os.path.dirname(path))
-            except: os.mkdir(os.path.dirname(path))
+                stream_url=re.compile('<source src="(.+?)"').findall(link)[0]
         except:
-            addon.log('FAILED to create directory')
-
-    if xbmcvfs.exists(path):
-        addon.log( name+' Already in the library' )
-        notification( addon.get_name()+' allready added', name, img)
-        return
-    
-    notification( addon.get_name()+' adding to library', name+' adding to library', img)
-    strm = xbmcvfs.File(path, 'w')
-    strm.write(string)
-    strm.close()
-    xbmc.executebuiltin("UpdateLibrary(video)")
-
-def remfromlib( url, name, infol, img, fanart, year ):
-    addon.log('Remove %s From Library' % name)
-    dialog = xbmcgui.Dialog()
-    ok = dialog.ok(addon.get_name(), 'Are you sure you want to [COLOR red][B]REMOVE[/COLOR][/B]', name.title(),'From XBMC/KODI library?')
-    if ok:
-        import shutil
-        path = pathfromname(name)
-        shutil.rmtree( path )
-        notification( addon.get_name(), name+' Removed From library', img)
-        xbmc.executebuiltin("CleanLibrary(video)")
+                stream_url=re.compile('<iframe src="(.+?)" scrolling').findall(link)[0]
+                stream_url=resolve(stream_url)
         
+        playlist = xbmc.PlayList(1)
+        playlist.clear()
+        listitem = xbmcgui.ListItem(name, iconImage=icon, thumbnailImage=icon)
+        listitem.setInfo("Video", {"Title":name})
+        listitem.setProperty('mimetype', 'video/x-msvideo')
+        listitem.setProperty('IsPlayable', 'true')
+        playlist.add(stream_url,listitem)
+        xbmcPlayer = xbmc.Player(xbmc.PLAYER_CORE_AUTO)
+        xbmcPlayer.play(playlist)
 
-    
-def notification(title, message, icon):
-    addon.show_small_popup( addon.get_name()+title.title(), message.title(), 5000, icon)
-    return
+def resolve(url):
+        # Thanks to Lambda for the resolver :)
+        O = {
+            '___': 0,
+            '$$$$': "f",
+            '__$': 1,
+            '$_$_': "a",
+            '_$_': 2,
+            '$_$$': "b",
+            '$$_$': "d",
+            '_$$': 3,
+            '$$$_': "e",
+            '$__': 4,
+            '$_$': 5,
+            '$$__': "c",
+            '$$_': 6,
+            '$$$': 7,
+            '$___': 8,
+            '$__$': 9,
+            '$_': "constructor",
+            '$$': "return",
+            '_$': "o",
+            '_': "u",
+            '__': "t",
+        }
+        url = url.replace('/f/', '/embed/')
+        import client,jsunpack
+        result = client.request(url)
+        result = re.search('>\s*(eval\(function.*?)</script>', result, re.DOTALL).group(1)
+        result = jsunpack.unpack(result)
+        result = result.replace('\\\\', '\\')
+        result = re.search('(O=.*?)(?:$|</script>)', result, re.DOTALL).group(1)
+        result = re.search('O\.\$\(O\.\$\((.*?)\)\(\)\)\(\);', result)
+        s1 = result.group(1)
+        s1 = s1.replace(' ', '')
+        s1 = s1.replace('(![]+"")', 'false')
+        s3 = ''
+        for s2 in s1.split('+'):
+            if s2.startswith('O.'):
+                s3 += str(O[s2[2:]])
+            elif '[' in s2 and ']' in s2:
+                key = s2[s2.find('[') + 3:-1]
+                s3 += s2[O[key]]
+            else:
+                s3 += s2[1:-1]
+        s3 = s3.replace('\\\\', '\\')
+        s3 = s3.decode('unicode_escape')
+        s3 = s3.replace('\\/', '/')
+        s3 = s3.replace('\\\\"', '"')
+        s3 = s3.replace('\\"', '"')
+        url = re.search('<source\s+src="([^"]+)', s3).group(1)
+        return url
 
-def pathfromname(name):
-    path = xbmc.translatePath( addon.get_setting('movie-folder') )
-    return (xbmc.makeLegalFilename( os.path.join( path, name )))
-        
-    
+def get_params():
+        param=[]
+        paramstring=sys.argv[2]
+        if len(paramstring)>=2:
+                params=sys.argv[2]
+                cleanedparams=params.replace('?','')
+                if (params[len(params)-1]=='/'):
+                        params=params[0:len(params)-2]
+                pairsofparams=cleanedparams.split('&')
+                param={}
+                for i in range(len(pairsofparams)):
+                        splitparams={}
+                        splitparams=pairsofparams[i].split('=')
+                        if (len(splitparams))==2:
+                                param[splitparams[0]]=splitparams[1]
+        return param
 
-    
-def playStreamUrl( url, infol, name ):
-    import requests
-    addon.log('Playstream %s'%url)
+def notification(title, message, ms, nart):
+    xbmc.executebuiltin("XBMC.notification(" + title + "," + message + "," + ms + "," + nart + ")")
 
-    url = re.split(r'#', url, re.I)[0]
-    headers = {}
-    headers['User-Agent'] = User_Agent
-    html = requests.get(url, headers=headers).text
+def addDir2(name,url,mode,iconimage,description,fanart):
+        xbmc.executebuiltin('Container.SetViewMode(50)')
+        u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)+"&description="+str(description)
+        ok=True
+        liz=xbmcgui.ListItem(name, iconImage=iconimage, thumbnailImage=iconimage)
+        liz.setInfo( type="Video", infoLabels={ "Title": name, 'plot': description } )
+        liz.setProperty('fanart_image', fanart)
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
 
-    form_data={'v': re.search(r'v\=(.*?)$',url,re.I).group(1)}
-    headers = {'host': 'm.afdah.org', 'content-type':'application/x-www-form-urlencoded; charset=UTF-8',
-               'origin':'https://m.afdah.org', 'referer': url,
-               'user-agent':'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8H7 Safari/6533.18.5','x-requested-with':'XMLHttpRequest'}
-    r = requests.post('https://m.afdah.org/video_info/html5', data=form_data, headers=headers)
-
-    res_quality = []
-    res_token = []
-    qt = re.findall(r'\"(\d+p)\".*?(\/get_video.*?)\"', str(r.text), re.I|re.DOTALL)
-    defst = re.findall(r'p\'\,\s\'(\/get_video.*?)\'', str(qt[0]), re.I|re.DOTALL)[0]
-
-    for quality, token in qt:
-        if '1080p' in quality: quality = '[COLOR blue][B]['+quality+'][/COLOR][/B]'
-        elif '720p' in quality: quality = '[COLOR green][B]['+quality+'][/COLOR][/B]'
-        elif '360' in quality: quality = '[COLOR red][B]['+quality+'][/COLOR][/B]'
-            
-        res_quality.append( quality )
-        res_token.append( token )
-
-    if len(qt) >1:
-        auto = qt[1]
-        addon.log('Autoplay: %s , Quality: %s' % ( auto_play, def_quality ))
-
-        if auto_play == 'false':
-            addon.log('Autoplay: False, Quality: %s' % ( def_quality ))
-            dialog = xbmcgui.Dialog()
-            ret = dialog.select('Select Stream Quality',res_quality)
-            if ret == -1:
-                return
-            elif ret > -1:
-                tokenurl = baseUrl+res_token[ret]
+def addDir(name,url,mode,iconimage,itemcount,isFolder=False):
+        if metaset=='true':
+            splitName=name.partition('(')
+            simplename=""
+            simpleyear=""
+            if len(splitName)>0:
+                simplename=splitName[0]
+                simpleyear=splitName[2].partition(')')
+            if len(simpleyear)>0:
+                simpleyear=simpleyear[0]
+            meta = metaget.get_meta('movie', simplename ,simpleyear)
+            u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&site="+str(site)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)
+            ok=True
+            liz=xbmcgui.ListItem(name, iconImage=meta['cover_url'], thumbnailImage=iconimage)
+            liz.setInfo( type="Video", infoLabels= meta )
+            contextMenuItems = []
+            contextMenuItems.append(('Movie Information', 'XBMC.Action(Info)'))
+            liz.addContextMenuItems(contextMenuItems, replaceItems=True)
+            if not meta['backdrop_url'] == '': liz.setProperty('fanart_image', meta['backdrop_url'])
+            else: liz.setProperty('fanart_image', fanart)
+            ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=isFolder,totalItems=itemcount)
+            return ok
         else:
-            try:
-                if re.search(def_quality, str(res_quality)):
-                    qual = []
-                    r = re.findall(r'B\]\[(\d+p)\]\[\/C', str(res_quality))
-                    if r:
-                        for r in r:
-                            qual.append(r)
-                        
-                        qual_ret = qual.index(def_quality)
-                        tokenurl = baseUrl+res_token[qual_ret]
-                else:
-                    tokenurl = baseUrl+re.search(r'\,\s\'(.*?)\'', str(auto)).group(1)
-            except Exception, e:
-                addon.log('Autoplay error: %s' % str(e))
-                notification( addon.get_name()+' Something went wrong', 'Playing '+name+', in lower quality', addon.get_icon())
-                tokenurl = baseUrl+defst
+            u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&site="+str(site)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)
+            ok=True
+            liz=xbmcgui.ListItem(name, iconImage=icon, thumbnailImage=icon)
+            liz.setInfo( type="Video", infoLabels={ "Title": name } )
+            liz.setProperty('fanart_image', fanart)
+            ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=isFolder)
+            return ok
         
-                
-                
-    else:
-        tokenurl = baseUrl+token
-
-    headers={'accept':'*/*', 'accept-encoding':'identity;q=1, *;q=0', 'accept-language':'en-GB,en-US;q=0.8,en;q=0.6',
-             'cache-control':'no-cache', 'dnt':'1', 'pragma':'no-cache', 'range':'bytes=0-','referer': str(url),
-             'user-agent':'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8H7 Safari/6533.18.5','x-requested-with':'XMLHttpRequest'}
-    r = requests.get(tokenurl, headers=headers,allow_redirects=False)
-
-    if r:
-        t = re.search(r'(https\:\/\/redirector\.googlevideo.*?)\'',str(r.headers), re.I)
-
-    
-        if t:
-            videourl = t.group(1)
-        else:
-            videourl = re.search(r'\s(https://.*?googleuserconten.*?)\'', str(r.headers), re.I).group(1)
-            
-        r = requests.get(videourl, headers={'Referer':str(url), 'user-agent':'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8H7 Safari/6533.18.5','x-requested-with':'XMLHttpRequest'},
-                         allow_redirects=False)
-        if r:
-            streamurl=r.headers['location']
-            listitem = xbmcgui.ListItem(path=str(streamurl), iconImage='', thumbnailImage='')
-            listitem.setProperty('IsPlayable', 'true')
-            listitem.setPath(str(streamurl))
-            xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, listitem)
-
-            
-
-''' Why recode whats allready written and works well,
-    Thanks go to Eldrado for it '''
+def open_url(url):
+    req = urllib2.Request(url)
+    req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
+    response = urllib2.urlopen(req)
+    link=response.read()
+    response.close()
+    return link
 
 def setView(content, viewType):
-        
     if content:
         xbmcplugin.setContent(int(sys.argv[1]), content)
-    #if addon.get_setting('auto-view') == 'true':
+    if ADDON2.getSetting('auto-view')=='true':
+        xbmc.executebuiltin("Container.SetViewMode(%s)" % ADDON2.getSetting(viewType) )
 
-    #    print addon.get_setting(viewType)
-    #    if addon.get_setting(viewType) == 'Info':
-    #        VT = '515'
-    #    elif addon.get_setting(viewType) == 'Wall':
-    #        VT = '501'
-    #    elif viewType == 'default-view':
-    #        VT = addon.get_setting(viewType)
+params=get_params(); url=None; name=None; mode=None; site=None; iconimage=None
+try: site=urllib.unquote_plus(params["site"])
+except: pass
+try: url=urllib.unquote_plus(params["url"])
+except: pass
+try: name=urllib.unquote_plus(params["name"])
+except: pass
+try: mode=int(params["mode"])
+except: pass
+try: iconimage=urllib.unquote_plus(params["iconimage"])
+except: pass
 
-    #    print viewType
-    #    print VT
-        
-    #    xbmc.executebuiltin("Container.SetViewMode(%s)" % ( int(VT) ) )
+print "Site: "+str(site); print "Mode: "+str(mode); print "URL: "+str(url); print "Name: "+str(name)
+print params
 
-    xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_UNSORTED )
-    xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_LABEL )
-    xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_VIDEO_RATING )
-    xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_DATE )
-    xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_PROGRAM_COUNT )
-    xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_VIDEO_RUNTIME )
-    xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_GENRE )
-    xbmcplugin.addSortMethod( handle=int( sys.argv[ 1 ] ), sortMethod=xbmcplugin.SORT_METHOD_MPAA_RATING )
-    
+if mode==None or url==None or len(url)<1: CATEGORIES()
+elif mode==1: GETMOVIES(url,name)
+elif mode==2: GENRES(url)
+elif mode==3: SEARCH()
+elif mode==100: PLAYLINK(name,url,iconimage)
 
-def Transform():
-    if addon.get_setting('transform') == 'true':
-        return
-    if xbmcvfs.exists(xbmc.translatePath('special://masterprofile/sources.xml')):
-        with open(xbmc.translatePath(os.path.join( addon.get_path(), 'resources', 'sourcesapp.xml'))) as f:
-            sourcesapp = f.read()
-            f.close()
-        with open(xbmc.translatePath('special://masterprofile/sources.xml'), 'r+') as f:
-            my_file = f.read()
-            if re.search(r'http://transform.mega-tron.tv/', my_file):
-                addon.log('Transform Source Found in sources.xml, Not adding.')
-                return
-            addon.log('Adding Transform source in sources.xml')
-            my_file = re.split(r'</files>\n</sources>\n', my_file)
-            my_file = my_file[0]+sourcesapp
-            f.seek(0)
-            f.truncate()
-            f.write(my_file)
-            f.close()
-            Addon.setSetting(id='transform', value='true')
-            
-
-    else:
-        xbmcvfs.copy(xbmc.translatePath(os.path.join( addon.get_path(), 'resources', 'sources.xml')),
-                       xbmc.translatePath('special://masterprofile/sources.xml'))
-        Addon.setSetting(id='transform', value='true')
-
-                                          
-if mode == 'main':
-    MAIN( menu )
-elif mode == 'content':
-    content( url )
-elif mode == 'year':
-    Year( url, name )
-elif mode == 'search':
-    Search( url )
-elif mode == 'settings':
-    settings()
-elif mode == 'playtrailer':
-    playtrailer( url )
-elif mode == 'playstream':
-    playStreamUrl( url, infol, name )
-elif mode == 'add2lib':
-    add2lib( url, name, infol, img, fanart, year )
-elif mode == 'remromlib':
-    remfromlib( url, name, infol, img, fanart, year )
-    
-    
-    
-    
-elif mode == 'resolv':
-    import urlresolver
-    urlresolver.display_settings()
-    
-elif mode == 'meta':
-    import metahandler
-    metahandler.display_settings()
-    
-elif mode == 'adset':
-    addon.show_settings()
-    
-    
-    
-
-
-#setView( None, 'default-view')
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
