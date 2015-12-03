@@ -1,4 +1,4 @@
-﻿#!/usr/bin/python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 import urllib , urllib2 , re , zlib , os , uuid , json
 from xbmcswift2 import Plugin , xbmc , xbmcgui , xbmcaddon
@@ -9,300 +9,333 @@ if 59 - 59: Oo0Ooo . OO0OO0O0O0 * iiiIIii1IIi . iII111iiiii11 % I1IiiI
 @ oo000 . route ( '/' )
 def IIi1IiiiI1Ii ( ) :
  I11i11Ii ( "None" , "None" )
- oO00oOo = xbmc . translatePath ( xbmcaddon . Addon ( ) . getAddonInfo ( 'path' ) ) . decode ( "utf-8" )
- if 49 - 49: oO00oOo = xbmc . translatePath ( os . path . join ( oO00oOo , "temp.jpg" ) )
- if 49 - 49: urllib . urlretrieve ( 'https://googledrive.com/host/0B-ygKtjD8Sc-S04wUUxMMWt5dmM/images/phim60s.jpg' , oO00oOo )
- if 49 - 49: OOOo0 = xbmcgui . ControlImage ( 0 , 0 , 1280 , 720 , oO00oOo )
- if 49 - 49: Oooo000o = xbmcgui . WindowDialog ( )
- if 49 - 49: Oooo000o . addControl ( OOOo0 )
- if 49 - 49: Oooo000o . doModal ( )
- if 6 - 6: i1 * ii1IiI1i % OOooOOo / I11i / o0O / IiiIII111iI
- IiII = [
- { 'label' : 'Phim mới' , 'path' : '%s/latest/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/danh-sach/phim-moi/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Phim hot' , 'path' : '%s/hottest/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/danh-sach/phim-chieu-rap/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Phim lẻ' , 'path' : '%s/movies/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/danh-sach/phim-le/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Phim bộ' , 'path' : '%s/series/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/danh-sach/phim-bo/page-%s.html' ) , 1 ) } ,
+ oO00oOo = ""
+ OOOo0 = ( "Busy" , "Bận" , "Band" , "Beschäftigt" , "Bezig" , "忙" , "忙碌" )
+ while True :
+  Oooo000o = urllib . quote ( xbmc . getInfoLabel ( "System.KernelVersion" ) . strip ( ) )
+  if not any ( b in Oooo000o for b in OOOo0 ) : break
+ while True :
+  IiIi11iIIi1Ii = urllib . quote ( xbmc . getInfoLabel ( "System.FriendlyName" ) . strip ( ) )
+  if not any ( b in IiIi11iIIi1Ii for b in OOOo0 ) : break
+ try :
+  oO00oOo = open ( '/sys/class/net/eth0/address' ) . read ( ) . strip ( )
+ except :
+  while True :
+   oO00oOo = xbmc . getInfoLabel ( "Network.MacAddress" ) . strip ( )
+   if re . match ( "[0-9a-f]{2}([-:])[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$" , oO00oOo . lower ( ) ) : break
+ Oo0O = urllib2 . urlopen ( "http://www.viettv24.com/main/checkActivation.php?MacID=%s&app_id=%s&sys=%s&dev=%s" % ( oO00oOo , "11" , Oooo000o , IiIi11iIIi1Ii ) ) . read ( )
+ if "allowed" in Oo0O :
+  IiI = xbmc . translatePath ( xbmcaddon . Addon ( ) . getAddonInfo ( 'path' ) ) . decode ( "utf-8" )
+  IiI = xbmc . translatePath ( os . path . join ( IiI , "temp.jpg" ) )
+  '''urllib . urlretrieve ( 'https://googledrive.com/host/0B-ygKtjD8Sc-S04wUUxMMWt5dmM/images/phim60s.jpg' , IiI )
+  ooOo = xbmcgui . ControlImage ( 0 , 0 , 1280 , 720 , IiI )
+  Oo = xbmcgui . WindowDialog ( )
+  Oo . addControl ( ooOo )
+  Oo . doModal ( )'''
+  if 67 - 67: O00ooOO . I1iII1iiII
+  iI1Ii11111iIi = [
+ { 'label' : 'Phim mới' , 'path' : '%s/latest/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/danh-sach/phim-moi/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Phim hot' , 'path' : '%s/hottest/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/danh-sach/phim-chieu-rap/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Phim lẻ' , 'path' : '%s/movies/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/danh-sach/phim-le/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Phim bộ' , 'path' : '%s/series/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/danh-sach/phim-bo/page-%s.html' ) , 1 ) } ,
  { 'label' : 'Theo thể loại' , 'path' : '%s/genres' % ii } ,
  { 'label' : 'Theo Quốc gia' , 'path' : '%s/nations' % ii } ,
  { 'label' : 'Tìm kiếm' , 'path' : '%s/search' % ii }
  ]
- return oo000 . finish ( IiII )
- if 28 - 28: Ii11111i * iiI1i1
+  return oo000 . finish ( iI1Ii11111iIi )
+ else :
+  iI1Ii11111iIi = [
+ { 'label' : 'Phim mới' , 'path' : '%s/latest/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/danh-sach/phim-moi/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Phim hot' , 'path' : '%s/hottest/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/danh-sach/phim-chieu-rap/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Phim lẻ' , 'path' : '%s/movies/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/danh-sach/phim-le/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Phim bộ' , 'path' : '%s/series/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/danh-sach/phim-bo/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Theo thể loại' , 'path' : '%s/genres' % ii } ,
+ { 'label' : 'Theo Quốc gia' , 'path' : '%s/nations' % ii } ,
+ { 'label' : 'Tìm kiếm' , 'path' : '%s/search' % ii }
+ ]
+  return oo000 . finish ( iI1Ii11111iIi )
+  if 96 - 96: o0OO0 - Oo0ooO0oo0oO . I1i1iI1i - o00ooo0 / o00 * Oo0oO0ooo
+  if 56 - 56: ooO00oOoo - O0OOo
 @ oo000 . route ( '/latest/<murl>/<page>' )
-def i1I1ii1II1iII ( murl , page ) :
- I11i11Ii ( "Browse" , '/latest/%s/%s' % ( murl , page ) )
- IiII = oooO0oo0oOOOO ( murl , page , 'latest' )
- if xbmc . getSkinDir ( ) == 'skin.xeebo' and oo000 . get_setting ( 'thumbview' , bool ) :
-  return oo000 . finish ( IiII , view_mode = 52 )
- else :
-  return oo000 . finish ( IiII )
-  if 53 - 53: o0oo0o / Oo + OOo00O0Oo0oO / iIi * ooO00oOoo - O0OOo
-@ oo000 . route ( '/hottest/<murl>/<page>' )
 def II1Iiii1111i ( murl , page ) :
+ I11i11Ii ( "Browse" , '/latest/%s/%s' % ( murl , page ) )
+ iI1Ii11111iIi = i1IIi11111i ( murl , page , 'latest' )
+ if xbmc . getSkinDir ( ) == 'skin.xeebo' and oo000 . get_setting ( 'thumbview' , bool ) :
+  return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
+ else :
+  return oo000 . finish ( iI1Ii11111iIi )
+  if 74 - 74: Oo0o00o0Oo0 * ii11
+@ oo000 . route ( '/hottest/<murl>/<page>' )
+def I1I1i1 ( murl , page ) :
  I11i11Ii ( "Browse" , '/hottest/%s/%s' % ( murl , page ) )
- IiII = oooO0oo0oOOOO ( murl , page , 'hottest' )
+ iI1Ii11111iIi = i1IIi11111i ( murl , page , 'hottest' )
  if xbmc . getSkinDir ( ) == 'skin.xeebo' and oo000 . get_setting ( 'thumbview' , bool ) :
-  return oo000 . finish ( IiII , view_mode = 52 )
+  return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
  else :
-  return oo000 . finish ( IiII )
-  if 25 - 25: OOo000
+  return oo000 . finish ( iI1Ii11111iIi )
+  if 18 - 18: iiIIIIi1i1 / OOoOoo00oo - iI1 + OOoOoo00oo % I1iII1iiII - o00ooo0
 @ oo000 . route ( '/movies/<murl>/<page>' )
-def O0 ( murl , page ) :
+def iIIIIiI ( murl , page ) :
  I11i11Ii ( "Browse" , '/movies/%s/%s' % ( murl , page ) )
- IiII = oooO0oo0oOOOO ( murl , page , 'movies' )
+ iI1Ii11111iIi = i1IIi11111i ( murl , page , 'movies' )
  if xbmc . getSkinDir ( ) == 'skin.xeebo' and oo000 . get_setting ( 'thumbview' , bool ) :
-  return oo000 . finish ( IiII , view_mode = 52 )
+  return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
  else :
-  return oo000 . finish ( IiII )
-  if 34 - 34: ooO00oOoo % i1 % iiiIIii1IIi % ooO00oOoo * iIi / o0O
+  return oo000 . finish ( iI1Ii11111iIi )
+  if 91 - 91: OO0OO0O0O0 / Oo0oO0ooo - ii11 + ooO00oOoo % I1IiiI
 @ oo000 . route ( '/series/<murl>/<page>' )
-def Iiii ( murl , page ) :
+def iI1i ( murl , page ) :
  I11i11Ii ( "Browse" , '/series/%s/%s' % ( murl , page ) )
- IiII = oooO0oo0oOOOO ( murl , page , 'series' )
+ iI1Ii11111iIi = i1IIi11111i ( murl , page , 'series' )
  if xbmc . getSkinDir ( ) == 'skin.xeebo' and oo000 . get_setting ( 'thumbview' , bool ) :
-  return oo000 . finish ( IiII , view_mode = 52 )
+  return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
  else :
-  return oo000 . finish ( IiII )
-  if 87 - 87: iiI1i1 / OOo000 + O0OOo - OOo000 . OOo000 / i1
+  return oo000 . finish ( iI1Ii11111iIi )
+  if 42 - 42: ooO00oOoo / I1IiiI + Oo0Ooo - Oo0o00o0Oo0
 @ oo000 . route ( '/genres' )
-def iiIIIIi1i1 ( ) :
- I11i11Ii ( "Browse" , '/genres' )
- IiII = [
- { 'label' : 'Hành Động' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-hanh-dong/1/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Giật Gân' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-giat-gan/24/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Võ Thuật' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-vo-thuat/2/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Chiến Tranh' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-chien-tranh/3/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Hoạt Hình' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-hoat-hinh/5/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Gia Đình' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-gia-dinh/15/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Kinh Dị & Ma' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-kinh-di-ma/6/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Bí Ẩn' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-bi-an/23/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Hài Hước' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-hai-huoc/7/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Phiêu Lưu' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-phieu-luu/9/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Viễn Tưởng' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-vien-tuong/8/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Thần Thoại' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-than-thoai/10/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Hình Sự' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-hinh-su/4/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Tâm Lý' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-tam-ly/16/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Tình Cảm' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-tinh-cam/17/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Tài Liệu' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-tai-lieu/20/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Lịch Sử' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-lich-su/25/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Tiểu Sử' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-tieu-su/29/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Viễn Tây' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-vien-tay/30/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Âm Nhạc' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-am-nhac/19/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Thể Thao' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-the-thao/18/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Cổ Trang' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-co-trang/12/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Truyền Hình' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/the-loai/phim-truyen-hinh/11/page-%s.html' ) , 1 ) }
- ]
- return oo000 . finish ( IiII )
- if 54 - 54: o0oo0o % OO0OO0O0O0 + ii1IiI1i - iIi / Oo
-@ oo000 . route ( '/genres/<murl>/<page>' )
-def iIiiI1 ( murl , page = 1 ) :
- I11i11Ii ( "Browse" , '/genres/%s/%s' % ( murl , page ) )
- IiII = oooO0oo0oOOOO ( murl , page , 'genres' )
- if xbmc . getSkinDir ( ) == 'skin.xeebo' and oo000 . get_setting ( 'thumbview' , bool ) :
-  return oo000 . finish ( IiII , view_mode = 52 )
- else :
-  return oo000 . finish ( IiII )
-  if 68 - 68: ii1IiI1i - Oo0Ooo - I11i / o0oo0o - I11i + I1IiiI
-@ oo000 . route ( '/nations' )
-def IiiIII111ii ( ) :
- I11i11Ii ( "Browse" , '/nations' )
- IiII = [
- { 'label' : 'Phim Việt Nam' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/quoc-gia/phim-viet-nam/1/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Phim Trung Quốc' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/quoc-gia/phim-trung-quoc/4/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Phim Hàn Quốc' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/quoc-gia/phim-han-quoc/2/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Phim Hồng Kong' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/quoc-gia/phim-hong-kong/6/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Phim Đài Loan' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/quoc-gia/phim-dai-loan/7/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Phim Nhật Bản' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/quoc-gia/phim-nhat-ban/3/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Phim Ấn Độ' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/quoc-gia/phim-an-do/10/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Phim Thái Lan' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/quoc-gia/phim-thai-lan/11/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Phim Châu Á' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/quoc-gia/phim-chau-a/8/page-%s.html' ) , 1 ) } ,
- { 'label' : 'Phim Mỹ - Châu Âu' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phim60s.info/quoc-gia/phim-my-chau-au/5/page-%s.html' ) , 1 ) }
- ]
- return oo000 . finish ( IiII )
- if 3 - 3: iIi + OO0OO0O0O0
-@ oo000 . route ( '/nations/<murl>/<page>' )
-def I1Ii ( murl , page ) :
- I11i11Ii ( "Browse" , '/nations/%s/%s' % ( murl , page ) )
- IiII = oooO0oo0oOOOO ( murl , page , 'nations' )
- if xbmc . getSkinDir ( ) == 'skin.xeebo' and oo000 . get_setting ( 'thumbview' , bool ) :
-  return oo000 . finish ( IiII , view_mode = 52 )
- else :
-  return oo000 . finish ( IiII )
-  if 66 - 66: OOo00O0Oo0oO
-@ oo000 . route ( '/search/' )
 def oo0Ooo0 ( ) :
- I11i11Ii ( "Browse" , '/search' )
- I1I11I1I1I = oo000 . keyboard ( heading = 'Tìm kiếm' )
- if I1I11I1I1I :
-  OooO0OO = "http://phim60s.info/tim-kiem/keyword/page-%s.html" . replace ( "keyword" , I1I11I1I1I . replace ( " " , "+" ) )
-  iiiIi = '%s/search/%s/%s' % ( ii , urllib . quote_plus ( OooO0OO ) , 1 )
-  oo000 . redirect ( iiiIi )
-  if 24 - 24: OO0OO0O0O0 % IiiIII111iI + I1IiiI + O0OOo + Ii11111i
-@ oo000 . route ( '/search/<murl>/<page>' )
-def OOoO000O0OO ( murl , page ) :
- I11i11Ii ( "Browse" , '/search/%s/%s' % ( murl , page ) )
- IiII = oooO0oo0oOOOO ( murl , page , 'search' )
+ I11i11Ii ( "Browse" , '/genres' )
+ iI1Ii11111iIi = [
+ { 'label' : 'Hành Động' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-hanh-dong/1/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Giật Gân' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-giat-gan/24/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Võ Thuật' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-vo-thuat/2/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Chiến Tranh' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-chien-tranh/3/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Hoạt Hình' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-hoat-hinh/5/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Gia Đình' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-gia-dinh/15/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Kinh Dị & Ma' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-kinh-di-ma/6/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Bí Ẩn' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-bi-an/23/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Hài Hước' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-hai-huoc/7/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Phiêu Lưu' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-phieu-luu/9/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Viễn Tưởng' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-vien-tuong/8/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Thần Thoại' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-than-thoai/10/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Hình Sự' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-hinh-su/4/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Tâm Lý' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-tam-ly/16/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Tình Cảm' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-tinh-cam/17/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Tài Liệu' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-tai-lieu/20/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Lịch Sử' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-lich-su/25/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Tiểu Sử' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-tieu-su/29/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Viễn Tây' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-vien-tay/30/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Âm Nhạc' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-am-nhac/19/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Thể Thao' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-the-thao/18/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Cổ Trang' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-co-trang/12/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Truyền Hình' , 'path' : '%s/genres/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/the-loai/phim-truyen-hinh/11/page-%s.html' ) , 1 ) }
+ ]
+ return oo000 . finish ( iI1Ii11111iIi )
+ if 46 - 46: iI1 % iI1 - Oo0oO0ooo * o00ooo0 % ii11
+@ oo000 . route ( '/genres/<murl>/<page>' )
+def OOooO0OOoo ( murl , page = 1 ) :
+ I11i11Ii ( "Browse" , '/genres/%s/%s' % ( murl , page ) )
+ iI1Ii11111iIi = i1IIi11111i ( murl , page , 'genres' )
  if xbmc . getSkinDir ( ) == 'skin.xeebo' and oo000 . get_setting ( 'thumbview' , bool ) :
-  return oo000 . finish ( IiII , view_mode = 52 )
+  return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
  else :
-  return oo000 . finish ( IiII )
-  if 23 - 23: Oo0Ooo + ii1IiI1i
+  return oo000 . finish ( iI1Ii11111iIi )
+  if 29 - 29: o00ooo0 / iiiIIii1IIi
+@ oo000 . route ( '/nations' )
+def IiIIIiI1I1 ( ) :
+ I11i11Ii ( "Browse" , '/nations' )
+ iI1Ii11111iIi = [
+ { 'label' : 'Phim Việt Nam' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/quoc-gia/phim-viet-nam/1/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Phim Trung Quốc' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/quoc-gia/phim-trung-quoc/4/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Phim Hàn Quốc' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/quoc-gia/phim-han-quoc/2/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Phim Hồng Kong' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/quoc-gia/phim-hong-kong/6/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Phim Đài Loan' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/quoc-gia/phim-dai-loan/7/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Phim Nhật Bản' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/quoc-gia/phim-nhat-ban/3/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Phim Ấn Độ' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/quoc-gia/phim-an-do/10/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Phim Thái Lan' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/quoc-gia/phim-thai-lan/11/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Phim Châu Á' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/quoc-gia/phim-chau-a/8/page-%s.html' ) , 1 ) } ,
+ { 'label' : 'Phim Mỹ - Châu Âu' , 'path' : '%s/nations/%s/%s' % ( ii , urllib . quote_plus ( 'http://phimno1.net/quoc-gia/phim-my-chau-au/5/page-%s.html' ) , 1 ) }
+ ]
+ return oo000 . finish ( iI1Ii11111iIi )
+ if 86 - 86: Oo0Ooo + Oo0o00o0Oo0 + iI1 * O0OOo + o00ooo0
+@ oo000 . route ( '/nations/<murl>/<page>' )
+def oOoO ( murl , page ) :
+ I11i11Ii ( "Browse" , '/nations/%s/%s' % ( murl , page ) )
+ iI1Ii11111iIi = i1IIi11111i ( murl , page , 'nations' )
+ if xbmc . getSkinDir ( ) == 'skin.xeebo' and oo000 . get_setting ( 'thumbview' , bool ) :
+  return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
+ else :
+  return oo000 . finish ( iI1Ii11111iIi )
+  if 68 - 68: I1i1iI1i . Oo0oO0ooo . Oo0Ooo
+@ oo000 . route ( '/search/' )
+def II ( ) :
+ I11i11Ii ( "Browse" , '/search' )
+ iI = oo000 . keyboard ( heading = 'Tìm kiếm' )
+ if iI :
+  iI11iiiI1II = "http://phimno1.net/tim-kiem/keyword/page-%s.html" . replace ( "keyword" , iI . replace ( " " , "+" ) )
+  O0oooo0Oo00 = '%s/search/%s/%s' % ( ii , urllib . quote_plus ( iI11iiiI1II ) , 1 )
+  oo000 . redirect ( O0oooo0Oo00 )
+  if 17 - 17: iiiIIii1IIi % iI1 % Oo0Ooo . I1iII1iiII
+@ oo000 . route ( '/search/<murl>/<page>' )
+def O0o0Oo ( murl , page ) :
+ I11i11Ii ( "Browse" , '/search/%s/%s' % ( murl , page ) )
+ iI1Ii11111iIi = i1IIi11111i ( murl , page , 'search' )
+ if xbmc . getSkinDir ( ) == 'skin.xeebo' and oo000 . get_setting ( 'thumbview' , bool ) :
+  return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
+ else :
+  return oo000 . finish ( iI1Ii11111iIi )
+  if 78 - 78: iiiIIii1IIi - Oo0o00o0Oo0 * Oo0ooO0oo0oO + o00ooo0 + ii11 + ii11
 @ oo000 . route ( '/mirrors/<murl>' )
-def oOo ( murl ) :
+def I11I11i1I ( murl ) :
  I11i11Ii ( "Browse" , '/mirrors/%s' % ( murl ) )
- IiII = [ ]
- for oOoOoO in ii1I ( murl ) :
-  if "Zing" not in oOoOoO [ "name" ] and "ClipVN" not in oOoOoO [ "name" ] :
-   OooO0 = { }
-   OooO0 [ "label" ] = oOoOoO [ "name" ] . strip ( )
-   II11iiii1Ii = str ( uuid . uuid1 ( ) )
-   OO0o = oo000 . get_storage ( II11iiii1Ii )
-   OO0o [ "list" ] = oOoOoO [ "eps" ]
-   OooO0 [ "path" ] = '%s/eps/%s' % ( ii , urllib . quote_plus ( II11iiii1Ii ) )
-   IiII . append ( OooO0 )
- return oo000 . finish ( IiII )
- if 82 - 82: Oo0Ooo . o0oo0o / OOooOOo * OO0OO0O0O0 % iiI1i1 % iiiIIii1IIi
+ iI1Ii11111iIi = [ ]
+ for ii11i1iIII in Ii1I ( murl ) :
+  if "Zing" not in ii11i1iIII [ "name" ] and "ClipVN" not in ii11i1iIII [ "name" ] :
+   Oo0o0 = { }
+   Oo0o0 [ "label" ] = ii11i1iIII [ "name" ] . strip ( )
+   III1ii1iII = str ( uuid . uuid1 ( ) )
+   oo0oooooO0 = oo000 . get_storage ( III1ii1iII )
+   oo0oooooO0 [ "list" ] = ii11i1iIII [ "eps" ]
+   Oo0o0 [ "path" ] = '%s/eps/%s' % ( ii , urllib . quote_plus ( III1ii1iII ) )
+   iI1Ii11111iIi . append ( Oo0o0 )
+ return oo000 . finish ( iI1Ii11111iIi )
+ if 19 - 19: O0OOo + iI1
 @ oo000 . route ( '/eps/<eps_list>' )
-def Oo00OOOOO ( eps_list ) :
+def ooo ( eps_list ) :
  I11i11Ii ( "Browse" , '/eps' )
- IiII = [ ]
- for O0O in oo000 . get_storage ( eps_list ) [ "list" ] :
-  OooO0 = { }
-  OooO0 [ "label" ] = O0O [ "name" ] . strip ( )
-  OooO0 [ "is_playable" ] = True
-  OooO0 [ "path" ] = '%s/play/%s' % ( ii , urllib . quote_plus ( O0O [ "url" ] ) )
-  IiII . append ( OooO0 )
- return oo000 . finish ( IiII )
- if 83 - 83: Oo + i1 * IiiIII111iI % I11i + Oo
+ iI1Ii11111iIi = [ ]
+ for ii1I1i1I in oo000 . get_storage ( eps_list ) [ "list" ] :
+  Oo0o0 = { }
+  Oo0o0 [ "label" ] = ii1I1i1I [ "name" ] . strip ( )
+  Oo0o0 [ "is_playable" ] = True
+  Oo0o0 [ "path" ] = '%s/play/%s' % ( ii , urllib . quote_plus ( ii1I1i1I [ "url" ] ) )
+  iI1Ii11111iIi . append ( Oo0o0 )
+ return oo000 . finish ( iI1Ii11111iIi )
+ if 88 - 88: Oo0ooO0oo0oO + OO0OO0O0O0 / I1i1iI1i * ii11
 @ oo000 . route ( '/play/<url>' )
-def Ii1iIIIi1ii ( url ) :
+def iiiIi1i1I ( url ) :
  I11i11Ii ( "Play" , '/play/%s' % ( url ) )
- o0oo0o0O00OO = xbmcgui . DialogProgress ( )
- o0oo0o0O00OO . create ( 'phim60s.info' , 'Loading video. Please wait...' )
- oo000 . set_resolved_url ( o0oO ( url ) )
- o0oo0o0O00OO . close ( )
- del o0oo0o0O00OO
- if 48 - 48: Oo + Oo / i1 / iiiIIii1IIi
-def o0oO ( url ) :
- i1iiI11I = iiii ( url )
- oO0o0O0OOOoo0 = ""
- if "youtube" in i1iiI11I :
-  IiIiiI = re . compile ( '(youtu\.be\/|youtube-nocookie\.com\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v|user)\/))([^\?&"\'>]+)' ) . findall ( i1iiI11I )
-  I1I = IiIiiI [ 0 ] [ len ( IiIiiI [ 0 ] ) - 1 ] . replace ( 'v/' , '' )
-  return 'plugin://plugin.video.youtube/?action=play_video&videoid=%s' % I1I
- if "lh3.googleusercontent.com" in i1iiI11I :
-  oOO00oOO = re . compile ( '"(https://lh3.googleusercontent.com/.+?)"' ) . findall ( i1iiI11I )
-  oO0o0O0OOOoo0 = oOO00oOO [ 0 ]
-  if oo000 . get_setting ( 'HQ' , bool ) and ( len ( oOO00oOO ) > 1 ) : oO0o0O0OOOoo0 = oOO00oOO [ 1 ]
- if "proxy.link=https://picasaweb.google.com/" in i1iiI11I :
-  OoOo = re . compile ( 'proxy.link=(https://picasaweb.google.com/.+?)&amp;' ) . findall ( i1iiI11I ) [ 0 ]
-  i1iiI11I = iI ( OoOo )
-  oOO00oOO = re . compile ( ',\{"url"\:"(https://.+?)"\,"height"\:\d+\,"width"\:\d+\,"type"\:"video/mpeg4"\}' ) . findall ( i1iiI11I )
-  oO0o0O0OOOoo0 = oOO00oOO [ 0 ]
-  if oo000 . get_setting ( 'HQ' , bool ) and ( len ( oOO00oOO ) > 1 ) : oO0o0O0OOOoo0 = oOO00oOO [ 1 ]
- return oO0o0O0OOOoo0
- if 60 - 60: Oo / Oo
-def oooO0oo0oOOOO ( url , page , route_name ) :
- I1II1III11iii = int ( page ) + 1
- i1iiI11I = iiii ( url % page )
- IiIiiI = re . compile ( '<img[^>]*src="(.+?)"></a><div class="info"><div class="name"><a title="(.+?)" href="(.+?)">' ) . findall ( i1iiI11I )
- IiII = [ ]
- for Oo000 , oo , ii11I in IiIiiI :
-  OooO0 = { }
-  OooO0 [ "label" ] = oo . strip ( )
-  OooO0 [ "thumbnail" ] = Oo000
-  OooO0 [ "path" ] = '%s/%s/%s' % ( ii , "mirrors" , urllib . quote_plus ( "http://phim60s.info/" + ii11I ) )
-  IiII . append ( OooO0 )
- if len ( IiII ) == oOOo :
-  IiII . append ( { 'label' : 'Next >>' , 'path' : '%s/%s/%s/%s' % ( ii , route_name , urllib . quote_plus ( url ) , I1II1III11iii ) , 'thumbnail' : 'http://icons.iconarchive.com/icons/rafiqul-hassan/blogger/128/Arrow-Next-icon.png' } )
- return IiII
- if 96 - 96: i1 % OOo00O0Oo0oO . o0oo0o + iII111iiiii11 * iiI1i1 - o0O
-def ii1I ( murl ) :
- i1iiI11I = iiii ( murl )
- IiIiiI = re . compile ( '(xem-phim/.+?/\d+.html)' ) . findall ( i1iiI11I )
- i1iiI11I = iiii ( 'http://phim60s.info/' + IiIiiI [ 0 ] )
- i11i1 = re . compile ( '<div class="server">.+?</ul></div>' ) . findall ( i1iiI11I )
- IIIii1II1II = re . compile ( '<span itemprop="title" title="(.+?)">' ) . findall ( i1iiI11I ) [ 0 ]
- i1I1iI = [ ]
- for oOoOoO in i11i1 :
-  oo0OooOOo0 = re . compile ( '<img[^>]*/>(.+?)</div>' ) . findall ( oOoOoO ) [ 0 ] . strip ( )
-  o0OO00oO = [ ]
-  for I11i1I1I , oO0Oo in re . compile ( '<a[^>]*href="(xem-phim/.+?/\d+.html)"[^>]*><b>(.+?)</b></a>' ) . findall ( oOoOoO ) :
-   O0O = { }
-   O0O [ "url" ] = 'http://phim60s.info/' + I11i1I1I
-   O0O [ "name" ] = "Part %s - %s" % ( oO0Oo , IIIii1II1II )
-   o0OO00oO . append ( O0O )
-  oOoOoO = { }
-  oOoOoO [ "name" ] = oo0OooOOo0
-  oOoOoO [ "eps" ] = o0OO00oO
-  i1I1iI . append ( oOoOoO )
- return i1I1iI
- if 54 - 54: IiiIII111iI - ii1IiI1i + iII111iiiii11
-@ oo000 . cached ( TTL = 60 )
-def iiii ( url ) :
- O0o0 = urllib2 . Request ( url )
- O0o0 . add_header ( 'User-Agent' , 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36' )
- O0o0 . add_header ( 'Accept' , 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' )
- O0o0 . add_header ( 'Accept-Encoding' , 'gzip, deflate, sdch' )
- OO00Oo = urllib2 . urlopen ( O0o0 )
- O0OOO0OOoO0O = OO00Oo . read ( )
- OO00Oo . close ( )
- if "gzip" in OO00Oo . info ( ) . getheader ( 'Content-Encoding' ) :
-  O0OOO0OOoO0O = zlib . decompress ( O0OOO0OOoO0O , 16 + zlib . MAX_WBITS )
- O0OOO0OOoO0O = '' . join ( O0OOO0OOoO0O . splitlines ( ) ) . replace ( '\'' , '"' )
- O0OOO0OOoO0O = O0OOO0OOoO0O . replace ( '\n' , '' )
- O0OOO0OOoO0O = O0OOO0OOoO0O . replace ( '\t' , '' )
- O0OOO0OOoO0O = re . sub ( '  +' , ' ' , O0OOO0OOoO0O )
- O0OOO0OOoO0O = O0OOO0OOoO0O . replace ( '> <' , '><' )
+ oOO00oOO = xbmcgui . DialogProgress ( )
+ oOO00oOO . create ( 'phimno1.net' , 'Loading video. Please wait...' )
+ oo000 . set_resolved_url ( OoOo ( url ) )
+ oOO00oOO . close ( )
+ del oOO00oOO
+ if 18 - 18: Oo0Ooo
+def OoOo ( url ) :
+ Oo0O = Ii11I ( url )
+ OOO0OOO00oo = ""
+ if "youtube" in Oo0O :
+  Iii111II = re . compile ( '(youtu\.be\/|youtube-nocookie\.com\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v|user)\/))([^\?&"\'>]+)' ) . findall ( Oo0O )
+  iiii11I = Iii111II [ 0 ] [ len ( Iii111II [ 0 ] ) - 1 ] . replace ( 'v/' , '' )
+  return 'plugin://plugin.video.youtube/?action=play_video&videoid=%s' % iiii11I
+ if "lh3.googleusercontent.com" in Oo0O :
+  Ooo0OO0oOO = re . compile ( '"(https://lh3.googleusercontent.com/.+?)"' ) . findall ( Oo0O )
+  OOO0OOO00oo = Ooo0OO0oOO [ 0 ]
+  if oo000 . get_setting ( 'HQ' , bool ) and ( len ( Ooo0OO0oOO ) > 1 ) : OOO0OOO00oo = Ooo0OO0oOO [ 1 ]
+ if 'proxy.link' in Oo0O :
+  ii11i1 = re . compile ( 'proxy.link=(.+?)&amp;' ) . findall ( Oo0O ) [ 0 ]
+  IIIii1II1II = re . compile ( '"url"\:"(.+?)"' ) . findall ( i1I1iI ( ii11i1 ) )
+  OOO0OOO00oo = IIIii1II1II [ 1 ]
+  if oo000 . get_setting ( 'HQ' , bool ) and ( len ( IIIii1II1II ) > 3 ) : OOO0OOO00oo = IIIii1II1II [ 2 ]
+ return OOO0OOO00oo
+ if 93 - 93: iiiIIii1IIi % Oo0oO0ooo * I1IiiI
+def i1IIi11111i ( url , page , route_name ) :
+ Ii11Ii1I = int ( page ) + 1
+ Oo0O = Ii11I ( url % page )
+ Iii111II = re . compile ( '<li class="movie-item"><a class="block-wrapper" title="(.+?)" href="(.+?)"><div class="movie-thumbnail" style=".*?url=(.+?)\)\; [^>]*>' ) . findall ( Oo0O )
+ iI1Ii11111iIi = [ ]
+ for O00oO , I11i1I1I , oO0Oo in Iii111II :
+  Oo0o0 = { }
+  Oo0o0 [ "label" ] = O00oO . strip ( )
+  Oo0o0 [ "thumbnail" ] = oO0Oo
+  Oo0o0 [ "path" ] = '%s/%s/%s' % ( ii , "mirrors" , urllib . quote_plus ( "http://phimno1.net/" + I11i1I1I ) )
+  iI1Ii11111iIi . append ( Oo0o0 )
+ if len ( iI1Ii11111iIi ) == oOOo :
+  iI1Ii11111iIi . append ( { 'label' : 'Next >>' , 'path' : '%s/%s/%s/%s' % ( ii , route_name , urllib . quote_plus ( url ) , Ii11Ii1I ) , 'thumbnail' : 'http://icons.iconarchive.com/icons/rafiqul-hassan/blogger/128/Arrow-Next-icon.png' } )
+ return iI1Ii11111iIi
+ if 54 - 54: o00ooo0 - I1iII1iiII + iII111iiiii11
+def Ii1I ( murl ) :
+ Oo0O = Ii11I ( murl )
+ Iii111II = re . compile ( 'href="(xem-phim/.+?/\d+.html)">Xem phim</a>' ) . findall ( Oo0O )
+ Oo0O = Ii11I ( 'http://phimno1.net/' + Iii111II [ 0 ] )
+ O0o0 = re . compile ( '(<h3 class="server-name">.+?</div>)' ) . findall ( Oo0O )
+ OO00Oo = re . compile ( '\[<a[^>]*title="(.+?)">Xem thêm</a>\]' ) . findall ( Oo0O ) [ 0 ]
+ O0OOO0OOoO0O = [ ]
+ for ii11i1iIII in O0o0 :
+  O00Oo000ooO0 = re . compile ( '<h3 class="server-name">(.+?)</h3>' ) . findall ( ii11i1iIII ) [ 0 ] . strip ( ) . replace ( ":" , "" )
+  OoO0O00 = [ ]
+  for IIiII , o0 in re . compile ( '<li class="episode"><a href="(.+?)"[^>]*>(.+?)</a></li>' ) . findall ( ii11i1iIII ) :
+   ii1I1i1I = { }
+   ii1I1i1I [ "url" ] = 'http://phimno1.net/' + IIiII
+   ii1I1i1I [ "name" ] = "Part %s - %s" % ( o0 , OO00Oo )
+   OoO0O00 . append ( ii1I1i1I )
+  ii11i1iIII = { }
+  ii11i1iIII [ "name" ] = O00Oo000ooO0
+  ii11i1iIII [ "eps" ] = OoO0O00
+  O0OOO0OOoO0O . append ( ii11i1iIII )
  return O0OOO0OOoO0O
- if 70 - 70: ooO00oOoo * OOooOOo * Oo / OOo00O0Oo0oO
-def iI ( url ) :
- i1iiI11I = urllib2 . urlopen ( 'http://echipstore.net/p' )
- oO = i1iiI11I . read ( )
- i1iiI11I . close ( )
- OOoO0O00o0 = { 'isslverify' : 'true' , 'iagent' : 'User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; rv:30.0) Gecko/20100101 Firefox/30.0' , 'url' : url , 'ihttpheader' : 'true' }
- iII = urllib . urlencode ( OOoO0O00o0 )
- O0o0 = urllib2 . Request ( urllib . unquote_plus ( oO ) , iII )
- O0o0 . add_header ( 'User-Agent' , 'Mozilla/5.0 (Windows NT 6.1; rv:19.0) Gecko/20100101 Firefox/19.0' )
- O0o0 . add_header ( 'Accept-Encoding' , 'gzip, deflate' )
- O0o0 . add_header ( 'Content-type' , 'application/x-www-form-urlencoded' )
- O0o0 . add_header ( 'Accept' , 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' )
- OO00Oo = urllib2 . urlopen ( O0o0 )
- ii11I = OO00Oo . read ( )
- OO00Oo . close ( )
- if "gzip" in OO00Oo . info ( ) . getheader ( 'Content-Encoding' ) :
-  ii11I = zlib . decompress ( ii11I , 16 + zlib . MAX_WBITS )
- ii11I = '' . join ( ii11I . splitlines ( ) ) . replace ( '\'' , '"' )
- ii11I = ii11I . replace ( '\n' , '' )
- ii11I = ii11I . replace ( '\t' , '' )
- ii11I = re . sub ( '  +' , ' ' , ii11I )
- ii11I = ii11I . replace ( '> <' , '><' )
- return ii11I
- if 80 - 80: ooO00oOoo . iiI1i1
-IIi = xbmc . translatePath ( xbmcaddon . Addon ( 'plugin.video.phim60s' ) . getAddonInfo ( 'profile' ) )
-if 26 - 26: iIi
-if os . path . exists ( IIi ) == False :
- os . mkdir ( IIi )
-OOO = os . path . join ( IIi , 'visitor' )
-if 59 - 59: i1 + iII111iiiii11 * o0O + I1IiiI
-if os . path . exists ( OOO ) == False :
+ if 62 - 62: iiiIIii1IIi * I1i1iI1i
+@ oo000 . cached ( TTL = 60 )
+def Ii11I ( url ) :
+ i1 = urllib2 . Request ( url )
+ i1 . add_header ( 'User-Agent' , 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36' )
+ i1 . add_header ( 'Accept' , 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' )
+ i1 . add_header ( 'Accept-Encoding' , 'gzip, deflate, sdch' )
+ OOO = urllib2 . urlopen ( i1 )
+ Oo0oOOo = OOO . read ( )
+ OOO . close ( )
+ if "gzip" in OOO . info ( ) . getheader ( 'Content-Encoding' ) :
+  Oo0oOOo = zlib . decompress ( Oo0oOOo , 16 + zlib . MAX_WBITS )
+ Oo0oOOo = '' . join ( Oo0oOOo . splitlines ( ) ) . replace ( '\'' , '"' )
+ Oo0oOOo = Oo0oOOo . replace ( '\n' , '' )
+ Oo0oOOo = Oo0oOOo . replace ( '\t' , '' )
+ Oo0oOOo = re . sub ( '  +' , ' ' , Oo0oOOo )
+ Oo0oOOo = Oo0oOOo . replace ( '> <' , '><' )
+ return Oo0oOOo
+ if 58 - 58: O00ooOO * ooO00oOoo * o00 / ooO00oOoo
+def i1I1iI ( url ) :
+ Oo0O = urllib2 . urlopen ( 'http://thong.viettv24.com/p' )
+ oO0o0OOOO = Oo0O . read ( )
+ Oo0O . close ( )
+ O0O0OoOO0 = {
+ 'iheader' : 'true' ,
+ 'isslverify' : 'true' ,
+ 'ihttpheader' : 'true' ,
+ 'iagent' : 'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0' ,
+ 'url' : url
+ }
+ iiiI1I11i1 = urllib . urlencode ( O0O0OoOO0 )
+ i1 = urllib2 . Request ( urllib . unquote_plus ( oO0o0OOOO ) , iiiI1I11i1 )
+ i1 . add_header ( 'User-Agent' , 'Mozilla/5.0 (Windows NT 6.1; rv:19.0) Gecko/20100101 Firefox/19.0' )
+ i1 . add_header ( 'Accept-Encoding' , 'gzip, deflate' )
+ i1 . add_header ( 'Content-type' , 'application/x-www-form-urlencoded' )
+ i1 . add_header ( 'Accept' , 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' )
+ OOO = urllib2 . urlopen ( i1 )
+ I11i1I1I = OOO . read ( )
+ OOO . close ( )
+ if "gzip" in OOO . info ( ) . getheader ( 'Content-Encoding' ) :
+  I11i1I1I = zlib . decompress ( I11i1I1I , 16 + zlib . MAX_WBITS )
+ I11i1I1I = '' . join ( I11i1I1I . splitlines ( ) ) . replace ( '\'' , '"' )
+ I11i1I1I = I11i1I1I . replace ( '\n' , '' )
+ I11i1I1I = I11i1I1I . replace ( '\t' , '' )
+ I11i1I1I = re . sub ( '  +' , ' ' , I11i1I1I )
+ I11i1I1I = I11i1I1I . replace ( '> <' , '><' )
+ return I11i1I1I
+ if 49 - 49: I1iII1iiII % iI1 . iI1 . O0OOo * iI1
+O0oOO0 = xbmc . translatePath ( xbmcaddon . Addon ( 'plugin.video.kodi4vn.phim60s' ) . getAddonInfo ( 'profile' ) )
+if 68 - 68: OOoOoo00oo % I1IiiI . iiIIIIi1i1 . o00
+if os . path . exists ( O0oOO0 ) == False :
+ os . mkdir ( O0oOO0 )
+o0oo0oOo = os . path . join ( O0oOO0 , 'visitor' )
+if 89 - 89: I1i1iI1i
+if os . path . exists ( o0oo0oOo ) == False :
  from random import randint
- Oo0OoO00oOO0o = open ( OOO , "w" )
- Oo0OoO00oOO0o . write ( str ( randint ( 0 , 0x7fffffff ) ) )
- Oo0OoO00oOO0o . close ( )
- if 80 - 80: iiI1i1 + o0oo0o - o0oo0o % iIi
-def OoOO0oo0o ( utm_url ) :
- II11i1I11Ii1i = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'
+ OO0oOoOO0oOO0 = open ( o0oo0oOo , "w" )
+ OO0oOoOO0oOO0 . write ( str ( randint ( 0 , 0x7fffffff ) ) )
+ OO0oOoOO0oOO0 . close ( )
+ if 86 - 86: ooO00oOoo
+def OOoo0O ( utm_url ) :
+ Oo0ooOo0o = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'
  import urllib2
  try :
-  O0o0 = urllib2 . Request ( utm_url , None ,
- { 'User-Agent' : II11i1I11Ii1i }
+  i1 = urllib2 . Request ( utm_url , None ,
+ { 'User-Agent' : Oo0ooOo0o }
  )
-  OO00Oo = urllib2 . urlopen ( O0o0 ) . read ( )
+  OOO = urllib2 . urlopen ( i1 ) . read ( )
  except :
   print ( "GA fail: %s" % utm_url )
- return OO00Oo
- if 97 - 97: OOo000 % iIi * OOo00O0Oo0oO + IiiIII111iI . o0oo0o + o0oo0o
+ return OOO
+ if 22 - 22: iiiIIii1IIi / Oo0Ooo * iiiIIii1IIi * O00ooOO . ooO00oOoo / Oo0Ooo
 def I11i11Ii ( group , name ) :
  try :
   try :
@@ -314,57 +347,57 @@ def I11i11Ii ( group , name ) :
   from urllib import unquote , quote
   from os import environ
   from hashlib import sha1
-  Oooo0O0oo00oO = "1.0"
-  IIi1i = open ( OOO ) . read ( )
-  I1I1iIiII1 = "Phim60s"
-  i11i1I1 = "UA-52209804-2"
-  ii1IOo0ooOo0o = "www.viettv24.com"
-  Ii1i1 = "http://www.google-analytics.com/__utm.gif"
+  Iiii = "1.0"
+  OO0OoO0o00 = open ( o0oo0oOo ) . read ( )
+  ooOO0O0ooOooO = "Phim60s"
+  oOOOo00O00oOo = "UA-52209804-2"
+  iiIIIi = "www.viettv24.com"
+  ooo00OOOooO = "http://www.google-analytics.com/__utm.gif"
   if name == "None" :
-   iiIii = Ii1i1 + "?" + "utmwv=" + Oooo0O0oo00oO + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmp=" + quote ( I1I1iIiII1 ) + "&utmac=" + i11i1I1 + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , IIi1i , "1" , "1" , "2" ] )
-   if 79 - 79: iII111iiiii11 / OO0OO0O0O0
-   if 75 - 75: o0O % IiiIII111iI % IiiIII111iI . O0OOo
-   if 5 - 5: IiiIII111iI * OOo000 + o0O . o0oo0o + o0O
-   if 91 - 91: OO0OO0O0O0
-   if 61 - 61: i1
+   O00OOOoOoo0O = ooo00OOOooO + "?" + "utmwv=" + Iiii + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmp=" + quote ( ooOO0O0ooOooO ) + "&utmac=" + oOOOo00O00oOo + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , OO0OoO0o00 , "1" , "1" , "2" ] )
+   if 77 - 77: ii11 % ii11 * Oo0oO0ooo - Oo0Ooo
+   if 93 - 93: iII111iiiii11 / I1iII1iiII % Oo0Ooo + o00 * Oo0ooO0oo0oO
+   if 15 - 15: O0OOo . Oo0ooO0oo0oO / o0OO0 + O0OOo
+   if 78 - 78: OO0OO0O0O0 . Oo0oO0ooo . O00ooOO % ooO00oOoo
+   if 49 - 49: Oo0o00o0Oo0 / Oo0ooO0oo0oO . O00ooOO
   else :
    if group == "None" :
-    iiIii = Ii1i1 + "?" + "utmwv=" + Oooo0O0oo00oO + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmp=" + quote ( I1I1iIiII1 + "/" + name ) + "&utmac=" + i11i1I1 + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , IIi1i , "1" , "1" , "2" ] )
-    if 64 - 64: OOo000 / o0O - OO0OO0O0O0 - Oo
-    if 86 - 86: Oo % o0O / ii1IiI1i / o0O
-    if 42 - 42: I11i
-    if 67 - 67: O0OOo . iIi . OO0OO0O0O0
-    if 10 - 10: Ii11111i % Ii11111i - iiiIIii1IIi / o0oo0o + OOo00O0Oo0oO
+    O00OOOoOoo0O = ooo00OOOooO + "?" + "utmwv=" + Iiii + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmp=" + quote ( ooOO0O0ooOooO + "/" + name ) + "&utmac=" + oOOOo00O00oOo + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , OO0OoO0o00 , "1" , "1" , "2" ] )
+    if 68 - 68: Oo0Ooo % o00 + Oo0Ooo
+    if 31 - 31: O00ooOO . I1iII1iiII
+    if 1 - 1: o0OO0 / o00ooo0 % ii11 * iiIIIIi1i1 . Oo0Ooo
+    if 2 - 2: o00 * O0OOo - iiiIIii1IIi + I1iII1iiII . Oo0oO0ooo % ii11
+    if 92 - 92: ii11
    else :
-    iiIii = Ii1i1 + "?" + "utmwv=" + Oooo0O0oo00oO + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmp=" + quote ( I1I1iIiII1 + "/" + group + "/" + name ) + "&utmac=" + i11i1I1 + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , IIi1i , "1" , "1" , "2" ] )
-    if 87 - 87: iiI1i1 * Ii11111i + o0oo0o / iiiIIii1IIi / iIi
-    if 37 - 37: iIi - OOo000 * iiI1i1 % Oo0Ooo - O0OOo
-    if 83 - 83: Oo / ii1IiI1i
-    if 34 - 34: ooO00oOoo
-    if 57 - 57: iiI1i1 . Oo . I1IiiI
-    if 42 - 42: Oo + Ii11111i % OO0OO0O0O0
+    O00OOOoOoo0O = ooo00OOOooO + "?" + "utmwv=" + Iiii + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmp=" + quote ( ooOO0O0ooOooO + "/" + group + "/" + name ) + "&utmac=" + oOOOo00O00oOo + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , OO0OoO0o00 , "1" , "1" , "2" ] )
+    if 25 - 25: o0OO0 - I1iII1iiII / iII111iiiii11 / o00ooo0
+    if 12 - 12: I1iII1iiII * ii11 % I1IiiI % iiiIIii1IIi
+    if 20 - 20: ooO00oOoo % Oo0o00o0Oo0 / Oo0o00o0Oo0 + Oo0o00o0Oo0
+    if 45 - 45: Oo0oO0ooo - iiIIIIi1i1 - iII111iiiii11 - Oo0ooO0oo0oO . O00ooOO / OO0OO0O0O0
+    if 51 - 51: OO0OO0O0O0 + ii11
+    if 8 - 8: Oo0oO0ooo * I1i1iI1i - Oo0o00o0Oo0 - Oo0ooO0oo0oO * ooO00oOoo % I1iII1iiII
   print "============================ POSTING ANALYTICS ============================"
-  OoOO0oo0o ( iiIii )
-  if 6 - 6: iiI1i1
+  OOoo0O ( O00OOOoOoo0O )
+  if 48 - 48: OO0OO0O0O0
   if not group == "None" :
-   oOOo0oOo0 = Ii1i1 + "?" + "utmwv=" + Oooo0O0oo00oO + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmhn=" + quote ( ii1IOo0ooOo0o ) + "&utmt=" + "events" + "&utme=" + quote ( "5(" + I1I1iIiII1 + "*" + group + "*" + name + ")" ) + "&utmp=" + quote ( I1I1iIiII1 ) + "&utmac=" + i11i1I1 + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , "1" , IIi1i , "1" , "2" ] )
-   if 49 - 49: OOooOOo . Oo0Ooo - I1IiiI / i1 . ii1IiI1i
-   if 1 - 1: OOooOOo / IiiIII111iI % iIi * ooO00oOoo . Oo0Ooo
-   if 2 - 2: Ii11111i * Oo - iiiIIii1IIi + ii1IiI1i . iiI1i1 % iIi
-   if 92 - 92: iIi
-   if 25 - 25: OOooOOo - ii1IiI1i / iII111iiiii11 / IiiIII111iI
-   if 12 - 12: ii1IiI1i * iIi % I1IiiI % iiiIIii1IIi
-   if 20 - 20: o0oo0o % OOo00O0Oo0oO / OOo00O0Oo0oO + OOo00O0Oo0oO
-   if 45 - 45: iiI1i1 - ooO00oOoo - iII111iiiii11 - I11i . i1 / OO0OO0O0O0
+   I1IiiIIIi = ooo00OOOooO + "?" + "utmwv=" + Iiii + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmhn=" + quote ( iiIIIi ) + "&utmt=" + "events" + "&utme=" + quote ( "5(" + ooOO0O0ooOooO + "*" + group + "*" + name + ")" ) + "&utmp=" + quote ( ooOO0O0ooOooO ) + "&utmac=" + oOOOo00O00oOo + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , "1" , OO0OoO0o00 , "1" , "2" ] )
+   if 41 - 41: Oo0o00o0Oo0 - OO0OO0O0O0 - OO0OO0O0O0
+   if 68 - 68: ooO00oOoo % OOoOoo00oo
+   if 88 - 88: iiiIIii1IIi - iI1 + ooO00oOoo
+   if 40 - 40: I1iII1iiII * Oo0o00o0Oo0 + ooO00oOoo % ii11
+   if 74 - 74: Oo0oO0ooo - o0OO0 + iII111iiiii11 + OOoOoo00oo / I1i1iI1i
+   if 23 - 23: OO0OO0O0O0
+   if 85 - 85: Oo0o00o0Oo0
+   if 84 - 84: I1iII1iiII . iiiIIii1IIi % iII111iiiii11 + Oo0o00o0Oo0 % iII111iiiii11 % Oo0ooO0oo0oO
    try :
     print "============================ POSTING TRACK EVENT ============================"
-    OoOO0oo0o ( oOOo0oOo0 )
+    OOoo0O ( I1IiiIIIi )
    except :
     print "============================  CANNOT POST TRACK EVENT ============================"
-    if 51 - 51: OO0OO0O0O0 + iIi
+    if 42 - 42: Oo0ooO0oo0oO / O0OOo / o00ooo0 + ii11 / I1i1iI1i
  except :
   print "================  CANNOT POST TO ANALYTICS  ================"
-  if 8 - 8: iiI1i1 * o0O - OOo00O0Oo0oO - I11i * o0oo0o % ii1IiI1i
+  if 84 - 84: iI1 * O00ooOO + o0OO0
 if __name__ == '__main__' :
  oo000 . run ( )
 # dd678faae9ac167bc83abf78e5cb2f3f0688d3a3
