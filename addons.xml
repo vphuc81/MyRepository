@@ -363,7 +363,7 @@
 
 <addon
   id="plugin.video.phim60s"
-  version="2.0.14"
+  version="2.0.15"
   name="*[COLOR yellow]Phim-60s.info[/COLOR]"
   provider-name="Vinh Modded from Thong">
   <requires>
