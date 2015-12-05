@@ -383,7 +383,7 @@
   </extension>
 </addon>
 
-<addon 
+<addon
 	id="plugin.video.phim3s"
 	version="1.0.0"
 	name="*[COLOR yellow][B]Phim 3S[/B][/COLOR]"
@@ -400,12 +400,12 @@
 		<summary>Movies</summary>
 		<description>[COLOR lime][B]Xem phim từ website phim3s.net[/B][/COLOR]</description>
 		<disclaimer lang="en">
-			[COLOR lime]The streaming media are pulled from online provider(s). 
+			[COLOR lime]The streaming media are pulled from online provider(s).
 			[COLOR red]These streams do not represent my views or opinions in any way.[/COLOR]</disclaimer>
 		<platform>all</platform>
 		<license>http://www.gnu.org/licenses/</license>
 		<forum></forum>
-		<website></website>  
+		<website></website>
 		<email></email>
 		<source></source>
 	</extension>
@@ -475,7 +475,7 @@
    <import addon="xbmc.python" version="2.14.0"/>
    <import addon="script.module.requests" />
   </requires>
-  <extension 
+  <extension
     point="xbmc.python.pluginsource"
     library="default.py">
    <provides>video</provides>
