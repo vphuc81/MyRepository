@@ -43,7 +43,7 @@ def TVChannel(url):
                ("toxmovies8" in link) or ("togenesis" in link) or ("tophoenix" in link) or ("toanhtrang" in link) or \
                ("tophim14" in link) or ("tofootball" in link) or ("toxemphimso" in link) or ("toenter" in link) or \
                ("toitv" in link) or ("tofilmon1" in link) or ("tofilmon2" in link) or ("toirantv" in link) or ("tozeus" in link) or \
-               ("tomoneysp" in link): 
+               ("tomoneysp" in link) or ("tophim60s" in link) or ("tophim3s" in link) or ("toukturk" in link): 
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]              
             add_Link(title, link, thumb)
         xbmc.executebuiltin('Container.SetViewMode(52)')        
@@ -383,6 +383,18 @@ def add_Link(name,url,iconimage):
         return ok
     if 'tomoneysp' in url:
         u = 'plugin://plugin.video.MoneySports'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tophim60s' in url:
+        u = 'plugin://plugin.video.phim60s'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tophim3s' in url:
+        u = 'plugin://plugin.video.phim3s'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'toukturk' in url:
+        u = 'plugin://plugin.video.ukturk'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)   

@@ -226,7 +226,7 @@
 
 <addon id="plugin.video.livetv"
        name="***[COLOR yellow]LIVE-TV[/COLOR]"
-       version="2.1.18"
+       version="2.1.19"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
@@ -246,7 +246,7 @@
 
 <addon id="plugin.video.livetvinternational"
        name="**[COLOR yellow]Live TV - International[/COLOR]"
-       version="2.1.15"
+       version="2.1.16"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
