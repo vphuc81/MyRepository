@@ -1,0 +1,51 @@
+1.0.0 Initial Release
+
+1.0.6
+Few bugs fixed
+All channels will show adults if the parent config is disabled.
+Added channel sort
+
+1.0.7
+Custom Mac Address - Config
+Fixed error in first load
+
+1.0.8
+Fixed bug custom mac address
+
+1.0.9
+Portal name added on channel name
+NTV
+
+1.0.10
+Add serial config
+M3U Server
+Ipguys (must enable send serial and add serial number, devices information)
+
+1.0.11
+Fixed M3U Server bug
+
+1.0.12
+EPG - epg.xml?portal=NUMBER
+Added channels.m3u
+Autostart M3U Server
+
+1.0.13
+Added group name on channels.m3u/html
+
+1.0.14
+Channel order fixed
+Fixed bugs
+
+1.0.15
+Fixed config
+
+1.0.16
+Reverted the authentication to version 1.0.11.
+
+1.0.17
+Fixed some bugs.
+Added new server page to be compatible with SIMPLE IPTV (https://play.google.com/store/apps/details?id=com.burakkal.simpleiptv&hl=en)
+
+1.0.18
+Added start/stop button on config - M3U Server
+Fixed some small bugs
