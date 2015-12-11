@@ -110,6 +110,16 @@ def doDemystify(data):
         for g in r.findall(data):
             quoted=g
             data = data.replace(quoted, quoted.decode('unicode-escape'))
+
+    r = re.compile('(\'\+dec\("\w+"\)\+\')')
+    while r.findall(data):
+        for g in r.findall(data):
+            r2 = re.compile('dec\("(\w+)"\)')
+            for dec_data in r2.findall(g):
+                res = ''
+                for i in dec_data:
+                    res = res + chr(ord(i) ^ 123)
+            data = data.replace(g, res)
             
     r = re.compile('(eval\(decodeURIComponent\(atob\([\'"][^\'"]+[\'"]\)\)\);)')
     while r.findall(data):
