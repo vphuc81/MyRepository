@@ -1,0 +1,5 @@
+<settings>
+	<setting id="email" type="text" label="Loged in Email" visible="false" default=""/>
+	<setting id="token" type="text" label="Login in token" visible="false" default=""/>
+	<setting id="thumbview" type="bool" label="Auto use thumbnail view (Xeebo Skin only)" default="true"/>
+</settings>
