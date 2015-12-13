@@ -1,2 +1,6 @@
 <favourites>
+	<favourite name="Phoenix TV" thumb="http://shanghai.watchkodi.com/Phoenix%20Tv%20Icon.jpg">ActivateWindow(10025,&quot;plugin://plugin.video.phstreams/?action=ndmode&amp;audio=0&amp;content=0&amp;fanart=C%3a%5cUsers%5cVinh%5cAppData%5cRoaming%5cKodi%5caddons%5cplugin.video.phstreams%5cfanart.jpg&amp;image=http%3a%2f%2fshanghai.watchkodi.com%2fPhoenix%2520Tv%2520Icon.jpg&amp;name=Phoenix%20TV&amp;playable=false&amp;tvshow=0&amp;url=http%3a%2f%2fshanghai.watchkodi.com%2fmaindir%2fmain.xml&quot;,return)</favourite>
+	<favourite name="[COLOR white][B]LIVE STREAMS[/B][/COLOR]" thumb="http://s6.postimg.org/hydf9763l/livenow.png">ActivateWindow(10025,&quot;plugin://plugin.video.zeus/?description&amp;iconimage=http%3a%2f%2fs6.postimg.org%2fhydf9763l%2flivenow.png&amp;mode=6&amp;name=%5bCOLOR%20white%5d%5bB%5dLIVE%20STREAMS%5b%2fB%5d%5b%2fCOLOR%5d&amp;url=fTpYSkEK&quot;,return)</favourite>
+	<favourite name="SOMALI TV" thumb="http://static.filmon.com/assets/groups/239/big_logo.png">ActivateWindow(10025,&quot;plugin://plugin.video.F.T.V/?ch_fanart=somali-tv&amp;description=3734&amp;mode=123&amp;name=SOMALI%20TV&amp;url=239&quot;,return)</favourite>
+	<favourite name="UK Turk Playlists" thumb="special://home/addons\plugin.video.ukturk\icon.png">ActivateWindow(10025,&quot;plugin://plugin.video.ukturk/&quot;,return)</favourite>
 </favourites>
