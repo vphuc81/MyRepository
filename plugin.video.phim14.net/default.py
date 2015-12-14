@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import urllib , urllib2 , re , zlib , ast , os , uuid
+import urllib , urllib2 , re , zlib , ast , os , uuid , requests
 from xbmcswift2 import Plugin , xbmc , xbmcgui , xbmcaddon
 oo000 = Plugin ( )
 ii = "plugin://plugin.video.phim14.net"
@@ -43,6 +43,14 @@ def IIi1IiiiI1Ii ( ) :
  ]
   return oo000 . finish ( iI1Ii11111iIi )
  else :
+  IiI = xbmc . translatePath ( xbmcaddon . Addon ( ) . getAddonInfo ( 'path' ) ) . decode ( "utf-8" )
+  IiI = xbmc . translatePath ( os . path . join ( IiI , "temp.jpg" ) )
+  '''urllib . urlretrieve ( 'https://googledrive.com/host/0B-ygKtjD8Sc-S04wUUxMMWt5dmM/images/phim14.jpg' , IiI )
+  ooOo = xbmcgui . ControlImage ( 0 , 0 , 1280 , 720 , IiI )
+  Oo = xbmcgui . WindowDialog ( )
+  Oo . addControl ( ooOo )
+  Oo . doModal ( )'''
+  if 67 - 67: O00ooOO . I1iII1iiII
   iI1Ii11111iIi = [
  { 'label' : 'Phim mới' , 'path' : '%s/latest/%s/%s' % ( ii , urllib . quote_plus ( 'http://m.phim14.net/danh-sach/phim-moi/page-%s.html' ) , 1 ) } ,
  { 'label' : 'Phim lẻ' , 'path' : '%s/movies/%s/%s' % ( ii , urllib . quote_plus ( 'http://m.phim14.net/danh-sach/phim-le/page-%s.html' ) , 1 ) } ,
@@ -58,8 +66,13 @@ def IIi1IiiiI1Ii ( ) :
 def II1Iiii1111i ( murl , page ) :
  I11i11Ii ( "Browse" , '/latest/%s/%s' % ( murl , page ) )
  iI1Ii11111iIi = i1IIi11111i ( murl , page , 'latest' )
- if xbmc . getSkinDir ( ) == 'skin.xeebo' and oo000 . get_setting ( 'thumbview' , bool ) :
-  return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
+ if oo000 . get_setting ( 'thumbview' , bool ) :
+  if xbmc . getSkinDir ( ) in ( 'skin.confluence' , 'skin.eminence' ) :
+   return oo000 . finish ( iI1Ii11111iIi , view_mode = 500 )
+  elif xbmc . getSkinDir ( ) == 'skin.xeebo' :
+   return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
+  else :
+   return oo000 . finish ( iI1Ii11111iIi )
  else :
   return oo000 . finish ( iI1Ii11111iIi )
   if 74 - 74: Oo0o00o0Oo0 * ii11
@@ -67,8 +80,13 @@ def II1Iiii1111i ( murl , page ) :
 def I1I1i1 ( murl , page ) :
  I11i11Ii ( "Browse" , '/movies/%s/%s' % ( murl , page ) )
  iI1Ii11111iIi = i1IIi11111i ( murl , page , 'movies' )
- if xbmc . getSkinDir ( ) == 'skin.xeebo' and oo000 . get_setting ( 'thumbview' , bool ) :
-  return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
+ if oo000 . get_setting ( 'thumbview' , bool ) :
+  if xbmc . getSkinDir ( ) in ( 'skin.confluence' , 'skin.eminence' ) :
+   return oo000 . finish ( iI1Ii11111iIi , view_mode = 500 )
+  elif xbmc . getSkinDir ( ) == 'skin.xeebo' :
+   return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
+  else :
+   return oo000 . finish ( iI1Ii11111iIi )
  else :
   return oo000 . finish ( iI1Ii11111iIi )
   if 18 - 18: iiIIIIi1i1 / OOoOoo00oo - iI1 + OOoOoo00oo % I1iII1iiII - o00ooo0
@@ -76,8 +94,13 @@ def I1I1i1 ( murl , page ) :
 def iIIIIiI ( murl , page ) :
  I11i11Ii ( "Browse" , '/series/%s/%s' % ( murl , page ) )
  iI1Ii11111iIi = i1IIi11111i ( murl , page , 'series' )
- if xbmc . getSkinDir ( ) == 'skin.xeebo' and oo000 . get_setting ( 'thumbview' , bool ) :
-  return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
+ if oo000 . get_setting ( 'thumbview' , bool ) :
+  if xbmc . getSkinDir ( ) in ( 'skin.confluence' , 'skin.eminence' ) :
+   return oo000 . finish ( iI1Ii11111iIi , view_mode = 500 )
+  elif xbmc . getSkinDir ( ) == 'skin.xeebo' :
+   return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
+  else :
+   return oo000 . finish ( iI1Ii11111iIi )
  else :
   return oo000 . finish ( iI1Ii11111iIi )
   if 91 - 91: OO0OO0O0O0 / Oo0oO0ooo - ii11 + ooO00oOoo % I1IiiI
@@ -107,8 +130,13 @@ def iI1i ( ) :
 def oo0Ooo0 ( murl , page = 1 ) :
  I11i11Ii ( "Browse" , '/genres/%s/%s' % ( murl , page ) )
  iI1Ii11111iIi = i1IIi11111i ( murl , page , 'genres' )
- if xbmc . getSkinDir ( ) == 'skin.xeebo' and oo000 . get_setting ( 'thumbview' , bool ) :
-  return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
+ if oo000 . get_setting ( 'thumbview' , bool ) :
+  if xbmc . getSkinDir ( ) in ( 'skin.confluence' , 'skin.eminence' ) :
+   return oo000 . finish ( iI1Ii11111iIi , view_mode = 500 )
+  elif xbmc . getSkinDir ( ) == 'skin.xeebo' :
+   return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
+  else :
+   return oo000 . finish ( iI1Ii11111iIi )
  else :
   return oo000 . finish ( iI1Ii11111iIi )
   if 46 - 46: iI1 % iI1 - Oo0oO0ooo * o00ooo0 % ii11
@@ -134,8 +162,13 @@ def OOooO0OOoo ( ) :
 def IiIIIiI1I1 ( murl , page ) :
  I11i11Ii ( "Browse" , '/nations/%s/%s' % ( murl , page ) )
  iI1Ii11111iIi = i1IIi11111i ( murl , page , 'nations' )
- if xbmc . getSkinDir ( ) == 'skin.xeebo' and oo000 . get_setting ( 'thumbview' , bool ) :
-  return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
+ if oo000 . get_setting ( 'thumbview' , bool ) :
+  if xbmc . getSkinDir ( ) in ( 'skin.confluence' , 'skin.eminence' ) :
+   return oo000 . finish ( iI1Ii11111iIi , view_mode = 500 )
+  elif xbmc . getSkinDir ( ) == 'skin.xeebo' :
+   return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
+  else :
+   return oo000 . finish ( iI1Ii11111iIi )
  else :
   return oo000 . finish ( iI1Ii11111iIi )
   if 86 - 86: Oo0Ooo + Oo0o00o0Oo0 + iI1 * O0OOo + o00ooo0
@@ -152,8 +185,13 @@ def oOoO ( ) :
 def Oooo ( murl , page ) :
  I11i11Ii ( "Browse" , '/search/%s/%s' % ( murl , page ) )
  iI1Ii11111iIi = i1IIi11111i ( murl , page , 'search' )
- if xbmc . getSkinDir ( ) == 'skin.xeebo' and oo000 . get_setting ( 'thumbview' , bool ) :
-  return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
+ if oo000 . get_setting ( 'thumbview' , bool ) :
+  if xbmc . getSkinDir ( ) in ( 'skin.confluence' , 'skin.eminence' ) :
+   return oo000 . finish ( iI1Ii11111iIi , view_mode = 500 )
+  elif xbmc . getSkinDir ( ) == 'skin.xeebo' :
+   return oo000 . finish ( iI1Ii11111iIi , view_mode = 52 )
+  else :
+   return oo000 . finish ( iI1Ii11111iIi )
  else :
   return oo000 . finish ( iI1Ii11111iIi )
   if 67 - 67: ooO00oOoo / iII111iiiii11 % O0OOo - iiiIIii1IIi
@@ -194,45 +232,53 @@ def iiI1 ( url ) :
  if 28 - 28: ooO00oOoo - iiIIIIi1i1 . iiIIIIi1i1 + I1i1iI1i - iII111iiiii11 + OO0OO0O0O0
 def iI ( url ) :
  Oo0O = oOoOooOo0o0 ( url )
- print Oo0O
  if "youtube" in Oo0O :
   OOOO = re . compile ( '(youtu\.be\/|youtube-nocookie\.com\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v|user)\/))([^\?&"\'>]+)' ) . findall ( Oo0O )
   OOO00 = OOOO [ 0 ] [ len ( OOOO [ 0 ] ) - 1 ] . replace ( 'v/' , '' )
   return 'plugin://plugin.video.youtube/?action=play_video&videoid=%s' % OOO00
- if ".php?url=" in Oo0O :
-  iiiiiIIii = re . compile ( '<source src="(http://.+?.mp4)"' ) . findall ( Oo0O )
-  O000OO0 = iiiiiIIii [ 0 ]
-  if oo000 . get_setting ( 'HQ' , bool ) :
-   O000OO0 = iiiiiIIii [ 1 ]
-  return O000OO0
-  if 43 - 43: OOoOoo00oo - OO0OO0O0O0 % I1iII1iiII . O0OOo
+ if '{link:"' in Oo0O :
+  iiiiiIIii = re . compile ( '\{link:"(.+?)"' ) . findall ( Oo0O ) [ 0 ]
+  O000OO0 = requests . post (
+ "http://player5.phim14.net/gkphp89m/plugins/gkpluginsphp.php" ,
+ data = { 'link' : iiiiiIIii , 'f' : 'true' }
+ ) . json ( )
+  if "list" in O000OO0 :
+   I11iii1Ii = O000OO0 [ "list" ] [ 0 ] [ "link" ] [ 0 ] [ "link" ]
+   if oo000 . get_setting ( 'HQ' , bool ) :
+    I11iii1Ii = O000OO0 [ "list" ] [ 0 ] [ "link" ] [ - 1 ] [ "link" ]
+  else :
+   I11iii1Ii = O000OO0 [ "link" ] [ 0 ] [ "link" ]
+   if oo000 . get_setting ( 'HQ' , bool ) :
+    I11iii1Ii = O000OO0 [ "link" ] [ - 1 ] [ "link" ]
+  return I11iii1Ii
+  if 13 - 13: OOoOoo00oo % I1i1iI1i - Oo0Ooo . I1iII1iiII + O00ooOO
 def i1IIi11111i ( url , page , route_name ) :
- o00OooOooo = int ( page ) + 1
+ II111ii1II1i = int ( page ) + 1
  Oo0O = oOoOooOo0o0 ( url % page )
  OOOO = re . compile ( '<a href="(http://m.phim14.net/phim/.+?)" class="content-items"><img src="(.+?)" alt="(.+?)"[^>]*><h3>.+?</h3><h4>.+?</h4><ul[^>]*><li>Năm phát hành: (.+?)</li><li>Thể loại: .+?</li></ul><p[^>]*>Trạng thái: (.*?)</p></a>' ) . findall ( Oo0O )
  iI1Ii11111iIi = [ ]
- for O000oo0O , OOOOi11i1 , IIIii1II1II , i1I1iI , oo0OooOOo0 in OOOO :
+ for iiiiiIIii , OoOo00o , o0OOoo0OO0OOO , iI1iI1I1i1I , iIi11Ii1 in OOOO :
   O0O = { }
-  O0O [ "label" ] = "%s (%s)" % ( IIIii1II1II , oo0OooOOo0 )
-  O0O [ "thumbnail" ] = OOOOi11i1
-  O0O [ "info" ] = { "year" : i1I1iI }
-  O0O [ "path" ] = '%s/%s/%s' % ( ii , "mirrors" , urllib . quote_plus ( O000oo0O . replace ( "/phim/" , "/xem-phim/" ) ) )
+  O0O [ "label" ] = "%s (%s)" % ( o0OOoo0OO0OOO , iIi11Ii1 )
+  O0O [ "thumbnail" ] = OoOo00o
+  O0O [ "info" ] = { "year" : iI1iI1I1i1I }
+  O0O [ "path" ] = '%s/%s/%s' % ( ii , "mirrors" , urllib . quote_plus ( iiiiiIIii . replace ( "/phim/" , "/xem-phim/" ) ) )
   iI1Ii11111iIi . append ( O0O )
  if len ( iI1Ii11111iIi ) == oOOo :
-  iI1Ii11111iIi . append ( { 'label' : 'Next >>' , 'path' : '%s/%s/%s/%s' % ( ii , route_name , urllib . quote_plus ( url ) , o00OooOooo ) , 'thumbnail' : 'http://icons.iconarchive.com/icons/rafiqul-hassan/blogger/128/Arrow-Next-icon.png' } )
+  iI1Ii11111iIi . append ( { 'label' : 'Next >>' , 'path' : '%s/%s/%s/%s' % ( ii , route_name , urllib . quote_plus ( url ) , II111ii1II1i ) , 'thumbnail' : 'http://icons.iconarchive.com/icons/rafiqul-hassan/blogger/128/Arrow-Next-icon.png' } )
  return iI1Ii11111iIi
- if 92 - 92: ii11 . O0OOo + o00ooo0
+ if 50 - 50: O00ooOO - iI1 * o00 / OOoOoo00oo + o00ooo0
 def Oo00OOOOO ( murl ) :
  Oo0O = oOoOooOo0o0 ( murl )
  OOOO = re . compile ( '<span class="svname">(.+?)</span><span class="svep">(.+?)</span>' ) . findall ( Oo0O )
- IiII1I11i1I1I = re . compile ( '<title>(.+?)</title>' ) . findall ( Oo0O ) [ 0 ]
+ O0O0O = re . compile ( '<title>(.+?)</title>' ) . findall ( Oo0O ) [ 0 ]
  oO0Oo = [ ]
  for oOOoo0Oo , o00OO00OoO in OOOO :
   OOOO0OOoO0O0 = [ ]
   for O0Oo000ooO00 , oO0 in re . compile ( '<a[^>]*href="(.+?)"[^>]*>(.+?)</a>' ) . findall ( o00OO00OoO ) :
    I11II1i = { }
    I11II1i [ "url" ] = O0Oo000ooO00
-   I11II1i [ "name" ] = "Part %s - %s" % ( oO0 , IiII1I11i1I1I . split ( " | " ) [ 0 ] )
+   I11II1i [ "name" ] = "Part %s - %s" % ( oO0 , O0O0O . split ( " | " ) [ 0 ] )
    OOOO0OOoO0O0 . append ( I11II1i )
   O0o0Oo = { }
   O0o0Oo [ "name" ] = oOOoo0Oo
@@ -259,7 +305,7 @@ def oOoOooOo0o0 ( url ) :
  iiII1i1 = iiII1i1 . replace ( '> <' , '><' )
  return iiII1i1
  if 66 - 66: ooO00oOoo - O0OOo
-I1i1III = xbmc . translatePath ( xbmcaddon . Addon ( 'plugin.video.kodi4vn.phim14.net' ) . getAddonInfo ( 'profile' ) )
+I1i1III = xbmc . translatePath ( xbmcaddon . Addon ( 'plugin.video.phim14.net' ) . getAddonInfo ( 'profile' ) )
 if 63 - 63: ooO00oOoo % Oo0oO0ooo * Oo0oO0ooo * Oo0ooO0oo0oO / o00
 if os . path . exists ( I1i1III ) == False :
  os . mkdir ( I1i1III )
