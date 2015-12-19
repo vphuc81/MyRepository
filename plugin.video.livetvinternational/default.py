@@ -3,13 +3,16 @@
 import xbmc,xbmcaddon,xbmcplugin,xbmcgui,sys,urllib,urllib2,re,os,codecs,unicodedata,base64
 import simplejson as json
 
-addonID = 'plugin.video.livetvinternational'
+addonID = 'plugin.video.livetv'
 addon = xbmcaddon.Addon(addonID)
 pluginhandle = int(sys.argv[1])
 home = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('path') ).decode("utf-8")
 logos = xbmc.translatePath(os.path.join(home,"logos\\"))
 dataPath = xbmc.translatePath(os.path.join(home, 'resources'))
-
+apk = xbmc . getCondVisibility ( 'system.platform.android' )
+Oo00OOO = 'aHR0cHM6Ly9nb29nbGVkcml2ZS5jb20vaG9zdC8='
+e = 'TDNaNExuaHRiQT09'
+oo00o0 = '0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM'
 
 
 def TVChannel(url):
@@ -27,10 +30,12 @@ def TVChannel(url):
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]            
             if "/thumbnail" in item:
                 thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
-            if "redirecttopakindia" in link:                   
+            if "viettv24free" in link:                   
                 link = re.compile('<link>(.+?)</link>').findall(item)[0] #required but not mean anything
-            if "redirecttoshahidmbc" in link:                   
+            if "redirecttofptplay" in link:                   
                 link = re.compile('<link>(.+?)</link>').findall(item)[0] #required but not mean anything
+            if "redirecttohtvplus" in link:                   
+                link = re.compile('<link>(.+?)</link>').findall(item)[0]    
             if ("redirecttoyoutube" in link) or ("redirecttodailymotion" in link):                   
                 link = re.compile('<link>(.+?)</link>').findall(item)[0] #required but not mean anything
             if ("tosportsdevil" in link) or ("tovdubt" in link):                   
@@ -42,27 +47,25 @@ def TVChannel(url):
                ("tomovieshd2" in link) or ("tocartoons8" in link) or ("tokiddiecartoons" in link) or ("tonavix" in link) or \
                ("toxmovies8" in link) or ("togenesis" in link) or ("tophoenix" in link) or ("toanhtrang" in link) or \
                ("tophim14" in link) or ("tofootball" in link) or ("toxemphimso" in link) or ("toenter" in link) or \
-               ("toitv" in link) or ("tofilmon1" in link) or ("tofilmon2" in link) or ("toirantv" in link) or ("tozeus" in link) or \
-               ("tomoneysp" in link) or ("tophim60s" in link) or ("tophim3s" in link) or ("toukturk" in link) or ("tocablestv" in link): 
-                link = re.compile('<link>(.+?)</link>').findall(item)[0]              
+               ("toitv" in link) or ("tofilmon1" in link) or ("tofilmon2" in link) or ("tozeus" in link) or ("touno" in link) or \
+               ("tomoneysp" in link) or ("tophim60s" in link) or ("tophim3s" in link) or ("toukturk" in link) or ("tocablestv" in link) or \
+               ("tonbafull" in link): 
+                link = re.compile('<link>(.+?)</link>').findall(item)[0]            
             add_Link(title, link, thumb)
-        xbmc.executebuiltin('Container.SetViewMode(52)')        
+        xbmc.executebuiltin('Container.SetViewMode(52)')		
     else:
         for name in names:
             addDir('' + name + '', url+"?n="+name, 'index', '')
         xbmc.executebuiltin('Container.SetViewMode(52)')
-
-		
-
 		
 def Channel():
-    content = Get_Url(DecryptData(homeurl))
+    content = Get_Url(I1lli + O0Ooo)
     match=re.compile("<title>([^<]*)<\/title>\s*<link>([^<]+)<\/link>\s*<thumbnail>(.+?)</thumbnail>").findall(content)	
     for title,url,thumbnail in match:
 		addDir(title,url,'tvchannel',thumbnail)	
-    xbmc.executebuiltin('Container.SetViewMode(%d)' % 500)
+    xbmc.executebuiltin('Container.SetViewMode(%d)' % 500)	
 
-
+	
 def resolveUrl(url):
 	if 'xemphimso' in url:
 		content = Get_Url(url)	
@@ -84,9 +87,7 @@ def resolveUrl(url):
 		url = url
 	item=xbmcgui.ListItem(path=url)
 	xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, item)	  
-	return		
-	
-
+	return	
 
 def Get_M3U(url,iconimage):
   m3ucontent = Get_Url(url)
@@ -112,14 +113,14 @@ def Index(url,iconimage):
                     link = re.compile('<link>(.+?)</link>').findall(item)[0]
                 if "/thumbnail" in item:
                     thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
-                if "youtube" in link:                   
+                if "youtube" in link:					
                     addDir(title, link, 'episodes', thumb)
                 #old version if ("youtube" in link) or ("redirecttomovieshd" in link) or ("redirecttonetmovie" in link) or \
                    #("redirectto1channel" in link) or ("redirecttokenh108" in link) or ("redirecttokenh88" in link) or \
                    #("redirecttomoviebox" in link) or ("redirecttophimvang" in link) or ("redirecttoxomgiaitri" in link) or \
                    #("redirecttoxixam" in link) or ("redirecttovkool" in link):                   
                     #addDir(title, link, 'episodes', thumb)
-                else:                   
+                else:					
                     addLink('' + title + '', link, 'play', thumb)
     skin_used = xbmc.getSkinDir()
     if skin_used == 'skin.xeebo':
@@ -139,7 +140,7 @@ def IndexGroup(url):
             if "/link" in item:
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]
             if "/thumbnail" in item:
-                thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
+                thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]            
             add_Link(title, link, thumb)
         skin_used = xbmc.getSkinDir()
         if skin_used == 'skin.xeebo':
@@ -151,27 +152,27 @@ def IndexGroup(url):
             addDir('' + name + '', url+"?n="+name, 'index', '')
 
 def Index_Group(url):
-	xmlcontent = GetUrl(url)
-	names = re.compile('<name>(.+?)</name>\s*<thumbnail>(.+?)</thumbnail>').findall(xmlcontent)
-	if len(names) == 1:
-		items = re.compile('<item>(.+?)</item>').findall(xmlcontent)
-		for item in items:
-			thumb=""
-			title=""
-			link=""
-			if "/title" in item:
-				title = re.compile('<title>(.+?)</title>').findall(item)[0]
-			if "/link" in item:
-				link = re.compile('<link>(.+?)</link>').findall(item)[0]
-			if "/thumbnail" in item:
-				thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]
-			addLink(title, link, 'play', thumb)
-		skin_used = xbmc.getSkinDir()
-		if skin_used == 'skin.xeebo':
-				xbmc.executebuiltin('Container.SetViewMode(50)')
-	else:
-		for name,thumb in names:
-			addDir(name, url+"?n="+name, 'index', thumb)
+    xmlcontent = GetUrl(url)
+    names = re.compile('<name>(.+?)</name>\s*<thumbnail>(.+?)</thumbnail>').findall(xmlcontent)
+    if len(names) == 1:
+        items = re.compile('<item>(.+?)</item>').findall(xmlcontent)
+        for item in items:
+            thumb=""
+            title=""
+            link=""
+            if "/title" in item:
+                title = re.compile('<title>(.+?)</title>').findall(item)[0]
+            if "/link" in item:
+                link = re.compile('<link>(.+?)</link>').findall(item)[0]
+            if "/thumbnail" in item:
+                thumb = re.compile('<thumbnail>(.+?)</thumbnail>').findall(item)[0]                      
+            addLink(title, link, 'play', thumb)
+        skin_used = xbmc.getSkinDir()
+        if skin_used == 'skin.xeebo':
+            xbmc.executebuiltin('Container.SetViewMode(50)')
+    else:
+        for name,thumb in names:
+            addDir(name, url+"?n="+name, 'index', thumb)
 
 def menulist(homepath):
   try:
@@ -182,7 +183,6 @@ def menulist(homepath):
     return match
   except:
     pass
-
 	
 def PlayVideo(url,title):
     
@@ -194,7 +194,7 @@ def PlayVideo(url,title):
         xbmcPlayer = xbmc.Player()
         playlist.add(url, listitem)
         xbmcPlayer.play(playlist)
-
+		
 def Get_Url(url):
     try:
 		req=urllib2.Request(url)
@@ -229,12 +229,16 @@ def add_Link(name,url,iconimage):
     liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
     liz.setInfo( type="Video", infoLabels={ "Title": name } )
     liz.setProperty('IsPlayable', 'true')
-    if 'redirecttopakindia' in url:
-        u = 'plugin://plugin.video.pakindia'  
+    if 'viettv24free' in url:
+        u = 'plugin://plugin.video.viettv24'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
-    if 'redirecttoshahidmbc' in url:
-        u = 'plugin://plugin.video.shahidmbcnet'  
+    if 'redirecttofptplay' in url:
+        u = 'plugin://plugin.video.fptplay'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'redirecttohtvplus' in url:
+        u = 'plugin://plugin.video.HTVonline'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'redirecttoyoutube' in url:
@@ -290,7 +294,7 @@ def add_Link(name,url,iconimage):
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'tonavix' in url:
-        u = 'plugin://plugin.video.navi-x'  
+        u = 'plugin://script.navi-x'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'redirecttonetmovie' in url:
@@ -373,13 +377,13 @@ def add_Link(name,url,iconimage):
         u = 'plugin://plugin.video.filmontv'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
-    if 'toirantv' in url:
-        u = 'plugin://plugin.video.IRAN'  
-        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
-        return ok
     if 'tozeus' in url:
         u = 'plugin://plugin.video.zeus'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'touno' in url and apk:
+        u = xbmc . executebuiltin ( 'StartAndroidActivity ( com.vietuu.hlsplayer )' )  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)
         return ok
     if 'tomoneysp' in url:
         u = 'plugin://plugin.video.MoneySports'  
@@ -401,7 +405,11 @@ def add_Link(name,url,iconimage):
         u = 'plugin://plugin.program.super.favourites'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
-    ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)   
+    if 'tonbafull' in url:
+        u = 'plugin://plugin.video.nbafullgames'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)  
 
 def addLink(name,url,mode,iconimage):
     u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)
@@ -443,7 +451,7 @@ def addDir(name,url,mode,iconimage):
     if ('www.youtube.com/user/' in url) or ('www.youtube.com/channel/' in url):
         u = 'plugin://plugin.video.youtube/%s/%s/' % (url.split( '/' )[-2], url.split( '/' )[-1])
         ok = xbmcplugin.addDirectoryItem(handle = int(sys.argv[1]), url = u, listitem = liz, isFolder = True)
-        return ok   
+        return ok	
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
     return ok	
 	
@@ -458,9 +466,13 @@ def parameters_string_to_dict(parameters):
                 paramDict[paramSplits[0]] = paramSplits[1]
     return paramDict
 
-DecryptData = base64.b64decode	
-homeurl = 'aHR0cHM6Ly9nb29nbGVkcml2ZS5jb20vaG9zdC8wQjd6a2tRd281cHI1ZmpOVWNIY3dNRWt5UzBneFVHUnZRbE16YUdwe\
-FNEUXRaR050VVZaclN5MWZRemhEU2pKMU5FaG1ibU0vc291cmNlZmlsZV9pbnRlcm5hdGlvbmFsLnhtbA=='
+ii11i = base64.urlsafe_b64decode(Oo00OOO)
+iI11ii = base64.urlsafe_b64decode(e)
+O0Ooo = base64.urlsafe_b64decode(iI11ii)
+I1lli = ii11i + oo00o0
+I11li = base64.b64decode	
+I1111i = 'aHR0cDovL3d3dy5zcG9va3lnaG9zdHRvdXJzLmNvbS93cC1jb250ZW50L3VwbG9hZHMvMjAxNC8w\
+Ny9zY2FyeS1naG9zdC5qcGc='
 params=parameters_string_to_dict(sys.argv[2])
 mode=params.get('mode')
 url=params.get('url')
