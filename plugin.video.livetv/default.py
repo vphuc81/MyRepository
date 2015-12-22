@@ -49,7 +49,8 @@ def TVChannel(url):
                ("tophim14" in link) or ("tofootball" in link) or ("toxemphimso" in link) or ("toenter" in link) or \
                ("toitv" in link) or ("tofilmon1" in link) or ("tofilmon2" in link) or ("tozeus" in link) or ("touno" in link) or \
                ("tomoneysp" in link) or ("tophim60s" in link) or ("tophim3s" in link) or ("toukturk" in link) or ("tocablestv" in link) or \
-               ("tonbafull" in link): 
+               ("tonbafull" in link) or ("tocartoonhd" in link) or ("toazdrama" in link) or ("todrama24" in link) or ("todramago" in link) or \
+               ("tocartoongo" in link) or ("tosominaltv" in link) or ("tomovieru" in link) or ("toanimego" in link): 
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]            
             add_Link(title, link, thumb)
         xbmc.executebuiltin('Container.SetViewMode(52)')		
@@ -409,6 +410,38 @@ def add_Link(name,url,iconimage):
         u = 'plugin://plugin.video.nbafullgames'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
+    if 'tocartoonhd' in url:
+        u = 'plugin://plugin.video.cartoonhd'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'toazdrama' in url:
+        u = 'plugin://plugin.video.azdrama'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'todrama24' in url:
+        u = 'plugin://plugin.video.drama24h'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'todramago' in url:
+        u = 'plugin://plugin.video.dramago'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tocartoongo' in url:
+        u = 'plugin://plugin.video.cartoongo'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tosominaltv' in url:
+        u = 'plugin://plugin.video.sominaltv'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tomovieru' in url:
+        u = 'plugin://plugin.video.movierulz'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'toanimego' in url:
+        u = 'plugin://plugin.video.animego'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok     
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)  
 
 def addLink(name,url,mode,iconimage):
