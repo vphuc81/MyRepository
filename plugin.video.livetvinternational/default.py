@@ -44,7 +44,8 @@ def TVChannel(url):
                ("tophim14" in link) or ("tofootball" in link) or ("toxemphimso" in link) or ("toenter" in link) or \
                ("toitv" in link) or ("tofilmon1" in link) or ("tofilmon2" in link) or ("toirantv" in link) or ("tozeus" in link) or \
                ("tomoneysp" in link) or ("tophim60s" in link) or ("tophim3s" in link) or ("toukturk" in link) or ("tocablestv" in link) or\
-               ("tonbafull" in link): 
+               ("tonbafull" in link) or ("tokhmertv" in link) or ("tohotkhmer" in link) or ("tomoviekhmer" in link) or \
+               ("tokhmera" in link) or ("tovideo4kh" in link): 
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]              
             add_Link(title, link, thumb)
         xbmc.executebuiltin('Container.SetViewMode(52)')        
@@ -404,6 +405,26 @@ def add_Link(name,url,iconimage):
         return ok
     if 'tonbafull' in url:
         u = 'plugin://plugin.video.nbafullgames'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tokhmertv' in url:
+        u = 'plugin://plugin.video.KhmerTv'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tohotkhmer' in url:
+        u = 'plugin://plugin.video.hotkhmer'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tomoviekhmer' in url:
+        u = 'plugin://plugin.video.MovieKhmer'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tokhmera' in url:
+        u = 'plugin://plugin.video.KhmerAvenue'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tovideo4kh' in url:
+        u = 'plugin://plugin.video.video4Khmer'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)   
