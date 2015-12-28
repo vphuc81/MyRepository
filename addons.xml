@@ -155,15 +155,13 @@
 
 <addon
   id="plugin.video.hayhaytv"
-  version="1.4"
+  version="1.4.1"
   name="*[COLOR yellow]HayHay-TV.vn[/COLOR]"
-  provider-name="Vinh Computer Repair">
+  provider-name="Vinh Modded from Thong">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
+  <extension point="xbmc.python.module" library="default.py" />
   <extension point="xbmc.addon.metadata">
     <summary>hayhaytv</summary>
     <description>Watch free hayhaytv.vn (Vietnamese) Videos</description>
@@ -173,15 +171,13 @@
 
 <addon
   id="plugin.video.hdonlinevn"
-  version="1.5"
+  version="1.5.1"
   name="*[COLOR yellow]HD-Online[/COLOR]"
-  provider-name="Vinh Computer Repair">
+  provider-name="Vinh Modded from Thong">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
+  <extension point="xbmc.python.module" library="default.py" />
   <extension point="xbmc.addon.metadata">
     <summary>hdonline.vn</summary>
     <description>Xem phim HD Lồng tiếng và Thuyết minh tiếng Việt tại HDonline</description>
@@ -457,16 +453,14 @@
 
 <addon
   id="plugin.video.phimclipvn"
-  version="1.4"
+  version="1.4.1"
   name="*[COLOR yellow]Phim-ClipVN[/COLOR]"
-  provider-name="Vinh Computer Repair">
+  provider-name="Vinh Modded from Thong">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 		<import addon="script.module.urlresolver" version="0.0.1"/>
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
+  <extension point="xbmc.python.module" library="default.py" />
   <extension point="xbmc.addon.metadata">
     <summary>Clip.vn</summary>
     <description>Watch free Clip.vn (Vietnamese) Videos</description>
@@ -639,13 +633,11 @@
 	</extension>
 </addon>
 
-<addon id="plugin.video.youtube.playlists" name="*[COLOR yellow]VIP-Playlists[/COLOR]" version="1.4" provider-name="Vinh Computer Repair">
+<addon id="plugin.video.youtube.playlists" name="*[COLOR yellow]VIP-Playlists[/COLOR]" version="1.4.1" provider-name="Vinh Modded from Thong">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
     </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-    </extension>
+    <extension point="xbmc.python.module" library="default.py" />
     <extension point="xbmc.addon.metadata">
         <platform>all</platform>
         <summary lang="en">Watch VIP YouTube Playlists</summary>
@@ -654,13 +646,11 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.youtube.vnnews" name="*[COLOR yellow]VN-Daily News[/COLOR]" version="1.4" provider-name="Vinh Computer Repair">
+<addon id="plugin.video.youtube.vnnews" name="*[COLOR yellow]VN-Daily News[/COLOR]" version="1.4.1" provider-name="Vinh Modded from Thong">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
     </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-    </extension>
+    <extension point="xbmc.python.module" library="default.py" />
     <extension point="xbmc.addon.metadata">
         <platform>all</platform>
         <summary lang="en">Watch Youtube's SBTN, RFA, VOA, NguoivietTV...</summary>
@@ -698,16 +688,14 @@
 
 <addon
   id="plugin.video.zingtv"
-  version="1.4"
+  version="1.4.1"
   name="*[COLOR yellow]Zing-TV[/COLOR]"
-  provider-name="Vinh Computer Repair">
+  provider-name="Vinh Modded from Thong">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 		<import addon="script.module.urlresolver" version="0.0.1"/>
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
+  <extension point="xbmc.python.module" library="default.py" />
   <extension point="xbmc.addon.metadata">
     <summary>tv.zing.vn</summary>
     <description>Watch Zing TV (Vietnamese) Videos</description>
