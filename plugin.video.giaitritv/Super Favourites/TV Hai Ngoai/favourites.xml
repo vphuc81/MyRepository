@@ -1,4 +1,5 @@
 <favourites>
 	<favourite name="Nhấn vào đây để download [LIVE] TV hải ngoại - Xong Vào Lại" thumb="https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvhaingoai.png">PlayMedia(&quot;plugin://plugin.video.kodi4vn.launcher/play/97cddb44191b2f4842c6f5eb007a30e7?sf_options=winID%3D10025%26_options_sf&quot;)</favourite>
-	<favourite name="[COLOR ffff0000][LIVE] TV hải ngoại[/COLOR]" thumb="http://www.sbtn.tv/sites/default/files/dsc_0244_0.jpg">ActivateWindow(10025,&quot;plugin://plugin.video.kodi4vn.launcher/dir/383908563&quot;,return)</favourite>
+	<favourite name="[COLOR ffff0000][LIVE][/COLOR] TV hải ngoại" thumb="http://www.sbtn.tv/sites/default/files/dsc_0244_0.jpg">ActivateWindow(10025,&quot;plugin://plugin.video.kodi4vn.launcher/dir/383908563&quot;,return)</favourite>
+	<favourite name="[COLOR ffff0000][LIVE][/COLOR] UNO IPTV" thumb="androidapp://sources/apps/com.vietuu.hlsplayer.png">StartAndroidActivity(&quot;com.vietuu.hlsplayer&quot;)</favourite>
 </favourites>
