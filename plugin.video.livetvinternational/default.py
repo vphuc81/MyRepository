@@ -47,7 +47,7 @@ def TVChannel(url):
                ("tonbafull" in link) or ("tokhmertv" in link) or ("tohotkhmer" in link) or ("tomoviekhmer" in link) or \
                ("tokhmera" in link) or ("tovideo4kh" in link) or ("tophumikh" in link) or ("tocartoonhd" in link) or ("toazdrama" in link) or \
                ("todrama24" in link) or ("todramago" in link) or ("tocartoongo" in link) or ("tosominaltv" in link) or \
-               ("tomovieru" in link) or ("toanimego" in link): 
+               ("tomovieru" in link) or ("toanimego" in link) or ("toccloud" in link): 
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]              
             add_Link(title, link, thumb)
         xbmc.executebuiltin('Container.SetViewMode(52)')        
@@ -463,6 +463,10 @@ def add_Link(name,url,iconimage):
         return ok
     if 'toanimego' in url:
         u = 'plugin://plugin.video.animego'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'toccloud' in url:
+        u = 'plugin://plugin.video.ccloudtv'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok     
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)   
