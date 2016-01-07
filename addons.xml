@@ -357,8 +357,8 @@
 
 <addon id="plugin.video.MoneySports"
        name="MoneySports"
-       version="1.0.2"
-       provider-name="Legends">
+       version="2.0.2"
+       provider-name="Mark Money">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.beautifulsoup" version="3.2.1"/>
@@ -370,7 +370,7 @@
     <import addon="script.module.youtube.dl" optional="true"/>
     <import addon="plugin.video.youtube" />
     <import addon="script.module.urlresolver" optional="true"/>
-    <import addon="script.module.simplejson" />
+    <import addon="script.module.simplejson" />    
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
     <provides>video</provides>
@@ -378,7 +378,7 @@
   <extension point="xbmc.addon.metadata">
     <summary>The only add-on you need for all your sport needs...</summary>
     <description>
-            The only add-on you need for all your sport needs...
+            The only add-on you need for all your sport needs... Supported By The Legends
     </description>
     <platform>all</platform>
   </extension>
