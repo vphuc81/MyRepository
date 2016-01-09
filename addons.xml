@@ -299,7 +299,7 @@
 
 <addon id="plugin.video.livetv"
        name="***[COLOR yellow]LIVE-TV[/COLOR]"
-       version="2.1.24"
+       version="2.1.25"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
@@ -319,7 +319,7 @@
 
 <addon id="plugin.video.livetvinternational"
        name="**[COLOR yellow]Live TV - International[/COLOR]"
-       version="2.1.22"
+       version="2.1.23"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
@@ -402,16 +402,13 @@
 
 <addon
   id="plugin.video.phim.xixam.com"
-  version="1.8"
+  version="1.9"
   name="*[COLOR yellow]Xi-Xam[/COLOR]"
   provider-name="Vinh Modded from Thong">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-		<import addon="script.module.urlresolver" version="0.0.1"/>
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
+  <extension point="xbmc.python.module" library="default.py" />
   <extension point="xbmc.addon.metadata">
     <summary>phim.xixam.com</summary>
     <description>Watch free phim.xixam.com (Vietnamese) Videos</description>
