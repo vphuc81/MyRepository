@@ -470,7 +470,7 @@ def add_Link(name,url,iconimage):
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'toadryanlist' in url:
-        u = 'plugin.video.adryanlist'  
+        u = 'plugin://plugin.video.adryanlist'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok      
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)   

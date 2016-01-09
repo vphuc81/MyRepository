@@ -452,15 +452,15 @@ def add_Link(name,url,iconimage):
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'tohayhay' in url:
-        u = 'plugin.video.lnt.hayhaytv'  
+        u = 'plugin://plugin.video.lnt.hayhaytv'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'tovietmedia' in url:
-        u = 'plugin.video.vietmedia.movie'  
+        u = 'plugin://plugin.video.vietmedia.movie'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'toadryanlist' in url:
-        u = 'plugin.video.adryanlist'  
+        u = 'plugin://plugin.video.adryanlist'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok     
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)  
