@@ -595,7 +595,7 @@
 
 <addon
   id="plugin.video.xomgiaitri"
-  version="1.6"
+  version="1.7"
   name="*[COLOR yellow]Xom-GiaiTri.com[/COLOR]"
   provider-name="th">
   <requires>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon
   id="plugin.video.xomgiaitri"
-  version="1.6"
+  version="1.7"
   name="*[COLOR yellow]Xom-GiaiTri.com[/COLOR]"
-  provider-name="th">
+  provider-name="v137">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
@@ -12,7 +12,7 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>xomiaitri.com</summary>
-    <description>Watch free xomiaitri.com (Vietnamese) Videos</description>
+    <description>Watch free xomgiaitri.com (Vietnamese) Videos</description>
     <platform>all</platform>
   </extension>
 </addon>
