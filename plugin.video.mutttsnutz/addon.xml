@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<addon id="plugin.video.mutttsnutz" name="The Mutts Nuts" version="1000.000.004.1" provider-name="__Jas0npc__, V137">
+		<requires>
+			<import addon="xbmc.python" version="2.1.0"/>
+			<import addon="script.module.addon.common" version="2.0.0" />
+			<import addon="script.module.metahandler" version="2.6.0" />
+			<import addon="script.module.requests" version="2.6.0"/>
+		</requires>
+		<extension point="xbmc.python.pluginsource" library="default.py" >
+			<provides>video</provides>
+		</extension>
+		<extension point="xbmc.python.module" library="lib" />
+		<extension point="xbmc.addon.metadata">
+			<summary lang="en">The Mutts Nuts (Modified)</summary>
+			<description lang="en"/>
+			<platform/>
+		</extension>
+	</addon>
