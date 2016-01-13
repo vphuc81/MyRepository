@@ -370,7 +370,7 @@
     <import addon="script.module.youtube.dl" optional="true"/>
     <import addon="plugin.video.youtube" />
     <import addon="script.module.urlresolver" optional="true"/>
-    <import addon="script.module.simplejson" />    
+    <import addon="script.module.simplejson" />
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
     <provides>video</provides>
@@ -558,6 +558,23 @@
 	</extension>
 </addon>
 
+	<addon id="plugin.video.v.phimlt"  version="1.7" name="PhimLT.com" provider-name="V137">
+		<requires>
+			<import addon="xbmc.python" version="2.1.0" />
+			<import addon="script.module.xbmcswift2" version="1.3.1" />
+			<import addon="plugin.video.youtube" version="4.4.1" />
+			<import addon="script.module.requests" version="2.6.0"/>
+		</requires>
+		<extension library="default.py" point="xbmc.python.pluginsource">
+			<provides>video</provides>
+		</extension>
+		<extension point="xbmc.addon.metadata">
+			<summary>PhimLT.com</summary>
+			<description>PhimLT.com (Vietnamese)</description>
+			<platform>all</platform>
+		</extension>
+	</addon>
+
 <addon
   id="plugin.video.viettv24"
   version="1.9.16"
@@ -593,11 +610,28 @@
   </extension>
 </addon>
 
+	<addon id="plugin.video.xemphimso"  version="0.0.4" name="XemPhimSo" provider-name="traitravinh, V137">
+		<requires>
+			<import addon="xbmc.python" version="2.1.0" />
+			<import addon="script.module.requests" version="2.4.3" />
+			<import addon="script.module.beautifulsoup" version="3.2.1" />
+			<import addon="script.module.beautifulsoup4"/>
+		</requires>
+		<extension point="xbmc.python.pluginsource" library="xemphimso.py">
+			<provides>video</provides>
+	  </extension>
+		<extension point="xbmc.addon.metadata">
+			<summary>XemPhimSo</summary>
+			<description>XemPhimSo (Vietnamese)</description>
+			<platform>all</platform>
+		</extension>
+	</addon>
+
 <addon
   id="plugin.video.xomgiaitri"
   version="1.7"
   name="*[COLOR yellow]Xom-GiaiTri.com[/COLOR]"
-  provider-name="th">
+  provider-name="v137">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
@@ -606,7 +640,7 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>xomiaitri.com</summary>
-    <description>Watch free xomiaitri.com (Vietnamese) Videos</description>
+    <description>Watch free xomgiaitri.com (Vietnamese) Videos</description>
     <platform>all</platform>
   </extension>
 </addon>
