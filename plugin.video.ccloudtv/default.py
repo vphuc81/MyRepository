@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright (C) 2015
+Copyright (C) 2015 PodGod
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -35,6 +35,8 @@ xml_regex = '<title>(.*?)</title>\s*<link>(.*?)</link>\s*<thumbnail>(.*?)</thumb
 m3u_thumb_regex = 'tvg-logo=[\'"](.*?)[\'"]'
 group_title_regex = 'group-title=[\'"](.*?)[\'"]'
 m3u_regex = '#(.+?),(.+)\s*(.+)\s*'
+adult_regex = '#(.+?)group-title="Adult",(.+)\s*(.+)\s*'
+adult_regex2 = '#(.+?)group-title="Public-Adult",(.+)\s*(.+)\s*'
 ondemand_regex = '[ON\'](.*?)[\'nd]'
 yt = 'http://www.youtube.com'
 m3u = 'WVVoU01HTkViM1pNTTBKb1l6TlNiRmx0YkhWTWJVNTJZbE01ZVZsWVkzVmpSMmgzVURKck9WUlViRWxTYXpWNVZGUmpQUT09'.decode('base64')
@@ -102,7 +104,7 @@ def search():
 		keyb = xbmc.Keyboard('', 'Enter Channel Name')
 		keyb.doModal()
 		if (keyb.isConfirmed()):
-			searchText = urllib.quote_plus(keyb.getText()).replace('+', ' ')
+			searchText = urllib.quote_plus(keyb.getText(), safe="%/:=&?~#+!$,;'@()*[]").replace('+', ' ')
 		if len(List) > 0:		
 			content = make_request(List)
 			match = re.compile(m3u_regex).findall(content)
@@ -287,13 +289,20 @@ def radio():
 	
 def adult(): 	
 	try:
-		searchText = '(Adult)'
+		searchText = ('(Adult)') or ('(Public-Adult)')
 		if len(List) > 0:		
 			content = make_request(List)
-			match = re.compile(m3u_regex).findall(content)
+			match = re.compile(adult_regex).findall(content)
 			for thumb, name, url in match:
 				if re.search(searchText, removeAccents(name.replace('Đ', 'D')), re.IGNORECASE):
 					adult_playlist(name, url, thumb)	
+		if len(List) > 0:		
+			content = make_request(List)
+			match = re.compile(adult_regex2).findall(content)
+			for thumb, name, url in match:
+				if re.search(searchText, removeAccents(name.replace('Đ', 'D')), re.IGNORECASE):
+					adult_playlist(name, url, thumb)	
+
 	except:
 		pass
 	
@@ -700,7 +709,7 @@ def m3u_playlist(name, url, thumb):
 		else:	
 			addDir(name, url, '', icon, fanart)
 	else:
-		if '(Adult)' in name:
+		if ('(Adult)' in name) or ('(Public-Adult)' in name):
 			name = 'ADULTS ONLY'.url = 'http://ignoreme.com'
 		if 'youtube.com/watch?v=' in url:
 			url = 'plugin://plugin.video.youtube/play/?video_id=%s' % (url.split('=')[-1])
@@ -723,8 +732,6 @@ def adult_playlist(name, url, thumb):
 		if 'tvg-logo' in thumb:
 			thumb = re.compile(m3u_thumb_regex).findall(str(thumb))[0].replace(' ', '%20')			
 			addDir(name, url, '', thumb, thumb)		
-		if ',Adult Swim' in url:
-			name = ''.url = 'http://ignoreme.com'
 		else:	
 			addDir(name, url, '', icon, fanart)
 	else:

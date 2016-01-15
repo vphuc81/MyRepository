@@ -69,7 +69,7 @@
 
 <addon id="plugin.video.ccloudtv"
        name="cCloud TV"
-       version="1.3.9"
+       version="1.4.1"
        provider-name="podgod">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -82,15 +82,14 @@
     <import addon="script.module.youtube.dl" optional="true"/>
     <import addon="plugin.video.youtube" />
     <import addon="script.module.urlresolver" optional="true"/>
-    <import addon="script.module.simplejson" />
+    <import addon="script.module.simplejson" />    
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
     <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>All the best from cCloud TV</summary>
-    <description>
-	[COLOR yellow]http://ccloudtv.org[/COLOR] cCloud Popcorntime for LIVE TV, an open source project. Just click, play and stream because IPTV just got simple and easy :)
+    <description>cCloud is an open source cloud based social IPTV service. It is built by the community for the community, where streaming is just a click away. Just click, play and stream yup it's that simple. Just go to http://ccloudtv.org  and enjoy:)
     </description>
 	<license>http://www.gnu.org/licenses/</license>
     <forum>http://ccloudtv.org/forum</forum>
@@ -535,7 +534,7 @@
 
 <addon
   id="plugin.video.SportsDevil"
-  version="2016.01.02"
+  version="2016.01.12"
   name="SportsDevil"
   provider-name="MaxMustermann">
   <requires>

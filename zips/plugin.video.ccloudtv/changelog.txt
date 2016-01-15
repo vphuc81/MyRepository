@@ -1,3 +1,7 @@
+[b]1.4.1[/b]
+- Small bug fix to repair Top 10 channels. Thanks to Coder Alpha
+[b]1.4.0[/b]
+- Fixed a bug that allowed adult channels to appear in the search, despite being disabled in settings
 [b]1.3.9[/b]
 - small code changes/fixes
 [b]1.3.8[/b]
