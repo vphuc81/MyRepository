@@ -11,54 +11,54 @@ class LoginClient(object):
     CONFIGS = {
         'youtube-tv': {
             'system': 'All',
-            'key': 'AIzaSyAd-YEOqZz9nXVzGtn3KWzYLbLaajhqIDA',
-            'id': '861556708454-d6dlm3lh05idd8npek18k6be8ba3oc68.apps.googleusercontent.com',
-            'secret': 'SboVhoG9s0rNafixCSGGKXAT'
+            'key': 'AIzaSyCerpJJF9ytpPVvr8xyPkuEk4RDnLRZX8M',
+            'id': '778161400076-qcb1rsmn14odqccq11igabvpu37f8jc2.apps.googleusercontent.com',
+            'secret': 'bo6tBOFu-xe99UZswTJ36peU'
         },
         # API KEY for search and channel infos. These should work most of the time without login to safe some quota
         'youtube-for-kodi-quota': {
             'token-allowed': False,
             'system': 'All',
-            'key': 'AIzaSyA7v1QOHz8Q4my5J8uGSpr0zRrntRjnMmk',
-            'id': '597640352045-7um2gr1v5rgobm5bf07ebesm3er48286.apps.googleusercontent.com',
-            'secret': 'VmyQ12KkJ_N3yegu4Y-VGCXd'
+            'key': 'AIzaSyCerpJJF9ytpPVvr8xyPkuEk4RDnLRZX8M',
+            'id': '778161400076-qcb1rsmn14odqccq11igabvpu37f8jc2.apps.googleusercontent.com',
+            'secret': 'bo6tBOFu-xe99UZswTJ36peU'
         },
         'youtube-for-kodi-fallback': {
             'token-allowed': False,
             'system': 'Fallback!',
-            'key': 'AIzaSyBEvxICg_E5g8mfndYjWHH4WEDF2fN_zXM',
-            'id': '705000440035-f7v8mhn75udt6l20r75ko7f15c39ns1c.apps.googleusercontent.com',
-            'secret': 'XeLKD8o_mdzEBDy9Nw5KMKbr'
+            'key': 'AIzaSyCerpJJF9ytpPVvr8xyPkuEk4RDnLRZX8M',
+            'id': '778161400076-qcb1rsmn14odqccq11igabvpu37f8jc2.apps.googleusercontent.com',
+            'secret': 'bo6tBOFu-xe99UZswTJ36peU'
         },
         'youtube-for-kodi-12': {
             'system': 'Frodo',
-            'key': 'AIzaSyB6-pMlWO_XmgdM15VKGeLH4QsipdToBas',
-            'id': '131835494776-s0ef9jorci9vl0kaa5sqslupqvlku6ej.apps.googleusercontent.com',
-            'secret': 'Fz9nnfVGoH6jiLc0iefvzZYM'
+            'key': 'AIzaSyCerpJJF9ytpPVvr8xyPkuEk4RDnLRZX8M',
+            'id': '778161400076-qcb1rsmn14odqccq11igabvpu37f8jc2.apps.googleusercontent.com',
+            'secret': 'bo6tBOFu-xe99UZswTJ36peU'
         },
         'youtube-for-kodi-13': {
             'system': 'Gotham',
-            'key': 'AIzaSyB6-pMlWO_XmgdM15VKGeLH4QsipdToBas',
-            'id': '131835494776-s0ef9jorci9vl0kaa5sqslupqvlku6ej.apps.googleusercontent.com',
-            'secret': 'Fz9nnfVGoH6jiLc0iefvzZYM'
+            'key': 'AIzaSyCerpJJF9ytpPVvr8xyPkuEk4RDnLRZX8M',
+            'id': '778161400076-qcb1rsmn14odqccq11igabvpu37f8jc2.apps.googleusercontent.com',
+            'secret': 'bo6tBOFu-xe99UZswTJ36peU'
         },
         'youtube-for-kodi-14': {
             'system': 'Helix',
-            'key': 'AIzaSyCOxb_JvsI1-ZneJ2SXTkwZvW3fdtaR3bg',
-            'id': '45906745725-ucn38a9eumqcgfkmv14th17s0eq8kt5f.apps.googleusercontent.com',
-            'secret': 'sK6GK-ZhzgXWehCdjaGybHRi'
+            'key': 'AIzaSyCerpJJF9ytpPVvr8xyPkuEk4RDnLRZX8M',
+            'id': '778161400076-qcb1rsmn14odqccq11igabvpu37f8jc2.apps.googleusercontent.com',
+            'secret': 'bo6tBOFu-xe99UZswTJ36peU'
         },
         'youtube-for-kodi-15': {
             'system': 'Isengard',
-            'key': 'AIzaSyBAdxZCHbeJwnQ7dDZQJNfcaF46MdqJ24E',
-            'id': '988476436049-l9sfcivj4jtm1f2ppcvvbgsli6kvtis0.apps.googleusercontent.com',
-            'secret': '_BEENv-a3-egDz_QKo5pGZCK'
+            'key': 'AIzaSyCerpJJF9ytpPVvr8xyPkuEk4RDnLRZX8M',
+            'id': '778161400076-qcb1rsmn14odqccq11igabvpu37f8jc2.apps.googleusercontent.com',
+            'secret': 'bo6tBOFu-xe99UZswTJ36peU'
         },
         'youtube-for-kodi-16': {
-            'system': 'J...',
-            'key': 'AIzaSyBbgC4PZ2_hUdqqX7MIgdg2fK1nohv1jrw',
-            'id': '17932591024-8jruv1v7s78gipo7s17c91bnk26rqgpf.apps.googleusercontent.com',
-            'secret': 'bK9T234WWhqzYdcQLif1L35K'
+            'system': 'Jarvis',
+            'key': 'AIzaSyCerpJJF9ytpPVvr8xyPkuEk4RDnLRZX8M',
+            'id': '778161400076-qcb1rsmn14odqccq11igabvpu37f8jc2.apps.googleusercontent.com',
+            'secret': 'bo6tBOFu-xe99UZswTJ36peU'
         }
     }
 

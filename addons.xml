@@ -680,7 +680,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.youtube" name="YouTube" version="5.1.7" provider-name="bromix">
+<addon id="plugin.video.youtube" name="YouTube" version="5.1.16.01" provider-name="bromix, V137">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0"/>
 	</requires>
@@ -704,6 +704,8 @@
         <description lang="fr">YouTube est l'un des plus grands sites de partage vidéos du monde.</description>
         <summary lang="zh">YouTube附加元件</summary>
         <description lang="zh">「Youtube」是全世界最大的影片分享網站</description>
+        <summary lang="bg">Добавка за YouTube</summary>
+        <description lang="bg">YouTube е един от най-големите уеб сайтове за споделяне на видео в целия свят.</description>
 		<disclaimer lang="en"></disclaimer>
 		<language></language>
 		<platform>all</platform>
