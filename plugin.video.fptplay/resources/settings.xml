@@ -1,0 +1,3 @@
+<settings>
+   <setting id="quality" type="enum" label="Chọn độ phân giải phù hợp" values="0|1|2|3|4" default="0"/>   
+</settings>
