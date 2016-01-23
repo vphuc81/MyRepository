@@ -69,7 +69,7 @@
 
 <addon id="plugin.video.ccloudtv"
        name="cCloud TV"
-       version="1.4.1"
+       version="1.4.2"
        provider-name="podgod">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -89,11 +89,13 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>All the best from cCloud TV</summary>
-    <description>cCloud is an open source cloud based social IPTV service. It is built by the community for the community, where streaming is just a click away. Just click, play and stream yup it's that simple. Just go to http://ccloudtv.org  and enjoy:)
+    <description>cCloud is an open source cloud based social IPTV service. It is built by the community for the community, where streaming is just a click away. Just click, play and stream yup it's that simple. Just go to http://ccloudtv.org  and enjoy:) Please report any channels that are down here http://www.tiny.cc/reportchs 
     </description>
 	<license>http://www.gnu.org/licenses/</license>
     <forum>http://ccloudtv.org/forum</forum>
     <website>http://ccloudtv.org</website>
+    <website>http://facebook.com/ccloudapp</website>
+    <website>http://twitter.com/ccloudapp</website>
     <email></email>
     <platform>all</platform>
   </extension>

@@ -78,6 +78,7 @@ def main():
 	if (len(List) < 1 ):		
 		mysettings.openSettings()
 		xbmc.executebuiltin("Container.Refresh")
+	#addDir('[COLOR yellow][B]cCloud TV Guide[/B][/COLOR]', 'guide', 97, '%s/guide.png'% iconpath, fanart)
 	addDir('[COLOR royalblue][B]Top 10[/B][/COLOR]', 'top10', 51, '%s/top10.png'% iconpath, fanart)
 	addDir('[COLOR royalblue][B]Sports[/B][/COLOR]', 'sports', 52, '%s/sports.png'% iconpath, fanart)
 	addDir('[COLOR royalblue][B]News[/B][/COLOR]', 'news', 53, '%s/news.png'% iconpath, fanart)
@@ -687,7 +688,10 @@ def showText(heading, text):
 	    return
 	except:
 	    pass
-	
+
+def guide():
+	xbmc.executebuiltin("RunAddon(script.renegadestv)")
+	sys.exit()
 	
 def m3u_online():		
 	content = make_request(List)
@@ -771,7 +775,8 @@ def get_params():
 				param[splitparams[0]] = splitparams[1]
 	return param
 
-List = 'YUhSMGNEb3ZMM1JwYm5rdVkyTXZTMjlrYVE9PQ=='.decode('base64') .decode('base64')
+List = 'YUhSMGNEb3ZMMnR2WkdrdVkyTnNaQzVwYnc9PQ=='.decode('base64') .decode('base64')
+#List = 'YUhSMGNEb3ZMM1JwYm5rdVkyTXZTMjlrYVE9PQ=='.decode('base64') .decode('base64')
 def addDir(name, url, mode, iconimage, fanart):
 	u = sys.argv[0] + "?url=" + urllib.quote_plus(url) + "&mode=" + str(mode) + "&name=" + urllib.quote_plus(name) + "&iconimage=" + urllib.quote_plus(iconimage)
 	ok = True
@@ -878,6 +883,9 @@ elif mode == 63:
 	
 elif mode == 64:
 	international()
+	
+elif mode == 97:
+	guide()
 	
 elif mode == 98:
 	adult()
