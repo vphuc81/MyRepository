@@ -1,0 +1,17 @@
+V1.0.9
+Blocked bad urls from throwing script errors 
+
+V1.0.8
+Added back to tvaddons.ag repo Thanks to idle loop!!
+
+v1.0.7.3
+more cameras available
+
+v1.0.7.1
+(2014, Oct)
+Code forked by idleloop
+to fix no video at all
+
+V1.0.7
+Code updated by Blazetamer
+to fix no items in USA & Worldwide
