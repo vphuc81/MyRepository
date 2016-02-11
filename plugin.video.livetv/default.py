@@ -13,8 +13,81 @@ apk = xbmc . getCondVisibility ( 'system.platform.android' )
 Oo00OOO = 'aHR0cHM6Ly9nb29nbGVkcml2ZS5jb20vaG9zdC8='
 e = 'TDNaNExuaHRiQT09'
 oo00o0 = '0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM'
-O00O0OOO00 = 'YzNCbFkybGhiRG92TDJodmJXVXZZV1JrYjI1ekwzQnNkV2RwYmk1MmFXUmxieTUyZEhad2JIVno='
+O00O0OOO00O = 'YzNCbFkybGhiRG92TDJodmJXVXZZV1JrYjI1ekwzQnNkV2RwYmk1MmFXUmxieTUyZEhad2JIVno='
+O00O0OO000O = 'L3Jlc291cmNlcy9wbGF5bGlzdHMvdngueG1s'
+O00O0OOO00 = 'YzNCbFkybGhiRG92TDJodmJXVXZZV1JrYjI1ekwzQnNkV2RwYmk1MmFXUmxieTVsWVhKMGFHTmhiUT09'
 O00O0OO000 = 'L3Jlc291cmNlcy9wbGF5bGlzdHMvdngueG1s'
+
+dict = {'&amp;':'&', '&acirc;':'â', '&Aacute;':'Á', '&agrave;':'à', '&aacute;':'á', '&atilde;':'ã', '&igrave;':'ì', '&iacute;':'í', '&uacute;':'ú', '&ugrave;':'ù', '&oacute;':'ó', '&ouml;':'ö', '&ograve;':'ò', '&otilde;':'õ', '&ocirc;':'ô', '&Ocirc;':'Ô', '&eacute;':'é', '&egrave;':'è', '&ecirc;':'ê', '&Yacute;':'Ý', '&yacute;':'ý', "&rsquo;":"'", '&quot;':'"','m34':'m22', 'm35':'m22', 'http://4.bp.blogspot.com':'https://lh3.googleusercontent.com', 'http://3.bp.blogspot.com':'https://lh3.googleusercontent.com', 'http://2.bp.blogspot.com':'https://lh3.googleusercontent.com', 'http://1.bp.blogspot.com':'https://lh3.googleusercontent.com', 'http://www.youtube.com/watch?v=':'plugin://plugin.video.youtube/play/?video_id=', 'https://www.youtube.com/watch?v=':'plugin://plugin.video.youtube/play/?video_id='}
+
+def replace_all(text, dict):
+	try:
+		for a, b in dict.iteritems():
+			text = text.replace(a, b)
+		return text
+	except:
+		pass
+
+def read_file(file):
+	try:
+		f = open(file, 'r')
+		content = f.read()
+		f.close()
+		return content	
+	except:
+		pass		
+
+def notify():
+    wdlg = xbmcgui.WindowDialog()
+    img = xbmcgui.ControlImage( 0, 0, 1280, 720, template)
+    wdlg.addControl(img)
+    wdlg.doModal()
+		
+def III():
+    O000O0OOO0 = addon.getSetting('view_mode')
+    if O000O0OOO0 == 'List':
+      try:  
+        xbmc.executebuiltin('Container.SetViewMode(502)')
+      except:
+	    pass
+    elif O000O0OOO0 == 'Thumbnails':  
+      try:  
+        xbmc.executebuiltin('Container.SetViewMode(500)')
+      except:
+	    pass
+
+def alert(message,title="Thông báo!"):
+    xbmcgui.Dialog().ok(title,"",message)		
+
+def notification(message, timeout=10000):
+    xbmc.executebuiltin((u'XBMC.Notification("%s", "%s", %s, %s)' % ('Super Movies', message, icon, timeout)).encode("utf-8"))
+
+def I1iI1(object,group):
+	return object.group(group) if object else ''	
+	
+def OOo000():
+    if Temp_mode == 'true':
+        if os.path.exists(template):
+            notify()
+
+    url = IIiIiII11i
+    content = makeRequest(I1IiiI(url))
+    match = re.findall('<channel>\s*<name>(.+?)</name>\s*<mode>(.*?)</mode>\s*<thumbnail>(.*?)</thumbnail>',I1IiiI(content))
+    for iII111ii,iiIi,thumbnail in match:
+	    addDir(iII111ii,url,iiIi,logos+thumbnail,fanart+'main.jpg')
+    III()
+    if 9 - 9: i111IiI + iIIIiI11 . iII111ii
+		
+def Ii11I1Ii(name,url):
+    name = name
+    content = makeRequest(I1IiiI(url))
+    match = re.findall('<channel>\s*<name>' + name + '</name>((?s).+?)</channel>',I1IiiI(content))
+    for O00o in match:
+        item = re.compile('<title>(.*?)</title>\s*<link>(.*?)</link>\s*<mode>(.*?)</mode>\s*<thumbnail>(.*?)</thumbnail>').findall(O00o)
+        for title, url, iiIi, thumbnail in item:		
+            addDir(title,url,iiIi,thumbnail,fanart+'cat2.jpg')
+    III()
+    if 20 - 20: Ooooo0Oo00oO0 % OooO0o0Oo . O00 % iII11i
 
 def TVChannel(url):
     xmlcontent = GetUrl(url)
