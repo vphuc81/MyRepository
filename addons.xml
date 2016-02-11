@@ -620,7 +620,7 @@
 
 <addon
   id="plugin.video.vtvplus"
-  version="1.5.1"
+  version="1.5.2"
   name="*[COLOR yellow]VTV-Plus[/COLOR]"
   provider-name="Vinh Modded from Thong">
   <requires>
