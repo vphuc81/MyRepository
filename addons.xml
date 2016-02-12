@@ -381,7 +381,7 @@
 
 <addon id="plugin.video.MoneySports"
        name="MoneySports"
-       version="2.0.2"
+       version="2.0.8"
        provider-name="Mark Money">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -637,8 +637,8 @@
 
 <addon
   id="plugin.video.vtvplus"
-  version="1.5.2.1"
-  name="*[COLOR yellow]VTV-Plus[/COLOR]"
+  version="1.5.2.2"
+  name="VTV-Plus(Not Working)"
   provider-name="Vinh Modded from Thong">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
