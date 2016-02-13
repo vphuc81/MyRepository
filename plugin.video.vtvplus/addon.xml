@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon
   id="plugin.video.vtvplus"
-  version="1.5.2.2"
-  name="VTV-Plus(Not Working)"
+  version="1.5.3"
+  name="VTV-Plus"
   provider-name="Vinh Modded from Thong">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
