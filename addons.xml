@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.super.favourites" name="Cables TV" version="3.0.35.1" provider-name="spoyser">
+<addon id="plugin.program.super.favourites" name="Cables TV" version="3.0.35.2" provider-name="spoyser">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.metahandler" version="2.7.0" />
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video audio executable</provides>
-  </extension>
+  <extension point="xbmc.python.pluginsource" library="default.py" />
   <extension point="xbmc.service" library="service.py" start="startup" />
   <extension point="xbmc.addon.metadata">
     <summary lang="en">Put all your favourites bits of all your favourites addons into one easy to use addon.</summary>
