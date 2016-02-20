@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.fptplay"
-       version="1.5.6.1"
-       name="Fpt Play"
-       provider-name="itv member">
+<addon id="plugin.video.fptplay" name="Fpt Play" version="1.5.8.1" provider-name="repository.cx.com">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.xbmcswift2" version="2.4.0"/>
   </requires>
-  <extension point="xbmc.python.module" library="default.py" />
+  <extension point="xbmc.python.pluginsource" library="addon.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.service"
+			library="start.py" start="startup">
+  </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>Entertainment</summary>
-    <description>Thử nghiệm xem các kênh truyền hình tại http://fptplay.net/livetv</description>
-	<disclaimer lang="en">Nguồn data trên web nên chúng tôi không chịu trách nhiệm về sự ổn định.</disclaimer>
     <platform>all</platform>
+    <language></language>
+    <summary lang="en">Vietnam TV Online</summary>
+    <description lang="en">This plugin allows you to watch live TV channels in Vietnam - Source from ftp play sites (http://fptplay.net)</description>
+	<language>vi</language>
+	<license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+	<forum></forum>
+	<website>https://github.com/vinhhrv/cxkodi</website>
+	<source>https://github.com/vinhhrv/cxkodi</source>
+	<disclaimer></disclaimer>
+	<email></email>
+	<broken></broken>
   </extension>
 </addon>
