@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+	<addon id="plugin.video.v137.xemphim73" version="1.1" name="XemPhim 73" provider-name="V137">
+		<requires>
+			<import addon="xbmc.python" version="2.1.0"/>
+			<import addon="script.module.requests" version="2.6.0"/>
+			<import addon="script.module.urlresolver" version="1.0.0"/>
+			<import addon="script.module.xbmcswift2" version="1.3.1" />
+		</requires>
+		<extension point="xbmc.python.pluginsource" library="default.py"/>
+		<extension point="xbmc.addon.metadata">
+			<summary>XemPhim 73</summary>
+			<description>XemPhim 73 (Vietnamese)</description>
+			<platform>all</platform>
+		</extension>
+	</addon>

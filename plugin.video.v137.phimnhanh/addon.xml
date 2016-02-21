@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+	<addon id="plugin.video.v137.phimnhanh" version="1.1" name="PhimNhanh.com" provider-name="V137">
+		<requires>
+			<import addon="xbmc.python" version="2.1.0"/>
+			<import addon="script.module.requests" version="2.6.0"/>
+		</requires>
+		<extension point="xbmc.python.pluginsource" library="default.py"/>
+		<extension point="xbmc.addon.metadata">
+			<summary>PhimNhanh.com</summary>
+			<description>PhimNhanh.com (Vietnamese)</description>
+			<platform>all</platform>
+		</extension>
+	</addon>
