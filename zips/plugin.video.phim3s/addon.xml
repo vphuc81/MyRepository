@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon 
 	id="plugin.video.phim3s"
-	version="1.0.0"
+	version="1.0.1"
 	name="*[COLOR yellow][B]Phim 3S[/B][/COLOR]"
 	provider-name="DaveLN">
 	<requires>
@@ -9,9 +9,7 @@
 		<import addon="script.module.simplejson" />
 		<import addon="script.module.t0mm0.common" version="1.1.0"/>
 	</requires>
-	<extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-	</extension>
+	<extension point="xbmc.python.pluginsource" library="default.py"/>
 	<extension point="xbmc.addon.metadata">
 		<summary>Movies</summary>
 		<description>[COLOR lime][B]Xem phim từ website phim3s.net[/B][/COLOR]</description>

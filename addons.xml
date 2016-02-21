@@ -305,8 +305,8 @@
 
 <addon
   id="plugin.video.kodi4vn.launcher"
-  version="0.2"
-  name="[COLOR yellow]Kodi4VN Launcher[/COLOR]"
+  version="0.6.1"
+  name="*[COLOR yellow]Kodi4VN Launcher[/COLOR]"
   provider-name="kodi4vn">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -314,9 +314,7 @@
     <import addon="plugin.video.youtube" version="4.4.1" />
     <import addon="script.module.requests" version="1.0" />
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
+  <extension point="xbmc.python.pluginsource" library="default.py"/>
   <extension point="xbmc.addon.metadata">
     <summary>VietTV24.com</summary>
     <description>Watch hundreds of Vietnamesse and English channels from viettv24.com</description>
@@ -411,15 +409,13 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.moviebox" name="*[COLOR yellow]Movie-Box[/COLOR]" provider-name="Vinh Computer Repair" version="1.6">
+<addon id="plugin.video.moviebox" name="*[COLOR yellow]Movie-Box[/COLOR]" provider-name="Vinh Computer Repair" version="1.6.1">
   <requires>
     <import addon="xbmc.python" version="2.1.0" />
     <import addon="script.module.xbmcswift2" version="1.3.1" />
     <import addon="plugin.video.youtube" version="4.4.1" />
   </requires>
-  <extension library="default.py" point="xbmc.python.pluginsource">
-    <provides>video</provides>
-  </extension>
+  <extension library="default.py" point="xbmc.python.pluginsource"/>
   <extension point="xbmc.addon.metadata">
     <platform>all</platform>
     <summary>Unofficial Kodi addon of MovieBox Android app</summary>
@@ -478,7 +474,7 @@
 
 <addon
 	id="plugin.video.phim3s"
-	version="1.0.0"
+	version="1.0.1"
 	name="*[COLOR yellow][B]Phim 3S[/B][/COLOR]"
 	provider-name="DaveLN">
 	<requires>
@@ -486,9 +482,7 @@
 		<import addon="script.module.simplejson" />
 		<import addon="script.module.t0mm0.common" version="1.1.0"/>
 	</requires>
-	<extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-	</extension>
+	<extension point="xbmc.python.pluginsource" library="default.py"/>
 	<extension point="xbmc.addon.metadata">
 		<summary>Movies</summary>
 		<description>[COLOR lime][B]Xem phim từ website phim3s.net[/B][/COLOR]</description>
@@ -506,7 +500,7 @@
 
 <addon
   id="plugin.video.phim60s"
-  version="2.0.16"
+  version="2.0.17"
   name="*[COLOR yellow]Phim-60s.info[/COLOR]"
   provider-name="Vinh Modded from Thong">
   <requires>
@@ -515,9 +509,7 @@
     <import addon="plugin.video.youtube" version="4.4.1" />
     <import addon="script.module.requests" version="1" />
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
+  <extension point="xbmc.python.pluginsource" library="default.py"/>
   <extension point="xbmc.addon.metadata">
     <summary>phim60s</summary>
     <description>Watch free phim60s.info (Vietnamese) Videos</description>
@@ -542,15 +534,13 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.phimvang.org" name="*[COLOR yellow]Phim-Vang.org[/COLOR]" provider-name="Vinh Computer Repair" version="1.5">
+<addon id="plugin.video.phimvang.org" name="*[COLOR yellow]Phim-Vang.org[/COLOR]" provider-name="Vinh Computer Repair" version="1.5.1">
   <requires>
     <import addon="xbmc.python" version="2.1.0" />
     <import addon="script.module.xbmcswift2" version="1.3.1" />
     <import addon="plugin.video.youtube" version="4.4.1" />
   </requires>
-  <extension library="default.py" point="xbmc.python.pluginsource">
-    <provides>video</provides>
-  </extension>
+  <extension library="default.py" point="xbmc.python.pluginsource"/>
   <extension point="xbmc.addon.metadata">
     <platform>all</platform>
     <summary>Watch free movies from phimvang.org</summary>
@@ -560,7 +550,7 @@
 
 <addon
   id="plugin.video.SportsDevil"
-  version="2016.02.01"
+  version="2016.02.20"
   name="SportsDevil"
   provider-name="SportsDevil">
   <requires>
@@ -570,9 +560,7 @@
   </requires>
   <extension
     point="xbmc.python.pluginsource"
-    library="default.py">
-   <provides>video</provides>
-  </extension>
+    library="default.py"/>
   <extension point="xbmc.addon.metadata">
     <summary>Play videos of different sports streaming sites</summary>
     <description>Play videos of different sports streaming sites</description>
@@ -601,16 +589,14 @@
 	</extension>
 </addon>
 
-	<addon id="plugin.video.v.phimlt"  version="1.7" name="PhimLT.com" provider-name="V137">
+	<addon id="plugin.video.v.phimlt"  version="1.7.1" name="PhimLT.com" provider-name="V137">
 		<requires>
 			<import addon="xbmc.python" version="2.1.0" />
 			<import addon="script.module.xbmcswift2" version="1.3.1" />
 			<import addon="plugin.video.youtube" version="4.4.1" />
 			<import addon="script.module.requests" version="2.6.0"/>
 		</requires>
-		<extension library="default.py" point="xbmc.python.pluginsource">
-			<provides>video</provides>
-		</extension>
+		<extension library="default.py" point="xbmc.python.pluginsource"/>
 		<extension point="xbmc.addon.metadata">
 			<summary>PhimLT.com</summary>
 			<description>PhimLT.com (Vietnamese)</description>
@@ -681,16 +667,14 @@
   </extension>
 </addon>
 
-	<addon id="plugin.video.xemphimso"  version="0.0.4" name="XemPhimSo" provider-name="traitravinh, V137">
+	<addon id="plugin.video.xemphimso"  version="0.0.4.1" name="XemPhimSo" provider-name="traitravinh, V137">
 		<requires>
 			<import addon="xbmc.python" version="2.1.0" />
 			<import addon="script.module.requests" version="2.4.3" />
 			<import addon="script.module.beautifulsoup" version="3.2.1" />
 			<import addon="script.module.beautifulsoup4"/>
 		</requires>
-		<extension point="xbmc.python.pluginsource" library="xemphimso.py">
-			<provides>video</provides>
-	  </extension>
+		<extension point="xbmc.python.pluginsource" library="xemphimso.py"/>
 		<extension point="xbmc.addon.metadata">
 			<summary>XemPhimSo</summary>
 			<description>XemPhimSo (Vietnamese)</description>
@@ -700,15 +684,13 @@
 
 <addon
   id="plugin.video.xomgiaitri"
-  version="1.7.1"
+  version="1.7.2"
   name="*[COLOR yellow]Xom-GiaiTri.com[/COLOR]"
   provider-name="Vinh Modded from Thong">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
+  <extension point="xbmc.python.pluginsource" library="default.py"/>
   <extension point="xbmc.addon.metadata">
     <summary>xomiaitri.com</summary>
     <description>Watch free xomgiaitri.com (Vietnamese) Videos</description>
@@ -718,15 +700,13 @@
 
 <addon
   id="plugin.video.yeuphim1"
-  version="1.5"
+  version="1.5.1"
   name="*[COLOR yellow]Yeu-Phim[/COLOR]"
   provider-name="th">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
+  <extension point="xbmc.python.pluginsource" library="default.py"/>
   <extension point="xbmc.addon.metadata">
     <summary></summary>
     <description></description>
