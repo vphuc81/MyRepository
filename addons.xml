@@ -243,16 +243,14 @@
 
 <addon
   id="plugin.video.htvonline"
-  version="1.5"
+  version="1.5.1"
   name="*[COLOR yellow]HTV-Online[/COLOR]"
   provider-name="Vinh Modded from Thong">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.xbmcswift2" version="1.3.1" />
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
+  <extension point="xbmc.python.pluginsource" library="default.py"/>
   <extension point="xbmc.addon.metadata">
     <summary>HTV Online</summary>
     <description>Watch free HTVOnline.com.vn (Vietnamese) Channels</description>
@@ -261,24 +259,26 @@
 </addon>
 
 <addon id="plugin.video.itvplus"
-       name="[COLOR ffff0000]*ITV*[/COLOR] Plus"
-       version="1.5.1"
+       version="2.2.0.1"
+       name="[COLOR ffff0000]*ITV*[/COLOR]Plus"
        provider-name="itv member">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
 	<import addon="script.module.simplejson" />
-	<import addon="script.module.simple.downloader" version="1.9.4" />
+	<import addon="script.module.t0mm0.common" version="1.1.0"/>
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.service"
-			library="autorun.py" start="startup">
+  <extension point="xbmc.python.pluginsource" library="default.py"/>
+  <extension point="xbmc.service" library="autorun.py" start="startup">
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>Entertainment</summary>
-    <description>Giải trí trên kodi (xbmc)</description>
-	<disclaimer lang="en">Nguồn data trên web nên chúng tôi không chịu trách nhiệm về sự ổn định.</disclaimer>
+    <summary>ITV Entertainment</summary>
+    <description>
+	* Addon được ITVPlus xây dựng dựa vào nguồn dữ liệu trên internet. Bản quyền tác giả thuộc về ITVPlus.
+	* Với mục đích phục vụ nhu cầu giải trí cho cộng đồng Kodi. Chúng tôi đã tốn nhiều thời gian và công sức để tạo ra sản phẩm, vì vậy mong các tổ chức và cá nhân tuân thủ các quy định sau:
+	- Không tự ý sử dụng mã nguồn của addon khi chưa có sự đồng ý của nhóm lập trình viên ITVPlus.
+	- Không tự ý chỉnh sửa lại addon và chia sẻ, quảng cáo phục vụ cho nhu cầu lợi ích của một cá nhân hay tập thể nào đó.
+	</description>
+	<disclaimer lang="en">Nguồn data được chia sẻ trên internet. Chúng tôi không chịu mọi trách nhiệm pháp lý.</disclaimer>
     <platform>all</platform>
   </extension>
 </addon>
@@ -358,15 +358,13 @@
 
 <addon
   id="plugin.video.megafun"
-  version="1.5"
+  version="1.5.1"
   name="*[COLOR yellow]Mega-Fun.vn[/COLOR]"
   provider-name="th">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
+  <extension point="xbmc.python.pluginsource" library="default.py"/>
   <extension point="xbmc.addon.metadata">
     <summary>hayhaytv</summary>
     <description>Watch free megafun.vn (Vietnamese) Videos</description>
