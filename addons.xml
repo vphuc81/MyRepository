@@ -259,7 +259,7 @@
 </addon>
 
 <addon id="plugin.video.itvplus"
-       version="2.2.0.1"
+       version="2.2.1.1"
        name="[COLOR ffff0000]*ITV*[/COLOR]Plus"
        provider-name="itv member">
   <requires>
@@ -594,7 +594,7 @@
 		</extension>
 	</addon>
 
-	<addon id="plugin.video.v137.phimnhanh" version="1.1" name="PhimNhanh.com" provider-name="V137">
+	<addon id="plugin.video.v137.phimnhanh" version="1.1.1" name="PhimNhanh.com" provider-name="V137">
 		<requires>
 			<import addon="xbmc.python" version="2.1.0"/>
 			<import addon="script.module.requests" version="2.6.0"/>
@@ -607,7 +607,7 @@
 		</extension>
 	</addon>
 
-	<addon id="plugin.video.v137.xemphim73" version="1.1" name="XemPhim 73" provider-name="V137">
+	<addon id="plugin.video.v137.xemphim73" version="1.1.1" name="XemPhim 73" provider-name="V137">
 		<requires>
 			<import addon="xbmc.python" version="2.1.0"/>
 			<import addon="script.module.requests" version="2.6.0"/>

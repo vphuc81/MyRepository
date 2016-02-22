@@ -64,19 +64,26 @@ def notify():
     img = xbmcgui.ControlImage( 0, 0, 1280, 720, template)
     wdlg.addControl(img)
     wdlg.doModal()
-		
+
+def noti_fy(url):
+    wdlg = xbmcgui.WindowDialog()
+    img = xbmcgui.ControlImage( 0, 0, 1280, 720, url)
+    wdlg.addControl(img)
+    wdlg.doModal()
+    sys.exit()
+	
 def III():
     O000O0OOO0 = addon.getSetting('view_mode')
     if O000O0OOO0 == 'List':
-      try:  
-        xbmc.executebuiltin('Container.SetViewMode(502)')
-      except:
-	    pass
+        try:  
+            xbmc.executebuiltin('Container.SetViewMode(502)')
+        except:
+	        pass
     elif O000O0OOO0 == 'Thumbnails':  
-      try:  
-        xbmc.executebuiltin('Container.SetViewMode(500)')
-      except:
-	    pass
+        try:  
+            xbmc.executebuiltin('Container.SetViewMode(500)')
+        except:
+	        pass
 
 def alert(message,title="Thông báo!"):
     xbmcgui.Dialog().ok(title,"",message)		
@@ -91,7 +98,6 @@ def OOo000():
     if Temp_mode == 'true':
         if os.path.exists(template):
             notify()
-
     url = IIiIiII11i
     content = makeRequest(I1IiiI(url))
     match = re.findall('<channel>\s*<name>(.+?)</name>\s*<mode>(.*?)</mode>\s*<thumbnail>(.*?)</thumbnail>',I1IiiI(content))
@@ -106,8 +112,11 @@ def Ii11I1Ii(name,url):
     match = re.findall('<channel>\s*<name>' + name + '</name>((?s).+?)</channel>',I1IiiI(content))
     for O00o in match:
         item = re.compile('<title>(.*?)</title>\s*<link>(.*?)</link>\s*<mode>(.*?)</mode>\s*<thumbnail>(.*?)</thumbnail>').findall(O00o)
-        for title, url, iiIi, thumbnail in item:		
-            addDir(title,url,iiIi,thumbnail,fanart+'cat2.jpg')
+        for title, url, iiIi, thumbnail in item:
+            if '.png' in url:
+                addDir(title,url,iiIi,thumbnail,fanart+'cat2.jpg')
+            else:
+                addDir(title,url,iiIi,thumbnail,fanart+'cat2.jpg')
     III()
     if 20 - 20: Ooooo0Oo00oO0 % OooO0o0Oo . O00 % iII11i
 
@@ -1014,6 +1023,9 @@ def I11111iII11i(url):
 	if 'htvonline' in url:
 		content = makeRequest(url)	
 		mediaUrl = re.compile('data\-source=\"([^\"]*)\"').findall(content)[0]
+	elif 'onworldtv' in url:
+		content = makeRequest(url)	
+		mediaUrl = re.compile('var iosUrl = "(.+?).m3u8.+?"').findall(content)[0] + '.m3u8'
 	elif 'wezatv' in url:
 		content = makeRequest(url)
 		try:
@@ -1368,7 +1380,7 @@ except:pass
 sysarg=str(sys.argv[1])
 
 if mode==None or url==None or len(url)<1:
-	I1Ii1() #I1iI1
+	I1Ii1()
 
 elif mode==1:Ii11I1Ii(name,url)
 
@@ -1440,6 +1452,8 @@ elif mode==102:
     I11111IIi11i(url)
     O0OO0O.close()
     del O0OO0O	
+
+elif mode==103:noti_fy(url)	
 	
 elif mode==500:addon.openSettings();end='ok'
 	

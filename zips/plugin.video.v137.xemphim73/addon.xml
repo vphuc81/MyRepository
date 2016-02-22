@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-	<addon id="plugin.video.v137.xemphim73" version="1.1" name="XemPhim 73" provider-name="V137">
+	<addon id="plugin.video.v137.xemphim73" version="1.1.1" name="XemPhim 73" provider-name="V137">
 		<requires>
 			<import addon="xbmc.python" version="2.1.0"/>
 			<import addon="script.module.requests" version="2.6.0"/>
