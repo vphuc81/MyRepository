@@ -1,3 +1,4 @@
 <settings>
-   <setting id="quality" type="enum" label="Chọn độ phân giải phù hợp" values="0|1|2|3|4" default="0"/>   
+   <setting id="start_channelid" type="text" label="Start Up Channel Id" default=''/>
+   <setting id="quality" type="text" label="Quality" default='3'/>
 </settings>
