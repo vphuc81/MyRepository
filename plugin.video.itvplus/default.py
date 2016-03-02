@@ -764,9 +764,9 @@ def oOiIi1IIIi1(url):
         elif 'timalbum' in url:  
             url = 'http://www.woim.net/search/album/%s.html' + urllib.quote_plus(searchText)      
             oOiii1IIIi1(url)
-        elif 'timphim1' in url:  
-            url = 'http://phim3s.net/search/%s/' % urllib.quote_plus(searchText)      
-            iI1Ii11111iIi(name,url)	  
+        #elif 'timphim1' in url:  
+            #url = 'http://phim3s.net/search/%s/' % urllib.quote_plus(searchText)      
+            #iI1Ii11111iIi(name,url)	  
         elif 'timphim2' in url:  
             url = 'http://phimhd365.com/search.htm?keyword=%s' % searchText      
             oOiii1IiIi1(url)
@@ -819,7 +819,7 @@ def OOiii1IiIi1(url):
     if (keyb.isConfirmed()):
         searchText=urllib.quote_plus(keyb.getText())
     try:	  
-        url = 'http://phimhd365.com/search.htm?keyword=%s' % searchText
+        url = 'http://phimhd365.com/search.htm?keyword=%s' % urllib.quote_plus(searchText)
         oOiii1IiIi1(url)
         try:	  
             url = pgt+'result.php?type=search&keywords=' + searchText
@@ -831,17 +831,17 @@ def OOiii1IiIi1(url):
                     url = 'http://xuongphim.tv/tim-kiem/%s.html' % urllib.quote_plus(searchText)
                     oOiii1IiIi1(url)
                     try:
-                        url = 'http://phim3s.net/search/%s/' % urllib.quote_plus(searchText)
+                        url = 'http://phim7.com/tim-kiem/tat-ca/' + searchText.replace('+', '-') + '.html'
                         oOiii1IiIi1(url)
                         try:
-                            url = 'http://phim7.com/tim-kiem/tat-ca/' + searchText.replace('+', '-') + '.html'
+                            url = 'http://phim.clip.vn/search?p=1&keyword=' + searchText + '/'
                             oOiii1IiIi1(url)
                             try:
-                                url = 'http://phim.clip.vn/search?p=1&keyword=' + searchText + '/'
+                                url = 'http://ssphim.com/movie/tags-' + searchText + '/'
                                 oOiii1IiIi1(url)
                                 try:
-                                    url = 'http://ssphim.com/movie/tags-' + searchText + '/'
-                                    oOiii1IiIi1(url)
+                                    url = 'http://hdonline.vn/tim-kiem/'+searchText.replace('+', '-')+'.html'
+                                    Ii1ii11111Iii(url, query='', mode='')
                                 except:pass 									
                             except:pass 								
                         except:pass							
@@ -854,56 +854,43 @@ def OOiii1IiIi1(url):
 
 def oOiii1IiIi1(url):	
     content = makeRequest(url)
-
-    match = re.compile('<div class="inner"><a href="(.+?)" title="(.+?)"><img src="(.+?)".+?</a><div class="info">.+?</a>(.+?)</div>').findall(content)
-    for url, title, thumbnail, year in match:
-	    addDir('[COLOR lime]Server 1 [/COLOR]' + title + ' ' + year, phim3s + url + 'xem-phim/', 9, thumbnail, thumbnail)	
-	
-    match=re.compile('<a data-tooltip=".+?" href="(.+?)">.*\s.*data-original="(.+?)"  alt="(.+?)"').findall(content)
+    #s2
+    match = re.compile('<a data-tooltip=".+?" href="(.+?)">.*\s.*data-original="(.+?)"  alt="(.+?)"').findall(content)
     for url, thumbnail, name in match:
 	    name = replace_all(name, dict)
 	    addDir('[COLOR red]Server 2 [/COLOR]'+name,phimhd365+url,10,thumbnail,thumbnail)
-
+    #s3
     match = re.compile('<a style=\'text-decoration:none\' href=\'([^\']*).html\'>\s*<img style=.+?src=(.+?) ><table style.+?:0px\'>(.+?)\s*<\/font><br \/><font style.+?#F63\'>(.+?)</font>').findall(content)
     for url,thumbnail,name,oname in match:
         addLink('[COLOR blue]Server 3 [/COLOR]'+name+' - '+oname,pgt+url+'/Tap-1.html',100,pgt+thumbnail)
     match = re.compile('<a style=\'text-decoration:none\' href=\'([^\']*).html\'>\s*<img style=.+?src=(.+?) ><table style.+?:0px\'>(.+?)</b>').findall(content)
     for url,thumbnail,name in match:
-        addLink('[COLOR blue]Server 3 [/COLOR]'+name,pgt+url+'/Tap-1.html',100,pgt+thumbnail)	  
-
+        addLink('[COLOR blue]Server 3 [/COLOR]'+name,pgt+url+'/Tap-1.html',100,pgt+thumbnail)
     match = re.compile("<a style='text-decoration:none' href='(.+?).html'>\s*<img style='.+?' src=(.+?) ><div class='text'>\s*<p>(.+?)</p>\s*</div><table style='.+?'><tr><td style='.+?'><b><font style='.+?:0px'>(.+?)\s*</font><br /><font style='.+?:#F63'> (.+?)</font>").findall(content)  
     for url,thumbnail,epi,name,oname in match:
         addDir('[COLOR blue]Server 3 [/COLOR]'+name+' - '+oname+' '+'[COLOR green]'+epi+'[/COLOR]',pgt+url+'/Tap-1.html',10,pgt+thumbnail,pgt+thumbnail)
     match = re.compile("<a style='text-decoration:none' href='(.+?).html'>\s*<img style='.+?' src=(.+?) ><div class='text'>\s*<p>(.+?)</p>\s*</div><table style='.+?'><tr><td style='.+?'><b><font style='.+?:0px'>(.+?)</b>").findall(content)  
     for url,thumbnail,epi,name in match:	
         addDir('[COLOR blue]Server 3 [/COLOR]'+name+'[COLOR green]'+epi+'[/COLOR]',pgt+url+'/Tap-1.html',10,pgt+thumbnail,pgt+thumbnail)
-	  
-    match=re.compile('<a class="tooltips" href=".+?" style=".+?url\(\'(.+?)\'\)" data-content-tooltips=".+?"></a>\s*</div>\s*<h3>\s*<a href="(.+?)" title=".+?">(.+?)<').findall(content)
+    #s4	  
+    match = re.compile('<a class="tooltips" href=".+?" style=".+?url\(\'(.+?)\'\)" data-content-tooltips=".+?"></a>\s*</div>\s*<h3>\s*<a href="(.+?)" title=".+?">(.+?)<').findall(content)
     for thumbnail,url,name in match:
-	    addDir('[COLOR lime]Server 4 [/COLOR]'+name,hplus+url,10,thumbnail+'?.png',thumbnail)
-	  
-    #match=re.compile('<a class="movie-item m-block" href="(.+?)" title="(.+?)"><div class="block-wrapper"><div class=".+?"><div class=".+?"><span class=".+?"><span class=".+?">(.+?)</span></span><img src="(.+?)"').findall(content)
-    #for url, title, res, thumbnail in match:
-	    #addDir('[COLOR orange]Server 6 [/COLOR]'+title.replace("&#39","'")+' [COLOR green]< '+res+' >[/COLOR]',url,10, thumbnail, thumbnail)	  
-
-    match=re.compile('<a href="(.+?)" .+? src="(.+?)" .+? alt="(.+?)"></span>').findall(content)
+	    addDir('[COLOR red]Server 4 [/COLOR]'+name,hplus+url,10,thumbnail+'?.png',thumbnail)	  
+    #s6
+    match = re.compile('<a href="(.+?)" .+? src="(.+?)" .+? alt="(.+?)"></span>').findall(content)
     for url, thumbnail, name in match:
 	    name = replace_all(name, dict)		
-	    addDir('[COLOR orange]Server 6 [/COLOR]' + name, xuongphim +url, 10, thumbnail, thumbnail)
-		
-    match = re.compile('href="(.+?)" >\s*<img src="(.+?)"\s*alt="(.+?)"').findall(content)
-    for url, thumbnail, name in match:
-        addDir('[COLOR firebrick]Server 7 [/COLOR]'+name, url, 10, thumbnail, thumbnail)	  
-
+	    addDir('[COLOR lime]Server 6 [/COLOR]' + name, xuongphim +url, 10, thumbnail, thumbnail)
+    #s8
     match = re.compile('href="(.+?)" title="(.+?)"><span class="poster">\s*<img src=".+?" alt="" />\s*<img class=".+?" src=".+?" data-original="(.+?)"').findall(content)
     for url, name, thumbnail in match:
-        addDir('[COLOR gold]Server 8 [/COLOR]' + name, phim7 + url.replace('/phim/', '/xem-phim/'), 9, thumbnail, thumbnail)	  
-	  
-    match=re.compile('<a href="(.+?)" class="item">\s*.+?\s*<div class=".+?" data-title="(.+?)" data-title-o=".+?" .+? data-year="(.+?)" .+?">\s*.+?\s* src="(.+?)"').findall(content)[:1]
+        addDir('[COLOR blue]Server 8 [/COLOR]' + name, phim7 + url.replace('/phim/', '/xem-phim/'), 9, replace_all(thumbnail, dict), thumbnail)	  
+    #s9
+    match = re.compile('<a href="(.+?)" class="item">\s*.+?\s*<div class=".+?" data-title="(.+?)" data-title-o=".+?" .+? data-year="(.+?)" .+?">\s*.+?\s* src="(.+?)"').findall(content)[:1]
     for url, title, year, thumbnail in match:
-	    addDir('[COLOR green]Server 9 [/COLOR]' + title + ' - ' + year, url, 10, thumbnail, thumbnail)
-
-    match=re.compile('<a href="(.+?)" title=".+?">\s*<div class=".+?">\s*<h4>.+?</h4>\s*.+?\s*.+?\s*</div>\s*<img class="img-thumbnail" src="(.+?)" alt="(.+?)">\s*</a>').findall(content)
+	    addDir('[COLOR orange]Server 9 [/COLOR]' + title + ' - ' + year, url, 10, thumbnail, thumbnail)
+    #s10
+    match = re.compile('<a href="(.+?)" title=".+?">\s*<div class=".+?">\s*<h4>.+?</h4>\s*.+?\s*.+?\s*</div>\s*<img class="img-thumbnail" src="(.+?)" alt="(.+?)">\s*</a>').findall(content)
     for url, thumbnail, name in match:
 	    thumbnail = thumbnail.replace(' ','%20')
 	    addDir('[COLOR deeppink]Server 10 [/COLOR]' + name, url, 10, thumbnail, thumbnail)
@@ -1153,7 +1140,7 @@ def I11111iIi11i(url):
 		OOoO = OOoO0O0OoO(content)
 	elif 'xuongphim' in url:
 		content = makeRequest(url)
-		videoUrl = re.compile('file: "(.+?)",.+?type:').findall(content)
+		videoUrl = re.compile('{file: "(.+?)",.+?}').findall(content)
 		if '.mp4' in videoUrl:
 		    mediaUrl = videoUrl[-1]
 		else:

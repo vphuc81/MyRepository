@@ -65,8 +65,8 @@
 
 <addon id="plugin.video.ccloudtv"
        name="cCloud TV"
-       version="1.4.3"
-       provider-name="podgod">
+       version="1.4.5.1"
+       provider-name="podgod, Coder Alpha">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.beautifulsoup" version="3.2.1"/>
@@ -80,12 +80,10 @@
     <import addon="script.module.urlresolver" optional="true"/>
     <import addon="script.module.simplejson" />
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>video</provides>
-  </extension>
+  <extension point="xbmc.python.module" library="default.py"/>
   <extension point="xbmc.addon.metadata">
     <summary>All the best from cCloud TV</summary>
-    <description>cCloud is an open source cloud based social IPTV service. It is built by the community for the community, where streaming is just a click away. Just click, play and stream yup it's that simple. Just go to http://ccloudtv.org  and enjoy:) Please report any channels that are down here http://www.tiny.cc/reportchs
+    <description>cCloud is an open source cloud based social IPTV service. It is built by the community for the community, where streaming is just a click away. Just click, play and stream. Yes, it's that simple. Just go to http://ccloudtv.org  and enjoy:) Please report any channels that are down here http://www.tiny.cc/reportchs Users can now check servers status which can be found at http://ccloudtv.org/status
     </description>
 	<license>http://www.gnu.org/licenses/</license>
     <forum>http://ccloudtv.org/forum</forum>
@@ -169,14 +167,12 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.fptplay" name="Fpt Play" version="1.6.0.1" provider-name="repository.cx.com">
+<addon id="plugin.video.fptplay" name="Fpt Play" version="1.6.0.2" provider-name="repository.cx.com">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.xbmcswift2" version="2.4.0"/>
   </requires>
-  <extension point="xbmc.python.pluginsource" library="addon.py">
-    <provides>video</provides>
-  </extension>
+  <extension point="xbmc.python.module" library="addon.py"/>
   <extension point="xbmc.service"
 			library="start.py" start="startup">
   </extension>
@@ -264,7 +260,7 @@
 </addon>
 
 <addon id="plugin.video.itvplus"
-       version="2.2.1.1"
+       version="2.2.2.1"
        name="[COLOR ffff0000]*ITV*[/COLOR]Plus"
        provider-name="itv member">
   <requires>
@@ -272,7 +268,7 @@
 	<import addon="script.module.simplejson" />
 	<import addon="script.module.t0mm0.common" version="1.1.0"/>
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py"/>
+  <extension point="xbmc.python.module" library="default.py"/>
   <extension point="xbmc.service" library="autorun.py" start="startup">
   </extension>
   <extension point="xbmc.addon.metadata">
