@@ -1,0 +1,24 @@
+﻿<START>
+[COLOR magenta][B]Đây là bản đã được sửa đổi và thêm vào một số mục để người Việt dùng tiện hơn.[/B][/COLOR]
+[COLOR brown][B]Cám ơn tác giả và tất cả những người đã tạo và giữ cho add-on này ngày càng phong phú và được tiếp tục tồn tại mãi.[/B][/COLOR]
+
+- Muốn dùng TV Guide, cần phải gài iVue/Renegades TV Guide. Xem hướng dẫn dưới đây:
+[COLOR blue]https://www.youtube.com/watch?v=7qFoqM31j4g[/COLOR]
+[COLOR blue]https://www.youtube.com/watch?v=IWiWJSb_VxE&h=zAQGH_gdr[/COLOR]
+[COLOR blue]https://seo-michael.co.uk/tutorial-how-to-install-ivue-tv-guide-kodi-xbmc[/COLOR]
+[COLOR blue]https://seo-michael.co.uk/tutorial-how-to-install-setup-renegades-sky-epg/&h=8AQFIf0sa[/COLOR]
+
+- Muốn xem mục VietMedia và các hướng dẫn về Kodi, cần phải gài YouTube add-on.
+
+- Mục Public Uploads và Links to Tutorials chỉ hiện lên khi dùng Kodi trong Windows hay Mac. Muốn dùng các mục này, cần phải gài Google Chrome browser trong Win/Mac PC và Chrome Launcher add-on trong Kodi.
+
+- [COLOR red][B]Khi upload lên cCloud TV server, dùng tiếng Việt không có dấu để đặt tên kênh.[/B][/COLOR]
+
+- [COLOR red][B]Muốn kênh được hiển thị trong mục Vietnam, khi upload lên cCloud TV server, chỉ cần chọn 1 trong các mục sau đây: Country = Vietnam, Language = Vietnamese, hoặc Language 2 = Vietnamese.[/B][/COLOR]
+
+- [COLOR chocolate][B]cCloud TV server hiện nay chỉ nhận các links có 3 định dạng như sau: m3u8, rtmp (loại đơn giản không có playpath, swfUrl, pageUrl nằm trong link) và mp4 cho các nhóm OnDemand.[/B][/COLOR]
+
+- Muốn add-on này có thể dùng được tới 3 m3u playlists (cCloud, local và online playlists), vào Add-on settings >> Playlist Testers >> Keep Local/Online M3U Source Path? >> chọn chế độ mở.
+
+[COLOR green][B]Chúc quí vị xem vui vẻ.[/B][/COLOR]
+<END>
