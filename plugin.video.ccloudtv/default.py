@@ -22,7 +22,7 @@ import xbmc, xbmcgui, xbmcplugin, xbmcaddon, base64
 from operator import itemgetter, attrgetter
 
 plugin_handle = int(sys.argv[1])
-mysettings = xbmcaddon.Addon(id = 'plugin.video.ccloud.tv')
+mysettings = xbmcaddon.Addon(id = 'plugin.video.ccloudtv')
 profile = mysettings.getAddonInfo('profile')
 home = mysettings.getAddonInfo('path')
 getSetting = xbmcaddon.Addon().getSetting
@@ -88,7 +88,7 @@ def select_server():
 			else:
 				return content
 	except:
-		xbmc.executebuiltin('XBMC.Notification(%s, %s, %s, %s)' % ('[B]cCloud.tv[/B]', 'All cCloud TV servers seem to be down. Please try again in a few minutes.', 10000, icon))
+		xbmc.executebuiltin('XBMC.Notification(%s, %s, %s, %s)' % ('[B]cCloudtv[/B]', 'All cCloud TV servers seem to be down. Please try again in a few minutes.', 10000, icon))
 
 def replace_all(text, dict):
 	try:

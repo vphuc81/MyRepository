@@ -63,7 +63,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.ccloud.tv" name="cCloud.tv" version="1.4.5.2" provider-name="podgod-mod">
+<addon id="plugin.video.ccloudtv" name="cCloud.tv" version="1.4.5.2" provider-name="podgod-mod">
   <requires>
   </requires>
   <extension point="xbmc.python.module" library="default.py" />
