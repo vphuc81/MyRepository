@@ -627,22 +627,19 @@
 		</extension>
 	</addon>
 
-<addon
-  id="plugin.video.viettv24"
-  version="1.9.16"
-  name="*[COLOR yellow]Viet-TV24.com[/COLOR]"
-  provider-name="Dknight - modified by bacha">
-  <requires>
+<addon id="plugin.video.viettv24" version="1.9.17" name="Viet Hai Ngoai 2" provider-name="thaitni">
+    <requires>
         <import addon="xbmc.python" version="2.1.0"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>VietTV24.com</summary>
-    <description>Watch hundreds of Vietnamesse and English channels from viettv24.com</description>
-    <platform>all</platform>
-  </extension>
+    </requires>
+    <extension point="xbmc.python.module" library="viettv24.py" />
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">HD video from viettv24.com</summary>
+        <license>GPL 2.0</license>
+        <platform>all</platform>
+		<language>en</language>
+		<license>GNU General Public License - v2</license>
+		<email>thai@thanhthai.net</email>
+    </extension>
 </addon>
 
 <addon
