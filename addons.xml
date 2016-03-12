@@ -63,22 +63,34 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.ccloudtv" name="cCloud.tv" version="1.4.5.2" provider-name="podgod-mod">
+<addon id="plugin.video.ccloudtv"
+       name="cCloud TV"
+       version="1.4.6.1"
+       provider-name="podgod, Coder Alpha">
   <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" />
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
   </requires>
   <extension point="xbmc.python.module" library="default.py" />
-  <extension point="xbmc.service" library="autostart.py" start="startup">
-  </extension>
   <extension point="xbmc.addon.metadata">
     <summary>All the best from cCloud TV</summary>
-    <description>cCloud is an open source cloud based social IPTV service. It is built by the community for the community, where streaming is just a click away. Just click, play and stream yup it's that simple. Just go to http://ccloudtv.org  and enjoy:) Please report any channels that are down here http://www.tiny.cc/reportchs
+    <description>cCloud is an open source cloud based social IPTV service. It is built by the community for the community, where streaming is just a click away. Just click, play and stream. Yes, it's that simple. Just go to http://ccloudtv.org  and enjoy:) Please report any channels that are down here http://www.tiny.cc/reportchs Users can now check servers status which can be found at http://ccloudtv.org/status
     </description>
-    <license>http://www.gnu.org/licenses/</license>
+	<license>http://www.gnu.org/licenses/</license>
     <forum>http://ccloudtv.org/forum</forum>
     <website>http://ccloudtv.org</website>
     <website>http://facebook.com/ccloudapp</website>
     <website>http://twitter.com/ccloudapp</website>
-    <email/>
+    <email></email>
     <platform>all</platform>
   </extension>
 </addon>
