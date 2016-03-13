@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.21.2" provider-name="MetalKettle">
-   <requires>
+<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.22" provider-name="MetalKettle">
+  <requires>
     <import addon="script.module.simplejson" version="3.3.0"/>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.t0mm0.common" version="2.0.0"/>
