@@ -573,7 +573,7 @@
 
 <addon
   id="plugin.video.SportsDevil"
-  version="2016.03.06"
+  version="2016.03.21"
   name="SportsDevil"
   provider-name="SportsDevil">
   <requires>

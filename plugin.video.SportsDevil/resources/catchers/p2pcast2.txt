@@ -4,7 +4,7 @@ item_info_build=p2pcast - %s
 
 item_info_name=pageUrl
 item_info_from=@PARAM1@
-item_info_build=http://p2pcast.tech/stream.php?id=%s&osr=0&p2p=0&stretching=fill
+item_info_build=http://p2pcast.tech/streamcdn.php?id=%s
 
 item_info_name=tokUrl
 item_info_from=@PARAM1@
@@ -13,7 +13,7 @@ item_info_build=http://p2pcast.tech/getTok.php
 item_info_name=tok
 item_info_from=tokUrl
 #item_info_convert=getXML('%s','.*token["']\s*:\s*["']([^"']+).*','@pageUrl@')
-item_info_build=wfNz6Pz_jNZfR8wmB8JEPw
+item_info_build=kQVPmj6SsF0hinK4wrZecw
 
 item_info_name=file.tmp
 item_info_from=pageUrl
@@ -28,7 +28,7 @@ item_info_convert=quote(%s)
 item_info_build=%s
 
 item_info_name=file
-item_info_from=file.tmp+tok
+item_info_from=file.tmp
 item_info_build=%s
 
 item_info_name=url

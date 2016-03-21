@@ -34,7 +34,7 @@ class BaseRequest(object):
         self.s = requests.Session()
         if fileExists(self.cookie_file):
             self.s.cookies = self.load_cookies_from_lwp(self.cookie_file)
-        self.s.headers.update({'User-Agent' : 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36'})
+        self.s.headers.update({'User-Agent' : 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36'})
         self.s.headers.update({'Accept-Language' : 'en'})
         self.url = ''
     
@@ -103,7 +103,10 @@ class BaseRequest(object):
         #many utf8 encodings are specified in HTTP body not headers and requests only checks headers, maybe use html5lib
         #https://github.com/kennethreitz/requests/issues/2086
         if 'streamlive.to' in urlparse.urlsplit(url).netloc \
-        or 'sport365.live' in urlparse.urlsplit(url).netloc:
+        or 'sport365.live' in urlparse.urlsplit(url).netloc \
+        or 'vipleague' in urlparse.urlsplit(url).netloc \
+        or 'batmanstream.com' in urlparse.urlsplit(url).netloc \
+        or 'sportcategory.com' in urlparse.urlsplit(url).netloc:
             r.encoding = 'utf-8'
         if 'lfootball.ws' in urlparse.urlsplit(url).netloc:
             r.encoding = 'windows-1251'

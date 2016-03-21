@@ -293,7 +293,7 @@ class Parser(object):
 
 
     def __getSection(self, data, section):
-        p = re.compile(section, re.IGNORECASE + re.DOTALL + re.UNICODE)
+        p = re.compile(section, re.IGNORECASE + re.DOTALL + re.MULTILINE + re.UNICODE)
         m = p.search(data)
         if m:
             return m.group(0)
@@ -642,9 +642,6 @@ class Parser(object):
             elif command == 'cjsAesDec':
                 src = crypt.cjsAesDec(src,item.infos[params])
             
-            elif command == 'aesDec':
-                src = crypt.aesDec(src,item.infos[params])
-                
             elif command == 'getCookies':
                 src = cc.getCookies(params, src)
 

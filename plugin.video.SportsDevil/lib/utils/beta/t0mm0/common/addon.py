@@ -16,7 +16,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import cgi
 import re
 import os
 try:
@@ -25,6 +24,7 @@ except:
     import pickle
 
 import urllib
+import urlparse
 import xbmc
 import xbmcaddon
 import xbmcgui
@@ -187,7 +187,7 @@ class Addon:
             from the query string. If a key is repeated in the query string
             its value will be a list containing all of that keys values.  
         '''
-        queries = cgi.parse_qs(query)
+        queries = urlparse.parse_qs(query)
         q = defaults
         for key, value in queries.items():
             if len(value) == 1:

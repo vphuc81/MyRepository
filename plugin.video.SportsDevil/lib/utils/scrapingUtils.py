@@ -141,10 +141,10 @@ def findContentRefreshLink(page, data):
     if links:
         return links[0]
     
-    regex = 'window.location\s*=\s*[\'"]([^\'"]+)[\'"]'
-    links = regexUtils.findall(data, regex)
-    if links:
-        return links[0]
+    #regex = 'window.location\s*=\s*[\'"]([^\'"]+)[\'"]'
+    #links = regexUtils.findall(data, regex)
+    #if links:
+        #return links[0]
     
     regex = 'frame\s*scrolling=\"auto\"\s*noresize\s*src\s*=\s*[\'"]([^\'"]+)[\'"]'
     links = regexUtils.findall(data, regex)
