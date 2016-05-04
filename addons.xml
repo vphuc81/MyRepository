@@ -618,7 +618,7 @@
 
 <addon
   id="plugin.video.SportsDevil"
-  version="2016.04.21"
+  version="2016.05.03"
   name="SportsDevil"
   provider-name="SportsDevil">
   <requires>
@@ -628,8 +628,10 @@
    <import addon="script.module.pydevd" optional="true"/>
   </requires>
   <extension
-    point="xbmc.python.module"
-    library="default.py"/>
+    point="xbmc.python.pluginsource"
+    library="default.py">
+   <provides>video</provides>
+  </extension>
   <extension point="xbmc.addon.metadata">
     <summary>Play videos of different sports streaming sites</summary>
     <description>Play videos of different sports streaming sites</description>
