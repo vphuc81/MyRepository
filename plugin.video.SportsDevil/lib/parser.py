@@ -547,6 +547,9 @@ class Parser(object):
 
             elif command == 'convTimestamp':
                 src = cc.convTimestamp(params, src)
+                
+            elif command == 'convDateUtil':
+                src = cc.convDateUtil(params, src)
 
             elif command == 'select':
                 src = cc.select(params, src)
