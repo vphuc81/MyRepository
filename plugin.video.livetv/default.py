@@ -573,7 +573,7 @@ def add_Link(name,url,iconimage):
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'tohdviet2' in url:
-        u = 'plugin.video.lnt.hdviet'  
+        u = 'plugin://plugin.video.lnt.hdviet'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'tomovihd' in url:
