@@ -545,7 +545,7 @@ def add_Link(name,url,iconimage):
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'tovietmediaf' in url:
-        u = 'plugin://plugin.video.vietmediaf'  
+        u = 'plugin://plugin.video.vietmediaF'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'toadryanlist' in url:
@@ -573,7 +573,7 @@ def add_Link(name,url,iconimage):
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'tohdviet2' in url:
-        u = 'plugin://plugin.video.hdviet'  
+        u = 'plugin.video.lnt.hdviet'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'tomovihd' in url:
