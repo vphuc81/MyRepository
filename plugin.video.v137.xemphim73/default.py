@@ -205,7 +205,7 @@ def LoadVideos(url):
 			else:
 				source = re.compile('file: "(.+?)"').findall(frameContent)[0]
 				if 'youtube' in source:
-					youtubeID = re.compile('watch\?v=(.*)').findall(source)[0]
+					youtubeID = re.compile('watch\?v=(.+?[^"|\s|\']*)').findall(source)[0]
 					source = 'plugin://plugin.video.youtube/play/?video_id=%s' % youtubeID
 			return source
 		elif 'showa' in frameContent: # resolve ok.ru links ##############################################

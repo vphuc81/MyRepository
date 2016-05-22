@@ -173,15 +173,20 @@ def Episodes(url, name, iconimage, vname):
 
 def GetVideo(url):
 	html = GetUrl(url)
-	if 'youtube.com/watch' in html:
-		url = re.compile('\'(.+?youtube.com\/watch.+?)\'').findall(html)[0]
+	if 'youtube.com' in html:
+		youtubeID = re.compile('watch\?v=(.*)').findall(html)[0]
+		url = 'plugin://plugin.video.youtube/play/?video_id=%s' % youtubeID
 	else:
 		link = re.compile('playlist:\s*"(.+?)"').findall(html)[0]
 		src = GetUrl(link)
-		mirrors = re.compile('file="(.+?)" label="(.+?)" type="video\/mp4"').findall(src)
-	#		for mlink, mname in mirrors:
-	#			addLink("Link: " + mname.encode('utf-8'), mlink, 'loadvideo', iconimage, vname)
-		url = mirrors[-1][0] # Auto play highest res
+		if 'youtube.com' in src:
+			youtubeID = re.compile('watch\?v=(.*)').findall(src)[0]
+			url = 'plugin://plugin.video.youtube/play/?video_id=%s' % youtubeID
+		else:
+			mirrors = re.compile('file="(.+?)" label="(.+?)" type="video\/mp4"').findall(src)
+		#		for mlink, mname in mirrors:
+		#			addLink("Link: " + mname.encode('utf-8'), mlink, 'loadvideo', iconimage, vname)
+			url = mirrors[-1][0] # Auto play highest res
 	return url
 
 def LoadVideo(url, vname):
