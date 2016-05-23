@@ -659,7 +659,7 @@ class Parser(object):
                 src = dt.getUnixTimestamp()
                 
             elif command == 'rowbalance':
-                src = rb.get()
+                src = rb.get(src)
 
             elif command == 'urlMerge':
                 src = cc.urlMerge(params, src)
