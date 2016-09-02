@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.itvplus"
-       version="2.2.2.1"
+       version="2.5.1.1"
        name="[COLOR ffff0000]*ITV*[/COLOR]Plus"
        provider-name="itv member">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0" optional="true" />
-	<import addon="script.module.simplejson" />
-	<import addon="script.module.t0mm0.common" version="1.1.0"/>
-  </requires>
-  <extension point="xbmc.python.module" library="default.py"/>
-  <extension point="xbmc.service" library="autorun.py" start="startup">
-  </extension>   
-  <extension point="xbmc.addon.metadata">
-    <summary>ITV Entertainment</summary>
-    <description>
-	* Addon được ITVPlus xây dựng dựa vào nguồn dữ liệu trên internet. Bản quyền tác giả thuộc về ITVPlus. 
-	* Với mục đích phục vụ nhu cầu giải trí cho cộng đồng Kodi. Chúng tôi đã tốn nhiều thời gian và công sức để tạo ra sản phẩm, vì vậy mong các tổ chức và cá nhân tuân thủ các quy định sau:
-	- Không tự ý sử dụng mã nguồn của addon khi chưa có sự đồng ý của nhóm lập trình viên ITVPlus.
-	- Không tự ý chỉnh sửa lại addon và chia sẻ, quảng cáo phục vụ cho nhu cầu lợi ích của một cá nhân hay tập thể nào đó.	
-	</description>
-	<disclaimer lang="en">Nguồn data được chia sẻ trên internet. Chúng tôi không chịu mọi trách nhiệm pháp lý.</disclaimer>
-    <platform>all</platform>
-  </extension>
+    <requires>
+        <import addon="xbmc.python" version="2.1.0" optional="true" />
+	    <import addon="script.module.simplejson" />
+	    <import addon="script.module.t0mm0.common" />
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.service" library="autorun.py" start="startup">
+    </extension>   
+    <extension point="xbmc.addon.metadata">
+        <summary>ITV Entertainment</summary>
+        <description>
+* Addon được ITVPlus xây dựng dựa vào nguồn dữ liệu trên internet.
+* Với mục đích phục vụ nhu cầu giải trí cho cộng đồng Kodi. Chúng tôi đã tốn nhiều thời gian và công sức để tạo ra sản phẩm, vì vậy mong các tổ chức và cá nhân tuân thủ các quy định sau:
+- Không tự ý sử dụng mã nguồn của addon khi chưa có sự đồng ý của nhóm lập trình viên ITVPlus.
+- Không tự ý chỉnh sửa lại addon và chia sẻ, quảng cáo phục vụ cho nhu cầu lợi ích của một cá nhân hay tập thể nào đó.
+	    </description>
+	    <disclaimer lang="en">[COLOR ffff0000]Data được chia sẻ trên internet. Chúng tôi không chịu mọi trách nhiệm pháp lý.[/COLOR]</disclaimer>
+        <platform>all</platform>
+    </extension>
 </addon>

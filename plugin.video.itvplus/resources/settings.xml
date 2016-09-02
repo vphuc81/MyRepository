@@ -8,9 +8,11 @@
         <setting label="Chọn FILE (.m3u/.xml)" type="file" id="local_patch" default="" />
 	</category>	
 	<category label="Các tùy chọn">
-	    <setting label="Chọn chế độ hiển thị" type="labelenum" id="view_mode" default="Thumbnails" values="List|Thumbnails"/>
+	    <setting label="Chọn chế độ hiển thị" type="labelenum" id="view_mode" default="Thumbnails" values="List|Thumbnails" />
+	    <setting label="Hiện thị icon lớn" type="bool" id="big_icon" default="false" />
         <setting label="Chọn Thumbail làm Fanart (y/n)" type="bool" id="use_fanart" default="true" />	
-	    <setting label="Mở chế độ tự động vào addon khi kodi khởi động (y/n)" type="bool" id="auto_mode" default="false"/>
-	    <setting label="Bật/Tắt quảng cáo (y/n)" type="bool" id="temp_mode" default="true"/>
+	    <setting label="Mở chế độ tự động vào addon khi kodi khởi động (y/n)" type="bool" id="auto_mode" default="true" />
+	    <setting label="Tắt quảng cáo (y/n)" type="bool" id="temp_mode" default="false "/>
+	    <setting label="Thông tin quảng cáo" type="text" id="temp_patch" default="advertisement" visible="false" />
 	</category>			
 </settings>
