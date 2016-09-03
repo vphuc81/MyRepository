@@ -318,7 +318,7 @@
 </addon>
 
 <addon id="plugin.video.itvplus"
-       version="2.5.1.1"
+       version="2.5.3.1"
        name="[COLOR ffff0000]*ITV*[/COLOR]Plus"
        provider-name="itv member">
     <requires>

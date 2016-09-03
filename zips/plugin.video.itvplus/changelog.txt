@@ -1,4 +1,12 @@
-﻿Version_2.5.1 <18/08/2016>
+﻿Version_2.5.3 <03/09/2016>
+- Edit source
+- Update more source
+- Fix Search
+
+Version_2.5.2 <30/08/2016>
+- Fix bug, fix other channel, fix plugin source
+
+Version_2.5.1 <18/08/2016>
 - New update
 
 Version_2.5.0 <15/08/2016>
