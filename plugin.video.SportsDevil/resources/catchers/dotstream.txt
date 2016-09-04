@@ -1,10 +1,10 @@
 item_info_name=title
 item_info_from=@PARAM1@
-item_info_build=LiveAll - %s
+item_info_build=LetOnTV - %s
 
 item_info_name=pageUrl
 item_info_from=@PARAM1@
-item_info_build=http://liveall.tv/player.php?streampage=%s&width=600&height=450
+item_info_build=http://dotstream.tv/player.php?streampage=%s&height=510&width=600
 
 item_info_name=tmp
 item_info_from=pageUrl
@@ -32,5 +32,5 @@ item_info_convert=divide(%s, @f@)
 item_info_build=%s
 
 item_info_name=url
-item_info_from=rtmp://' + ip1 + '.' + ip2 + '.' + ip3 + '.' + ip4 + v + ' swfUrl=http://wds.liveall.tv/jwplayer.flash.swf live=1 timeout=15 swfVfy=1 pageUrl=' + pageUrl
+item_info_from=rtmp://' + ip1 + '.' + ip2 + '.' + ip3 + '.' + ip4 + v + ' swfUrl=http://dotstream.tv/jwp/jwplayer.flash.swf live=1 timeout=15 swfVfy=1 pageUrl=' + pageUrl
 item_info_build=%s

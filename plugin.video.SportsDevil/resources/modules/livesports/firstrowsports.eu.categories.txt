@@ -94,3 +94,7 @@ cfg=firstrowsports.eu.links.cfg
 #cfg=firstrowsports.eu.cfg@Events
 url=http://www.feed2allnow.eu/type/others.html
 ########################################################
+title=Olympics
+icon=sports.devil.image|sports/Other.png
+cfg=firstrowsports.eu.links.cfg
+url=http://www.feed2allnow.eu/type/olympics.html
