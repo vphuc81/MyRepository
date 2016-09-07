@@ -7,6 +7,8 @@ from javascriptUtils import JsFunctions, JsUnpacker, JsUnpackerV2, JsUnpacker95H
 from hivelogic import hivelogic
 try: import json
 except ImportError: import simplejson as json
+try: from Crypto.Cipher import AES
+except ImportError: import pyaes as AES
 
 def encryptDES_ECB(data, key):
     data = data.encode()
@@ -187,11 +189,29 @@ def doDemystify(data):
             pass
 
     if '"result2":"'in data:
-        r = re.compile(r""":("(?!http)[^\.]+M3U4")""")
+        r = re.compile(r""":("(?!http)\w+\.\w+\.m3u8")""")
         gs = r.findall(data)
         if gs:
             for g in gs:
-                data = data.replace(g,json.dumps(decryptDES_ECB(json.loads(g).decode('base64')[:-5], '5333637233742600'.decode('hex'))))
+                _in = json.loads(g).split('.')
+                aes = AES.new('5e4841405044757e4631795f39373837384e313335396d316775336c346e5972'.decode('hex'), AES.MODE_CBC, _in[1].decode('hex'))
+                unpad = lambda s : s[0:-ord(s[-1])]
+                try:
+                    _url = unpad(aes.decrypt(_in[0].decode('hex')))
+                except:
+                    _url = None
+                if _url:
+                    data = data.replace(g,json.dumps( _url ))
+                else:
+                    aes = AES.new('5e6d59405052757e4b65795f393738373831313335396d316775336c346e7472'.decode('hex'), AES.MODE_CBC, _in[1].decode('hex'))
+                    data = data.replace(g,json.dumps( unpad(aes.decrypt(_in[0].decode('hex'))) ))
+                
+        r = re.compile(r""":("(?!http)[\w=\\/\+]+\.m3u8")""")
+        gs = r.findall(data)
+        if gs:
+            for g in gs:
+                data = data.replace(g,json.dumps(decryptDES_ECB(json.loads(g)[:-5], '5333637233742600'.decode('hex'))))
+
     # n98c4d2c
     if 'function n98c4d2c(' in data:
         gs = parseTextToGroups(data, ".*n98c4d2c\(''\).*?'(%[^']+)'.*")
@@ -249,6 +269,11 @@ def doDemystify(data):
         data = re.sub(r"""function\(\w\w\w\w,\w\w\w\w,\w\w\w\w,\w\w\w\w""",'function(p,a,c,k)',data.replace('#','|'))
         data = re.sub(r"""\(\w\w\w\w\+0\)%\w\w\w\w""",'e%a',data)
         data = re.sub(r"""RegExp\(\w\w\w\w\(\w\w\w\w\)""",'RegExp(e(c)',data)
+        r = re.compile(r"""\.split\('([^']+)'\)""")
+        gs = r.findall(data)
+        if gs:
+            for g in gs:
+                data = data.replace(g,'|')
         
     if """.replace(""" in data:
         r = re.compile(r""".replace\(["']([^"']+)["'],\s*["']([^"']*)["']\)""")

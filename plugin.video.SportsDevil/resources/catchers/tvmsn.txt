@@ -97,7 +97,7 @@ item_info_convert=parseText('%s','.*://([\d\.:]+)/')
 item_info_build=%s
 
 item_info_name=url
-item_info_from=rtmp+' swfUrl=http://www.tv-msn.com/player/player.swf flashver=WIN\2022,0,0,209 token=carioca live=1 timeout=15 pageUrl=' + pageUrl
+item_info_from=rtmp+' swfUrl=http://www.tv-msn.com/player/player.swf flashver=WIN\2022,0,0,209 token=maxcorp live=1 timeout=15 pageUrl=' + pageUrl
 item_info_build=%s
 
 #item_info_name=url

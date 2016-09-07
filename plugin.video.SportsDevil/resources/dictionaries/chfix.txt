@@ -118,6 +118,8 @@ MLB Network
   Mlb Netowrk
 NBA Network
   Nba Network
+NFL Network
+  Nfl Network
 Golf Channel
 At The Races
 Racing UK
@@ -140,6 +142,7 @@ MUTV
   Mutv
 BBC One
   Bbc One
+  Bbc 1
 BBC Two
   Bbc Two
 WWE Network
@@ -164,3 +167,9 @@ BeIN Sports 1 France
   bein1
 BeIN Sports 2 France
   bein2
+NBCSN
+  Nbcsn Ing
+Chelsea TV
+  Chelsea Tv
+Motors TV
+  Motors Tv Uk
