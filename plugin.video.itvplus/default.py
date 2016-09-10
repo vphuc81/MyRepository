@@ -1343,7 +1343,7 @@ def I11111iII11i(url):
 		content = makeRequest(url)	
 		mediaUrl = re.compile('var channel_stream = "(.+?)"').findall(content)[0]
 	elif d('euro','2-no1tSj6N0=') in url:	
-		try : content = makeRequest(url); mediaUrl = re.compile('"file": \'(.+?.m3u8)\',').findall(content)[0]
+		try : content = makeRequest(url); mediaUrl = re.compile("'(.+?.m3u8)',").findall(content)[0]
 		except : content = makeRequest(url); mediaUrl = re.compile('"data":"(.+?.m3u8)",').findall(content)[0].replace('\\','')
 	elif 'wezatv' in url:
 		content = makeRequest(url)
@@ -1408,12 +1408,6 @@ def I11111iII11i(url):
 	elif 'phimhd365' in url:
 		content = makeRequest(url)
 		mediaUrl = re.compile('poster=".+?"\s*src="(.+?)"\s*').findall(content)[-1].replace('&amp;','&')
-	elif 'hplus' in url:
-	    try:
-		    content = makeRequest(url)
-		    mediaUrl = re.compile('var link_stream = iosUrl = "(.+?)";').findall(content)[0]		
-	    except:
-		    alert(u'Nội dung này chưa được Addon hỗ trợ!'); return
 	elif 'phimgiaitri' in url:
 		try:	
 		    xbmc.log(url)	
