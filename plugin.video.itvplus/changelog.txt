@@ -1,4 +1,10 @@
-﻿Version_2.5.4 <09/09/2016>
+﻿Version_2.5.5 <13/09/2016>
+- Fix OneTV
+- Fix TVshow
+- New Other Channel
+- Fix HDO
+
+Version_2.5.4 <09/09/2016>
 - Fix more channel
 
 Version_2.5.3 <03/09/2016>

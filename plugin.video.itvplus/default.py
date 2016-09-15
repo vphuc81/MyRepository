@@ -35,10 +35,10 @@ local = addon.getSetting('local_patch')
 OO0OO0O0O0 = addon.getSetting('name_account')
 O00OO0O0O0 = addon.getSetting('pass_account')
 O00OO0OOO0 = addon.getSetting('use_fanart')
-sys.path.append(os.path.join(home,'resources','lib'));from BeautifulSoup import BeautifulSoup;import visitor
+sys.path.append(os.path.join(home,'resources','lib'));from BeautifulSoup import BeautifulSoup;import visitor;import urlfetch
 favfolder = xbmc.translatePath('special://userdata/favourites.xml')
 
-dict = {'&amp;':'&', '&acirc;':'â', '&Aacute;':'Á', '&agrave;':'à', '&aacute;':'á', '&atilde;':'ã', '&igrave;':'ì', '&iacute;':'í', '&uacute;':'ú', '&ugrave;':'ù', '&oacute;':'ó', '&ouml;':'ö', '&ograve;':'ò', '&otilde;':'õ', '&ocirc;':'ô', '&Ocirc;':'Ô', '&eacute;':'é', '&egrave;':'è', '&ecirc;':'ê', '&Yacute;':'Ý', '&yacute;':'ý', "&rsquo;":"'", '&quot;':'"','m34':'m22', 'm35':'m22', 'http://www.youtube.com/watch?v=':'plugin://plugin.video.youtube/play/?video_id=', 'https://www.youtube.com/watch?v=':'plugin://plugin.video.youtube/play/?video_id='}
+dict = {'&amp;':'&', '&acirc;':'â', '&Aacute;':'Á', '&agrave;':'à', '&aacute;':'á', '&atilde;':'ã', '&igrave;':'ì', '&iacute;':'í', '&uacute;':'ú', '&ugrave;':'ù', '&oacute;':'ó', '&ouml;':'ö', '&ograve;':'ò', '&otilde;':'õ', '&ocirc;':'ô', '&Ocirc;':'Ô', '&eacute;':'é', '&egrave;':'è', '&ecirc;':'ê', '&Yacute;':'Ý', '&yacute;':'ý', "&rsquo;":"'", '&quot;':'"','m34':'m22', 'm35':'m22', "&#039;":"'", 'http://www.youtube.com/watch?v=':'plugin://plugin.video.youtube/play/?video_id=', 'https://www.youtube.com/watch?v=':'plugin://plugin.video.youtube/play/?video_id='}
 
 fixthumb = {'4.bp.blogspot.com':'lh3.googleusercontent.com', '3.bp.blogspot.com':'lh3.googleusercontent.com', '2.bp.blogspot.com':'lh3.googleusercontent.com', '1.bp.blogspot.com':'lh3.googleusercontent.com'}
 
@@ -47,6 +47,8 @@ accent = {'TÌM KIẾM':'TIM KIEM', 'TRUYỀN HÌNH':'TRUYEN HINH', 'TIVI XEM L�
 reg = '|User-Agent=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36 VietMedia/1.0'
 
 mhd = {'User-Agent' : 'Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3'}
+
+hd = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/600.1.4 Gecko/20100101 Firefox/41.0'}
 
 def replace_all(text, dict):
 	try:
@@ -101,13 +103,13 @@ def OOo000():
 	        if d ( 'imai', '2dnC4pfU0NjQ2cY=') in IOIO[1]: isFolder=False
 	        else: isFolder=True
 	        addir( IOIO[0], IOIO[1], IOIO[3] if 'http' in IOIO[3] else logos + IOIO[3], IOIO[4], mode=IOIO[2], page='', query='', isFolder=isFolder)
-
         III()
     except:
-        alert( u'____Server đang bảo trì, xin vui lòng xem vào thời điểm khác____\n                                Mong quý khách thông cảm!'); sys.exit()
+        alert( u'Server đang bảo trì, xin vui lòng xem vào thời điểm khác\nMong quý khách thông cảm!'); sys.exit()
     if 9 - 9: i111IiI + iIIIiI11 . iII111ii	
 	
 def Ii11I1Ii(name,url):
+    clean()
     name = name
     content = makeRequest( url )
     match = re.findall('<channel>\s*<name>' + name + '</name>((?s).+?)</channel>',I1IiiI(content))
@@ -228,7 +230,33 @@ def I1II11iiI11i(name,url):
     if 110 - 110: iIIIiI11 % OooO0o0Oo . O00 % iII111ii	
 	
 def iI1Ii11111iIi(name,url):
-    if 'woim' in url:
+    if 'fptplay' in url:
+        content = makeRequest(url)
+        match = re.compile('<a class="tv_channel.+?".+?title="([^>]+)".+?onclick=".+?".+?data-href="([^"]*)".+?>\s*\s*<img class="lazy" data-original="([^"]*)".+?/>\s*</a>').findall(content)
+        for title, url, thumb in match:
+            title = replace_all(title, dict);params = url.split('/');id = params[len(params) - 1]
+            if not id:id='vtv3-hd'
+            addLink( title, d ( 'fpt' , fakef ) % id, 100, thumb)
+    elif 'hplus' in url:
+        hd['x-requested-with']='XMLHttpRequest'; hd['referer']=''
+        content = plus_request(url,headers=hd,resp='o')
+        if content:cookie=content.cookiestring; content=content.body
+        else:cookie=''
+        soup = BeautifulSoup(str(content), convertEntities=BeautifulSoup.HTML_ENTITIES)
+        match = soup.findAll('div',{'class' : 'panel'})
+        for item in match:
+            href = item.find('a').get('href')
+            title = item.find('h3').find('a').text.encode('utf-8')
+            thumb = item.find('img').get('src')
+            if ( 'FOX' in title ): continue
+            addLink( title, '%s%s%s%s' % ( 'http://hplus.com.vn/', href, '?', cookie), 102, thumb)
+    elif 'vuitivi' in url:
+        content = makeRequest(url)
+        match = re.compile('<a href="(http://vuitivi.com/.+?)"><img.+?src="(.+?)".+?</a>').findall(content)
+        for url, thumb in match:
+            name = thumb.split('public/')[-1].split('.png')[0].split('.jpg')[0]
+            addLink( name.upper(), url, 100, thumb)
+    elif 'woim' in url:
         content = makeRequest(url)
         match=re.compile('<li>\s*<a href="([^"]*)" title="([^"]+)".+?src="(.+?)&w').findall(content)
         for url,name,thumb in match:
@@ -602,7 +630,17 @@ def iii1Ii11Ii(url):
     if 14 - 14: iiII1i1iI - OOO0Ooo0ooO0oOOOOo - II1Ii - i11iII1iiI . oOo0Ooo / Oooo
 				
 def iIi1II11ii(url,name):
-    if 'CLIP HOT' in name:
+    if 'hplus' in url:
+        poster = 'http://goo.gl/3dcBnk'
+        hd['x-requested-with']='XMLHttpRequest'; hd['referer']=''
+        content = plus_request(url,headers=hd,resp='o')
+        if content:cookie=content.cookiestring; content=content.body
+        else:cookie=''
+        match = re.compile('<a href="(http://hplus.com.vn/ti-vi-truc-tuyen/.+?)">\s*.+?(Kênh.+?)</a>').findall(content)
+        for item in match:
+            if ( 'Kênh Nước Ngoài' in item[1] ): continue
+            addDir( item[1].replace('                                        ',''), item[0], 7, poster, '')
+    elif 'CLIP HOT' in name:
         content = makeRequest('http://hplus.com.vn/vi/categories/hot-clips')
         match = re.compile("href='http://hplus.com.vn/vi/genre/index(.+?)'>(.+?)<").findall(content)
         for url, title in match:
@@ -969,139 +1007,6 @@ def oOiii1IiIi1(url):
 	  
     III()
 
-	
-#######################################################################################################################
-
-def I1iI1(object,group):
-	return object.group(group) if object else ''
-	
-def Ii1Ii11111Iii(url, mode=''):
-    Ii1ii11111Iii(url, query='', mode='')	
-
-def Ii11i1Ii(url):
-	link = visitor.GetContent("http://hdonline.vn/")
-	link = ''.join(link.splitlines()).replace('\'','"')
-	try:
-		link =link.encode("UTF-8")
-	except: pass
-	vidcontent=re.compile('<nav class="tn-gnav">(.+?)</nav> ').findall(link)
-	vidcontentlist=[]
-	if(len(vidcontent)>0):
-		addDir('[COLOR red]Tìm Kiếm[/COLOR]','timphim7',50,logos+'timkiem.png','')
-		vidcontentlist=re.compile('<li>(.+?)</div>\s*</div>\s*</li>').findall(vidcontent[0])
-		for vidcontent in vidcontentlist:
-			mainpart=re.compile('<a href="(.+?)"> <span class="tnico-(.+?)"></span>(.+?)</a>').findall(vidcontent)
-			mainname=mainpart[0][2]
-			href=mainpart[0][0]
-			if 'hdonline.vn' not in href:href='http://hdonline.vn'+mainpart[0][0]
-			vidlist=re.compile('<li><a [^>]*href=["\']?([^>^"^\']+)["\']?[^>]*>(.+?)</a></li>').findall(vidcontent)
-			if 'TIN' in mainname : mainname = "MORE";href='http://hdonline.vn/danh-sach/phim-moi.html'
-			addDir('[COLOR lime][B]'+mainname+'[/B][/COLOR]',href,41,logos+'All.png','')	
-			for vurl,vname in vidlist:
-				if 'Mỹ' in vname : vname = vname.replace('Phim Mỹ','Phim Âu - Mỹ')
-				if mainname == "MORE" : vurl = 'http://hdonline.vn'+vurl
-				if(vurl.find("javascript:") ==-1 and len(vurl) > 3):
-					addDir(vname,vurl,41,logos+'TheLoai.png','')	
-	III()	
-
-def Ii1ii11111Iii(url, query='', mode=''):
-	search_string = iii1II11ii(query)
-	if search_string=='-':search_string=''	
-	if 'hdonline.vn' in url:
-		content = visitor.GetContent(url)
-		content = ''.join(content.splitlines()).replace('\'','"')
-		try:
-			content = content.encode("UTF-8")
-		except: pass
-		movielist=re.compile('<li>\s*<div class="tn-bxitem">(.+?)</li>').findall(content)
-		for idx in range(len(movielist)):
-			vcontent = movielist[idx]				
-			items=re.compile('<a href="(.+?)"(.+?)<img src="(.+?)".+?<p class="name-vi">(.+?)</p>\s*<p class="name-en">(.+?)</p>').findall(vcontent)
-			for url, episodes, img, nameen, namevn in items :
-				name = namevn + ' - ' + nameen							
-				if iiI1II11ii(search_string) in iiI1II11ii(name) or search_string == '' :
-					isFolder=True;v_query=nameen
-					if 'episodes' in episodes :														
-						v_mode='bo'
-						name = '[HDOnline] ' + name if query!='' else name
-					else :						
-						v_mode='le'
-						if query!='':name = '[HDOnline] ' + name
-					if v_mode == 'le' :
-						v_mode = 102;isFolder = False						
-					else :
-						v_mode = 10;url = 'http://m.hdonline.vn' + url
-					addir(name,url,img,fanart='fanart',mode=v_mode,page=1,query=v_query,isFolder=isFolder)
-		if query=='':
-			pagecontent=re.compile('<ul class="pagination">(.+?)</ul>').findall(content)
-			if(len(pagecontent)>0):
-				pagelist=re.compile('<li><a [^>]*href=["\']?([^>^"^\']+)["\']?[^>]*>(.+?)</a></li>').findall(pagecontent[0])
-				for vurl,vpage in pagelist:
-					if 'Trang Sau' in vpage:
-					    addDir('[COLOR red]Trang Tiếp Theo >>>[/COLOR]',vurl,42,logos+'NEXT.png','')
-	III()
-
-def iii1II11ii(string):
-	string = string.replace('+','-').replace(' ','-')	
-	string = string.replace('?','').replace('!','').replace('.','').replace(':','').replace('"','')
-	string = string.replace('&amp;','and').replace('&','and').replace("&#39;","")
-	i = 1
-	while i < 10:
-		string = string.replace('(Season '+str(i)+'','Season '+str(i))
-		i += 1
-	string = string.replace('- Season','Season')	
-	string = string.strip()
-	return string	
-	
-def iiI1II11ii(string):
-	string = string.replace('+','-').replace(' ','-')	
-	string = string.replace('?','').replace('!','').replace('.','').replace(':','')	
-	string = string.replace('&amp;','and').replace('&','and').replace("&#39;","")
-	string = string.upper()
-	string = string.strip()
-	return string	
-
-def I11111IIi11i(url):
-	fid = I1iI1(re.search('-(\d{1,5}).html',url),1)
-	url = 'http://hdonline.vn/frontend/episode/loadxmlconfigorder?ep=1&fid='+str(fid)
-	content = visitor.GetContent(url)
-	vurl=re.compile('<jwplayer:file>(.+?)</jwplayer:file>').findall(content)[0]
-	if(vurl.find("http") == -1):
-		vurl = visitor.decodevplug(vurl)
-	vsubtitle=re.compile('<jwplayer:vplugin.subfile>(.+?)</jwplayer:vplugin.subfile>').findall(content)
-	suburl=""
-	if(len(vsubtitle)>0 and vsubtitle[0].find("http")>-1):
-		suburl=vsubtitle[0]
-	elif(len(vsubtitle)>0):
-		suburl=decodevplug(vsubtitle[0])
-	for item in suburl.split(','):
-		if 'VIE' in item:suburl=item
-	if 'phimhd3s' in vurl:
-		link = vurl
-	else:
-	    link= 'plugin://plugin.program.gdrive?mode=streamURL&url=' + vurl.replace('view?usp=sharing','edit')
-	subtitle=suburl
-	listitem = xbmcgui.ListItem(path=link)
-	xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, listitem)
-	if len(subtitle) > 0:
-	    subtitlePath = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('path')).decode("utf-8")
-	    subfile = xbmc.translatePath(os.path.join(subtitlePath, "temp.sub"))
-	    try:
-		    if os.path.exists(subfile):
-		        os.remove(subfile)
-		    f = urllib2.urlopen(subtitle)
-		    with open(subfile, "wb") as code:
-		        code.write(f.read())
-		    xbmc.sleep(5000)
-		    xbmc.Player().setSubtitles(subfile);notification(u'[COLOR red]Load Sub Thành Công[/COLOR]');
-	    except:
-		    notification(u'[COLOR gold]Load Sub Không Thành Công[/COLOR]');
-	elif 'TM' not in vurl:
-	    notification(u'[COLOR lime]Phim Thuyết Minh Không Có Sub Rời[/COLOR]');
-	if 105 - 105: i11iII1iiI - iiIiiII1i1iI . O0Oooo00 . ooooo00000OOOO / iii1II11ii + O0Oooo00	
-	
-	
-###############################################################################################################	
 #RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR#
 
 def Ii11i1II():
@@ -1299,7 +1204,23 @@ def clearcache():
 			else:
 				pass
 	sys.exit()
-		
+
+def clean():
+	cache_path = xbmc.translatePath(os.path.join('special://temp'))
+	if os.path.exists(cache_path) == True:
+		for root, dirs, files in os.walk(cache_path):
+			file_count = 0
+			file_count += len(files)
+			if file_count > 0:
+					for f in files:
+						try:os.unlink(os.path.join(root, f))
+						except:pass
+					for d in dirs:
+						try:shutil.rmtree(os.path.join(root, d))
+						except:pass
+			else:
+				pass
+	
 def I1Ii1():
 	if len(OO0OO0O0O0) < 1:
 			d = xbmcgui.Dialog().yesno('Thông báo!', '', 'Bạn chưa đăng nhập tài khoản!\nHãy vào menu cài đặt nhập [COLOR gold]Tên đăng nhập[/COLOR] và [COLOR red]Password[/COLOR] để không hiện thông báo này nữa.\nNhấn [COLOR lime]OK[/COLOR] để vào menu cài đặt', '', 'Exit', 'OK')
@@ -1323,6 +1244,9 @@ def I11111iII11i(url):
 	if 'htvonline' in url:
 		content = makeRequest(url)	
 		mediaUrl = re.compile('data\-source=\"([^\"]*)\"').findall(content)[0]
+	elif 'vuitivi' in url:
+		content = makeRequest(url)	
+		mediaUrl = re.compile('playM3U8\("(.+?)",0\)').findall(content)[0]
 	elif d('vpv','7OTs5tzX757s5A==') in url:
 		content = makeRequest(url)	
 		x = re.compile('var v = .+?"(.+?)".+?;').findall(content)[0]
@@ -1510,7 +1434,15 @@ def I11111iIi11i(url):
 	return	
 	if 71 - 71: i11iII1iiI - iiIIIII1i1iI . O0Oooo00 . ooooo00000OOOO / iii1II11ii + O0Oooo00
 
-
+def I11111IIi11i(url):
+    hd = { 'Cookie':url.split('?')[-1], 'referer':url.split('?')[0]}
+    content = plus_request( url.split('?')[0], headers=hd)
+    link = re.compile('id="link-live" type="hidden" value="(.+?)"').findall(content)[0]
+    data = { 'url':link, 'type':'1'}
+    mediaUrl = urlfetch.post('http://hplus.com.vn/content/getlinkvideo/', data=data, headers=hd).body  
+    item = xbmcgui.ListItem(path=mediaUrl)
+    xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, item)	  
+    return
 
 def Advertisement():
     content = makeRequest(d('adv','ydjq0Z6lkNzYzsekytjs0dDr1JLkxtilrbO9sJO8orWlhtek1dzq') % addon.getSetting('temp_patch'))
@@ -1564,6 +1496,22 @@ def makeRequest(url):
             print 'We failed to reach a server.'
             print 'Reason: ', e.reason			
 
+def plus_request(url,headers=hd,resp='b'):
+	try:
+		response=urlfetch.get(url,headers=headers)
+
+		if resp=='o':resp=response
+		else:
+			if resp=='j':resp=response.json
+			elif resp=='s':resp=response.status
+			elif resp=='u':resp=response.text
+			elif resp=='c':resp=response.cookiestring
+			else:resp=response.body
+			response.close()
+	except:
+		pass
+	return resp			
+			
 def d ( k , e ) :
     data = [ ]
     e = base64.urlsafe_b64decode ( e )
@@ -1682,6 +1630,7 @@ fake7 = '1tzjzdncoJ-d1tzjzdnclObXytXdlKTk1J7U1uTe0tHnldXe2Z-T2Q=='
 fake4 = '4NTi19Hbqpec4NTi19Hbnt7W1M3cntDY3pbd2NHa3dfWn6fO09zW39aq3NHg5Mfa1czW0cfW5M3a447d0dzVrQ=='
 #fake11 = '4M7d18vWqpGX4M7d18vWntjR1MfXnpbe3pDY2MvV0sPc2NeX1dLbnw=='
 fake11 = '4M7d18vWqpGX4M7d18vWntjR1MfXntrb2MPa1ZGn3dHM1Z-co4jY0cnNrZOO4dfN4tul1dLR49HM1dWO5Mfg5Ijd4s6lldU='
+fakef = '1tzpzdnioJ-j1tzpzdnilObdytXjlOjnztHmy9zd2tWjpeTZ3uSxjOXm0q2Z2Zbl29Xm363a1uTgz-bZxeDgx-ma1tHby62ljN3jytWxnqk='
 
 if addon.getSetting('big_icon') == 'true':
     xbmcplugin.setContent(int(sys.argv[1]), 'movies')	
