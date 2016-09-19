@@ -25,7 +25,7 @@ item_info_build=%s
 item_info_name=md
 item_info_from=pageUrl
 item_info_convert=getInfo('%s','.*?.m3u8([^']+)','@REFERER@')
-item_info_convert=ifEmpty('%s','','%s|Referer=http://www.castalba.tv/embed.php&User-Agent=Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.92 Safari/537.36&X-Requested-With=ShockwaveFlash/22.0.0.209')
+item_info_convert=ifEmpty('%s','','%s|Referer=http://www.castalba.tv/embed.php&User-Agent=Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36&X-Requested-With=ShockwaveFlash/23.0.0.162')
 item_info_build=%s
 
 item_info_name=hls_url
@@ -33,7 +33,7 @@ item_info_from=m3u8+md+'
 item_info_build=%s
 
 item_info_name=rtmp_url
-item_info_from=rtmp://'+rtmp+'/live playpath=' + file + '?'+t+' swfUrl=http://static.castalba.tv/player.swf flashver=WIN\2022,0,0,209 live=true timeout=15 swfVfy=true pageUrl=' + pageUrl
+item_info_from=rtmp://'+rtmp+'/live playpath=' + file + '?'+t+' swfUrl=http://static.castalba.tv/player.swf flashver=WIN\2023,0,0,162 live=true timeout=15 swfVfy=true pageUrl=' + pageUrl
 item_info_build=%s
 
 item_info_name=url

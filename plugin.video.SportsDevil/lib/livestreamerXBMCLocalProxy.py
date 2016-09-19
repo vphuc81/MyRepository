@@ -65,7 +65,7 @@ class MyHandler(BaseHTTPRequestHandler):
             elif request_path[0:13] == "livestreamer/":
                 realpath = request_path[13:]
                 #print 'realpath: ' + realpath
-                fURL = base64.b64decode(realpath)
+                fURL = base64.b64decode(realpath).replace('sstream.pw','sitenow.me')
                 #print 'fURL: ' + fURL
                 self.serveFile(fURL, sendData)
             else:

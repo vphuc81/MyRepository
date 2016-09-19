@@ -36,6 +36,17 @@ def drenchDec(data, key):
     from drench import blowfish
     return blowfish(key).decrypt(data)
 
+def zdecode(data):
+    sym_re = (r".*'(.*)'\.split")
+    symtab = re.search(sym_re, data).groups()[0].split('|')
+    tab_re = (r""",'(\d=[\W\d]+;)',""")
+    tab = re.search(tab_re, data).groups()[0].decode('unicode-escape')
+
+    def lookup(match):
+        return symtab[int(match.group(0))] or str(match.group(0))
+
+    return re.sub(ur'\d+', lookup, tab)
+    
 def wdecode(data):
     from itertools import chain
     
@@ -141,6 +152,12 @@ def doDemystify(data):
         for g in r.findall(data):
             quoted=g
             data = data.replace(quoted, urllib.unquote_plus(quoted))
+            
+    r = re.compile("""('%[\w%]{100,130}')""")
+    while r.findall(data):
+        for g in r.findall(data):
+            quoted=g
+            data = data.replace(quoted, "unescape({0})".format(urllib.unquote_plus(quoted)))
     
     r = re.compile('unescape\(\s*["\']((?=[^\'"]*\\u00)[^\'"]+)["\']')
     while r.findall(data):
@@ -180,7 +197,7 @@ def doDemystify(data):
                 data = data.replace(g, urllib.unquote(base64_data.decode('base-64')))
                 escape_again=True
     
-    r = re.compile('(eval\\(function\\((?!w)\w+,\w+,\w+,\w+.*?join\\(\'\'\\);*}\\(.*?\\))', flags=re.DOTALL)
+    r = re.compile('(eval\(function\((?!w)\w+,\w+,\w+,\w+\),\w+,\w+.*?\{\}\)\);)', flags=re.DOTALL)
     for g in r.findall(data):
         try:
             data = data.replace(g, wdecode(g))
@@ -194,7 +211,7 @@ def doDemystify(data):
         if gs:
             for g in gs:
                 _in = json.loads(g).split('.')
-                aes = AES.new('5e4841405044757e4631795f39373837384e313335396d316775336c346e5972'.decode('hex'), AES.MODE_CBC, _in[1].decode('hex'))
+                aes = AES.new('5e4542404f4c757e4431675f373837385649313133356f3152693935366e4361'.decode('hex'), AES.MODE_CBC, _in[1].decode('hex'))
                 unpad = lambda s : s[0:-ord(s[-1])]
                 try:
                     _url = unpad(aes.decrypt(_in[0].decode('hex')))
@@ -203,8 +220,9 @@ def doDemystify(data):
                 if _url:
                     data = data.replace(g,json.dumps( _url ))
                 else:
-                    aes = AES.new('5e6d59405052757e4b65795f393738373831313335396d316775336c346e7472'.decode('hex'), AES.MODE_CBC, _in[1].decode('hex'))
-                    data = data.replace(g,json.dumps( unpad(aes.decrypt(_in[0].decode('hex'))) ))
+                    aes = AES.new('5e4d58405044757e73314a5f39373837514e313335396a3144793833366e527a'.decode('hex'), AES.MODE_CBC, _in[1].decode('hex'))
+                    _url = unpad(aes.decrypt(_in[0].decode('hex')))
+                    data = data.replace(g,json.dumps( _url ))
                 
         r = re.compile(r""":("(?!http)[\w=\\/\+]+\.m3u8")""")
         gs = r.findall(data)
@@ -267,14 +285,14 @@ def doDemystify(data):
     
     if 'eval(function(' in data:
         data = re.sub(r"""function\(\w\w\w\w,\w\w\w\w,\w\w\w\w,\w\w\w\w""",'function(p,a,c,k)',data.replace('#','|'))
-        data = re.sub(r"""\(\w\w\w\w\+0\)%\w\w\w\w""",'e%a',data)
+        data = re.sub(r"""\(\w\w\w\w\)%\w\w\w\w""",'e%a',data)
         data = re.sub(r"""RegExp\(\w\w\w\w\(\w\w\w\w\)""",'RegExp(e(c)',data)
         r = re.compile(r"""\.split\('([^']+)'\)""")
         gs = r.findall(data)
         if gs:
             for g in gs:
                 data = data.replace(g,'|')
-        
+
     if """.replace(""" in data:
         r = re.compile(r""".replace\(["']([^"']+)["'],\s*["']([^"']*)["']\)""")
         gs = r.findall(data)
@@ -336,6 +354,8 @@ def doDemystify(data):
     if JsHive.contains_hivelogic(data):
         data = JsHive.unpack_hivelogic(data)
 
+    try: data = zdecode(data)
+    except: pass
     # unescape again
     if escape_again:
         data = doDemystify(data)

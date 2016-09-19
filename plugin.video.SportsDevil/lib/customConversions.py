@@ -205,15 +205,15 @@ def resolve(src):
         parsed_link = urlparse.urlsplit(src)
         tmp_host = parsed_link.netloc.split(':')
         if 'streamlive.to' in tmp_host[0]:
-            servers = [#'80.82.78.4',
-                       #'93.174.93.230',
-                       #'212.117.188.22'.
+            servers = ['80.82.78.4',
+                       '93.174.93.230',
+                       #'212.117.188.22',
                        #'95.211.210.69',
                        #'95.211.196.5',
-                       '184.173.85.91',
+                       #'184.173.85.91',
                        #'85.17.31.102',
                        #'169.54.85.69',
-                       #'62.210.139.136'
+                       '62.210.139.136'
                        ]
             import random
             tmp_host[0] = random.choice(servers)
