@@ -144,7 +144,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.docuhub" version="2.0.0" name="Docu-Hub" provider-name="[COLOR red]Blazetamer[/COLOR]">
+<addon id="plugin.video.docuhub" version="2.1.0" name="Docu-Hub" provider-name="[COLOR red]Blazetamer[/COLOR]">
 <requires>
 <import addon="xbmc.python" version="2.1.0"/>
 <import addon="script.module.urlresolver"  version="2.0.9"/>
@@ -178,7 +178,7 @@
 
 <addon id="plugin.video.earthcam"
 	name="EarthCam"
-	version="2.0.9"
+	version="2.1.0"
 	provider-name="tvaddons.ag,idleloop">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
