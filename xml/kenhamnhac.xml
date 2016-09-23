@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" ?>
+<channels>
+<channel>
+<name>kenhamnhac</name>
+<items>
+
+
+
+
+
+<item>
+<title>MTV</title>
+<link>rtmp://85.132.78.6:1935/live/ playpath=muztv.stream swfUrl=http://zui.vn/templates/images/jwplayer.swf pageUrl=http://zui.vn/livetv/mtv-81.html live=1</link>
+<thumbnail>http://nyoobserver.files.wordpress.com/2011/08/mtv.png</thumbnail>
+</item>
+<item>
+<title>VEVO HD 1</title>
+<link>http://vevoplaylist-live.hls.adaptive.level3.net/vevo/ch1/06/prog_index.m3u8</link>
+<thumbnail>http://channels.roku.com/images/c0c2c0ac8b62409fad03b5ade06b8511-hd.jpg</thumbnail>
+</item>
+<item>
+<title>VEVO HD 2</title>
+<link>http://vevoplaylist-live.hls.adaptive.level3.net/vevo/ch2/06/prog_index.m3u8</link>
+<thumbnail>http://channels.roku.com/images/c0c2c0ac8b62409fad03b5ade06b8511-hd.jpg</thumbnail>
+</item>
+<item>
+<title>VEVO HD 3</title>
+<link>http://vevoplaylist-live.hls.adaptive.level3.net/vevo/ch3/06/prog_index.m3u8</link>
+<thumbnail>http://channels.roku.com/images/c0c2c0ac8b62409fad03b5ade06b8511-hd.jpg</thumbnail>
+</item>
+<item>
+<title>USA:Kiss Tv Music</title>
+<link>rtmp://tst.es.flash.glb.ipercast.net/tst.es-live/live</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM/kenhamnhac.png</thumbnail>
+</item>
+
+<item>
+<title>MCM Top</title>
+<link>http://hlsstr03.svc.iptv.rt.ru/hls/CH_MCMTOP/variant.m3u8?version=2</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM/kenhamnhac.png</thumbnail>
+</item>
+<item>
+<title>NRJ Tv</title>
+<link>rtmp://rtmp.infomaniak.ch:1935/livecast/energytv</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM/kenhamnhac.png</thumbnail>
+</item>
+<item>
+<title>MFM</title>
+<link>rtmp://ec.playmedia.fr/mfmtv/ playpath=live swfUrl=http://mfmtv.tv/tv/swf/player.swf live=1 flashver=WIN/2012,0,0,77 timeout=15 pageUrl=http://mfmtv.tv/tv/player.html</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM/kenhamnhac.png</thumbnail>
+</item>
+<item>
+<title>VOX Music HD</title>
+<link>rtmp://stream.smcloud.net/live2/vox/vox_720p</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM/kenhamnhac.png</thumbnail>
+</item>
+<item>
+<title>Party Tv HD</title>
+<link>rtmp://stream.smcloud.net/live2/eska_party/eska_party_720p</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM/kenhamnhac.png</thumbnail>
+</item>
+<item>
+<title>Best Music HD</title>
+<link>rtmp://stream.smcloud.net/live2/best/best_720p</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM/kenhamnhac.png</thumbnail>
+</item>
+<item>
+<title>Rock Tv HD</title>
+<link>rtmp://stream.smcloud.net/live2/eska_rock/eska_rock_720p</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM/kenhamnhac.png</thumbnail>
+</item>
+
+
+
+<item>
+<title>Việt MTV SV1</title>
+<link>http://64.62.143.5:1935/live/donotstealmy-Stream1/playlist.m3u8?bitrate=800&q=high</link>
+<thumbnail>https://lh3.googleusercontent.com/-GOCcPbjEW2U/Ud11H7xAJ3I/AAAAAAAAA-M/r2G4-zL96vs/w397-h136-no/vietmtv.png</thumbnail>
+</item>
+<item>
+<title>Việt MTV SV2</title>
+<link>http://64.62.143.5:1935/live/donotstealmy-Stream1/playlist.m3u8?wowzasessionid=937763912</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM/kenhamnhac.png</thumbnail>
+</item>
+<item>
+<title>HTVC - Ca Nhạc</title>
+<link>http://www.htvonline.com.vn/livetv/htvc-ca-nhac-34376E61.html</link>
+<thumbnail>http://img.htvonline.com.vn/livetv/27122013/htvmusic_77851388140058.png</thumbnail>
+</item>
+
+
+<item>
+<title>Nhạc Của Tui</title>
+<link>http://123.30.134.108:1935/live/nctlive/playlist.m3u8</link>
+<thumbnail>http://stc.id.nixcdn.com/10/images/logo_600x600.png</thumbnail>
+</item>
+
+
+
+
+</items>
+</channel>
+</channels>

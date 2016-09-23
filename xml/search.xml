@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<channels>
+<channel>
+<name>redirect</name>
+<items>
+
+<item>
+<title>[COLOR ffff0000]YouTube[/COLOR]</title>
+<link>http://redirecttoyoutube</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/youtube.png</thumbnail>
+</item>
+
+
+<item>
+<title>[COLOR yellow]DailyMotion[/COLOR]</title>
+<link>http://redirecttodailymotion</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/dailymotion.png</thumbnail>
+</item>
+
+
+<item>
+<title>[COLOR ffff0000][/COLOR]</title>
+<link>http://toyoutubeft</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/youtube.png</thumbnail>
+</item>
+
+
+
+
+
+</items>
+</channel>
+</channels>

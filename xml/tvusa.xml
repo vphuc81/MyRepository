@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channels>
+<name>tvusa</name>
+<channel>
+<items>
+
+
+<item>
+<title>[COLOR ffff0000]TV[/COLOR] | [COLOR yellow]cCloud TV[/COLOR]</title>
+<link>toccloud</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/ccloud.png</thumbnail>
+</item>
+<item>
+<title>[COLOR ffff0000]TV[/COLOR] | [COLOR yellow]Cables TV Channels[/COLOR]</title>
+<link>tocablestv</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/cablestv.png</thumbnail>
+</item>
+<item>
+<title>[COLOR ffff0000]TV[/COLOR] | [COLOR yellow]Phoenix TV[/COLOR]</title>
+<link>tophoenix</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/phoenix.png</thumbnail>
+</item>
+<item>
+<title>[COLOR ffff0000]TV[/COLOR] | [COLOR yellow]UK Turk Playlists[/COLOR]</title>
+<link>toukturk</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/ukturk.png</thumbnail>
+</item>
+<item>
+<title>[COLOR ffff0000]TV[/COLOR] | [COLOR yellow]FilmOn[/COLOR]</title>
+<link>tofilmon2</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/filmon2.png</thumbnail>
+</item>
+<item>
+<title>[COLOR ffff0000]TV[/COLOR] | [COLOR yellow]FilmOn TV[/COLOR]</title>
+<link>tofilmon1</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/filmon1.png</thumbnail>
+</item>
+
+
+<item>
+<title>CNN</title>
+<link>http://d1hya96e2cm7qi.cloudfront.net/Live/_definst_/sweetbcha1novD177_W_150.sdp/chunklist.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+
+
+<item>
+<title>ABC News</title>
+<link>http://abclive.abcnews.com/i/abc_live4@136330/index_1200_av-b.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+
+
+
+
+
+
+<item>
+<title>USA:Vevo1 HD</title>
+<link>http://vevoplaylist-live.hls.adaptive.level3.net/vevo/ch1/05/prog_index.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>USA:Vevo2 HD</title>
+<link>http://vevoplaylist-live.hls.adaptive.level3.net/vevo/ch2/05/prog_index.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>USA:Vevo3 HD</title>
+<link>http://vevoplaylist-live.hls.adaptive.level3.net/vevo/ch3/05/prog_index.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>USA:Kiss Tv Music</title>
+<link>rtmp://tst.es.flash.glb.ipercast.net/tst.es-live/live</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+
+
+
+
+
+
+
+
+<item>
+<title>NBC GOLF SD</title>
+<link>http://tvegolf-i.Akamaihd.net/hls/live/218225/golfx/1896k/prog.m3u8|X-Forwarded-For=209.239.112.104</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>NBC GOLF 720p</title>
+<link>http://tvegolf-i.Akamaihd.net/hls/live/218225/golfx/2596k/prog.m3u8|X-Forwarded-For=209.239.112.104</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>NBC GOLF 1080p</title>
+<link>http://tvegolf-i.Akamaihd.net/hls/live/218225/golfx/4296k/prog.m3u8|X-Forwarded-For=209.239.112.104</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>NBC Sports Network 1080P</title>
+<link>http://tvenbcsn-i.Akamaihd.net/hls/live/218235/nbcsnx/4296k/prog.m3u8|X-Forwarded-For=209.239.112.104</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>USA Live TV Big Ten Network</title>
+<link>http://bigten247.cdnak.bigtenhd.neulion.com/nlds/btn2go/btnnetwork/as/live/btnnetwork_hd_3000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>PAC-12 Net. (Arizona)</title>
+<link>http://xrxs.net/video/live-p12ariz-4728.m3u8?</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>PAC-12 Net. (Bay Area)</title>
+<link>http://xrxs.net/video/live-p12baya-4728.m3u8?</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>PAC-12 Net. (Los Angeles)</title>
+<link>http://xrxs.net/video/live-p12losa-4728.m3u8?</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>PAC-12 Net. (Moutain)</title>
+<link>http://xrxs.net/video/live-p12moun-4728.m3u8?</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>PAC-12 Net. (Oregon)</title>
+<link>http://xrxs.net/video/live-p12oreg-4728.m3u8?</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>PAC-12 Net. (Oregon) 1280*720</title>
+<link>http://xrxs.net/video/live-p12oreg-2328.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>PAC-12 Net. (Oregon) 640*360</title>
+<link>http://xrxs.net/video/live-p12oreg-1164.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>PAC-12 Net. (Washington)</title>
+<link>http://xrxs.net/video/live-p12wash-4728.m3u8?</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>PAC National 1280*720</title>
+<link>http://xrxs.net/video/live-p12netw-2328.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>PAC National 640*360</title>
+<link>http://xrxs.net/video/live-p12netw-1164.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>USA-BASKET UNI.(Arizona)</title>
+<link>http://xrxs.net/video/live-p12ariz-1164.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>USA-BASKET UNI.(Los Angeles)</title>
+<link>http://xrxs.net/video/live-p12losa-1164.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>USA-BASKET UNI.(Moutain)</title>
+<link>http://xrxs.net/video/live-p12moun-1164.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>USA-BASKET UNI.(Oregon)</title>
+<link>http://xrxs.net/video/live-p12oreg-1164.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>USA-BASKET UNI.(Washington)</title>
+<link>http://xrxs.net/video/live-p12wash-2328.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>SPORTES 7 HD</title>
+<link>http://xrxs.net/video/live-p12oreg-4728.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+
+
+
+
+
+
+
+
+<item>
+<title>HSN</title>
+<link>rtmp://hsn.mpl.miisolutions.net:1935/hsn-live01/_definst_ playpath=mp4:420p500kB31 swfUrl=http://img.hsni.com/images/Site_Relaunch_2007/arcade/StrobeMediaPlay pageUrl="http://www.hsn.com/watch-hsn-tv-live_xh.aspx?network=1&amp live=1 timeout=30</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+<item>
+<title>HSN 2</title>
+<link>rtmp://hsn.mpl.miisolutions.net:1935/hsn-live01/_definst_ playpath=mp4:468p500kB31 swfUrl=http://img.hsni.com/images/Site_Relaunch_2007/arcade/StrobeMediaPlay pageUrl=http://hsn2.hsn.com/watch-hsn-live_xh.aspx?network=4 live=1 timeout=30</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvusa.png</thumbnail>
+</item>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<item>
+<title>[COLOR lime]↓↓↓ NOT Working Channels ↓↓↓[/COLOR]</title>
+<link>http://www.youtube.com</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM/kenhthieunhi.png</thumbnail>
+</item>
+
+
+
+
+
+</items>
+</channel>
+</channels>
+
+
+

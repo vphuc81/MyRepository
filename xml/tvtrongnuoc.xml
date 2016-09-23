@@ -1,0 +1,1430 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channels>
+<channel>
+<name>tvtrongnuoc</name>
+<items>
+
+<item>
+<title>[COLOR ffff0000]More TV Trong Nước[/COLOR] | [COLOR yellow]Please Click Here[/COLOR]</title>
+<link>tocablestv</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/cablestv.png</thumbnail>
+</item>
+<item>
+<title>[COLOR ffff0000]TV[/COLOR] | [COLOR yellow]FPTPlay[/COLOR]</title>
+<link>redirecttofptplay</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/fptplay.png</thumbnail>
+</item>
+
+
+<item>
+<title>[COLOR yellow]ITV Plus[/COLOR]</title>
+<link>toitv</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/itv.png</thumbnail>
+</item>
+
+
+
+
+
+<item>
+<title>[COLOR lime]✫-✫-✫ Updated 09-17-2016 ✫-✫-✫[/COLOR]]</title>
+<link>http://youtube.com</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+
+
+
+<item>
+<title>VTV1 HD s1</title>
+<link>http://live.cdn.mobifonetv.vn/motv/vtv1hd_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTV1 HD s2</title>
+<link>http://118.107.85.14:1935/tvnet/smil:vtv1.smil/chunklist_w1184817626_b1000000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTV1 HD s3</title>
+<link>http://103.21.148.45:81/icomchannelvtv/smil:v1_dump.smil/chunklist_b1328000_sleng.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTV2 s1</title>
+<link>http://103.21.148.45:81/icomchannelvtc/vtc12_576/chunklist.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTV2 s2</title>
+<link>http://118.107.85.14:1935/tvnet/smil:vtv2.smil/chunklist_w1308999529_b800000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTV2 HD</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/vtv2hd_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTV3 HD s1</title>
+<link>http://103.21.148.45:81/icomchannelvtv/smil:vtv3_ele_dump_1.smil/chunklist_b1328000_sleng.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTV3 HD s2</title>
+<link>http://118.107.85.14:1935/tvnet/smil:vtv3.smil/chunklist_w954930339_b800000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTV4</title>
+<link>http://118.107.85.14:1935/tvnet/smil:vtv4.smil/chunklist_w1158642052_b1000000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTV4 HD</title>
+<link>http://live.cdn.mobifonetv.vn/motv/vtv4_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTV5 HD</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/vtv5_hls.smil/chunklist.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTV6 HD</title>
+<link>http://113.185.19.171:8081/livedemo/vtv6hd-vtv-abr/playlist.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTV9 s1</title>
+<link>http://live.cdn.mobifonetv.vn/motv/vtv9_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTV9 s2</title>
+<link>http://103.21.148.45:81/icomchannelvtv/smil:vtv9_adb.smil/chunklist_b928000_sleng.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VOV</title>
+<link>http://live.cdn.mobifonetv.vn/motv2/vov_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VIETNAMNET</title>
+<link>http://live.cdn.mobifonetv.vn/motv/vietnamnet_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>QUOC HOI</title>
+<link>http://live.cdn.mobifonetv.vn/motv/quochoi_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>TTXVN</title>
+<link>http://live.cdn.mobifonetv.vn/motv2/ttxvn_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>ANTV</title>
+<link>http://live.cdn.mobifonetv.vn/motv/antv_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVCab1</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/giaitritv_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVCab2</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/phimviet_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVCab4</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/vanhoa_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVCab5</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/echannel_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVCab6</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/haytv_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVCab7</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/ddramas_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVCab8</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/bibi_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVCab9</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/infotv_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVCab10</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/o2tv_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVcab11</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/tvshopping_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVcab12</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/styletvhd_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVCab14</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/lottedatviet_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVCab15</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/investtv_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVCab17</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/yeah1tv_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>ANTG HD</title>
+<link>http://live.cdn.mobifonetv.vn/motv/antg_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>NCM BTV10</title>
+<link>http://live.cdn.mobifonetv.vn/motv/ncm_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>PHIM HAY TV HD</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/phimhay_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Mien Tay</title>
+<link>http://live.cdn.mobifonetv.vn/motv2/mientay_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VIETTEEN</title>
+<link>http://live.cdn.mobifonetv.vn/motv/vietten_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SAM BTV11 TV</title>
+<link>http://live.cdn.mobifonetv.vn/motv/sam_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>ANVIEN HD</title>
+<link>http://live.cdn.mobifonetv.vn/motv/anvienhd_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Nhac Co Dien</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/nhaccodien_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Nhac Tru Tinh</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/nhactrutinh_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Nhac Dan Toc</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/nhacdantoc_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Nhac Nam Bo</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/nhacnambo_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Nhac Tre</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/nhactre_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Nhac Nhe</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/nhacnhe_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Nhac Cach Mang</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/nhaccachmang_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Doc Sach</title>
+<link>http://live.cdn.mobifonetv.vn/motv3/docsach_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC1</title>
+<link>http://live.cdn.mobifonetv.vn/motv2/vtc1_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC1 HD</title>
+<link>http://118.107.85.14:1935/tvnet/smil:vtc1.smil/chunklist_w1630296716_b1000000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC4</title>
+<link>http://103.21.148.45:81/icomchannelvtc/smil:vtc4_adb_security.smil/chunklist_b928000_sleng.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC5</title>
+<link>http://103.21.148.45:81/icomchannelvtc/smil:vtc5_adb_security.smil/chunklist_b928000_sleng.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC7</title>
+<link>http://103.21.148.45:81/icomchannelvtc/smil:today_ele_dump.smil/chunklist_b928000_sleng.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC8 s1</title>
+<link>http://103.21.148.45:81/icomchannelvtc/vtc8_576/chunklist.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC8 s2</title>
+<link>http://118.69.184.194/tv1/vtc8/index.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC9 s1</title>
+<link>http://103.21.148.45:81/icomchannelvtc/smil:vtc9_adb_security.smil/chunklist_b928000_sleng.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC9 s2</title>
+<link>http://14.161.5.88:1935/live/myStream/playlist.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC10 s1</title>
+<link>http://103.21.148.45:81/icomchannelvtc/vtc10_576/chunklist.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC10 s2</title>
+<link>http://118.107.85.14:1935/tvnet/smil:vtc10.smil/chunklist_w853959802_b800000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC10 s3</title>
+<link>http://118.107.71.15:1935/live/_definst_/VTC10/VTC10_640x360_800kbps.stream/playlist.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC11 s1</title>
+<link>http://103.21.148.45:81/icomchannelvtc/smil:vtc11_adb_security.smil/chunklist_b928000_sleng.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC11 s2</title>
+<link>rtmp://118.107.84.3/live//vtc11_public</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC13 s1</title>
+<link>http://103.21.148.45:81/icomchannelvtc/smil:itv_ele.smil/chunklist_b928000_sleng.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC13 s2</title>
+<link>http://censoft.mobi:1935/tvviet/vtc12.stream/playlist.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC13 s3</title>
+<link>http://live.kenhitv.vn:1935/liveweb/itv_web_500k.stream/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>ITV HD</title>
+<link>http://live.cdn.mobifonetv.vn/motv/itvhd_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC14</title>
+<link>http://live.cdn.mobifonetv.vn/motv/vtc14_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC16 s1</title>
+<link>http://live.cdn.mobifonetv.vn/motv/vtc16_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC16 s2</title>
+<link>http://103.21.148.45:81/icomchannelvtc/vtc16_576/chunklist.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTC16 s3</title>
+<link>http://118.107.85.14:1935/tvnet/smil:vtc16.smil/chunklist_w1702620396_b1000000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>HTV9</title>
+<link>http://118.107.85.14:1935/tvnet/smil:htv9.smil/chunklist_w520143836_b1000000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>HTVC FBNC</title>
+<link>http://live.cdn.mobifonetv.vn/motv/fbnc_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>HN1</title>
+<link>http://118.107.85.14:1935/tvnet/smil:hanoi1.smil/chunklist_w1672688797_b1000000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>CAO BANG</title>
+<link>http://118.107.76.15:1935/live/_definst_/CB/CB_live.smil/playlist.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Bac Can</title>
+<link>http://118.107.76.15:1935/live/_definst_/BK/BK_640x480_1200kbps.stream/playlist.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>L?ng Son</title>
+<link>rtmp://123.18.206.40:1935/live/livestream</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Quang Ninh 1</title>
+<link>rtmp://123.29.68.44/hctv/vstv020</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Quang Ninh 3</title>
+<link>rtmp://123.29.68.44/hctv/vstv021</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VINH PHUC</title>
+<link>rtmp://117.6.162.63/live/thvp</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>HaNam</title>
+<link>rtmp://113.160.198.111:8086/live//hanamtv</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Ha Tinh</title>
+<link>http://hatinhtv.vn/liveevent.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Quang Tri</title>
+<link>rtmp://123.25.117.9:80/live/qtv</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>THUA THIEN HUE</title>
+<link>rtmp://118.69.176.149:1935/live/trt</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Da Nang 2</title>
+<link>rtmp://drt.danang.vn/live/livestream</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Kh⯨ H򡼯</title>
+<link>rtmp://118.69.198.109/live/video</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>GIA LAI</title>
+<link>rtmp://222.255.169.132/live/livestream</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>DAK NONG</title>
+<link>rtmp://222.255.158.22/live/truyenhinh</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Ba Ria Vung Tau</title>
+<link>rtmp://113.163.216.24:1935/live/livestream</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Vinh long 1</title>
+<link>http://live.cdn.mobifonetv.vn/motv/vinhlong1_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Vinh long 2</title>
+<link>http://live.cdn.mobifonetv.vn/motv2/vinhlong2_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Tien Giang</title>
+<link>http://live.cdn.mobifonetv.vn/motv2/tiengiang_hls.smil/chunklist_b1200000.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>S󣠴rang</title>
+<link>rtmp://115.78.3.164/live/stv1</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Bac Lieu</title>
+<link>rtmp://118.69.205.213/livepkgr/livestream1</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>An Giang</title>
+<link>rtmp://113.161.212.25/live//atv1</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Ca Mau</title>
+<link>rtmp://113.161.220.254:1935/livepkgr/livestream2</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+
+
+
+
+
+
+
+<item>
+<title>[COLOR lime]✫-✫-✫ Kênh FPT ✫-✫-✫[/COLOR]</title>
+<link>http://youtube.com</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+
+
+<item>
+<title>VTV1 HD</title>
+<link>plugin://plugin.video.fptplay/plays/vtv1-hd?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_vtv1-hd_142284975301.png</thumbnail>
+</item>
+<item>
+<title>VTV2</title>
+<link>plugin://plugin.video.fptplay/plays/vtv2?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_vtv2.png</thumbnail>
+</item>
+<item>
+<title>VTV3 HD</title>
+<link>plugin://plugin.video.fptplay/plays/vtv3-hd?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_vtv3.png</thumbnail>
+</item>
+<item>
+<title>VTV4</title>
+<link>plugin://plugin.video.fptplay/plays/vtv4?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_vtv4.png</thumbnail>
+</item>
+<item>
+<title>VTV6 HD</title>
+<link>plugin://plugin.video.fptplay/plays/vtv6-hd?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_vtv6-hd_140988742272.png</thumbnail>
+</item>
+<item>
+<title>VTV9</title>
+<link>plugin://plugin.video.fptplay/plays/vtv9?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_vtv9.png</thumbnail>
+</item>
+<item>
+<title>ITV HD</title>
+<link>plugin://plugin.video.fptplay/plays/itv?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_itv.png</thumbnail>
+</item>
+<item>
+<title>VTC1</title>
+<link>plugin://plugin.video.fptplay/plays/vtc1?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_vtc1.png</thumbnail>
+</item>
+<item>
+<title>VTC2</title>
+<link>plugin://plugin.video.fptplay/plays/vtc2?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_vtc2.png</thumbnail>
+</item>
+<item>
+<title>VTC3 HD</title>
+<link>plugin://plugin.video.fptplay/plays/vtc3-hd?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_vtc3.png</thumbnail>
+</item>
+<item>
+<title>VTC5</title>
+<link>plugin://plugin.video.fptplay/plays/vtc5?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_vtc5.png</thumbnail>
+</item>
+<item>
+<title>VTC6</title>
+<link>plugin://plugin.video.fptplay/plays/vtc6?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_vtc6.png</thumbnail>
+</item>
+<item>
+<title>VTC7</title>
+<link>plugin://plugin.video.fptplay/plays/vtc7?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_vtc7.png</thumbnail>
+</item>
+<item>
+<title>VTC10</title>
+<link>plugin://plugin.video.fptplay/plays/vtc10?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_vtc10.png</thumbnail>
+</item>
+<item>
+<title>VTC11 - KIDS TV</title>
+<link>plugin://plugin.video.fptplay/plays/vtc11?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>https://static.fptplay.net/static/img/share/channels/icon_channel_vtc11_144377325286.png</thumbnail>
+</item>
+<item>
+<title>VTC14</title>
+<link>plugin://plugin.video.fptplay/plays/vtc14?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_vtc14.png</thumbnail>
+</item>
+<item>
+<title>VTC16</title>
+<link>plugin://plugin.video.fptplay/plays/vtc16?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_vtc16.png</thumbnail>
+</item>
+<item>
+<title>HTV1</title>
+<link>plugin://plugin.video.fptplay/plays/htv1?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_htv1_144377198682.png</thumbnail>
+</item>
+<item>
+<title>HTV2</title>
+<link>plugin://plugin.video.fptplay/plays/htv2?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_htv2.png</thumbnail>
+</item>
+<item>
+<title>HTV3</title>
+<link>plugin://plugin.video.fptplay/plays/htv3?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_htv3.png</thumbnail>
+</item>
+<item>
+<title>HTV4</title>
+<link>plugin://plugin.video.fptplay/plays/htv4?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_htv4_144377188149.png</thumbnail>
+</item>
+<item>
+<title>HTV7</title>
+<link>plugin://plugin.video.fptplay/plays/htv7-hd?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_htv7.png</thumbnail>
+</item>
+<item>
+<title>HTV9 HD</title>
+<link>plugin://plugin.video.fptplay/plays/htv9-hd?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_htv9-hd_144377200032.png</thumbnail>
+</item>
+<item>
+<title>PHIM HAY</title>
+<link>plugin://plugin.video.fptplay/plays/phim-hay?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>https://static.fptplay.net/static/img/share/channels/icon_channel_phim-hay_144377095251.png</thumbnail>
+</item>
+<item>
+<title>HTV THỂ THAO</title>
+<link>plugin://plugin.video.fptplay/plays/htvc-the-thao?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_htvc-the-thao.png</thumbnail>
+</item>
+<item>
+<title>THUẦN VIỆT HD</title>
+<link>plugin://plugin.video.fptplay/plays/htvc-thuan-viet-hd?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_htvc-thuan-viet.png</thumbnail>
+</item>
+<item>
+<title>THUẦN VIỆT</title>
+<link>plugin://plugin.video.fptplay/plays/htvc-thuan-viet-sd?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_htvc-thuan-viet_141869995261.png</thumbnail>
+</item>
+<item>
+<title>HTVC HD</title>
+<link>plugin://plugin.video.fptplay/plays/htvc-hd?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>https://static.fptplay.net/static/img/share/channels/icon_channel_htvc-hd_144377148491.png</thumbnail>
+</item>
+<item>
+<title>HTVC PHIM HD</title>
+<link>plugin://plugin.video.fptplay/plays/htvc-movie-hd?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_htvc-movie.png</thumbnail>
+</item>
+<item>
+<title>HTVC SHOPPING</title>
+<link>plugin://plugin.video.fptplay/plays/htvc-shopping?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_htvc-shopping.png</thumbnail>
+</item>
+<item>
+<title>HTVC PHỤ NỮ</title>
+<link>plugin://plugin.video.fptplay/plays/htvc-phu-nu?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_htvc-phu-nu_141870063257.png</thumbnail>
+</item>
+<item>
+<title>HTVC DU LỊCH</title>
+<link>plugin://plugin.video.fptplay/plays/htvc-du-lich?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_htvc-du-lich.png</thumbnail>
+</item>
+<item>
+<title>HTVC GIA ĐÌNH</title>
+<link>plugin://plugin.video.fptplay/plays/htvc-gia-dinh?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_htvc-gia-dinh.png</thumbnail>
+</item>
+<item>
+<title>FBNC</title>
+<link>plugin://plugin.video.fptplay/plays/fbnc?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_fbnc_141870056938.png</thumbnail>
+</item>
+<item>
+<title>VIỆT TEEN</title>
+<link>plugin://plugin.video.fptplay/plays/vietteen?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_vietteen_141217629418.png</thumbnail>
+</item>
+<item>
+<title>MIỀN TÂY</title>
+<link>plugin://plugin.video.fptplay/plays/mien-tay?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_mien-tay_141217633202.png</thumbnail>
+</item>
+<item>
+<title>SAM</title>
+<link>plugin://plugin.video.fptplay/plays/sam?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_sam_141217634547.png</thumbnail>
+</item>
+<item>
+<title>NCM</title>
+<link>plugin://plugin.video.fptplay/plays/ncm?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_ncm_141217724217.png</thumbnail>
+</item>
+<item>
+<title>ONE TV</title>
+<link>plugin://plugin.video.fptplay/plays/onetv?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_onetv.png</thumbnail>
+</item>
+<item>
+<title>ANTV</title>
+<link>plugin://plugin.video.fptplay/plays/antv?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_antv.png</thumbnail>
+</item>
+<item>
+<title>VIETNAMNET</title>
+<link>plugin://plugin.video.fptplay/plays/vietnamnet?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_vietnamnet_141457732736.png</thumbnail>
+</item>
+
+<item>
+<title>LET'S VIỆT</title>
+<link>plugin://plugin.video.fptplay/plays/lets-viet?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>https://static.fptplay.net/static/img/share/channels/icon_channel_lets-viet_144377006165.png</thumbnail>
+</item>
+<item>
+<title>LIÊN MINH HUYỀN THOẠI</title>
+<link>plugin://plugin.video.fptplay/plays/lol-event?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>https://static.fptplay.net/static/img/share/channels/icon_channel_lol-event_144377033134.png</thumbnail>
+</item>
+
+<item>
+<title>QUỐC PHÒNG VN</title>
+<link>plugin://plugin.video.fptplay/plays/quoc-phong-vn?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_quoc-phong-vn.png</thumbnail>
+</item>
+<item>
+<title>QUỐC HỘI</title>
+<link>plugin://plugin.video.fptplay/plays/quoc-hoi-hd?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_quoc-hoi-hd_143625917363.png</thumbnail>
+</item>
+<item>
+<title>TTXVN</title>
+<link>plugin://plugin.video.fptplay/plays/vnews?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_vnews.png</thumbnail>
+</item>
+<item>
+<title>VOVTV</title>
+<link>plugin://plugin.video.fptplay/plays/vovtv?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_vov_141463718035.png</thumbnail>
+</item>
+<item>
+<title>HÀ NỘI TV1</title>
+<link>plugin://plugin.video.fptplay/plays/hanoitv-1?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_hanoitv-1.png</thumbnail>
+</item>
+<item>
+<title>HÀ NỘI TV2</title>
+<link>plugin://plugin.video.fptplay/plays/hanoitv-2?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_hanoitv-2_141457719731.png</thumbnail>
+</item>
+<item>
+<title>VĨNH LONG 1</title>
+<link>plugin://plugin.video.fptplay/plays/vinh-long-1?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_vinh-long-1.png</thumbnail>
+</item>
+<item>
+<title>VĨNH LONG 2</title>
+<link>plugin://plugin.video.fptplay/plays/vinh-long-2?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_vinh-long-2.png</thumbnail>
+</item>
+<item>
+<title>VTV ĐÀ NẴNG</title>
+<link>plugin://plugin.video.fptplay/plays/vtv-da-nang?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_vtv-da-nang_141457757889.png</thumbnail>
+</item>
+<item>
+<title>VTV CẦN THƠ</title>
+<link>plugin://plugin.video.fptplay/plays/cvtv1?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_cvtv1.png</thumbnail>
+</item>
+<item>
+<title>BÌNH DƯƠNG 1 - BTV1</title>
+<link>plugin://plugin.video.fptplay/plays/binh-duong-1?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_binh-duong-1.png</thumbnail>
+</item>
+<item>
+<title>BÌNH DƯƠNG 2 - BTV2</title>
+<link>plugin://plugin.video.fptplay/plays/binh-duong-2?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_binh-duong-2.png</thumbnail>
+</item>
+<item>
+<title>BÌNH DƯƠNG 4 - BTV4 HD</title>
+<link>plugin://plugin.video.fptplay/plays/binh-duong-4-hd?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_binh-duong-4-hd_144412738734.png</thumbnail>
+</item>
+<item>
+<title>ĐỒNG NAI 1</title>
+<link>plugin://plugin.video.fptplay/plays/dong-nai-1?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_dong-nai-1.png</thumbnail>
+</item>
+<item>
+<title>ĐỒNG NAI 2</title>
+<link>plugin://plugin.video.fptplay/plays/dong-nai-2?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_dong-nai-2.png</thumbnail>
+</item>
+<item>
+<title>ĐÀ NẴNG 1</title>
+<link>plugin://plugin.video.fptplay/plays/da-nang-1?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_da-nang-1.png</thumbnail>
+</item>
+<item>
+<title>ĐÀ NẴNG 2</title>
+<link>plugin://plugin.video.fptplay/plays/da-nang-2?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_da-nang-2.png</thumbnail>
+</item>
+<item>
+<title>CẦN THƠ</title>
+<link>plugin://plugin.video.fptplay/plays/can-tho?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_can-tho.png</thumbnail>
+</item>
+<item>
+<title>TIỀN GIANG</title>
+<link>plugin://plugin.video.fptplay/plays/tien-giang?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_tien-giang.png</thumbnail>
+</item>
+<item>
+<title>AN GIANG</title>
+<link>plugin://plugin.video.fptplay/plays/an-giang?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_an-giang.png</thumbnail>
+</item>
+<item>
+<title>HẢI PHÒNG</title>
+<link>plugin://plugin.video.fptplay/plays/hai-phong?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_hai-phong.png</thumbnail>
+</item>
+<item>
+<title>BÌNH ĐỊNH</title>
+<link>plugin://plugin.video.fptplay/plays/binh-dinh?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_binh-dinh.png</thumbnail>
+</item>
+<item>
+<title>THANH HÓA</title>
+<link>plugin://plugin.video.fptplay/plays/thanh-hoa?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_thanh-hoa_141457714089.png</thumbnail>
+</item>
+<item>
+<title>KHÁNH HÒA</title>
+<link>plugin://plugin.video.fptplay/plays/khanh-hoa?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_khanh-hoa_141457723074.png</thumbnail>
+</item>
+<item>
+<title>NINH BÌNH</title>
+<link>plugin://plugin.video.fptplay/plays/ninh-binh?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_ninh-binh_141457725841.png</thumbnail>
+</item>
+<item>
+<title>NGHỆ AN</title>
+<link>plugin://plugin.video.fptplay/plays/nghe-an?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_nghe-an_14145773592.png</thumbnail>
+</item>
+<item>
+<title>BÀ RỊA</title>
+<link>plugin://plugin.video.fptplay/plays/ba-ria-vung-tau?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_ba-ria-vung-tau_141457728259.png</thumbnail>
+</item>
+<item>
+<title>QUẢNG NINH 1</title>
+<link>plugin://plugin.video.fptplay/plays/quang-ninh-1?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_quang-ninh-1_141457746552.png</thumbnail>
+</item>
+<item>
+<title>QUẢNG NINH 3</title>
+<link>plugin://plugin.video.fptplay/plays/quang-ninh-3?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static1.fptplay.net.vn/static/img/share/channels/icon_channel_quang-ninh-3_141457749017.png</thumbnail>
+</item>
+<item>
+<title>TUYÊN QUANG</title>
+<link>plugin://plugin.video.fptplay/plays/tuyen-quang?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_tuyen-quang_141457751675.png</thumbnail>
+</item>
+<item>
+<title>HÒA BÌNH</title>
+<link>plugin://plugin.video.fptplay/plays/hoa-binh?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_hoa-binh_141457760549.png</thumbnail>
+</item>
+<item>
+<title>GIA LAI</title>
+<link>plugin://plugin.video.fptplay/plays/gia-lai?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_gia-lai_144377329901.png</thumbnail>
+</item>
+<item>
+<title>QUẢNG BÌNH</title>
+<link>plugin://plugin.video.fptplay/plays/quang-binh-tv?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>http://static.fptplay.net.vn/static/img/share/channels/icon_channel_qbtv_144435660103.png</thumbnail>
+</item>
+<item>
+<title>SÓC TRĂNG</title>
+<link>plugin://plugin.video.fptplay/plays/truyen-hinh-soc-trang?sf_options=winID%3D10025%26_options_sf</link>
+<thumbnail>https://static.fptplay.net/static/img/share/channels/icon_channel_truyen-hinh-soc-trang_145040824356.png</thumbnail>
+</item>
+
+
+
+
+
+
+
+
+
+
+
+<item>
+<title>[COLOR lime]✫-✫-✫ Kênh SCTV ✫-✫-✫[/COLOR]</title>
+<link>http://www.youtube.com</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTVHD-DU LICH & KHÁM PHÁ</title>
+<link>rtmp://112.197.2.135:1935/colive/C007_HD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTVHD-PHIM  VIỆT</title>
+<link>rtmp://112.197.2.135:1935/colive/C009_HD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTVHD-PHIM CHÂU Á</title>
+<link>rtmp://112.197.2.135:1935/colive/C010_HD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTVHD-PHIM TỔNG HỢP</title>
+<link>rtmp://112.197.2.135:1935/colive/C013_HD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTVHD-PHIM NƯỚC NGOÀI ÐẶC SẮC</title>
+<link>rtmp://112.197.2.135:1935/colive/C015_HD_2 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTVHD-STAR MOVIES</title>
+<link>rtmp://112.197.2.135:1935/colive/C001_HD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTVHD-GIẢI TRÍ TỔNG HỢP</title>
+<link>rtmp://112.197.2.135:1935/colive/C014_HD_2 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTVHD-THIẾU NHI</title>
+<link>rtmp://112.197.2.135:1935/colive/C016_HD_2 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTVHD-HÀI</title>
+<link>rtmp://112.197.2.135:1935/colive/C011_HD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTVHD-SÂN KHẤU</title>
+<link>rtmp://112.197.2.135:1935/colive/C012_HD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTVHD-PHỤ NỮ & GIA ÐÌNH</title>
+<link>rtmp://112.197.2.135:1935/colive/C017_HD_2 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTVHD THỂ THAO 1</title>
+<link>rtmp://112.197.2.135:1935/colive/C042_SD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTVHD THỂ THAO 2</title>
+<link>rtmp://112.197.2.135:1935/colive/C008_HD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTVHD-SÓNG NHẠC</title>
+<link>rtmp://112.197.2.135:1935/colive/C006_HD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV1</title>
+<link>rtmp://112.197.2.135:1935/colive/C027_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV2</title>
+<link>rtmp://112.197.2.135:1935/colive/C028_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV3</title>
+<link>rtmp://112.197.2.135:1935/colive/C029_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV4</title>
+<link>rtmp://112.197.2.135:1935/colive/C030_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV5</title>
+<link>rtmp://112.197.2.135:1935/colive/C037_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV6</title>
+<link>rtmp://112.197.2.135:1935/colive/C038_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV7</title>
+<link>rtmp://112.197.2.135:1935/colive/C039_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV8</title>
+<link>rtmp://112.197.2.135:1935/colive/C040_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV9</title>
+<link>rtmp://112.197.2.135:1935/colive/C041_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV10</title>
+<link>rtmp://112.197.2.135:1935/colive/C064_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV11</title>
+<link>rtmp://112.197.2.135:1935/colive/C066_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV12</title>
+<link>rtmp://112.197.2.135:1935/colive/C067_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV13</title>
+<link>rtmp://112.197.2.135:1935/colive/C031_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV14</title>
+<link>rtmp://112.197.2.135:1935/colive/C032_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV15</title>
+<link>rtmp://112.197.2.135:1935/colive/C042_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV16</title>
+<link>rtmp://112.197.2.135:1935/colive/C033_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV17</title>
+<link>rtmp://112.197.2.135:1935/colive/C034_SD_3 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV18</title>
+<link>rtmp://112.197.2.135:1935/colive/C008_HD_2 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV BTV5 Bóng Ðá</title>
+<link>rtmp://112.197.2.135:1935/colive/C069_SD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV VTV1</title>
+<link>rtmp://112.197.2.135:1935/colive/C043_SD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV VTV2</title>
+<link>rtmp://112.197.2.135:1935/colive/C044_SD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV VTVHUE</title>
+<link>rtmp://112.197.2.135:1935/colive/C061_SD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV VTVCANTHO1</title>
+<link>rtmp://112.197.2.135:1935/colive/C063_SD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV VTVCAB5</title>
+<link>rtmp://112.197.2.135:1935/colive/C059_SD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV DRT1</title>
+<link>rtmp://112.197.2.135:1935/colive/C060_SD_4 swfUrl=http://tv24.vn/jwplayer/jwplayer.flash.swf pageUrl=http://www.tv24.vn/ token=qrtkL6xTjSqeG4q3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+
+
+
+
+<item>
+<title>[COLOR lime]✫-✫-✫ Kênh Life TV ✫-✫-✫[/COLOR]</title>
+<link>http://youtube.com</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+
+<item>
+<title>LIFETV</title>
+<link>rtmp://203.162.121.230/live/live_lifetv?securetoken=#ed%h0#w@1</link>
+<thumbnail>http://xbmc.itvplus.net/LOGO/LIFE/lifetvI.png</thumbnail>
+</item>
+<item>
+<title>KÊNH 9 MUSIC</title>
+<link>rtmp://203.162.121.230/live//9_music?securetoken=#ed%h0#w@1</link>
+<thumbnail>http://xbmc.itvplus.net/LOGO/LIFE/K9I.png</thumbnail>
+</item>
+<item>
+<title>FITNESS 360</title>
+<link>rtmp://203.162.121.230/live//fitness_360?securetoken=#ed%h0#w@1</link>
+<thumbnail>http://xbmc.itvplus.net/LOGO/LIFE/360I.png</thumbnail>
+</item>
+<item>
+<title>MODEL CHANNEL</title>
+<link>rtmp://203.162.121.230/live//model_channel?securetoken=#ed%h0#w@1</link>
+<thumbnail>http://xbmc.itvplus.net/LOGO/LIFE/MOCI.png</thumbnail>
+</item>
+<item>
+<title>DI SẢN VIỆT</title>
+<link>rtmp://203.162.121.230/live//disanviet?securetoken=#ed%h0#w@1</link>
+<thumbnail>http://xbmc.itvplus.net/LOGO/LIFE/disanI.png</thumbnail>
+</item>
+<item>
+<title>4 MEN</title>
+<link>rtmp://203.162.121.230/live//4Men?securetoken=#ed%h0#w@1</link>
+<thumbnail>http://xbmc.itvplus.net/LOGO/LIFE/4menI.png</thumbnail>
+</item>
+<item>
+<title>2 Channel Vietnam</title>
+<link>rtmp://203.162.121.230/live//2channel?securetoken=#ed%h0#w@1</link>
+<thumbnail>http://xbmc.itvplus.net/LOGO/LIFE/2channelI.png</thumbnail>
+</item>
+<item>
+<title>TECH CHANNEL</title>
+<link>rtmp://203.162.121.230/live//tech?securetoken=#ed%h0#w@1</link>
+<thumbnail>http://xbmc.itvplus.net/LOGO/LIFE/techI.png</thumbnail>
+</item>
+<item>
+<title>TRUYỀN THÔNG VIỆT</title>
+<link>rtmp://203.162.121.230/live//ttv?securetoken=#ed%h0#w@1</link>
+<thumbnail>http://xbmc.itvplus.net/LOGO/LIFE/ttbvI.png</thumbnail>
+</item>
+
+
+
+
+<item>
+<title>[COLOR lime]✫-✫-✫ Kênh Địa Phương ✫-✫-✫[/COLOR]</title>
+<link>http://youtube.com</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+
+
+<item>
+<title>Bà Rịa - Vũng Tàu</title>
+<link>rtmp://113.163.216.24/live playpath=livestream swfUrl=http://thvl.vn/vplayer.swf pageUrl=http://tivihay.net/dia-phuong-vung-tau-k61.html swfVfy=true live=true timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Cần Thơ THTPCT</title>
+<link>rtmp://113.161.204.167:1935/livepkgr/ playpath=livestream swfUrl=http://vtvcantho.vn/Content/jwplayer/player.swf pageUrl=http://vtvcantho.vn/ live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Khánh Hòa KTV</title>
+<link>rtmp://118.69.198.109:1935/live/ playpath=video swfUrl=http://hktivi.net/player.swf swfVfy=true live=true timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Lạng Sơn LSTV</title>
+<link>rtmp://123.18.206.40/live/ playpath=livestream swfUrl=http://hktivi.net/player.swf pageUrl=http://hktivi.net/tv_truc_tuyen/langson.php swfVfy=true live=true timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Bình Dương BTV1</title>
+<link>rtmp://202.43.109.147/live/btv1.stream live=1</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Bình Dương BTV2</title>
+<link>rtmp://202.43.109.147/rtplive/btv2.stream live=1</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Cà Mau CTV</title>
+<link>rtmp://113.161.220.254/livepkgr/ playpath=livestream1?adbe-live-event=liveevent swfUrl=http://ctvcamau.vn/jwplayer/jwplayer.flash.swf pageUrl=http://ctvcamau.vn/jwplayer/?l=rtmp&i=http://118.69.199.136/wp-content/uploads/2014/01/TVonline_Ctvcamau.jpg&w=400&h=300&a=0 live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SÓC TRĂNG STV</title>
+<link>rtmp://115.78.3.164/live playpath=stv1 swfUrl=http://thst.vn/MediaPlayer/vplayer.swf pageUrl=http://thst.vn/Truyen_hinh.aspx live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>ĐẮC NÔNG PTD</title>
+<link>rtmp://222.255.158.22:1935/live playpath=truyenhinh swfUrl=http://fpdownload.adobe.com/strobe/FlashMediaPlayback_101.swf/[[DYNAMIC]]/1 pageUrl=http://www.ptthdaknong.com.vn/truyenhinh.html live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>ĐÀ NẴNG 1</title>
+<link>rtmp://113.164.15.175:44444/mnrrnlm/_definst_ playpath=drt1 swfUrl=http://www.drt.danang.vn/js/DRTplayer.swf pageUrl=http://www.drt.danang.vn/# live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>ĐÀ NẴNG 2</title>
+<link>rtmp://drt.danang.vn/live playpath=livestream swfUrl=http://www.drt.danang.vn/js/DRTplayer.swf pageUrl=http://www.drt.danang.vn/# live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VĨNH PHÚC VP</title>
+<link>rtmp://117.6.162.63/live/ playpath=thvp swfUrl=http://hktivi.net/player.swf pageUrl=http://hktivi.net/kenh/vinhphuc.html swfVfy=true live=true timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>BÌNH PHƯỚC BPTV1</title>
+<link>rtmp://113.161.180.136/live/ playpath=thbp1.tv swfUrl=http://www.bptv.com.vn/vplayer.swf pageUrl=http://www.bptv.com.vn/ live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>BÌNH PHƯỚC BPTV2</title>
+<link>rtmp://113.161.180.136/live/ playpath=thbp2.tv swfUrl=http://www.bptv.com.vn/vplayer.swf pageUrl=http://www.bptv.com.vn/# live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>BẠC LIÊU</title>
+<link>rtmp://118.69.205.213/livepkgr/ playpath=livestream1 swfUrl=http://p.jwpcdn.com/6/10/jwplayer.flash.swf pageUrl=http://hktivi.net/tv_truc_tuyen/truyen-hinh-bac-lieu-btv.php swfVfy=true live=true timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+
+
+
+
+<item>
+<title>VNews - TTXVN</title>
+<link>rtmp://live.vnanet.vn:1935/Live/ playpath=DRC swfUrl=http://avnews.vnanet.vn/RtmpPlayer/player.swf pageUrl=http://avnews.vnanet.vn/ live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>An Giang 1</title>
+<link>rtmp://113.161.212.25/live playpath=atv1 swfUrl=http://www.atv.org.vn/player/player.swf swfVfy=true live=true timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>An Giang 2</title>
+<link>rtmp://113.161.212.25/live2 playpath=atv2 swfUrl=http://www.atv.org.vn/player/player.swf swfVfy=true live=true timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Bắc Ninh</title>
+<link>rtmp://113.160.154.159:5119/live playpath=bntv swfUrl=http://www.umediaserver.net/bin/FlashPlayer/player-quick.swf pageUrl=http://bacninhtv.vn/ live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Bến Tre</title>
+<link>rtmp://113.163.94.245/live/ playpath=Stream swfUrl=http://thbt.vn/jwplayer/jwplayer.flash.swf pageUrl=http://thbt.vn/jwplayer/?l=rtmp%3A%2F%2F113.163.94.245%2Flive%2FStream&amp;i=http://thbt.vn/wp-content/uploads/2014/03/nentruct.png&amp;w=400&amp;h=280&amp;a=0 live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Bình Thuận</title>
+<link>mms://123.30.108.114/BTVTruyenhinh</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Đồng Nai 1</title>
+<link>rtmp://123.29.75.131:1935/thdn playpath=dn1.stream swfUrl=http://www.dnrtv.org.vn/static/js/flowplayer/flowplayer-3.2.7.swf pageUrl=http://www.dnrtv.org.vn/ live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Đồng Nai 2</title>
+<link>rtmp://123.29.75.131:1935/thdn/dn2.stream swfUrl=http://www.dnrtv.org.vn/static/js/flowplayer/flowplayer-3.2.7.swf swfVfy=true live=true timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Gia Lai</title>
+<link>rtmp://222.255.169.132/live/ playpath=livestream swfUrl=http://p.jwpcdn.com/6/11/jwplayer.flash.swf swfVfy=true live=true timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Hà Nội</title>
+<link>rtmp://38.107.180.195:1935/live playpath=hanoi11_h swfUrl=http://vtc.com.vn/player_akamai_low.swf pageUrl=http://vtc.com.vn/live/6/Ha-Noi-1.html swfVfy=1 live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Hậu Giang</title>
+<link>rtmp://115.78.160.29/live/thhg live=1 swfUrl=http://truyenhinhhaugiang.vn/MediaPlayer/vplayer.swf swfVfy=true live=true timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Ninh Thuận</title>
+<link>rtmp://113.164.108.11/live/ playpath=NTV_VIDEO swfUrl=http://hktivi.net/player.swf swfVfy=true live=true timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Phú Yên</title>
+<link>rtmp://113.161.4.102/live/ playpath=vtvphuyen.tv swfUrl=http://vtvphuyen.vn/vplayer.swf pageUrl=http://vtvphuyen.vn/ live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Quảng Ngãi</title>
+<link>http://113.160.244.44/liveevent.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Quảng Trị</title>
+<link>rtmp://123.25.117.9:80/live playpath=qtv swfUrl=http://hktivi.net/player.swf swfVfy=true live=true timeout=60</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Thừa Thiên Huế</title>
+<link>rtmp://118.69.176.149/live/trt swfUrl=http://tv.xunghe.vn/player.swf pageUrl=http://tv.xunghe.vn/ live=true timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+
+
+
+
+<item>
+<title>[COLOR lime]✫-✫-✫ Kênh Accessasia ✫-✫-✫[/COLOR]</title>
+<link>http://youtube.com</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Thuần Việt HD - Giải Trí Tổng Hợp</title>
+<link>http://tvod.accessasia.tv:8080/tvod/air/thuanviet.480p/index.m3u8?e=1389744448&amp;st=qyg7wGxdgIptlUnbonBKuQ</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTV 4 - Kênh thời sự - kinh tế - văn hóa và giải trí</title>
+<link>http://tvod.accessasia.tv:8080/tvod/air/vtv4.480p/index.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVcab 1 - Kênh giải trí tổng hợp</title>
+<link>http://tvod.accessasia.tv:8080/live/vctv1.480p/index.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVcab 2 - Kênh phim truyện Việt Nam</title>
+<link>http://tvod.accessasia.tv:8080/tvod/air/vctv2.480p/index.m3u8?e=1389728751&amp;st=ec_kFlx1ytFUw6ErmiEmHg</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVcab 4 - Giải trí tổng hợp</title>
+<link>http://tvod.accessasia.tv:8080/live/vctv4.480p/index.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVcab 8 - Giải trí tổng hợp</title>
+<link>http://tvod.accessasia.tv:8080/live/vctv8.480p/index.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVcab 10 - Sức khỏe</title>
+<link>http://tvod.accessasia.tv:8080/live/vctv10.480p/index.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>VTVcab 17 - Kênh văn hóa giải trí</title>
+<link>http://tvod.accessasia.tv:8080/live/vctv17.480p/index.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV 14 - Kênh phim Việt</title>
+<link>http://tvod.accessasia.tv:8080/live/sctv14.480p/index.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>SCTV HD - Hài</title>
+<link>http://tvod.accessasia.tv:8080/live/sctvhaihd.480p/index.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>FBNC - Thông Tin Thương Mại</title>
+<link>http://tvod.accessasia.tv:8080/tvod/air/htvcfbnc.480p/index.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+<item>
+<title>Du Lịch Và Cuộc Sống</title>
+<link>http://tvod.accessasia.tv:8080/live/dulichcuocsong.480p/index.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png</thumbnail>
+</item>
+
+
+
+
+</items>
+</channel>
+</channels>
+
+
+
+
+
+

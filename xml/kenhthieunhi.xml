@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channels>
+<channel>
+<name>kenhthieunhi</name>
+<items>
+
+
+
+
+<item>
+<title>[COLOR ffff0000]TV[/COLOR] | Cables TV Channels</title>
+<link>tocablestv</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/cablestv.png</thumbnail>
+</item>
+<item>
+<title>[COLOR ffff0000]Movies[/COLOR] English | Cartoons 8</title>
+<link>tocartoons8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/cartoons8.png</thumbnail>
+</item>
+<item>
+<title>[COLOR ffff0000]Movies[/COLOR] English | Kiddie Cartoons</title>
+<link>tokiddiecartoons</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/kiddiecartoons.png</thumbnail>
+</item>
+<item>
+<title>[COLOR ffff0000]Movies[/COLOR] English | Cartoon HD</title>
+<link>tocartoonhd</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/cartoonhd.png</thumbnail>
+</item>
+<item>
+<title>[COLOR ffff0000]Movies[/COLOR] English | CartoonGo</title>
+<link>tocartoongo</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/cartoongo.png</thumbnail>
+</item>
+<item>
+<title>[COLOR ffff0000]Movies[/COLOR] English | AnimeGo</title>
+<link>toanimego</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/animego.png</thumbnail>
+</item>
+
+
+<item>
+<title>VTVcab8</title>
+<link>rtmp://118.70.203.130/channel/_definst_/vtvcab8_profile1.stream</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM/kenhthieunhi.png</thumbnail>
+</item>
+<item>
+<title>[COLOR orange]Mầm Non TV[/COLOR]</title>
+<link>http://xmamnontvx.api.channel.livestream.com/3.0/playlist.m3u8</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM/kenhthieunhi.png</thumbnail>
+</item>
+<item>
+<title>Cartoon Network</title>
+<link>rtsp://72.13.93.186/campcartoon</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM/kenhthieunhi.png</thumbnail>
+</item>
+
+
+
+
+</items>
+</channel>
+</channels>
+

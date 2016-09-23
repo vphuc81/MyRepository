@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+
+<channel>Radio
+<name>Kênh [COLOR lime]>[/COLOR][COLOR cyan]>[/COLOR][COLOR orange]>[/COLOR][COLOR lightgreen]>[/COLOR] Radio</name>
+<thumbnail>http://i.imgur.com/VDxKaHk.png</thumbnail>
+
+<items>
+
+
+
+<item>
+<title>Little Saigon Radio Channel</title>
+<link>http://stream.onworldtv.com/edge/liveorigin/lstv_aud/index.m3u8?worldtokenstarttime=1444423608&worldtokenendtime=1444508208&worldtokenhash=k6qFZYx0ELbVimn1MRjDwjNovV_bV6ve3l34BuiIZJM=</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM/radio.png</thumbnail>
+</item>
+<item>
+<title>Sai Gon Network Radio Channel</title>
+<link>http://stream.onworldtv.com/edge/liveorigin/sgn_aud/index.m3u8?worldtokenstarttime=1444423674&worldtokenendtime=1444508274&worldtokenhash=sJeb-VFJiW2a2TiV0rrISBxY6Sv5dwVP0s3fxt417oQ=</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fjNUcHcwMEkyS0gxUGRvQlMzaGpxSDQtZGNtUVZrSy1fQzhDSjJ1NEhmbmM/radio.png</thumbnail>
+</item>
+
+<item>
+<title>VOV1</title>
+<link>http://123.29.68.10/radio/myradio001.m3u8</link>
+<thumbnail>http://diendan.vov.vn/lib/images/logo/vov1.png</thumbnail>
+</item>
+
+<item>
+<title>VOV2</title>
+<link>http://123.29.68.10/radio/myradio002.m3u8</link>
+<thumbnail>http://diendan.vov.vn/lib/images/logo/vov2.png</thumbnail>
+</item>
+
+<item>
+<title>VOV3</title>
+<link>http://123.29.68.10/radio/myradio003.m3u8</link>
+<thumbnail>http://diendan.vov.vn/lib/images/logo/vov3.png</thumbnail>
+</item>
+
+<item>
+<title>VOV5</title>
+<link>http://123.29.68.10/radio/myradio004.m3u8</link>
+<thumbnail>http://diendan.vov.vn/lib/images/logo/vov5.png</thumbnail>
+</item>
+
+<item>
+<title>LOVE MUSIC</title>
+<link>http://123.29.68.10/radio/myradio010.m3u8</link>
+<thumbnail>http://i.imgur.com/T1jpZkH.png</thumbnail>
+</item>
+
+<item>
+<title>JAZZ</title>
+<link>http://123.29.68.10/radio/myradio012.m3u8</link>
+<thumbnail>http://i.imgur.com/RfQX1dX.png</thumbnail>
+</item>
+
+<item>
+<title>BEST MUSIC DANCE</title>
+<link>http://123.29.68.10/radio/myradio009.m3u8</link>
+<thumbnail>http://i.imgur.com/mcIDe81.png</thumbnail>
+</item>
+
+<item>
+<title>ROCK 80'S</title>
+<link>http://123.29.68.10/radio/myradio005.m3u8</link>
+<thumbnail>http://i.imgur.com/aE4YVxM.png</thumbnail>
+</item>
+
+<item>
+<title>COUNTRY MUSIC</title>
+<link>http://123.29.68.10/radio/myradio008.m3u8</link>
+<thumbnail>http://i.imgur.com/FuHA4K2.png</thumbnail>
+</item>
+
+<item>
+<title>POP ROCK</title>
+<link>http://123.29.68.10/radio/myradio011.m3u8</link>
+<thumbnail>http://i.imgur.com/WhhEpfW.png</thumbnail>
+</item>
+
+<item>
+<title>CLASSIC GUITAR</title>
+<link>http://123.29.68.10/radio/myradio007.m3u8</link>
+<thumbnail>http://i.imgur.com/RPFicNB.png</thumbnail>
+</item>
+
+<item>
+<title>THE BEST HITS OF 90</title>
+<link>http://123.29.68.10/radio/myradio006.m3u8</link>
+<thumbnail>http://i.imgur.com/EsJmzmL.png</thumbnail>
+</item>
+
+
+<item>
+<title>Radio Bolsa</title>
+<link>http://ice7.securenetsystems.net/RBVU?type=.flv&playSessionID=724B6190-D27B-7531-5AD645183B89ED51</link>
+<thumbnail>http://www.ktulaw.com/wp-content/uploads/Radio-Bolsa-logo.jpg</thumbnail>
+<item>
+<title>VOA News</title>
+<link>mms://a823.l211056822.c2110.g.lm.akamaistream.net/D/823/2110/v0001/reflector:56822</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+<item>
+<title>NHK Vietnam</title>
+<link>mms://wm.nhk.or.jp/rj/on_demand/wma/vietnamese.wma</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+<item>
+<title>RFI Vietnam</title>
+<link>http://95.81.155.3/2584/rfi_en_vietnamien/rfivietnamien.mp3</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+<item>
+<title>VOH</title>
+<link>mms://221.132.37.15/fm</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+<item>
+<title>VOV GT HN</title>
+<link>rtmp://vov.radiovietnam.vn/live/vovgthn.stream</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+<item>
+<title>VOV GT TP.HCM</title>
+<link>rtmp://vov.radiovietnam.vn/live/vovgthcm.stream</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+<item>
+<title>VOV1</title>
+<link>rtmp://vov.radiovietnam.vn/live/vov1.stream</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+<item>
+<title>VOV2</title>
+<link>rtmp://vov.radiovietnam.vn/live/vov2.stream</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+<item>
+<title>VOV3</title>
+<link>rtmp://vov.radiovietnam.vn/live/vov3.stream</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+<item>
+<title>An Giang Radio</title>
+<link>rtmp://113.161.212.25/live/ playpath=radio swfUrl=http://atv.org.vn/player/player.swf pageUrl=http://nguoiviet.tv/an-giang-radio-2/ live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+<item>
+<title>Bến Tre Radio</title>
+<link>rtmp://113.163.94.245:1936/live/ playpath=audiostream swfUrl=http://thbt.vn/jwplayer/jwplayer.flash.swf pageUrl=http://thbt.vn/jwplayer/?l=rtmp%3A%2F%2F113.163.94.245%3A1936%2Flive%2Faudiostream&i=http://222.255.237.48/wp-content/uploads/2013/11/nen-truc-tuyen-copy.png&w=400&h=280&a=1 live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+<item>
+<title>Bình Phước Radio</title>
+<link>rtmp://113.161.180.136/live/ playpath=thbp.radio swfUrl=http://www.bptv.com.vn/vplayer.swf pageUrl=http://www.bptv.com.vn/# live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+<item>
+<title>Cà Mau Radio</title>
+<link>rtmp://113.161.220.254/livepkgr/ playpath=livestream4?adbe-live-event=liveevent swfUrl=http://ctvcamau.vn/jwplayer/jwplayer.flash.swf pageUrl=http://ctvcamau.vn/jwplayer/?l=rtmp2&i=http://118.69.199.136/wp-content/uploads/2014/01/radio_online.jpg&w=400&h=300&a=1 live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+<item>
+<title>Đồng Nai Radio</title>
+<link>rtmp://vov.radiovietnam.vn:1935/live playpath=dongnai.stream swfUrl=http://www.dnrtv.org.vn/static/js/flowplayer/flowplayer-3.2.7.swf pageUrl=http://www.dnrtv.org.vn/ live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+<item>
+<title>Đồng Tháp Radio</title>
+<link>rtmp://vov.radiovietnam.vn:1935/live playpath=dongthap.stream swfUrl=http://radiovietnam.vn/media/RadioPlayer.swf pageUrl=http://radiovietnam.vn/sharedradio.aspx?rname=dongthap&w=625&h=320 live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+<item>
+<title>Khánh Hoà Radio</title>
+<link>rtmp://118.69.198.109:1935/live playpath=audio swfUrl=http://thvl.vn/vplayer.swf pageUrl=http://nguoiviet.tv/radio-khanh-hoa/ live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+<item>
+<title>Sóc Trăng Radio</title>
+<link>rtmp://115.78.3.164/live playpath=FMsoctrang swfUrl=http://thst.vn/MediaPlayer/vplayer.swf pageUrl=http://thst.vn/Phat_thanh.aspx live=1 timeout=90</link>
+<thumbnail>https://googledrive.com/host/0B7zkkQwo5pr5fmZlb3l5MmEtbmxuWlpyVFFfOHJ0cVA5cmpIVS1seDVXOG1fby1HcmFuNzg/radio.png</thumbnail>
+</item>
+
+</items>
+</channel>
