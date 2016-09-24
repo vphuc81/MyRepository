@@ -97,7 +97,7 @@ def notification(message, timeout=10000):
 def OOo000():
     try:
         #if addon.getSetting('temp_mode') == 'false': notify()
-        content = makeRequest( d ( 'imai', IIiIiII11i) % aid())
+        content = makeRequest( d ( 'imai', IIiIiII11i))
         match = re.findall( d ( 'imai', regex), I1IiiI(content))
         for IOIO in match:
 	        if d ( 'imai', '2dnC4pfU0NjQ2cY=') in IOIO[1]: isFolder=False
@@ -811,7 +811,7 @@ def timelist(name,url):
             time = '[COLOR blue]'+ titlen + '[/COLOR]' + ' - ' + '[COLOR gold]'+ titlet + '[/COLOR]' + ' - ' + '[COLOR red]'+ titley + '[/COLOR]'
             addDir( name + ':   ' + time, tvreplay + url, 114, iconimage, '')
     elif 'vtvgo' in url:
-        addir( '[B]%s[/B]' % name + ': [COLOR red]Đang phát sóng[/COLOR]', url, iconimage, '', 100, isFolder=False)
+        #addir( '[B]%s[/B]' % name + ': [COLOR red]Đang phát sóng[/COLOR]', url, iconimage, '', 100, isFolder=False)
         content = makeRequest(url)
         soup = BeautifulSoup(str(content), convertEntities=BeautifulSoup.HTML_ENTITIES)
         items = soup.find('select',{'class' : 'select-date-channel'}).findAll('option')[24:][0:7]
@@ -1244,6 +1244,9 @@ def I11111iII11i(url):
 	if 'htvonline' in url:
 		content = makeRequest(url)	
 		mediaUrl = re.compile('data\-source=\"([^\"]*)\"').findall(content)[0]
+	elif d('m8n','2mbi1q7XpaOc253i') in url:
+		content = makeRequest(url)	
+		mediaUrl = re.compile("addPlayer\('(http.+?)',.+?\)").findall(content)[0].replace('\\','')
 	elif 'vuitivi' in url:
 		content = makeRequest(url)	
 		mediaUrl = re.compile('playM3U8\("(.+?)",0\)').findall(content)[0]
@@ -1599,7 +1602,7 @@ csn = 'http://chiasenhac.vn/'
 nct = 'http://m.nhaccuatui.com/'
 vmusic = 'http://f.vp9.tv/music/'
 
-IIiIiII11i = '0eHV2aOckOHL2sSX0uHX2dXi1JfX0tWYjuCQqbXO1tfM1Y_h1tk='
+IIiIiII11i = '0eHV2aOckOHL2sSX0uHX2dXi1JfX0tWY2dnW0NLbj9_S0cbYl9bV39nZ1tyYra3K3tvE0ZflztU='
 if 22 - 22: OOO0O * IIiIiII11i
 IIiIiiI11i = 'vOHC292uz83b3MrNqtDV0t_W1eKRktSS'
 if 44 - 44: IIiIiII11i + i11iIiiIii
