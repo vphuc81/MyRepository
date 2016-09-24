@@ -651,7 +651,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon
   id="plugin.video.SportsDevil"
-  version="2016.09.16"
+  version="2016.09.24"
   name="SportsDevil"
   provider-name="SportsDevil">
   <requires>

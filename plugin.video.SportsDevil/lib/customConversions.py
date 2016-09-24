@@ -218,15 +218,14 @@ def resolve(src):
             import random
             tmp_host[0] = random.choice(servers)
         elif tmp_host[0] == 'xlive.sportstream365.com':
-            servers = [ "185.56.139.162",
-                        "93.189.57.254",
-                        "93.189.62.10",
-                        "185.49.70.58",
-                        "46.28.205.96",
-                        "178.17.168.90",
-                        "185.28.190.69",
-                        "85.114.135.215",
-                        "94.242.254.211"]
+            servers = [ '93.189.57.254',
+                        '93.189.62.10',
+                        '185.49.70.58',
+                        '46.28.205.96',
+                        '178.17.168.90',
+                        '185.28.190.69',
+                        '85.114.135.215',
+                        '94.242.254.211']
             import random
             tmp_host[0] = random.choice(servers)
         elif tmp_host[0] == 'live.pub.stream':

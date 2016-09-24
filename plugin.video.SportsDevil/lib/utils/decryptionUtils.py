@@ -37,9 +37,9 @@ def drenchDec(data, key):
     return blowfish(key).decrypt(data)
 
 def zdecode(data):
-    sym_re = (r".*'(.*)'\.split")
+    sym_re = (r",'(?=[\w|]+1935)(?=[\w|]+streamer)([\w|]+)'\.split")
     symtab = re.search(sym_re, data).groups()[0].split('|')
-    tab_re = (r""",'(\d=[\W\d]+;)',""")
+    tab_re = (r"""'(\d=[\W\d]+;(?!\\))'""")
     tab = re.search(tab_re, data).groups()[0].decode('unicode-escape')
 
     def lookup(match):
@@ -220,7 +220,7 @@ def doDemystify(data):
                 if _url:
                     data = data.replace(g,json.dumps( _url ))
                 else:
-                    aes = AES.new('5e4d58405044757e73314a5f39373837514e313335396a3144793833366e527a'.decode('hex'), AES.MODE_CBC, _in[1].decode('hex'))
+                    aes = AES.new('5e5858405046757e4631775f33414141514e3133393973315775336c34695a5a'.decode('hex'), AES.MODE_CBC, _in[1].decode('hex'))
                     _url = unpad(aes.decrypt(_in[0].decode('hex')))
                     data = data.replace(g,json.dumps( _url ))
                 
@@ -294,7 +294,7 @@ def doDemystify(data):
                 data = data.replace(g,'|')
 
     if """.replace(""" in data:
-        r = re.compile(r""".replace\(["']([^"']+)["'],\s*["']([^"']*)["']\)""")
+        r = re.compile(r""".replace\(["'](...[^"']+)["'],\s*["']([^"']*)["']\)""")
         gs = r.findall(data)
         if gs:
             for g in gs:

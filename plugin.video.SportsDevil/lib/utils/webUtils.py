@@ -78,7 +78,7 @@ class BaseRequest(object):
         if not referer:
             referer = url
         else:
-            referer = self.fixurl(referer.replace('wizhdsports.be','wizhdsports.to').replace('ibrod.tv','www.ibrod.tv'))
+            referer = self.fixurl(referer.replace('wizhdsports.be','wizhdsports.to').replace('ibrod.tv','www.ibrod.tv').replace('livetv120.net','livetv.sx'))
         
         headers = {'Referer': referer}
         if mobile:
@@ -149,7 +149,7 @@ class BaseRequest(object):
                 self.save_cookies_lwp(self.s.cookies, self.cookie_file)
         
         if 'setCurrentQuality' in response:
-            response = response.replace("""' + '""",'')
+            response = response.replace("""' + '""",'').replace('"("+','')
 
         return HTMLParser().unescape(response)
 

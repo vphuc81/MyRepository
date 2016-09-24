@@ -12,10 +12,16 @@ item_info_from=pageUrl
 item_info_convert=getInfo('%s','.*(http[^"']+\.m3u8[^"']*).*','@REFERER@')
 item_info_build=%s
 
+item_info_name=rurl
+item_info_from=pageUrl
+item_info_convert=getInfo('%s','.*?(http[^"']+:1935[^"']*).*','@REFERER@')
+item_info_convert=getInfo('%s','.','@pageUrl@')
+item_info_build=%s
+
 item_info_name=rtmp_url
 item_info_from=pageUrl
 item_info_convert=getInfo('%s','.*["'](rtmpe*://[^"']+).*','@REFERER@')
-item_info_convert=ifEmpty('%s','','%s swfUrl=http://ssl.p.jwpcdn.com/player/v/7.5.2/jwplayer.flash.swf flashver=WIN\2023,0,0,162 token=%Zrey(nKa@#Z timeout=15 live=true swfVfy=1 pageUrl=http://www.yotv.co/embed.php')
+item_info_convert=ifEmpty('%s','','%s swfUrl=http://ssl.p.jwpcdn.com/player/v/7.5.2/jwplayer.flash.swf flashver=WIN\2023,0,0,162 token=%Zrey(nKa@#Z timeout=15 live=true swfVfy=1 pageUrl=http://www.webtv.ws/embed.php')
 item_info_build=%s
 
 item_info_name=ref

@@ -28,17 +28,16 @@ item_info_build=%s
 
 item_info_name=key
 item_info_from=pageUrl
-item_info_convert=getInfo('%s','.*src="(http[^"]+wrapper.js\?\d+)">','@refUrl@')
+item_info_convert=getInfo('%s','.*src="(http[^"]+advertisement.js\?\d+)">','@refUrl@')
 item_info_convert=debug
 item_info_convert=getInfo('%s','.*"(5\w+)"','http://h5.adshell.net/peer5')
 item_info_convert=debug
 item_info_build=%s
 
 item_info_name=m3u8
-item_info_from=f
-item_info_convert=unquote(%s)
+item_info_from=pageUrl
+item_info_convert=getInfo('%s','.*?'(ey[^']+)'\s*','@refUrl@')
 item_info_convert=cjsAesDec(key)
-item_info_convert=debug
 item_info_build=%s
 
 item_info_name=ref
