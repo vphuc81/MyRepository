@@ -53,7 +53,7 @@ def TVChannel(url):
                ("tomovieru" in link) or ("toanimego" in link) or ("toccloud" in link) or ("toadryanlist" in link) or ("tomuttsnuts" in link) or \
                ("tonbareplays" in link) or ("tomdgenvideos" in link) or ("tocastaway" in link) or ("toexodus" in link) or \
                ("tomdvodlocker" in link) or ("tomdhdmovie14" in link) or ("tomd123movies" in link) or ("tomdwatch32hd" in link) or ("toespn3" in link) or ("tozemtv" in link) or \
-               ("toyoutubeft" in link):
+               ("toyoutubeft" in link)  or ("toprosport" in link):
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]              
             add_Link(title, link, thumb)
         xbmc.executebuiltin('Container.SetViewMode(52)')        
@@ -535,6 +535,10 @@ def add_Link(name,url,iconimage):
     if 'toyoutubeft' in url and apk:
         u = xbmc . executebuiltin ( 'StartAndroidActivity ( org.chromium.youtube_apk )' )  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)
+        return ok
+    if 'toprosport' in url:
+        u = 'plugin://plugin.video.prosport'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)   
 
