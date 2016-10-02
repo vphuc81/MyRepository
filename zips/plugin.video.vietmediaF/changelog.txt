@@ -1,0 +1,54 @@
+Version 1.0.0:
+- Phát hành lần đầu
+Version 1.0.2:
+- Thêm server hd0
+Version 1.0.3:
+- Fixed e'p po` lay
+Version 1.0.4:
+- Fixed HDO
+Version 1.0.5:
+- Fixed HDO
+Version 1.0.7:
+- Fixed HDO
+Version 1.0.8:
+- Add Fshare Account
+Version 1.0.9:
+- Add Fshare linksvip
+Version 1.0.10:
+- Fixed Fshare
+Version 1.0.11:
+- Fixed HDO
+Version 1.0.12:
+- Default Poster View
+Version 1.0.13:
+- Rollback Default Poster View
+Version 1.0.14:
+- Add fptplay livetv
+Version 1.0.15:
+- fix folder
+Version 1.0.16:
+- fix HDO
+Version 1.0.17:
+- Add VTVGO
+Version 1.0.18:
+- Add Download
+Version 1.0.19:
+- Add VIP fshare
+Version 1.0.20:
+- Thêm tiện ích khoá thư mục
+Version 1.0.21:
+- bug fixed
+Version 1.0.22:
+- Support linkvips
+Version 1.0.23:
+- bug fixed
+Version 1.0.24:
+- bug fixed
+Version 1.0.25:
+- bug fixed
+Version 1.0.30:
+- VTVGO fixed
+Version 1.0.31:
+- ability to play movies on Phim3S and Xuongphim.tv
+Version 1.0.31:
+- Fix phim3s.
