@@ -1,4 +1,9 @@
-﻿Version_2.5.6 <24/09/2016>
+﻿Version_2.5.7 <01/10/2016>
+- New HOT 'Truyện Cổ Tích' and 'Sách Văn Học' in menu Xã Hội
+- Update more HDchanel, tvshow content, content baby's corner
+- Fix Kho phim 7
+
+Version_2.5.6 <24/09/2016>
 - HDchanel
 
 Version_2.5.5 <13/09/2016>

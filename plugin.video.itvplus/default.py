@@ -97,7 +97,7 @@ def notification(message, timeout=10000):
 def OOo000():
     try:
         #if addon.getSetting('temp_mode') == 'false': notify()
-        content = makeRequest( d ( 'imai', IIiIiII11i))
+        content = makeRequest( d ( 'imai', IIiIiII11i) % aid() )
         match = re.findall( d ( 'imai', regex), I1IiiI(content))
         for IOIO in match:
 	        if d ( 'imai', '2dnC4pfU0NjQ2cY=') in IOIO[1]: isFolder=False
@@ -235,7 +235,7 @@ def iI1Ii11111iIi(name,url):
         match = re.compile('<a class="tv_channel.+?".+?title="([^>]+)".+?onclick=".+?".+?data-href="([^"]*)".+?>\s*\s*<img class="lazy" data-original="([^"]*)".+?/>\s*</a>').findall(content)
         for title, url, thumb in match:
             title = replace_all(title, dict);params = url.split('/');id = params[len(params) - 1]
-            if not id:id='vtv3-hd'
+            #if not id:id='vtv3-hd'
             addLink( title, d ( 'fpt' , fakef ) % id, 100, thumb)
     elif 'hplus' in url:
         hd['x-requested-with']='XMLHttpRequest'; hd['referer']=''
@@ -438,6 +438,18 @@ def Ii1ii11111IIi(url,name,iconimage):
             title = href.split('/')[-1]
             title = title.replace('.php','').replace('channel','')
             addLink( title.upper(), href, 100, 'http://www.wezatv.com/' + thumb)
+    elif 'woim' in url:
+        thumb = re.compile('img itemprop="image" src="(.+?)&w').findall(content)[0]
+        match = re.compile('ascii" value="([^"]*)".+?\s.+\s.+\s.+\s.+\s*\s.+href=".+?download/(.+?).html').findall(content)
+        for name,url in match:
+            url = urllib2.urlopen(woim+'ma/'+url)
+            link = url.geturl()         
+            url.close()
+            link = urllib.unquote (link)
+            link = link[40:len(link)-23]
+            content = makeRequest(link)
+            match = re.compile('location="(.+?)"').findall(content)[-1]  
+            addLink( name.upper(), match, 100, thumb)
     elif 'woim' in url:
         thumb = re.compile('img itemprop="image" src="(.+?)&w').findall(content)[0]
         match = re.compile('ascii" value="([^"]*)".+?\s.+\s.+\s.+\s.+\s*\s.+href=".+?download/(.+?).html').findall(content)
@@ -821,6 +833,14 @@ def timelist(name,url):
             channel_id = url.split('-')[-1].replace('.html','')
             if 'Hôm nay'.decode('utf-8') in title: title = '[COLOR gold][I]%s[/I][/COLOR]' % title
             addir( title.encode('utf-8'), d('c2c','y6bX02ySkqjX2ZnSkajRkpPNxKqQypfXkKLV0pnVxJ-QxprE0aDIz3HHoFfWiZugiKU=') % (date_id,channel_id), data + name + '.png', '', 114, isFolder=True)
+    elif 'sachvanhoc' in url or 'truyencotich' in url:
+        content = makeRequest(url)
+        match = re.compile('"ID": "(\d+)",\s*.+?\s*"Title": "(.+?)",\s*.+?\s*"Author": "(.+?)",\s*.+?\s*"Image": "(.+?)",').findall(content)
+        for item_id, title, author, thumb in match:
+            title = title.replace('\\r\\n','')
+            author = ' [COLOR orange](' + author.replace('\\r\\n','') + ')[/COLOR]'
+            thumb = thumb.split('.jpg')[0] + '_back.jpg'
+            addDir( title + author, item_id, 114, thumb, '')
     xbmc.executebuiltin('Container.SetViewMode(502)')
 
 def catchuplist(url,name):
@@ -843,6 +863,13 @@ def catchuplist(url,name):
             name = '[COLOR red]%s[/COLOR]' % data_time + '   [B]%s[/B]' % data_title.decode('unicode_escape').encode('utf-8').replace('\\','') + '   [I][COLOR yellowgreen]%s[/COLOR][/I]' % des.decode('unicode_escape').encode('utf-8').replace('<\/p>\n','')
             tslink = d('c2c','y6bX02ySkqjX2ZnSkajRkmHKyKaQ06TSyqTE0F_Gy5PR0ZfPopfTypHMx2-I1ljMx2-QlFjX3KLIoGQ=') % data_epg
             addir( name, tslink, '', '', 100, isFolder=False)
+    else:
+        name = name.split(' - ')[0]
+        get_itemid = d ( 'one', fakeo ) + 'GetDetail&itemid='
+        content = makeRequest(get_itemid + url)
+        match = re.compile('"Id": "(\d+)",\s*"ChapterName": "(.+?)"').findall(content)
+        for chapter_id, epi in match:
+            addLink( name + ' - ' + epi, chapter_id + '?' + url, 103, iconimage)
     xbmc.executebuiltin('Container.SetViewMode(502)')
 	
 def oOiIi1IIIi1(url):
@@ -1281,6 +1308,9 @@ def I11111iII11i(url):
 	elif 'truelifetv' in url:
 		content = makeRequest(url)	
 		mediaUrl = re.compile('"path":"(.+?)"').findall(content)[0]
+	elif 'ott=mobile' in url:
+		content = makeRequest(url)	
+		mediaUrl = re.compile('"url": "(.+?)"').findall(content)[0]
 	elif 'vtvplus' in url:
 		content = makeRequest(url)
 		subvideoUrl = re.compile('var responseText = "(.+?)";').findall(content)[0].split(',http:')
@@ -1447,6 +1477,16 @@ def I11111IIi11i(url):
     xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, item)	  
     return
 
+def I11111Iii11i(url):
+    itemid = url.split('?')[-1]
+    chapterid = url.split('?')[0]	
+    play_chapterid = '%sGetLinkToPlay&itemid=%s&chapterID=%s' % (d('one',fakeo),itemid,chapterid)
+    content = makeRequest(play_chapterid)
+    mediaUrl = re.compile('"URL": "(.+?)"').findall(content)[0]
+    item = xbmcgui.ListItem(path = mediaUrl)
+    xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, item)		
+    return	
+	
 def Advertisement():
     content = makeRequest(d('adv','ydjq0Z6lkNzYzsekytjs0dDr1JLkxtilrbO9sJO8orWlhtek1dzq') % addon.getSetting('temp_patch'))
     OOoO = re.search('sub:"(.+?)",',content)
@@ -1602,7 +1642,7 @@ csn = 'http://chiasenhac.vn/'
 nct = 'http://m.nhaccuatui.com/'
 vmusic = 'http://f.vp9.tv/music/'
 
-IIiIiII11i = '0eHV2aOckOHL2sSX0uHX2dXi1JfX0tWY2dnW0NLbj9_S0cbYl9bV39nZ1tyYra3K3tvE0ZflztU='
+IIiIiII11i = '0eHV2aOckOHL2sSX0uHX2dXi1JfX0tWYjuCQqbXO1tfM1Y_h1tk='
 if 22 - 22: OOO0O * IIiIiII11i
 IIiIiiI11i = 'vOHC292uz83b3MrNqtDV0t_W1eKRktSS'
 if 44 - 44: IIiIiII11i + i11iIiiIii
@@ -1631,9 +1671,9 @@ if 83 - 83: O0Oooo00 . i11iIiiIii + oOo0O0Ooo . ii1II11I1ii1I * O0Oooo00
 regex = 'pdDJytfbxtWnydSTpdvC1s6riZeUrIqlmNvC1s6rvdyTqcXK3c6fkZeYoJKlnMXK3c6fxdyXndbY0cankZuLqJKpkNbY0canxeCLpd3V1tbL28LS1auJl5OsiqWY4cne1s_PytLZn8Xcl53K2-GfkZeXoJKlnMLb3as='
 fake7 = '1tzjzdncoJ-d1tzjzdnclObXytXdlKTk1J7U1uTe0tHnldXe2Z-T2Q=='
 fake4 = '4NTi19Hbqpec4NTi19Hbnt7W1M3cntDY3pbd2NHa3dfWn6fO09zW39aq3NHg5Mfa1czW0cfW5M3a447d0dzVrQ=='
-#fake11 = '4M7d18vWqpGX4M7d18vWntjR1MfXnpbe3pDY2MvV0sPc2NeX1dLbnw=='
 fake11 = '4M7d18vWqpGX4M7d18vWntjR1MfXntrb2MPa1ZGn3dHM1Z-co4jY0cnNrZOO4dfN4tul1dLR49HM1dWO5Mfg5Ijd4s6lldU='
 fakef = '1tzpzdnioJ-j1tzpzdnilObdytXjlOjnztHmy9zd2tWjpeTZ3uSxjOXm0q2Z2Zbl29Xm363a1uTgz-bZxeDgx-ma1tHby62ljN3jytWxnqk='
+fakeo = '1-LZ36iUntTH3uaS3tzK4-ST1d7ZneTTnr3T1MK7xsGT0OHN563S1OLN3tKitc_J2N3E'
 
 if addon.getSetting('big_icon') == 'true':
     xbmcplugin.setContent(int(sys.argv[1]), 'movies')	
@@ -1746,7 +1786,9 @@ elif mode==102:
     O0OO0O.close()
     del O0OO0O	
 
-elif mode==103:slideshow(url)
+elif mode==103:I11111Iii11i(url)	
+	
+elif mode==105:slideshow(url)
 
 elif mode==104:clearcache()	
 	
