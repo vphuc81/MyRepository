@@ -73,7 +73,7 @@ def get_fptplay(url):
 		response = fetch_data('https://fptplay.net/show/getlinklivetv', headers, data)
 		if response:
 			json_data = json.loads(response.body)
-			return json_data['stream']
+			return json_data['stream']+'|User-Agent=VMF'
 			
 	match = re.search(r'\-([\w]+)\.html', url)
 	if not match:
@@ -99,7 +99,7 @@ def get_fptplay(url):
 	
 	if response:
 		json_data = json.loads(response.body)
-		return json_data['stream']
+		return json_data['stream']+'|User-Agent=VMF'
 		
 	pass
 
