@@ -744,7 +744,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon id="plugin.video.vietmediaF"
        name="[B]VietMediaF[/B]"
-       version="1.0.33.1"
+       version="1.0.34.1"
        provider-name="VietMedia">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />

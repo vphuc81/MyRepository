@@ -206,7 +206,7 @@ def get_htvplus(url):
 		return ''
 	video_url = response.content
 	xbmc.log(video_url)
-	return video_url	
+	return video_url+'|User-Agent=VMF'	
 		
 def get_hdonline(url):
 	attempt = 1
