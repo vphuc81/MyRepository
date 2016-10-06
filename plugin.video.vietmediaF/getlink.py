@@ -351,7 +351,8 @@ def get_linkvips(fshare_url,username, password):
 			if not match:
 				return ''
 			video_url = match.group(1)
-
+			video_url = video_url.replace("[LinksVIP.Net]", "")
+			xbmc.log(video_url)
 			#logout
 			response = fetch_data(logout_url, headers)
 			
@@ -383,7 +384,7 @@ def get_fshare(url):
 			pass
 
 	if len(username) == 0  or len(password) == 0:
-		alert(u'Bạn chưa nhập tài khoản fshare, hoặc cần phải có VIP code'.encode("utf-8"))
+		alert(u'Bạn chưa nhập tài khoản VIP fshare, hoặc phải có VIP code. Soạn tin: VMF gửi 8698 hoặc Paypal to vietkodi@gmail.com'.encode("utf-8"))
 		return
 
 	response = fetch_data(login_url)
