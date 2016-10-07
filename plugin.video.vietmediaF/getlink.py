@@ -52,6 +52,10 @@ def get(url):
 		return get_xuongphim(url)
 	if '//phim3s.net' in url:
 		return get_phim3s(url)
+	if 'hdsieunhanh.com' in url:
+		return get_hdsieunhanh(url)
+	if '//vn.tvnet.gov.vn' in url:
+		return get_tvnet(url)
 	else:
 		return url
 
@@ -186,9 +190,40 @@ def get_phim3s(url):
 	video_url = response.headers['location']
 	return video_url
 	
+def get_hdsieunhanh(url):
+	match = re.search(re.compile(r'-(\d+.*?)\.html'), url)
+	pid = match.group(1)
+	response = urlfetch.get(url)
+	cookie = response.cookiestring;
+	response = urlfetch.get('http://ip.hdsieunhanh.com/')
+	match = re.search(re.compile(r"'(.*?)'"), response.body)
+	yourip = match.group(1)
+	headers = { 
+				'User-Agent'		: 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0',
+				'Cookie'			: cookie,
+				'Referer'			: url,
+    			'X-Requested-With'	: 'XMLHttpRequest'
+				}
+	data = {'ip': yourip, 'fix': '1'}
+	response = urlfetch.get('http://www.hdsieunhanh.com/getsource/' +pid +'?ip=' +yourip +'&fix=1', headers=headers, data=data)
+	json_data = json.loads(response.body)
+	video_url = json_data[0]['file']
+	#response = urlfetch.get(video_url)
+	#video_url = response.headers['location']
+	return video_url
+
+def get_tvnet(url):
+	channelid = re.search(r'\d\/(.*?)\.htm', url).group(1).lower()
+	get_url = 'http://118.107.85.21:1337/get-stream.json?p=smil:'+channelid+'.smil&t=l'
+	response = urlfetch.get(get_url)
+	json_data = json.loads(response.body)
+	video_url = json_data[0]['url']
+	return video_url
 	
 def get_htvplus(url):
 	response = urlfetch.get(url)
+	if not response:
+		return ''
 	match = re.search(re.compile(r'iosUrl\s=\s\"(.*?)\"'), response.body)
 	linklive = match.group(1)
 	xbmc.log(linklive)
