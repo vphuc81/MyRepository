@@ -56,6 +56,8 @@ def get(url):
 		return get_hdsieunhanh(url)
 	if '//vn.tvnet.gov.vn' in url:
 		return get_tvnet(url)
+	if '//kenh1.mobifone.com.vn' in url:
+		return get_mobifone(url)
 	else:
 		return url
 
@@ -213,13 +215,17 @@ def get_hdsieunhanh(url):
 	return video_url
 
 def get_tvnet(url):
-	channelid = re.search(r'\d\/(.*?)\.htm', url).group(1).lower()
-	get_url = 'http://118.107.85.21:1337/get-stream.json?p=smil:'+channelid+'.smil&t=l'
+	get_url = 'http://118.107.85.21:1337/get-stream.json?p=smil:'+re.search(r'\d\/(.*?)\.htm', url).group(1).lower()+'.smil&t=l'
 	response = urlfetch.get(get_url)
 	json_data = json.loads(response.body)
 	video_url = json_data[0]['url']
 	return video_url
 	
+def get_mobifone(url):
+	
+	video_url = re.search(r'file:\s\"(.*?)\"', fetch_data(url).body).group(1)
+	return video_url
+
 def get_htvplus(url):
 	response = urlfetch.get(url)
 	if not response:

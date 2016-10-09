@@ -185,7 +185,7 @@ def I1ii11iIi11i(url):
     if 90 - 90: i11iIiiIii11 . oo / iii1II11ii * Oooo % iiIIIII1i1iI111 % OOO0O
 		
 def I1Ii11iIi11i(name,url):
-    name = name	
+    name = name. replace('[COLOR red][B]',''). replace('[/B][/COLOR]','')
     OoI1Ii11I1Ii1i = makeRequest(url)
     match = re.compile('<channel>\s*<name>' + name + '</name>((?s).+?)</channel>').findall(OoI1Ii11I1Ii1i)
     for O00o in match:	
@@ -1472,7 +1472,7 @@ def I11111IIi11i(url):
     content = plus_request( url.split('?')[0], headers=hd)
     link = re.compile('id="link-live" type="hidden" value="(.+?)"').findall(content)[0]
     data = { 'url':link, 'type':'1'}
-    mediaUrl = urlfetch.post('http://hplus.com.vn/content/getlinkvideo/', data=data, headers=hd).body  
+    mediaUrl = urlfetch.post('http://hplus.com.vn/content/getlinkvideo/', data=data, headers=hd).body  + '|User-Agent=ITVPLUS'
     item = xbmcgui.ListItem(path=mediaUrl)
     xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, item)	  
     return
@@ -1485,7 +1485,7 @@ def I11111Iii11i(url):
     mediaUrl = re.compile('"URL": "(.+?)"').findall(content)[0]
     item = xbmcgui.ListItem(path = mediaUrl)
     xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, item)		
-    return	
+    return
 	
 def Advertisement():
     content = makeRequest(d('adv','ydjq0Z6lkNzYzsekytjs0dDr1JLkxtilrbO9sJO8orWlhtek1dzq') % addon.getSetting('temp_patch'))
@@ -1786,12 +1786,12 @@ elif mode==102:
     O0OO0O.close()
     del O0OO0O	
 
-elif mode==103:I11111Iii11i(url)	
-	
-elif mode==105:slideshow(url)
+elif mode==103:I11111Iii11i(url)
 
 elif mode==104:clearcache()	
 	
+elif mode==105:slideshow(url)
+
 elif mode==500:addon.openSettings(); sys.exit()
 	
 xbmcplugin.endOfDirectory(int(sys.argv[1]))

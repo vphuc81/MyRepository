@@ -348,7 +348,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 </addon>
 
 <addon id="plugin.video.itvplus"
-       version="2.5.7.1"
+       version="2.5.8.1"
        name="[COLOR ffff0000]*ITV*[/COLOR]Plus"
        provider-name="itv member">
     <requires>
@@ -744,7 +744,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon id="plugin.video.vietmediaF"
        name="[B]VietMediaF[/B]"
-       version="1.0.36.1"
+       version="1.0.37.1"
        provider-name="VietMedia">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />

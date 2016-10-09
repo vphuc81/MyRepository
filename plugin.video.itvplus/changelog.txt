@@ -1,4 +1,10 @@
-﻿Version_2.5.7 <01/10/2016>
+﻿Version_2.5.8 <08/10/2016>
+- New "TORRENT" menu
+- New 'Arena Vison' in menu THỂ THAO
+- Fix FPTPLAY
+- Fix more HD channel
+
+Version_2.5.7 <01/10/2016>
 - New HOT 'Truyện Cổ Tích' and 'Sách Văn Học' in menu Xã Hội
 - Update more HDchanel, tvshow content, content baby's corner
 - Fix Kho phim 7
