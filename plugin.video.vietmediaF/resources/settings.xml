@@ -10,7 +10,7 @@
 		<setting id="lock_pin" type="text" option="hidden" label="Mã khoá" default="0000"/>
 	</category>
 	<category label="On/Off Autorun">
-		<setting id="on_off" type="bool" label="On/Off" default="false"/>
+		<setting id="on_off" type="bool" label="On/Off" default="true"/>
 	</category>
 	<category label="Tài trợ/Donate">
 		<setting id="donate_bank" type="bool" label="Nguyễn Ngọc Đức, TK: 0011000469829, Ngân hàng Ngoại thương Việt Nam - Vietcombank" default="true"/>

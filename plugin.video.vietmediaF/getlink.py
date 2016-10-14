@@ -11,6 +11,7 @@ import random
 import xbmc
 from config import VIETMEDIA_HOST
 
+
 USER_VIP_CODE = ADDON.getSetting('user_vip_code')
 
 def fetch_data(url, headers=None, data=None):
@@ -58,9 +59,17 @@ def get(url):
 		return get_tvnet(url)
 	if '//kenh1.mobifone.com.vn' in url:
 		return get_mobifone(url)
+	if '//thvl.vn' in url:
+		return get_thvl(url)
+	if 'link.tvmienphi.biz' in url:
+		return get_tvmienphi(url)
+	if 'serverthunghiem' in url:
+		return get_serverthunghiem(url)
 	else:
 		return url
 
+
+		
 def get_fptplay(url):
 	headers = { 
 				'Referer'			: url,
@@ -140,6 +149,21 @@ def get_htvonline(url):
 	xbmc.log(video_url)
 	return video_url	
 
+def get_thvl(url):
+	cookie = urlfetch.get('http://thvl.vn/').cookiestring;
+	headers = {'Host': 'thvl.vn', 'Accept-Encoding': 'gzip, deflate, compress, identity, *', 'Accept': '*/*', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0', 'Cookie': cookie, 'Referer': 'http://thvl.vn/jwplayer/?l=rtmp&i=http://thvl.vn/wp-content/uploads/2014/12/THVL1Online.jpg&w=640&h=360&a=0', 'X-Requested-With'	: 'XMLHttpRequest'}
+	data = {'l': 'rtmp', 'i': 'http://thvl.vn/wp-content/uploads/2014/12/THVL1Online.jpg', 'w': '640', 'h': '360', 'a': '1'}
+	response = urlfetch.get(url, data=data, headers=headers)
+	return re.search(r'file:\s"(.*?)"', response.body).group(1)
+
+def get_tvmienphi(url):
+	cookie = urlfetch.get('http://www.tvmienphi.biz').cookiestring;
+	headers = {'Host': 'link.tvmienphi.biz', 'Accept-Encoding': 'gzip, deflate, compress, identity, *', 'Accept': '*/*', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0', 'Cookie': cookie, 'Referer': 'http://mi.tvmienphi.biz/'}
+	return re.search(r'channel_stream\s=\s\"(.*?)\"', urlfetch.get(url, headers=headers).body).group(1)
+
+def get_serverthunghiem(url):
+	return re.search(r'data-file="(.*?)"', urlfetch.get(re.search(r'=(.*)', url).group(1)).body).group(1)
+	
 def get_xuongphim(url):
 	response = urlfetch.get(url)
 	if not response:
@@ -193,6 +217,12 @@ def get_phim3s(url):
 	return video_url
 	
 def get_hdsieunhanh(url):
+	if 'hdsieunhanh.com.auto' in url:
+		response = urlfetch.get('http://www.hdsieunhanh.com/phim-le.html')
+		url = re.search(r'<a\sclass=\".*?\"\shref=\"(.*?)\"', response.body).group(1)
+	else:
+		url = url
+		
 	match = re.search(re.compile(r'-(\d+.*?)\.html'), url)
 	pid = match.group(1)
 	response = urlfetch.get(url)
@@ -210,8 +240,6 @@ def get_hdsieunhanh(url):
 	response = urlfetch.get('http://www.hdsieunhanh.com/getsource/' +pid +'?ip=' +yourip +'&fix=1', headers=headers, data=data)
 	json_data = json.loads(response.body)
 	video_url = json_data[0]['file']
-	#response = urlfetch.get(video_url)
-	#video_url = response.headers['location']
 	return video_url
 
 def get_tvnet(url):
@@ -222,7 +250,6 @@ def get_tvnet(url):
 	return video_url
 	
 def get_mobifone(url):
-	
 	video_url = re.search(r'file:\s\"(.*?)\"', fetch_data(url).body).group(1)
 	return video_url
 

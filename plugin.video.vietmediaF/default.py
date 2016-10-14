@@ -14,6 +14,7 @@ import SimpleDownloader as downloader
 import remove_accents
 import autorun
 
+
 downloader = downloader.SimpleDownloader()
 
 reload(sys);
