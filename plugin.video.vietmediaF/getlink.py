@@ -118,30 +118,29 @@ def get_fptplay(url):
 	pass
 
 def get_vtvgo(url):
-	response = fetch_data(url)
-	if not response:
-		return ''
+	response = urlfetch.get(url)
 	cookie=response.cookiestring;
-	match = re.search(re.compile(r'vtv\d-(.*?)\.'), url)
-	epgid = match.group(1)
-	headers = { 
-				'User-Agent'		: 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0',
-				'Cookie'			: cookie,
-				'Referer'			: url,
-    			'X-Requested-With'	: 'XMLHttpRequest'
-				
-            }
-	data={'epg_id':epgid,'type':'1'}
-	response = urlfetch.get('http://vtvgo.vn//get-program-channel?epg_id=' +epgid +'&type=1', headers=headers, data=data)
-	json_data = json.loads(response.body)
-	video_url = json_data['data']
+	match = re.search(re.compile(r"(xem-video)"), url)
+
+	if not match:
+		
+		epgid = re.search(re.compile(ur'vtv\d-(.*?)\.'), url).group(1)
+		headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0', 'Cookie': cookie, 'Referer': url, 'X-Requested-With'  : 'XMLHttpRequest'}  
+		data = {'epg_id': epgid, 'type':'1'}
+		response = urlfetch.get('http://vtvgo.vn//get-program-channel?epg_id=' +epgid +'&type=1', headers=headers, data=data)
+		json_data = json.loads(response.body)
+		video_url = json_data['data']
+		
+	else:
+		video_url = re.search(re.compile(r"addPlayer\('(.*?)'"), response.body).group(1)
 	return video_url
 
 def get_htvonline(url):
 	response = fetch_data(url)
+	cookie=response.cookiestring;
 	if not response:
 		return ''
-	match = re.search(re.compile(r'setUpPlayer\(\'(.*?)\''), response.body)
+	match = re.search(re.compile(r'data-source=\"(.*?)\"'), response.body)
 	if not match:
 		return ''
 	video_url = match.group(1)

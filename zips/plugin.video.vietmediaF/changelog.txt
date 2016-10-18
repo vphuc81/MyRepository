@@ -56,3 +56,5 @@ Version 1.0.33:
 - Fix FPTPlay.
 Version 1.0.39:
 - Fix FPTPlay, BiluTV, tags,
+Version 1.0.39:
+- Fix xuongphimtv, htvonline.
