@@ -648,6 +648,9 @@ class Parser(object):
                 
             elif command == 'cjsAesDec':
                 src = crypt.cjsAesDec(src,item.infos[params])
+                
+            elif command == 'm3u8AesDec':
+                src = crypt.m3u8AesDec(src,item.infos[params])
 
             elif command == 'drenchDec':
                 src = crypt.drenchDec(src,item.infos[params])

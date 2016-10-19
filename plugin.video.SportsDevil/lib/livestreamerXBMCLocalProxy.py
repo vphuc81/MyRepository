@@ -26,9 +26,24 @@ import urlparse
 import sys
 import traceback
 import socket
+import random
 from SocketServer import ThreadingMixIn
 from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
 from livestreamer import Livestreamer, StreamError, PluginError, NoPluginError
+
+s = [   '185.39.11.42',
+        '185.39.9.34',
+        '185.39.9.130',
+        '185.39.11.50',
+        '185.39.11.34',
+        '185.39.9.2',
+        '185.39.11.10',
+        '185.39.11.26',
+        '185.39.9.98',
+        '185.39.9.162',
+        '185.39.11.2',
+        '185.39.11.58',
+        '185.39.11.66']
 
 class MyHandler(BaseHTTPRequestHandler):
     """
@@ -65,7 +80,7 @@ class MyHandler(BaseHTTPRequestHandler):
             elif request_path[0:13] == "livestreamer/":
                 realpath = request_path[13:]
                 #print 'realpath: ' + realpath
-                fURL = base64.b64decode(realpath).replace('sstream.pw','sitenow.me')
+                fURL = base64.b64decode(realpath)
                 #print 'fURL: ' + fURL
                 self.serveFile(fURL, sendData)
             else:
@@ -89,9 +104,12 @@ class MyHandler(BaseHTTPRequestHandler):
                 sp = fURL.split('|')
                 fURL = sp[0]
                 headers = dict(urlparse.parse_qsl(sp[1]))
+                if 'cdn.sstream.pw' in fURL:
+                    fURL = fURL.replace('cdn.sstream.pw',random.choice(s))
+                    headers['Host'] = '6b6473616a6b6c647361646a7361643737353637647361393973616768647368686464732e736974656e6f772e6d65'.decode('hex')
                 session.set_option("http-headers", headers)
                 session.set_option("http-ssl-verify",False)
-                session.set_option("hls-segment-threads",2)
+                session.set_option("hls-segment-threads",3)
         try:
             streams = session.streams(fURL)
         except:

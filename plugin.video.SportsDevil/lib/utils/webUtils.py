@@ -34,7 +34,7 @@ class BaseRequest(object):
         self.s = requests.Session()
         if fileExists(self.cookie_file):
             self.s.cookies = self.load_cookies_from_lwp(self.cookie_file)
-        self.s.headers.update({'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36'})
+        self.s.headers.update({'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'})
         self.s.headers.update({'Accept-Language' : 'en-US,en;q=0.5'})
         self.url = ''
     
@@ -78,7 +78,7 @@ class BaseRequest(object):
         if not referer:
             referer = url
         else:
-            referer = self.fixurl(referer.replace('wizhdsports.be','wizhdsports.to').replace('ibrod.tv','www.ibrod.tv').replace('livetv120.net','livetv.sx'))
+            referer = self.fixurl(referer.replace('wizhdsports.be','wizhdsports.to').replace('ibrod.tv','www.ibrod.tv').replace('livetv123.net','livetv.sx'))
         
         headers = {'Referer': referer}
         if mobile:

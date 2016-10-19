@@ -18,14 +18,14 @@ item_info_build=%s
 
 item_info_name=m3u8
 item_info_from=pageUrl
-item_info_convert=getInfo('%s','.*?var\s*\w+\s*=\s*unescape\('([^']+)','@REFERER@')
+item_info_convert=getInfo('%s','.*?unescape\('([^']+)','@REFERER@')
 item_info_convert=ifEmpty('%s','','http://%s.m3u8')
 item_info_build=%s
 
 item_info_name=md
 item_info_from=pageUrl
 item_info_convert=getInfo('%s','.*?.m3u8([^']+)','@REFERER@')
-item_info_convert=ifEmpty('%s','','%s|Referer=http://www.castalba.tv/embed.php&User-Agent=Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36&X-Requested-With=ShockwaveFlash/23.0.0.162')
+item_info_convert=ifEmpty('%s','','%s|Referer=http://www.castalba.tv/embed.php&User-Agent=Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36&X-Requested-With=ShockwaveFlash/23.0.0.162')
 item_info_build=%s
 
 item_info_name=hls_url

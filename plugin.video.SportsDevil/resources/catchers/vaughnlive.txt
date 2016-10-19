@@ -16,7 +16,7 @@ item_info_convert=getInfo('%s','(.)')
 item_info_build=%s
 
 item_info_name=player
-item_info_build=0.1.1.765
+item_info_build=0.1.1.767
 
 item_info_name=millis
 item_info_from=load
@@ -29,7 +29,7 @@ item_info_convert=random(10000000000000000,99999999999999999)
 item_info_build=%s
 
 item_info_name=tkurl
-item_info_from=http://mvn.vaughnsoft.net/video/edge/vmn-live_'+stream+'?'+player+'_'+millis+'-'+millis+'-0.'+rand+'
+item_info_from=http://mvn.vaughnsoft.net/video/edge/mzn-live_'+stream+'?'+player+'_'+millis+'-'+millis+'-0.'+rand+'
 item_info_build=%s
 
 item_info_name=file
