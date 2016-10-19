@@ -65,6 +65,8 @@ def get(url):
 		return get_tvmienphi(url)
 	if 'serverthunghiem' in url:
 		return get_serverthunghiem(url)
+	if 'web.tv24.vn' in url:
+		return get_servertv24(url)
 	else:
 		return url
 
@@ -147,6 +149,20 @@ def get_htvonline(url):
 	xbmc.log(video_url)
 	return video_url	
 
+def get_servertv24(url):
+	response = urlfetch.get('http://web.tv24.vn/')
+	cookie=response.cookiestring;
+	channelid = re.search(re.compile(r"\/(\d+)\/"), url).group(1)
+	headers = {'Host': 'web.tv24.vn', 'Accept-Encoding': 'gzip, deflate, compress, identity, *', 'Accept': '*/*', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0', 'Cookie': cookie, 'Referer': 'http://web.tv24.vn/dang-nhap'}
+	data = {'mobile': '0907280386', 'password': '123456'}
+	urlfetch.post('http://web.tv24.vn/client/login/process', headers=headers, data=data)
+	data = {'channel_id': channelid}
+	response = urlfetch.post('http://web.tv24.vn/client/channel/link', headers=headers, data=data)
+	json_data = json.loads(response.body)
+	video_url = json_data['data']['PLAY_URL']
+	return video_url
+	
+	
 def get_thvl(url):
 	cookie = urlfetch.get('http://thvl.vn/').cookiestring;
 	headers = {'Host': 'thvl.vn', 'Accept-Encoding': 'gzip, deflate, compress, identity, *', 'Accept': '*/*', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0', 'Cookie': cookie, 'Referer': 'http://thvl.vn/jwplayer/?l=rtmp&i=http://thvl.vn/wp-content/uploads/2014/12/THVL1Online.jpg&w=640&h=360&a=0', 'X-Requested-With'	: 'XMLHttpRequest'}
