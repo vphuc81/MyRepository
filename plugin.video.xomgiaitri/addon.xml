@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon
   id="plugin.video.xomgiaitri"
-  version="1.7.4"
+  version="1.7.5"
   name="*[COLOR yellow]XomGiaiTri.com[/COLOR]"
   provider-name="Vinh Modded from Thong">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.requests" version="1" />
+    <import addon="script.module.urlresolver" version="0.0.1"/>
   </requires>
   <extension point="xbmc.python.module" library="default.py" />
   <extension point="xbmc.addon.metadata">
     <summary>xomiaitri.com</summary>
-    <description>Watch free xomgiaitri.com (Vietnamese) Videos</description>
+    <description>Watch free xomiaitri.com (Vietnamese) Videos</description>
     <platform>all</platform>
   </extension>
 </addon>
