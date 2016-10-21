@@ -180,13 +180,15 @@ def get_serverthunghiem(url):
 	
 def get_xuongphim(url):
 	response = urlfetch.get(url)
-	if not response:
-		return ''
+	#cookie=response.cookiestring;
 	match = re.search(re.compile(ur'file:\s"(.*?)"'), response.body)
-	if not match:
-		return ''
 	video_url = match.group(1)
-	return video_url	
+	match = re.search(re.compile(r'file:\s\"(\/sub.*?)\"'), response.body)
+	if match:
+		phude = '|http://xuongphim.tv/'+match.group(1)
+	else:
+		phude = ''
+	return video_url+phude	
 
 def get_phim3s(url):
 	match = re.search(re.compile(r'\/(xem-phim\/)'), url)
@@ -194,40 +196,39 @@ def get_phim3s(url):
 		url = url
 	else:
 		url = url +'xem-phim/'
-	response = fetch_data(url)
-	if not response:
-		return ''
+	print (url)
+
+	response = urlfetch.get(url)
 	cookie = response.cookiestring;
-	match = re.search(re.compile(ur'data-id="(.*?)"'), response.body)
-	espisodeid = match.group(1)
+
+	if 'phim-bo' in url:
+			match = re.search(re.compile(r'\/(\d+)'), response.body)
+			espisodeid = match.group(1)
+	else:
+			match = re.search(re.compile(r'data-id="(.*?)"'), response.body)
+			espisodeid = match.group(1)
+	print (espisodeid)
 	match = re.search(re.compile(r'data-film-id="(.*?)"'), response.body)
 	filmid = match.group(1)
+	#print (filmid)
 	import time
 	ti = (int(time.time()*1000))
 	data = {'espisode_id': espisodeid, '_': ti,}
 	headers = { 
 					'User-Agent'		: 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0',
-					'Cookie'			: response.cookiestring,
+					'Cookie'			: cookie,
 					'Referer'			: url,
 					'X-Requested-With'	: 'XMLHttpRequest'
 								   }
-	
-	response = fetch_data('http://phim3s.net/ajax/episode/embed/?episode_id=' +espisodeid, data=data, headers=headers)
+	film_url = 'http://phim3s.net/ajax/episode/embed/?episode_id=' +espisodeid
+	response = urlfetch.get(film_url, data=data, headers=headers)
 	json_data = json.loads(response.body)
 	google_url = json_data['video_url_hash']
 	encode_url = 'http://sub2.phim3s.net/v3/?link=' +google_url+'&json=1&s=44'
 	data = {'link': google_url, 'json': '1', 's': '44'}
-	headers = { 
-				'User-Agent'		: 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0',
-				'Cookie'			: cookie,
-				'Referer'			: url,
-    			'X-Requested-With'	: 'XMLHttpRequest'
-                               }
 	response = urlfetch.get(encode_url, data=data, headers=headers)
-	match = re.search(re.compile(r'"file_o":"(.*?)"'), response.body)
-	video_url = match.group(1)+'.mp4'
-	response = urlfetch.get(video_url.replace("\/", "/", 3))
-	video_url = response.headers['location']
+	json_data = json.loads(response.body)
+	video_url = json_data[0]['file']
 	return video_url
 	
 def get_hdsieunhanh(url):
