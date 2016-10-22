@@ -553,7 +553,7 @@ def add_Link(name,url,iconimage):
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'tomovievault' in url:
-        u = 'plugin://plugin.video.mdmoivevault'  
+        u = 'plugin://plugin.video.mdmovievault'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'tomoviepool' in url:
