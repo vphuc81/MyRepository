@@ -65,10 +65,26 @@ def get(url):
 		return get_serverthunghiem(url)
 	if 'web.tv24.vn' in url:
 		return get_servertv24(url)
+	if 'acestream' in url:
+		return getAcestream(url)
+	if 'sop:' in url:
+		return getSopcast(url)
 	else:
 		return url
 
+def getAcestream(url):
+	if 'plugin:' in url:
+		ace_link = url
+	else:
+		ace_link = 'plugin://program.plexus/?mode=1&url='+url+'&name=Video'
+	return ace_link
 
+def getSopcast(url):
+	if 'plugin:' in url:
+		sopcast_link = url
+	else:
+		sopcast_link = 'plugin://program.plexus/?mode=2&url='+url+'&name=Video'
+	return sopcast_link
 		
 def get_fptplay(url):
 	headers = { 
@@ -439,7 +455,7 @@ def get_fshare(url):
 			pass
 
 	if len(username) == 0  or len(password) == 0:
-		alert(u'Bạn chưa nhập tài khoản VIP fshare, hoặc phải có VIP code. Soạn tin: VMF gửi 8698 hoặc Paypal to vietkodi@gmail.com'.encode("utf-8"))
+		alert(u'Bạn chưa có TK VIP Fshare hoặc chưa có VIP CODE hoặc VIP CODE hết hạn. Soạn tin: VMF gửi 8698 hoặc Paypal to vietkodi@gmail.com. Sau khi nhập đợi 10 phút hệ thống update lại.'.encode("utf-8"))
 		return
 
 	response = fetch_data(login_url)
