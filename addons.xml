@@ -580,7 +580,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
   </extension>
 </addon>
 
-<addon id="plugin.video.mdscenepeeper" name="Scene Peeper" version="1.0.6.1" provider-name="Mucky Duck">
+<addon id="plugin.video.mdscenepeeper" name="Scene Peeper" version="1.0.6.2" provider-name="Mucky Duck">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 	<import addon="script.module.addon.common" />
