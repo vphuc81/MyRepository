@@ -429,7 +429,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon id="plugin.video.livetv"
        name="***[COLOR yellow]LIVE-TV[/COLOR]"
-       version="2.2.17"
+       version="2.2.18"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
@@ -449,7 +449,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon id="plugin.video.livetvinternational"
        name="**[COLOR yellow]Live TV-International[/COLOR]"
-       version="2.2.10"
+       version="2.2.11"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
@@ -504,6 +504,25 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
   </extension>
 </addon>
 
+<addon id="plugin.video.mdluckytv" name="LUCKY-TV" version="1.0.1.1" provider-name="Mucky Duck">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.addon.common" />
+	<import addon="script.module.metahandler" version="2.5.1"/>
+	<import addon="script.module.requests" />
+	<import addon="repository.mdrepo" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Stream Free content From The Web</summary>
+    <description lang="en">There are 700+ of the latest TV shows to watch for free. Please share lucktv.net with your family and friends. This Addon Will Delete Itself Unless You Have http://muckys.mediaportal4kodi.ml As A Source In File Manager.  Special Thanks Go Out To @McWaine For Spending The Time To Create The Icons For Each Individual Section.</description>
+	<disclaimer lang="en">The author does not host or distribute any of the content displayed by this addon or have any affiliation with the website owners</disclaimer>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="plugin.video.mdm4u" name="M4U" version="1.1.6.1" provider-name="Mucky Duck">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -537,6 +556,44 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
   <extension point="xbmc.addon.metadata">
     <summary lang="en">Stream Free content From The Web</summary>
     <description lang="en">This Addon Will Delete Itself Unless You Have http://muckys.mediaportal4kodi.ml In File Manager. Stream Free Content From The Web. .  Special Thanks Go Out To @McWaine For Spending The Time To Create The Icons For Each Individual Section.</description>
+	<disclaimer lang="en">The author does not host or distribute any of the content displayed by this addon or have any affiliation with the website owners</disclaimer>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.mdpubfilm" name="PubFilm" version="1.0.8.1" provider-name="Mucky Duck">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.addon.common" />
+	<import addon="script.module.metahandler" version="2.5.1"/>
+	<import addon="script.module.requests" />
+	<import addon="repository.mdrepo" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Stream Movies And TV-Shows From pubfilm.com</summary>
+    <description lang="en">This Addon Will Delete Itself Unless You Have http://muckys.mediaportal4kodi.ml In File Manager. Stream Movies And TV-Shows From pubfilm.com</description>
+	<disclaimer lang="en">The author does not host or distribute any of the content displayed by this addon or have any affiliation with the website owners.</disclaimer>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.mdscenepeeper" name="Scene Peeper" version="1.0.6.1" provider-name="Mucky Duck">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.addon.common" />
+	<import addon="script.module.metahandler" version="2.5.1"/>
+	<import addon="script.module.requests" />
+	<import addon="repository.mdrepo" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Stream content From The layarkaca21.com WebSite</summary>
+    <description lang="en">Stream Content From layarkaca21.com WebSite. This Addon Will No Longer Work Unless You Have http://muckysmediaportal4kodi.ml In File Manager.</description>
 	<disclaimer lang="en">The author does not host or distribute any of the content displayed by this addon or have any affiliation with the website owners</disclaimer>
     <platform>all</platform>
   </extension>
