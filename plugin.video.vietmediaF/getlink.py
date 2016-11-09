@@ -55,8 +55,8 @@ def get(url):
 		return get_xuongphim(url)
 	if '//phim3s.net' in url:
 		return get_phim3s(url)
-	if '//vn.tvnet.gov.vn' in url:
-		return get_tvnet(url)
+	if 'tvnet.gov.vn' in url:
+		return getTvnet(url)
 	if '//kenh1.mobifone.com.vn' in url:
 		return get_mobifone(url)
 	if '//thvl.vn' in url:
@@ -74,6 +74,38 @@ def get(url):
 	else:
 		return url
 
+
+def getTvnet(url):
+	
+	match = re.search(re.compile(r"(video)"), url)
+
+	if not match:
+
+		response = urlfetch.get(url)
+		cookie=response.cookiestring;
+		regex = r"data-file=\"(.*?)\""
+		match = re.search(regex, response.body)
+		playerurl = match.group(1)
+		#Lấy link trực tiếp  
+		response = urlfetch.get(playerurl)
+		
+		json_data = json.loads(response.body)
+		
+		video_url = json_data[0]['url']
+		
+	else:
+		response = urlfetch.get(url)
+		cookie=response.cookiestring;
+		regex = r"data-file=\"(.*?)\""
+		match = re.search(regex, response.body)
+		playerurl = match.group(1)
+		playerurl = playerurl.replace('amp;', '')
+		response = urlfetch.get(playerurl)
+		
+		json_data = json.loads(response.body)
+		video_url = json_data[0]['url']
+	return(video_url)	
+		
 def getAcestream(url):
 	if 'plugin:' in url:
 		ace_link = url
@@ -93,6 +125,7 @@ def get_fptplay(url):
 				'Referer'			: url,
 	   			'X-Requested-With'	: 'XMLHttpRequest'
             }
+	hd={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/600.1.4 Gecko/20100101 Firefox/41.0'}
 	#Kiểm tra live tivi 
 	match = re.search(r'\/livetv\/(.*)$', url)
 	if match:
@@ -105,7 +138,7 @@ def get_fptplay(url):
 	    }
 		response = fetch_data('https://fptplay.net/show/getlinklivetv', headers, data)
 		if response:
-			return json.loads(response.body)['stream']+'|User-Agent=Mozilla'
+			return json.loads(response.body)['stream']+'|User-Agent=Mozilla/5.0'
 			
 	match = re.search(r'\-([\w]+)\.html', url)
 	if not match:
@@ -131,7 +164,7 @@ def get_fptplay(url):
 	
 	if response:
 		json_data = json.loads(response.body)
-		return json_data['stream']+'|User-Agent=VMF'
+		return json_data['stream']+'|User-Agent=Mozilla/5.0'
 		
 	pass
 
@@ -247,30 +280,8 @@ def get_phim3s(url):
 	video_url = json_data[0]['file']
 	return video_url
 	
-def get_tvnet(url):
-	match = re.search(re.compile(r"(vod)"), url)
-	
-	if not match:
 
-		channelid = re.search(r'\d\/(.*?)\.htm', url).group(1).lower()
-		
-		get_url = 'http://118.107.85.21:1337/get-stream.json?p=smil:'+channelid+'.smil&t=l'
-		response = urlfetch.get(get_url)
-		json_data = json.loads(response.body)
-		video_url = json_data[0]['url']
-	
-	else:
-		response = urlfetch.get(url)
-		match = re.search(r"idcontent\s=\s(\d+)", response.body)
-		idvideo = match.group(1)
-		playerurl = 'http://vn.tvnet.gov.vn/player1.php?contentid='+idvideo+'&contenttype=o'
-		response = urlfetch.get(playerurl)
-		match = re.search(r"var url = '(.*?)'", response.body)
-		link = match.group(1)
-		response = urlfetch.get(link)
-		json_data = json.loads(response.body)
-		video_url = json_data[0]['url']
-	return(video_url)
+
 	
 def get_mobifone(url):
 	video_url = re.search(r'file:\s\"(.*?)\"', fetch_data(url).body).group(1)
