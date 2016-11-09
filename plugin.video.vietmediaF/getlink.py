@@ -41,6 +41,8 @@ def get(url):
 		return get_fptplay(url)
 	if 'www.fshare.vn' in url:
 		return get_fshare(url)
+	if '//4share.vn' in url:
+		return get_4share(url)
 	if 'hdonline.vn' in url:
 		return get_hdonline(url)
 	if '//vtvgo.vn' in url:
@@ -246,11 +248,29 @@ def get_phim3s(url):
 	return video_url
 	
 def get_tvnet(url):
-	get_url = 'http://118.107.85.21:1337/get-stream.json?p=smil:'+re.search(r'\d\/(.*?)\.htm', url).group(1).lower()+'.smil&t=l'
-	response = urlfetch.get(get_url)
-	json_data = json.loads(response.body)
-	video_url = json_data[0]['url']
-	return video_url
+	match = re.search(re.compile(r"(vod)"), url)
+	
+	if not match:
+
+		channelid = re.search(r'\d\/(.*?)\.htm', url).group(1).lower()
+		
+		get_url = 'http://118.107.85.21:1337/get-stream.json?p=smil:'+channelid+'.smil&t=l'
+		response = urlfetch.get(get_url)
+		json_data = json.loads(response.body)
+		video_url = json_data[0]['url']
+	
+	else:
+		response = urlfetch.get(url)
+		match = re.search(r"idcontent\s=\s(\d+)", response.body)
+		idvideo = match.group(1)
+		playerurl = 'http://vn.tvnet.gov.vn/player1.php?contentid='+idvideo+'&contenttype=o'
+		response = urlfetch.get(playerurl)
+		match = re.search(r"var url = '(.*?)'", response.body)
+		link = match.group(1)
+		response = urlfetch.get(link)
+		json_data = json.loads(response.body)
+		video_url = json_data[0]['url']
+	return(video_url)
 	
 def get_mobifone(url):
 	video_url = re.search(r'file:\s\"(.*?)\"', fetch_data(url).body).group(1)
@@ -429,6 +449,27 @@ def get_linkvips(fshare_url,username, password):
 			
 	return video_url
 
+def get_4share(url):
+	
+	username = ADDON.getSetting('4share_username')
+	password = ADDON.getSetting('4share_password')
+
+	direct_url = ''
+	url_account = VIETMEDIA_HOST + '?action=fshare_account_linkvips'
+	response = fetch_data(url_account)
+	json_data = json.loads(response.body)
+	username = json_data['username']
+	password = json_data['password']
+
+	if len(username) > 0  and len(password) > 0:
+		direct_url = get_linkvips(url, username,password)
+		if len(direct_url) > 0:
+			notify(u'Lấy link 4share VIP thành công.'.encode("utf-8"))
+			return direct_url
+	if len(direct_url) == 0:
+		alert(u'Không lấy được link 4share.'.encode("utf-8"))
+	return direct_url
+
 def get_fshare(url):
 	login_url = 'https://www.fshare.vn/login'
 	logout_url = 'https://www.fshare.vn/logout'
@@ -436,7 +477,14 @@ def get_fshare(url):
 
 	username = ADDON.getSetting('fshare_username')
 	password = ADDON.getSetting('fshare_password')
-
+	
+	match = re.search(r"(https://)", url)
+	if not match:
+		url = 'https://'+url
+	else:
+		url = url
+	
+	
 	direct_url = ''
 	if len(username) == 0  or len(password) == 0:
 		try:
@@ -455,7 +503,7 @@ def get_fshare(url):
 			pass
 
 	if len(username) == 0  or len(password) == 0:
-		alert(u'Bạn chưa có TK VIP Fshare hoặc chưa có VIP CODE hoặc VIP CODE hết hạn. Soạn tin: VMF gửi 8698 hoặc Paypal to vietkodi@gmail.com. Sau khi nhập đợi 10 phút hệ thống update lại.'.encode("utf-8"))
+		alert(u'Bạn chưa có TK VIP Fshare hoặc chưa có VMF CODE hoặc CODE hết hạn. Mời Cafe tác giả đi bạn. Soạn tin: VMF gửi 8698 hoặc Paypal to vietkodi@gmail.com. Sau khi nhập đợi 10 phút hệ thống update lại.'.encode("utf-8"))
 		return
 
 	response = fetch_data(login_url)

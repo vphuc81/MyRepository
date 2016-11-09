@@ -876,7 +876,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon id="plugin.video.vietmediaF"
        name="[B]VietMediaF[/B]"
-       version="1.0.45.2"
+       version="1.0.47.1"
        provider-name="VietMedia">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
@@ -893,7 +893,8 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
         <platform>all</platform>
         <language>en</language>
 		<summary lang="en">VietMediaF Video Online</summary>
-		<description lang="en">Trung tâm giải trí trực tuyến, xem phim, shows, tivi, ca nhạc, karaoke</description>
+		<description lang="en">Trung tâm giải trí trực tuyến, xem phim, shows, tivi, ca nhạc, karaoke của người Việt.
+		Các nguồn nội dung được lấy từ các cá nhân và tổ chức cung cấp và chia sẻ miễn phí trên mạng Internet. Add-on hoạt động như một trình duyệt media, không lưu trữ hay sở hữu bất cứ nguồn nội dung nào. Người dùng chịu trách nhiệm hoàn toàn về việc xem các nguồn nội dung này.</description>
     <disclaimer>Các nguồn nội dung được lấy từ các cá nhân và tổ chức cung cấp miễn phí trên mạng Internet. Add-on không lưu trữ hay sở hữu bất cứ nguồn nội dung nào. Người dùng chịu trách nhiệm hoàn toàn về việc xem các nguồn nội dung này.
 - http://vietmediaf.net
 - https://www.facebook.com/groups/vietkodi/
