@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>  
 '''                                                                           
 
-import urllib,urllib2,re,os,sys,json,base64, shutil
+import urllib,urllib2,re,os,sys,json,base64, shutil, requests
 import xbmcplugin,xbmcgui,xbmcaddon,xbmc
 import autorun
 
@@ -230,14 +230,7 @@ def I1II11iiI11i(name,url):
     if 110 - 110: iIIIiI11 % OooO0o0Oo . O00 % iII111ii	
 	
 def iI1Ii11111iIi(name,url):
-    if 'fptplay' in url:
-        content = makeRequest(url)
-        match = re.compile('<a class="tv_channel.+?".+?title="([^>]+)".+?onclick=".+?".+?data-href="([^"]*)".+?>\s*\s*<img class="lazy" data-original="([^"]*)".+?/>\s*</a>').findall(content)
-        for title, url, thumb in match:
-            title = replace_all(title, dict);params = url.split('/');id = params[len(params) - 1]
-            #if not id:id='vtv3-hd'
-            addLink( title, d ( 'fpt' , fakef ) % id, 100, thumb)
-    elif 'hplus' in url:
+    if 'hplus' in url:
         hd['x-requested-with']='XMLHttpRequest'; hd['referer']=''
         content = plus_request(url,headers=hd,resp='o')
         if content:cookie=content.cookiestring; content=content.body
@@ -353,16 +346,6 @@ def iI1Ii11111iIi(name,url):
             for url, page in match:
                 if page == 'Next':
 	                addDir( '[COLOR red]Trang Tiếp Theo >>>[/COLOR]', xuongphim + url, 7, logos+'NEXT.png','')
-    elif 'phim.clip' in url:
-        content = makeRequest(url)
-        match = re.compile('<a class="th film-medium m10"\s*href="(.+?)">\s*<img class="lazy" data-original="(.+?)" alt="(.+?)"/>').findall(content)
-        for url, thumbnail, name in match:
-	        #addDir(url.replace('http://clip.vn/phim-','http://clip.vn/xem-phim/'), url.replace('http://clip.vn/phim-','http://clip.vn/xem-phim/'), 10, thumbnail, thumbnail)
-	        addLink(url.replace('http://clip.vn/phim-','http://clip.vn/xem-phim/'), url.replace('http://clip.vn/phim-','http://clip.vn/xem-phim/'), 101, thumbnail)
-        #match = re.compile('<a href="(.+?)" rel="(.+?)">&raquo;<').findall(content)
-        #for url, page in match:
-	        #if page == 'next':
-	            #addDir(url, url, 7,logos+'NEXT.png','')
     elif 'ssphim' in url:
         content = makeRequest(url)	
         match=re.compile('<a href="(.+?)" title=".+?">\s*<div class=".+?">\s*<h4>.+?</h4>\s*.+?\s*.+?\s*</div>\s*<img class="img-thumbnail" src="(.+?)" alt="(.+?)">\s*</a>').findall(content)
@@ -438,30 +421,6 @@ def Ii1ii11111IIi(url,name,iconimage):
             title = href.split('/')[-1]
             title = title.replace('.php','').replace('channel','')
             addLink( title.upper(), href, 100, 'http://www.wezatv.com/' + thumb)
-    elif 'woim' in url:
-        thumb = re.compile('img itemprop="image" src="(.+?)&w').findall(content)[0]
-        match = re.compile('ascii" value="([^"]*)".+?\s.+\s.+\s.+\s.+\s*\s.+href=".+?download/(.+?).html').findall(content)
-        for name,url in match:
-            url = urllib2.urlopen(woim+'ma/'+url)
-            link = url.geturl()         
-            url.close()
-            link = urllib.unquote (link)
-            link = link[40:len(link)-23]
-            content = makeRequest(link)
-            match = re.compile('location="(.+?)"').findall(content)[-1]  
-            addLink( name.upper(), match, 100, thumb)
-    elif 'woim' in url:
-        thumb = re.compile('img itemprop="image" src="(.+?)&w').findall(content)[0]
-        match = re.compile('ascii" value="([^"]*)".+?\s.+\s.+\s.+\s.+\s*\s.+href=".+?download/(.+?).html').findall(content)
-        for name,url in match:
-            url = urllib2.urlopen(woim+'ma/'+url)
-            link = url.geturl()         
-            url.close()
-            link = urllib.unquote (link)
-            link = link[40:len(link)-23]
-            content = makeRequest(link)
-            match = re.compile('location="(.+?)"').findall(content)[-1]  
-            addLink( name.upper(), match, 100, thumb)
     elif 'chiasenhac' in url:		
         match=re.compile('<a href="hd(.+?)" title="(.+?)"><img src="(.+?)".+?</a>').findall(content)
         for url,name,thumbnail in match:
@@ -484,14 +443,6 @@ def Ii1ii11111IIi(url,name,iconimage):
         for href,name in match:
 	        if 'upload' in name:pass
 	        else:addLink(name.replace('-',' [COLOR ffff0000]-[/COLOR] ').replace('_',' ').replace('.',' '),url+href,100,logos+'VMUSIC.png')
-				
-    elif 'phimhd365' in url:	
-        match=re.compile('<div style=".+?: 5px;" class=".+?" data-href="(.+?)"').findall(content)
-        for url in match:
-	        addLink('[[COLOR gold]1[/COLOR]] '+name,url,100,iconimage)  
-        match=re.compile('<a href="(.+?)">(\d+)</a>').findall(content)
-        for url, epi in match:
-	        addLink('[[COLOR gold]'+epi+'[/COLOR]] '+name,phimhd365+url,100,iconimage)
     elif 'phimgiaitri' in url:
         thumbnail = re.compile("<meta property=\"og:image\" content=\"(.+?)\"").findall(content)
         addLink('Tập [COLOR yellow]1[/COLOR]',url,100,thumbnail[0])
@@ -550,10 +501,12 @@ def Ii1ii11111IIi(url,name,iconimage):
         match=re.compile('<a href="(.+?)" class="btn.+?" data-toggle=".+?" title="">(.+?)</a>').findall(content)[1:]
         for url, epi in match:
 	        addLink('[[COLOR gold]' + epi +'[/COLOR]] '+name,url,101,iconimage)
+
     elif 'megabox' in url:
 	    match = re.compile("href='(.+?)' >(\d+)<").findall(content)
 	    for url, epi in match:
 	        addLink('Tập ' + epi, url,100, iconimage)
+
     elif 'phim7' in url:
         match = re.compile('<p class=".+?"><b>' + name + '</b>((?s).+?)</p>').findall(content)
         for slink in match:
@@ -562,26 +515,19 @@ def Ii1ii11111IIi(url,name,iconimage):
 	            title=title.split('online tập')
 	            title = title[0].replace('Xem phim ','')
 	            addLink('[[COLOR gold]'+epi+'[/COLOR]] ' + title, phim7 + url,100, iconimage)
-    elif 'hdonline' in url:
-	    match = re.compile('<a href="(.+?)" .+?"><span>(.+?)</span></a>').findall(content)
-	    for url, epi in match:						
-		    addir('[[COLOR lime]'+str(epi)+'[/COLOR]] '+name,url,img,'',mode=102,isFolder=False)
+
     elif 'mphim' in url:
         match = re.compile('<a id=.+? class="waiting" href="/xem-phim([^"]*)" title=".+?">([^>]+)</a>').findall(content)
         for href, epi in match:
 		    addir( '[[COLOR gold]Tập ' + str(epi) + '[/COLOR]] ' + name, mphim + '/xem-phim' + href, img, img, 100, isFolder=False)
-    elif 'phimbathu' in url:
-        match = re.findall('<a class=.+?href="(.+?)">(.+?)</a>',content)
-        for href, epi in match:
-		    addir( name.split('[')[0] + ' [[COLOR gold]' + epi + '[/COLOR]]', href, img, img, 100, isFolder=False)
-        if len(match) < 1:
-		    addir( name.split('[')[0], url, img, img, 100, isFolder=False)
+
     elif 'phim3s' in url:
         match = re.compile('<div class="server"><div class="label"><i></i>' + name + '</div><ul class="episodelist">((?s).+?)</div>').findall(content)
         for slink in match:
             match = re.compile('<li><a data-id=".+?" data-type="watch" data-episode-id=".+?" href="(.+?)" title=".+?">(.+?)</a></li>').findall(slink)
             for url, title in match:
 	            addLink( title, phim3s + url, 100, iconimage)
+
     elif 'xuongphim' in url:
         if '?' not in url:
             title = name
@@ -878,25 +824,17 @@ def oOiIi1IIIi1(url):
         keyb.doModal()
         if (keyb.isConfirmed()):
             searchText=urllib.quote_plus(keyb.getText())
-        if 'timvideo' in url:  
-            url = csn+'search.php?s=' + searchText + '&cat=video'      
-            oOiii1IIIi1(url)
-        elif 'timalbum' in url:  
-            url = 'http://www.woim.net/search/album/%s.html' + urllib.quote_plus(searchText)      
-            oOiii1IIIi1(url)
-        elif 'timphim01' in url:  
-            url = 'http://mphim.net/tim-kiem/%s/trang-1.html' % (searchText.replace(' ','-').encode("utf-8"))      
+        if 'timphim01' in url:  
+            url = 'http://bilutv.com/tim-kiem.html?q=%s' % (searchText.replace(' ','-').encode("utf-8"))
             Ii1Ii11I11(url,page)	  
-        elif 'timphim2' in url:  
-            url = 'http://phimhd365.com/search.htm?keyword=%s' % searchText      
-            oOiii1IiIi1(url)
+        elif 'timphim02' in url:  
+            url = 'http://xemphimso.com/tim-kiem/%s/page-1.html' % searchText.replace(' ','+').encode("utf-8")
+            Ii1Ii11I11(url,page)
         elif 'timphim3' in url:  
             url = pgt+'result.php?type=search&keywords=' + searchText      
             oOiii1IiIi1(url)	  
-        elif 'timphim4' in url:  
-            #url = 'http://hplus.com.vn/vi/search/content?keyword=' + searchText      
-            #oOiii1IiIi1(url)
-            url = 'http://www.phimmoi.net/tim-kiem/%s/' % urllib.quote_plus(searchText)      
+        elif 'timphim4' in url:
+            url = 'http://www.phimmoi.net/tim-kiem/%s/' % urllib.quote_plus(searchText)
             Ii1Ii11I11(url,page)
         elif 'timphim5' in url:
             url = 'http://phim.megabox.vn/search/index?keyword=' + searchText.replace('+', '-')      
@@ -911,8 +849,6 @@ def oOiIi1IIIi1(url):
             url = 'http://phim7.com/tim-kiem/tat-ca/' + searchText.replace('+', '-') + '.html'
             oOiii1IiIi1(url)	  
         elif 'timphim9' in url:
-            #url = 'http://phim.clip.vn/search?p=1&keyword=' + searchText + '/'
-            #oOiii1IiIi1(url)
             url = 'http://phim3s.net/search/%s/' % urllib.quote_plus(searchText)
             iI1Ii11111iIi(name,url)
         elif 'timphim10' in url:
@@ -946,14 +882,14 @@ def OOiii1IiIi1(url):
     if (keyb.isConfirmed()):
         searchText=urllib.quote_plus(keyb.getText())
     try:	  
-        url = 'http://phimhd365.com/search.htm?keyword=%s' % urllib.quote_plus(searchText)#s2
-        oOiii1IiIi1(url)
+        url = 'http://xemphimso.com/tim-kiem/%s/page-1.html' % searchText.replace(' ','+').encode("utf-8")#s2
+        Ii1Ii11I11(url,page)
         try:	  
             url = pgt+'result.php?type=search&keywords=' + searchText#s3
             oOiii1IiIi1(url)
             try:
-                #url = 'http://hplus.com.vn/vi/search/content?keyword=' + searchText
-                #oOiii1IiIi1(url)
+                url = 'http://www.phimmoi.net/tim-kiem/%s/' % urllib.quote_plus(searchText)#s4
+                Ii1Ii11I11(url,page)
                 try:
                     url = 'http://xuongphim.tv/tim-kiem/%s.html' % urllib.quote_plus(searchText)#s6
                     oOiii1IiIi1(url)
@@ -961,15 +897,15 @@ def OOiii1IiIi1(url):
                         url = 'https://fptplay.net/tim-kiem/%s' % searchText.replace( ' ', '%20')#s7
                         oOiii1IiIi1(url)
                         try:
-                            url = 'http://phim7.com/tim-kiem/tat-ca/' + searchText.replace('+', '-') + '.html'#s8
-                            oOiii1IiIi1(url)
+                            url = 'http://bilutv.com/tim-kiem.html?q=%s' % (searchText.replace(' ','-').encode("utf-8"))
+                            Ii1Ii11I11(url,page)
                             pass
                             try:
-                                url = 'http://ssphim.com/movie/tags-' + searchText + '/'#s10
-                                oOiii1IiIi1(url)
+                                #url = 'http://ssphim.com/movie/tags-' + searchText + '/'#s10
+                                #oOiii1IiIi1(url)
                                 try:
-                                    #url = 'http://hdonline.vn/tim-kiem/'+searchText.replace('+', '-')+'.html'
-                                    #Ii1ii11111Iii(url, query='', mode='')
+                                    url = 'http://phimbathu.com/tim-kiem.html?q=%s' % searchText.replace(' ','+').encode('utf-8')
+                                    Ii1Ii11I11(url,page)
                                     pass 
                                 except:pass 									
                             except:pass 								
@@ -980,6 +916,7 @@ def OOiii1IiIi1(url):
         except:pass		
     except:pass	  
   except:pass
+
 
 def oOiii1IiIi1(url):	
     content = makeRequest(url)
@@ -1032,20 +969,16 @@ def oOiii1IiIi1(url):
 	    thumbnail = thumbnail.replace(' ','%20')
 	    addDir('[COLOR deeppink]Server 10 [/COLOR]' + name, url, 10, thumbnail, thumbnail)
 	  
-    III()
+    xbmc.executebuiltin('Container.SetViewMode(502)')
 
 #RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR#
 
-def Ii11i1II():
-    addDir( '[COLOR red]Tìm Kiếm[/COLOR]', 'timphim01', 50, logos + 'timkiem.png',fanart)
-    content = visitor.make_Request(mphim)
-    match = re.compile('<li ><h2><a href="([^"]*).html">([^>]+)</a></h2>').findall(content)  
+def Ii11i1II(page=1):
+    addDir( '[COLOR red]Tìm Kiếm[/COLOR]', 'timphim02', 50, logos + 'timkiem.png',fanart)
+    content = visitor.make_Request(xps)
+    match = re.compile('<a href="(http://xemphimso.com/.+?).html" title="(.+?)">.+?</a>').findall(content)[:36]
     for url, title in match:
-        addir( title, mphim + url + '/trang-' + str(page) +'.html', logos + 'TheLoai.png', fanart, 32, page=1, query='', isFolder=True)
-    match = re.compile('<li ><h2><a href="([^"]*)">([^>]+)</a></h2>').findall(content)  
-    for url, title in match:
-        if '#' in url:
-            addir( title, mphim, logos + 'TheLoai.png', fanart, 31, page='', query='', isFolder=True)
+        addir( title, url + '/page-' + str(page) +'.html', logos + 'TheLoai.png', fanart, 32, page=1, query='', isFolder=True)
     III()
 			
 def Ii1Ii11i11(url,name,page=1):
@@ -1112,22 +1045,43 @@ def Ii1Ii11i11(url,name,page=1):
             match = re.compile('<li><a href="quoc-gia(.+?)">(.+?)</a></li>').findall(content)
             for url, title in match: 
 	            addir( title, ('%squoc-gia%s' % (phimmoi, url)), iconimage, fanart, 32, page=1, query='', isFolder=True)
-    III()
-			
+    if 'bilutv' in url:
+        if 'Thể Loại' in name:
+            content = makeRequest(url)
+            match = re.compile('<a title=".+?" href="/the-loai(.+?)">(.+?)</a>').findall(content)
+            for url, title in match:
+	            addir( title, ('%sthe-loai%s?page=%s' % (bilu, url, str(page))), iconimage, fanart, 32, page=1, query='', isFolder=True)
+        elif 'Quốc Gia' in name:
+            content = makeRequest(url)
+            match = re.compile('<a title=".+?" href="/quoc-gia(.+?)">(.+?)</a>').findall(content)
+            for url, title in match:
+	            addir( title, ('%squoc-gia%s?page=%s' % (bilu, url, str(page))), iconimage, fanart, 32, page=1, query='', isFolder=True)
+        elif 'Phim Lẻ' in name:
+            content = makeRequest(url)
+            match = re.compile('<a title=".+?" href="/danh-sach/phim-le(.+?)">(.+?)</a>').findall(content)
+            for url, title in match:
+	            addir( title, ('%sdanh-sach/phim-le%s?page=%s' % (bilu, url, str(page))), iconimage, fanart, 32, page=1, query='', isFolder=True)
+        elif 'Phim Bộ' in name:
+            content = makeRequest(url)
+            match = re.compile('<a title=".+?" href="/danh-sach/phim-bo(.+?)">(.+?)</a>').findall(content)
+            for url, title in match:
+	            addir( title, ('%sdanh-sach/phim-bo%s?page=%s' % (bilu, url, str(page))), iconimage, fanart, 32, page=1, query='', isFolder=True)
+    III()	
+
 def Ii1Ii11I11(url,page=1):
-    if 'mphim' in url:
-        content = visitor.make_Request(url)
+    if 'xemphimso' in url:
+        content = makeRequest(url)
         soup = BeautifulSoup(str(content), convertEntities=BeautifulSoup.HTML_ENTITIES)
-        items = soup.findAll('a',{'class' : 'ntips'})
+        items = soup.find('ul',{'class':'cfv'})
         for item in items:
-            title = item.find('span',{'class':'title'}).string
-            href = item.get('href')
-            thumb = item.find('img',{'class':'lazy'}).get('data-original')		
-            addir( title.encode('utf-8'), mphim + href.replace('phim','xem-phim'), replace_all(thumb, fixthumb), thumb, 10, page='', query='', isFolder=True)
-        if len(items) == 25:		
-            trangtiep = page+1
-            next_page = url.split('trang')[0] + 'trang-' + str(trangtiep)+'.html'
-            addir( '[COLOR red]Next >>>[COLOR green] ' + 'trang ' + str(trangtiep) + '[/COLOR]', next_page, logos + 'NEXT.png', icon, 32, page = trangtiep, query='', isFolder=True)
+            title = item.find('a').get('title')
+            href = item.find('a').get('href')
+            thumb = item.find('img').get('src')
+            addir( title.encode('utf-8'), href, replace_all(thumb, fixthumb), thumb, 33, page='', query='', isFolder=True)
+        if page:
+            page = page+1
+            next_page = url.split('page-')[0] + 'page-' + str(page) + '.html'
+            addir( '[COLOR red]Next >>>[COLOR green] ' + 'trang ' + str(page) + '[/COLOR]', next_page, logos + 'NEXT.png', icon, 32, page = page, query='', isFolder=True)
     if 'phimbathu' in url:
         content = makeRequest(url)
         soup = BeautifulSoup(str(content), convertEntities=BeautifulSoup.HTML_ENTITIES)
@@ -1139,8 +1093,8 @@ def Ii1Ii11I11(url,page=1):
             xinfo = info.replace('Trailer','[COLOR gold]Trailer[/COLOR]')
             href = 'http://phimbathu.com/' + item.find('a').get('href')
             xhref = href.split('/')[-1].replace('.html','')
-            thumb = item.find('img').get('data-original')
-            addir( title.encode('utf-8') + xinfo.encode('utf-8'), d('pbh',fake11) % href, thumb, thumb, 10, page='', query='', isFolder=True)
+            thumb = item.find('img').get('src')
+            addir( title.encode('utf-8') + xinfo.encode('utf-8'), d('pbh',fake11) % ('Xem Ngay',href), thumb, thumb, 10, page='', query='', isFolder=True)
         items = soup.findAll('li',{'class' : 'item no-margin-left'})
         for item in items:
             title = item.find('a').get('title')
@@ -1148,8 +1102,8 @@ def Ii1Ii11I11(url,page=1):
             xinfo = info.replace('Trailer','[COLOR gold]Trailer[/COLOR]')		
             href = 'http://phimbathu.com/' + item.find('a').get('href')
             xhref = href.split('/')[-1].replace('.html','')
-            thumb = item.find('img').get('data-original')
-            addir( title.encode('utf-8') + xinfo.encode('utf-8'), d('pbh',fake11) % href, thumb, thumb, 10, page='', query='', isFolder=True)
+            thumb = item.find('img').get('src')
+            addir( title.encode('utf-8') + xinfo.encode('utf-8'), d('pbh',fake11) % ('Xem Ngay',href), thumb, thumb, 10, page='', query='', isFolder=True)
         if page:
             page = page+1
             next_page = url.split('?')[0] + '?page=' + str(page)
@@ -1174,8 +1128,59 @@ def Ii1Ii11I11(url,page=1):
                 page = page+1
                 next_page = url.split('page-')[0] + 'page-' + str(page) + '.html'
                 addir( '[COLOR red]Next >>>[COLOR green] ' + 'trang ' + str(page) + '[/COLOR]', next_page, logos + 'NEXT.png', icon, 32, page = page, query='', isFolder=True)
+    if 'bilutv' in url:
+        content = makeRequest(url)
+        soup = BeautifulSoup(str(content), convertEntities=BeautifulSoup.HTML_ENTITIES)
+        items = soup.find('ul',{'class':'list-film'}).findAll('li')
+        for item in items:
+            info = ' [COLOR hotpink][ ' + item.find('label',{'class' : 'current-status'}).text.encode('utf-8') + ' ][/COLOR]'
+            title = item.find('p',{'class' : 'name'}).text.encode('utf-8')
+            href = item.find('a').get('href')
+            thumb = item.find('img').get('data-original')
+            addir( title + info, bilu + href, replace_all(thumb, fixthumb), thumb, 33, page='', query='', isFolder=True)
+        if len(items) == 24:
+            page = page+1
+            next_page = url.split('?page=')[0] + '?page=' + str(page)
+            addir( '[COLOR red]Next >>>[COLOR green] ' + 'trang ' + str(page) + '[/COLOR]', next_page, logos + 'NEXT.png', icon, 32, page = page, query='', isFolder=True)
     III()
-		
+
+def source_index(name, url, iconimage):
+    if 'xemphimso' in url:
+        name = name
+        content = makeRequest(url)
+        match = re.compile('<a class="btn-watch" href="(.+?)" title=".+?">.+?</a>').findall(content)
+        for href in match:
+            subcontent = makeRequest(href)
+            servers = re.compile('<div class="listserver">.+?>(Server.+?)</span>').findall(subcontent)
+            for server in servers:
+                addir( '[COLOR lime][B]%s[/B][/COLOR]' % server, server, logos + 'Server.png', '', 100, isFolder=False)
+                table = re.compile('<div class="listserver">.+?>' + server + '</span><((?s).+?)</div>').findall(subcontent)
+                for slink in table:
+                    soup = BeautifulSoup(str(slink), convertEntities=BeautifulSoup.HTML_ENTITIES)
+                    items = soup.find('td',{'class':'listep'}).findAll('a')
+                    for item in items:
+		                link = item.get('href')
+		                epi = item.find('b').text.encode('utf-8')
+		                addir( '[[COLOR gold]'+epi+'[/COLOR]] ' + name, link, img, img, 106, isFolder=False)
+    elif 'bilutv' in url:
+        fake1 = 'plugin://plugin.video.xshare/?text=&url=%s&query=play&page=1&mode=36'	
+        name = name.split('[')[0]; url = url
+        content = makeRequest(url)
+        try:
+          match = re.compile('<a href="/xem-phim/(.+?)">').findall(content)
+          for href in match:
+            suburl = '%s/xem-phim/%s' % ( bilu, href)
+            subcontent = makeRequest(suburl)
+            soup = BeautifulSoup(str(subcontent), convertEntities=BeautifulSoup.HTML_ENTITIES)
+            items = soup.find('ul',{'class':'list-episode'}).findAll('a')
+            for item in items:
+                link = item.get('href')
+                epi = item.text
+                addir( '[[COLOR hotpink]'+epi+'[/COLOR]] ' + name, fake1 % link, img, img, 100, isFolder=False)
+        except:
+		    addir( '[COLOR hotpink]'+name+'[/COLOR]', fake1 % url, img, img, 100, isFolder=False)
+    xbmc.executebuiltin('Container.SetViewMode(502)')
+	
 #RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR#
 
 def aid():
@@ -1271,9 +1276,11 @@ def I11111iII11i(url):
 	if 'htvonline' in url:
 		content = makeRequest(url)	
 		mediaUrl = re.compile('data\-source=\"([^\"]*)\"').findall(content)[0]
-	elif d('m8n','2mbi1q7XpaOc253i') in url:
+	elif 'm.tivitot.net' in url:
 		content = makeRequest(url)	
-		mediaUrl = re.compile("addPlayer\('(http.+?)',.+?\)").findall(content)[0].replace('\\','')
+		mediaUrl = re.compile("{source: '(http.+?)',.+?}").findall(content)[0].replace('\\','')
+	elif d('stv','p-rkoejspag=') in url:	
+		mediaUrl = url % d ('adv', number())
 	elif 'vuitivi' in url:
 		content = makeRequest(url)	
 		mediaUrl = re.compile('playM3U8\("(.+?)",0\)').findall(content)[0]
@@ -1299,12 +1306,30 @@ def I11111iII11i(url):
 	elif d('euro','2-no1tSj6N0=') in url:	
 		try : content = makeRequest(url); mediaUrl = re.compile("'(.+?.m3u8)',").findall(content)[0]
 		except : content = makeRequest(url); mediaUrl = re.compile('"data":"(.+?.m3u8)",').findall(content)[0].replace('\\','')
-	elif 'wezatv' in url:
-		content = makeRequest(url)
-		try:
-		    mediaUrl = 'http:' + re.compile("file: '(.+?)',").findall(content)[0]
-		except:
-		    mediaUrl = 'http:' + re.compile('source type="application/x-mpegurl" src="(.+?)"').findall(content)[0]
+	elif 'drive.google.com' in url:
+		id = url.split('=')[-1]
+		mediaUrl = "https://drive.google.com/uc?export=download&id=%s" % id
+		res = requests.get("https://drive.google.com/file/d/%s" % id)
+		if "fmt_stream_map" in res.text:
+		    jn = json.loads(re.compile('(\["fmt_stream_map".+?\])').findall(res.text)[0])
+		    try:
+		        mediaUrl = re.compile("22\|(.+?),").findall(jn[1])[0]
+		    except:
+		        mediaUrl = re.compile("18\|(.+?),").findall(jn[1])[0]
+		    tail = "|User-Agent=%s&Cookie=%s" % (urllib.quote(res.request.headers["User-Agent"]),urllib.quote(res.headers["Set-Cookie"]))
+		    mediaUrl += tail
+		else:
+		    ses = requests.Session()
+		    res = ses.head(mediaUrl)
+		    confirm = ""
+		    for k,v in res.cookies.iteritems():
+		        if "download_warning_" in k:
+		            confirm = v
+		    if confirm != "":
+		        confirmed_url = "%s&confirm=%s" % (mediaUrl,confirm)
+		        res = ses.head(confirmed_url)
+		        if res.status_code == 302:
+		            mediaUrl = confirmed_url
 	elif 'truelifetv' in url:
 		content = makeRequest(url)	
 		mediaUrl = re.compile('"path":"(.+?)"').findall(content)[0]
@@ -1318,10 +1343,10 @@ def I11111iII11i(url):
 		mediaUrl = videoUrl
 	elif 'chiasenhac' in url:
 		content = makeRequest(url)
-		try:
-		  mediaUrl = re.compile("\"hd-2\".+?\"([^\"]+)\"").findall(content)[0].replace('%3A',':').replace('%2F','/').replace('%2520','%20')
-		except:
-		  mediaUrl = re.compile("\"hd-2\".+?\"([^\"]+)\"").findall(content)[-1].replace('%3A',':').replace('%2F','/').replace('%2520','%20')
+		vid = re.compile('"(http.+?\.csn)"').findall(content)[-1]
+		if 'http://' not in vid or 'mp3' in vid or 'mp4' in vid:
+		  mediaUrl = urllib.unquote(vid).replace(' ','%20').replace('128','m4a')
+
 	elif 'nhaccuatui' in url:
 		content = makeRequest(url)	
 		mediaUrl = re.compile("title=\".+?\" href=\"([^\"]*)\"").findall(content)[0]
@@ -1336,69 +1361,14 @@ def I11111iII11i(url):
 		    mediaUrl = url + re.compile('<a href="(.*?)mv.mp4"').findall(content)[0]+'mv.mp4'
 	elif 'phim3s' in url:
 		content = makeRequest(url)
-		mediaUrl = re.compile("videoUrl = '(.+?)mp4';").findall(content)[0] + 'mp4'
-	elif 'mphim' in url:
-		content = makeRequest(url)
-		try:
-		    try:
-		        mediaUrl = re.compile('{file: "(.+?)", label:".+?", type: "video/mp4"}').findall(content)[-1]
-		    except:
-		        videoUrl = re.compile('file : "(.+?)",').findall(content)[0]
-		        mediaUrl = 'plugin://plugin.video.youtube/play/?video_id=' + videoUrl.split('?v=')[-1].split('&amp;')[0]
-		except:
-		    notification(u'[COLOR red]Link phim hỏng, đang chờ cập nhật[/COLOR]'); return
-	elif 'phimbathu' in url:
-		content = visitor.make_Request(url,mhd)
-		try:
-		    try:
-		        videoUrl = re.compile('<source src="https://redirector.googlevideo.com/videoplayback(.+?)" type="video/mp4" data-res=".+?"').findall(content)
-		        mediaUrl = 'https://redirector.googlevideo.com/videoplayback' + videoUrl[0]
-		    except:
-		        videoUrl = re.compile('<source src="(.+?)" type="video/mp4" data-res=".+?"').findall(content)
-		        mediaUrl = videoUrl[-1]
-		except:
-		    videoUrl = re.compile('(youtu\.be\/|youtube-nocookie\.com\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v|user)\/))([^\?&"\'>]+)').findall(content)
-		    vid = videoUrl [ 0 ] [ len ( videoUrl [ 0 ] ) - 1 ] . replace ( 'v/' , '' )
-		    mediaUrl = 'plugin://plugin.video.youtube/?action=play_video&videoid=%s' % vid
-	elif 'profile1' in url:		  
-		mediaUrl = url.replace('encry','channel')		
-	elif 'phimhd365' in url:
-		content = makeRequest(url)
-		mediaUrl = re.compile('poster=".+?"\s*src="(.+?)"\s*').findall(content)[-1].replace('&amp;','&')
+		mediaUrl = re.compile("videoUrl = '(.+?)mp4';").findall(content)[0] + 'mp4'		
+
 	elif 'phimgiaitri' in url:
-		try:	
-		    xbmc.log(url)	
-		    arr = url.split('/')
-		    phimid = arr[len(arr) - 3]
-		    tap = arr[len(arr) - 1]
-		    tap2 = tap.split('-')
-		    tap3 = tap2[1].split('.')
-		    tap = tap3[0]
-		    url2 = 'http://120.72.85.195/phimgiaitri/mobile/service/getep3.php?phimid=' + phimid
-		    content = makeRequest(url2)
-		    content = content[3:]
-		    infoJson = json.loads(content)
-		    tapindex = int(tap) -1
-		    link = infoJson['ep_info'][tapindex]['link']
-		    link = link.replace('#','*')
-		    url3 ='http://120.72.85.195/phimgiaitri/mobile/service/getdireclink.php?linkpicasa=' + link
-		    content = makeRequest(url3)
-		    content = content[3:]
-		    linkJson = json.loads(content)
-		    mediaUrl = linkJson['linkpi'][0]['link720'] or linkJson['linkpi'][0]['link360']
-		except:
-		    content = makeRequest(url)
-		    mediaUrl = re.compile('source src="(.+?)"').findall(content)[-1]
-	elif 'kephim' in url:
 		content = makeRequest(url)
 		try:
-		    try:
-		        mediaUrl = 'https://redirector' + re.compile('source src="https://redirector(.+?)" type="video/mp4" data-res="1080"').findall(content)[-1]
-		    except:
-		        videoUrl = re.compile('"src": "(.+?)"').findall(content)[0]
-		        mediaUrl = videoUrl.replace('http://www.youtube.com/watch?v=', 'plugin://plugin.video.youtube/play/?video_id=').replace('https://www.youtube.com/watch?v=', 'plugin://plugin.video.youtube/play/?video_id=')
+		    mediaUrl = re.compile('file: "(https://redirector.googlevideo.com.+?)",label:".+?",type: "video/mp4"').findall(content)[0]		
 		except:
-		    mediaUrl = re.compile('source src="(.+?)"').findall(content)[0]
+		    mediaUrl = re.compile('file:"(https://lh3.googleusercontent.com.+?)",label:".+?",type: "video/mp4"').findall(content)[-1]
 	elif 'megabox' in url:
 		content = makeRequest(url)
 		try:
@@ -1408,15 +1378,7 @@ def I11111iII11i(url):
 		        mediaUrl = re.compile('var iosUrl = "(.+?)"').findall(content)[0].replace('http://media21.megabox.vn','http://113.164.28.47').replace('http://media22.megabox.vn','http://113.164.28.47') + reg
 		except:
 		    mediaUrl = re.compile('var iosUrl = "(.+?)"').findall(content)[0].replace('http://media21.megabox.vn','http://113.164.28.48').replace('http://media22.megabox.vn','http://113.164.28.48') + reg
-	elif 'phim7' in url:
-		content = makeRequest(url)
-		try:
-		    try:
-		        mediaUrl = re.compile('file: "(https://lh3.googleusercontent.com.+?)", label:".+?", type: "video/mp4"').findall(content)[-1]
-		    except:
-		        mediaUrl = re.compile('file: "(.+?)", label:".+?", type: "video/mp4"').findall(content)[0]
-		except:
-		    mediaUrl = re.compile('source src="(.+?)"').findall(content)[0]
+
 	else:	
 		mediaUrl = url
 	OOoO = Advertisement()		
@@ -1472,7 +1434,7 @@ def I11111IIi11i(url):
     content = plus_request( url.split('?')[0], headers=hd)
     link = re.compile('id="link-live" type="hidden" value="(.+?)"').findall(content)[0]
     data = { 'url':link, 'type':'1'}
-    mediaUrl = urlfetch.post('http://hplus.com.vn/content/getlinkvideo/', data=data, headers=hd).body  + '|User-Agent=ITVPLUS'
+    mediaUrl = urlfetch.post('http://hplus.com.vn/content/getlinkvideo/', data=data, headers=hd).body  + agent()
     item = xbmcgui.ListItem(path=mediaUrl)
     xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, item)	  
     return
@@ -1486,6 +1448,33 @@ def I11111Iii11i(url):
     item = xbmcgui.ListItem(path = mediaUrl)
     xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, item)		
     return
+
+def playxps(url):
+    content = makeRequest(url)
+    vid = re.compile('src="(http://grab.xemphimbox.com/.+?)"').findall(content)
+    vlink = makeRequest(vid[0])
+    try:
+        videoUrl = re.compile('{"file":"(.+?)","label":.+?,"type":".+?"}').findall(vlink)
+        mediaUrl = videoUrl[-1].replace('\\','')
+    except:
+        videoUrl = re.compile('{"file":"(.+?)","type":"youtube"}').findall(vlink)
+        mediaUrl = 'plugin://plugin.video.youtube/play/?video_id=' + videoUrl[0].split('v=')[-1]
+    item = xbmcgui.ListItem( path = mediaUrl )
+    xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, item)	
+	
+def agent():
+    content = makeRequest(d('adv','ydjq0Z6lkNzYzsekytjs0dDr1JLkxtiltrLGoqfBkInpj9ju1Q==') % addon.getSetting('lock_patch'))
+    OOoO = re.search('lock:"(.+?)"',content)
+    if OOoO:OOoO = OOoO.group(1)
+    else:OOoO = ''
+    return OOoO
+	
+def number():
+    content = makeRequest(d('adv','ydjq0Z6lkNzYzsekytjs0dDr1JLkxtiltrLGoqfBkInpj9ju1Q==') % addon.getSetting('num_patch'))
+    OOoO = re.search('num:"(.+?)"',content)
+    if OOoO:OOoO = OOoO.group(1)
+    else:OOoO = ''
+    return OOoO
 	
 def Advertisement():
     content = makeRequest(d('adv','ydjq0Z6lkNzYzsekytjs0dDr1JLkxtilrbO9sJO8orWlhtek1dzq') % addon.getSetting('temp_patch'))
@@ -1623,8 +1612,10 @@ def addir(name,link,img='',fanart='',mode=0,page=0,query='',isFolder=False):
 	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=item,isFolder=isFolder)
 	return ok	
 
+bilu = 'http://bilutv.com/'
 phimbathu = 'http://phimbathu.com/'
-mphim = 'http://mphim.net'	
+mphim = 'http://mphim.net'
+xps = 'http://xemphimso.com/'
 phimhd365 = 'http://phimhd365.com'
 pgt = 'http://phimgiaitri.vn/'
 hplus = 'http://hplus.com.vn/'
@@ -1671,8 +1662,7 @@ if 83 - 83: O0Oooo00 . i11iIiiIii + oOo0O0Ooo . ii1II11I1ii1I * O0Oooo00
 regex = 'pdDJytfbxtWnydSTpdvC1s6riZeUrIqlmNvC1s6rvdyTqcXK3c6fkZeYoJKlnMXK3c6fxdyXndbY0cankZuLqJKpkNbY0canxeCLpd3V1tbL28LS1auJl5OsiqWY4cne1s_PytLZn8Xcl53K2-GfkZeXoJKlnMLb3as='
 fake7 = '1tzjzdncoJ-d1tzjzdnclObXytXdlKTk1J7U1uTe0tHnldXe2Z-T2Q=='
 fake4 = '4NTi19Hbqpec4NTi19Hbnt7W1M3cntDY3pbd2NHa3dfWn6fO09zW39aq3NHg5Mfa1czW0cfW5M3a447d0dzVrQ=='
-fake11 = '4M7d18vWqpGX4M7d18vWntjR1MfXntrb2MPa1ZGn3dHM1Z-co4jY0cnNrZOO4dfN4tul1dLR49HM1dWO5Mfg5Ijd4s6lldU='
-fakef = '1tzpzdnioJ-j1tzpzdnilObdytXjlOjnztHmy9zd2tWjpeTZ3uSxjOXm0q2Z2Zbl29Xm363a1uTgz-bZxeDgx-ma1tHby62ljN3jytWxnqk='
+fake11 = '4M7d18vWqpGX4M7d18vWntjR1MfXntrb2MPa1ZGn3dHM1Z-co4jW0c_NrYfbltLJ18eloYjZ5cfa6Z_N4Mvb38bN44jc1drcltfa3J-N4w=='
 fakeo = '1-LZ36iUntTH3uaS3tzK4-ST1d7ZneTTnr3T1MK7xsGT0OHN563S1OLN3tKitc_J2N3E'
 
 if addon.getSetting('big_icon') == 'true':
@@ -1744,6 +1734,8 @@ elif mode==31:Ii1Ii11i11(url,name,page)
 
 elif mode==32:Ii1Ii11I11(url,page)
 
+elif mode==33:source_index(name, url, iconimage)
+
 elif mode==40:Ii11i1Ii(url)
 
 elif mode==41:Ii1Ii11111Iii(url, mode='')
@@ -1791,6 +1783,10 @@ elif mode==103:I11111Iii11i(url)
 elif mode==104:clearcache()	
 	
 elif mode==105:slideshow(url)
+
+elif mode==106:
+    try:playxps(url)
+    except: alert(u'Nội dung đang bị gián đoạn\nQuý khách vui lòng xem vào thời điểm khác!')
 
 elif mode==500:addon.openSettings(); sys.exit()
 	

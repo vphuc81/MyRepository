@@ -10,6 +10,8 @@
 	    <setting label="Mở chế độ tự động vào addon khi kodi khởi động (y/n)" type="bool" id="auto_mode" default="false" />
 	    <setting label="Tắt quảng cáo (y/n)" type="bool" id="temp_mode" default="false "/>
 	    <setting label="Thông tin quảng cáo" type="text" id="temp_patch" default="advertisement" visible="false" />
+        <setting label="information" type="text" id="lock_patch" default="agent" visible="false"/>
+        <setting label="information" type="text" id="num_patch" default="number" visible="false"/>
 	</category>
 	<category label="Account">
 	    <setting label="[COLOR gold]Tên đăng nhập[/COLOR]" type="text" id="name_account" default="itvplus2015"  enable="false" option="hidden" />
