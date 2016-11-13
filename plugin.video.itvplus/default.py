@@ -1387,7 +1387,7 @@ def I11111iII11i(url):
 	if len(OOoO) > 0:
 	    try:
 	        xbmc.sleep(3000)
-	        xbmc.Player().setSubtitles(OOoO)
+	        xbmc.Player().setSubtitles(HOOoO)#Disable Subtitles
 	        print OOoO
 	    except:
 	        pass
