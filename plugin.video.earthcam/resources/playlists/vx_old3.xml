@@ -29,31 +29,7 @@
 </item>
 
 <item>
-<title>[COLOR yellow][B]Video Music - Ca Nhạc[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/music.xml</link>
-<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/videomusic.png</thumbnail>
-</item>
-
-<item>
-<title>[COLOR yellow][B]Movies - Phim Truyện[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/movies.xml</link>
-<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/phimle.png</thumbnail>
-</item>
-
-<item>
-<title>[COLOR yellow][B]TV - THỂ THAO[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/kenhthethao.xml</link>
-<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/kenhthethao.png</thumbnail>
-</item>
-
-<item>
-<title>[COLOR yellow][B]Youtube - Dailymotion[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/search.xml</link>
-<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/search.png</thumbnail>
-</item>
-
-<item>
-<title>[COLOR yellow][B]TV - Tổng Hợp[/B][/COLOR]</title>
+<title>[COLOR yellow][B]Việt - TV[/B][/COLOR]</title>
 <link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/viettv.xml</link>
 <thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/othertv.png</thumbnail>
 </item>
@@ -65,9 +41,39 @@
 </item>
 
 <item>
+<title>[COLOR yellow][B]TV - ÂM NHẠC[/B][/COLOR]</title>
+<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/kenhamnhac.xml</link>
+<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/kenhamnhac.png</thumbnail>
+</item>
+
+<item>
+<title>[COLOR yellow][B]TV - THỂ THAO[/B][/COLOR]</title>
+<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/kenhthethao.xml</link>
+<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/kenhthethao.png</thumbnail>
+</item>
+
+<item>
+<title>[COLOR yellow][B]Radio - FM[/B][/COLOR]</title>
+<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/radio.xml</link>
+<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/radio.png</thumbnail>
+</item>
+
+<item>
 <title>[COLOR yellow][B]Thiếu Nhi - Kids Place[/B][/COLOR]</title>
 <link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/kenhthieunhi.xml</link>
 <thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/kenhthieunhi.png</thumbnail>
+</item>
+
+<item>
+<title>[COLOR yellow][B]Video Music - Ca Nhạc[/B][/COLOR]</title>
+<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/music.xml</link>
+<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/videomusic.png</thumbnail>
+</item>
+
+<item>
+<title>[COLOR yellow][B]Movies - Phim Truyện[/B][/COLOR]</title>
+<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/movies.xml</link>
+<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/phimle.png</thumbnail>
 </item>
 
 <item>
@@ -95,9 +101,9 @@
 </item>
 
 <item>
-<title>[COLOR yellow][B]Radio - FM[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/radio.xml</link>
-<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/radio.png</thumbnail>
+<title>[COLOR yellow][B]Youtube - Dailymotion[/B][/COLOR]</title>
+<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/search.xml</link>
+<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/search.png</thumbnail>
 </item>
 
 <item>
