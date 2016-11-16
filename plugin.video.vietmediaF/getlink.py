@@ -10,6 +10,7 @@ import simplejson as json
 import random
 import xbmc
 from config import VIETMEDIA_HOST
+import urllib
 
 
 USER_VIP_CODE = ADDON.getSetting('user_vip_code')
@@ -71,40 +72,42 @@ def get(url):
 		return getAcestream(url)
 	if 'sop:' in url:
 		return getSopcast(url)
+	if 'vtv.vn' in url:
+		return getVtv(url)	
 	else:
 		return url
 
 
-def getTvnet(url):
+def getVtv(url)	:
+	channelname1 = re.search(r"tuyen\/(.*?).htm", url).group(1)
+	response = urlfetch.get(url)
+	cookie=response.cookiestring;
+	channelid1 = re.search(re.compile(r"disableLiveTv.init\((\d+),"), response.body).group(1)
+
+	urlcheck = 'http://vtvapi.vcmedia.vn/handlers/checkdisablelivetv.ashx?channelId='+channelid1+'&channelName=' + channelname1
+	headers = {'Host': 'vtvapi.vcmedia.vn',  'Origin': 'http://vtv.vn', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0', 'Referer': url}
+	data = {'channelId': channelid1, 'channelName': channelname1}
+
+	response = urlfetch.get(urlcheck, headers=headers)
+	linkplay = re.search(r'src=\"(.*?)"', json.loads(response.body)['Content']).group(1)
+	headers = {'Host': 'play.sohatv.vn', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0', 'Referer': url}
+	response = urlfetch.get(linkplay, headers=headers)
+	video_url = re.search(r"src=\"(.*?m3u8)", response.body).group(1)
+	result = 'http://'+re.search(r"live=(.*)", urllib.unquote_plus(video_url)).group(1)
+	return result
 	
-	match = re.search(re.compile(r"(video)"), url)
-
-	if not match:
-
-		response = urlfetch.get(url)
-		cookie=response.cookiestring;
-		regex = r"data-file=\"(.*?)\""
-		match = re.search(regex, response.body)
-		playerurl = match.group(1)
-		#Lấy link trực tiếp  
-		response = urlfetch.get(playerurl)
-		
-		json_data = json.loads(response.body)
-		
-		video_url = json_data[0]['url']
-		
-	else:
-		response = urlfetch.get(url)
-		cookie=response.cookiestring;
-		regex = r"data-file=\"(.*?)\""
-		match = re.search(regex, response.body)
-		playerurl = match.group(1)
-		playerurl = playerurl.replace('amp;', '')
-		response = urlfetch.get(playerurl)
-		
-		json_data = json.loads(response.body)
-		video_url = json_data[0]['url']
-	return(video_url)	
+def getTvnet(url):
+	response = urlfetch.get(url)
+	cookie=response.cookiestring;
+	regex = r"data-file=\"(.*?)\""
+	match = re.search(regex, response.body)
+	playerurl = match.group(1)
+	playerurl = playerurl.replace('amp;', '')
+	response = urlfetch.get(playerurl)
+	json_data = json.loads(response.body)
+	video_url = json_data[0]['url']	
+	return video_url
+	xbmc.log(video_url)
 		
 def getAcestream(url):
 	if 'plugin:' in url:
@@ -123,6 +126,7 @@ def getSopcast(url):
 def get_fptplay(url):
 	headers = { 
 				'Referer'			: url,
+				'X-KEY'				: '123456',
 	   			'X-Requested-With'	: 'XMLHttpRequest'
             }
 	hd={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/600.1.4 Gecko/20100101 Firefox/41.0'}
@@ -138,7 +142,7 @@ def get_fptplay(url):
 	    }
 		response = fetch_data('https://fptplay.net/show/getlinklivetv', headers, data)
 		if response:
-			return json.loads(response.body)['stream']+'|User-Agent=Mozilla/5.0'
+			return json.loads(response.body)['stream']+'|User-Agent=Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0&Referer=https://fptplay.net/livetv/'
 			
 	match = re.search(r'\-([\w]+)\.html', url)
 	if not match:
@@ -164,7 +168,7 @@ def get_fptplay(url):
 	
 	if response:
 		json_data = json.loads(response.body)
-		return json_data['stream']+'|User-Agent=Mozilla/5.0'
+		return json_data['stream']+'|User-Agent=Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0&Referer=https://fptplay.net/livetv/'
 		
 	pass
 
@@ -307,8 +311,9 @@ def get_htvplus(url):
 	if not response:
 		return ''
 	video_url = response.content
-	xbmc.log(video_url)
-	return video_url+'|User-Agent=VMF'	
+	#referer = urlfetch.get('http://hplus.com.vn/themes/front/player/jwplayer.flash.swf')
+	
+	return video_url+'|User-Agent%3DMozilla%2F5.0+%28Windows+NT+10.0%3B+WOW64%3B+rv%3A49.0%29+Gecko%2F20100101+Firefox%2F49.0%26Referer%3Dhttp%3A%2F%2Fhplus.com.vn%2Fthemes%2Ffront%2Fplayer%2Fjwplayer.flash.swf'	
 		
 def get_hdonline(url):
 	attempt = 1
