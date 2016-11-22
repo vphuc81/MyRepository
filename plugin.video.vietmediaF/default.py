@@ -135,10 +135,10 @@ def play(data):
       with open(subfile, "wb") as code:
         code.write(f.read())
       xbmc.sleep(3000)
-      xbmc.Player().setSubtitles(subfile)
+      xbmc.Player().setSubtitles(subfile.no) #Disable sub
       #notify('Tải phụ đề thành công')
     except:
-      notify('Không tải được phụ đề phim.')
+      notify#('Không tải được phụ đề phim.') #Disable sub
 
 def go():
   url = sys.argv[0].replace("plugin://%s" % ADDON_ID, VIETMEDIA_HOST ) + sys.argv[2]
