@@ -32,6 +32,11 @@ def findPHP(data, streamId):
     if html:
         return re.sub(r"\'\+\s*(?:f*id|ch)\s*\+\'", "%s" % streamId,html[0])
     
+    regex = "document.write\('.*?src=\"(.*?(?:f*id|ch)[^\"]+)\".*?['\" ]*.*?\)"
+    html = regexUtils.findall(data, regex)
+    if html:
+        return re.sub(r"\'\+\s*(?:f*id|ch)\s*\+\'", "%s" % streamId,html[0])
+    
     return None
 
 def findRTMP(url, data):

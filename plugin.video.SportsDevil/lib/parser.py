@@ -669,6 +669,9 @@ class Parser(object):
                 
             elif command == 'rowbalance':
                 src = rb.get(src)
+                
+            elif command == 'simpleToken':
+                src = cc.simpleToken(src)
 
             elif command == 'urlMerge':
                 src = cc.urlMerge(params, src)

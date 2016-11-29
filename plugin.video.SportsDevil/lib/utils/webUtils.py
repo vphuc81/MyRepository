@@ -34,7 +34,7 @@ class BaseRequest(object):
         self.s = requests.Session()
         if fileExists(self.cookie_file):
             self.s.cookies = self.load_cookies_from_lwp(self.cookie_file)
-        self.s.headers.update({'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'})
+        self.s.headers.update({'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.100 Safari/537.36'})
         self.s.headers.update({'Accept-Language' : 'en-US,en;q=0.5'})
         self.url = ''
     
@@ -98,6 +98,8 @@ class BaseRequest(object):
             del self.s.headers['Accept-Encoding']
         if 'skstream.tv' in urlparse.urlsplit(url).netloc:
             del self.s.headers['Accept-Encoding']
+        if 'bstream.tech' in urlparse.urlsplit(url).netloc:
+            del self.s.headers['Accept-Encoding']
         
         if form_data:
             #zo**tv
@@ -148,8 +150,8 @@ class BaseRequest(object):
             if self.cookie_file:
                 self.save_cookies_lwp(self.s.cookies, self.cookie_file)
         
-        if 'setCurrentQuality' in response:
-            response = response.replace("""' + '""",'').replace('"("+','')
+        if 'iaxpEnabled' in response:
+            response = response.replace("""' + '""",'').replace('"("+','').replace("""'+'""",'')
 
         return HTMLParser().unescape(response)
 
