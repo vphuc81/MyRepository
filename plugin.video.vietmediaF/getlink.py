@@ -13,6 +13,8 @@ from config import VIETMEDIA_HOST
 import urllib
 
 
+
+
 USER_VIP_CODE = ADDON.getSetting('user_vip_code')
 
 def fetch_data(url, headers=None, data=None):
@@ -74,9 +76,132 @@ def get(url):
 		return getSopcast(url)
 	if 'vtv.vn' in url:
 		return getVtv(url)	
+	if 'dzone.vn' in url:
+		return getDzone(url)
+	if 'clip.vn' in url:
+		return getClipvn(url)
 	else:
 		return url
 
+def get_hdonline(url):
+	attempt = 1
+	MAX_ATTEMPTS = 5
+	
+	while attempt < MAX_ATTEMPTS:
+		if attempt > 1: 
+			sleep(2)
+		url_play = ''
+		notify (u'Lấy link lần thứ #%s'.encode("utf-8") % attempt)
+		attempt += 1
+		headers = { 
+				'User-Agent' 	: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36',
+				'Referer'		: 'http://hdonline.vn'
+			}
+		response = fetch_data(url, headers)
+		if not response:
+			return ''
+
+		cookie = response.cookiestring
+
+		match = re.search(r'eval\(function\((.*?)split\(\'\|\'\),0,\{\}\)\)', response.body)
+		if match:
+			eval_js = 'eval(function(' + match.group(1) + 'split(\'|\'),0,{}))'
+			
+			response = fetch_data('http://vietmediaf.net:4000/api/v1/decode/hdo', None, {'data': eval_js})
+
+			json_data = json.loads(response.body)
+			_x = random.random()
+			url_play = ('http://hdonline.vn%s&format=json&_x=%s' % (json_data['playlist'][0]['file'], _x))
+			
+			#tim ep
+			
+			match = re.search(r'\-tap-(\d+)-[\d.]+?\.html$', url)
+			if match:
+				ep = match.group(1)
+				url_play = url_play.replace('ep=1','ep='+ep)
+			
+			break
+		else:
+			match = re.search(r'\-tap-(\d+)-[\d.]+?\.html$', url)
+			if not match:
+				ep = 1
+			else:
+				ep = match.group(1)
+			match = re.search(r'"file":"(.*?)","', response.body)
+			if match:
+				url_play = 'http://hdonline.vn' + match.group(1).replace('\/','/') + '&format=json'
+				url_play = url_play.replace('ep=1','ep=' + str(ep))
+				break
+	if len(url_play) == 0:
+		notify (u'Không lấy được link.')
+		return ''
+
+	headers = { 
+				'User-Agent' 	: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36',
+				'Referer'		: 'http://hdonline.vn',
+				'Accept'		: 'json',
+				'Cookie'		: cookie
+			}
+	
+	
+	response = fetch_data(url_play, headers)
+
+	json_data = json.loads(response.body)
+	video_url = json_data['file']
+	if json_data.get('level') and len(json_data['level']) > 0:
+		video_url = json_data['level'][len(json_data['level']) - 1]['file']
+
+	subtitle_url = ''
+	if json_data.get('subtitle') and len(json_data['subtitle']) > 0:
+		for subtitle in json_data['subtitle']:
+			subtitle_url = subtitle['file']
+			if subtitle['code'] == 'vi':
+				subtitle_url = subtitle['file']
+				break
+	
+	if len(subtitle_url) > 0:		
+		subtitle_url = ('http://data.hdonline.vn/api/vsub.php?url=%s' % subtitle_url)
+		return video_url + "[]" + subtitle_url
+	else:
+		return video_url
+
+	xbmc.log(video_url)
+		
+def getClipvn(url):
+	response = urlfetch.fetch(url)
+	regex = r'file\":\"(http.*?m3u8)'
+	matches = re.search(regex, response.body)
+	video_url = matches.group(1)
+	video_url = video_url.replace('\/\/', '//')
+	video_url = video_url.replace('\/', '/')
+	return(video_url)
+	
+def getDzone(url):
+	
+	#Tim ID cua film
+	regex = r"http.*?/(\d+)"
+	matches = re.search(regex, url)
+	idurl = matches.group(1)
+	print (idurl)
+	response = urlfetch.get(url)
+	cookie=response.cookiestring;
+
+	headers = { 
+					'Host'				: 'service.tivi.dzone.vn',
+					'User-Agent'		: 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0',
+					'Cookie'			: cookie,
+					'Referer'			: url,
+					'Origin'			: 'http://dzone.vn'
+				}
+	asset_optn = {'type': 'media'}
+	data = {'asset_optns': asset_optn, 'id': idurl}
+	data = json.dumps(data)
+
+	response = urlfetch.post('http://service.tivi.dzone.vn/api/v1/assets/'+idurl, data = data, headers =headers)
+	json_data = json.loads(response.body)
+	info = json_data['asset_result']['result']
+	info = info['mediaFiles'][0]['url']
+	return info
 
 def getVtv(url)	:
 	channelname1 = re.search(r"tuyen\/(.*?).htm", url).group(1)
@@ -124,12 +249,29 @@ def getSopcast(url):
 	return sopcast_link
 		
 def get_fptplay(url):
+	
+	user = ADDON.getSetting('fptplay_user')
+	password = ADDON.getSetting('fptplay_pass')
+	country_code = ADDON.getSetting('country_code')
+	matches = re.search(r"(.+)\s", country_code)
+	country_code = matches.group(1)
+	
+	url_login = 'https://fptplay.net/user/login'
+
+	r = urlfetch.get('https://fptplay.net')
+	cookie = r.cookiestring;
+	params = {'country_code': country_code, 'phone': user, 'password': password, 'submit': ''}
+	headers = {'User_Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','Referer':'https://fptplay.net/', 'cookie': cookie}
+	
+	r = urlfetch.post(url_login, headers=headers, data=params)
+	
 	headers = { 
 				'Referer'			: url,
 				'X-KEY'				: '123456',
-	   			'X-Requested-With'	: 'XMLHttpRequest'
+	   			'X-Requested-With'	: 'XMLHttpRequest',
+				'cookie'			: r.cookiestring
             }
-	hd={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/600.1.4 Gecko/20100101 Firefox/41.0'}
+	
 	#Kiểm tra live tivi 
 	match = re.search(r'\/livetv\/(.*)$', url)
 	if match:
@@ -140,9 +282,9 @@ def get_fptplay(url):
 	  		'quality'  : 3,
 	  		'mobile'   : 'web'
 	    }
-		response = fetch_data('https://fptplay.net/show/getlinklivetv', headers, data)
-		if response:
-			return json.loads(response.body)['stream']+'|User-Agent=Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0&Referer=https://fptplay.net/livetv/'
+		r = urlfetch.post('https://fptplay.net/show/getlinklivetv', headers=headers, data=data)
+		
+		return json.loads(r.content)['stream']+'|User-Agent=Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0&Referer=https://fptplay.net/livetv/'
 			
 	match = re.search(r'\-([\w]+)\.html', url)
 	if not match:
@@ -164,13 +306,13 @@ def get_fptplay(url):
   		'mobile'   : 'web',
     }
 
-	response = fetch_data('https://fptplay.net/show/getlink', headers, data)
+	r = urlfetch.post('https://fptplay.net/show/getlink', headers=headers, data=data)
 	
-	if response:
-		json_data = json.loads(response.body)
-		return json_data['stream']+'|User-Agent=Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0&Referer=https://fptplay.net/livetv/'
+	
+	json_data = json.loads(r.content)
+	return json_data['stream']+'|User-Agent=Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0&Referer=https://fptplay.net/livetv/'
 		
-	pass
+	
 
 def get_vtvgo(url):
 	response = urlfetch.get(url)
@@ -315,84 +457,9 @@ def get_htvplus(url):
 	
 	return video_url+'|User-Agent%3DMozilla%2F5.0+%28Windows+NT+10.0%3B+WOW64%3B+rv%3A49.0%29+Gecko%2F20100101+Firefox%2F49.0%26Referer%3Dhttp%3A%2F%2Fhplus.com.vn%2Fthemes%2Ffront%2Fplayer%2Fjwplayer.flash.swf'	
 		
-def get_hdonline(url):
-	attempt = 1
-	MAX_ATTEMPTS = 5
+
 	
-	xbmc.log(url)
-
-	while attempt < MAX_ATTEMPTS:
-		if attempt > 1: 
-			sleep(2)
-		url_play = ''
-		notify (u'Lấy link lần thứ #%s'.encode("utf-8") % attempt)
-		attempt += 1
-		response = fetch_data(url)
-		if not response:
-			return ''
-
-		match = re.search(r'\-(\d+)\.?\d*?\.html$', url)
-		if not match:
-			return ''
-		fid = match.group(1)
-
-		match = re.search(r'\-tap-(\d+)-[\d.]+?\.html$', url)
-		if not match:
-			ep = 1
-		else:
-			ep = match.group(1)
 		
-		match = re.search(r'\|(\w{86}|\w{96})\|', response.body)
-		if match:
-			token = match.group(1)
-			
-			match = re.search(r'\|14(\d+)\|', response.body)
-			token_key = '14' + match.group(1)
-			
-			token = token + '-' + token_key
-
-			_x = random.random()
-			url_play = ('http://hdonline.vn/frontend/episode/xmlplay?ep=%s&fid=%s&format=json&_x=%s&token=%s' % (ep, fid, _x, token))
-			break
-		else:
-			match = re.search(r'"file":"(.*?)","', response.body)
-			if match:
-				url_play = 'http://hdonline.vn' + match.group(1).replace('\/','/') + '&format=json'
-				url_play = url_play.replace('ep=1','ep=' + str(ep))
-				break
-	if len(url_play) == 0:
-		notify (u'Không lấy được link.')
-		return ''
-
-	headers = { 
-				'User-Agent' 	: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36',
-				'Referer'		: url,
-				'Accept'		: 'application/json, text/javascript, */*; q=0.01',
-				'Cookie'		: response.cookiestring
-			}
-	response = fetch_data(url_play, headers)
-
-	json_data = json.loads(response.body)
-	video_url = json_data['file']
-	if json_data.get('level') and len(json_data['level']) > 0:
-		video_url = json_data['level'][len(json_data['level']) - 1]['file']
-
-	subtitle_url = ''
-	if json_data.get('subtitle') and len(json_data['subtitle']) > 0:
-		for subtitle in json_data['subtitle']:
-			subtitle_url = subtitle['file']
-			if subtitle['code'] == 'vi':
-				subtitle_url = subtitle['file']
-				break
-	
-	xbmc.log(video_url)
-
-	if len(subtitle_url) > 0:		
-		subtitle_url = ('http://data.hdonline.vn/api/vsub.php?url=%s' % subtitle_url)
-		return video_url + "[]" + subtitle_url
-	else:
-		return video_url
-
 def get_hash(m):
 	md5 = m or 9
 	s = ''

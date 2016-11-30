@@ -60,3 +60,5 @@ Version 1.0.40:
 - Fix xuongphimtv, htvonline.
 Version 1.0.44:
 - Optimise getlink.
+Version 1.0.59:
+- Fixx FPTPlay

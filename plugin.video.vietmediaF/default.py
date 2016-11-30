@@ -30,6 +30,8 @@ USER = ADDON.getSetting('user_id')
 USER_PIN_CODE = ADDON.getSetting('user_pin_code')
 USER_VIP_CODE = ADDON.getSetting('user_vip_code')
 LOCK_PIN = ADDON.getSetting('lock_pin')
+VIEWMODE = ADDON.getSetting('view_mode')
+
 
 def fetch_data(url, headers=None):
   visitor = get_visitor()
@@ -112,7 +114,7 @@ def play(data):
   link = data["url"]
   link = getlink.get(link)
   if link is None or len(link) == 0:
-    notify('Lỗi không lấy được link phim.')
+    notify('Lỗi không lấy được link phim, có thể do nguồn phát. Xin vui lòng thử lại sau.')
     return
   subtitle = ''
   links = link.split('[]')
@@ -135,10 +137,10 @@ def play(data):
       with open(subfile, "wb") as code:
         code.write(f.read())
       xbmc.sleep(3000)
-      xbmc.Player().setSubtitles(subfile.no) #Disable sub
+      xbmc.Player().setSubtitles(subfile.bak)#Disable sub
       #notify('Tải phụ đề thành công')
     except:
-      notify#('Không tải được phụ đề phim.') #Disable sub
+      notify#('Không tải được phụ đề phim.')disable sub
 
 def go():
   url = sys.argv[0].replace("plugin://%s" % ADDON_ID, VIETMEDIA_HOST ) + sys.argv[2]
@@ -242,6 +244,13 @@ def go():
       listitems[i] = (item["path"], listItem, not item["is_playable"])
 
   xbmcplugin.addDirectoryItems(HANDLE, listitems, totalItems=len(listitems))
+  
+  if VIEWMODE == 'true':
+	  if '?action=menu' in url or 'node_id=77' in url or 'node_id=86' in url or 'node_id=79' in url or 'thread_id=18666' in url or 'thread_id=15858' in url or 'thread_id=21762' in url or 'thread_id=21802' in url or 'thread_id=15492' in url or 'thread_id=104' in url or 'node_id=13' in url or 'node_id=19' in url:
+		xbmc.executebuiltin('Container.SetViewMode(%d)' % 500)
+  
+  
+  
   
   xbmcplugin.endOfDirectory(HANDLE, succeeded=True, updateListing=False, cacheToDisc=True)
 
