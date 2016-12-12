@@ -1,9 +1,10 @@
 ﻿<settings>
 	<category label="Tài khoản">
+		<setting id="fshare_option" type="bool" label="[COLOR blue][B]Dùng tk fshare cá nhân thay VMF Code[/B][/COLOR]" default="false"/>
 		<setting id="user_id" type="number" label="User Id của bạn [COLOR dimgrey][I](đăng ký tại www.vietmediaF.net)[/COLOR][/I]"/>
 		<setting id="user_pin_code" type="number" label="Mã PIN [COLOR dimgrey][I](bạn nhập ở diễn đàn)[/COLOR][/I]"/>
 		<setting id="user_vip_code" type="number" label="Mã VMF [COLOR dimgrey][I]soạn VMF gửi 8698 (10.000đ) để mời cafe người phát triển[/I][/COLOR]"/>
-		<setting label="Fshare [COLOR dimgrey][I]Không nhập nếu có VMF Code[/COLOR][/I]" type="lsep"/>
+		<setting label="Fshare" type="lsep"/>
 		<setting id="fshare_username" type="text" label="Tài khoản:" default=""/>
 		<setting id="fshare_password" type="text" option="hidden" label="Mật khẩu:" default=""/>
 		<setting label="Fptplay [COLOR dimgrey][I]Tài khoản dùng chung có nguy cơ bị block[/COLOR][/I]" type="lsep"/>
@@ -17,11 +18,13 @@
 		<setting id="lock_pin" type="text" option="hidden" label="Mã khoá" default="0000"/>
 	</category>
 	<category label="Cấu hình">
-		<setting id="on_off" type="bool" label="On/Off" default="false"/>
+		<setting id="on_off" type="bool" label="Autorun" default="false"/>
 		<setting id="view_mode" type="bool" label="Chọn chế độ Thumbnails" default="false"/>
 	</category>
 	<category label="Mời Cafe tác giả">
-		<setting id="donate_bank" type="bool" label="Nguyễn Ngọc Đức, TK: 0011000469829, Ngân hàng Ngoại thương Việt Nam - Vietcombank" default="true"/>
+		<setting id="version" type="text" label="FB group: [COLOR red]Cộng đồng KODII Việt Nam[/COLOR] - Current version: [COLOR red]1.0.67[/COLOR]" default=""/>
+		<setting id="donate_sms" type="bool" label="Soạn tin SMS [COLOR yellow]VMF[/COLOR] gửi [COLOR yellow]8798[/COLOR]" default="true"/>
+		<setting id="donate_bank" type="bool" label="Nguyễn Ngọc Đức, TK: 0011000469829, Ngân hàng Ngoại thương Việt Nam - SGD" default="true"/>
 		<setting id="donate_paypal" type="bool" label="Paypal: vietkodi@gmail.com" default="true"/>
 		<setting id="donate_the_cao" type="bool" label="Thẻ cào xin gửi email về: vietkodi@gmail.com" default="true"/>
 	</category>

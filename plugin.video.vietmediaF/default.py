@@ -13,7 +13,7 @@ import uuid
 import SimpleDownloader as downloader
 import remove_accents
 import autorun
-
+import datetime as dt, time
 
 downloader = downloader.SimpleDownloader()
 
@@ -31,6 +31,7 @@ USER_PIN_CODE = ADDON.getSetting('user_pin_code')
 USER_VIP_CODE = ADDON.getSetting('user_vip_code')
 LOCK_PIN = ADDON.getSetting('lock_pin')
 VIEWMODE = ADDON.getSetting('view_mode')
+
 
 
 def fetch_data(url, headers=None):
@@ -54,6 +55,31 @@ def fetch_data(url, headers=None):
     return json.loads(body)
   except:
     pass
+
+def hello():
+	
+	date = dt.date.today().strftime("%d/%m/%Y")
+	day = dt.datetime.now().strftime("%A")
+
+	filename = os.path.join(PROFILE_PATH, 'date.dat' )
+	if not os.path.exists(filename):
+		with open(filename,"w") as f:
+			f.write(date)
+		if 'Saturday' in day:
+				notify('Xin chúc bạn ngày cuối tuần vui vẻ.')
+		else:
+				notify('Xin chúc bạn có thời gian giải trí vui vẻ.')	
+		
+	with open(filename,"r") as f:
+		lines = f.read()
+	if date not in lines:
+		if 'Saturday' in day or 'Sunday' in day:
+			notify('Xin chúc bạn ngày cuối tuần vui vẻ.')
+		else:
+			notify('Xin chúc bạn có thời gian giải trí vui vẻ.')	
+		with open(filename,"w") as f:
+			f.write(date)
+ 
 
 def get_visitor():
   
@@ -114,7 +140,7 @@ def play(data):
   link = data["url"]
   link = getlink.get(link)
   if link is None or len(link) == 0:
-    notify('Lỗi không lấy được link phim, có thể do nguồn phát. Xin vui lòng thử lại sau.')
+    notify('Lỗi không lấy được link phim. Xin vui lòng thử lại sau.')
     return
   subtitle = ''
   links = link.split('[]')
@@ -137,16 +163,18 @@ def play(data):
       with open(subfile, "wb") as code:
         code.write(f.read())
       xbmc.sleep(3000)
-      xbmc.Player().setSubtitles(subfile.bak)#Disable sub
+      xbmc.Player().setSubtitles(subfile.bak)#disable sub
       #notify('Tải phụ đề thành công')
     except:
-      notify#('Không tải được phụ đề phim.')disable sub
+      notify#('Không tải được phụ đề phim.')
 
 def go():
+  
   url = sys.argv[0].replace("plugin://%s" % ADDON_ID, VIETMEDIA_HOST ) + sys.argv[2]
+  
   if url == VIETMEDIA_HOST + '/':
     url += '?action=menu'
-  
+	
   #Settings
   if '__settings__' in url:
     ADDON.openSettings()
@@ -250,7 +278,7 @@ def go():
 		xbmc.executebuiltin('Container.SetViewMode(%d)' % 500)
   
   
-  
+  hello()
   
   xbmcplugin.endOfDirectory(HANDLE, succeeded=True, updateListing=False, cacheToDisc=True)
 

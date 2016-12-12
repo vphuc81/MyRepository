@@ -1,4 +1,9 @@
-﻿Version 1.0.0:
+﻿Version 1.0.67:
+- Fix bug;
+Version 1.0.62:
+- Add Haivn.com
+---
+Version 1.0.0:
 - Phát hành lần đầu
 Version 1.0.2:
 - Thêm server hd0

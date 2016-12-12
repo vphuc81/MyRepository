@@ -12,7 +12,7 @@ PlayResY: 0
 
 [Aegisub Project Garbage]
 Last Style Storage: Default
-Active Line: 9
+Active Line: 3
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
@@ -25,10 +25,10 @@ Style: Left corner,Arial,12,&H0000FFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 1,0:00:00.00,0:00:15.00,Right_corner 1.0,,0,0,0,, ZIDOO - Android TV Box số 1 thế giới
-Dialogue: 0,0:00:00.00,0:00:15.00,Right_corner 1.1,,0,0,0,,Nhập code "VIETMEDIAF" giảm 100.000đ tại Hieuhien.vn
-Dialogue: 1,0:00:15.00,0:00:28.00,Right_corner 1.0,,0,0,0,, ZIDOO - Android TV Box số 1 thế giới
-Dialogue: 0,0:00:15.00,0:00:28.00,Right_corner 1.1,,0,0,0,,Vibox V5 PRO - Android TV Box dành cho người Việt
+Dialogue: 1,0:00:00.00,0:00:15.00,Right_corner 1.0,,0,0,0,, {\u1}HIMEDIA{\u0}  - Android Box Số 1 Về Hình Ảnh, Âm Thanh và Chơi KODI
+Dialogue: 0,0:00:00.00,0:00:15.00,Right_corner 1.1,,0,0,0,,Thương Hiệu 10 Năm Bền Bỉ
+Dialogue: 1,0:00:15.00,0:00:28.00,Right_corner 1.0,,0,0,0,, {\u1}Vimtag.vn{\u0} - Camera Wifi Vimtag bán chạy nhất tại thị trường Mỹ
+Dialogue: 0,0:00:15.00,0:00:28.00,Right_corner 1.1,,0,0,0,,Phân Phối ITVPLUS.NET
 Dialogue: 1,0:00:00.00,0:01:00.00,Chu nghieng 90 do ben tay phai,,0,0,0,,vietmediaF.net
 Dialogue: 1,0:00:30.00,0:30:00.00,Chu nghieng 90 do ben tay phai,,0,0,0,,
 Dialogue: 1,0:30:00.00,0:30:30.00,Chu nghieng 90 do ben tay phai,,0,0,0,,vietmediaF.net
