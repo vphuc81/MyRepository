@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <!-- General -->
+  <category label="$LOCALIZE[128]">
+    <setting type="sep"/>
+    <setting id="use_PAC-12_intro" type="bool" label="Use PAC-12 Intro" default="false"/>
+    <setting id="use_custom_links" type="bool" label="Use Custom Links" default="false"/>
+  </category>
+  <category label="Links">
+    <setting type="lsep" label="Fill in the fields below with links to streamings."/>
+    <setting type="lsep" label="Example: http://xrxs.net/video/live-*****-4728.m3u8"/>
+    <setting type="lsep" label="Proper link should looks like: http://xrxs.net/video/live-*****-/ without 4728.m3u8"/>
+    <setting visible="true" type="text" default="http://"   id="National"  label="Pac National" />
+    <setting visible="true" type="text" default="http://"   id="Arizona"  label="Arizona" />
+    <setting visible="true" type="text" default="http://"   id="Bay"  label="Bay Area" />
+    <setting visible="true" type="text" default="http://"   id="Angeles"  label="Los Angeles" />
+    <setting visible="true" type="text" default="http://"   id="Mountain"  label="Mountain" />
+    <setting visible="true" type="text" default="http://"   id="Oregon"  label="Oregon" />
+    <setting visible="true" type="text" default="http://"   id="Washington"  label="Washington" />
+    <setting visible="true" type="text" default="http://"   id="BTN"  label="Big Ten Network" />
+  </category>
+  
+  <category label="Proxy Server">
+    	<setting label="IP Address" type="ipaddress" id="ipaddress" default="127.0.0.1"/>
+    	<setting label="Port number" type="number" id="portNumber" default="19098" visible="true"/>
+  </category>
+</settings>
