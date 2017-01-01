@@ -46,6 +46,8 @@ s = [   '185.39.11.42',
         '185.39.11.66']
 
 class MyHandler(BaseHTTPRequestHandler):
+    def log_message(self, format, *args):
+        pass
     """
     Serves a HEAD request
     """
@@ -178,6 +180,7 @@ PORT_NUMBER = 19000
 
 if __name__ == '__main__':
     socket.setdefaulttimeout(10)
+    sys.tracebacklimit = 0
     server_class = ThreadedHTTPServer
     httpd = server_class((HOST_NAME, PORT_NUMBER), MyHandler)
     #print "XBMCLocalProxy Starts - %s:%s" % (HOST_NAME, PORT_NUMBER)

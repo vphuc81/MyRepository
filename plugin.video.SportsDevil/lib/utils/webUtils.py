@@ -100,6 +100,8 @@ class BaseRequest(object):
             del self.s.headers['Accept-Encoding']
         if 'bstream.tech' in urlparse.urlsplit(url).netloc:
             del self.s.headers['Accept-Encoding']
+        if 'bcast.site' in urlparse.urlsplit(url).netloc:
+            del self.s.headers['Accept-Encoding']
         
         if form_data:
             #zo**tv
@@ -150,7 +152,7 @@ class BaseRequest(object):
             if self.cookie_file:
                 self.save_cookies_lwp(self.s.cookies, self.cookie_file)
         
-        if 'iaxpEnabled' in response:
+        if '"zmbtn"' in response:
             response = response.replace("""' + '""",'').replace('"("+','').replace("""'+'""",'')
 
         return HTMLParser().unescape(response)
