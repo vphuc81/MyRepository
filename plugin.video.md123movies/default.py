@@ -12,7 +12,7 @@ addon_name = selfAddon.getAddonInfo('name')
 art = xbmc.translatePath(os.path.join('special://home/addons/' + addon_id + '/resources/art/'))
 icon = xbmc.translatePath(os.path.join('special://home/addons/' + addon_id, 'icon.png'))
 fanart = xbmc.translatePath(os.path.join('special://home/addons/' + addon_id , 'fanart.jpg'))
-User_Agent = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36'
+User_Agent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36'
 show_tv = selfAddon.getSetting('enable_shows')
 baseurl = selfAddon.getSetting('base_url')
 s = requests.session()
@@ -94,6 +94,7 @@ def YEAR(url):
 def INDEX(url):
 	link = OPEN_URL(url)
 	link = link.encode('ascii', 'ignore').decode('ascii')
+	addon.log('#######################link = '+str(link))
 	all_videos = regex_get_all(link, 'class="ml-item">', '</h2></span>')
 	for a in all_videos:
 		name = regex_from_to(a, 'title="', '"').replace("&amp;","&").replace('&#39;',"'").replace('&quot;','"').replace('&#39;',"'")
@@ -326,7 +327,7 @@ def addLink(name,url,mode,iconimage,fanart,description=''):
 def OPEN_URL(url):
 	headers = {}
 	headers['User-Agent'] = User_Agent
-	link = s.get(url, headers=headers, allow_redirects=False).text
+	link = s.get(url, headers=headers).text
 	link = link.encode('ascii', 'ignore')
 	return link
 
