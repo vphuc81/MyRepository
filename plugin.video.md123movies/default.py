@@ -19,6 +19,7 @@ s = requests.session()
 net = Net()
 
 
+
 def CAT():
 	addDir('[B][COLOR white]Most Favorite[/COLOR][/B]',baseurl+'/movie/filter/movie/favorite/all/all/all/all/all',1,icon,fanart,'')
 	addDir('[B][COLOR white]Most Ratings[/COLOR][/B]',baseurl+'/movie/filter/movie/rating/all/all/all/all/all',1,icon,fanart,'')
@@ -137,23 +138,31 @@ def EPIS(url):
         referer = url
         video_id = re.compile('id: "(.*?)"').findall(link)[0]
         request_url =  baseurl + '/ajax/v2_get_episodes/'+video_id#+'/'+token
-        coookie_1 = hashlib.md5(video_id+key).hexdigest()
-        link = OPEN_URL(request_url)
-        all_links = regex_get_all(link, '"server-10"', '"clearfix"')
+        link2 = OPEN_URL(request_url)
+        all_links = regex_get_all(link2, '"server-10"', '"clearfix"')
         all_videos = regex_get_all(str(all_links), '<a', '</a>')
         for a in all_videos:
                 name = regex_from_to(a, 'title="', '"').replace("&amp;","&").replace('&#39;',"'").replace('&quot;','"').replace('&#39;',"'")
                 key_gen = random_generator()
                 episode_id = regex_from_to(a, 'episode-id="', '"')
+
                 coookie = hashlib.md5(episode_id + key).hexdigest() + '=%s' %key_gen
+                getc = re.findall(r'<img title=.*?src="(.*?)"', str(link), re.I|re.DOTALL)[0]
+                headers = {'Accept': 'image/webp,image/*,*/*;q=0.8', 'Accept-Encoding':'gzip, deflate, sdch, br',
+                           'Accept-Language': 'en-US,en;q=0.8', 'Referer': referer, 'User-Agent':User_Agent}
+                cookie = s.get(getc,headers=headers,verify=False).cookies.get_dict()
+                for i in cookie:
+                        cookie =  i + '=' + cookie[i]
                 a= episode_id + key2
                 b= key_gen
-                i=b[-1]
-                h=b[:-1]
-                b=i+h+i+h+i+h
-                hash_id = uncensored(a, b)
-                headers = referer + '\+' + coookie
-                url =  baseurl + '/ajax/v2_get_sources/' + episode_id + '?hash=' + urllib.quote(hash_id)
+                hash_id = __uncensored(a, b)
+                cookie = '%s; %s' %(cookie,coookie)
+
+                a= episode_id + key2
+                b= key_gen
+                hash_id = __uncensored(a, b)
+                headers = referer + '\+' + cookie
+                url =  baseurl + '/ajax/v2_get_sources/' + episode_id + '?hash=' + urllib.quote(hash_id).encode('utf8')
                 addDir('[B][COLOR white]%s[/COLOR][/B]' %name,url,7,icon,fanart,headers)
         setView('tvshows', 'show-view')
 
@@ -163,28 +172,55 @@ def LINKS(url):
         referer = url
         video_id = re.compile('id: "(.*?)"').findall(link)[0]
         request_url =  baseurl + '/ajax/v2_get_episodes/'+video_id
+        getc = re.findall(r'<img title=.*?src="(.*?)"', str(link), re.I|re.DOTALL)[0]
+        headers = {'Accept': 'image/webp,image/*,*/*;q=0.8', 'Accept-Encoding':'gzip, deflate, sdch, br',
+                   'Accept-Language': 'en-US,en;q=0.8', 'Referer': referer, 'User-Agent':User_Agent}
+        cookie = s.get(getc,headers=headers,verify=False).cookies.get_dict()
+        for i in cookie:
+                cookie =  i + '=' + cookie[i]
         link = OPEN_URL(request_url)
-        all_videos = regex_get_all(link, '"server-10"', '"clearfix"')
-        for a in all_videos:
-                episode_id = regex_from_to(a, 'episode-id="', '"')
-                key_gen = random_generator()
-                coookie = hashlib.md5(episode_id + key).hexdigest() + '=%s' %key_gen
-                a= episode_id + key2
-                b= key_gen
-                i=b[-1]
-                h=b[:-1]
-                b=i+h+i+h+i+h
-                hash_id = uncensored(a, b)
-                request_url2 =  baseurl + '/ajax/v2_get_sources/' + episode_id + '?hash=' + urllib.quote(hash_id)
-                headers = {'Accept-Encoding':'gzip, deflate, sdch', 'Cookie': coookie, 'Referer': referer, 'user-agent':User_Agent,'x-requested-with':'XMLHttpRequest'}
-                link = s.get(request_url2, headers=headers).text
-                url = re.compile('"file":"(.*?)"').findall(link)[0]
-                url = url.replace('&amp;','&').replace('\/','/')
-                liz = xbmcgui.ListItem(name, iconImage='DefaultVideo.png', thumbnailImage=iconimage)
-                liz.setInfo(type='Video', infoLabels={"Title": name})
-                liz.setProperty("IsPlayable","true")
-                liz.setPath(url)
-                xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, liz)
+        try:
+                all_videos = regex_get_all(link, '"server-10"', '"clearfix"')
+                for a in all_videos:
+                        episode_id = regex_from_to(a, 'episode-id="', '"')
+                        key_gen = random_generator()
+                        coookie = hashlib.md5(episode_id + key).hexdigest() + '=%s' %key_gen
+                        cookie = '%s; %s' %(cookie,coookie)
+                        a= episode_id + key2
+                        b= key_gen
+                        hash_id = __uncensored(a, b)
+                        request_url2 =  baseurl + '/ajax/v2_get_sources/' + episode_id + '?hash=' + urllib.quote(hash_id).encode('utf8')
+                        headers = {'Accept-Encoding':'gzip, deflate, sdch', 'Cookie':cookie, 'Referer': referer,
+                                   'User-Agent':User_Agent,'x-requested-with':'XMLHttpRequest','Accept':'application/json, text/javascript, */*; q=0.01'}
+                        link = s.get(request_url2, headers=headers).text
+                        url = re.compile('"file":"(.*?)"').findall(link)[0]
+                        url = url.replace('&amp;','&').replace('\/','/')
+                        liz = xbmcgui.ListItem(name, iconImage='DefaultVideo.png', thumbnailImage=iconimage)
+                        liz.setInfo(type='Video', infoLabels={"Title": name})
+                        liz.setProperty("IsPlayable","true")
+                        liz.setPath(url)
+                        xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, liz)
+        except:
+                all_videos = regex_get_all(link, '"server-8"', '"clearfix"')
+                for a in all_videos:
+                        episode_id = regex_from_to(a, 'episode-id="', '"')
+                        key_gen = random_generator()
+                        coookie = hashlib.md5(episode_id + key).hexdigest() + '=%s' %key_gen
+                        cookie = '%s; %s' %(cookie,coookie)
+                        a= episode_id + key2
+                        b= key_gen
+                        hash_id = __uncensored(a, b)
+                        request_url2 =  baseurl + '/ajax/v2_get_sources/' + episode_id + '?hash=' + urllib.quote(hash_id).encode('utf8')
+                        headers = {'Accept-Encoding':'gzip, deflate, sdch', 'Cookie':cookie, 'Referer': referer,
+                                   'User-Agent':User_Agent,'x-requested-with':'XMLHttpRequest','Accept':'application/json, text/javascript, */*; q=0.01'}
+                        link = s.get(request_url2, headers=headers).text
+                        url = re.compile('"file":"(.*?)"').findall(link)[0]
+                        url = url.replace('&amp;','&').replace('\/','/')
+                        liz = xbmcgui.ListItem(name, iconImage='DefaultVideo.png', thumbnailImage=iconimage)
+                        liz.setInfo(type='Video', infoLabels={"Title": name})
+                        liz.setProperty("IsPlayable","true")
+                        liz.setPath(url)
+                        xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, liz)
         '''except:
                 url = re.compile('"file":"(.*?)"').findall(link)[0]
                 url = url.replace('&amp;','&').replace('\/','/')
@@ -255,26 +291,29 @@ def regex_get_all(text, start_with, end_with):
 	return r
 
 
-def uncensored(a,b):
-    addon.log(len(a))
-    addon.log(len(b))
-    n = -1
-    fuckme=[]
-    justshow=[]
-    while True:
-        
-        if n == len(a)-1:
-            break
-        n +=1
-       
-        addon.log(n)
-        d = int(''.join(str(ord(c)) for c in a[n]))
-      
-        e=int(''.join(str(ord(c)) for c in b[n]))
-        justshow.append(d+e)
-        fuckme.append(chr(d+e))
-    #print justshow    
-    return base64.b64encode(''.join(fuckme))
+def __jav( a):
+        b = str(a)
+        code = ord(b[0])
+        if 0xD800 <= code and code <= 0xDBFF:
+            c = code
+            if len(b) == 1:
+                return code
+            d = ord(b[1])
+            return ((c - 0xD800) * 0x400) + (d - 0xDC00) + 0x10000
+
+        if 0xDC00 <= code and code <= 0xDFFF:
+            return code
+        return code
+
+def __uncensored( a, b):
+        c = ''
+        i = 0
+        for i, d in enumerate(a):
+            e = b[i % len(b) - 1]
+            d = int(__jav(d) + __jav(e))
+            c += chr(d)
+
+        return base64.b64encode(c)
 
 
 
@@ -327,7 +366,7 @@ def addLink(name,url,mode,iconimage,fanart,description=''):
 def OPEN_URL(url):
 	headers = {}
 	headers['User-Agent'] = User_Agent
-	link = s.get(url, headers=headers).text
+	link = s.get(url, headers=headers, verify=False).text
 	link = link.encode('ascii', 'ignore')
 	return link
 
