@@ -95,7 +95,6 @@ def YEAR(url):
 def INDEX(url):
 	link = OPEN_URL(url)
 	link = link.encode('ascii', 'ignore').decode('ascii')
-	addon.log('#######################link = '+str(link))
 	all_videos = regex_get_all(link, 'class="ml-item">', '</h2></span>')
 	for a in all_videos:
 		name = regex_from_to(a, 'title="', '"').replace("&amp;","&").replace('&#39;',"'").replace('&quot;','"').replace('&#39;',"'")
@@ -131,6 +130,8 @@ def INDEX2(url):
 
 key = '87wwxtp3dqii'
 key2 = '7bcq9826avrbi6m49vd7shxkn985mhod'
+
+
 
 
 def EPIS(url):
@@ -192,8 +193,9 @@ def LINKS(url):
                         request_url2 =  baseurl + '/ajax/v2_get_sources/' + episode_id + '?hash=' + urllib.quote(hash_id).encode('utf8')
                         headers = {'Accept-Encoding':'gzip, deflate, sdch', 'Cookie':cookie, 'Referer': referer,
                                    'User-Agent':User_Agent,'x-requested-with':'XMLHttpRequest','Accept':'application/json, text/javascript, */*; q=0.01'}
-                        link = s.get(request_url2, headers=headers).text
-                        url = re.compile('"file":"(.*?)"').findall(link)[0]
+                        link2 = s.get(request_url2, headers=headers).json()
+                        url = max(link2['playlist'][0]['sources'], key=lambda lab: lab['label'])
+                        url = url['file']
                         url = url.replace('&amp;','&').replace('\/','/')
                         liz = xbmcgui.ListItem(name, iconImage='DefaultVideo.png', thumbnailImage=iconimage)
                         liz.setInfo(type='Video', infoLabels={"Title": name})
@@ -213,8 +215,10 @@ def LINKS(url):
                         request_url2 =  baseurl + '/ajax/v2_get_sources/' + episode_id + '?hash=' + urllib.quote(hash_id).encode('utf8')
                         headers = {'Accept-Encoding':'gzip, deflate, sdch', 'Cookie':cookie, 'Referer': referer,
                                    'User-Agent':User_Agent,'x-requested-with':'XMLHttpRequest','Accept':'application/json, text/javascript, */*; q=0.01'}
-                        link = s.get(request_url2, headers=headers).text
-                        url = re.compile('"file":"(.*?)"').findall(link)[0]
+
+                        link2 = s.get(request_url2, headers=headers).json()
+                        url = max(link2['playlist'][0]['sources'], key=lambda lab: lab['label'])
+                        url = url['file']
                         url = url.replace('&amp;','&').replace('\/','/')
                         liz = xbmcgui.ListItem(name, iconImage='DefaultVideo.png', thumbnailImage=iconimage)
                         liz.setInfo(type='Video', infoLabels={"Title": name})
@@ -236,8 +240,9 @@ def LINKS2(url,description):
         referer = split_head[0]
         coookie = split_head[1]
         headers = {'Referer': referer, 'Cookie': coookie, 'user-agent':User_Agent,'x-requested-with':'XMLHttpRequest'}
-        link = requests.get(url, headers=headers, allow_redirects=False).text
-        url = re.compile('"file":"(.*?)"').findall(link)[0]
+        link2 = s.get(request_url2, headers=headers).json()
+        url = max(link2['playlist'][0]['sources'], key=lambda lab: lab['label'])
+        url = url['file']
         url = url.replace('&amp;','&').replace('\/','/')
         liz = xbmcgui.ListItem(name, iconImage='DefaultVideo.png', thumbnailImage=iconimage)
         liz.setInfo(type='Video', infoLabels={"Title": name})
