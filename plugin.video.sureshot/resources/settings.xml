@@ -1,0 +1,41 @@
+<settings>
+	
+
+	<category label="Filters">
+	    
+	    
+	    <setting id="reminder" type="bool" label="Show a FILTER STATUS REMINDER" default="true"/>
+	    <setting type="sep"/>
+	    
+	    
+	    <setting label="IMDb Watchlist" type="lsep" />
+        <setting id="imdbwl" type="bool" label="Only in your IMDb Watchlist" default="false"/>
+        <setting id="imdbuser" type="text" label="IMDb user ID:" enable="eq(-1,true)" default="ur"/>
+		
+		<setting label="Genres" type="lsep" />
+		<setting id="enable_tags" type="bool" label="Use filters by genre" default="false" />	
+		<setting id="Action" type="bool" label="- Action" default="false" visible="eq(-1,true)"/>
+		<setting id="Adventure" type="bool" label="- Adventure" default="false" visible="eq(-2,true)"/>
+		<setting id="Animation" type="bool" label="- Animation" default="false" visible="eq(-3,true)"/>
+		<setting id="Biography" type="bool" label="- Biography" default="false" visible="eq(-4,true)"/>
+		<setting id="Comedy" type="bool" label="- Comedy" default="false" visible="eq(-5,true)"/>
+		<setting id="Crime" type="bool" label="- Crime" default="false" visible="eq(-6,true)"/>
+		<setting id="Documentary" type="bool" label="- Documentary" default="false" visible="eq(-7,true)"/>
+		<setting id="Drama" type="bool" label="- Drama" default="false" visible="eq(-8,true)"/>
+		<setting id="Family" type="bool" label="- Family" default="false" visible="eq(-9,true)"/>
+		<setting id="Fantasy" type="bool" label="- Fantasy" default="false" visible="eq(-10,true)"/>
+		<setting id="History" type="bool" label="- History" default="false" visible="eq(-11,true)"/>
+		<setting id="Horror" type="bool" label="- Horror" default="false" visible="eq(-12,true)"/>
+		<setting id="Musical" type="bool" label="- Musical" default="false" visible="eq(-13,true)"/>
+		<setting id="Mystery" type="bool" label="- Mystery" default="false" visible="eq(-14,true)"/>
+		<setting id="Romance" type="bool" label="- Romance" default="false" visible="eq(-15,true)"/>
+		<setting id="Sci-Fi" type="bool" label="- Sci-Fi" default="false" visible="eq(-16,true)"/>
+		<setting id="Sport" type="bool" label="- Sport" default="false" visible="eq(-17,true)"/>
+		<setting id="Thriller" type="bool" label="- Thriller" default="false" visible="eq(-18,true)"/>
+		<setting id="War" type="bool" label="- War" default="false" visible="eq(-19,true)"/>
+		<setting id="Western" type="bool" label="- Western" default="false" visible="eq(-20,true)"/>	
+	
+	</category>
+
+
+</settings>
