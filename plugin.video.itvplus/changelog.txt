@@ -1,4 +1,9 @@
-﻿Version_2.6.3 <10/11/2016>
+﻿Version_2.6.4 <14/12/2016>
+- Fix Youtube
+- Fix Phimmoi.net
+- Fix Kho Phim 7, Kho Phim 11
+
+Version_2.6.3 <10/11/2016>
 - Minor Fix
 
 Version_2.6.2 <09/11/2016>
