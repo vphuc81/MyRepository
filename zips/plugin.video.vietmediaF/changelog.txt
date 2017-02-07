@@ -1,4 +1,6 @@
-﻿Version 1.0.67:
+﻿Version 1.0.71:
+- 4share added, fix fshare;
+Version 1.0.67:
 - Fix bug;
 Version 1.0.62:
 - Add Haivn.com

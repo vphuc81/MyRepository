@@ -7,6 +7,9 @@
 		<setting label="Fshare" type="lsep"/>
 		<setting id="fshare_username" type="text" label="Tài khoản:" default=""/>
 		<setting id="fshare_password" type="text" option="hidden" label="Mật khẩu:" default=""/>
+		<setting label="4share" type="lsep"/>
+		<setting id="4share_username" type="text" label="Tài khoản:" default=""/>
+		<setting id="4share_password" type="text" option="hidden" label="Mật khẩu:" default=""/>
 		<setting label="Fptplay [COLOR dimgrey][I]Tài khoản dùng chung có nguy cơ bị block[/COLOR][/I]" type="lsep"/>
 		<setting id="fptplay_user" type="text" label="Tài khoản: [COLOR dimgrey][I]Số điện thoại[/COLOR][/I]" default=""/>
 		<setting id="fptplay_pass" type="text" option="hidden" label="Mật khẩu:" default=""/>
@@ -14,18 +17,25 @@
 		
 		
 	</category>
-	<category label="Khoá thư mục">
-		<setting id="lock_pin" type="text" option="hidden" label="Mã khoá" default="0000"/>
-	</category>
 	<category label="Cấu hình">
 		<setting id="on_off" type="bool" label="Autorun" default="false"/>
 		<setting id="view_mode" type="bool" label="Chọn chế độ Thumbnails" default="false"/>
+		<setting id="lock_pin" type="text" option="hidden" label="Mã khoá thư mục [COLOR dimgrey]Mặc định: 0000[/COLOR]" default="0000"/>
+		<setting id="download_path" type="folder" label="Download Path"  default="" option="writeable" />
 	</category>
+	
+	<category label="Quality">
+		<setting id="vtvvn" type="bool" label="Chất lượng VTVvn (cao/thấp)" default="true"/>
+		
+	</category>
+	
 	<category label="Mời Cafe tác giả">
-		<setting id="version" type="text" label="FB group: [COLOR red]Cộng đồng KODII Việt Nam[/COLOR] - Current version: [COLOR red]1.0.67[/COLOR]" default=""/>
+		<setting id="version" type="text" label="FB group: [COLOR red]Cộng đồng KODII Việt Nam[/COLOR] - Current version: [COLOR red]1.0.72[/COLOR]" enable="false" default=""/>
 		<setting id="donate_sms" type="bool" label="Soạn tin SMS [COLOR yellow]VMF[/COLOR] gửi [COLOR yellow]8798[/COLOR]" default="true"/>
-		<setting id="donate_bank" type="bool" label="Nguyễn Ngọc Đức, TK: 0011000469829, Ngân hàng Ngoại thương Việt Nam - SGD" default="true"/>
+		<setting id="donate_bank" type="bool" label="Nguyễn Ngọc Đức, TK: 0711000111888, Ngân hàng Ngoại thương Việt Nam - CN Thanh Xuân" default="true"/>
 		<setting id="donate_paypal" type="bool" label="Paypal: vietkodi@gmail.com" default="true"/>
 		<setting id="donate_the_cao" type="bool" label="Thẻ cào xin gửi email về: vietkodi@gmail.com" default="true"/>
+		<setting id="check" type="bool" visible="false" default="false"/>
+		<setting id="notif" type="text" visible="false" default="0"/>
 	</category>
 </settings>

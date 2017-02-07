@@ -5,18 +5,24 @@ import re
 import urlfetch
 import os
 from time import sleep
-from addon import notify, alert, ADDON
+from addon import alert, notify, ADDON, ADDON_ID, ADDON_PROFILE, LOG, PROFILE
 import simplejson as json
 import random
-import xbmc
+import xbmc,xbmcgui
 from config import VIETMEDIA_HOST
 import urllib
 import requests
-
+import time
 
 
 
 USER_VIP_CODE = ADDON.getSetting('user_vip_code')
+ADDON_NAME = ADDON.getAddonInfo("name")
+PROFILE_PATH = xbmc.translatePath(ADDON_PROFILE).decode("utf-8")
+HOME = xbmc.translatePath('special://home/')
+USERDATA = os.path.join(xbmc.translatePath('special://home/'), 'userdata')
+ADDONDATA = os.path.join(USERDATA, 'addon_data', ADDON_ID)
+DIALOG = xbmcgui.Dialog()
 
 def fetch_data(url, headers=None, data=None):
   	if headers is None:
@@ -32,8 +38,7 @@ def fetch_data(url, headers=None, data=None):
   			response = urlfetch.post(url, headers=headers, data=data)
   		else:
 			response = urlfetch.get(url, headers=headers)
-
-		return response
+           	return response
 
 	except Exception as e:
   		print e
@@ -46,6 +51,8 @@ def get(url):
 	if 'www.fshare.vn' in url:
 		return get_fshare(url)
 	if '//4share.vn' in url:
+		return get_4share(url)
+	if len(url)==16:
 		return get_4share(url)
 	if 'hdonline.vn' in url:
 		return get_hdonline(url)
@@ -85,8 +92,105 @@ def get(url):
 		return getHaivn(url)
 	if 'thongbao' in url:
 		return getThongbao(url)	
+	if 'checkupdate' in url:
+		return forceUpdate()
+	if 'xemphimbox.com' in url:
+		return getxemphimbox(url)
+	if 'hayhaytv.vn' in url:
+		return getHayhayTV(url)
+	if 'kphim.tv' in url:
+		return getKphim(url)
 	else:
 		return url
+
+def getKphim(url):
+	matches = re.search(r"\?vid=(\d+)\?sid=(\d+)", url)
+	vid = matches.group(1)
+	sid = matches.group(2)
+	token=urllib2.hashlib.md5(vid+'func'+sid).hexdigest()[1:]
+	getlink = 'http://kphim.tv/embed/'+vid+'/'+sid+'/'+token
+	response = urlfetch.get(getlink)
+	matches = re.search(r"file:\s'(.+?)'", response.body)
+	video_url = matches.group(1)
+	response = urlfetch.get(video_url)
+	rh = response.getheaders()
+	video_url = rh[5][1]
+	return video_url
+def getHayhayTV(url):
+	#check ip
+	response = urlfetch.get('http://ip.hayhaytv.vn/')
+	cookie = response.cookiestring;
+	matches = re.search(r"userip = '(.+?)'", response.body)
+	yourip = matches.group(1)
+	#id url
+	response = urlfetch.get(url)
+	regex = r"FILM_KEY = '(.+?)'"
+	matches = re.search(regex, response.body)
+	id_url = matches.group(1)
+	#get url
+	get_url = 'http://www.hayhaytv.vn/getsource/'+id_url+'__?ip='+yourip
+	headers = {
+			'User_Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0',
+			'Referer': url,
+			'Host'	: 'www.hayhaytv.vn',
+			'Cookie'			: cookie}
+	response = urlfetch.get(get_url, headers=headers)
+	if not response:
+		return 'thongbao2'
+	json_data = json.loads(response.body)
+	video_url = json_data["sources"][0]["file"]
+	if 'youtube.com' in video_url:
+		matches = re.search(r"v=(.+)", video_url)
+		id_youtube = matches.group(1)
+		video_url = "plugin://plugin.video.youtube/?path=/root/video&action=play_video&videoid=" + id_youtube 
+
+	phude = json_data["tracks"][0]["file"]
+	if len(phude) > 0:
+		return video_url+"[]"+phude
+	else:
+		return video_url
+		
+	xbmc.log(video_url)
+def getxemphimbox(url):
+	matches = re.search(r"-(\d+)", url)
+	idfilm = matches.group(1)
+
+	response = urlfetch.get(url)
+	cookie = response.cookiestring;
+	matches = re.search(r"filmInfo\.episodeID = parseInt\('(\d+)'\);", response.body)
+	idEP = matches.group(1)
+	host = 'xemphimbox.com'
+	headers = {
+			'User_Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0',
+			'Referer': url,
+			'Host'	: host,
+			'X-Requested-With'	: 'XMLHttpRequest',
+			'Cookie'			: cookie}
+	data = {
+			'NextEpisode':  1,
+			'EpisodeID'	: idEP,
+			'filmID'	: idfilm,
+			'playTech'	: 'auto'}
+
+	response = urlfetch.post('http://xemphimbox.com/ajax', headers=headers, data=data)
+	matches = re.search(r"src=\"(.+?)\"", response.body)
+	getlink = matches.group(1)
+	millis = int(round(time.time() * 1000))
+	getlink += '&_=' + str(millis)
+	host = 'grab.xemphimbox.com'
+	headers = {
+			'User_Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0',
+			'Referer': url,
+			'Host'	: host,
+			'X-Requested-With'	: 'XMLHttpRequest',
+			'Cookie'			: cookie}
+	response = urlfetch.get(getlink, headers=headers)
+	matches = re.search(r"jwConfigPlayer.playlist\[0\].sources =(.*?);", response.body)
+	jsonStr = json.loads(matches.group(1))
+	video_url = jsonStr[len(jsonStr)-1]['file']	
+	return video_url
+	
+		
 
 def getHaivn(url):
 	headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0',
@@ -207,23 +311,14 @@ def get_hdonline(url):
 		return video_url
 
 	xbmc.log(video_url)
-		
-def getClipvn(url):
-	response = urlfetch.fetch(url)
-	regex = r'file\":\"(http.*?m3u8)'
-	matches = re.search(regex, response.body)
-	video_url = matches.group(1)
-	video_url = video_url.replace('\/\/', '//')
-	video_url = video_url.replace('\/', '/')
-	return(video_url)
-	
+
 def getDzone(url):
 	
 	#Tim ID cua film
 	regex = r"http.*?/(\d+)"
 	matches = re.search(regex, url)
 	idurl = matches.group(1)
-	print (idurl)
+	
 	response = urlfetch.get(url)
 	cookie=response.cookiestring;
 
@@ -245,22 +340,32 @@ def getDzone(url):
 	return info
 
 def getVtv(url)	:
-	channelname1 = re.search(r"tuyen\/(.*?).htm", url).group(1)
 	response = urlfetch.get(url)
-	cookie=response.cookiestring;
-	channelid1 = re.search(re.compile(r"disableLiveTv.init\((\d+),"), response.body).group(1)
-
-	urlcheck = 'http://vtvapi.vcmedia.vn/handlers/checkdisablelivetv.ashx?channelId='+channelid1+'&channelName=' + channelname1
-	headers = {'Host': 'vtvapi.vcmedia.vn',  'Origin': 'http://vtv.vn', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0', 'Referer': url}
-	data = {'channelId': channelid1, 'channelName': channelname1}
-
-	response = urlfetch.get(urlcheck, headers=headers)
-	linkplay = re.search(r'src=\"(.*?)"', json.loads(response.body)['Content']).group(1)
+	matches = re.search(r"src=\"(.+play.+?)\"", response.body)
+	play_url = matches.group(1)
 	headers = {'Host': 'play.sohatv.vn', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0', 'Referer': url}
-	response = urlfetch.get(linkplay, headers=headers)
-	video_url = re.search(r"src=\"(.*?m3u8)", response.body).group(1)
-	result = 'http://'+re.search(r"live=(.*)", urllib.unquote_plus(video_url)).group(1)
-	return result
+	response = urlfetch.get(play_url, headers=headers)
+	matches = re.search(r"status-code=200 src=\"(.+?)\"", response.body)
+	url_play = matches.group(1)
+	matches = re.search(r"live=(.+?m3u8)", url_play)
+	m3u8 = matches.group(1)
+	m3u8 = 'http:'+urllib.unquote_plus(m3u8)
+	split_list = m3u8.split('/', 9)
+	remove = split_list[8]
+	vtvvn_option = ADDON.getSetting('vtvvn')
+	if 'vtv5-tay-nam-bo' not in url:
+		if vtvvn_option == 'false':
+			m3u8 = m3u8.replace(remove, 'dnR2MQ==_m.m3u8')
+		if vtvvn_option == 'true':
+			m3u8 = m3u8.replace(remove, 'dnR2MQ==.m3u8')
+	else:
+		if vtvvn_option == 'false':
+			m3u8 = m3u8.replace(remove, 'dnR2NWtt_m.m3u8')
+		if vtvvn_option == 'true':
+			m3u8 = m3u8.replace(remove, 'dnR2NWtt.m3u8')
+	return m3u8
+	xbmc.log(m3u8)
+
 	
 def getTvnet(url):
 	response = urlfetch.get(url)
@@ -577,27 +682,67 @@ def get_4share(url):
 	
 	username = ADDON.getSetting('4share_username')
 	password = ADDON.getSetting('4share_password')
+	url_login = 'https://4share.vn/default/index/login'
+	url_logout = 'https://4share.vn/default/index/logout'
+	if len(username) ==0 or len(password)==0:
+		alert(u'Bạn chưa nhập tài khoản 4share trong Addon-Setting'.encode("utf-8"))
+		return
+	#xác định url
+	if len(url)==16:
+		url = 'http://4share.vn/f/'+url+'/affiliate/1833176'
+	if 'f' not in url:
+		notify('Link sai. Kiểm tra lại')
+	if 'f' in url:	
+		matches = re.search(r"(affiliate.+)", url)
+		if matches:
+			remove = matches.group(1)
+			url = url.replace(remove, '/affiliate/1833176')
+		else:
+			regex = r"f\/(.+?)\/"
+			matches = re.search(regex, url)
+			id_url = matches.group(1)
+			url = 'http://4share.vn/f/'+id_url+'/affiliate/1833176'
+	xbmc.log('===========VMF 4share==============='+url)	
+	
+	data = {'username': username, 'password': password}
+	headers = {
+				'User_Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0',
+				'Referer': 'http://4share.vn/',
+				'Host'	: '4share.vn'
+				}
+	response = urlfetch.post(url_login, headers=headers, data=data)
+	cookie = response.cookiestring
+	headers = {
+			'User_Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0',
+			'Referer': 'http://4share.vn/',
+			'Host'	: '4share.vn',
+			'Cookie': cookie
+			}
+	#login
+	if response and response.status == 302:
+		notify ('Đăng nhập thành công')
+		response = urlfetch.get(url, headers=headers)
+	
+		matches = re.search(r"href='(http://sv.+?4share.vn.+)'", response.body)
+		direct_url = matches.group(1)
+		notify ('Đã getlink 4share VIP thành công.')
+	else:
+		notify ('Đăng nhập không thành công. Kiểm tra tài khoản.')
+		return
 
-	direct_url = ''
-	url_account = VIETMEDIA_HOST + '?action=fshare_account_linkvips'
-	response = fetch_data(url_account)
-	json_data = json.loads(response.body)
-	username = json_data['username']
-	password = json_data['password']
-
-	if len(username) > 0  and len(password) > 0:
-		direct_url = get_linkvips(url, username,password)
-		if len(direct_url) > 0:
-			notify(u'Lấy link 4share VIP thành công.'.encode("utf-8"))
-			return direct_url
-	if len(direct_url) == 0:
-		alert(u'Không lấy được link 4share.'.encode("utf-8"))
-	return direct_url
+	#logout
+	response = urlfetch.get(url_logout, headers=headers)
+	if response.status == 302:
+		notify ('Đăng xuất 4share thành công')
+	if len(direct_url) > 0:
+		notify ('Đã lấy link thành công')
+	else:
+		notify (u'Có sự cố khi lấy link. Xin vui lòng thử lại'.encode("utf-8"))
+	return direct_url;
+	
 def get_fshare(url):
-	login_url = 'https://www.fshare.vn/login'
-	logout_url = 'https://www.fshare.vn/logout'
-	download_url = 'https://www.fshare.vn/download/get'
-
+	url = url.replace('http://', 'https://')
+	#xbmc.log(url)
 	match = re.search(r"(https://)", url)
 	if not match:
 		url = 'https://'+url
@@ -608,22 +753,11 @@ def get_fshare(url):
 	password = ADDON.getSetting('fshare_password')
 	fshare_option = ADDON.getSetting('fshare_option')
 	
-	if len(username) == 0  or len(password) == 0:
-		try:
-			url_account = VIETMEDIA_HOST + '?action=fshare_account'
-			response = fetch_data(url_account)
-			json_data = json.loads(response.body)
-			username = json_data['username']
-			password = json_data['password']
-		except Exception as e:
-			pass
-
-	if fshare_option == "false":
-	
-		if len(username) == 0  or len(password) == 0:
-			alert(u'Bạn chưa nhập tài khoản fshare, hoặc cần phải có VIP code'.encode("utf-8"))
-			return
-
+	def getlink(url, username, password):
+		login_url = 'https://www.fshare.vn/login'
+		logout_url = 'https://www.fshare.vn/logout'
+		download_url = 'https://www.fshare.vn/download/get'
+		notify (u'VMF Getlink system'.encode("utf-8"))
 		response = fetch_data(login_url)
 		if not response:
 			return
@@ -668,11 +802,11 @@ def get_fshare(url):
 							'ajax'						: 'download-form',
 							'DownloadForm[linkcode]'	: file_id
 						}
-					
+
 					response=fetch_data(download_url, headers, data);
-					
+
 					json_data = json.loads(response.body)
-					
+
 					if json_data.get('url'):
 						direct_url = json_data['url']
 						break
@@ -682,7 +816,7 @@ def get_fshare(url):
 					direct_url = response.headers['location']
 					break
 				else:
-					notify (u'Lỗi khi lấy link, mã lỗi #%s. Đang thử lại...'.encode("utf-8") % response.status) 
+					notify (u'Lỗi khi lấy link, mã lỗi #%s. Đang thử lại...'.encode("utf-8") % response.status)
 
 			response = fetch_data(logout_url, headers)
 			if response.status == 302:
@@ -695,86 +829,37 @@ def get_fshare(url):
 			notify (u'Có sự cố khi lấy link. Xin vui lòng thử lại'.encode("utf-8"))
 
 		return direct_url
+	#+++++++++++++++++	
 	if fshare_option == "true":
 		if len(username) == 0  or len(password) == 0:
-			alert(u'Bạn chưa nhập tài khoản fshare, hoặc cần phải có VIP code.'.encode("utf-8"))
+			alert(u'Bạn chưa nhập [COLOR red]VMF[/COLOR] code hoặc tài khoản cá nhân Fshare'.encode("utf-8"), 'Soạn tin: [COLOR red]VMF[/COLOR] gửi [COLOR red]8798[/COLOR] để lấy VMF Code')
 			return
-
-		response = fetch_data(login_url)
-		if not response:
+		else:
+			return getlink(url, username, password)
+	
+	if fshare_option == "false":	
+		if len(USER_VIP_CODE) == 0:
+			alert(u'Bạn chưa nhập [COLOR red]VMF[/COLOR] code hoặc tài khoản cá nhân Fshare'.encode("utf-8"), 'Soạn tin: [COLOR red]VMF[/COLOR] gửi [COLOR red]8798[/COLOR] để lấy VMF Code')
 			return
-
-		csrf_pattern = '\svalue="(.+?)".*name="fs_csrf"'
-
-		csrf=re.search(csrf_pattern, response.body)
-		fs_csrf = csrf.group(1)
-
-		headers = { 
-					'User-Agent' 	: 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36 VietMedia/1.0',
-					'Cookie'		: response.cookiestring
-				}
+		if len(USER_VIP_CODE) > 0:
+			try:
+				url_account = VIETMEDIA_HOST + '?action=fshare_account'
+				response = fetch_data(url_account)
+				json_data = json.loads(response.body)
+				username = json_data['username']
+				password = json_data['password']
+				return getlink(url, username, password)
+			except Exception as e:
+				pass
+			
 		
-		data = {
-				"LoginForm[email]"		: username,
-				"LoginForm[password]"	: password,
-				"fs_csrf"				: fs_csrf
-			}
-
-		response = fetch_data(login_url, headers, data)
-		headers['Cookie'] = response.cookiestring
-		headers['Referer'] = url
-		direct_url = ''
-		attempt = 1
-		MAX_ATTEMPTS = 8
-		file_id = os.path.basename(url)
-		if response and response.status == 302:
-			notify (u'Đăng nhập fshare thành công'.encode("utf-8"))
-			while attempt < MAX_ATTEMPTS:
-				if attempt > 1: sleep(2)
-				notify (u'Lấy link lần thứ #%s'.encode("utf-8") % attempt)
-				attempt += 1
-
-				response = fetch_data(url, headers, data)
-
-				if response.status == 200:
-					csrf=re.search(csrf_pattern, response.body)
-					fs_csrf = csrf.group(1)
-					data = {
-							'fs_csrf'					: fs_csrf,
-							'ajax'						: 'download-form',
-							'DownloadForm[linkcode]'	: file_id
-						}
-					
-					response=fetch_data(download_url, headers, data);
-					
-					json_data = json.loads(response.body)
-					
-					if json_data.get('url'):
-						direct_url = json_data['url']
-						break
-					elif json_data.get('msg'):
-						notify(json_data['msg'].encode("utf-8"))
-				elif response.status == 302:
-					direct_url = response.headers['location']
-					break
-				else:
-					notify (u'Lỗi khi lấy link, mã lỗi #%s. Đang thử lại...'.encode("utf-8") % response.status) 
-
-			response = fetch_data(logout_url, headers)
-			if response.status == 302:
-				notify (u'Đăng xuất fshare thành công'.encode("utf-8"))
-		else:
-			notify (u'Đăng nhập không thành công, kiểm tra lại tài khoản'.encode("utf-8"))
-		if len(direct_url) > 0:
-			notify (u'Đã lấy được link'.encode("utf-8"))
-		else:
-			notify (u'Không được link, bạn vui lòng kiểm tra lại tài khoản'.encode("utf-8"))
-		return direct_url
+def forceUpdate():
+	xbmc.executebuiltin('UpdateAddonRepos()')
+	xbmc.executebuiltin('UpdateLocalAddons()')
+	DIALOG = xbmcgui.Dialog()
+	notify('Kiểm tra cập nhật.')
+	if DIALOG.yesno(ADDON_NAME, "Đi đến mục kiểm tra update hay không?", yeslabel="Go to Page", nolabel="No Thanks"):
+		xbmc.executebuiltin('ActivateWindow(10040,"addons://outdated/",return)')
+	return 'checkupdate'
 def getThongbao(url):
-	CURRENT_VERSION = ADDON.getSetting('version')
-	if 'thongbao1' in url:
-		alert (u'Bạn đang sử dụng phiên bản: '.encode("utf-8")+CURRENT_VERSION)
-		return
-	if 'thongbao2' in url:
-		alert (u'Nguồn phát thay đổi. Thông báo cho admin để xử lý.'.encode("utf-8"))
-		return		
+	return url
