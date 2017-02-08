@@ -1,0 +1,9 @@
+1.0.2 (02.08.2017) lh@hme
+	Updated Links and Fixed Bugs.
+1.0.2 (02.07.2017) lh@hme
+	added Streamer to work both Kodi 16.0 and 17.0
+	Revise stream selection Low/Mid/High (720p)
+1.0.1 (02.02.2017) lh@hme
+	added ProxyMode settings for IPTV Simple Client.
+1.0.0 (01.31.2017) lh@hme
+	Initial Release for Kodi 17.0 or later version.

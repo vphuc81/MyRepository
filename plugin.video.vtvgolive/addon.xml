@@ -1,0 +1,21 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<addon id="plugin.video.vtvgolive" version="1.0.3" name="*VTVGoLive" provider-name="LongHong">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.simplejson" />
+        <import addon="script.module.six" />
+        <import addon="script.module.requests" />
+        <import addon="script.module.livestreamer" />
+        <import addon="script.module.pydevd" version="4.4.0" optional="true"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+	<extension point="xbmc.service" library="resources/lib/proxy_server.py" start="startup" />
+    <extension point="xbmc.addon.metadata">
+        <summary>various (Vietnamese) Live TV channels. Last updated by lh@hme 02.08.2017.</summary>
+        <description>VTVGoLive Entertainment for Kodi add-ons and PVR IPTV Simple Client</description>
+        <platform>all</platform>
+    </extension>
+</addon>
+
