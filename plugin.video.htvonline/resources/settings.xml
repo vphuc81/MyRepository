@@ -1,4 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
-	<setting id="HQ" type="bool" label="Auto choose best quality (recommended for high speed internet)" default="true"/>
-	<setting id="thumbview" type="bool" label="Auto use thumbnail view (Xeebo Skin only)" default="true"/>
+  <!-- General -->
+  <category label="Proxy Server">
+    	<setting id="download_path" type="folder" label="Download Path (export m3u)" default="" />
+    	<setting label="IP Address (Proxy)" type="ipaddress" id="ipaddress" default="127.0.0.1" enable="false"/>
+    	<setting label="Port number (Proxy)" type="number" id="portNumber" default="19096" visible="true" enable="false"/>
+		<setting label="Chunk buffer Min 200KB - Max 6400KB" id="chunk_buffer" type="enum"  values="200KB|300KB|400KB|500KB|600KB|700KB|800KB|900KB|100KB" default="3" enable="true"/>
+		<setting label="Show debug messages" id="dislay_message" type="bool" default="false"/>
+		<setting label="Proxy Enabled" id="isProxyMode" type="bool" default="false"/>
+		<setting label="VTVGoLive Livestreamer" id="isVTVGoStreamer" type="bool" default="true"/>	
+		<setting label="TVNet Livestreamer" id="isTVNetStreamer" type="bool" default="true"/>
+		<setting label="Auto play (Best Quality Resolution)" id="autoPlay" type="bool" default="true"/>
+		<setting label="Stream Selection" id="stream_sel" type="enum"  values="Low|Mid|High" default="2" enable="true"/>
+  </category>
 </settings>
