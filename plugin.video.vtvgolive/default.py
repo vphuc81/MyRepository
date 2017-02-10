@@ -33,6 +33,12 @@ m3u_file = "vtvlist_all.m3u"
 addondir    = xbmc.translatePath( my_addon.getAddonInfo('profile') ) 
 vtvgovnlivelist = addondir + "vtvgovnlivelist.txt"
 vtvnetvnlivelist = addondir + "vtvnetvnlivelist.txt"
+decripter_url = addondir + "decripter_url.txt"
+
+if download_path == "":
+	vtvm3u_all = os.path.join(addondir,m3u_file)
+else:
+	vtvm3u_all = os.path.join(download_path, m3u_file)
 
 vtc_chid = ["vtv1","vtv2","vtv3","vtv4","ttxvn","htv9","vtc1","vtc10","vtc16","hn1"]
 logo_id = ["vtv1_vn", "vtv2_vn","vtv3_vn","vtv4_vn", "ttx_vn", "htv_9", "vtc_1", "vtc_10", "vtc_16_vn", "hanoi_tv1"]	
@@ -43,27 +49,32 @@ m3uHdr_vtvgo = '#EXTINF:-1 group-title="VTVGoVN Live",  tvg-id="" tvg-name="" tv
 m3uHdr_tvnet = '#EXTINF:-1 group-title="Top VTV VTC Live",  tvg-id="" tvg-name="" tvg-logo='
 ProxyMode = str(my_addon.getSetting(id='isProxyMode'))
 
-try: # intial/refresh
-	global vtvm3u_all
-	import uuid
-	macAdr = ':'.join(re.findall('..', '%012x' % uuid.getnode()))
-	lanIpAdr = str(xbmc.getIPAddress())
-	ProxyMode = str(my_addon.getSetting(id='isProxyMode'))
-	if download_path == "":
-		vtvm3u_all = os.path.join(addondir,m3u_file)
-	else:
-		vtvm3u_all = os.path.join(download_path, m3u_file)
-	mydebug = str(my_addon.getSetting(id='debug_message'))
-except: pass
-
-#check Version
-try:
-	import platform
-	osType = platform.system()
-	osVer = platform.release()
-	KodiVer = xbmc.getInfoLabel( "System.BuildVersion" )[:2]
-	infoDialog("OS: " + str(osType) + " " + str(osVer) + "\nKodi " + str(KodiVer), "Check Version")	
+maxCacheSize = int(my_addon.getSetting(id='maxCacheSize'))
+if maxCacheSize == 0: CacheSize = 12000
+elif maxCacheSize == 1: CacheSize = 32000
+else: CacheSize = 64000	
 	
+def isMaxSize(file):
+	try:				
+		if os.path.isfile(file):
+			file_size = os.stat(file).st_size		
+			value = file_size > CacheSize
+			if value: return True
+			else: return False
+	except: return False
+ 
+def clearCache(): # keep the files as low as maxCacheSize.
+	try:
+		if isMaxSize(vtvgovnlivelist): deleteContent(vtvgovnlivelist)
+		if isMaxSize(vtvnetvnlivelist): deleteContent(vtvnetvnlivelist)
+		if isMaxSize(decripter_url): deleteContent(decripter_url)
+		if isMaxSize(decripter_url): infoDialog("selfClearCache", "checked and cleared VtvGo-Cache")
+	except: pass
+
+try: # intial/refresh
+	ProxyMode = str(my_addon.getSetting(id='isProxyMode'))
+	mydebug = str(my_addon.getSetting(id='debug_message'))
+	clearCache()
 except: pass
 
 def vtvnet_livelist(m3uList=False,chid=vtc_chid):
@@ -72,6 +83,7 @@ def vtvnet_livelist(m3uList=False,chid=vtc_chid):
 	if ProxyMode == "false": vntvnet_pxy = ""
 	else: vntvnet_pxy = base64.b64decode("aHR0cDovLzEyNy4wLjAuMToxOTA5Ni92bnR2bmV0cHJveHkv")
 	if not m3uList:
+		deleteContent(vtvnetvnlivelist)
 		for idx in range(0, len(chid)):
 			name = chid[idx]
 			image = logo_id[idx]
@@ -119,21 +131,16 @@ def vtvm3uList_all(list=vtvm3u_all, chid=vtc_chid):
 	writeappend_file(list, "#EXTM3U \n")
 	for name, url, thumb in myvtvgo.liveList():
 		index += 1
-		#xbmc.sleep(350)
 		infoDialog("process index " + "vtvgo: " + str(index), "vtvgo m3uList. Please wait..")
-		#xbmc.sleep(350)
 		writeappend_file(list, m3uHdr_vtvgo +'"'+ thumb +'",' + name.replace(",", " -"))
 		writeappend_file(list, url_vtvgovn + url + "\n")# url link
-		#xbmc.sleep(350)
 	for idx in range(0, len(chid)):
 		infoDialog("process index "  + "vtvnet: " + str(idx), "vtvnet m3uList. Please wait..")
-		#xbmc.sleep(350)
 		name = chid[idx]			
 		image = logo_id[idx]
 		thumb = vnLogoHost + image + ".jpg"
 		writeappend_file(list, m3uHdr_vtvgo +'"'+ thumb +'",' + name.upper() + " HD")
 		writeappend_file(list, vntvnet_pxy + chid[idx])	
-		#xbmc.sleep(350)
 	infoDialog("Done m3u list for IPTV Simple Client", "vtvm3uList_all")
 	time.sleep(3)
 	ShowMessage("M3U list for PVR IPTV Simple Client", "Creating M3U file in: \n" + str(list))

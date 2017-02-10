@@ -37,7 +37,6 @@ class Paths:
     
     xbmcFavouritesFile = xbmc.translatePath( 'special://profile/favourites.xml' )
 
-
 #############################################################################
 addon=xbmcaddon.Addon(); 
 addon_id   =addon.getAddonInfo('id'); 
@@ -47,8 +46,82 @@ addon_path8=addon.getAddonInfo('path').decode("utf-8");
 addonIcon  =addon.getAddonInfo('icon'); 
 addonFanart=addon.getAddonInfo('fanart'); 
 addon_profile=addon.getAddonInfo('profile'); 
-#MediaPath  =xbmc.translatePath( os.path.join(addon_path8,'resources','skins','default','media').encode("utf-8") ).decode("utf-8"); 
 MediaPath  =xbmc.translatePath( os.path.join(addon_path,'resources','skins','default','media') ); 
+
+### - Network Info +++++++++++++++++++++++++++++++++
+
+def getMacAddr():
+	import uuid
+	try:
+		macAdr = ':'.join(re.findall('..', '%012x' % uuid.getnode()))
+		return macAdr
+	except: return ""
+	
+def getLanIP():
+	import xbmc
+	try:
+		lanIpAdr = xbmc.getIPAddress()
+		return lanIpAdr
+	except: return ""
+	
+def getExtIP():
+	try:
+		external_ip = urllib2.urlopen('http://ident.me').read().decode('utf8')
+		return external_ip
+	except: return ""
+	
+def ShowNetworkInfo():
+	network_Info = []
+	try:
+		mac = getMacAddr()
+		ip = getLanIP()
+		extip = getExtIP()
+		network_Info.append({"mac":mac, "ip":ip, "extip":str(extip)})
+		return network_Info
+	except: pass
+	
+def check_version():
+	import platform
+	version = []
+	try:		
+		osType = platform.system()
+		osVer = platform.release()
+		KodiVer = xbmc.getInfoLabel( "System.BuildVersion" )[:2]
+		version.append({"osType":str(osType), "osVer":str(osVer), "KodiVer":str(KodiVer)})
+		#infoDialog("OS: " + str(osType) + " " + str(osVer) + "\nKodi " + str(KodiVer), "Check Version")		
+	except: pass
+	return version
+	
+def extractFilename(file):
+	try:
+		if os.path.isfile(file):
+			return os.path.basename(file)
+		else: return ""
+	except: pass
+	
+def extractDirname(file):
+	try:
+		if os.path.isfile(file):
+			return os.path.dirname(file)
+		else: return ""
+	except: pass
+	
+def geturlpath(url):
+	ourl = urlparse(url)
+	return str(ourl.path)
+
+def geturlip(url):
+	ourl = urlparse(url)
+	return str(ourl.scheme) + "://" + str(ourl.netloc)
+
+def urlJson_req(purl, noData=""):
+	try:
+		req = urllib2.urlopen(purl)
+		return json.load(req)
+	except: return noData
+	
+### - Network Info +++++++++++++++++++++++++++++++++	
+
 def tP(p): return xbmc.translatePath(p)
 addonPath=addon_path; addonId=addon_id; addonName=addon_name; addonUserDataPath=addon_profile; addonUserDataPathTP=tP(addon_profile); 
 #icon = Addon.getAddonInfo('icon')
