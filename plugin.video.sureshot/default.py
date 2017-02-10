@@ -84,7 +84,7 @@ def get_watchlist(user):
 
 def wl_filter():
 
-    if Config.getSetting("imdbwl") == 'true' and Config.getSetting("imdbuser") != 'ur':
+    if Config.getSetting("imdbwl") == 'true':
         imdbuser = Config.getSetting("imdbuser")
         watchlist = get_watchlist(imdbuser)
     else:
