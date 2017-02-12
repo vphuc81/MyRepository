@@ -1,4 +1,3 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
-	<setting id="HQ" type="bool" label="Auto choose best quality (recommended for high speed internet)" default="false"/>
-	<setting id="thumbview" type="bool" label="Auto use thumbnail view (Xeebo Skin only)" default="false"/>
 </settings>

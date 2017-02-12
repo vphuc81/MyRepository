@@ -4,13 +4,17 @@
 import xbmc, xbmcaddon, xbmcgui
 import os, re, requests, urllib, urllib2, uuid
 from xbmcswift2 import Plugin
-import base64
-userAgent = base64.b64decode("fFVzZXItQWdlbnQ9TW96aWxsYS81LjAgQXBwbGVXZWJLaXQvNTM3LjM2")
+
+from common import ShowMessage, infoDialog, Paths, writeappend_file, SaveList
+
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-addonID = "plugin://plugin.video.v.phimlt"
+myDebugPath = Paths.pluginDataDir
+streamer_buf = myDebugPath + "streamer_buf.txt"
+
+addonID = "plugin://plugin.video.v137.phimlt"
 plugin  = Plugin()
 listMax = 28
 
@@ -168,12 +172,13 @@ def Episodes(eps_list):
 def Play(url):
 	dialogWait = xbmcgui.DialogProgress()
 	dialogWait.create('phimlt.com', 'Loading video. Please wait...')
+	writeappend_file(streamer_buf, "play url: \n" + str(url))
 	plugin.set_resolved_url(LoadVideos(url))
 	dialogWait.close()
 	del dialogWait
 
 def LoadVideos(url):
-	vidcontent = GetUrl(url)	
+	vidcontent = GetUrl(url)
 	if "youtube" in vidcontent :
 		match = re.compile('(youtu\.be\/|youtube-nocookie\.com\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v|user)\/))([^\?&"\'>]+)').findall(vidcontent)
 		ytlink = match[0][len(match[0])- 1].replace('v/', '')
@@ -193,14 +198,12 @@ def LoadVideos(url):
 			if i > 0:
 				vidcontent = GetUrl(links[i])
 			frame = re.compile('<iframe id="iplayer" class="smallVid" frameborder="0" allowtransparency="true" scrolling="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" src="(.+?)">').findall(vidcontent)[0]
-			source = geturlWeb("https", GetUrl(frame).encode('utf-8'))
-			if len(source) > 1: source = source[1][0]
-			if "googlevideo.com" in source: return source
+			source = GetVideo(GetUrl(frame))
+			if source is not '':
+				break
+	writeappend_file(streamer_buf, "LoadVideos url: \n" + str(source))
 	return source
-	
-def geturlWeb(keyword,source):
-	return re.findall('"(({0})s?://.*?)"'.format(keyword), source)
-	
+
 def GetVideo(frame):
 	if ('<source src="http://' in frame) or ('<source src="https://' in frame) :
 		if '1440p' in frame: #Downgrade from 1440p to 1080p for proper playback in 1K boxes
@@ -212,7 +215,8 @@ def GetVideo(frame):
 	elif '<source src="/' in frame :
 		vid = 'http://phimlt.com' + re.compile('<source src="(.+?)"[^>]*/>').findall(frame)[0]
 	else:
-		vid = ''	
+		vid = ''
+	writeappend_file(streamer_buf, "GetVideo frame: \n" + str(vid))	
 	return vid
 
 def sortedItems(url, page, route_name):

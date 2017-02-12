@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-	<addon id="plugin.video.v.phimlt"  version="1.7.1" name="PhimLT.com" provider-name="V137">
+	<addon id="plugin.video.v.phimlt"  version="2.6" name="PhimLT.com" provider-name="V137">
 		<requires>
 			<import addon="xbmc.python" version="2.1.0" />
-			<import addon="script.module.xbmcswift2" version="1.3.1" />
-			<import addon="plugin.video.youtube" version="4.4.1" />
 			<import addon="script.module.requests" version="2.6.0"/>
+			<import addon="script.module.urlresolver" version="1.0.0" />
+			<import addon="script.module.xbmcswift2" version="1.3.1" />
 		</requires>
-		<extension library="default.py" point="xbmc.python.pluginsource"/>
+		<extension library="default.py" point="xbmc.python.pluginsource">
+			<provides>video</provides>
+		</extension>
 		<extension point="xbmc.addon.metadata">
 			<summary>PhimLT.com</summary>
-			<description>PhimLT.com (Vietnamese)</description>
+			<description>PhimLT.com (Vietnamese) last updated 02/11/2017 - LH@hme</description>
 			<platform>all</platform>
 		</extension>
 	</addon>
