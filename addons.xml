@@ -20,13 +20,11 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.accessasiatv" name="*[COLOR yellow]Accessasia-TV[/COLOR]" version="1.4" provider-name="Vinh Computer Repair">
+<addon id="plugin.video.accessasiatv" name="*[COLOR yellow]Accessasia-TV[/COLOR]" version="1.5" provider-name="Vinh Computer Repair">
 <requires>
 	<import addon="xbmc.python" version="2.1.0"/>
 </requires>
-<extension point="xbmc.python.pluginsource" library="default.py">
-	<provides>video</provides>
-</extension>
+<extension point="xbmc.python.pluginsource" library="default.py"/>
   <extension point="xbmc.addon.metadata">
     <summary>Danasyentertainment.com</summary>
     <description>Watch a top selection of 10 Vietnamese TV channels at Accessasia.tv</description>
@@ -1084,18 +1082,20 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon
   id="plugin.video.xomgiaitri"
-  version="1.7.5"
+  version="1.8.40"
   name="*[COLOR yellow]XomGiaiTri.com[/COLOR]"
-  provider-name="Vinh Modded from Thong">
+  provider-name="thongld">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.requests" version="1" />
     <import addon="script.module.urlresolver" version="0.0.1"/>
   </requires>
-  <extension point="xbmc.python.module" library="default.py" />
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>xomiaitri.com</summary>
-    <description>Watch free xomiaitri.com (Vietnamese) Videos</description>
+    <summary>xomgiaitri.com</summary>
+    <description>Watch free xomiaitri.com (Vietnamese) Videos - Last updated 02.12.2017 (LH@hme)</description>
     <platform>all</platform>
   </extension>
 </addon>

@@ -7,37 +7,11 @@ Oo0Ooo = xbmcaddon . Addon ( OO0o )
 O0O0OO0O0O0 = int ( sys . argv [ 1 ] )
 if 5 - 5: iiI / ii1I
 def ooO0OO000o ( ) :
- ii11i = ""
- oOooOoO0Oo0O = ( "Busy" , "Bận" , "Band" , "Beschäftigt" , "Bezig" , "忙" , "忙碌" )
- # while True :
-#  sys = urllib . quote ( xbmc . getInfoLabel ( "System.KernelVersion" ) . strip ( ) )
- # if not any ( b in sys for b in oOooOoO0Oo0O ) : break
- #while True :
-  #iI1 = urllib . quote ( xbmc . getInfoLabel ( "System.FriendlyName" ) . strip ( ) )
-  #if not any ( b in iI1 for b in oOooOoO0Oo0O ) : break
- #try :
-  #ii11i = open ( '/sys/class/net/eth0/address' ) . read ( ) . strip ( )
- #except :
-  #while True :
-   #ii11i = xbmc . getInfoLabel ( "Network.MacAddress" ) . strip ( )
-   #if re . match ( "[0-9a-f]{2}([-:])[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$" , ii11i . lower ( ) ) : break
- #i1I11i = urllib2 . urlopen ( "http://www.viettv24.com/main/checkActivation.php?MacID=%s&app_id=%s&sys=%s&dev=%s" % ( ii11i , "16" , sys , iI1 ) ) . read ( )
- if True :
-  OoOoOO00 ( 'Search' , 'http://www.mythugian.net/xem/search/%s/1.html' , 'search' , 'http://i.imgur.com/uRDBdIl.jpg' )
-  OoOoOO00 ( 'Phim Lẻ' , 'http://www.mythugian.net/xem/the-loai/phim-dien-anh' , 'index' , 'http://i.imgur.com/TD9aIs0.jpg' )
-  OoOoOO00 ( 'Phim Bộ' , 'http://www.mythugian.net/xem/the-loai/phim-bo' , 'index' , 'http://i.imgur.com/nEqTWDN.jpg' )
-  OoOoOO00 ( 'Phim Bộ theo Quốc Gia' , 'http://www.mythugian.net/' , 'videosbyregion' , 'http://i.imgur.com/Kh1CL2Y.jpg' )
-  OoOoOO00 ( 'Phim Lẻ theo Thể Loại' , 'http://www.mythugian.net/' , 'videosbycategory' , 'http://i.imgur.com/IYDKhR8.jpg' )
- else :
-  I11i = xbmcgui . Dialog ( )
-  I11i . ok ( "Chú ý" , i1I11i )
-  if 64 - 64: OOooo000oo0 . i1 * ii1IiI1i % IIIiiIIii
-  #I11iIi1I = xbmc . translatePath ( os . path . join ( I11iIi1I , "temp.jpg" ) )
- #urllib . urlretrieve ( 'http://drive.google.com/uc?export=jpg&id=0B-ygKtjD8Sc-OUxwbVR5ZzZsbFJFT3A5aS04YlJkdDJtQ3BF' , I11iIi1I )
- #IiiIII111iI = xbmcgui . ControlImage ( 0 , 0 , 1280 , 720 , I11iIi1I )
- #IiII = xbmcgui . WindowDialog ( )
- #IiII . addControl ( IiiIII111iI )
- #IiII . doModal ( )
+ OoOoOO00 ( 'Search' , 'http://www.mythugian.net/xem/search/%s/1.html' , 'search' , 'http://www.viettv24.com/addonicons/Search.jpg' )
+ OoOoOO00 ( 'Phim Lẻ' , 'http://www.mythugian.net/xem/the-loai/phim-dien-anh' , 'index' , 'http://www.viettv24.com/addonicons/Movies.jpg' )
+ OoOoOO00 ( 'Phim Bộ' , 'http://www.mythugian.net/xem/the-loai/phim-bo' , 'index' , 'http://www.viettv24.com/addonicons/Series.jpg' )
+ OoOoOO00 ( 'Phim Bộ theo Quốc Gia' , 'http://www.mythugian.net/' , 'videosbyregion' , 'http://www.viettv24.com/addonicons/Regions.jpg' )
+ OoOoOO00 ( 'Phim Lẻ theo Thể Loại' , 'http://www.mythugian.net/' , 'videosbycategory' , 'http://www.viettv24.com/addonicons/Categories.jpg' )
  if 28 - 28: Ii11111i * iiI1i1
 def i1I1ii1II1iII ( ) :
  OoOoOO00 ( "Hồng Kong" , "http://www.mythugian.net/xem/category/1/phim-bo-hong-kong.html" , "index" , "" )
@@ -123,7 +97,9 @@ def oOoOooOo0o0 ( url , name ) :
  if ( "proxy.link" in i1oOOoo00O0O ) :
   OOO00 = re . compile ( "'proxy.link', '(.+?)'" ) . findall ( i1oOOoo00O0O )
   i1oOOoo00O0O = i1111 ( OOO00 [ 0 ] )
- OOO00 = re . compile ( '<source src="(.+?)" type="video/mp4">' ) . findall ( i1oOOoo00O0O )
+ i1oOOoo00O0O = i1oOOoo00O0O.replace("\/", "/")
+ OOO00 = re.findall('"(({0})s?://.*?)"'.format('https'), i1oOOoo00O0O)
+ if len(OOO00) > 0: OOO00 = OOO00[0][0]
  if ( len ( OOO00 ) == 0 ) :
   iiiiiIIii = None
   if "app.box.com" in i1oOOoo00O0O :
@@ -143,9 +119,7 @@ def oOoOooOo0o0 ( url , name ) :
     pass
   OOOO . setPath ( iiiiiIIii )
  else :
-  if "http://" not in OOO00 [ 0 ] :
-   OOO00 [ 0 ] = "http://www.mythugian.net/xem/" + OOO00 [ 0 ]
-  OOOO . setPath ( OOO00 [ 0 ] )
+  OOOO . setPath ( OOO00 )
  OOOO . setProperty ( "IsPlayable" , "true" )
  xbmcplugin . setResolvedUrl ( int ( sys . argv [ 1 ] ) , True , OOOO )
  xbmcplugin . setResolvedUrl ( int ( sys . argv [ 1 ] ) , True , OOOO )
