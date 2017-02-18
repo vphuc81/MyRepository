@@ -115,7 +115,7 @@ def TVChannel(url):
             if ("tosportsdevil" in link) or ("tovdubt" in link):                   
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]
             if ("redirecttomovieshd" in link) or ("toyeuphim" in link) or ("redirecttonetmovie" in link) or \
-               ("redirectto1channel" in link) or ("redirecttokenh108" in link) or ("redirecttokenh88" in link) or \
+               ("redirectto1channel" in link) or ("redirecttokenh108" in link) or ("redirecttokenh88" in link) or ("redirecttokenh88vod" in link) or \
                ("redirecttomoviebox" in link) or ("redirecttophimvang" in link) or ("redirecttoxomgiaitri" in link) or \
                ("redirecttoxixam" in link) or ("redirecttovkool" in link) or ("tomovienight" in link) or ("toyify" in link) or \
                ("tomovieshd2" in link) or ("tocartoons8" in link) or ("tokiddiecartoons" in link) or ("tonavix" in link) or \
@@ -405,6 +405,10 @@ def add_Link(name,url,iconimage):
         return ok
     if 'redirecttokenh88' in url:
         u = 'plugin://plugin.video.kenh88'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'redirecttokenh88vod' in url:
+        u = 'plugin://plugin.video.vod.kenh88'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'redirecttomoviebox' in url:
