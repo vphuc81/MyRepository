@@ -407,7 +407,7 @@ def add_Link(name,url,iconimage):
         u = 'plugin://plugin.video.kenh88'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
-    if 'redirecttokenh88vod' in url:
+    if 'tovodkenh88' in url:
         u = 'plugin://plugin.video.vod.kenh88'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
