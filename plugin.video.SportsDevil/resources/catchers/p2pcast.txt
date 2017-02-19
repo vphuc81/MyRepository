@@ -9,12 +9,12 @@ item_info_build=%s
 
 item_info_name=tokUrl
 item_info_from=@PARAM1@
-item_info_build=http://bro.adca.st/access.php
+item_info_build=http://bro.adca.st/ckcskr.php
 
 item_info_name=tok
 item_info_from=tokUrl
 #item_info_convert=getXML('%s','.*\w+["']\s*:\s*["']([^"']+).*','@pageUrl@')
-item_info_build=a7rDZAEIS59KgJ5IAWiyHw
+item_info_build=J2L6HhXMgU4cNVuV4e1ZxA
 
 item_info_name=file.tmp
 item_info_from=pageUrl

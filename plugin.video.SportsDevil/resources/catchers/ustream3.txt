@@ -38,7 +38,7 @@ item_info_build=%s
 
 item_info_name=tmp
 item_info_from=tmpUrl
-item_info_convert=getInfo('%s','.*?SWFObject\('([^']+)'.*?["']\d*([12]\d{4}).*?(MT[^'"]+)','@REFERER@','swf|file|t')
+item_info_convert=getInfo('%s','.*?SWFObject\('([^']+)'.*?["'=]([12]\d{4}).*?(MT[^'"&]+)','@REFERER@','swf|file|t')
 item_info_build=%s
 
 item_info_name=rtmp

@@ -24,8 +24,17 @@ item_info_convert=replace('%s','%22%2C%22','')
 item_info_convert=unquote(%s)
 item_info_build=%s
 
-item_info_name=tmpUrl
+item_info_name=tmpUrl1
 item_info_from=http://www.shidurlive.com/stream/'+p1+'/'+p2+'
+item_info_build=%s
+
+item_info_name=p3
+item_info_from=tmpUrl1
+item_info_convert=getInfo('%s','.*(/d/\w+)','@REFERER@')
+item_info_build=%s
+
+item_info_name=tmpUrl
+item_info_from=http://www.shidurlive.com/streamss/'+p1+'/'+p2+'+p3
 item_info_build=%s
 
 item_info_name=tmp

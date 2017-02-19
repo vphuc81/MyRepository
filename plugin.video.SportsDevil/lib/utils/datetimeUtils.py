@@ -16,7 +16,8 @@ from dateutil.tz import tzlocal
 try:
     local_tzinfo = tzlocal()
     locale_timezone = json.loads(xbmc.executeJSONRPC('{"jsonrpc": "2.0", "method": "Settings.GetSettingValue", "params": {"setting": "locale.timezone"}, "id": 1}'))
-    local_tzinfo = gettz(locale_timezone['result']['value'])
+    if locale_timezone['result']['value']:
+        local_tzinfo = gettz(locale_timezone['result']['value'])
 except:
     pass
 
