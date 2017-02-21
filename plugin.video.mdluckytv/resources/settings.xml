@@ -22,12 +22,24 @@
 	</category>
 	
 	<category label="User Login Details">
-		<setting id="email" type="text" label="Email" default=""/>
+		<setting id="base_url" type="text" label="BaseUrl" default="http://lucktv.net" visible="true"/>
+		<setting id="email" type="text" label="Username or Email" default=""/>
 		<setting id="pass" type="text" label="Password" default=""/>
 	</category>
 	
 	<category label="Metadata">
 		<setting id="enable_meta" type="bool" label="Enable Metadata" default="true"/>
+		<setting id="tv_show_meta" type="bool" label="Enable TV-Show Meta" default="true" enable="!eq(-1,false)"/>
+		<setting id="episode_meta" type="bool" label="Enable Episode Meta" default="true" enable="!eq(-2,false)"/>
+	</category>
+	
+	<category label="Enable Sections">
+		<setting id="enable_favs" type="bool" label="Enable My Favourites" default="true"/>
+		<setting id="enable_shows" type="bool" label="Enable TV-Shows" default="true"/>
+		<setting id="enable_movies" type="bool" label="Enable Movies" default="true"/>
+		<setting id="add_set" type="bool" label="Enable Addon Settings" default="true"/>
+		<setting id="enable_proxy" type="bool" label="Enable Proxy Settings" default="true"/>
+		<setting id="enable_meta_set" type="bool" label="Enable Meta Settings" default="true"/>
 	</category>
 	
 	<category label="Update">

@@ -482,31 +482,29 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
   </extension>
 </addon>
 
-<addon id="plugin.video.mdhdbox" name="HD Box" version="1.0.0.1" provider-name="Mucky Duck">
+<addon id="plugin.video.mdhdbox" name="HD Box" version="2.0.1" provider-name="Mucky Duck">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-	<import addon="script.module.addon.common" />
 	<import addon="script.module.metahandler" version="2.5.1"/>
-	<import addon="script.module.requests" />
+	<import addon="script.module.muckys.common"/>
 	<import addon="repository.mdrepo" />
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en">This Addon Will Not Work Unless You Have http://muckysmediaportal4kodi.ml In File Manager.</summary>
-    <description lang="en">This Addon Will Not Work Unless You Have http://muckysmediaportal4kodi.ml In File Manager.Stream Content From The xmovies8.org WebSite</description>
+    <summary lang="en">This Addon Will Not Work Unless You Have http://muckys.mediaportal4kodi.ml In File Manager.</summary>
+    <description lang="en">This Addon Will Not Work Unless You Have http://muckys.mediaportal4kodi.ml In File Manager.Stream Content From The xmovies8.org WebSite</description>
 	<disclaimer lang="en">The author does not host or distribute any of the content displayed by this addon or have any affiliation with the website owners</disclaimer>
     <platform>all</platform>
   </extension>
 </addon>
 
-<addon id="plugin.video.mdluckytv" name="LUCKY-TV" version="1.0.1.1" provider-name="Mucky Duck">
+<addon id="plugin.video.mdluckytv" name="LUCKY-TV" version="2.0.0" provider-name="Mucky Duck">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-	<import addon="script.module.addon.common" />
 	<import addon="script.module.metahandler" version="2.5.1"/>
-	<import addon="script.module.requests" />
+	<import addon="script.module.muckys.common"/>
 	<import addon="repository.mdrepo" />
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
@@ -520,12 +518,11 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
   </extension>
 </addon>
 
-<addon id="plugin.video.mdm4u" name="M4U" version="1.1.7.1" provider-name="Mucky Duck">
+<addon id="plugin.video.mdm4u" name="M4U" version="2.0.6" provider-name="Mucky Duck">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-	<import addon="script.module.addon.common" />
 	<import addon="script.module.metahandler" version="2.5.1"/>
-	<import addon="script.module.requests" />
+	<import addon="script.module.muckys.common"/>
 	<import addon="repository.mdrepo" />
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
@@ -558,12 +555,11 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
   </extension>
 </addon>
 
-<addon id="plugin.video.mdpubfilm" name="PubFilm" version="1.0.8.1" provider-name="Mucky Duck">
+<addon id="plugin.video.mdpubfilm" name="PubFilm" version="2.0.5" provider-name="Mucky Duck">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-	<import addon="script.module.addon.common" />
-	<import addon="script.module.metahandler" version="2.5.1"/>
-	<import addon="script.module.requests" />
+	<import addon="script.module.muckys.common"/>
+	<import addon="script.module.metahandler"/>
 	<import addon="repository.mdrepo" />
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">

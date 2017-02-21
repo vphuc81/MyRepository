@@ -1,10 +1,16 @@
 ############################################################
 
+- v2.0.0
+
+- addon recoded
+
+############################################################
+
 - v1.0.1
 
 - site Updated And now Requires A Free Account To View Streams
 - You Can Either Visit http://lucktv.net To Set Up A Free Account
-- Or Follow The On Screen Promts Within The Addon.
+- Or Follow The On Screen Prompts Within The Addon.
 
 ############################################################
 ############################################################
