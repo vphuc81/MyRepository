@@ -1,4 +1,24 @@
-﻿Version_2.6.4 <14/12/2016>
+﻿Version_2.7.0 <22/02/2017>
+- Fix Get Link
+
+Version_2.6.9 <22/02/2017>
+- Fix TVPlus, FPTPlay, Youtube
+
+Version_2.6.8 <21/02/2017>
+- New "TALK TV" menu 
+
+Version_2.6.7 <19/02/2017>
+- Fix stream other link
+
+Version_2.6.6 <17/02/2017>
+- Fix "Truyền Hình"
+- Fix "Tivi Xem Lại"
+- Fix "Phim Truyện"
+
+Version_2.6.5 <13/02/2017>
+- All Fix and update
+
+Version_2.6.4 <14/12/2016>
 - Fix Youtube
 - Fix Phimmoi.net
 - Fix Kho Phim 7, Kho Phim 11
