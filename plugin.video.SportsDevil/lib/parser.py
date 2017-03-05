@@ -640,9 +640,6 @@ class Parser(object):
             elif command == 'ifExists':
                 src = cc.ifExists(item, params, src)
 
-            elif command == 'encryptJimey':
-                src = crypt.encryptJimey(params.strip("'").replace('%s', src))
-
             elif command == 'gAesDec':
                 src = crypt.gAesDec(src,item.infos[params])
                 
@@ -660,9 +657,6 @@ class Parser(object):
 
             elif command == 'getCookies':
                 src = cc.getCookies(params, src)
-
-            elif command == 'destreamer':
-                src = crypt.destreamer(params.strip("'").replace('%s', src))
 
             elif command == 'unixTimestamp':
                 src = dt.getUnixTimestamp()

@@ -3,8 +3,7 @@ import pyDes
 import urllib
 import re
 from regexUtils import parseTextToGroups
-from javascriptUtils import JsFunctions, JsUnpacker, JsUnpackerV2, JsUnpacker95High, JsUnwiser, JsUnIonCube, JsUnFunc, JsUnPP, JsUnPush
-from hivelogic import hivelogic
+from javascriptUtils import JsFunctions, JsUnpacker, JsUnpackerV2, JsUnwiser, JsUnFunc, JsUnPP, JsUnPush
 try: import json
 except ImportError: import simplejson as json
 try: from Crypto.Cipher import AES
@@ -39,22 +38,41 @@ def m3u8AesDec(data, key):
         aes = AES.new(key.decode('hex'), AES.MODE_CBC, _in[1].decode('hex'))
         return unpad(aes.decrypt(_in[0].decode('hex')))
     except: return data
-    
-def drenchDec(data, key):
-    from drench import blowfish
-    return blowfish(key).decrypt(data)
 
 def zdecode(data):
-    sym_re = (r",'(?=[\w|]+1935|[\w|]+smil)(?=[\w|]+fname)(?=[\w|]+tnum)([\w|]+)'\.split")
-    symtab = re.search(sym_re, data).groups()[0].split('|')
-    tab_re = (r""".*'(\d+=[\W\d]+;(?!\\))'""")
-    tab = re.search(tab_re, data).groups()[0].decode('unicode-escape')
+    import csv
+    csv.register_dialect('js', delimiter=',', quotechar="'", escapechar='\\')
+
+    keys_regex = r'''eval\(.*?function\(([^\)]+)\){'''
+    keys = [re.search(keys_regex, data).groups()[0]]
+
+    values_regex = r'''.*(\w+)\s*=\s*\w+\((.*?)\);\s*eval\(\1'''
+    values = [re.search(values_regex, data, re.DOTALL).groups()[1].replace('\n','')]
+
+    key_list = [l for l in csv.reader(keys, dialect='js')][0]
+    value_list = [l for l in csv.reader(values, dialect='js')][0]
+
+    dictionary = dict(zip(key_list, value_list))
+
+    symtab_regex = r'''\w+\[\w+\]=(\w+)\[\w+\]\|\|\w+'''
+    sym_key = re.search(symtab_regex, data).groups()[0]
+    symtab = dictionary[sym_key]
+
+    split_regex = r'''(.*)\.split\('(.*)'\)'''
+    _symtab, _splitter = re.search(split_regex, symtab).groups()
+    splitter = re.sub(r"""'\s*\+\s*'""", '', _splitter)
+    symtab = _symtab.split(splitter)
+
+    tab_regex = r'''(\w+)=\1\.replace'''
+    tab_key = re.search(tab_regex, data).groups()[0]
+    tab = dictionary[tab_key]
 
     def lookup(match):
         return symtab[int(match.group(0))] or str(match.group(0))
 
-    return re.sub(ur'\d+', lookup, tab)
-    
+    return re.sub(ur'\w+', lookup, tab)
+
+
 def wdecode(data):
     from itertools import chain
     
@@ -81,7 +99,7 @@ def onetv(playpath):
     from base64 import b64encode
     user_agent = 'Mozilla%2F5.0%20%28Linux%3B%20Android%205.1.1%3B%20Nexus%205%20Build%2FLMY48B%3B%20wv%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Version%2F4.0%20Chrome%2F43.0.2357.65%20Mobile%20Safari%2F537.36'
     token = "65rSw"+"UzRad"
-    servers = ['185.152.66.39', '185.102.219.72', '185.152.64.235', '185.152.64.236', '185.59.222.232', '185.102.219.67', '185.102.218.56']
+    servers = ['185.152.66.39', '185.102.219.72', '185.59.221.109', '185.152.64.236', '185.59.222.232', '185.102.219.67', '185.102.218.56']
     time_stamp = str(int(time.time()) + 14400)
     to_hash = "{0}{1}/hls/{2}".format(token,time_stamp,playpath)
     out_hash = b64encode(md5.new(to_hash).digest()).replace("+", "-").replace("/", "_").replace("=", "")
@@ -89,31 +107,7 @@ def onetv(playpath):
     
     url = "hls://http://{0}/p2p/{1}?st={2}&e={3}".format(server,playpath,out_hash,time_stamp)
     return '{url}|User-Agent={user_agent}&referer={referer}'.format(url=url,user_agent=user_agent,referer='6d6f6264726f2e6d65'.decode('hex'))
-    
 
-def encryptJimey(data):
-    result = encryptDES_ECB(data,"PASSWORD").encode('base64').replace('/','').strip()
-    return result
-
-# used by 24cast
-def destreamer(s):
-    #remove all but[0-9A-Z]
-    string = re.sub("[^0-9A-Z]", "", s.upper())
-    result = ""
-    nextchar = ""
-    for i in range(0,len(string)-1):
-        nextchar += string[i]
-        if len(nextchar) == 2:
-            result += ntos(int(nextchar,16))
-            nextchar = ""
-    return result
-
-def ntos(n):
-    n = hex(n)[2:]
-    if len(n) == 1:
-        n = "0" + n
-    n = "%" + n
-    return urllib.unquote(n)
 
 def doDemystify(data):
     escape_again=False
@@ -123,16 +117,9 @@ def doDemystify(data):
     jsU = JsUnpacker()
     jsU2 = JsUnpackerV2()
     jsUW = JsUnwiser()
-    jsUI = JsUnIonCube()
     jsUF = JsUnFunc()
     jsUP = JsUnPP()
-    jsU95 = JsUnpacker95High()
     JsPush = JsUnPush()
-    JsHive = hivelogic()
-
-    # replace NUL
-    #data = data.replace('\0','')
-
 
     # unescape
     r = re.compile('a1=["\'](%3C(?=[^\'"]*%\w\w)[^\'"]+)["\']')
@@ -169,13 +156,20 @@ def doDemystify(data):
                 for i in dec_data:
                     res = res + chr(ord(i) ^ 123)
             data = data.replace(g, res)
-            
-    r = re.compile('((?:eval\(decodeURIComponent\(|window\.)atob\([\'"][^\'"]+[\'"]\)+)')
-    while r.findall(data):
+
+    r = re.compile(r"""file:\s*(window\.atob\(['"][^'"]+['"]\))""")
+    if r.findall(data):
         for g in r.findall(data):
-            r2 = re.compile('(?:eval\(decodeURIComponent\(|window\.)atob\([\'"]([^\'"]+)[\'"]\)+')
+            r2 = re.compile(r"""window\.atob\(['"]([^'"]+)['"]\)""")
             for base64_data in r2.findall(g):
                 data = data.replace(g, urllib.unquote(base64_data.decode('base-64')))
+
+    #r = re.compile('((?:eval\(decodeURIComponent\(|window\.)atob\([\'"][^\'"]+[\'"]\)+)')
+    #while r.findall(data):
+        #for g in r.findall(data):
+            #r2 = re.compile('(?:eval\(decodeURIComponent\(|window\.)atob\([\'"]([^\'"]+)[\'"]\)+')
+            #for base64_data in r2.findall(g):
+                #data = data.replace(g, urllib.unquote(base64_data.decode('base-64')))
                 
     r = re.compile('(<script.*?str=\'@.*?str.replace)')
     while r.findall(data):
@@ -192,20 +186,17 @@ def doDemystify(data):
                 data = data.replace(g, urllib.unquote(base64_data.decode('base-64')))
                 escape_again=True
     
-    r = re.compile('(eval\(function\((?!w)\w+,\w+,\w+,\w+\),\w+,\w+.*?\{\}\)\);)', flags=re.DOTALL)
+    r = re.compile('\?i=([^&]+)&r=([^&\'"]+)')
     for g in r.findall(data):
+        print g
         try:
-            data = data.replace(g, wdecode(g))
-            escape_again=True
+            _a, _b =  g[0].split('%2F')
+            _res = (_a+'=').decode('base-64')+'?'+_b.decode('base-64')
+            data = data.replace(g[0], _res)
+            data = data.replace(g[1], urllib.unquote(g[1]).decode('base-64'))
         except:
             pass
 
-    # n98c4d2c
-    if 'function n98c4d2c(' in data:
-        gs = parseTextToGroups(data, ".*n98c4d2c\(''\).*?'(%[^']+)'.*")
-        if gs != None and gs != []:
-            data = data.replace(gs[0], jsF.n98c4d2c(gs[0]))
-            
     if 'var enkripsi' in data:
         r = re.compile(r"""enkripsi="([^"]+)""")
         gs = r.findall(data)
@@ -215,53 +206,6 @@ def doDemystify(data):
                 for i in g:
                     s+= chr(ord(i)^2)
                 data = data.replace("""enkripsi=\""""+g, urllib.unquote(s))
-    # o61a2a8f
-    if 'function o61a2a8f(' in data:
-        gs = parseTextToGroups(data, ".*o61a2a8f\(''\).*?'(%[^']+)'.*")
-        if gs != None and gs != []:
-            data = data.replace(gs[0], jsF.o61a2a8f(gs[0]))
-
-    # RrRrRrRr
-    if 'function RrRrRrRr(' in data:
-        r = re.compile("(RrRrRrRr\(\"(.*?)\"\);)</SCRIPT>", re.IGNORECASE + re.DOTALL)
-        gs = r.findall(data)
-        if gs != None and gs != []:
-            for g in gs:
-                data = data.replace(g[0], jsF.RrRrRrRr(g[1].replace('\\','')))
-
-    # hp_d01
-    if 'function hp_d01(' in data:
-        r = re.compile("hp_d01\(unescape\(\"(.+?)\"\)\);//-->")
-        gs = r.findall(data)
-        if gs:
-            for g in gs:
-                data = data.replace(g, jsF.hp_d01(g))
-
-    # ew_dc
-    if 'function ew_dc(' in data:
-        r = re.compile("ew_dc\(unescape\(\"(.+?)\"\)\);</SCRIPT>")
-        gs = r.findall(data)
-        if gs:
-            for g in gs:
-                data = data.replace(g, jsF.ew_dc(g))
-                
-     # pbbfa0
-    if 'function pbbfa0(' in data:
-        r = re.compile("pbbfa0\(''\).*?'(.+?)'.\+.unescape")
-        gs = r.findall(data)
-        if gs:
-            for g in gs:
-                data = data.replace(g, jsF.pbbfa0(g))
-    
-    if 'eval(function(' in data:
-        data = re.sub(r"""function\(\w\w\w\w,\w\w\w\w,\w\w\w\w,\w\w\w\w""",'function(p,a,c,k)',data.replace('#','|'))
-        data = re.sub(r"""\(\w\w\w\w\)%\w\w\w\w""",'e%a',data)
-        data = re.sub(r"""RegExp\(\w\w\w\w\(\w\w\w\w\)""",'RegExp(e(c)',data)
-        r = re.compile(r"""\.split\('([^']+)'\)""")
-        gs = r.findall(data)
-        if gs:
-            for g in gs:
-                data = data.replace(g,'|')
 
     if """.replace(""" in data:
         r = re.compile(r""".replace\(["'](...[^"']+)["'],\s*["']([^"']*)["']\)""")
@@ -270,31 +214,11 @@ def doDemystify(data):
             for g in gs:
                 data = data.replace(g[0],g[1])
 
-    # util.de
-    if 'Util.de' in data:
-        r = re.compile("Util.de\(unescape\(['\"](.+?)['\"]\)\)")
-        gs = r.findall(data)
-        if gs:
-            for g in gs:
-                data = data.replace(g,g.decode('base64'))
-
-    # 24cast
-    if 'destreamer(' in data:
-        r = re.compile("destreamer\(\"(.+?)\"\)")
-        gs = r.findall(data)
-        if gs:
-            for g in gs:
-                data = data.replace(g, destreamer(g))
-                
     # JS P,A,C,K,E,D
-    if jsU95.containsPacked(data):
-        data = jsU95.unpackAll(data)
-        escape_again=True
-        
     if jsU2.containsPacked(data):
         data = jsU2.unpackAll(data)
         escape_again=True
-    
+
     if jsU.containsPacked(data):
         data = jsU.unpackAll(data)
         escape_again=True
@@ -304,25 +228,17 @@ def doDemystify(data):
         data = jsUW.unwiseAll(data)
         escape_again=True
 
-    # JS IonCube
-    if jsUI.containsIon(data):
-        data = jsUI.unIonALL(data)
-        escape_again=True
-        
     # Js unFunc
     if jsUF.cointainUnFunc(data):
         data = jsUF.unFuncALL(data)
         escape_again=True
-    
+
     if jsUP.containUnPP(data):
         data = jsUP.UnPPAll(data)
         escape_again=True
-        
+
     if JsPush.containUnPush(data):
         data = JsPush.UnPush(data)
-
-    if JsHive.contains_hivelogic(data):
-        data = JsHive.unpack_hivelogic(data)
 
     try: data = zdecode(data)
     except: pass
