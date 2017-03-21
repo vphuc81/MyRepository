@@ -157,7 +157,8 @@ def doDemystify(data):
                     res = res + chr(ord(i) ^ 123)
             data = data.replace(g, res)
 
-    r = re.compile(r"""file:\s*(window\.atob\(['"][^'"]+['"]\))""")
+    #sebn
+    r = re.compile(r"""(?:file|src|source):\s*(window\.atob\(['"][^'"]+['"]\))""")
     if r.findall(data):
         for g in r.findall(data):
             r2 = re.compile(r"""window\.atob\(['"]([^'"]+)['"]\)""")
@@ -212,6 +213,8 @@ def doDemystify(data):
         gs = r.findall(data)
         if gs:
             for g in gs:
+                if '\\' in g[0]:
+                    data = data.replace(g[0].lower(),g[1])
                 data = data.replace(g[0],g[1])
 
     # JS P,A,C,K,E,D
@@ -240,7 +243,9 @@ def doDemystify(data):
     if JsPush.containUnPush(data):
         data = JsPush.UnPush(data)
 
-    try: data = zdecode(data)
+    try: 
+        data = zdecode(data)
+        escape_again=True
     except: pass
     # unescape again
     if escape_again:

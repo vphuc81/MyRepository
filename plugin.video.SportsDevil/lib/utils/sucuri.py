@@ -44,7 +44,7 @@ def sucuri_decode(script):
 
             out_list.append(item.strip(""" "'"""))
 
-    cookie_regex = r'''(\w+);document.cookie='(\w+)='''
+    cookie_regex = r'''(\w{32}).*?(sucuri\w+)='''
     match = re.search(cookie_regex, ''.join(out_list))
     if match:
         value, name = match.groups()
