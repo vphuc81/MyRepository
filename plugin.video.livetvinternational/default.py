@@ -55,7 +55,8 @@ def TVChannel(url):
                ("tomdvodlocker" in link) or ("tomdhdmovie14" in link) or ("tomd123movies" in link) or ("tomdwatch32hd" in link) or ("toespn3" in link) or ("tozemtv" in link) or \
                ("toyoutubeft" in link)  or ("toprosport" in link) or ("toxshare" in link) or ("tophimmoi" in link) or ("tom4u" in link) or ("tomovievault" in link) or ("tomoviepool" in link) or \
                ("tomdafdah" in link) or ("tomdhdbox" in link) or ("tomdpubfilm" in link) or ("tomdscenepeeper" in link) or ("tomdluckytv" in link) or ("topac12" in link) or \
-               ("tomic" in link) or ("tohappymovies" in link) or ("tosureshot" in link) or ("tomdyesmovies" in link) or ("toicefilms" in link):
+               ("tomic" in link) or ("tohappymovies" in link) or ("tosureshot" in link) or ("tomdyesmovies" in link) or ("toicefilms" in link) or \
+               ("tozen" in link) or ("tometalliq" in link) or ("tobob" in link):
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]              
             add_Link(title, link, thumb)
         xbmc.executebuiltin('Container.SetViewMode(52)')        
@@ -604,6 +605,18 @@ def add_Link(name,url,iconimage):
         return ok
     if 'toicefilms' in url:
         u = 'plugin://plugin.video.icefilms'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tozen' in url:
+        u = 'plugin://plugin.video.zen'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tometalliq' in url:
+        u = 'plugin://plugin.video.metalliq'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tombob' in url:
+        u = 'plugin://plugin.video.bob'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)   
