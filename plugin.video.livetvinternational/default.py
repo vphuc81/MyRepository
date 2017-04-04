@@ -615,7 +615,7 @@ def add_Link(name,url,iconimage):
         u = 'plugin://plugin.video.metalliq'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
-    if 'tombob' in url:
+    if 'tobob' in url:
         u = 'plugin://plugin.video.bob'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok

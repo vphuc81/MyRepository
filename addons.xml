@@ -457,7 +457,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon id="plugin.video.livetv"
        name=" ***[COLOR yellow]LIVE-TV[/COLOR]"
-       version="2.2.25"
+       version="2.2.26"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
@@ -477,7 +477,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon id="plugin.video.livetvinternational"
        name=" **[COLOR yellow]Live TV-International[/COLOR]"
-       version="2.2.14"
+       version="2.2.15"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
