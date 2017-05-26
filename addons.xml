@@ -1205,7 +1205,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon
   id="plugin.video.xomgiaitri"
-  version="1.8.40"
+  version="2.0.44"
   name="*[COLOR yellow]XomGiaiTri.com[/COLOR]"
   provider-name="thongld">
   <requires>
@@ -1218,7 +1218,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>xomgiaitri.com</summary>
-    <description>Watch free xomiaitri.com (Vietnamese) Videos - Last updated 02.12.2017 (LH@hme)</description>
+    <description>Watch free xomgiaitri.com (Vietnamese) Videos - Last updated 05.26.2017 (LH@hme)</description>
     <platform>all</platform>
   </extension>
 </addon>
