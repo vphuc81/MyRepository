@@ -8,8 +8,8 @@ item_info_from=@PARAM1@
 item_info_convert=getInfo('http://%s','.*src="([^"]+)".*','@REFERER@')
 item_info_build=%s
 
-item_info_name=key
-item_info_build=5e5858405046757e4631775f33414141514e3133393973315775336c34695a5a
+#item_info_name=key
+#item_info_build=5e5858405046757e4631775f33414141514e3133393973315775336c34695a5a
 
 item_info_name=_1
 item_info_from=pageUrl
@@ -21,7 +21,7 @@ item_info_from=tk
 item_info_convert=decodeBase64
 item_info_convert=decodeBase64
 item_info_convert=decodeBase64
-item_info_convert=m3u8AesDec(key)
+#item_info_convert=m3u8AesDec(key)
 item_info_build=%s
 
 item_info_name=ref
@@ -30,6 +30,18 @@ item_info_convert=quote('%s')
 item_info_convert=quote('%s')
 item_info_build=%s
 
+item_info_name=ref_
+item_info_from=pageUrl
+item_info_convert=quote('%s')
+item_info_build=%s
+
+item_info_name=url_
+item_info_from=file+'|Referer='+ref_+'&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36
+item_info_convert=quote('%s')
+item_info_convert=quote('%s')
+item_info_build=%s
+
 item_info_name=url
 item_info_from=file+'|Referer='+ref+'&User-Agent=Mozilla/5.0%20%28Windows%20NT%206.1%3B%20WOW64%29%20AppleWebKit/537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome/54.0.2840.100%20Safari/537.36&Icy-MetaData=0
+#item_info_from=plugin://plugin.video.f4mTester/?streamtype=HLSRETRY&amp;name='+title+'&amp;url='+url_
 item_info_build=%s
