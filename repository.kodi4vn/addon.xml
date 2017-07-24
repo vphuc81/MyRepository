@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.kodi4vn" name="Kodi4VN's REPO" version="1.3" provider-name="ThongLD">
+	<extension point="xbmc.addon.repository" name="ThongLD's Addon Repository">
+		<info compressed="false">http://thong.viettv24.com/kodi4vn/addons.xml</info>
+		<checksum>http://thong.viettv24.com/kodi4vn/addons.xml.md5</checksum>
+		<datadir zip="true">http://thong.viettv24.com/kodi4vn/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Install Kodi4VN Addons</summary>
+		<description>Download and install addons from Kodi4VN's Repo: Best addons for Vietnamesse</description>
+		<platform>all</platform>
+	</extension>
+</addon>
