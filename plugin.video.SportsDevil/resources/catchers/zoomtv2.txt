@@ -4,13 +4,19 @@ item_info_build=nohead
 
 item_info_name=qs
 item_info_from=@PARAM1@
-item_info_convert=parseText('%s','.*v_vid="?([\d\w]+)"?,\s*v_vpp="([^"]+)",\s*v_vpv="([^"]+)"\s*;\s*\w+='([^']+)','id|pp|pv|zm')
+item_info_convert=parseText('%s','.*v_vid="?([\d\w]+)"?,\s*v_vpp="([^"]+)",\s*v_vpv="([^"]+)".*?src="([^"]+)','id|pp|pv|zm')
 #item_info_convert=startLivestreamerProxy
 item_info_build=%s
 
-item_info_name=zmhost
+item_info_name=zm_
 item_info_from=zm
-item_info_convert=ifEmpty('%s','http://www.zoomtv.me/kembed.php','http://%s/kembed.php')
+item_info_convert=getInfo('%s','.*url="([^"]+)"','@REFERER@')
+item_info_convert=debug
+item_info_build=%s
+
+item_info_name=zmhost
+item_info_from=zm_
+item_info_convert=ifEmpty('%s','http://www.zoomtv.me/kembed.php','%s')
 item_info_convert=debug
 item_info_build=%s
 
@@ -21,11 +27,11 @@ item_info_from=id='+pp+'&v='+pv+'&p='+id
 item_info_build=%s
 
 item_info_name=pageUrl
-item_info_from=zmhost+'?p='+pp+'&id='+id+'&v='+pv+'|' + postData
+item_info_from=zmhost+pp+'&id='+id+'&v='+pv+'|' + postData
 item_info_build=%s
 
 item_info_name=pageUrl2
-item_info_from=zoomtv+'?p='+pp+'&id='+id+'&v='+pv
+item_info_from=zmhost+pp+'&id='+id+'&v='+pv
 item_info_build=%s
 
 item_info_name=p_file

@@ -8,11 +8,11 @@ item_info_from=@PARAM1@
 item_info_build=%s
 
 item_info_name=tkurl
-item_info_from=http://sportstream365.com/LiveFeed/GetGame?id='+game+'&lng=en&partner=24'
+item_info_from=http://sportstream-365.com/LiveFeed/GetGame?id='+game+'&lng=en&partner=24'
 item_info_build=%s
 
 item_info_name=purl
-item_info_from=http://sportstream365.com/viewer?game='+game
+item_info_from=http://sportstream-365.com/viewer?game='+game
 item_info_build=%s
 
 item_info_name=rtmp

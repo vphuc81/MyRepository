@@ -2,73 +2,70 @@ item_info_name=page
 item_info_from=@PARAM1@
 item_info_build=%s
 
-item_info_name=title
+item_info_name=tmp1
 item_info_from=page
-item_info_convert=getInfo('%s','.*streamTitle\s+=\s+"([^"]+)";','@REFERER@')
+item_info_convert=getInfo('%s','.*streamTitle\s+=\s+"([^"]+)";.*?country\s+=\s+'([^']+)';.*?channelID\s+=\s+'([^']+)';.*?cToken\s+=\s+'([^']*)';','@REFERER@','title|cn|id|ptok')
 #item_info_convert=debug
 item_info_build=%s
 
-item_info_name=id
-item_info_from=page
-item_info_convert=getInfo('%s','.*channelID\s+=\s+'([^']+)';','@REFERER@')
-item_info_build=%s
+#item_info_name=ptoken
+#item_info_from=page
+#item_info_convert=getInfo('%s','.*cToken\s+=\s+'([^']+)';','@REFERER@')
+#item_info_build=%s
 
-item_info_name=cn
-item_info_from=page
-item_info_convert=getInfo('%s','.*country\s+=\s+'([^']+)';','@REFERER@')
-item_info_build=%s
+#item_info_name=api1
+#item_info_from=page
+#item_info_convert=randomfloat(0,1)
+#item_info_build=https://www.firstone.tv/api/?cacheFucker=%s
 
-item_info_name=ptoken
-item_info_from=page
-item_info_convert=getInfo('%s','.*cToken\s+=\s+'([^']+)';','@REFERER@')
-item_info_build=%s
+#item_info_name=postData1
+#item_info_from=action=tracking&act=get&c='+cn+'&id='+id
+#item_info_build=%s
 
-item_info_name=api1
-item_info_from=page
-item_info_convert=randomfloat(0,1)
-item_info_build=https://www.firstonetv.eu/api/?cacheFucker=%s
-
-item_info_name=postData1
-item_info_from=action=tracking&act=get&c='+cn+'&id='+id
-item_info_build=%s
-
-item_info_name=tmp
-item_info_from=api1+'|'+postData1
-item_info_convert=getInfo('%s','.*','@page@')
-item_info_build=%s
+#item_info_name=tmp2
+#item_info_from=api1+'|'+postData1
+#item_info_convert=ifEmpty('@ptok@','%s','')
+#item_info_convert=getInfo('%s','.*','@page@')
+#item_info_build=%s
 
 item_info_name=api2
 item_info_from=page
 item_info_convert=randomfloat(0,1)
-item_info_build=https://www.firstonetv.eu/api/?cacheFucker=%s
+item_info_build=https://www.firstone.tv/api/?cacheFucker=%s
 
 item_info_name=postData2
 item_info_from=action=hiro&result=get'+
 item_info_build=%s
 
-item_info_name=tmp
+item_info_name=tmp3
 item_info_from=api2+'|'+postData2
+item_info_convert=ifEmpty('@ptok@','%s','')
 item_info_convert=getInfo('%s','.*"hash":"(\w+)","time":(\d+),"rss":(\d+)','@page@','hash|time|rss')
 item_info_build=%s
 
 item_info_name=api3
 item_info_from=page
 item_info_convert=randomfloat(0,1)
-item_info_build=https://www.firstonetv.eu/api/?cacheFucker=%s
+item_info_build=https://www.firstone.tv/api/?cacheFucker=%s
 
 item_info_name=postData3
 item_info_from=action=hiro&result='+rss+'&time='+time+'&hash='+hash
 item_info_build=%s
 
-item_info_name=ctoken
+item_info_name=ctok
 item_info_from=api3+'|'+postData3
+item_info_convert=ifEmpty('@ptok@','%s','')
 item_info_convert=getInfo('%s','.*"ctoken":"([^"]+)"','@page@')
+item_info_build=%s
+
+item_info_name=ctoken
+item_info_from=ptok||ctok
 item_info_build=%s
 
 item_info_name=api4
 item_info_from=page
 item_info_convert=randomfloat(0,1)
-item_info_build=https://www.firstonetv.eu/api/?cacheFucker=%s
+item_info_build=https://www.firstone.tv/api/?cacheFucker=%s
 
 item_info_name=postData4
 item_info_from=action=channel&ctoken='+ctoken+'&c='+cn+'&id='+id

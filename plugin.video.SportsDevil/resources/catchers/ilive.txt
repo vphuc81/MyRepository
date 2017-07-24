@@ -12,7 +12,7 @@ item_info_build=%s
 item_info_name=page0
 item_info_from=title
 item_info_convert=urlMerge('@REFERER@','')
-item_info_convert=debug
+##item_info_convert=debug
 item_info_build=%s
 
 #item_info_name=rtmp
@@ -65,21 +65,15 @@ item_info_build=%s
 
 item_info_name=hls_url_1
 item_info_from=page0
-item_info_convert=getInfo('%s','.*?jwplayer\(.*?setup.*?file"\s*:\s*"(.*?)"','streamlive.to')
+item_info_convert=getInfo('%s','.*?jwplayer\(.*"file"\s*:\s*"([^"\s]+wmsAuthSign[^"]+)"','streamlive.to')
 #item_info_convert=debug
 item_info_build=%s
-
-#item_info_name=hls_url_2
-#item_info_from=pageUrl
-#item_info_convert=getInfo('%s','.*?jwplayer\(.*?setup.*?file"\s*:\s*"(.*?)"','@REFERER@')
-#item_info_convert=debug
-#item_info_build=%s
 
 item_info_name=hls_url
 item_info_from=hls_url_1
 #item_info_convert=debug
-item_info_build=http:%s
+item_info_build=https:%s
 
 item_info_name=url
-item_info_from=hls_url
+item_info_from=hls_url+'|Referer='+page0+'&User-Agent=Mozilla/5.0%20%28Windows%20NT%206.1%3B%20WOW64%29%20AppleWebKit/537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome/54.0.2840.100%20Safari/537.36
 item_info_build=%s

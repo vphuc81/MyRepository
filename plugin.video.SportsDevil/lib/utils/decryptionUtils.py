@@ -224,7 +224,7 @@ def decryptSaurus(data):
 def doDemystify(data):
     from base64 import b64decode
     escape_again=False
-    
+    #lib.common.log("JairoDemyst:" + data)
     #init jsFunctions and jsUnpacker
     jsF = JsFunctions()
     jsU = JsUnpacker()
@@ -335,16 +335,17 @@ def doDemystify(data):
                 data = data.replace(g, urllib.unquote(base64_data.decode('base-64')))
                 escape_again=True
     
-    r = re.compile('\?i=([^&]+)&r=([^&\'"]+)')
-    for g in r.findall(data):
-        print g
-        try:
-            _a, _b =  g[0].split('%2F')
-            _res = (_a+'=').decode('base-64')+'?'+_b.decode('base-64')
-            data = data.replace(g[0], _res)
-            data = data.replace(g[1], urllib.unquote(g[1]).decode('base-64'))
-        except:
-            pass
+    if not 'sawlive' in data:
+        r = re.compile('\?i=([^&]+)&r=([^&\'"]+)')
+        for g in r.findall(data):
+            print g
+            try:
+                _a, _b =  g[0].split('%2F')
+                _res = (_a+'=').decode('base-64')+'?'+_b.decode('base-64')
+                data = data.replace(g[0], _res)
+                data = data.replace(g[1], urllib.unquote(g[1]).decode('base-64'))
+            except:
+                pass
 
     if 'var enkripsi' in data:
         r = re.compile(r"""enkripsi="([^"]+)""")

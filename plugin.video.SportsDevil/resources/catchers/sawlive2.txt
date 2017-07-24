@@ -3,25 +3,70 @@ item_info_from=@PARAM1@
 item_info_convert=parseText('%s','.*/(\w+)')
 item_info_build=%s
 
-item_info_name=p.tmp
+item_info_name=p0.tmp_
 item_info_from=@PARAM1@
-item_info_convert=getInfo('%s','.*id="(\w+)"\s+value="(\w+)".*?\1=\[(.*?)\].*\1.join','@REFERER@','junk|_p1|_p2')
+item_info_convert=getInfo('%s','.*src="(http:\/\/www3?.sawlive.tv\/embe\w+\/).*?['"](\w+)['"]','@REFERER@','u1|u2')
 item_info_build=%s
 
-item_info_name=p1
-item_info_from=_p1
-#item_info_convert=parseText('%s','.*')
+item_info_name=p0
+item_info_from=u1+u2
+item_info_convert=debug
+item_info_build=%s
+
+item_info_name=p1.tmp_
+item_info_from=p0
+item_info_convert=getInfo('%s','.*\["((?:\W\w+)+)","((?:\W\w+)+)"\]','@REFERER@','pz1_|pz2_')
+item_info_build=%s
+
+item_info_name=pz1
+item_info_from=pz1_
+item_info_convert=unicode_escape
+item_info_build=%s
+
+item_info_name=pz2
+item_info_from=pz2_
+item_info_convert=unicode_escape
+item_info_build=%s
+
+item_info_name=p1.tmp
+item_info_from=http://www3.sawlive.tv/embed/watch/'+pz2+'/'+pz1
+item_info_convert=debug
+item_info_build=%s
+
+
+
+
+item_info_name=ref
+item_info_from=p0 
+item_info_convert=quote(%s)
+item_info_build=%s
+
+
+item_info_name=ls_file
+item_info_from=p1.tmp
+item_info_convert=getInfo('%s','.*(http[^"']+\.m3u8[^"']*).*','@REFERER@')
+item_info_convert=ifEmpty('%s','','hls://%s|Referer=___&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36')
+item_info_convert=replace('%s','___','@ref@')
+item_info_convert=encodeBase64
+item_info_convert=ifEmpty('%s','','http://127.1.2.3:45678/livestreamer/%s')
+item_info_convert=debug
+item_info_build=%s
+
+
+item_info_name=p.tmp
+item_info_from=@PARAM1@
+item_info_convert=getInfo('%s','.*id="(\w+)"\s+value="(\w+)".*src="([^']+).*var\s+\1=\[([^\]]+)','@REFERER@','junk|p1|u|_p2')
 item_info_build=%s
 
 item_info_name=p2
 item_info_from=_p2
-#item_info_convert=parseText('%s','.*')
 item_info_convert=replace('%s','"','')
 item_info_convert=replace('%s',',','')
 item_info_build=%s
 
 item_info_name=tmpUrl
-item_info_from='http://www.sawlive.tv/embed/watch/'+p2+'/'+p1+'
+item_info_from=u+p2+'/'+p1+'
+item_info_convert=debug
 item_info_build=%s
 
 item_info_name=file.tmp
@@ -36,7 +81,7 @@ item_info_build=%s
 
 item_info_name=rtmp
 item_info_from=_p3
-item_info_convert=getInfo('%s','.*(rtmpe?://[^']+)','@REFERER@')
+item_info_convert=getInfo('%s','.*(rtmpe?://[^']+)','@tmpUrl@')
 item_info_build=%s
 
 item_info_name=url

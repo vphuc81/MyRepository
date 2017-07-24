@@ -76,10 +76,13 @@ def create_decryptor(self, key, sequence):
     if self.key_uri != key.uri:
 
         zoom_key = self.reader.stream.session.options.get("zoom-key")
+        zuom_key = self.reader.stream.session.options.get("zuom-key")
         saw_key = self.reader.stream.session.options.get("saw-key")
         your_key = self.reader.stream.session.options.get("your-key")
         if zoom_key:
             uri = 'http://www.zoomtv.me/k.php?q='+base64.urlsafe_b64encode(zoom_key+base64.urlsafe_b64encode(key.uri))
+        elif zuom_key:
+            uri = 'http://www.zuom.xyz/k.php?q='+base64.urlsafe_b64encode(zuom_key+base64.urlsafe_b64encode(key.uri))
         elif saw_key:
             if 'foxsportsgo' in key.uri:
                 _tmp = key.uri.split('/')
@@ -199,7 +202,9 @@ class MyHandler(BaseHTTPRequestHandler):
                 session.set_option("http-ssl-verify", False)
                 session.set_option("hls-segment-threads", 1)
                 if 'zoomtv' in headers['Referer']:
-                    session.set_option("zoom-key", headers['Referer'].split('?')[1])
+                    session.set_option("zoom-key", headers['Referer'].split('?')[1])                    
+                elif 'zuom' in headers['Referer']:
+                    session.set_option("zuom-key", headers['Referer'].split('?')[1])
                 elif 'sawlive' in headers['Referer']:
                     session.set_option("saw-key", headers['Referer'])
                 elif 'yoursportsinhd' in headers['Referer']:
