@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon
-  id="plugin.video.kodi4vn.launcher"
-  version="2.3.6.1"
-  name="**[COLOR yellow]Kodi4VN Launcher[/COLOR]"
-  provider-name="kodi4vn">
+  id="plugin.video.thongld.vnplaylist"
+  version="1.1"
+  name="**[COLOR yellow]VN Open Playlist[/COLOR]"
+  provider-name="thongld">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.xbmcswift2" version="0.0.7" />
     <import addon="plugin.video.youtube" version="4.4.1" />
-    <import addon="script.module.requests" version="1.0" />
-    <import addon="service.kodi4vn.maintenance" version="0.1" />
     <import addon="script.module.httplib2" version="0.1" />
     <import addon="service.kodi4vn.iptvproxy" version="0.1" />
   </requires>
@@ -17,8 +15,8 @@
         <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>fb.me/kodi4vn</summary>
-    <description>Watch hundreds of Vietnamesse and English channels</description>
+    <summary>AIO Media Center cho người Việt</summary>
+    <description>Cổng giải trí mở, miễn phí, tất cả trong một cho người Việt</description>
     <platform>all</platform>
   </extension>
 </addon>

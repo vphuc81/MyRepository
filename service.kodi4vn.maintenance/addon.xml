@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon
+  id="service.kodi4vn.maintenance"
+  version="0.20"
+  name="**[COLOR yellow]Bảo trì Kodi4VN Launcher[/COLOR]"
+  provider-name="kodi4vn">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.service" library="startup.py" start="startup"/>
+  <extension point="xbmc.addon.metadata">
+    <summary>Kodi4VN Maintenance</summary>
+    <description>Maintenance Kodi system for better usage</description>
+    <platform>all</platform>
+  </extension>
+</addon>
