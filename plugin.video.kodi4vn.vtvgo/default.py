@@ -158,7 +158,7 @@ def I11II1i ( args_json = { } ) :
  )
  )
  IIIII = xbmcgui . DialogProgress ( )
- IIIII . create ( 'VTVGo' , 'Đang tải, Xin quý khách vui lòn đợi trong giây lát...' )
+ IIIII . create ( 'VTVGo' , 'Đang tải, Xin quý khách vui lòng đợi trong giây lát...' )
  oo000 . set_resolved_url ( ooooooO0oo ( Oo0oO0oo0oO00 [ "url" ] ) , subtitles = "https://raw.githubusercontent.com/vinhcomp/xml/master/xml/sub1.tsv" )
  IIIII . close ( )
  del IIIII
@@ -184,9 +184,10 @@ def II ( time_object ) :
  return time_object . tm_hour * 60 + time_object . tm_min
  if 87 - 87: IiII / ooOoO0o - I1IiiI * I1Ii111 / iII111iiiii11 . OO0OO0O0O0
 def II1Ii1iI1i ( title = "Home" , page = "/" ) :
- iii11I111 = "http://www.google-analytics.com/collect"
- OOOO00ooo0Ooo = open ( OOOooOooo00O0 ) . read ( )
- Oo0OO = {
+ try :
+  iii11I111 = "http://www.google-analytics.com/collect"
+  OOOO00ooo0Ooo = open ( OOOooOooo00O0 ) . read ( )
+  Oo0OO = {
  'v' : '1' ,
  'tid' : 'UA-52209804-5' ,
  'cid' : OOOO00ooo0Ooo ,
@@ -194,7 +195,8 @@ def II1Ii1iI1i ( title = "Home" , page = "/" ) :
  'dp' : "VTVGo" + page ,
  'dt' : "[VTVGo] - %s" % title
  }
- requests . post ( iii11I111 , data = urllib . urlencode ( Oo0OO ) )
+  requests . post ( iii11I111 , data = urllib . urlencode ( Oo0OO ) )
+ except : pass
  if 92 - 92: IiII - oOoO0oo0OOOo
 i11i1 = xbmc . translatePath ( 'special://userdata' )
 if os . path . exists ( i11i1 ) == False :
