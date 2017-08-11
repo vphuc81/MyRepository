@@ -1678,7 +1678,7 @@ For updates check the readme.
 
 <addon
   id="service.kodi4vn.iptvproxy"
-  version="0.7"
+  version="0.8.1"
   name="**[COLOR yellow]IPTV Proxy[/COLOR]"
   provider-name="kodi4vn">
   <requires>
@@ -1697,11 +1697,12 @@ For updates check the readme.
 
 <addon
   id="service.kodi4vn.maintenance"
-  version="0.20"
+  version="1.1.1"
   name="**[COLOR yellow]Bảo trì Kodi4VN Launcher[/COLOR]"
   provider-name="kodi4vn">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.requests" version="1" />
   </requires>
   <extension point="xbmc.service" library="startup.py" start="startup"/>
   <extension point="xbmc.addon.metadata">
