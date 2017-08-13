@@ -41,8 +41,9 @@ class BaseRequest(object):
         self.s.cookies = LWPCookieJar(self.cookie_file)
         if fileExists(self.cookie_file):
             self.s.cookies.load(ignore_discard=True)
-        self.s.headers.update({'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'})
-        self.s.headers.update({'Accept-Language' : 'en-US,en;q=0.5'})
+        self.s.headers.update({'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36'})
+        self.s.headers.update({'Accept-Language' : 'en-US,en;q=0.8,de;q=0.6,es;q=0.4'})
+        self.s.headers.update({'Upgrade-Insecure-Requests': '1'})
         
 
         self.url = ''
@@ -91,7 +92,7 @@ class BaseRequest(object):
         
         headers = {'Referer': referer}
         if mobile:
-            self.s.headers.update({'User-Agent' : 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13E238 Safari/601.1'})
+            self.s.headers.update({'User-Agent' : 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1'})
             
         if xml:
             headers['X-Requested-With'] = 'XMLHttpRequest'
@@ -121,7 +122,7 @@ class BaseRequest(object):
         if 'firstonetv' in url:
             self.s.verify = False
 
-            
+        
         #if 'strikeout' in urlparse.urlsplit(url).netloc:
             #self.s.headers.update({'Upgrade-Insecure-Requests': '1'})
             #self.s.headers.update({'Host': 'zoomtv.me'})

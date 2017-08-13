@@ -30,12 +30,12 @@ item_info_build=%s
 item_info_name=playUrl
 item_info_from=pageUrl
 item_info_convert=getInfo('%s','.*iframe.*src="([^"]+)','@REFERER@')
-#item_info_convert=debug
+item_info_convert=debug
 item_info_build=%s
 
 item_info_name=tmp2
 item_info_from=playUrl
-item_info_convert=getInfo('%s','.*id\s*=\s*(\w+)>([^<]+).*?var\s*(\w+)\s*=\s*\[(.*?)\];.*function\s*\w+\(\)\s*\{\s*return\(\[([^\]]+)\]\.join\(\"\"\)\s*\+\s*\3.*?getElementById\(\"\1','@pageUrl@','junk1|tok2|junk2|tok1_|uri_')
+item_info_convert=getInfo('%s','.*?id\s*=\s*"(\w+)">([^<]+).*?var\s*(\w+)\s*=\s*\[(.*?)\].*function\s*\w+\(\)\s*\{\s*return\(\[([^\]]+)\]\.join\(""\)\s*\+\s*\3.*?getElementById\("\1','@pageUrl@','junk1|tok2|junk2|tok1_|uri_')
 item_info_build=%s
 
 item_info_name=uri
