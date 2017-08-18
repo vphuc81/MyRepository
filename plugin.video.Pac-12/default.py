@@ -23,37 +23,72 @@ site_logo = "http://x.pac-12.com/profiles/pac12/themes/pac12_foundation/images/p
 
 #More Live Channels..auto updated..
 exec("import re;import base64");exec((lambda p,y:(lambda o,b,f:re.sub(o,b,f))(r"([0-9a-f]+)",lambda m:p(m,y),base64.b64decode("MTQgPSAiMmY6Ly8zMS4xMi4xZi8yMi8yOC8yOS8iCjEgPSAiMjc6Ly8yMS4xZi9kLzIwLzMzLzIzL2YvMjYvIgo2ID0gMSArICIxOS44IgoyID0gMSArICJlLjgiCjUgPSAxICsgIjEwLjgiCjExICAgPSA3LjQoJzJkJykKMyAgICA9IDJhLjkoIDcuNCgnMWInKSApIAoxNSA9IDMgKyAiMWQuOCIKMTMgPSAzICsgIjFhLjgiCgozMiAwKDE2LCBhPSIiKToKCTFlOgoJCTI0ID0gMWMuMTgoMTYpCgkJYiAyYy4yZSgyNCkKCWM6IGIgYQoKMWU6CgkxNyA9IDAoNikKCTMwID0gMCg1KQoJMjUgPSAwKDIpIApjOgoJMmI=")))(lambda a,b:b[int("0x"+a.group(1),16)],"urlJson_req|onetv_site|onetv_ch_list|addondir|getAddonInfo|onetv_index|onetv_logo|my_addon|txt|translatePath|noData|return|except|LongHongVan|usa_ch_list|iptvsimple2|name_index|addonname|thelogodb|myLogList|LOGO_PATH|myLogData|purl|LOGO_CH|urlopen|logo_ch|LogList|profile|urllib2|LogData|try|com|MyKodi|github|images|master|req|USA_CH|onetv|https|media|logo|xbmc|pass|json|name|load|http|NAME|www|def|raw".split("|")))
- 
   
-def CATEGORIES():
-    xbmc.executebuiltin('Container.SetViewMode(500)')
-    if my_addon.getSetting("use_PAC-12_intro") == "true":
-        if not isplayed:
-            li = xbmcgui.ListItem(label='PAC-12', iconImage=icon, thumbnailImage=icon)
-            xbmc.Player().play(intro, li)
-            xbmcgui.Window(10000).setProperty("intro.isplayed", "true")
-    addDir('Pac National', 'p12netw', 1, icon, fanart, 'Pac-12')
-    addDir('Arizona', 'p12ariz', 1, site_logo + 'network-arizona.jpg', fanart, 'Pac-12 Arizona')
-    addDir('Bay Area', 'p12baya', 1, site_logo + 'network-bayarea.jpg', fanart, 'Pac-12 Bay Area')
-    addDir('Los Angeles', 'p12losa', 1, site_logo + 'network-losangeles.jpg', fanart, 'Pac-12 Los Angeles')
-    addDir('Mountain', 'p12moun', 1, site_logo + 'network-mountain.jpg', fanart, 'Pac-12 Mountain')
-    addDir('Oregon', 'p12oreg', 1, site_logo + 'network-oregon.jpg', fanart, 'Pac-12 Oregon')
-    addDir('Washington', 'p12wash', 1, site_logo + 'network-washington.jpg', fanart, 'Pac-12 Washington')
-    if '//' in my_addon.getSetting("BTN"):
-        addDir('BTN', my_addon.getSetting("BTN"), 2, iconbtn, fanartbtn, 'Big Ten')
-    
-    for idx in range(0, len(USA_CH)):
-		addDir(NAME[idx], USA_CH[idx], 2, LOGO_CH[idx], fanart, ' HD')
+usa_icon = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHEbCdJb52qz-bAt0SqML7OnwfNU0z6tiB7kC4UVXVdYyMujFc"
+uk_icon = "https://albaniaiptv.com/wp-content/uploads/2016/12/uk-british-flag-waving-animated-gif-9-300x160.gif"
+canana_icon = "https://i.ytimg.com/vi/-ID-ZadxCJ0/hqdefault.jpg"
+all_icon = "https://i0.wp.com/iptv-shop.net/wp-content/uploads/2017/06/Download-Free-IPTV-m3u-World-Channels-list-Vlc-Kodi-15-06-17.jpg?fit=1200%2C675&resize=350%2C200"
+
+FILTER1_VI = "VTV|HTV|VTC|SCTV|Hanoi|Thuần Việt|Star|PHIM|MTV |Music|VH|Thuần Việt HD|National|Concerts|JPOP|TOM|THẾ GIỚI|SBTN|VSTAR|VIET|VBS"
+FILTER2_CA = "GLOBAL|CTV|Astro|Sportsnet|NETV|TSN|HGTV|CA |Sports net|Sportnet|Sport net"
+
+FILTER3_UK = "UK |UK: TS|UK: BT SPORT|UK: EUR|UK: National|UK: Nat |UK: ANI|UK: Sky Sport|SKY SPORTS|SKY MOVIE|National|Comedy|Sony|\
+BABY|BBC WORLD|BBC AMERICA|BBC NEWS|ITV|SKY SPORT|BT SPORT|MUTV|Nick|Disney|VH|Box|RTE|Lifetime|NAT|Cartoon Network|SYFY|E!|GOL TV|EURO|COOKING|TRAVEL|FIGHT|5 USA|Premier Sport|Racing|PPV|Star |\
+Willow Cricket|UTV|True|Super|WARNER|Slice|TMN|World|paramount|FOOTB|Antena|Boomerang" # removed FILM due to FILM Adult contents - SPORT, MBC, Premium
+
+FILTER4_US = "US |USA|US:|FOX HD|FOX SPORT|FOX NEWS|FOX EAST|FOX WEST|FOX SOCCER|ESPN|NFL|NBC|CBS|ABC|NBA|TNT|BRAVO|History|SPIKE|HBO|SHOWTIME|DISCOVER|MTV |TENIS|OUTDOOR|FOOD|COOK|HGTV|\
+AMC|THE CW|US|PBS|my9|SYFY|FX|FXX|DIY|Animal|Hallmark|Travel|Cartoon Network|PPV|tbs|USA-Astro|BET\
+Bein Sport|Starz|MSNBC|E!|A & E|A&E|CNN|NBCSN|AXN|NEWS|TENNIS|A&E|The CW|FXx|MY9|ION|COOKING|MLB NETWORK|NHL|AMERICAN|LIFE|FREEFORM|H2|HUNTING|\
+FISHING|OUTDOOR|SHOPPING|UNIVERSAL|ACTION|CINEMAX|CNBC|DESINATION|ENCORE|LIFETIME|NICK|TV Land|C-SPAN|FIGHT|MOREMAX|Big Ten|BTN|We TV|TPK "
+FILTER5_ADULT = "XXX|Play|Adult|FILM Adult|Video Adult|Video XXX|Girl|First Girl"# PAC (Removed Pac 12 | ENL)
+
+try:  
+	usa_ch_list = ReadList(addondir + "\usa_ch_list.txt")
+	name_index = ReadList(addondir + "name_index.txt")
+	logo_ch = ReadList(addondir + "\logo_ch.txt")
+except: pass
+
+def pac12():
+    addDir('National FHD', 'http://127.0.0.1:19098/livestreamer/aGxzOi8vaHR0cDovL3hyeHMubmV0L3ZpZGVvL2xpdmUtcDEybmV0dy00NzI4Lm0zdTg=', 2, icon, fanart, 'Pac-12')
+    addDir('Arizona FHD', 'http://127.0.0.1:19098/livestreamer/aGxzOi8vaHR0cDovL3hyeHMubmV0L3ZpZGVvL2xpdmUtcDEyYXJpei00NzI4Lm0zdTg=', 2, site_logo + 'network-arizona.jpg', fanart, 'Pac-12 Arizona')
+    addDir('Bay Area FHD', 'http://127.0.0.1:19098/livestreamer/aGxzOi8vaHR0cDovL3hyeHMubmV0L3ZpZGVvL2xpdmUtcDEybG9zYS00NzI4Lm0zdTg=', 2, site_logo + 'network-bayarea.jpg', fanart, 'Pac-12 Bay Area')
+    addDir('Los Angeles FHD', 'http://127.0.0.1:19098/livestreamer/aGxzOi8vaHR0cDovL3hyeHMubmV0L3ZpZGVvL2xpdmUtcDEybW91bi00NzI4Lm0zdTg=', 2, site_logo + 'network-losangeles.jpg', fanart, 'Pac-12 Los Angeles')
+    addDir('Mountain FHD', 'http://127.0.0.1:19098/livestreamer/aGxzOi8vaHR0cDovL3hyeHMubmV0L3ZpZGVvL2xpdmUtcDEyb3JlZy00NzI4Lm0zdTg=', 2, site_logo + 'network-mountain.jpg', fanart, 'Pac-12 Mountain')
+    addDir('Oregon FHD', 'http://127.0.0.1:19098/livestreamer/aGxzOi8vaHR0cDovL3hyeHMubmV0L3ZpZGVvL2xpdmUtcDEyd2FzaC00NzI4Lm0zdTg=', 2, site_logo + 'network-oregon.jpg', fanart, 'Pac-12 Oregon')
+    addDir('Washington FHD', 'http://127.0.0.1:19098/livestreamer/aGxzOi8vaHR0cDovL3hyeHMubmV0L3ZpZGVvL2xpdmUtcDEyYmF5YS00NzI4Lm0zdTg=', 2, site_logo + 'network-washington.jpg', fanart, 'Pac-12 Washington')
+
+def filter_cat(FILTER=""):
+	for idx in range(0, len(usa_ch_list)):
+		if re.match(FILTER, str(name_index[idx]), re.IGNORECASE):
+			addDir(name_index[idx], usa_ch_list[idx], 2, logo_ch[idx], fanart, ' HD')
+
+def filter_cat_url(FILTER=""):
+	for idx in range(0, len(USA_CH)):
+		if re.match(FILTER, str(NAME[idx]), re.IGNORECASE):
+			addDir(NAME[idx], USA_CH[idx], 2, LOGO_CH[idx], fanart, ' HD')
+
+def CATEGORIES(REMOTE_URL=True):
+	#xbmc.executebuiltin('Container.SetViewMode(500)')
+	addDir("[COLOR aqua]PAC12[/COLOR]", "url", 1, icon, fanart, ' HD', isFolder=True)
+	if not REMOTE_URL:
+		addDir("USA CHANNELS", FILTER4_US, 4, usa_icon, fanart, ' HD', isFolder=True)
+		addDir("CANADA CHANNELS", FILTER2_CA, 4, canana_icon, fanart, ' HD', isFolder=True)
+		addDir("UK CHANNELS", FILTER3_UK, 4, uk_icon, fanart, ' HD', isFolder=True)
+	else:
+		addDir("[COLOR red]USA[/COLOR]", FILTER4_US, 5, usa_icon, fanart, ' HD', isFolder=True)
+		addDir("[COLOR lime]CANADA[/COLOR]", FILTER2_CA, 5, canana_icon, fanart, ' HD', isFolder=True)
+		addDir("[COLOR yellow]UK[/COLOR]", FILTER3_UK, 5, uk_icon, fanart, ' HD', isFolder=True)
+		addDir("[COLOR orange]ALL[/COLOR]", FILTER4_US + "|" + FILTER3_UK  + "|" + FILTER2_CA, 5, all_icon, fanart, ' HD', isFolder=True)
 
 
-def addDir(name, url, mode, iconimage, fanart, description):
+def addDir(name, url, mode, iconimage, fanart, description, isFolder=False):
     title = ''
     u = sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)+"&iconimage="+urllib.quote_plus(iconimage)+"&fanart="+urllib.quote_plus(fanart)
     ok = True
     liz = xbmcgui.ListItem(name + '[I]' + title + '[/I]', iconImage="DefaultFolder.png", thumbnailImage=iconimage)
     liz.setInfo(type="Video", infoLabels={"Title": name, "Plot": ''})
     liz.setProperty("Fanart_Image", fanart)
-    ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=u, listitem=liz, isFolder=True)
+    ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=u, listitem=liz, isFolder=isFolder)
     return ok
 
 
@@ -65,66 +100,7 @@ def getItemTitles(table):
     return out
 
 
-def Play(url, name, icon):
-    if my_addon.getSetting("use_custom_links") == "true":
-        lista = [['1080p', '4728.m3u8'], ['720p', '2328.m3u8'], ['SD', '1164.m3u8']]
-        lista2 = [['1080p', 'index_4728_av-p.m3u8'], ['720p', 'index_2328_av-b.m3u8'], ['SD', 'index_1164_av-b.m3u8']]
-        d = xbmcgui.Dialog()
-        item = d.select("Select Quality", getItemTitles(lista))
-        if item != -1:
-            if 'p12netw' in url:
-                url = my_addon.getSetting("National")
-            elif 'p12ariz' in url:
-                url = my_addon.getSetting("Arizona")
-            elif 'p12baya' in url:
-                url = my_addon.getSetting("Bay")
-            elif 'p12losa' in url:
-                url = my_addon.getSetting("Angeles")
-            elif 'p12moun' in url:
-                url = my_addon.getSetting("Mountain")
-            elif 'p12oreg' in url:
-                url = my_addon.getSetting("Oregon")
-            elif 'p12wash' in url:
-                url = my_addon.getSetting("Washington")
-            print url
-            if 'xrxs' in url:
-                url = url + str(lista[item][1])
-            else:
-                url = url + str(lista2[item][1])
-            li = xbmcgui.ListItem(label=name, iconImage=icon, thumbnailImage=icon, path="")
-            xbmc.Player().play(item=url, listitem=li)
-        exit()
-    else:
-        lista = [['1080p', '4728.m3u8'], ['720p', '2328.m3u8'], ['SD', '1164.m3u8']]
-        d = xbmcgui.Dialog()
-        item = d.select("Select Quality", getItemTitles(lista))
-        if item != -1:
-            try:
-                quality = str(lista[item][1])
-                query_args = {'page': 'links', 'network': url, 'bitrate': quality}
-                encoded_args = urllib.urlencode(query_args)
-                request = urllib2.Request(site)
-                request.add_header('User-agent', 'Mozilla/5.0')
-                response = urllib2.urlopen(request, encoded_args)
-                data = response.read()
-                response.close()
-                link = re.compile('<input value="(.+?)" class=').findall(data)
-                if len(link) > 0:
-                    for url in link:
-                        url = url.replace('.m3u8.m3u8' , '.m3u8')
-                        li = xbmcgui.ListItem(label=name, iconImage=icon, thumbnailImage=icon, path="")
-                        xbmc.Player().play(item=url, listitem=li)
-                        exit()
-                else:
-                    addonname = my_addon.getAddonInfo('name')
-                    line1 = "Try custom links"
-                    line2 = "Greetings, huball"
-                    xbmcgui.Dialog().ok(addonname, line1, line2)
-            except: 
-                CATEGORIES()
-
-
-def Playbtn(url, name, icon):
+def playStream(url, name, icon):
     li = xbmcgui.ListItem(label=name, iconImage=icon, thumbnailImage=icon, path="")
     xbmc.Player().play(item=url, listitem=li)
     exit()
@@ -175,10 +151,16 @@ if mode == None or url == None or len(url) < 1:
         CATEGORIES()
 
 elif mode == 1:
-        Play(url, name, icon)
+        pac12()
 
 elif mode == 2:
-        Playbtn(url, name, icon)
+        playStream(url, name, icon)
+		
+elif mode == 4:
+		filter_cat(url)
+
+elif mode == 5:
+		filter_cat_url(url)
 
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
 xbmcgui.Window(10000).setProperty("intro.isplayed", "false")
