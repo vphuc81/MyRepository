@@ -132,7 +132,7 @@ def TVChannel(url):
                ("toyoutubeft" in link) or ("toprosport" in link) or ("toxshare" in link) or ("tophimmoi" in link) or ("tom4u" in link) or ("tomovievault" in link) or ("tomoviepool" in link) or \
                ("tomdafdah" in link) or ("tomdhdbox" in link) or ("tomdpubfilm" in link) or ("tomdscenepeeper" in link) or ("tomdluckytv" in link) or ("topac12" in link) or \
                ("tomic" in link) or ("tohappymovies" in link) or ("tosureshot" in link) or ("tomdyesmovies" in link) or ("toicefilms" in link) or ("tovtvgo" in link) or ("tophimltv137" in link) or \
-               ("tozen" in link) or ("tometalliq" in link) or ("tobob" in link) or ("tokodi4vnlauncher" in link) or ("tobennu" in link):
+               ("tozen" in link) or ("tometalliq" in link) or ("tobob" in link) or ("tokodi4vnlauncher" in link) or ("tobennu" in link) or ("tobobunleashed" in link):
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]            
             add_Link(title, link, thumb)
         xbmc.executebuiltin('Container.SetViewMode(52)')		
@@ -734,6 +734,10 @@ def add_Link(name,url,iconimage):
         return ok
     if 'tobennu' in url:
         u = 'plugin://plugin.video.bennu'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tobobunleashed' in url:
+        u = 'plugin://plugin.video.bob.unleashed'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)  
