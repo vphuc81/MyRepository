@@ -19,7 +19,7 @@ item_info_build=RTVE - %s
 item_info_name=1
 item_info_from=@PARAM1@
 item_info_convert=parseText('%s','.*(canal-24h)')
-item_info_convert=ifEmpty('%s','','http://rtvev4-live.hss.adaptive.level3.net/egress/ahandler/rtvegl8/24h_lv3_aosv4_gl8/24h_lv3_aosv4_gl8.isml/24h_lv3_aosv4_gl8-audio=128000-video=400000.m3u8')
+item_info_convert=ifEmpty('%s','','http://hlsackdn_gl8-lh.akamaihd.net/i/hlsdvrlive_1@81183/index_0650_av-p.m3u8?sd=10&rebase=on')
 item_info_convert=debug
 item_info_build=%s
 

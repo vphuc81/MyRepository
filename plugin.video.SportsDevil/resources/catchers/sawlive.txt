@@ -66,10 +66,17 @@ item_info_build=%s
 
 item_info_name=tmpUrl2
 item_info_from=u+p2+'/'+p1+'
+item_info_convert=ifEmpty('@u@','','%s')
 item_info_build=%s
 
+item_info_name=tmpUrl3
+item_info_from=@PARAM1@
+item_info_convert=getInfo('%s','.*iframe.*?src="([^"]+)','@REFERER@')
+item_info_build=%s
+
+
 item_info_name=tmpUrl
-item_info_from=tmpUrl1 || tmpUrl2
+item_info_from=tmpUrl1 || tmpUrl2 || tmpUrl3
 item_info_build=%s
 
 item_info_name=rtmp1
@@ -95,6 +102,7 @@ item_info_build=%s
 
 item_info_name=file1
 item_info_from=file1_+t+sp2+'
+#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=tmp2
@@ -121,7 +129,7 @@ item_info_convert=getInfo('%s','.*src="(http:\/\/.*\?i=[^"]+)','@REFERER@')
 item_info_build=%s
 
 item_info_name=tmp4
-item_info_from=jsUrl
+item_info_from=jsUrl || tmpUrl
 item_info_convert=getInfo('%s','(.*)','@REFERER@')
 item_info_convert=unicode_escape
 #item_info_convert=debug
@@ -129,12 +137,12 @@ item_info_build=%s
 
 item_info_name=tmp5
 item_info_from=tmp4
-item_info_convert=parseText('%s','.*(\d{5}).*?(\?[A-Za-z0-9\+=]+).*?rtmp://(.*?)/','n3|file3_|rtmp3')
+item_info_convert=parseText('%s','.*?var\s+[\w_]+\s*=\s*\[?"(\d{5})".*?(\?[A-Za-z0-9\+=]+).*?rtmp://(.*?)/','n3|file3_|rtmp3')
 item_info_build=%s
 
 item_info_name=file3
 item_info_from=n3+file3_+'
-#item_info_convert=debug
+item_info_convert=debug
 item_info_build=%s
 
 item_info_name=file

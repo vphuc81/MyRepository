@@ -5,7 +5,8 @@ item_info_build=%s
 
 item_info_name=sUrl
 item_info_from=@PARAM1@
-item_info_convert=getInfo('%s','.*(//wakwaw\.xyz/stats\.php\?p=[^"]+)','@REFERER@')
+#item_info_convert=getInfo('%s','.*(//wakwaw\.xyz/stats\.php\?p=[^"]+)','@REFERER@')
+item_info_convert=getInfo('%s','.*(//.*sucurifirewall\.com/stats\.php\?p=[^"]+)','@REFERER@')
 #item_info_convert=debug
 item_info_build=http:%s
 
@@ -19,7 +20,7 @@ item_info_name=url_
 item_info_from=@PARAM1@
 item_info_convert=getInfo('%s','.*var\s*stream\s*=\s*[\"']([^\"']+)','@REFERER@')
 #item_info_convert=debug
-item_info_build=http:%s
+item_info_build=http://ustreamyx.com%s
 
 item_info_name=pUrl
 item_info_from=url_ + token + '|Referer='+@REFERER@+'&User-Agent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML,%20like%20Gecko)%20Chrome%2F56.0.2924.87%20Safari%2F537.36&X-Requested-With%3A%20ShockwaveFlash%2F25.0.0.171

@@ -65,7 +65,7 @@ item_info_build=%s
 
 item_info_name=hls_url_1
 item_info_from=page0
-item_info_convert=getInfo('%s','.*?jwplayer\(.*"file"\s*:\s*"([^"\s]+wmsAuthSign[^"]+)"','streamlive.to')
+item_info_convert=getInfo('%s','.*?jwplayer\(.*"file"\s*:\s*"([^"\s]+m3u8\?st=[^"]+)"','streamlive.to')
 #item_info_convert=debug
 item_info_build=%s
 
