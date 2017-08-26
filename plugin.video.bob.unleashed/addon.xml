@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.bob.unleashed" name="BoB Unleashed" version="1.0.1" provider-name="midraal">
+        <requires>
+                <import addon="xbmc.python" version="2.19.0" />
+                <import addon="script.module.nanscrapers" version="0.5.5" />
+                <import addon="script.module.python.koding.aio" version="0.9.6.6"/>
+                <import addon="script.module.liveresolver" version="0.1.47" />
+                <import addon="script.module.beautifulsoup" version="3.2.1"/>
+                <import addon="script.module.requests" version="2.9.1" />
+                <import addon="script.module.addon.common" version="2.0.0" />
+                <import addon="script.module.xmltodict" version="0.9.0"/>
+				<import addon="repository.noobsandnerds" />
+				<import addon="repository.simplycaz" />
+				<import addon="repository.kodil" />
+                <!--<import addon="script.module.web-pdb" version="1.0"/>-->
+                <import addon="script.module.urlresolver" version="1.2.0"/>
+        </requires>
+        <extension point="xbmc.python.pluginsource" library="default.py">
+                <provides>audio video</provides>
+        </extension>
+        <extension point="xbmc.service" library="service.py" start="[login|startup]">
+	      </extension>
+        <extension point="xbmc.addon.metadata">
+          <summary lang="en">Unleash Your Inner Bob</summary>
+          <description lang="en">Unleash Your Inner Bob</description>
+          <platform>all</platform>
+          <forum>http://www.noobsandnerds.com/support/forumdisplay.php?fid=253</forum>
+          <website>www.noobsandnerds.com</website>
+          <video_guide>y0w8zIH4lOY</video_guide>
+          <video_preview>WdKIzajiBBI</video_preview>
+        </extension>
+</addon>

@@ -1,0 +1,18 @@
+Release 1.0.1
+  * add try block to prepare for next nanscraper release
+  * fix hang on empty link tag
+  * add fallback view setting
+  * fix another metadata bug
+  * added option to disable service
+  * fix bg queue guisetting bug
+  * fix estuary information artwork
+  * add notification for set view
+  * add information context item
+  * fix movie view context
+  * fix search
+  * fix metadata issue for SPMC
+  * add cache_folder setting
+  * fix resolver setting item  
+  * fix metadata caching
+
+Release 1.0.0 initial release

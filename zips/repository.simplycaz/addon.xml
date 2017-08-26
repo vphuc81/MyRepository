@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.simplycaz" name="Simply Caz Repo" version="1.0.2" provider-name="Simply Caz | CazWall.com">
+	<extension point="xbmc.addon.repository" name="Simply Caz Repo">
+		<info compressed="false">http://repo.cazwall.com/repolist/Plugins/addons.xml</info>
+		<checksum>http://repo.cazwall.com/repolist/Plugins/addons.xml.md5</checksum>
+		<datadir zip="true">http://repo.cazwall.com/repolist/Plugins/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Simply Caz YouTube</summary>
+		<description>
+
+		 CazWall.com | Kodi, Tech and More! This Repo is not an Official Repo for any of the add-ons in it. It's simply an easy spot for my followers. "Peace in Caribbean, Peace in the Middle East, to God be the Glory!"
+
+		</description> 
+		
+		<platform>all</platform>
+	</extension>
+</addon>
+
+
+
+
