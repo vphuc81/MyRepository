@@ -1,0 +1,4 @@
+[B]17.8.11[/B]
+
+
+Added option to settings to remove Adult items from main menu.
