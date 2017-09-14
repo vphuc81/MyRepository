@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<addon 
+	id="repository.hieuhien.vn" 
+	version="1.0.0" 
+	name="[COLOR lime][B]Hieuhien.vn Repository[/B][/COLOR]" 
+	provider-name="Hieuhien.vn">
+	<requires>
+		<import addon="xbmc.addon" version="12.0.0"/>
+	</requires>
+	<extension point="xbmc.addon.repository"
+		name="[COLOR lime][B]Hieuhien.vn Repository[/B][/COLOR]">
+		<info compressed="true">https://raw.github.com/hieuhienvn/hieuhien.vn/master/addons.xml</info>
+		<checksum>https://raw.github.com/hieuhienvn/hieuhien.vn/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://github.com/hieuhienvn/hieuhien.vn/raw/master/zips/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Install addon from Hieuhien.vn's repository</summary>
+		<description lang="en">[COLOR red][B]Hieuhien.vn[/COLOR]-[COLOR lime]Repository tập hợp các addon và repository giải trí online trên XBMC - Kodi[/B][/COLOR]</description>
+		<disclaimer lang="en">Mọi nội dung được lấy từ Internet vì vậy chúng tôi không chịu trách nhiệm về chất lượng cũng như sự ổn định</disclaimer>
+		<email>contact@hieuhien.vn</email>
+		<platform>all</platform>
+	</extension>
+</addon>
