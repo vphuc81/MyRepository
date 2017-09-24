@@ -11,19 +11,16 @@ item_info_build=%s
 item_info_name=zm_
 item_info_from=zm
 item_info_convert=getInfo('%s','.*url="([^"]+)"','@REFERER@')
-item_info_convert=debug
 item_info_build=%s
 
 item_info_name=zmhost
 item_info_from=zm_
 item_info_convert=ifEmpty('%s','http://www.zoomtv.me/kembed.php','%s')
-item_info_convert=debug
 item_info_build=%s
 
 item_info_name=postData
 #item_info_from=uagent=uagent&id='+pp+'&v='+pv+'&p='+id
 item_info_from=id='+pp+'&v='+pv+'&p='+id
-#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=pageUrl
@@ -52,7 +49,6 @@ item_info_build=%s
 
 item_info_name=url4
 item_info_from=hlsvariant://'+file+'|Referer='+ref+'&User-Agent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML,%20like%20Gecko)%20Chrome%2F56.0.2924.87%20Safari%2F537.36
-item_info_convert=debug
 item_info_convert=encodeBase64
 item_info_build=%s
 

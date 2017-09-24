@@ -5,14 +5,13 @@ item_info_build=%s
 
 item_info_name=sUrl
 item_info_from=@PARAM1@
-#item_info_convert=getInfo('%s','.*(//wakwaw\.xyz/stats\.php\?p=[^"]+)','@REFERER@')
-item_info_convert=getInfo('%s','.*(//.*sucurifirewall\.com/stats\.php\?p=[^"]+)','@REFERER@')
+item_info_convert=getInfo('%s','.*src="(.*?stats\.php.*?)"','@REFERER@')
 #item_info_convert=debug
 item_info_build=http:%s
 
-item_info_name=token
+item_info_name=pars
 item_info_from=sUrl
-item_info_convert=getInfo('%s','.*var\s*jdtk\s*=\s*[\"']([a-z0-9]+)[\"']','@REFERER@')
+item_info_convert=getInfo('%s','.+var\sjdtk="([^"]+).+="([^"]+)";','@REFERER@','token|hostid')
 #item_info_convert=debug
 item_info_build=%s
 
@@ -20,21 +19,9 @@ item_info_name=url_
 item_info_from=@PARAM1@
 item_info_convert=getInfo('%s','.*var\s*stream\s*=\s*[\"']([^\"']+)','@REFERER@')
 #item_info_convert=debug
-item_info_build=http://ustreamyx.com%s
-
-item_info_name=pUrl
-item_info_from=url_ + token + '|Referer='+@REFERER@+'&User-Agent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML,%20like%20Gecko)%20Chrome%2F56.0.2924.87%20Safari%2F537.36&X-Requested-With%3A%20ShockwaveFlash%2F25.0.0.171
-#item_info_convert=debug
-item_info_build=%s
-
-item_info_name=test
-item_info_from=pUrl
-item_info_convert=getInfo('%s','.*(m3u8\s*not\s*valid)','@REFERER@')
-item_info_convert=ifEmpty('%s','___','Playlist_not_valid')
-item_info_convert=replace('%s','___','@pUrl@')
-item_info_convert=debug
 item_info_build=%s
 
 item_info_name=url
-item_info_from=test
+item_info_from= 'http://' + hostid + url_ + token + '|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
+#item_info_convert=debug
 item_info_build=%s

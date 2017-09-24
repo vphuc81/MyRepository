@@ -12,12 +12,23 @@ item_info_name=title
 item_info_from=@PARAM1@
 item_info_build=iptvhq - %s
 
-item_info_name=rtmp
+item_info_name=rtmp_
 item_info_from=pageUrl
 item_info_convert=getInfo('%s','.*(?:trap|url)\s*=\s*["']([^"']+).*','@REFERER@')
 item_info_convert=decodeBase64
 item_info_build=%s
 
+item_info_name=rtmp
+item_info_from=rtmp_
+item_info_convert=ifEmpty('%s','','%s swfUrl=http://p.jwpcdn.com/6/12/jwplayer.flash.swf live=1 pageUrl=___')
+item_info_convert=replace('%s','___','@pageUrl@')
+item_info_build=%s
+
+item_info_name=mp4
+item_info_from=pageUrl
+item_info_convert=getInfo('%s','.*jwplayer.*?file\s*:\s*'([^']+)','@REFERER@')
+item_info_build=%s
+
 item_info_name=url
-item_info_from=rtmp+' swfUrl=http://p.jwpcdn.com/6/12/jwplayer.flash.swf live=1 pageUrl=' + pageUrl
+item_info_from=rtmp || mp4
 item_info_build=%s

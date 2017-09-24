@@ -32,26 +32,48 @@ item_info_convert=ifEmpty('%s','','http://127.1.2.3:45678/livestreamer/%s')
 #item_info_convert=ifEmpty('%s','','http://127.0.0.1:19000/livestreamer/%s')
 item_info_build=%s
 
-item_info_name=p_
+item_info_name=p__
 item_info_from=p0z || @PARAM1@
+item_info_convert=getInfo('%s','.*?\["((?:\W\w+)+)","((?:\W\w+)+)"\].*?document\.write\('(\w+)','@REFERER@','p1__|junk|p2_')
+item_info_build=%s
+
+item_info_name=p1_
+item_info_from=p1__
+item_info_convert=unicode_escape
+item_info_convert=unquote('%s')
+item_info_convert=parseText('%s','.*src="(.*)')
+#item_info_convert=debug
+item_info_build=%s
+
+item_info_name=tmpUrl1_
+item_info_from=p1_+p2_+'
+item_info_convert=ifEmpty('@p1_@','','%s')
+#item_info_convert=debug
+item_info_build=%s
+
+item_info_name=p_
+item_info_from=tmpUrl1_
 item_info_convert=getInfo('%s','.*?\["((?:\W\w+)+)","((?:\W\w+)+)"\]','@REFERER@','p2_|p1_')
 #item_info_convert=unicode_escape
 item_info_build=%s
-
+#
 item_info_name=p1
 item_info_from=p1_
 item_info_convert=unicode_escape
+#item_info_convert=debug
 item_info_build=%s
-
+#
 item_info_name=p2
 item_info_from=p2_
 item_info_convert=unicode_escape
+#item_info_convert=debug
 item_info_build=%s
-
+#
 item_info_name=tmpUrl1
 item_info_from=http://www3.sawlive.tv/embed/watch/'+p1+'/'+p2+'
 item_info_convert=ifEmpty('@p1@','','%s')
 item_info_build=%s
+#
 
 item_info_name=tmp0
 item_info_from=@PARAM1@
@@ -69,11 +91,15 @@ item_info_from=u+p2+'/'+p1+'
 item_info_convert=ifEmpty('@u@','','%s')
 item_info_build=%s
 
-item_info_name=tmpUrl3
+item_info_name=tmpUrl3_
 item_info_from=@PARAM1@
-item_info_convert=getInfo('%s','.*iframe.*?src="([^"]+)','@REFERER@')
+#item_info_convert=getInfo('%s','.*iframe.*?src="([^"]+)','@REFERER@')
+item_info_convert=getInfo('%s','.*var\s+\w+\s*=\s*"([^;]+);([^"]+).*iframe.*?src="([^']+)'\+','@REFERER@','a1|a2|u3')
 item_info_build=%s
 
+item_info_name=tmpUrl3
+item_info_from=u3+a2+'/'+a1
+item_info_build=%s
 
 item_info_name=tmpUrl
 item_info_from=tmpUrl1 || tmpUrl2 || tmpUrl3
@@ -84,30 +110,38 @@ item_info_from=tmpUrl
 item_info_convert=getInfo('%s','.*?["'/](\d{1,3}\.\d{1,3}\.\d{1,3}\.[^"'/]+)["'/]','@REFERER@')
 item_info_build=%s
 
-
 item_info_name=tmp1
 item_info_from=tmpUrl
-item_info_convert=getInfo('%s','.*?SWFObject\('([^']+)'.*?["'=]([12]\d{4}).*?(MT[^'"&]+)','@REFERER@','swf1|f1|t')
+#item_info_convert=getInfo('%s','.*?SWFObject\('([^']+)'.*?["'=]([12]\d{4}).*?(MT[^'"&]+)','@REFERER@','swf1|f1|t')
+item_info_convert=getInfo('%s','.*id="(\w+)">(\w+).*?id="\2">(\d+).*?param\s+name=\'movie\'\s+value=\'([^\']+).*?document.getElementById\("\1.*?flashvars.*?file=.*?(\?[^&]+)','@REFERER@','junk|crap|t|swf1|f1')
 item_info_build=%s
-
-item_info_name=sp2
-item_info_from=tmpUrl
-item_info_convert=getInfo('%s','.*\s*=\s*["'](%[^"']+)["']','@REFERER@')
-item_info_build=%s
-
+#
+#item_info_name=sp2
+#item_info_from=tmpUrl
+#item_info_convert=getInfo('%s','.*\s*=\s*["'](%[^"']+)["']','@REFERER@')
+#item_info_build=%s
+#
 item_info_name=file1_
 item_info_from=f1
-item_info_convert=ifEmpty('%s','','%s?')
+item_info_convert=ifEmpty('%s','','%s')
+item_info_build=%s
+#
+item_info_name=file
+item_info_from=t+file1_
+#item_info_convert=debug
 item_info_build=%s
 
-item_info_name=file1
-item_info_from=file1_+t+sp2+'
+item_info_name=tmp2_
+item_info_from=tmpUrl
+item_info_convert=getInfo('%s','(.*)','@REFERER@')
+item_info_convert=unicode_escape
 #item_info_convert=debug
 item_info_build=%s
 
 item_info_name=tmp2
-item_info_from=tmpUrl
-item_info_convert=getInfo('%s','.*?param\s+name="movie"\s+value="([^"]+).*var\s+(\w+)\s*=\s*"(\d+)".*\2\+"(\?[^&"]+).*rtmp:\/\/([^\/]+)','@REFERER@','swf2|junk|f1|f2|rtmp2')
+item_info_from=tmp2_
+item_info_convert=parseText('%s','.*?id="\w+">(\d{5}).*param\s+name='movie'\s+value='([^']+).*file=.*(\?[^&]+)&streamer=.*?:\/\/(\d+\.\d+\.\d+\.\d+)','f1|swf2|f2|rtmp2')
+#item_info_convert=getInfo('%s','.*?param\s+name="movie"\s+value="([^"]+).*var\s+(\w+)\s*=\s*"(\d+)".*\2\+"(\?[^&"]+).*rtmp:\/\/([^\/]+)','@REFERER@','swf2|junk|f1|f2|rtmp2')
 #item_info_convert=getInfo('%s','.*?id="jwplayer.*?object.*?"(http.*swf)".*?var\s+\w+\s*=\s*"([^"]+)".*?file=.*(\?[^&]+)&streamer=([^&]+)','@REFERER@','swf2|f1|f2|rtmp2')
 item_info_build=%s
 
@@ -130,27 +164,28 @@ item_info_build=%s
 
 item_info_name=tmp4
 item_info_from=jsUrl || tmpUrl
-item_info_convert=getInfo('%s','(.*)','@REFERER@')
-item_info_convert=unicode_escape
+#item_info_convert=getInfo('%s','(.*)','@REFERER@')
+item_info_convert=getInfo('%s','.*?var\s+swf\s*=\s*[\'"]([^\'"]+).*?"(\d{5}\?[^"]+).*?rtmpe?://(.*?)/','@REFERER@','swf4|file3|rtmp3')
+#item_info_convert=unicode_escape
 #item_info_convert=debug
 item_info_build=%s
 
-item_info_name=tmp5
-item_info_from=tmp4
-item_info_convert=parseText('%s','.*?var\s+[\w_]+\s*=\s*\[?"(\d{5})".*?(\?[A-Za-z0-9\+=]+).*?rtmp://(.*?)/','n3|file3_|rtmp3')
-item_info_build=%s
+#item_info_name=tmp5
+#item_info_from=tmp4
+#item_info_convert=parseText('%s','.*?var\s+[\w_]+\s*=\s*\[?"(\d{5})".*?(\?[A-Za-z0-9\+=]+).*?rtmp://(.*?)/','n3|file3_|rtmp3')
+#item_info_build=%s
 
-item_info_name=file3
-item_info_from=n3+file3_+'
-item_info_convert=debug
-item_info_build=%s
+#item_info_name=file3
+#item_info_from=n3+file3_+'
+#item_info_convert=debug
+#item_info_build=%s
 
 item_info_name=file
 item_info_from=file3||file2||file1
 item_info_build=%s
 
 item_info_name=swf
-item_info_from=swf3||swf2||swf1
+item_info_from=swf4||swf3||swf2||swf1
 item_info_build=%s
 
 item_info_name=rtmp

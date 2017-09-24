@@ -65,7 +65,7 @@ def zadd(data):
     return data
 
 def zadd2(data):
-    if re.search(".*\w+\s*=\s*eval\(\"\(\"\+\w+\+", data):
+    if re.search(".*\w+\s*=\s*eval\(\"\(\"\s*\+\s*\w+",data):
         #jsvar = re.findall(".*\w+\s*=\s*eval\(\"\(\"\+(\w+)\+", data)[0]
         matches = re.findall('\w+\s*=\s*\w+\s*\+\s*(\w+)',data)
         jsall = ''
@@ -75,8 +75,8 @@ def zadd2(data):
                 tmp = re.findall(match+'\s*=\s*[\'\"](.*?)[\"\'];',data)
                 if len(tmp)>0:
                     jsall += tmp[0]
-            if re.compile(r"jwplayer\(\'\w+.*eval\(\"\(\"\+\w+\+\"\)\"\);", flags=re.DOTALL).findall(data):
-                 tmp_ = re.sub(r"jwplayer\(\'\w+.*eval\(\"\(\"\+\w+\+\"\)\"\);", jsall, data, count=1, flags=re.DOTALL)
+            if re.compile(r"jwplayer\(\'\w+.*eval\(\"\(\"\s*\+\s*\w+\s*\+\s*\"\)\"\);", flags=re.DOTALL).findall(data):
+                 tmp_ = re.sub(r"jwplayer\(\'\w+.*eval\(\"\(\"\s*\+\s*\w+\s*\+\s*\"\)\"\);", jsall, data, count=1, flags=re.DOTALL)
             if re.compile(r"\w+\.\w+\({.*}\s+</script>(.*)</script>", flags=re.DOTALL).findall(data):
                 tmp_ = re.sub(r"\w+.\w+\({.*}\s+</script>(.*)</script>", jsall, data, count=1, flags=re.DOTALL)
             data = tmp_
@@ -298,9 +298,7 @@ def doDemystify(data):
                 
     #jairox: ustreamix -- Obfuscator HTML : https://github.com/BlueEyesHF/Obfuscator-HTML
     r = re.compile(r"var\s*(\w+)\s*=\s*\[([A-Za-z0-9+=\/\",\s]+)\];\s*\1\.forEach.*-\s*(\d+)")
-    #lib.common.log("JairoX_Decrypt:" + data)
     if r.findall(data):
-        #lib.common.log("JairoX_Decrypt1:" + data)
         try:
             matches = re.compile(r"var\s*(\w+)\s*=\s*\[([A-Za-z0-9+=\/\",\s]+)\];\s*\1\.forEach.*-\s*(\d+)").findall(data)
             chunks = matches[0][1].split(',')

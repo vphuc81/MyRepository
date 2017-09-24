@@ -179,7 +179,7 @@ class Parser(object):
             startUrl = inputList.curr_url
             while count == 0 and i <= maxits:
                 if i > 1:
-                    ignoreCache = False if postData == '' else True
+                    ignoreCache = True
                     demystify =  True
 
                 # Trivial: url is from known streamer

@@ -187,7 +187,7 @@ def getInfo(item, params, src, xml=False, mobile=False):
     common.log('Get Info from: "'+ paramPage + '" from "' + referer + '"')
     #common.log('JairoX1:' + paramRegex)
     data = common.getHTML(paramPage, form_data, referer, xml, mobile, ignoreCache=False, demystify=True)
-    #common.log('JairoX2:' + data)
+    #common.log('JairoX2:' + str(data))
     return reg.parseText(data, paramRegex, variables)
 
 def hex2ascii(src):

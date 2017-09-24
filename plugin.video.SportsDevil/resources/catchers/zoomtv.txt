@@ -33,7 +33,6 @@ item_info_build=%s
 item_info_name=file1
 item_info_from=pageUrl
 item_info_convert=getInfo('%s','.*?rtmp://.*?\/(\w+)"','@REFERER@')
-#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=req2
@@ -62,7 +61,6 @@ item_info_build=.*;(\w+\s*=\s*{.*?"\w+"\s*:\s*"%s".*?};)
 item_info_name=data
 item_info_from=pageUrl
 item_info_convert=getInfo('%s','@rex1@','@REFERER@')
-#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=rtmp__
@@ -73,14 +71,12 @@ item_info_build=%s
 item_info_name=rtmp1_
 item_info_from=rtmp__
 item_info_convert=replace('%s','\','')
-#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=ip
 item_info_from=data
 item_info_convert=parseText('%s','.*:window\.atob\("([^"]+)')
 item_info_convert=decodeBase64
-#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=rtmp1
@@ -109,7 +105,6 @@ item_info_build=%s
 
 item_info_name=rtmp
 item_info_from=rtmp1 || rtmp2
-#item_info_convert=debug
 item_info_build=%s
 
 
