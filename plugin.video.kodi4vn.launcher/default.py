@@ -325,7 +325,7 @@ def I1iiIii ( cid , page = "" ) :
 @ O0 . route ( '/play/<url>/<title>' )
 def III1iII1I1ii ( url , title = "" ) :
  i1IIi11111i ( "Play [%s]" % title , "/play/%s/%s" % ( title , url ) )
- O0 . set_resolved_url ( oOOo0 ( url ) , subtitles = "https://docs.google.com/spreadsheets/d/16l-nMNyOvrtu4FKLm-ctGDNClCjI09XKp3lcOKPOXMk/export?format=tsv&gid=0" )
+ O0 . set_resolved_url ( oOOo0 ( url ) , subtitles = "https://raw.githubusercontent.com/vinhcomp/xml/master/xml/sub1.tsv" )
  if 54 - 54: ooO0OO000o - O0O0O0O00OooO % i1iII1I1i1i1
 def oOOo0 ( url ) :
  if "youtube" in url :

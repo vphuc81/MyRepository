@@ -571,7 +571,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon
   id="plugin.video.kodi4vn.launcher"
-  version="2.3.8.1"
+  version="2.3.8.2"
   name="**[COLOR yellow]Kodi4VN Launcher[/COLOR]"
   provider-name="kodi4vn">
   <requires>
