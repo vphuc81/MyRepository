@@ -1,5 +1,5 @@
 <?xml version="1.1" encoding="UTF-8"?>
-<addon id="plugin.video.Pac-12" version="1.3.9" name="*Pac-12 Pro" provider-name="LongHong">
+<addon id="plugin.video.Pac-12" version="1.3.15" name="*Pac-12 Pro" provider-name="LongHong">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
 		<import addon="script.module.simplejson" />
@@ -13,8 +13,8 @@
     </extension>
 	<extension point="xbmc.service" library="resources/lib/proxy_server.py" start="startup" />
     <extension point="xbmc.addon.metadata">
-        <summary>Pac-12 Network and various (USA) Live TV channels. Last updated by LongHong 08.13.2017.</summary>
-        <description>Pac-12</description>
+        <summary>Pac-12 Network and various (USA) Live TV channels. Last updated by LongHong 08.31.2017 @ 12:27AM.</summary>
+        <description>Pac-12 Pro for Home Media Entertainments.</description>
         <platform>all</platform>
     </extension>
 </addon>

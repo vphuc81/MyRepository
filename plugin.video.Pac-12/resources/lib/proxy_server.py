@@ -34,11 +34,14 @@ from livestreamer import Livestreamer, StreamError, PluginError, NoPluginError
 from common import ShowMessage, infoDialog, Paths
 import pyperclip
 import xbmcaddon
+from xbmcgui import ListItem
+from xbmc import executebuiltin, Player
+import urllib
 
 myDebugPath = Paths.pluginDataDir
 streamer_buf = myDebugPath + "streamer_buf.txt"
 
-settings = xbmcaddon.Addon(id='plugin.video.Pac-12.TestV137')
+settings = xbmcaddon.Addon(id='plugin.video.Pac-12')
 hostName = str(settings.getSetting(id="ipaddress"))
 portNumber = str(settings.getSetting(id="portNumber"))
 
@@ -48,7 +51,7 @@ def onetv_decrypt(playpath):
     infoDialog('Process onetv decrypt..', '[COLOR blue]Kodi Local Proxy[/COLOR]')
     user_agent = 'Mozilla%2F5.0%20%28Linux%3B%20Android%205.1.1%3B%20Nexus%205%20Build%2FLMY48B%3B%20wv%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Version%2F4.0%20Chrome%2F43.0.2357.65%20Mobile%20Safari%2F537.36'
     token = "65rSw"+"UzRad"
-    servers = ['185.152.64.236', '185.59.222.232']
+    servers = ['185.102.219.67', '185.102.219.72', '185.102.218.56']
     time_stamp = str(int(time.time()) + 144000)
     to_hash = "{0}{1}/hls/{2}".format(token,time_stamp,playpath)
     out_hash = b64encode(md5.new(to_hash).digest()).replace("+", "-").replace("/", "_").replace("=", "")
@@ -57,20 +60,6 @@ def onetv_decrypt(playpath):
     new_playpath = '{url}|User-Agent={user_agent}&referer={referer}'.format(url=url,user_agent=user_agent,referer='6d6f6264726f2e6d65'.decode('hex'))
     new_playpath = base64.b64encode(new_playpath)
     return new_playpath
-
-myProxy = hostName + ':' + portNumber + "/version"
-def proxy_ping(purl, serverPath):
-	try:
-		import requests		
-		req = requests.get(purl)
-		proxyIsRunning = True
-		common.ShowMessage("proxy_req", "Server status: " + str(proxyIsRunning), str(req.text))
-	except:
-		proxyIsRunning = False
-		common.ShowMessage("proxy_req", "Server status: " + str(proxyIsRunning), "Proxy Server is not running")
-	if not proxyIsRunning:
-		xbmc.executebuiltin('RunScript(' + serverPath + ')')
-	return proxyIsRunning
 
 s = [   '185.39.11.42',
         '185.39.9.34',
@@ -102,6 +91,7 @@ class MyHandler(BaseHTTPRequestHandler):
     def answer_request(self, sendData):
         try:
             request_path = self.path[1:]
+            urllib.quote_plus(request_path)
             extensions = ['.Vprj', '.edl', '.txt', '.chapters.xml']
             for extension in extensions:
                 if request_path.endswith(extension):
@@ -128,6 +118,14 @@ class MyHandler(BaseHTTPRequestHandler):
                 fURL = base64.b64decode(realpath)
                 self.serveFile(fURL, sendData)
                 infoDialog('[COLOR lime]Done sendData..ready streamer[/COLOR]', 'sendData', time=1000)
+            elif request_path[0:13] == "youtubevideo/" or request_path[0:13] == "vodstreamers/" or request_path[0:13] == "f4mstreamers/": 
+                infoDialog('Process Video streamers', '[COLOR aqua]answer_request[/COLOR]', time=3000)
+                url = self.path[14:]
+                urllib.quote_plus(url)
+                listitem = ListItem(path=url)
+                listitem.setInfo(type="Video", infoLabels={"mediatype": "movie", "title": "LiveTV_VOD"})
+                Player().play(url, listitem)
+                return
             else:
                 self.send_response(403)
         except:
