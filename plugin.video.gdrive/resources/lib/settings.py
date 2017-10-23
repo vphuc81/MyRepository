@@ -67,7 +67,10 @@ def parse_query(query):
     q['mode'] = q.get('mode', 'main')
     return q
 
-plugin_queries = parse_query(sys.argv[2][1:])
+plugin_queries = None
+try:
+    plugin_queries = parse_query(sys.argv[2][1:])
+except:pass
 
 # global variables
 import addon_parameters
@@ -90,7 +93,7 @@ class settings:
         self.cc = getParameter('cc', self.getSetting('cc', True))
         self.srt = getParameter('srt', self.getSetting('srt', True))
         #self.srt_folder = getParameter('srt_folder', self.getSetting('srt_folder', False))
-        self.strm = getParameter('strm', False)
+        self.strm = getParameter('strm', True) ## force to TRUE, set to false manually
 
         self.username = getParameter('username', '')
         self.setCacheParameters()
@@ -101,6 +104,8 @@ class settings:
 #        self.cloudResume = self.getSetting('resumepoint', 0)
         self.cloudResumePrompt = self.getSetting('resumeprompt', False)
 #        self.cloudSpreadsheet = self.getSetting('library_filename', 'CLOUD_DB')
+        self.tv_watch  = self.getSetting('tv_db_watch', False)
+        self.movie_watch  = self.getSetting('movie_db_watch', False)
 
         self.seek = getParameter('seek', 0)
         self.trace = getSetting('trace', False)
@@ -129,6 +134,10 @@ class settings:
 #            self.thumbnailResolution = 120
 #        else:
 #            self.thumbnailResolution = 200
+
+        self.streamer =  self.getSetting('streamer', True)
+        self.streamPort =  int(self.getSetting('stream_port', 8011))
+
 
         self.encfsDownloadType = int(self.getSetting('encfs_download_type', 1))
 
@@ -169,7 +178,9 @@ class settings:
         self.encfsInode = int(self.getSetting('encfs_inode', 0))
         self.encfsLast = self.getSetting('encfs_last', '')
 
-
+    def setCryptoParameters(self):
+        self.cryptoPassword = self.getSetting('crypto_password')
+        self.cryptoSalt = self.getSetting('crypto_salt')
 
     def getParameter(self, key, default=''):
         try:

@@ -1,5 +1,5 @@
 #http://stackoverflow.com/questions/6425131/encrpyt-decrypt-data-in-python-with-salt
-import os, random, struct, string
+import os, random, struct, string, re
 
 try:
     import Crypto.Random
@@ -33,7 +33,7 @@ class encryption():
 
         if password != None and password != '':
             self.key = self.generateKey(password,)
-            print self.key
+            #print self.key
 
 
     def generateKey(self,password, iterations=NUMBER_OF_ITERATIONS):
@@ -43,7 +43,7 @@ class encryption():
         assert iterations > 0
 
         key = str(password) + str(self.salt)
-        print "iterations " + str(iterations)
+        #print "iterations " + str(iterations)
         for i in range(iterations):
             key = hashlib.sha256(key).digest()
 
@@ -114,7 +114,7 @@ class encryption():
                         break
                     outfile.write(decryptor.decrypt(chunk))
 
-                outfile.truncate(origsize)
+                ##outfile.truncate(origsize)
 
     def decryptStream(self,response, chunksize=24*1024):
             if ENCRYPTION_ENABLE == 0:
@@ -131,6 +131,63 @@ class encryption():
                     outfile.write(decryptor.decrypt(chunk))
 
                 outfile.truncate(origsize)
+
+    def decryptStreamChunk44(self,response, wfile, chunksize=24*1024):
+            if ENCRYPTION_ENABLE == 0:
+                return
+    #    with open(in_filename, 'rb') as infile:
+            origsize = struct.unpack('<Q', response.read(struct.calcsize('Q')))[0]
+            decryptor = AES.new(self.key, AES.MODE_ECB)
+
+            currentSize = origsize
+            while True:
+                chunk = response.read(chunksize)
+                currentSize = currentSize + chunksize
+
+                if len(chunk) == 0:
+                    break
+                if currentSize <= origsize:
+                    wfile.write(decryptor.decrypt(chunk))
+                else:
+                    deltaSize = currentSize - origsize
+                    fixSize = chunk - deltaSize
+                    wfile.write(decryptor.decrypt(chunk)[:])
+
+    def decryptStreamChunk(self,response, wfile, chunksize=24*1024, startOffset=0):
+            if ENCRYPTION_ENABLE == 0:
+                return
+    #    with open(in_filename, 'rb') as infile:
+            origsize = struct.unpack('<Q', response.read(struct.calcsize('Q')))[0]
+            decryptor = AES.new(self.key, AES.MODE_ECB)
+
+            count = 0
+            while True:
+                chunk = response.read(chunksize)
+                count = count + 1
+                if len(chunk) == 0:
+                    break
+
+                responseChunk = decryptor.decrypt(chunk)
+                if count == 1 and startOffset !=0:
+                    wfile.write(responseChunk[startOffset:])
+                elif (len(chunk)) < (len(responseChunk.strip())):
+                    wfile.write(responseChunk.strip())
+                else:
+                    wfile.write(responseChunk)
+
+    def decryptStreamChunk2(self,response, wfile, chunksize=24*1024, startOffset=0):
+            if ENCRYPTION_ENABLE == 0:
+                return
+    #    with open(in_filename, 'rb') as infile:
+            origsize = struct.unpack('<Q', response.read(struct.calcsize('Q')))[0]
+            decryptor = AES.new(self.key, AES.MODE_ECB)
+
+            while True:
+                chunk = response.read(chunksize)
+
+                if len(chunk) == 0:
+                    break
+                wfile.write(decryptor.decrypt(chunk))
 
     def encryptFile(self, in_filename, out_filename=None, chunksize=64*1024):
         """ Encrypts a file using AES (CBC mode) with the
@@ -178,4 +235,42 @@ class encryption():
 
                     outfile.write(encryptor.encrypt(chunk))
 
+
+    def encryptString(self, stringDecrypted):
+
+        if ENCRYPTION_ENABLE == 0:
+            return
+
+
+    #    key = generate_key(key, salt, NUMBER_OF_ITERATIONS)
+
+    #    iv = ''.join(chr(random.randint(0, 0xFF)) for i in range(16))
+        encryptor = AES.new(self.key, AES.MODE_ECB)
+
+
+        if len(stringDecrypted) == 0:
+            return
+        elif len(stringDecrypted) % 16 != 0:
+            stringDecrypted += ' ' * (16 - len(stringDecrypted) % 16)
+
+        import base64
+        stringEncrypted = base64.b64encode(encryptor.encrypt(stringDecrypted))
+        stringEncrypted = re.sub('/', '---', stringEncrypted)
+        return stringEncrypted
+
+
+    def decryptString(self, stringEncrypted):
+
+        if ENCRYPTION_ENABLE == 0:
+            return
+
+        decryptor = AES.new(self.key, AES.MODE_ECB)
+
+        if len(stringEncrypted) == 0:
+            return
+        import base64
+        stringEncrypted = re.sub('---', '/', stringEncrypted)
+        stringDecrypted = decryptor.decrypt(base64.b64decode(stringEncrypted))
+
+        return stringDecrypted
 

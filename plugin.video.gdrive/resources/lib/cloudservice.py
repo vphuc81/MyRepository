@@ -34,11 +34,12 @@ from resources.lib import streamer
 
 
 
-
-#global variables
 PLUGIN_URL = sys.argv[0]
-plugin_handle = int(sys.argv[1])
-
+plugin_handle = None
+try:
+    #global variables
+    plugin_handle = int(sys.argv[1])
+except:pass
 
 
 def decode(data):
@@ -110,15 +111,19 @@ class cloudservice(object):
         import xbmcvfs
         xbmcvfs.mkdir(path)
 
-        musicPath = path + '/music'
-        moviePath = path + '/movies'
-        tvPath = path + '/tv'
-        videoPath = path + '/video-other'
+        #musicPath = path + '/music'
+        #moviePath = path + '/movies'
+        #tvPath = path + '/tv'
+        #videoPath = path + '/video-other'
+        musicPath = path
+        moviePath = path
+        tvPath = path
+        videoPath = path
 
-        xbmcvfs.mkdir(musicPath)
-        xbmcvfs.mkdir(tvPath)
-        xbmcvfs.mkdir(videoPath)
-        xbmcvfs.mkdir(moviePath)
+        #xbmcvfs.mkdir(musicPath)
+        #xbmcvfs.mkdir(tvPath)
+        #xbmcvfs.mkdir(videoPath)
+        #xbmcvfs.mkdir(moviePath)
 
 
         mediaItems = self.getMediaList(folderID,contentType=contentType)
@@ -164,7 +169,7 @@ class cloudservice(object):
                         if not tv:
                             tv = item.file.regtv3.match(title)
 
-                        if tv:
+                        if 0 and tv:
                             show = tv.group(1).replace("\S{2,}\.\S{2,}", " ")
                             show = show.rstrip("\.")
                             season = tv.group(2)
@@ -1209,7 +1214,8 @@ class cloudservice(object):
 
                         #add encfs option unless viewing as encfs already
                         if not encfs:
-                            cm.append(( '[treat as encfs]', 'XBMC.Container.Update('+self.PLUGIN_URL+'?mode=index&content_type='+contextType+'&encfs=true&'+urllib.urlencode(values)+')', ))
+                            cm.append((  self.addon.getLocalizedString(30192), 'XBMC.Container.Update('+self.PLUGIN_URL+'?mode=index&content_type='+contextType+'&encfs=true&'+urllib.urlencode(values)+')', ))
+                        cm.append((  self.addon.getLocalizedString(30193), 'XBMC.Container.Update('+self.PLUGIN_URL+'?mode=index&content_type='+contextType+'&encfs=true&'+urllib.urlencode(values)+')', ))
                         #if within encfs and pictures, disable right-click default photo options; add download-folder
                         if encfs and contextType == 'image':
                             values = {'instance': self.instanceName, 'epath': epath, 'foldername': folder.title, 'folder': folder.id}
@@ -1400,17 +1406,17 @@ class cloudservice(object):
                 # play-original for video only
                 if (contextType == 'video'):
                     if (package.file.type != package.file.AUDIO and self.settings.promptQuality) and not encfs:
-                        cm.append(( self.addon.getLocalizedString(30123), 'XBMC.RunPlugin('+url + '&original=true'+')', ))
+                        cm.append(( self.addon.getLocalizedString(30123), 'XBMC.RunPlugin('+url + '&strm=false&original=true'+')', ))
                     else:
-                        cm.append(( self.addon.getLocalizedString(30151), 'XBMC.RunPlugin('+url + '&promptquality=true'+')', ))
+                        cm.append(( self.addon.getLocalizedString(30151), 'XBMC.RunPlugin('+url + '&strm=false&promptquality=true'+')', ))
 
                     # if the options are disabled in settings, display option to playback with feature
                     if not self.settings.srt:
-                        cm.append(( self.addon.getLocalizedString(30138), 'XBMC.RunPlugin('+url + '&srt=true'+')', ))
+                        cm.append(( self.addon.getLocalizedString(30138), 'XBMC.RunPlugin('+url + '&strm=false&srt=true'+')', ))
                     if not self.settings.cc:
-                        cm.append(( self.addon.getLocalizedString(30146), 'XBMC.RunPlugin('+url + '&cc=true'+')', ))
+                        cm.append(( self.addon.getLocalizedString(30146), 'XBMC.RunPlugin('+url + '&strm=false&cc=true'+')', ))
 
-                    cm.append(( self.addon.getLocalizedString(30147), 'XBMC.RunPlugin('+url + '&seek=true'+')', ))
+                    cm.append(( self.addon.getLocalizedString(30147), 'XBMC.RunPlugin('+url + '&strm=false&seek=true'+')', ))
 #                    cm.append(( self.addon.getLocalizedString(30148), 'XBMC.RunPlugin('+url + '&resume=true'+')', ))
 #                    values = {'instance': self.instanceName, 'folder': package.folder.id}
 #                    folderurl = self.PLUGIN_URL+ str(playbackURL)+ '&' + urllib.urlencode(values)

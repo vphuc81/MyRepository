@@ -390,7 +390,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
   </extension>
 </addon>
 
-<addon id="plugin.video.gdrive" version="0.8.35" name="gdrive" provider-name="ddurdle">
+<addon id="plugin.video.gdrive" version="0.8.52.1" name="gdrive" provider-name="ddurdle">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
     </requires>
@@ -401,6 +401,8 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
         <summary>Listen to music, watch videos and view photos from your Google Drive account</summary>
         <description>Plays music and video from your Google Drive account.  Not affiliated with Google.</description>
         <platform>all</platform>
+    </extension>
+	<extension point="xbmc.service" library="service.py" start="login">
     </extension>
 </addon>
 
