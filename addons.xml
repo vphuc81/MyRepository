@@ -20,11 +20,11 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.accessasiatv" name="*[COLOR yellow]Accessasia-TV[/COLOR]" version="1.5" provider-name="Vinh Computer Repair">
+<addon id="plugin.video.accessasiatv" name="*[COLOR yellow]Phim Hot[/COLOR]" version="2.2" provider-name="Vinh Computer Repair">
 <requires>
 	<import addon="xbmc.python" version="2.1.0"/>
 </requires>
-<extension point="xbmc.python.pluginsource" library="default.py"/>
+<extension point="xbmc.python.pluginsource" library="default.py" />
   <extension point="xbmc.addon.metadata">
     <summary>Danasyentertainment.com</summary>
     <description>Watch a top selection of 10 Vietnamese TV channels at Accessasia.tv</description>
@@ -613,7 +613,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon id="plugin.video.livetv"
        name=" ***[COLOR yellow]LIVE-TV[/COLOR]"
-       version="2.2.33"
+       version="2.2.34"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
@@ -634,7 +634,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon id="plugin.video.livetvinternational"
        name=" **[COLOR yellow]Live TV-International[/COLOR]"
-       version="2.2.22"
+       version="2.2.23"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />

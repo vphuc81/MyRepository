@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.accessasiatv" name="*[COLOR yellow]Accessasia-TV[/COLOR]" version="1.5" provider-name="Vinh Computer Repair">
+<addon id="plugin.video.accessasiatv" name="*[COLOR yellow]Phim Hot[/COLOR]" version="2.2" provider-name="Vinh Computer Repair">
 <requires> 
 	<import addon="xbmc.python" version="2.1.0"/>   
 </requires>
-<extension point="xbmc.python.pluginsource" library="default.py"/>
+<extension point="xbmc.python.pluginsource" library="default.py" />
   <extension point="xbmc.addon.metadata">
     <summary>Danasyentertainment.com</summary>
     <description>Watch a top selection of 10 Vietnamese TV channels at Accessasia.tv</description>

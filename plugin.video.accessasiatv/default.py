@@ -10,14 +10,14 @@ def Home():
     path = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('path') ).decode("utf-8")
     path = xbmc.translatePath(os.path.join(path,"temp.jpg"))
     #urllib.urlretrieve('http://langsongviet.com/fta4vnForum/upload/images/ads/temp.jpg',path)
-    urllib.urlretrieve('https://www.dropbox.com/s/x38occ8l47x9p0v/tempPat.jpg',path)
+    urllib.urlretrieve('https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/tempPat.jpg',path)
     #urllib.urlretrieve("tempPat.jpg",path)
     img = xbmcgui.ControlImage(360,140,540,360, path)
     wdlg = xbmcgui.WindowDialog()
     #wdlg.addControl(img)
     #wdlg.doModal()
 
-    homemenu = GetUrl("http://langsongviet.com/fta4vnForum/upload/images/ads/accessasiatv/source_file")
+    homemenu = GetUrl("https://raw.githubusercontent.com/vinhcomp/xml/master/xml/phimhot")
     #homemenu = codecs.open("local_source_file", encoding='utf-8').read()
     for menutitle,menulink in eval(homemenu):
         addDir(menutitle,menulink,'indexgroup',path.replace("temp.jpg","icon.png"))
