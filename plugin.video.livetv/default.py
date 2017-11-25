@@ -479,6 +479,7 @@ def add_Link(name,url,iconimage):
         return ok    
     if 'touno' in url and apk:
         u = xbmc . executebuiltin ( 'StartAndroidActivity ( com.vietuu.hlsplayer )' )
+        u = xbmc . executebuiltin ( 'StartAndroidActivity ( com.aftv.unoiptv )' ) 
         u = xbmc . executebuiltin ( 'StartAndroidActivity ( com.unoipbox.stb )' )         
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)
         return ok    
