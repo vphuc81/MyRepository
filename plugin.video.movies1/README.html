@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title></title>
+<!-- 2017-11-10 Fri 21:51 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Org-mode">
+
+<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style type="text/css">
+/* org mode styles on top of twbs */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    font-size: 18px;
+    margin-bottom: 105px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 101px;
+    background-color: #f5f5f5;
+}
+
+footer > div {
+    padding: 10px;
+}
+
+footer p {
+    margin: 0 0 5px;
+    text-align: center;
+    font-size: 16px;
+}
+
+#table-of-contents {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+blockquote p {
+    font-size: 18px;
+}
+
+pre {
+    font-size: 16px;
+}
+
+.footpara {
+    display: inline-block;
+}
+
+figcaption {
+  font-size: 16px;
+  color: #666;
+  font-style: italic;
+  padding-bottom: 15px;
+}
+
+/* from twbs docs */
+
+.bs-docs-sidebar.affix {
+    position: static;
+}
+@media (min-width: 768px) {
+    .bs-docs-sidebar {
+        padding-left: 20px;
+    }
+}
+
+/* All levels of nav */
+.bs-docs-sidebar .nav > li > a {
+    display: block;
+    padding: 4px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #999;
+}
+.bs-docs-sidebar .nav > li > a:hover,
+.bs-docs-sidebar .nav > li > a:focus {
+    padding-left: 19px;
+    color: #A1283B;
+    text-decoration: none;
+    background-color: transparent;
+    border-left: 1px solid #A1283B;
+}
+.bs-docs-sidebar .nav > .active > a,
+.bs-docs-sidebar .nav > .active:hover > a,
+.bs-docs-sidebar .nav > .active:focus > a {
+    padding-left: 18px;
+    font-weight: bold;
+    color: #A1283B;
+    background-color: transparent;
+    border-left: 2px solid #A1283B;
+}
+
+/* Nav: second level (shown on .active) */
+.bs-docs-sidebar .nav .nav {
+    display: none; /* Hide by default, but at >768px, show it */
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 30px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav > li > a:focus {
+    padding-left: 29px;
+}
+.bs-docs-sidebar .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav > .active:focus > a {
+    padding-left: 28px;
+    font-weight: 500;
+}
+
+/* Nav: third level (shown on .active) */
+.bs-docs-sidebar .nav .nav .nav {
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 40px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav .nav > li > a:focus {
+    padding-left: 39px;
+}
+.bs-docs-sidebar .nav .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav .nav > .active:focus > a {
+    padding-left: 38px;
+    font-weight: 500;
+}
+
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) {
+    .bs-docs-sidebar .nav > .active > ul {
+        display: block;
+    }
+    /* Widen the fixed sidebar */
+    .bs-docs-sidebar.affix,
+    .bs-docs-sidebar.affix-bottom {
+        width: 213px;
+    }
+    .bs-docs-sidebar.affix {
+        position: fixed; /* Undo the static from mobile first approach */
+        top: 20px;
+    }
+    .bs-docs-sidebar.affix-bottom {
+        position: absolute; /* Undo the static from mobile first approach */
+    }
+    .bs-docs-sidebar.affix .bs-docs-sidenav,.bs-docs-sidebar.affix-bottom .bs-docs-sidenav {
+        margin-top: 0;
+        margin-bottom: 0
+    }
+}
+@media (min-width: 1200px) {
+    /* Widen the fixed sidebar again */
+    .bs-docs-sidebar.affix-bottom,
+    .bs-docs-sidebar.affix {
+        width: 263px;
+    }
+}
+</style>
+<script type="text/javascript">
+$(function() {
+    'use strict';
+
+    $('.bs-docs-sidebar li').first().addClass('active');
+
+    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
+
+    $('.bs-docs-sidebar').affix();
+});
+</script>
+</head>
+<body>
+<div id="content" class="container">
+<div class="row"><div class="col-md-9"><h1 class="title"></h1>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Steps needed to get a working addon</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> change addon.xml</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+change the addon id and name and anything else you need to suit your addon
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> change settings.xml</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+If you changed the addon ID and Folder name
+open resources folder/settings.xml
+</p>
+
+<p>
+on lines 26, 30, 34, &amp; 59 change just the plugin.video.jen to match
+your addon ID
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> change the jen folder name</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+change it to reflect the addon id you assigned in step 1. not really needed while developing, but important before doing the first release so you don't overwrite any other addons using Jen
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> fill out variables</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+fill out these lines in default.py
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">root_xml_url = "http://"  # url of the root xml file
+__builtin__.tvdb_api_key = ""  # tvdb api key
+__builtin__.tmdb_api_key = ""  # tmdb api key
+__builtin__.trakt_client_id = ""  # trakt client id
+__builtin__.trakt_client_secret = ""  # trakt client secret
+__builtin__.search_db_location = ""  # location of search db
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> <span class="label label-default OPTIONAL">OPTIONAL</span> Add a plugin</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+have a look at plugin.py to see where you can overwrite default behaviour, if there are any other usefull ones, open an issue
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Steps needed to upgrade to a new version of jen</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>slide over your icon, fanart, strings.po, settings.xml, addon.xml to the new version
+</li>
+<li>copy over the configuration variables in your default.py
+</li>
+<li>up your addon.xml version number if need be
+</li>
+<li>push out new version
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> How to Make a Search DB for Jen</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Open the jensearchdb.py
+</p>
+
+<p>
+Change line 269 to the url for your main.xml
+Change line 271 'jen' to whatever name you want the search.xml to be called.  In this case it will be jen.xml
+Change line 272 to the url for your section.xml this is handy if you don't want to compile your entire url. Can use subsections.
+        If however you want the entire folder added to search type in the main.xml url here again.
+Change line 273 'Jen' to whatever you want it to output for name in the search on your addon.  If for example you choose The Avengers
+        (provided you have that movie) the search will display: Jen - The Avengers.
+Change line 277 to be folder where you want the xml and db file to output too
+Change line 278 to be folder where you want the xml and db file to output too
+Change line 290 to be folder where you want the xml and db file to output too but only up to the <i>output</i>
+</p>
+
+<p>
+Save the file.
+</p>
+
+<p>
+Next make a folder and save this py file. Add a folder called "output" (without the "")
+Open a text editor and make an empty file called search.db and slide it in the output folder.
+</p>
+
+<p>
+Open the jensearch.py in idle or another program that runs py files.  Run it.
+</p>
+
+<p>
+The results are then sent to the output folder you made that you directed the py to.
+</p>
+
+<p>
+Slide the db file onto your server.
+</p>
+
+<p>
+Open the default.py for your addon and add the search.db url to "<span class="underline"><span class="underline">builtin</span></span>.search<sub>db</sub><sub>location</sub>"
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> XML Formats for Jen</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Main Directories</h3>
+<div class="outline-text-3" id="text-4-1">
+<pre class="example">
+&lt;dir&gt;
+        &lt;name&gt;&lt;/name&gt;
+        &lt;link&gt;&lt;/link&gt;
+        &lt;animated_thumbnail&gt;&lt;/animated_thumbnail&gt;
+        &lt;thumbnail&gt;&lt;/thumbnail&gt;
+        &lt;animated_fanart&gt;&lt;/animated_fanart&gt;
+        &lt;fanart&gt;&lt;/fanart&gt;
+&lt;/dir&gt;
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Movies</h3>
+<div class="outline-text-3" id="text-4-2">
+<pre class="example">
+&lt;item&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;meta&gt;
+                &lt;content&gt;movie&lt;/content&gt;
+                &lt;imdb&gt;&lt;/imdb&gt;
+                &lt;title&gt;&lt;/title&gt;
+                &lt;year&gt;&lt;/year&gt;
+        &lt;/meta&gt;
+        &lt;link&gt;
+                &lt;sublink&gt;search&lt;/sublink&gt;
+                &lt;sublink&gt;searchsd&lt;/sublink&gt;
+        &lt;/link&gt;
+        &lt;animated_thumbnail&gt;&lt;/animated_thumbnail&gt;
+        &lt;thumbnail&gt;&lt;/thumbnail&gt;
+        &lt;animated_fanart&gt;&lt;/animated_fanart&gt;
+        &lt;fanart&gt;&lt;/fanart&gt;
+&lt;/item&gt;
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> TV Directories</h3>
+<div class="outline-text-3" id="text-4-3">
+<pre class="example">
+&lt;dir&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;meta&gt;
+                &lt;content&gt;tvshow&lt;/content&gt;
+                &lt;imdb&gt;&lt;/imdb&gt;
+                &lt;tvdb&gt;&lt;/tvdb&gt;
+                &lt;tvshowtitle&gt;&lt;/tvshowtitle&gt;
+                &lt;year&gt;&lt;/year&gt;
+        &lt;/meta&gt;
+        &lt;link&gt;&lt;/link&gt;
+        &lt;animated_thumbnail&gt;&lt;/animated_thumbnail&gt;
+        &lt;thumbnail&gt;&lt;/thumbnail&gt;
+        &lt;animated_fanart&gt;&lt;/animated_fanart&gt;
+        &lt;fanart&gt;&lt;/fanart&gt;
+&lt;/dir&gt;
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> TV Seasons</h3>
+<div class="outline-text-3" id="text-4-4">
+<pre class="example">
+&lt;dir&gt;
+        &lt;name&gt;&lt;/name&gt;
+        &lt;meta&gt;
+                &lt;content&gt;season&lt;/content&gt;
+                &lt;imdb&gt;&lt;/imdb&gt;
+                &lt;tvdb&gt;&lt;/tvdb&gt;
+                &lt;tvshowtitle&gt;&lt;/tvshowtitle&gt;
+                &lt;year&gt;&lt;/year&gt;
+                &lt;season&gt;&lt;/season&gt;
+        &lt;/meta&gt;
+        &lt;link&gt;&lt;/link&gt;
+        &lt;animated_thumbnail&gt;&lt;/animated_thumbnail&gt;
+        &lt;thumbnail&gt;&lt;/thumbnail&gt;
+        &lt;animated_fanart&gt;&lt;/animated_fanart&gt;
+        &lt;fanart&gt;&lt;/fanart&gt;
+&lt;/dir&gt;
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> TV Episodes</h3>
+<div class="outline-text-3" id="text-4-5">
+<pre class="example">
+&lt;item&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;meta&gt;
+                &lt;content&gt;episode&lt;/content&gt;
+                &lt;imdb&gt;&lt;/imdb&gt;
+                &lt;tvdb&gt;&lt;/tvdb&gt;
+                &lt;tvshowtitle&gt;&lt;/tvshowtitle&gt;
+                &lt;year&gt;&lt;/year&gt;
+                &lt;title&gt;&lt;/title&gt;
+                &lt;premiered&gt;&lt;/premiered&gt;
+                &lt;season&gt;&lt;/season&gt;
+                &lt;episode&gt;&lt;/episode&gt;
+        &lt;/meta&gt;
+        &lt;link&gt;
+                &lt;sublink&gt;search&lt;/sublink&gt;
+                &lt;sublink&gt;searchsd&lt;/sublink&gt;
+        &lt;/link&gt;
+        &lt;animated_thumbnail&gt;&lt;/animated_thumbnail&gt;
+        &lt;thumbnail&gt;&lt;/thumbnail&gt;
+        &lt;animated_fanart&gt;&lt;/animated_fanart&gt;
+        &lt;fanart&gt;&lt;/fanart&gt;
+&lt;/item&gt;
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-4-6" class="outline-3">
+<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Youtube Channels</h3>
+<div class="outline-text-3" id="text-4-6">
+<pre class="example">
+&lt;plugin&gt;
+  &lt;title&gt;&lt;/title&gt;
+  &lt;link&gt;plugin://plugin.video.youtube/channel/***CHANNEL NUMBER HERE***/playlists/&lt;/link&gt;
+  &lt;animated_thumbnail&gt;&lt;/animated_thumbnail&gt;
+  &lt;thumbnail&gt;&lt;/thumbnail&gt;
+  &lt;animated_fanart&gt;&lt;/animated_fanart&gt;
+  &lt;fanart&gt;&lt;/fanart&gt;
+&lt;/plugin&gt;
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-4-7" class="outline-3">
+<h3 id="sec-4-7"><span class="section-number-3">4.7</span> Settings</h3>
+<div class="outline-text-3" id="text-4-7">
+<p>
+&lt;plugin&gt;
+&lt;name&gt;30701&lt;/name&gt;
+&lt;link&gt;plugin://plugin.video.jen/?action=openSettings&lt;/link&gt;
+&lt;thumbnail&gt;&lt;/thumbnail&gt;
+&lt;summary&gt;Settings for Jen Addons&lt;/summary&gt;
+&lt;/plugin&gt;
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4-8" class="outline-3">
+<h3 id="sec-4-8"><span class="section-number-3">4.8</span> Search</h3>
+<div class="outline-text-3" id="text-4-8">
+<p>
+&lt;plugin&gt;
+&lt;name&gt;30702&lt;/name&gt;
+&lt;link&gt;plugin://plugin.video.jen/?action=search&lt;/link&gt;
+&lt;thumbnail&gt;&lt;/thumbnail&gt;
+&lt;summary&gt;Search for Jen Addon&lt;/summary&gt;
+&lt;/plugin&gt;
+</p>
+</div>
+</div>
+</div>
+</div><div class="col-md-3"><nav id="table-of-contents">
+<div id="text-table-of-contents" class="bs-docs-sidebar">
+<ul class="nav">
+<li><a href="#sec-1">1. Steps needed to get a working addon</a>
+<ul class="nav">
+<li><a href="#sec-1-1">1.1. change addon.xml</a></li>
+<li><a href="#sec-1-2">1.2. change settings.xml</a></li>
+<li><a href="#sec-1-3">1.3. change the jen folder name</a></li>
+<li><a href="#sec-1-4">1.4. fill out variables</a></li>
+<li><a href="#sec-1-5">1.5. Add a plugin</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Steps needed to upgrade to a new version of jen</a></li>
+<li><a href="#sec-3">3. How to Make a Search DB for Jen</a></li>
+<li><a href="#sec-4">4. XML Formats for Jen</a>
+<ul class="nav">
+<li><a href="#sec-4-1">4.1. Main Directories</a></li>
+<li><a href="#sec-4-2">4.2. Movies</a></li>
+<li><a href="#sec-4-3">4.3. TV Directories</a></li>
+<li><a href="#sec-4-4">4.4. TV Seasons</a></li>
+<li><a href="#sec-4-5">4.5. TV Episodes</a></li>
+<li><a href="#sec-4-6">4.6. Youtube Channels</a></li>
+<li><a href="#sec-4-7">4.7. Settings</a></li>
+<li><a href="#sec-4-8">4.8. Search</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+</div></div></div>
+<footer id="postamble" class="">
+<div><p class="date">Created: 2017-11-10 Fri 21:51</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org-mode</a> 9.0.9)</p>
+</div>
+</footer>
+</body>
+</html>

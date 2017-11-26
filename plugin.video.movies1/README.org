@@ -1,0 +1,174 @@
+#+SEQ_TODO: OPTIONAL
+* Steps needed to get a working addon
+** change addon.xml
+change the addon id and name and anything else you need to suit your addon
+** change settings.xml
+If you changed the addon ID and Folder name
+open resources folder/settings.xml
+
+on lines 26, 30, 34, & 59 change just the plugin.video.jen to match
+your addon ID
+** change the jen folder name
+change it to reflect the addon id you assigned in step 1. not really needed while developing, but important before doing the first release so you don't overwrite any other addons using Jen
+** fill out variables
+fill out these lines in default.py
+#+BEGIN_SRC python
+root_xml_url = "http://"  # url of the root xml file
+__builtin__.tvdb_api_key = ""  # tvdb api key
+__builtin__.tmdb_api_key = ""  # tmdb api key
+__builtin__.trakt_client_id = ""  # trakt client id
+__builtin__.trakt_client_secret = ""  # trakt client secret
+__builtin__.search_db_location = ""  # location of search db
+#+END_SRC
+** OPTIONAL Add a plugin
+have a look at plugin.py to see where you can overwrite default behaviour, if there are any other usefull ones, open an issue
+* Steps needed to upgrade to a new version of jen
+- slide over your icon, fanart, strings.po, settings.xml, addon.xml to the new version
+- copy over the configuration variables in your default.py
+- up your addon.xml version number if need be
+- push out new version
+* How to Make a Search DB for Jen
+Open the jensearchdb.py
+
+Change line 269 to the url for your main.xml
+Change line 271 'jen' to whatever name you want the search.xml to be called.  In this case it will be jen.xml
+Change line 272 to the url for your section.xml this is handy if you don't want to compile your entire url. Can use subsections.
+        If however you want the entire folder added to search type in the main.xml url here again.
+Change line 273 'Jen' to whatever you want it to output for name in the search on your addon.  If for example you choose The Avengers
+        (provided you have that movie) the search will display: Jen - The Avengers.
+Change line 277 to be folder where you want the xml and db file to output too
+Change line 278 to be folder where you want the xml and db file to output too
+Change line 290 to be folder where you want the xml and db file to output too but only up to the /output/
+
+Save the file.
+
+Next make a folder and save this py file. Add a folder called "output" (without the "")
+Open a text editor and make an empty file called search.db and slide it in the output folder.
+
+Open the jensearch.py in idle or another program that runs py files.  Run it.
+
+The results are then sent to the output folder you made that you directed the py to.
+
+Slide the db file onto your server.
+
+Open the default.py for your addon and add the search.db url to "__builtin__.search_db_location"
+
+* XML Formats for Jen
+** Main Directories
+#+BEGIN_EXAMPLE
+  <dir>
+          <name></name>
+          <link></link>
+          <animated_thumbnail></animated_thumbnail>
+          <thumbnail></thumbnail>
+          <animated_fanart></animated_fanart>
+          <fanart></fanart>
+  </dir>
+#+END_EXAMPLE
+** Movies
+#+BEGIN_EXAMPLE
+  <item>
+          <title></title>
+          <meta>
+                  <content>movie</content>
+                  <imdb></imdb>
+                  <title></title>
+                  <year></year>
+          </meta>
+          <link>
+                  <sublink>search</sublink>
+                  <sublink>searchsd</sublink>
+          </link>
+          <animated_thumbnail></animated_thumbnail>
+          <thumbnail></thumbnail>
+          <animated_fanart></animated_fanart>
+          <fanart></fanart>
+  </item>
+#+END_EXAMPLE
+** TV Directories
+#+BEGIN_EXAMPLE
+  <dir>
+          <title></title>
+          <meta>
+                  <content>tvshow</content>
+                  <imdb></imdb>
+                  <tvdb></tvdb>
+                  <tvshowtitle></tvshowtitle>
+                  <year></year>
+          </meta>
+          <link></link>
+          <animated_thumbnail></animated_thumbnail>
+          <thumbnail></thumbnail>
+          <animated_fanart></animated_fanart>
+          <fanart></fanart>
+  </dir>
+#+END_EXAMPLE
+** TV Seasons
+#+BEGIN_EXAMPLE
+  <dir>
+          <name></name>
+          <meta>
+                  <content>season</content>
+                  <imdb></imdb>
+                  <tvdb></tvdb>
+                  <tvshowtitle></tvshowtitle>
+                  <year></year>
+                  <season></season>
+          </meta>
+          <link></link>
+          <animated_thumbnail></animated_thumbnail>
+          <thumbnail></thumbnail>
+          <animated_fanart></animated_fanart>
+          <fanart></fanart>
+  </dir>
+#+END_EXAMPLE
+** TV Episodes
+#+BEGIN_EXAMPLE
+  <item>
+          <title></title>
+          <meta>
+                  <content>episode</content>
+                  <imdb></imdb>
+                  <tvdb></tvdb>
+                  <tvshowtitle></tvshowtitle>
+                  <year></year>
+                  <title></title>
+                  <premiered></premiered>
+                  <season></season>
+                  <episode></episode>
+          </meta>
+          <link>
+                  <sublink>search</sublink>
+                  <sublink>searchsd</sublink>
+          </link>
+          <animated_thumbnail></animated_thumbnail>
+          <thumbnail></thumbnail>
+          <animated_fanart></animated_fanart>
+          <fanart></fanart>
+  </item>
+#+END_EXAMPLE
+** Youtube Channels
+#+BEGIN_EXAMPLE
+  <plugin>
+    <title></title>
+    <link>plugin://plugin.video.youtube/channel/***CHANNEL NUMBER HERE***/playlists/</link>
+    <animated_thumbnail></animated_thumbnail>
+    <thumbnail></thumbnail>
+    <animated_fanart></animated_fanart>
+    <fanart></fanart>
+  </plugin>
+#+END_EXAMPLE
+** Settings
+<plugin>
+<name>30701</name>
+<link>plugin://plugin.video.jen/?action=openSettings</link>
+<thumbnail></thumbnail>
+<summary>Settings for Jen Addons</summary>
+</plugin>
+** Search
+<plugin>
+<name>30702</name>
+<link>plugin://plugin.video.jen/?action=search</link>
+<thumbnail></thumbnail>
+<summary>Search for Jen Addon</summary>
+</plugin>

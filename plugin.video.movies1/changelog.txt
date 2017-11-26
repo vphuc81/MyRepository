@@ -1,0 +1,54 @@
+v1.0.11
+- add context item to fetch list uncached
+- tweak sorting function
+- tweak caching a bit
+
+v1.0.10
+- remove live resolver dependency
+- update server
+
+v1.0.8
+- fix caching layer
+
+v1.0.6
+- change over to new server
+
+v1.0.5
+- bandaid patch to keep running till server work is done
+
+v1.0.4
+- Fixed request-calls
+- Switched xml-fetching from Koding to requests
+
+v1.0.3
+- add seperate tag for animated list fanart and thumb
+- add song and song collection types to content detection
+- add resume playback and watched status
+- alter sort function
+- fix warning about plot
+- fix search loop after clear
+- fix playback issue
+- fix metadata empty crashing lists
+- fix tmdb trailers
+- hook up music scrapers
+- master fix other view type bug
+- rewire part of the sports scrapers
+
+Release 1.0.1
+   add try block to prepare for next nanscraper release
+   fix hang on empty link tag
+   add fallback view setting
+   fix another metadata bug
+   added option to disable service
+   fix bg queue guisetting bug
+   fix estuary information artwork
+   add notification for set view
+   add information context item
+   fix movie view context
+   fix search
+   fix metadata issue for SPMC
+   add cache_folder setting
+   fix resolver setting item
+   fix metadata caching
+
+Release 1.0.0 initial release
