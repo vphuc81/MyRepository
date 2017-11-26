@@ -87,6 +87,16 @@ def getHTML(url, form_data='', referer='', xml=False, mobile=False, ignoreCache=
     request = CachedWebRequest(cookiePath, Paths.cacheDir)
     return request.getSource(url, form_data, referer, xml, mobile, ignoreCache, demystify)
 
+def getLocation(url): #get 302 response location    
+    if 'tinyurl' in url:
+        cookiePath = xbmc.translatePath(os.path.join(Paths.cacheDir, 'cookies.lwp'))
+        request = CachedWebRequest(cookiePath, Paths.cacheDir)
+        return request.getLocation(url)
+
+    return url
+    
+    
+
 def getCookies(cookieName, domain):
     cookiePath = xbmc.translatePath(os.path.join(Paths.cacheDir, 'cookies.lwp'))
     

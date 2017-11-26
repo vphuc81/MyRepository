@@ -81,6 +81,15 @@ class BaseRequest(object):
             url = parsed_link.geturl().encode('ascii')
         #url is str (quoted)
         return url
+    
+    #302 response redirect location
+    def getLocation(self, url):
+        r = self.s.get(url, allow_redirects=False, timeout=20)
+        if 'Location' in r.headers:
+             rloc = r.headers['Location']
+        else:
+            rloc = url        
+        return rloc
 
     def getSource(self, url, form_data, referer, xml=False, mobile=False):
         url = self.fixurl(url)
@@ -168,9 +177,9 @@ class BaseRequest(object):
             r.encoding = 'windows-1251'
             
         response  = r.text
-                
 
-        
+       
+
         if 'beget=begetok' in response: # av
             _cookie = requests.cookies.create_cookie('beget','begetok',domain=urlparse.urlsplit(url).netloc,path='/')
             self.s.cookies.set_cookie(_cookie)

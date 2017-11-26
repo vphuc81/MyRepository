@@ -22,7 +22,7 @@ MA 02110-1301, USA.
 
 import xbmc
 import base64
-import urlparse
+import urlparse,urllib
 import sys
 from SocketServer import ThreadingMixIn
 from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
@@ -31,6 +31,7 @@ import struct
 import livestreamer
 from livestreamer.exceptions import StreamError
 from urlparse import urljoin
+
 
 ##aes stuff
 _android_ssl = False
@@ -74,15 +75,20 @@ def create_decryptor(self, key, sequence):
         raise StreamError("Missing URI to decryption key")
 
     if self.key_uri != key.uri:
-
         zoom_key = self.reader.stream.session.options.get("zoom-key")
         zuom_key = self.reader.stream.session.options.get("zuom-key")
+        livecam_key = self.reader.stream.session.options.get("livecam-key")
         saw_key = self.reader.stream.session.options.get("saw-key")
         your_key = self.reader.stream.session.options.get("your-key")
+        mama_key = self.reader.stream.session.options.get("mama-key")
         if zoom_key:
             uri = 'http://www.zoomtv.me/k.php?q='+base64.urlsafe_b64encode(zoom_key+base64.urlsafe_b64encode(key.uri))
         elif zuom_key:
             uri = 'http://www.zuom.xyz/k.php?q='+base64.urlsafe_b64encode(zuom_key+base64.urlsafe_b64encode(key.uri))
+        elif livecam_key:           
+            h = urlparse.urlparse(urllib.unquote(livecam_key)).netloc
+            q = urlparse.urlparse(urllib.unquote(livecam_key)).query            
+            uri = 'http://%s/kaes?q='%h+base64.urlsafe_b64encode(q+base64.b64encode(key.uri))
         elif saw_key:
             if 'foxsportsgo' in key.uri:
                 _tmp = key.uri.split('/')
@@ -90,11 +96,18 @@ def create_decryptor(self, key, sequence):
             elif 'nlsk.neulion' in key.uri:
                 _tmp = key.uri.split('?')
                 uri = urljoin(saw_key,'/m/stream?'+_tmp[-1])
+            elif 'nlsk' in key.uri:
+                _tmp = key.uri.split('?')
+                uri = 'http://bile.level303.club/m/stream?'+_tmp[-1]
             elif 'nhl.com' in key.uri:
                 _tmp = key.uri.split('/')
                 uri = urljoin(saw_key,'/m/streams?ci='+_tmp[-3]+'&k='+_tmp[-1])
             else:
                 uri = key.uri
+        elif mama_key:
+           if 'nlsk' in key.uri:
+                _tmp = key.uri.split('&url=')
+                uri = 'http://mamahd.in/nba?url=' + _tmp[-1]
         elif your_key:
             if 'mlb.com' in key.uri:
                 _tmp = key.uri.split('?')
@@ -188,8 +201,11 @@ class MyHandler(BaseHTTPRequestHandler):
     """
     Sends the requested file and add additional headers.
     """
-    def serveFile(self, fURL, sendData):
+    def serveFile(self, fURL, sendData):        
+
         session = livestreamer.session.Livestreamer()
+        #session.set_loglevel("debug")
+
         if _dec:
             livestreamer.stream.hls.HLSStreamWriter.create_decryptor = create_decryptor
             livestreamer.stream.hls.HLSStreamWorker.process_sequences = process_sequences
@@ -197,18 +213,24 @@ class MyHandler(BaseHTTPRequestHandler):
         if '|' in fURL:
                 sp = fURL.split('|')
                 fURL = sp[0]
-                headers = dict(urlparse.parse_qsl(sp[1]))
-                session.set_option("http-headers", headers)
+                headers = dict(urlparse.parse_qsl(sp[1]))                
                 session.set_option("http-ssl-verify", False)
                 session.set_option("hls-segment-threads", 1)
                 if 'zoomtv' in headers['Referer']:
                     session.set_option("zoom-key", headers['Referer'].split('?')[1])                    
                 elif 'zuom' in headers['Referer']:
                     session.set_option("zuom-key", headers['Referer'].split('?')[1])
+                elif 'livecam' in headers['Referer'] or 'emty.space' in headers['Referer']:
+                    session.set_option("livecam-key", headers['Referer'])
+                    headers.pop('Referer')
                 elif 'sawlive' in headers['Referer']:
                     session.set_option("saw-key", headers['Referer'])
                 elif 'yoursportsinhd' in headers['Referer']:
                     session.set_option("your-key", headers['Referer'])
+                elif 'mamahd' in headers['Referer']:
+                    session.set_option("mama-key", headers['Referer'].split('&')[1])
+                
+                session.set_option("http-headers", headers)
         try:
             streams = session.streams(fURL)
             self.send_response(200)

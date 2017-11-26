@@ -9,36 +9,37 @@ item_info_build=%s
 
 item_info_name=tokUrl
 item_info_from=@PARAM1@
-item_info_build=http://bro.adca.st/nws.php
+item_info_build=http://bro.adca.st/token2.php
 
 item_info_name=tok
 item_info_from=tokUrl
-#item_info_convert=getXML('%s','.*\w+["']\s*:\s*["']([^"']+).*','@pageUrl@')
-item_info_build=Ra2vjTJBQ1LEaWgJXoipaQ
+item_info_convert=getXML('%s','.*\w+["']\s*:\s*["']([^"']+).*','@pageUrl@')
+item_info_build=%s
 
 item_info_name=file.tmp
 item_info_from=pageUrl
-item_info_convert=getInfo('%s','.*(?:url|trap)\s*=\s*["']([^"']+).*','@REFERER@')
+item_info_convert=getInfo('%s','.*(?:url|trap)\s*=\s*["']([^"']+).*','http://bonstreams.net')
 item_info_convert=decodeBase64
 item_info_build=%s
 
-item_info_name=ref
+item_info_name=ref2
 item_info_from=pageUrl
 item_info_convert=quote(%s)
-item_info_convert=quote(%s)
-item_info_build=%s
-
-item_info_name=ua
-item_info_from=+'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'+
-item_info_convert=quote(%s)
-item_info_convert=quote(%s)
+#item_info_convert=quote(%s)
 item_info_build=%s
 
 item_info_name=file
 item_info_from=file.tmp+tok
 item_info_build=%s
 
+item_info_name=url2
+item_info_from=hls://'+file+'|Referer='+ref2+'&User-Agent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML,%20like%20Gecko)%20Chrome%2F61.0.3163.100%20Safari%2F537.36'
+item_info_convert=debug
+item_info_convert=encodeBase64
+item_info_build=%s
+
 item_info_name=url
-item_info_from=file+'|Referer='+ref+'&User-Agent='+ua+'&X-Requested-With=ShockwaveFlash/24.0.0.221
+#item_info_from=file+'|User-Agent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML,%20like%20Gecko)%20Chrome%2F61.0.3163.100%20Safari%2F537.36&Referer=http://bro.adca.st/stream.php'
+item_info_from=http://127.1.2.3:45678/livestreamer/'+url2+'
 item_info_build=%s
 

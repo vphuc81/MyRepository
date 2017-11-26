@@ -13,15 +13,20 @@ item_info_from=@PARAM1@
 item_info_build=http://livesports.pw/embedn.php?file=%s&height=397&width=650
 #item_info_convert=debug
 
-item_info_name=hls_url1
+item_info_name=hls_url1_
 item_info_from=pUrl
 item_info_convert=getInfo('%s','.*player.*?(?:file|source):\s*['"](http:\/\/(?!edge).*?)["']','@REFERER@')
 #item_info_convert=debug
 item_info_build=%s
 
+item_info_name=hls_url1
+item_info_from=hls_url1_+'|Referer='+pUrl+'&User-Agent=Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.100 Safari/537.36&X-Requested-With=ShockwaveFlash/23.0.0.162'
+#item_info_convert=debug
+item_info_build=%s
+
 item_info_name=hls_url_
 item_info_from=pUrl
-item_info_convert=getInfo('%s','.*player.*?(?:file|source):\s*['"](http://edge\d+.*?)["']','@pUrl@')
+item_info_convert=getInfo('%s','.*player.*?(?:file|source|videoUrl)\s*[:=]\s*['"](http://.*?edge\d+.*?)["']','@pUrl@')
 #item_info_convert=replaceRegex('%s','http://edge\d+','')
 #item_info_convert=debug
 item_info_build=%s

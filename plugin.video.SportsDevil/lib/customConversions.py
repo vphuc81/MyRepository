@@ -187,7 +187,7 @@ def getInfo(item, params, src, xml=False, mobile=False):
     common.log('Get Info from: "'+ paramPage + '" from "' + referer + '"')
     #common.log('JairoX1:' + paramRegex)
     data = common.getHTML(paramPage, form_data, referer, xml, mobile, ignoreCache=False, demystify=True)
-    #common.log('JairoX2:' + str(data))
+    #common.log('JairoX2:' + str(data.encode('ascii', 'ignore').decode('ascii')))
     return reg.parseText(data, paramRegex, variables)
 
 def hex2ascii(src):
@@ -309,12 +309,14 @@ def replace(item, params, src):
     return paramstr.replace(paramSrch,paramRepl)
 
 
-def replaceRegex(params, src):
+def replaceRegex(item, params, src):
     paramArr = __parseParams(params)
     paramStr = paramArr[0].replace('%s', src)
     paramSrch = paramArr[1]
     paramRepl = paramArr[2]
-
+    if paramRepl.startswith('@') and paramRepl.endswith('@'):
+        paramRepl = item.getInfo(paramRepl.strip('@'))
+    
     r = re.compile(paramSrch, re.IGNORECASE + re.DOTALL + re.MULTILINE + re.UNICODE)
     ms = r.findall(paramStr)
     if ms:

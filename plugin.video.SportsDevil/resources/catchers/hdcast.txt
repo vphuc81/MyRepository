@@ -9,16 +9,18 @@ item_info_build=%s
 
 item_info_name=pageUrl_
 item_info_from=pUrl
-item_info_convert=getInfo('%s','.*src=(http:\/\/[^\/]+)([^\s]+).*','@REFERER@','host|path')
+item_info_convert=getInfo('%s','.*src=(http:\/\/[^\/]+)(\/(?!ads)[^\s]+)','@REFERER@','host|path')
 item_info_build=%s
 
 item_info_name=phpUrl_
 item_info_from=host+path+'
+item_info_convert=ifEmpty('@host@','','%s')
 item_info_convert=getInfo('%s','.*iframe.*src=(.*?)&amp;','@pUrl@')
 item_info_build=%s
 
 item_info_name=phpUrl
 item_info_from=host+'/'+phpUrl_+'&width=680&height=490
+item_info_convert=ifEmpty('@host@','','%s')
 item_info_build=%s
 
 item_info_name=file

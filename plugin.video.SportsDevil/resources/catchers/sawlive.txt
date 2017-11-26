@@ -10,11 +10,13 @@ item_info_build=%s
 item_info_name=p0z
 item_info_from=u1+u2
 item_info_convert=ifEmpty('@u2@','','%s')
+#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=p0
 item_info_from=p0z
 item_info_convert=getInfo('%s','.*src="(http://\w+.sawlive.tv/embed\w+/[^"]+)"','@REFERER@')
+#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=ref

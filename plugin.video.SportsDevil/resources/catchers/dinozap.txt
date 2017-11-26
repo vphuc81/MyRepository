@@ -121,7 +121,7 @@ item_info_build=%s
 
 item_info_name=url4
 item_info_from=hlsvariant://'+file+'|User-Agent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML,%20like%20Gecko)%20Chrome%2F60.0.3112.90%20Safari%2F537.36&Referer='+ref4
-item_info_convert=debug
+#item_info_convert=debug
 item_info_convert=encodeBase64
 item_info_build=%s
 

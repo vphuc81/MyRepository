@@ -16,7 +16,7 @@ item_info_build=%s
 #item_info_name=api1
 #item_info_from=page
 #item_info_convert=randomfloat(0,1)
-#item_info_build=https://www.firstone.tv/api/?cacheFucker=%s
+#item_info_build=https://www.firstonetv.net/api/?cacheFucker=%s
 
 #item_info_name=postData1
 #item_info_from=action=tracking&act=get&c='+cn+'&id='+id
@@ -31,7 +31,7 @@ item_info_build=%s
 item_info_name=api2
 item_info_from=page
 item_info_convert=randomfloat(0,1)
-item_info_build=https://www.firstone.tv/api/?cacheFucker=%s
+item_info_build=https://www.firstonetv.net/api/?cacheFucker=%s
 
 item_info_name=postData2
 item_info_from=action=hiro&result=get'+
@@ -40,16 +40,16 @@ item_info_build=%s
 item_info_name=tmp3
 item_info_from=api2+'|'+postData2
 item_info_convert=ifEmpty('@ptok@','%s','')
-item_info_convert=getInfo('%s','.*"hash":"(\w+)","time":(\d+),"rss":(\d+)','@page@','hash|time|rss')
+item_info_convert=getInfo('%s','.*"hiro":(\d+),"hash":"(\w+)","time":(\d+),"rss":(\d+)','@page@','hiro|hash|time|rss')
 item_info_build=%s
 
 item_info_name=api3
 item_info_from=page
 item_info_convert=randomfloat(0,1)
-item_info_build=https://www.firstone.tv/api/?cacheFucker=%s
+item_info_build=https://www.firstonetv.net/api/?cacheFucker=%s
 
 item_info_name=postData3
-item_info_from=action=hiro&result='+rss+'&time='+time+'&hash='+hash
+item_info_from=action=hiro&result='+hiro+'&time='+time+'&hash='+hash
 item_info_build=%s
 
 item_info_name=ctok
@@ -65,7 +65,7 @@ item_info_build=%s
 item_info_name=api4
 item_info_from=page
 item_info_convert=randomfloat(0,1)
-item_info_build=https://www.firstone.tv/api/?cacheFucker=%s
+item_info_build=https://www.firstonetv.net/api/?cacheFucker=%s
 
 item_info_name=postData4
 item_info_from=action=channel&ctoken='+ctoken+'&c='+cn+'&id='+id
@@ -73,7 +73,7 @@ item_info_build=%s
 
 item_info_name=url_
 item_info_from=api4+'|'+postData4
-item_info_convert=getInfo('%s','.*surl":".*(http[^"]+)"','@page@')
+item_info_convert=getInfo('%s','.*surl":".*?(http[^"]+)"','@page@')
 item_info_convert=replace('%s','\','')
 #item_info_convert=debug
 item_info_build=%s

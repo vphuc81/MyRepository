@@ -9,6 +9,7 @@ item_info_build=%s
 
 item_info_name=zm_
 item_info_from=zm+'/sdembed?v='+id
+#item_info_convert=debug
 item_info_build=http://%s
 
 item_info_name=zmhost
@@ -24,15 +25,48 @@ item_info_name=postUrl
 item_info_from=zmhost + '|' + postData
 item_info_build=%s
 
+item_info_name=data0
+item_info_from=postUrl
+item_info_convert=getInfo('%s','.*(Clappr\.Player.*?<style>)','@REFERER@')
+item_info_build=%s
+
+item_info_name=hls_
+item_info_from=data0
+item_info_convert=parseText('%s','.*\w+\s*=\s*"(/.*?m3u[^"]+)')
+item_info_build=%s
+
+item_info_name=tmp_
+item_info_from=data0
+item_info_convert=parseText('%s','.*replace\('(\w+)',\s*window.atob\(\"(.*?)\"','r_|ts_')
+item_info_build=%s
+
+item_info_name=ts
+item_info_from=ts_
+item_info_convert=decodeBase64
+#item_info_convert=debug
+item_info_build=%s
+
+item_info_name=hls
+item_info_from=http://'+zm+hls_+'|Referer='+zmhost+'&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36
+item_info_convert=ifEmpty('@hls_@','','%s')
+item_info_convert=replaceRegex('%s','/(\w+)/\d+','@ts@')
+#item_info_convert=debug
+item_info_build=%s
+
 item_info_name=file1
 item_info_from=postUrl
 item_info_convert=getInfo('%s','.*?rtmp://.*?\/(\w+)"','@REFERER@')
 item_info_build=%s
 
-item_info_name=req2
+item_info_name=req2_
 item_info_from=postUrl
 item_info_convert=getInfo('%s','.*?file.?:\s*[\'"]((?:hd)?smil[^\'"]+)[\'"].*','@REFERER@')
-item_info_convert=ifEmpty('%s','','http://www.seelive.me/%s')
+item_info_convert=ifEmpty('%s','','%s')
+item_info_build=%s
+
+item_info_name=req2
+item_info_from='http://'+zm+'/'+req2_
+item_info_convert=ifEmpty('@req2_@','','%s')
 item_info_build=%s
 
 item_info_name=file2
@@ -51,6 +85,7 @@ item_info_build=.*;(\w+\s*=\s*{.*?"\w+"\s*:\s*"%s".*?};)
 item_info_name=data
 item_info_from=postUrl
 item_info_convert=getInfo('%s','@rex1@','@REFERER@')
+#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=ip
@@ -79,7 +114,7 @@ item_info_from='rtmp://'+ip+rtmp_2
 item_info_convert=ifEmpty('@rtmp_2@','','%s')
 item_info_build=%s
 
-item_info_name=rtmp
+item_info_name=rtmp_
 item_info_from=rtmp1 || rtmp2
 item_info_build=%s
 
@@ -101,7 +136,11 @@ item_info_build=%s
 # this._application = this._application.replace(config.hle7iAp,config.Zo7frlA);
 #this._connection.connect(this._application,config.qoeFrl2,config.TRiexl4,config.hlUDia0,config.g2ajieQ);
 
+item_info_name=rtmp
+item_info_from=rtmp_ + ' playpath=' + file + ' swfVfy=1 swfUrl=http://sts.livecamtv.me/player/7.12/jwplayer.flash.swf flashVer=WIN\27,0,0,117 conn=S:' + file + ' conn=S:'+num+' conn=S:'+tok+' conn=S:V&gt;JWhui^@2ESdu0?}&gt;AN live=1 token=Q!lrB@G1)ww(-dQ4J4 pageUrl=' + zmhost
+item_info_build=%s
+
 
 item_info_name=url
-item_info_from=rtmp + ' playpath=' + file + ' swfVfy=1 swfUrl=http://sts.livecamtv.me/player/7.12/jwplayer.flash.swf flashVer=WIN\27,0,0,117 conn=S:' + file + ' conn=S:'+num+' conn=S:'+tok+' conn=S:V&gt;JWhui^@2ESdu0?}&gt;AN live=1 token=Q!lrB@G1)ww(-dQ4J4 pageUrl=' + zmhost
+item_info_from=hls||rtmp
 item_info_build=%s
