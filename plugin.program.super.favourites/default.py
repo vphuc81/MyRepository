@@ -294,7 +294,7 @@ def addGlobalMenuItem(menu, item, ignore, label, thumbnail, u, keyword):
 
     if mode != _XBMC:
         cmd = '%s?mode=%d' % (sys.argv[0], _XBMC)
-        label = GETTEXT(30040) % DISPLAYNAME
+        label = GETTEXT(30040)# % DISPLAYNAME
         menu.append((label, 'XBMC.Container.Update(%s)' % cmd))
 
         if mode == _FOLDER or mode == _MAIN:
@@ -631,7 +631,7 @@ def addMainItems():
         thumbnail = 'DefaultVideoPlaylists.png'
         fanart    = ''
 
-        label = GETTEXT(30146) % DISPLAYNAME
+        label = GETTEXT(30146)# % DISPLAYNAME
         addDir(label, _IPLAY, thumbnail=thumbnail, isFolder=True, fanart=fanart, infolabels={'plot':GETTEXT(30196)})
         separator = True
 
@@ -643,7 +643,7 @@ def addMainItems():
 
         thumbnail, fanart = getFolderThumb(PROFILE, True)
 
-        label = GETTEXT(30040) % DISPLAYNAME
+        label = GETTEXT(30040)# % DISPLAYNAME
         addDir(label, _XBMC, thumbnail=thumbnail, isFolder=True, fanart=fanart, infolabels={'plot':GETTEXT(30197)})
         separator = True
 

@@ -1,6 +1,0 @@
-<favourites>
-	<favourite name="[COLOR red]Ai Chưa Có FlyTV xin mang tới cho Vinh update[/COLOR]" thumb="https://googledrive.com/host/0B7zkkQwo5pr5fjVUZG5MRkhFalRKTHF0T0poZnd6aTZUbmx1ZDZWMkwtR3FHZFhtdTB4TTQ/tvtrongnuoc.png">PlayMedia(&quot;;)?sf_options=winID%3D10025%26_options_sf&quot;)</favourite>
-	<favourite name="[COLOR white][LIVE][/COLOR] [COLOR yellow]FlyTV - TV Trong Nước - Thế Giới Giải Trí [/COLOR][COLOR lime]* Please Click Here *[/COLOR]" thumb="androidapp://sources/apps/com.flytv.box.png">StartAndroidActivity(&quot;com.flytv.box&quot;)</favourite>
-	<favourite name="[COLOR white][LIVE][/COLOR] [COLOR yellow]HTV - Online[/COLOR]" thumb="special://home/addons\plugin.video.htvonline-1.4\icon.png">ActivateWindow(10025,&quot;plugin://plugin.video.htvonline/&quot;,return)</favourite>
-	<favourite name="[COLOR white][LIVE][/COLOR] [COLOR yellow]HTV - Online Plus[/COLOR]" thumb="special://home/addons\plugin.video.HTVonline-0.0.7\icon.png">ActivateWindow(10025,&quot;plugin://plugin.video.HTVonline/&quot;,return)</favourite>
-</favourites>

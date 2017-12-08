@@ -2,7 +2,7 @@
 <strings>
 	<string id="30000">Super Favourites</string>
 	<string id="30001">Super Favourite</string>
-	<string id="30004">Create new Super Folder</string>
+	<string id="30004">[COLOR blue]Vinh Computer Repair[/COLOR]</string>
 	<string id="30005">Super Favourite settings</string>
 	<string id="30006">Add to %s favourites</string>
 	<string id="30007">Copy favourite</string>
@@ -37,7 +37,7 @@
 	<string id="30037">F10</string>
 	<string id="30038">F11</string>
 	<string id="30039">F12</string>	
-	<string id="30040">Explore %s favourites</string>	
+	<string id="30040">[COLOR blue]------------------------[/COLOR]</string>	
 	<string id="30041">Move up</string>	
 	<string id="30042">Move down</string>	
 	<string id="30043">Choose thumbnail</string>	
@@ -50,7 +50,7 @@
 	<string id="30051">Show separator</string>
 	<string id="30052">Change playback mode</string>
 	<string id="30053">Launch Super Favourites</string>
-	<string id="30054">iSearch</string>
+	<string id="30054">[COLOR yellow]iSearch[/COLOR]</string>
 	<string id="30055">Show iSearch menu item</string>
 	<string id="30056">Location of Super Favourites folder</string>	
 	<string id="30057">Edit search term</string>
@@ -142,7 +142,7 @@
 	<string id="30143">Activate Window (try if Play Media fails)</string>
 	<string id="30144">Run Plugin (try if video repeats)</string>
 	<string id="30145">Show iPlay menu item</string>
-	<string id="30146">iPlay - %s playlist manager</string>	
+	<string id="30146">[COLOR blue]------------------------[/COLOR]</string>	
 	<string id="30148">Browse for playlist</string>
 	<string id="30149">Copy playlists to Super Favourites folder</string>
 	<string id="30150">Delete playlist</string>	
