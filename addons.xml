@@ -441,7 +441,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
     </extension>
 </addon>
 
-<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.25" provider-name="MetalKettle">
+<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.26" provider-name="MetalKettle">
 
   <requires>
 
@@ -1305,7 +1305,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon
   id="plugin.video.xomgiaitri"
-  version="2.0.44"
+  version="2.0.47"
   name="*[COLOR yellow]XomGiaiTri.com[/COLOR]"
   provider-name="thongld">
   <requires>
