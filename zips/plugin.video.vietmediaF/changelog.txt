@@ -1,4 +1,68 @@
-﻿Version 1.0.71:
+﻿Version 1.1.16:
+- Fix some bugs
+Version 1.1.16:
+- Fix fshare
+Version 1.1.14:
+- Fix hdsieunhanh
+Version 1.1.12:
+- Fix fshare
+Version 1.1.11:
+- Fix phimmoi;
+Version 1.1.04:
+- Fix phimmoi;
+Version 1.1.03:
+- Fix tvnet;
+Version 1.1.02:
+- Add Hplus VIP;
+Version 1.1.01:
+- Add Acestream API;
+Version 1.1.00:
+- Add some server;
+Version 1.0.99:
+- Add some server;
+Version 1.0.97:
+- Add some server;
+Version 1.0.97:
+- Fix some bug;
+Version 1.0.95:
+- Fix hdsieunhanh,fptplay;
+Version 1.0.94:
+- Fix Fshare;
+Version 1.0.93:
+- Download phu de;
+Version 1.0.92:
+- Install file zip;
+Version 1.0.91:
+- Fix Fshare, Hayhaytv;
+Version 1.0.90:
+- Fix Zing;
+Version 1.0.89:
+- Fix tvnet, truyen hinh xem lai;
+Version 1.0.88:
+- Fix phu de hdo;
+Version 1.0.87:
+- Fix TVnet;
+Version 1.0.86:
+- Fix VTVgo, Hplus;
+Version 1.0.85:
+- Fix fshare;
+Version 1.0.84:
+- Picture reader, Anime47 fixed;
+Version 1.0.83:
+- Fix VTVgo;
+Version 1.0.82:
+- Fix VTVgo;
+Version 1.0.78:
+- Fix Hplus, HTVonline, VTVGO;
+Version 1.0.77:
+- Fix vtv.vn;
+Version 1.0.76:
+- Add VTVcab;
+Version 1.0.75:
+- Add SCTV;
+Version 1.0.73:
+- Fix iptv servers;
+Version 1.0.71:
 - 4share added, fix fshare;
 Version 1.0.67:
 - Fix bug;
