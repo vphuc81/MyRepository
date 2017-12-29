@@ -1,1067 +1,927 @@
-# Addon Name: Exodus
-# Addon id: plugin.video.exodus
-# Addon Provider: Exodus
 # Translators:
-# Translators:
-# Translators:
-# Translators:
-# Translators:
-# Translators:
-# Translators:
-# Translators:
-# Translators:
-# Translators:
-# Translators:
-# Translators:
-# Translators:
-# Translators:
-# djkidy123 <drago.kraner@gmail.com>, 2016
+# Anton G, 2016
+# Anton G, 2016
+# djkidy123, 2016
+# djkidy123, 2016
+# frunc, 2017
 # lambda81, 2016
+# lambda81, 2016
+# Mario Mijic, 2017
+# Zvonimir Brajković, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Exodus\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2016-03-25 21:44+0000\n"
-"Last-Translator: lambda81\n"
-"Language-Team: Croatian (http://www.transifex.com/tv-addons/exodus/language/hr/)\n"
+"PO-Revision-Date: 2017-10-31 22:27+0100\n"
+"Last-Translator: gogo\n"
+"Language-Team: Croatian (http://www.transifex.com/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: hr\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
-msgctxt "#30001"
+msgctxt "#32001"
 msgid "Movies"
 msgstr "Filmovi"
 
-msgctxt "#30002"
+msgctxt "#32002"
 msgid "TV Shows"
-msgstr "TV Serije"
+msgstr "TV serije"
 
-msgctxt "#30003"
+msgctxt "#32003"
+msgid "My Movies"
+msgstr "Moji filmovi"
+
+msgctxt "#32004"
+msgid "My TV Shows"
+msgstr "Moje TV serije"
+
+msgctxt "#32005"
+msgid "New Movies"
+msgstr "Novi filmovi"
+
+msgctxt "#32006"
+msgid "New Episodes"
+msgstr "Nove epizode"
+
+msgctxt "#32007"
 msgid "Channels"
-msgstr "Kanali"
+msgstr "TV programi"
 
-msgctxt "#30004"
-msgid "My Lists"
-msgstr "Moji popisi"
-
-msgctxt "#30005"
-msgid "Latest Movies"
-msgstr "Najnoviji filmovi"
-
-msgctxt "#30006"
-msgid "Latest Episodes"
-msgstr "Najnovije epizode"
-
-msgctxt "#30007"
-msgid "TV Calendar"
-msgstr "TV Kalendar"
-
-msgctxt "#30008"
+msgctxt "#32008"
 msgid "Tools"
 msgstr "Alati"
 
-msgctxt "#30009"
-msgid "Search"
-msgstr "Pretraga"
-
-msgctxt "#30010"
+msgctxt "#32009"
 msgid "Downloads"
 msgstr "Preuzimanja"
 
-msgctxt "#30021"
+msgctxt "#32010"
+msgid "Search"
+msgstr "Pretraživanje"
+
+msgctxt "#32011"
 msgid "Genres"
 msgstr "Žanrovi"
 
-msgctxt "#30022"
+msgctxt "#32012"
 msgid "Year"
-msgstr "Godine"
+msgstr "Godina"
 
-msgctxt "#30023"
+msgctxt "#32013"
 msgid "People"
 msgstr "Osobe"
 
-msgctxt "#30024"
+msgctxt "#32014"
+msgid "Languages"
+msgstr "Jezici"
+
+msgctxt "#32015"
 msgid "Certificates"
-msgstr "Certifikati"
+msgstr "Dobna ograničenja"
 
-msgctxt "#30025"
-msgid "Featured"
-msgstr "Istaknuto"
+msgctxt "#32016"
+msgid "Networks"
+msgstr "TV mreže"
 
-msgctxt "#30026"
+msgctxt "#32017"
 msgid "People Watching"
 msgstr "Ljudi gledaju"
 
-msgctxt "#30027"
+msgctxt "#32018"
 msgid "Most Popular"
 msgstr "Najpopularnije"
 
-msgctxt "#30028"
+msgctxt "#32019"
 msgid "Most Voted"
-msgstr "Najviše glasano"
+msgstr "Najviše glasova"
 
-msgctxt "#30029"
+msgctxt "#32020"
 msgid "Box Office"
-msgstr "Zarada"
+msgstr "Najveća zarada"
 
-msgctxt "#30030"
+msgctxt "#32021"
 msgid "Oscar Winners"
-msgstr "Oskarom nagrađivani"
+msgstr "Dobitnici Oscara"
 
-msgctxt "#30031"
+msgctxt "#32022"
 msgid "In Theaters"
 msgstr "U kinima"
 
-msgctxt "#30032"
-msgid "Latest Movies"
-msgstr "Najnoviji filmovi"
+msgctxt "#32023"
+msgid "Highly Rated"
+msgstr "Najocjenjenije"
 
-msgctxt "#30033"
-msgid "My Lists"
-msgstr "Moji popisi"
-
-msgctxt "#30034"
-msgid "People Search"
-msgstr "Pretraga osoba"
-
-msgctxt "#30035"
-msgid "Search"
-msgstr "Pretraga"
-
-msgctxt "#30036"
-msgid "Collection"
-msgstr "Kolekcija"
-
-msgctxt "#30037"
-msgid "Watchlist"
-msgstr "Lista Ogleda"
-
-msgctxt "#30038"
-msgid "Movie Lists"
-msgstr "Liste filmova"
-
-msgctxt "#30039"
-msgid "History"
-msgstr "Povijest"
-
-msgctxt "#30051"
-msgid "Genres"
-msgstr "Žanrovi"
-
-msgctxt "#30052"
-msgid "Year"
-msgstr "Godine"
-
-msgctxt "#30053"
-msgid "Networks"
-msgstr "TV kuće"
-
-msgctxt "#30054"
-msgid "People Watching"
-msgstr "Ljudi gledaju"
-
-msgctxt "#30055"
-msgid "Most Popular"
-msgstr "Najpopularnije"
-
-msgctxt "#30056"
+msgctxt "#32024"
 msgid "Airing today"
 msgstr "Emitira se danas"
 
-msgctxt "#30057"
+msgctxt "#32025"
 msgid "Returning TV Shows"
-msgstr "TV Serije u povratku"
+msgstr "Ponovno snimane TV serije"
 
-msgctxt "#30058"
+msgctxt "#32026"
 msgid "New TV Shows"
-msgstr "Nove TV Serije"
+msgstr "Nove TV serije"
 
-msgctxt "#30059"
-msgid "Highly Rated"
-msgstr "Najbolje ocijenjeno"
-
-msgctxt "#30060"
-msgid "Most Voted"
-msgstr "Najviše glasano"
-
-msgctxt "#30061"
+msgctxt "#32027"
 msgid "TV Calendar"
-msgstr "TV Kalendar"
+msgstr "TV kalendar"
 
-msgctxt "#30062"
-msgid "Latest Episodes"
-msgstr "Najnovije epizode"
-
-msgctxt "#30063"
-msgid "My Lists"
-msgstr "Moji popisi"
-
-msgctxt "#30065"
+msgctxt "#32028"
 msgid "People Search"
 msgstr "Pretraga osoba"
 
-msgctxt "#30066"
-msgid "Search"
-msgstr "Pretraga"
+msgctxt "#32029"
+msgid "People (Movies)"
+msgstr "Osobe (filmovi)"
 
-msgctxt "#30067"
+msgctxt "#32030"
+msgid "People (TV)"
+msgstr "Osobe (TV)"
+
+msgctxt "#32031"
+msgid "Discover"
+msgstr "Otkrij"
+
+msgctxt "#32032"
 msgid "Collection"
 msgstr "Kolekcija"
 
-msgctxt "#30068"
+msgctxt "#32033"
 msgid "Watchlist"
-msgstr "Lista Ogleda"
+msgstr "Popis gledanja"
 
-msgctxt "#30069"
-msgid "Progress"
-msgstr "Napredak"
+msgctxt "#32034"
+msgid "IMDb"
+msgstr "IMDb"
 
-msgctxt "#30070"
+msgctxt "#32035"
 msgid "Featured"
 msgstr "Istaknuto"
 
-msgctxt "#30071"
-msgid "TV Show Lists"
-msgstr "Liste TV Serija"
-
-msgctxt "#30072"
-msgid "Episode Lists"
-msgstr "Popisi s epizodama"
-
-msgctxt "#30073"
+msgctxt "#32036"
 msgid "History"
 msgstr "Povijest"
 
-msgctxt "#30081"
-msgid "No Trakt or IMDb account found."
-msgstr "Nije pronađen Trakt niti IMDb račun."
-
-msgctxt "#30082"
-msgid "Trakt indicators are disabled by default."
-msgstr "Trakt indikatori su početno onemogućeni."
-
-msgctxt "#30083"
-msgid "In order to use them enable them in settings."
-msgstr "Da biste ih rabili, omogućite ih u postavkama."
-
-msgctxt "#30084"
-msgid "[B]TRAKT[/B] : Collection"
-msgstr "[B]TRAKT[/B] : Kolekcija"
-
-msgctxt "#30085"
-msgid "[B]TRAKT[/B] : TV Collection"
-msgstr "[B]TRAKT[/B] : TV Kolekcija"
-
-msgctxt "#30086"
-msgid "[B]TRAKT[/B] : Watchlist"
-msgstr "[B]TRAKT[/B] : Popis za gledanje"
-
-msgctxt "#30087"
-msgid "[B]TRAKT[/B] : TV Watchlist"
-msgstr "[B]TRAKT[/B] : TV Popis za gledanje"
-
-msgctxt "#30088"
-msgid "[B]IMDB[/B] : Watchlist"
-msgstr "[B]IMDB[/B] : Popis za gledanje"
-
-msgctxt "#30089"
-msgid "[B]IMDB[/B] : TV Watchlist"
-msgstr "[B]IMDB[/B] : TV Popis za gledanje"
-
-msgctxt "#30090"
-msgid "[B]TRAKT[/B] : Featured"
-msgstr "[B]TRAKT[/B] : Istaknuto"
-
-msgctxt "#30091"
-msgid "[B]TRAKT[/B] : TV Featured"
-msgstr "[B]TRAKT[/B] : TV Istaknuto"
-
-msgctxt "#30092"
-msgid "[B]TRAKT[/B] : History"
-msgstr "[B]TRAKT[/B] : Povijest"
-
-msgctxt "#30093"
-msgid "[B]TRAKT[/B] : TV History"
-msgstr "[B]TRAKT[/B] : TV Povijest"
-
-msgctxt "#30094"
-msgid "[B]TRAKT[/B] : Progress"
-msgstr "[B]TRAKT[/B] : Napredak"
-
-msgctxt "#30095"
-msgid "[B]TRAKT[/B] : Episodes"
-msgstr "[B]TRAKT[/B] : Epizode"
-
-msgctxt "#30096"
-msgid "Movie Lists"
-msgstr "Popisi s filmovima"
-
-msgctxt "#30097"
-msgid "TV Show Lists"
-msgstr "Popisi s TV serijama"
-
-msgctxt "#30098"
-msgid "Episode Lists"
-msgstr "Popisi s epizodama"
-
-msgctxt "#30111"
-msgid "[B]SETTINGS[/B] : General"
-msgstr "[B]POSTAVKE[/B] : Općenito"
-
-msgctxt "#30112"
-msgid "[B]SETTINGS[/B] : Accounts"
-msgstr "[B]POSTAVKE[/B] : Računi"
-
-msgctxt "#30113"
-msgid "[B]SETTINGS[/B] : Playback"
-msgstr "[B]POSTAVKE[/B] : Reprodukcija"
-
-msgctxt "#30114"
-msgid "[B]SETTINGS[/B] : Subtitles"
-msgstr "[B]POSTAVKE[/B] : Podnapisi"
-
-msgctxt "#30115"
-msgid "[B]SETTINGS[/B] : Providers"
-msgstr "[B]POSTAVKE[/B] : Izvori"
-
-msgctxt "#30119"
-msgid "[B]EXODUS[/B] : Clear providers..."
-msgstr "[B]EXODUS[/B] : Očisti usluge..."
-
-msgctxt "#30120"
-msgid "[B]EXODUS[/B] : Clear cache..."
-msgstr "[B]EXODUS[/B] : Očisti predmemoriju..."
-
-msgctxt "#30122"
-msgid "[B]EXODUS[/B] : Downloads"
-msgstr "[B]GENESIS[/B] : Preuzimanja"
-
-msgctxt "#30141"
-msgid "Movies"
-msgstr "Filmovi"
-
-msgctxt "#30142"
-msgid "TV Shows"
-msgstr "TV Serije"
-
-msgctxt "#30151"
-msgid "Movies"
-msgstr "Filmovi"
-
-msgctxt "#30152"
-msgid "TV Shows"
-msgstr "TV Serije"
-
-msgctxt "#30153"
-msgid "People (Movies)"
-msgstr "Osobe (Filmovi)"
-
-msgctxt "#30154"
-msgid "People (TV)"
-msgstr "Osobe (TV Serije)"
-
-msgctxt "#30155"
-msgid "Queue item"
-msgstr "Dodaj u red čekanja"
-
-msgctxt "#30201"
-msgid "Search"
-msgstr "Pretraga"
-
-msgctxt "#30202"
-msgid "Queue item"
-msgstr "Dodaj u red čekanja"
-
-msgctxt "#30203"
-msgid "Auto-play"
-msgstr "Auto-reprodukcija"
-
-msgctxt "#30204"
-msgid "Play using..."
-msgstr "Reproduciraj koristeći..."
-
-msgctxt "#30205"
-msgid "Movie information"
-msgstr "Informacije o filmu"
-
-msgctxt "#30206"
-msgid "Mark as watched"
-msgstr "Označi kao pogledano"
-
-msgctxt "#30207"
-msgid "Mark as unwatched"
-msgstr "Označi kao nepogledano"
-
-msgctxt "#30208"
-msgid "Trakt Manager"
-msgstr "Trakt upravitelj"
-
-msgctxt "#30209"
-msgid "Add to favourites"
-msgstr "Dodaj u omiljene"
-
-msgctxt "#30210"
-msgid "Remove from favourites"
-msgstr "Ukloni iz omiljenih"
-
-msgctxt "#30212"
-msgid "Set Movies view"
-msgstr "Postavi pregled filmova"
-
-msgctxt "#30213"
-msgid "[I]Next Page[/I]"
-msgstr "[I]Sljedeća stranica[/I]"
-
-msgctxt "#30214"
-msgid "Movie trailer"
-msgstr "Foršpan filma"
-
-msgctxt "#30231"
-msgid "Search"
-msgstr "Pretraga"
-
-msgctxt "#30232"
-msgid "Queue item"
-msgstr "Dodaj u red čekanja"
-
-msgctxt "#30233"
-msgid "TV show information"
-msgstr "Informacije o TV Seriji"
-
-msgctxt "#30234"
-msgid "Mark as watched"
-msgstr "Označi kao pogledano"
-
-msgctxt "#30235"
-msgid "Mark as unwatched"
-msgstr "Označi kao nepogledano"
-
-msgctxt "#30236"
-msgid "Trakt Manager"
-msgstr "Trakt upravitelj"
-
-msgctxt "#30237"
-msgid "Add to favourites"
-msgstr "Dodaj u omiljene"
-
-msgctxt "#30238"
-msgid "Remove from favourites"
-msgstr "Ukloni iz omiljenih"
-
-msgctxt "#30240"
-msgid "Set TV Shows view"
-msgstr "Postavi pregled TV Serija"
-
-msgctxt "#30241"
-msgid "[I]Next Page[/I]"
-msgstr "[I]Sljedeća stranica[/I]"
-
-msgctxt "#30242"
-msgid "TV show trailer"
-msgstr "Foršpan TV serije"
-
-msgctxt "#30261"
-msgid "Queue item"
-msgstr "Dodaj u red čekanja"
-
-msgctxt "#30262"
-msgid "TV show information"
-msgstr "Informacije o TV Seriji"
-
-msgctxt "#30263"
-msgid "Mark as watched"
-msgstr "Označi kao pogledano"
-
-msgctxt "#30264"
-msgid "Mark as unwatched"
-msgstr "Označi kao nepogledano"
-
-msgctxt "#30265"
-msgid "Trakt Manager"
-msgstr "Trakt upravitelj"
-
-msgctxt "#30266"
-msgid "Add to favourites"
-msgstr "Dodaj u omiljene"
-
-msgctxt "#30267"
-msgid "Remove from favourites"
-msgstr "Ukloni iz omiljenih"
-
-msgctxt "#30268"
-msgid "TV show trailer"
-msgstr "Foršpan TV serije"
-
-msgctxt "#30269"
-msgid "Set Seasons view"
-msgstr "Postavi pregled sezona"
-
-msgctxt "#30270"
-msgid "Auto-play"
-msgstr "Auto-reprodukcija"
-
-msgctxt "#30271"
-msgid "Play using..."
-msgstr "Reproduciraj koristeći..."
-
-msgctxt "#30272"
-msgid "Episode information"
-msgstr "Informacije o epizodi"
-
-msgctxt "#30273"
-msgid "Set Episodes view"
-msgstr "Postavi pregled epizoda"
-
-msgctxt "#30274"
-msgid "Browse Seasons"
-msgstr "Pretraži sezone"
-
-msgctxt "#30275"
-msgid "Season"
-msgstr "Sezona"
-
-msgctxt "#30291"
-msgid "Auto-play"
-msgstr "Auto-reprodukcija"
-
-msgctxt "#30292"
-msgid "Play using..."
-msgstr "Reproduciraj koristeći..."
-
-msgctxt "#30293"
-msgid "Information"
-msgstr "Informacije"
-
-msgctxt "#30294"
-msgid "Refresh"
-msgstr "Osvježi"
-
-msgctxt "#30295"
-msgid "Add-on settings"
-msgstr "Postavke dodatka"
-
-msgctxt "#30296"
-msgid "Now playing..."
-msgstr "Trenutno se reproducira..."
-
-msgctxt "#30297"
-msgid "Trailer"
-msgstr "Foršpan"
-
-msgctxt "#30401"
-msgid "Are you sure?"
-msgstr "Jeste li sigurni?"
-
-msgctxt "#30402"
-msgid "Process Complete"
-msgstr "Proces dovršen"
-
-msgctxt "#30411"
-msgid "A RealDebrid account already exists"
-msgstr "RealDebrid račun već postoji..."
-
-msgctxt "#30413"
-msgid "Do you want to reset?"
-msgstr "Želite li resetirati?"
-
-msgctxt "#30414"
-msgid "Yes"
-msgstr "Da"
-
-msgctxt "#30415"
-msgid "No"
-msgstr "Ne"
-
-msgctxt "#30416"
-msgid "1) Visit : "
-msgstr "1) Posjetite:"
-
-msgctxt "#30417"
-msgid "2) When prompted enter : "
-msgstr "2) Kada Vas se pita unesite:"
-
-msgctxt "#30451"
-msgid "Getting information"
-msgstr "Dohvaćam informacije"
-
-msgctxt "#30461"
-msgid "Resume from"
-msgstr "Nastavi od"
-
-msgctxt "#30462"
-msgid "Start from beginning"
-msgstr "Pokreni od početka"
-
-msgctxt "#30463"
-msgid "Resume"
-msgstr "Nastavi"
-
-msgctxt "#30464"
-msgid "Loaded in"
-msgstr "Učitano u"
-
-msgctxt "#30465"
-msgid "seconds"
-msgstr "sekundi"
-
-msgctxt "#30471"
-msgid "Trakt Manager"
-msgstr "Trakt upravitelj"
-
-msgctxt "#30472"
-msgid "Add to Collection"
-msgstr "Dodaj u Kolekciju"
-
-msgctxt "#30473"
-msgid "Remove from Collection"
-msgstr "Ukloni iz Kolekcije"
-
-msgctxt "#30474"
-msgid "Add to Watchlist"
-msgstr "Dodaj u Watchlistu"
-
-msgctxt "#30475"
-msgid "Remove from Watchlist"
-msgstr "Ukloni iz Watchliste"
-
-msgctxt "#30476"
-msgid "Add to new List"
-msgstr "Dodaj na novi popis"
-
-msgctxt "#30477"
-msgid "Add to"
-msgstr "Dodaj na"
-
-msgctxt "#30478"
-msgid "Remove from"
-msgstr "Ukloni iz"
-
-msgctxt "#30479"
-msgid "A Trakt account already exists"
-msgstr "Trakt račun već postoji"
-
-msgctxt "#30481"
-msgid "Do you want to reset?"
-msgstr "Želite li resetirati?"
-
-msgctxt "#30482"
-msgid "Yes"
-msgstr "Da"
-
-msgctxt "#30483"
-msgid "No"
-msgstr "Ne"
-
-msgctxt "#30491"
-msgid "This View is now Default"
-msgstr "Ovaj pregled je sada zadan "
-
-msgctxt "#30501"
-msgid "No stream available"
-msgstr "Nema dostupnih streamova"
-
-msgctxt "#30502"
-msgid "Movie information"
-msgstr "Informacije o filmu"
-
-msgctxt "#30503"
-msgid "Episode information"
-msgstr "Informacije o epizodi"
-
-msgctxt "#30504"
-msgid "Queue item"
-msgstr "Dodaj u red čekanja"
-
-msgctxt "#30505"
-msgid "Download item"
-msgstr "Preuzmi"
-
-msgctxt "#30506"
-msgid "Refresh providers"
-msgstr "Osvježi izvore"
-
-msgctxt "#30507"
-msgid "Add-on settings"
-msgstr "Postavke dodatka"
-
-msgctxt "#30508"
-msgid "Now playing..."
-msgstr "Trenutno se reproducira..."
-
-msgctxt "#30509"
-msgid "Auto-play"
-msgstr "Auto-reprodukcija"
-
-msgctxt "#30510"
-msgid "Are you sure?"
-msgstr "Jeste li sigurni?"
-
-msgctxt "#30511"
-msgid "Process Complete"
-msgstr "Proces dovršen"
-
-msgctxt "#30512"
-msgid "Time elapsed"
-msgstr "Proteklo vremena"
-
-msgctxt "#30513"
-msgid "seconds"
-msgstr "sekundi"
-
-msgctxt "#30514"
-msgid "Remaining providers"
-msgstr "Preostali izvori"
-
-msgctxt "#30515"
-msgid "Loading streams"
-msgstr "Učitavanje linkova"
-
-msgctxt "#30516"
-msgid "Movie trailer"
-msgstr "Foršpan filma"
-
-msgctxt "#30517"
-msgid "TV show trailer"
-msgstr "Foršpan TV serije"
-
-msgctxt "#30518"
-msgid "Playback outside Exodus is not allowed"
-msgstr "Reprodukcija izvan Exodus-a nije dopuštena"
-
-msgctxt "#30521"
-msgid "Monday"
-msgstr "Ponedjeljak"
-
-msgctxt "#30522"
-msgid "Tuesday"
-msgstr "Utorak"
-
-msgctxt "#30523"
-msgid "Wednesday"
-msgstr "Srijeda"
-
-msgctxt "#30524"
-msgid "Thursday"
-msgstr "Četvrtak"
-
-msgctxt "#30525"
-msgid "Friday"
-msgstr "Petak"
-
-msgctxt "#30526"
-msgid "Saturday"
-msgstr "Subota"
-
-msgctxt "#30527"
-msgid "Sunday"
-msgstr "Nedjelja"
-
-msgctxt "#30528"
-msgid "January"
-msgstr "Siječanj"
-
-msgctxt "#30529"
-msgid "February"
-msgstr "Veljača"
-
-msgctxt "#30530"
-msgid "March"
-msgstr "Ožujak"
-
-msgctxt "#30531"
-msgid "April"
-msgstr "Travanj"
-
-msgctxt "#30532"
-msgid "May"
-msgstr "Svibanj"
-
-msgctxt "#30533"
-msgid "June"
-msgstr "Lipanj"
-
-msgctxt "#30534"
-msgid "July"
-msgstr "Srpanj"
-
-msgctxt "#30535"
-msgid "August"
-msgstr "Kolovoz"
-
-msgctxt "#30536"
-msgid "September"
-msgstr "Rujan"
-
-msgctxt "#30537"
-msgid "October"
-msgstr "Listopad"
-
-msgctxt "#30538"
-msgid "November"
-msgstr "Studeni"
-
-msgctxt "#30539"
-msgid "December"
-msgstr "Prosinac"
-
-msgctxt "#30800"
-msgid "General"
-msgstr "Općenito"
-
-msgctxt "#30801"
-msgid "Appearance"
-msgstr "Izgled"
-
-msgctxt "#30802"
-msgid "Enable Fanart"
-msgstr "Omogući pozadine"
-
-msgctxt "#30803"
-msgid "Info Language"
-msgstr "Jezik informacija"
-
-msgctxt "#30804"
-msgid "Providers Timeout"
-msgstr "Timeout izvora"
-
-msgctxt "#30805"
-msgid "Main menu"
-msgstr "Glavni izbornik"
-
-msgctxt "#30806"
-msgid "Latest Movies"
-msgstr "Najnoviji filmovi"
-
-msgctxt "#30807"
-msgid "Disabled"
-msgstr "Onemogućeno"
-
-msgctxt "#30808"
-msgid "Featured"
-msgstr "Istaknuto"
-
-msgctxt "#30809"
-msgid "People Watching"
-msgstr "Ljudi gledaju"
-
-msgctxt "#30810"
-msgid "Most Popular"
-msgstr "Najpopularnije"
-
-msgctxt "#30811"
-msgid "In Theaters"
-msgstr "U kinima"
-
-msgctxt "#30812"
-msgid "Latest Episodes"
-msgstr "Najnovije epizode"
-
-msgctxt "#30813"
-msgid "Disabled"
-msgstr "Onemogućeno"
-
-msgctxt "#30814"
+msgctxt "#32037"
+msgid "Progress"
+msgstr "Napredak"
+
+msgctxt "#32038"
 msgid "Episodes"
 msgstr "Epizode"
 
-msgctxt "#30815"
-msgid "Trakt Progress"
-msgstr "Trakt napredak"
+msgctxt "#32039"
+msgid "Movie Lists"
+msgstr "Popis filmova"
 
-msgctxt "#30816"
-msgid "Trakt Episodes"
-msgstr "Trakt epizode"
+msgctxt "#32040"
+msgid "TV Show Lists"
+msgstr "Popis TV serija"
 
-msgctxt "#30817"
-msgid "TV Calendar"
-msgstr "TV Kalendar"
+msgctxt "#32041"
+msgid "Episode Lists"
+msgstr "Popis epizoda"
 
-msgctxt "#30818"
-msgid "Disabled"
-msgstr "Onemogućeno"
+msgctxt "#32042"
+msgid "No Trakt or IMDb account found."
+msgstr "Nije pronađen Trakt ili IMDb račun."
 
-msgctxt "#30819"
+msgctxt "#32043"
+msgid "[B]SETTINGS[/B] : General"
+msgstr "[B]POSTAVKE[/B] : Općenito"
+
+msgctxt "#32044"
+msgid "[B]SETTINGS[/B] : Accounts"
+msgstr "[B]POSTAVKE[/B] : Računi"
+
+msgctxt "#32045"
+msgid "[B]SETTINGS[/B] : Playback"
+msgstr "[B]POSTAVKE[/B] : Reprodukcija"
+
+msgctxt "#32046"
+msgid "[B]SETTINGS[/B] : Subtitles"
+msgstr "[B]POSTAVKE[/B] : Podnaslovi"
+
+msgctxt "#32047"
+msgid "[B]SETTINGS[/B] : Providers"
+msgstr "[B]POSTAVKE[/B] : Izvori"
+
+msgctxt "#32048"
+msgid "[B]EXODUS[/B] : Downloads"
+msgstr "[B]EXODUS[/B] : Preuzimanja"
+
+msgctxt "#32049"
+msgid "[B]EXODUS[/B] : Viewtypes"
+msgstr "[B]EXODUS[/B] : Vrsta prikaza"
+
+msgctxt "#32050"
+msgid "[B]EXODUS[/B] : Clear providers..."
+msgstr "[B]EXODUS[/B] : Obriši izvore..."
+
+msgctxt "#32051"
+msgid "[B]EXODUS[/B] : Clear metadata..."
+msgstr "[B]EXODUS[/B] : Obriši metapodatke..."
+
+msgctxt "#32052"
+msgid "[B]EXODUS[/B] : Clear cache..."
+msgstr "[B]EXODUS[/B] : Obriši predmemoriju..."
+
+msgctxt "#32053"
+msgid "[I]Next Page[/I]"
+msgstr "[I]Sljedeća stranica[/I]"
+
+msgctxt "#32054"
+msgid "Seasons"
+msgstr "Sezone"
+
+msgctxt "#32055"
+msgid "Season"
+msgstr "Sezona"
+
+msgctxt "#32056"
+msgid "Are you sure?"
+msgstr "Jeste li sigurni?"
+
+msgctxt "#32057"
+msgid "Process Complete"
+msgstr "Proces završen"
+
+msgctxt "#32058"
+msgid "This will slow down things until they are re-cached!"
+msgstr "To će usporiti stvari dok se ponovno ne stvori predmemorija!"
+
+msgctxt "#32059"
+msgid "CLICK HERE TO SAVE VIEW"
+msgstr "KLIKNI OVDJE ZA SPREMANJE PRIKAZA"
+
+msgctxt "#32060"
+msgid "January|February|March|April|May|June|July|August|September|October|November|December"
+msgstr "Siječanj|Veljača|Ožujak|Travanj|Svibanj|Lipanj|Srpanj|Kolovoz|Rujan|Listopad|Studeni|Prosinac"
+
+msgctxt "#32061"
+msgid "Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday"
+msgstr "Ponedjeljak|Utorak|Srijeda|Četvrtak|Petak|Subota|Nedjelja"
+
+msgctxt "#32062"
+msgid "[B]%s[/B] : %s"
+msgstr "[B]%s[/B] : %s"
+
+msgctxt "#32063"
+msgid "Play using..."
+msgstr "Reproduciraj koristeći..."
+
+msgctxt "#32064"
+msgid "Auto Play"
+msgstr "Automatska repordukcija"
+
+msgctxt "#32065"
+msgid "Queue item"
+msgstr "Dodaj u red čekanja"
+
+msgctxt "#32066"
+msgid "Watched in Exodus"
+msgstr "Gledano u Exodusu"
+
+msgctxt "#32067"
+msgid "Unwatched in Exodus"
+msgstr "Neodgledano u Exodusu"
+
+msgctxt "#32068"
+msgid "Watched in Trakt"
+msgstr "Gledano u Traktu"
+
+msgctxt "#32069"
+msgid "Unwatched in Trakt"
+msgstr "Neodgledano u Traktu"
+
+msgctxt "#32070"
+msgid "Trakt Manager"
+msgstr "Trakt upravitelj"
+
+msgctxt "#32071"
+msgid "Browse Series"
+msgstr "Pregledaj serije"
+
+msgctxt "#32072"
+msgid "Refresh"
+msgstr "Osvježi"
+
+msgctxt "#32073"
+msgid "[B]TRAKT[/B] : Authorize"
+msgstr "[B]TRAKT[/B]: Ovjera"
+
+msgctxt "#32074"
+msgid "[B]HELP[/B]"
+msgstr "[B]POMOĆ[/B]"
+
+msgctxt "#32301"
 msgid "Enabled"
 msgstr "Omogućeno"
 
-msgctxt "#30820"
-msgid "Indicators"
-msgstr "Indikatori"
-
-msgctxt "#30821"
-msgid "Local"
-msgstr "Lokalno"
-
-msgctxt "#30822"
-msgid "Trakt"
-msgstr "Trakt"
-
-msgctxt "#30823"
-msgid "My Lists"
-msgstr "Moji popisi"
-
-msgctxt "#30824"
+msgctxt "#32302"
 msgid "Disabled"
 msgstr "Onemogućeno"
 
-msgctxt "#30825"
-msgid "Enabled"
-msgstr "Omogućeno"
-
-msgctxt "#30826"
-msgid "Sub menu"
-msgstr "Podizbornik"
-
-msgctxt "#30827"
-msgid "Classic"
-msgstr "Klasičan"
-
-msgctxt "#30828"
-msgid "Flatten TV show seasons"
-msgstr "Prikaz sezona TV serija"
-
-msgctxt "#30830"
-msgid "Playback"
-msgstr "Reprodukcija"
-
-msgctxt "#30831"
-msgid "Max Quality"
-msgstr "Maksimalna kvaliteta"
-
-msgctxt "#30832"
-msgid "Host selection"
-msgstr "Host selekcija"
-
-msgctxt "#30833"
-msgid "Dialog"
-msgstr "Dijalog"
-
-msgctxt "#30834"
-msgid "Directory"
-msgstr "Mapa"
-
-msgctxt "#30835"
-msgid "File Hosting Filters"
-msgstr "File Hosting Filteri"
-
-msgctxt "#30836"
-msgid "Hosters with captchas"
-msgstr "Hosteri s captchom"
-
-msgctxt "#30837"
-msgid "Sort by Provider"
-msgstr "Sortiraj po izvoru"
-
-msgctxt "#30839"
-msgid "Auto-play"
-msgstr "Auto-reprodukcija"
-
-msgctxt "#30840"
-msgid "Auto-play"
-msgstr "Auto-reprodukcija"
-
-msgctxt "#30842"
-msgid "Force SD playback in Auto-play"
-msgstr "Forsiraj SD u Auto-reprodukciji"
-
-msgctxt "#30843"
-msgid "When playback starts..."
-msgstr "Kad reprodukcija počne..."
-
-msgctxt "#30844"
-msgid "Resume Playback"
-msgstr "Nastavi reprodukciju"
-
-msgctxt "#30845"
-msgid "Playback Info"
-msgstr "Informacije o reprodukciji"
-
-msgctxt "#30846"
-msgid "Progress Dialog"
-msgstr "Prozor napretka"
-
-msgctxt "#30847"
-msgid "Safe"
-msgstr "Sigurno"
-
-msgctxt "#30848"
-msgid "Unsafe"
-msgstr "Nesigurno"
-
-msgctxt "#30860"
-msgid "Providers"
-msgstr "Izvori"
-
-msgctxt "#30910"
-msgid "Accounts"
-msgstr "Računi"
-
-msgctxt "#30911"
+msgctxt "#32303"
 msgid "User"
 msgstr "Korisnik"
 
-msgctxt "#30912"
+msgctxt "#32304"
 msgid "Email"
-msgstr "Email"
+msgstr "E-pošta"
 
-msgctxt "#30913"
-msgid "Password"
-msgstr "Zaporka"
+msgctxt "#32305"
+msgid "ID"
+msgstr "ID"
 
-msgctxt "#30914"
+msgctxt "#32306"
 msgid "Authorization..."
-msgstr "Autorizacija..."
+msgstr "Ovjera..."
 
-msgctxt "#30940"
-msgid "Subtitles"
-msgstr "Podnapisi"
+msgctxt "#32307"
+msgid "Password"
+msgstr "Lozinka"
 
-msgctxt "#30941"
-msgid "Subtitles could be unavailable or out of sync."
-msgstr "Podnapisi mogu biti nedostupni ili neusklađeni."
+msgctxt "#32308"
+msgid "PIN"
+msgstr "PIN"
 
-msgctxt "#30942"
-msgid "In that case use your own subtitles."
-msgstr "U tom slučaju rabite svoje podnapise."
+msgctxt "#32309"
+msgid "API"
+msgstr "API"
 
-msgctxt "#30943"
-msgid "Enable subtitles"
-msgstr "Omogući podnapise"
+msgctxt "#32310"
+msgid "General"
+msgstr "Općenito"
 
-msgctxt "#30944"
-msgid "Convert subtitles to UTF-8"
-msgstr "Pretvori podnapise u UTF-8"
+msgctxt "#32311"
+msgid "Appearance"
+msgstr "Izgled"
 
-msgctxt "#30945"
-msgid "Primary Language"
-msgstr "Primarni jezik"
+msgctxt "#32312"
+msgid "Providers Timeout"
+msgstr "Vrijeme isteka izvora"
 
-msgctxt "#30946"
-msgid "Secondary Language"
-msgstr "Sekundarni jezik"
+msgctxt "#32313"
+msgid "Indicators"
+msgstr "Informacije o gledanju"
 
-msgctxt "#30950"
+msgctxt "#32314"
+msgid "Local"
+msgstr "Lokalno"
+
+msgctxt "#32315"
+msgid "Trakt"
+msgstr "Trakt"
+
+msgctxt "#32316"
+msgid "Info Language"
+msgstr "Jezik informacija"
+
+msgctxt "#32317"
+msgid "Flatten TV seasons"
+msgstr "Bez izbornika TV sezona"
+
+msgctxt "#32318"
+msgid "Enable Fanart"
+msgstr "Omogući postere obožavatelja"
+
+msgctxt "#32319"
+msgid "Menu"
+msgstr "Izbornik"
+
+msgctxt "#32320"
+msgid "New Movies"
+msgstr "Novi filmovi"
+
+msgctxt "#32321"
+msgid "Featured"
+msgstr "Istaknuti"
+
+msgctxt "#32322"
+msgid "People Watching"
+msgstr "Ljudi gledaju"
+
+msgctxt "#32323"
+msgid "Most Popular"
+msgstr "Najpopularnije"
+
+msgctxt "#32324"
+msgid "In Theaters"
+msgstr "U kinima"
+
+msgctxt "#32325"
+msgid "New Episodes"
+msgstr "Nove epizode"
+
+msgctxt "#32326"
+msgid "Episodes"
+msgstr "Epizode"
+
+msgctxt "#32327"
+msgid "Trakt Progress"
+msgstr "Trakt napredak"
+
+msgctxt "#32328"
+msgid "Trakt Episodes"
+msgstr "Trakt epizode"
+
+msgctxt "#32329"
+msgid "My Lists"
+msgstr "Moji popisi"
+
+msgctxt "#32330"
+msgid "Playback"
+msgstr "Reprodukcija"
+
+msgctxt "#32331"
+msgid "Default action"
+msgstr "Zadana radnja"
+
+msgctxt "#32332"
+msgid "Dialog"
+msgstr "Dijalog"
+
+msgctxt "#32333"
+msgid "Directory"
+msgstr "Mapa"
+
+msgctxt "#32334"
+msgid "Auto Play"
+msgstr "Automatska repordukcija"
+
+msgctxt "#32335"
+msgid "Progress Dialog"
+msgstr "Prozor napretka"
+
+msgctxt "#32336"
+msgid "Foreground"
+msgstr "Prednja strana"
+
+msgctxt "#32337"
+msgid "Background"
+msgstr "Pozadina"
+
+msgctxt "#32338"
+msgid "File Hosting Filters"
+msgstr "Filtri pružatelja sadržaja"
+
+msgctxt "#32339"
+msgid "Max Quality"
+msgstr "Najveća kvaliteta"
+
+msgctxt "#32340"
+msgid "SD Hosters in Auto Play"
+msgstr "SD pružatelji sadržaja u Automatskoj reprodukciji"
+
+msgctxt "#32341"
+msgid "Hosters with captchas"
+msgstr "Pružatelji sadržaja sa captcha provjerom"
+
+msgctxt "#32342"
+msgid "Sort by Provider"
+msgstr "Razvrstaj po izvoru"
+
+msgctxt "#32343"
+msgid "When playback starts..."
+msgstr "Kada reprodukcija počne..."
+
+msgctxt "#32344"
+msgid "Resume Playback"
+msgstr "Nastavi reprodukciju"
+
+msgctxt "#32345"
+msgid "Providers"
+msgstr "Izvori"
+
+msgctxt "#32346"
+msgid "Accounts"
+msgstr "Računi"
+
+msgctxt "#32347"
 msgid "Downloads"
 msgstr "Preuzimanja"
 
-msgctxt "#30951"
-msgid "Movies"
-msgstr "Filmovi"
-
-msgctxt "#30952"
-msgid "TV"
-msgstr "TV Serije"
-
-msgctxt "#30953"
+msgctxt "#32348"
 msgid "Enable downloads"
 msgstr "Omogući preuzimanja"
 
-msgctxt "#30954"
-msgid "Downloading features are disabled by default."
-msgstr "Značajke preuzimanja su početno onemogućene."
+msgctxt "#32349"
+msgid "Movies"
+msgstr "Filmovi"
 
-msgctxt "#30955"
+msgctxt "#32350"
+msgid "TV"
+msgstr "TV serije"
+
+msgctxt "#32351"
+msgid "Downloading features are disabled by default."
+msgstr "Značajke preuzimanja su onemogućene po zadanome."
+
+msgctxt "#32352"
 msgid "Set up your download folders in order to enable them."
-msgstr "Postavite mape za preuzimanja kako bi ih omogućili."
+msgstr "Postavite mape preuzimanja kako bi ih omogućili."
+
+msgctxt "#32353"
+msgid "Subtitles"
+msgstr "Podnaslovi"
+
+msgctxt "#32354"
+msgid "Enable subtitles"
+msgstr "Omogući podnaslove"
+
+msgctxt "#32355"
+msgid "Convert subtitles to UTF-8"
+msgstr "Pretvori podnaslove u UTF-8"
+
+msgctxt "#32356"
+msgid "Primary Language"
+msgstr "Glavni jezik"
+
+msgctxt "#32357"
+msgid "Secondary Language"
+msgstr "Pomoćni jezik"
+
+msgctxt "#32358"
+msgid "Subtitles could be unavailable or out of sync."
+msgstr "Podnaslovi mogu biti nedostupni ili neusklađeni."
+
+msgctxt "#32359"
+msgid "In that case use your own subtitles."
+msgstr "U tom slučaju koristite svoje podnaslove."
+
+msgctxt "#32360"
+msgid "Providers Language"
+msgstr "Jezik izvora"
+
+msgctxt "#32363"
+msgid "HEVC"
+msgstr "HEVC"
+
+msgctxt "#32372"
+msgid "When playback ends..."
+msgstr "Kada reprodukcija završi..."
+
+msgctxt "#32373"
+msgid "Force container refresh"
+msgstr "Prisili osvježavanje spremnika"
+
+msgctxt "#32401"
+msgid "No stream available"
+msgstr "Nema dostupnih strujanja"
+
+msgctxt "#32402"
+msgid "Playback outside Exodus is not allowed"
+msgstr "Reprodukcija izvan Exodusa nije dopuštena"
+
+msgctxt "#32403"
+msgid "Download"
+msgstr "Preuzimanje"
+
+msgctxt "#32404"
+msgid "Time elapsed: %s seconds"
+msgstr "Proteklo vrijeme: %s sekundi"
+
+msgctxt "#32405"
+msgid "%s seconds"
+msgstr "%s sekundi"
+
+msgctxt "#32406"
+msgid "Remaining providers: %s"
+msgstr "Preostalo izvora: %s"
+
+msgctxt "#32407"
+msgid "Are you sure?"
+msgstr "Jeste li sigurni?"
+
+msgctxt "#32408"
+msgid "Process Complete"
+msgstr "Proces završen"
+
+msgctxt "#32501"
+msgid "Start from beginning"
+msgstr "Pokreni od početka"
+
+msgctxt "#32502"
+msgid "Resume from %s"
+msgstr "Nastavi od %s"
+
+msgctxt "#32503"
+msgid "Resume"
+msgstr "Nastavi"
+
+msgctxt "#32511"
+msgid "An account already exists."
+msgstr "Račun već postoji."
+
+msgctxt "#32512"
+msgid "Do you want to reset?"
+msgstr "Želite li vratiti izvorno?"
+
+msgctxt "#32513"
+msgid "1) Visit : [COLOR skyblue]%s[/COLOR]"
+msgstr "1) Posjetite:  [COLOR skyblue]%s[/COLOR]"
+
+msgctxt "#32514"
+msgid "2) When prompted enter : [COLOR skyblue]%s[/COLOR]"
+msgstr "2) Kada ste upitani upišite : [COLOR skyblue]%s[/COLOR]"
+
+msgctxt "#32515"
+msgid "Trakt Manager"
+msgstr "Trakt upravitelj"
+
+msgctxt "#32516"
+msgid "Add to [B]Collection[/B]"
+msgstr "Dodaj u [B]Kolekciju[/B]"
+
+msgctxt "#32517"
+msgid "Remove from [B]Collection[/B]"
+msgstr "Ukloni iz [B]Kolekcije[/B]"
+
+msgctxt "#32518"
+msgid "Add to [B]Watchlist[/B]"
+msgstr "Dodaj u [B]Popis gledanja[/B]"
+
+msgctxt "#32519"
+msgid "Remove from [B]Watchlist[/B]"
+msgstr "Ukloni iz [B]Popisa gledanja[/B]"
+
+msgctxt "#32520"
+msgid "Add to [B]new List[/B]"
+msgstr "Dodaj u [B]novi popis[/B]"
+
+msgctxt "#32521"
+msgid "Add to [B]%s[/B]"
+msgstr "Dodaj u [B]%s[/B]"
+
+msgctxt "#32522"
+msgid "Remove from [B]%s[/B]"
+msgstr "Ukloni iz  [B]%s[/B]"
+
+msgctxt "#32531"
+msgid "An account already exists."
+msgstr "Račun već postoji."
+
+msgctxt "#32532"
+msgid "Do you want to reset?"
+msgstr "Želite li vratiti izvorno?"
+
+msgctxt "#32533"
+msgid "1) Visit : [COLOR skyblue]%s[/COLOR]"
+msgstr "1) Posjetite : [COLOR skyblue]%s[/COLOR]"
+
+msgctxt "#32534"
+msgid "2) When prompted enter : [COLOR skyblue]%s[/COLOR]"
+msgstr "2) Kada ste upitani upišite : [COLOR skyblue]%s[/COLOR]"
+
+msgctxt "#32535"
+msgid "Play Random"
+msgstr "Naizmjenična reprodukcija"
+
+msgctxt "#32536"
+msgid "Playing"
+msgstr "Reprodukcija"
+
+msgctxt "#32537"
+msgid "Nothing found to play"
+msgstr "Ništa nije pronađeno za reprodukciju"
+
+msgctxt "#32538"
+msgid "DEBRID-SERVICE"
+msgstr "DEBRID-USLUGA"
+
+msgctxt "#32539"
+msgid "Configure Debrid Services in URLResolver Settings."
+msgstr "Podesi Debrid usluge u postavkama URL razrješitelja."
+
+msgctxt "#32540"
+msgid "URLResolver Settings"
+msgstr "Postavke URL razrješitelja"
+
+msgctxt "#32541"
+msgid "Library"
+msgstr "Videoteka"
+
+msgctxt "#32542"
+msgid "Exodus folders will be imported to library if they are added to media sources."
+msgstr "Exodus mape će se uvesti u videoteku ako su dodane u medijske izvore."
+
+msgctxt "#32543"
+msgid "Movies"
+msgstr "Filmovi"
+
+msgctxt "#32544"
+msgid "TV"
+msgstr "TV serije"
+
+msgctxt "#32545"
+msgid "Auto update TV Shows"
+msgstr "Automastski nadopuni TV serije"
+
+msgctxt "#32546"
+msgid "Show notifications during update"
+msgstr "Prikaži obavijesti tijekom nadopune"
+
+msgctxt "#32547"
+msgid "Update library after adding content"
+msgstr "Nadopuni videoteku nakon dodavanja sadržaja"
+
+msgctxt "#32548"
+msgid "Avoid creating duplicate content"
+msgstr "Izbjegavaj stvaranje duplog sadržaja"
+
+msgctxt "#32549"
+msgid "Check movie before adding it"
+msgstr "Provjeri film prije dodavanja"
+
+msgctxt "#32550"
+msgid "Check first episode of season before adding it"
+msgstr "Provjeri prvo epizodu sezone prije dodavanja"
+
+msgctxt "#32551"
+msgid "Add to Library"
+msgstr "Dodaj u videoteku"
+
+msgctxt "#32552"
+msgid "Adding to library..."
+msgstr "Dodavanje u videoteku..."
+
+msgctxt "#32553"
+msgid "Updating TV shows..."
+msgstr "Nadopuna TV serija..."
+
+msgctxt "#32554"
+msgid "Process Complete"
+msgstr "Proces je završen"
+
+msgctxt "#32555"
+msgid "Are you sure?"
+msgstr "Jeste li sigurni?"
+
+msgctxt "#32556"
+msgid "[B]EXODUS[/B] : Library"
+msgstr "[B]EXODUS[/B] : Videoteka"
+
+msgctxt "#32557"
+msgid "[B]LIBRARY[/B] : Settings"
+msgstr "[B]VIDEOTEKA[/B] : Postavke"
+
+msgctxt "#32558"
+msgid "[B]EXODUS[/B] : Update library..."
+msgstr "[B]EXODUS[/B] : Nadopuni videoteku..."
+
+msgctxt "#32559"
+msgid "[B]EXODUS[/B] : Movie folder..."
+msgstr "[B]EXODUS[/B] : Mapa filmova..."
+
+msgctxt "#32560"
+msgid "[B]EXODUS[/B] : TV folder..."
+msgstr "[B]EXODUS[/B] : Mapa TV serija..."
+
+msgctxt "#32561"
+msgid "[B]TRAKT[/B] : Import Collection..."
+msgstr "[B]TRAKT[/B] : Uvezi kolekciju..."
+
+msgctxt "#32562"
+msgid "[B]TRAKT[/B] : Import Watchlist..."
+msgstr "[B]TRAKT[/B] : Uvezi popis gledanja..."
+
+msgctxt "#32563"
+msgid "[B]TRAKT[/B] : Import TV Collection..."
+msgstr "[B]TRAKT[/B] : Uvezi kolekciju TV serija..."
+
+msgctxt "#32564"
+msgid "[B]TRAKT[/B] : Import TV Watchlist..."
+msgstr "[B]TRAKT[/B] : Uvezi popis gledanja TV serija..."
+
+msgctxt "#32565"
+msgid "Include episodes with unknown air dates"
+msgstr "Uključi epizode s nepoznatim datumima prikazivanja"
+
+msgctxt "#32570"
+msgid "Show unaired seasons/episodes"
+msgstr "Prikaži neemitirane sezone/epizode"
+
+msgctxt "#32571"
+msgid "Hide movies in cinema"
+msgstr "Sakrij filmove u kinima"
+
+msgctxt "#32572"
+msgid "Protected Link. Please enter account credentials in the settings."
+msgstr "Zaštićena poveznica. Upišite vjerodajnice računa u postavkama."
+
+msgctxt "#32580"
+msgid "Films/TV Movies"
+msgstr "Filmovi/TV serije"
+
+msgctxt "#32581"
+msgid "Results Limit"
+msgstr "Ograničenje rezultata"
+
+msgctxt "#32582"
+msgid "Personal API keys provide quicker API responses."
+msgstr "Osobni API ključevi omogućuju API odgovor."
+
+msgctxt "#32583"
+msgid "Become a VIP member for many benefits at: https://fanart.tv/vip"
+msgstr "Postanite VIP član kako bi ostvarili mnoge pogodnosti na: https://fanart.tv/vip"
+
+msgctxt "#32584"
+msgid "Sort order for Trakt Watched Progress"
+msgstr "Razvrstaj poredak za Trakt napredak gledanja"
+
+msgctxt "#32585"
+msgid "Recently aired"
+msgstr "Nedavno emitirano"
+
+msgctxt "#32586"
+msgid "Recently watched"
+msgstr "Nedavno gledano"
+
+msgctxt "#32587"
+msgid "Show Extra Source Info"
+msgstr "Prikaži dodatne informacije izvora"
+
+msgctxt "#32588"
+msgid "Premium Source Identifier Color"
+msgstr "Boja identifikatora Premium izvora"
+
+msgctxt "#32589"
+msgid "Blue"
+msgstr "Plava"
+
+msgctxt "#32590"
+msgid "Red"
+msgstr "Crvena"
+
+msgctxt "#32591"
+msgid "Yellow"
+msgstr "Žuta"
+
+msgctxt "#32592"
+msgid "Deep Pink"
+msgstr "Ružičasta"
+
+msgctxt "#32593"
+msgid "Cyan"
+msgstr "Modra"
+
+msgctxt "#32594"
+msgid "Lawn Green"
+msgstr "Zelena"
+
+msgctxt "#32595"
+msgid "Gold"
+msgstr "Zlatna"
+
+msgctxt "#32596"
+msgid "Magenta"
+msgstr "Ljubičasta"
+
+msgctxt "#32597"
+msgid "Yellow Green"
+msgstr "Žuto zelena"
+
+msgctxt "#32598"
+msgid "No Color"
+msgstr "Bez boje"
+
+msgctxt "#32599"
+msgid "Getting genre information from Trakt"
+msgstr "Dobivanje informacija žanra sa trakta"
+
+msgctxt "#32600"
+msgid "Preparing sources"
+msgstr "Pripremanje izvora"
+
+msgctxt "#32601"
+msgid "Total"
+msgstr "Ukupno"
+
+msgctxt "#32602"
+msgid "Waiting for"
+msgstr "Čekam"
+
+msgctxt "#32603"
+msgid "New search..."
+msgstr "Nova pretraga..."
+
+msgctxt "#32604"
+msgid "[B]EXODUS[/B] : Clear search history..."
+msgstr "[B]EXODUS[/B] : Obriši povijest pretrage..."
+
+msgctxt "#32605"
+msgid "Click to clear search history"
+msgstr "Klikni za brisanje povijesti pretrage"
+
+msgctxt "#32606"
+msgid "Prem"
+msgstr "Prem"
+
+msgctxt "#32607"
+msgid "Normal"
+msgstr "Normalno"

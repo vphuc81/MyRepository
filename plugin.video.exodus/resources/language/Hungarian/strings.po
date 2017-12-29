@@ -1,6 +1,3 @@
-# Addon Name: Exodus
-# Addon id: plugin.video.exodus
-# Addon Provider: Exodus
 # Translators:
 # Translators:
 # Translators:
@@ -15,1053 +12,795 @@
 # Translators:
 # Translators:
 # Translators:
+# Translators:
+# Translators:
+# Translators:
+# Viper2k4, 2017
 # lambda81, 2016
-# HeisenBerg <sehunsenki@gmail.com>, 2016
+# lambda81, 2016
+# plasticfighter, 2016
+# plasticfighter, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Exodus\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2016-03-25 21:44+0000\n"
-"Last-Translator: lambda81\n"
-"Language-Team: Hungarian (http://www.transifex.com/tv-addons/exodus/language/hu/)\n"
+"PO-Revision-Date: 2017-05-30 12:02+0000\n"
+"Last-Translator: plasticfighter\n"
+"Language-Team: Hungarian (http://www.transifex.com/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgctxt "#30001"
+msgctxt "#32001"
 msgid "Movies"
 msgstr "Filmek"
 
-msgctxt "#30002"
+msgctxt "#32002"
 msgid "TV Shows"
 msgstr "Sorozatok"
 
-msgctxt "#30003"
+msgctxt "#32003"
+msgid "My Movies"
+msgstr "Kedvenc filmek"
+
+msgctxt "#32004"
+msgid "My TV Shows"
+msgstr "Kedvenc sorozatok"
+
+msgctxt "#32005"
+msgid "New Movies"
+msgstr "Legújabb filmek"
+
+msgctxt "#32006"
+msgid "New Episodes"
+msgstr "Legújabb epizódok"
+
+msgctxt "#32007"
 msgid "Channels"
 msgstr "Csatornák"
 
-msgctxt "#30004"
-msgid "My Lists"
-msgstr "Listáim"
-
-msgctxt "#30005"
-msgid "Latest Movies"
-msgstr "Legújabb filmek"
-
-msgctxt "#30006"
-msgid "Latest Episodes"
-msgstr "Legújabb sorozatok"
-
-msgctxt "#30007"
-msgid "TV Calendar"
-msgstr "TV naptár"
-
-msgctxt "#30008"
+msgctxt "#32008"
 msgid "Tools"
 msgstr "Eszközök"
 
-msgctxt "#30009"
-msgid "Search"
-msgstr "Keresés"
-
-msgctxt "#30010"
+msgctxt "#32009"
 msgid "Downloads"
 msgstr "Letöltések"
 
-msgctxt "#30021"
+msgctxt "#32010"
+msgid "Search"
+msgstr "Keresés"
+
+msgctxt "#32011"
 msgid "Genres"
 msgstr "Műfajok"
 
-msgctxt "#30022"
+msgctxt "#32012"
 msgid "Year"
 msgstr "Évszámok"
 
-msgctxt "#30023"
+msgctxt "#32013"
 msgid "People"
 msgstr "Színészek"
 
-msgctxt "#30024"
+msgctxt "#32014"
+msgid "Languages"
+msgstr "Nyelvek"
+
+msgctxt "#32015"
 msgid "Certificates"
 msgstr "Korhatár-besorolások"
 
-msgctxt "#30025"
-msgid "Featured"
-msgstr "Ajánlott"
-
-msgctxt "#30026"
-msgid "People Watching"
-msgstr "Sokan nézik"
-
-msgctxt "#30027"
-msgid "Most Popular"
-msgstr "Legnépszerűbb"
-
-msgctxt "#30028"
-msgid "Most Voted"
-msgstr "Legtöbb szavazatot kapott"
-
-msgctxt "#30029"
-msgid "Box Office"
-msgstr "Legnagyobb bevételek"
-
-msgctxt "#30030"
-msgid "Oscar Winners"
-msgstr "Oscar-nyertesek"
-
-msgctxt "#30031"
-msgid "In Theaters"
-msgstr "Jelenleg a mozikban"
-
-msgctxt "#30032"
-msgid "Latest Movies"
-msgstr "Legújabb filmek"
-
-msgctxt "#30033"
-msgid "My Lists"
-msgstr "Listáim"
-
-msgctxt "#30034"
-msgid "People Search"
-msgstr "Keresés színészre"
-
-msgctxt "#30035"
-msgid "Search"
-msgstr "Keresés"
-
-msgctxt "#30036"
-msgid "Collection"
-msgstr "Gyűjtemény"
-
-msgctxt "#30037"
-msgid "Watchlist"
-msgstr "Figyelőlista"
-
-msgctxt "#30038"
-msgid "Movie Lists"
-msgstr "Filmes listák"
-
-msgctxt "#30039"
-msgid "History"
-msgstr "Előzmények"
-
-msgctxt "#30051"
-msgid "Genres"
-msgstr "Műfajok"
-
-msgctxt "#30052"
-msgid "Year"
-msgstr "Évszámok"
-
-msgctxt "#30053"
+msgctxt "#32016"
 msgid "Networks"
 msgstr "Televíziótársaságok"
 
-msgctxt "#30054"
-msgid "People Watching"
-msgstr "Sokan nézik"
-
-msgctxt "#30055"
-msgid "Most Popular"
-msgstr "Legnépszerűbb"
-
-msgctxt "#30056"
-msgid "Airing today"
-msgstr "Ma vetítik"
-
-msgctxt "#30057"
-msgid "Returning TV Shows"
-msgstr "Visszatérő sorozatok"
-
-msgctxt "#30058"
-msgid "New TV Shows"
-msgstr "Új sorozatok"
-
-msgctxt "#30059"
-msgid "Highly Rated"
-msgstr "Magasan értékelt"
-
-msgctxt "#30060"
-msgid "Most Voted"
-msgstr "Legtöbb szavazatot kapott"
-
-msgctxt "#30061"
-msgid "TV Calendar"
-msgstr "TV naptár"
-
-msgctxt "#30062"
-msgid "Latest Episodes"
-msgstr "Legújabb sorozatok"
-
-msgctxt "#30063"
-msgid "My Lists"
-msgstr "Listáim"
-
-msgctxt "#30065"
-msgid "People Search"
-msgstr "Keresés színészre"
-
-msgctxt "#30066"
-msgid "Search"
-msgstr "Keresés"
-
-msgctxt "#30067"
-msgid "Collection"
-msgstr "Gyűjtemény"
-
-msgctxt "#30068"
-msgid "Watchlist"
-msgstr "Figyelőlista"
-
-msgctxt "#30069"
-msgid "Progress"
-msgstr "Előrehaladás"
-
-msgctxt "#30070"
-msgid "Featured"
-msgstr "Ajánlott"
-
-msgctxt "#30071"
-msgid "TV Show Lists"
-msgstr "Sorozatlisták"
-
-msgctxt "#30072"
-msgid "Episode Lists"
-msgstr "Epizódlisták"
-
-msgctxt "#30073"
-msgid "History"
-msgstr "Előzmények"
-
-msgctxt "#30081"
-msgid "No Trakt or IMDb account found."
-msgstr "Nem található Trakt vagy IMDb fiók."
-
-msgctxt "#30082"
-msgid "Trakt indicators are disabled by default."
-msgstr "Trakt mutatók alapértelmezés szerint letiltva."
-
-msgctxt "#30083"
-msgid "In order to use them enable them in settings."
-msgstr "Annak érdekében, hogy használni tudd engedélyezd a beállításokban."
-
-msgctxt "#30084"
-msgid "[B]TRAKT[/B] : Collection"
-msgstr "[B]TRAKT[/B] : Gyűjtemény"
-
-msgctxt "#30085"
-msgid "[B]TRAKT[/B] : TV Collection"
-msgstr "[B]TRAKT[/B] : TV Gyűjtemény"
-
-msgctxt "#30086"
-msgid "[B]TRAKT[/B] : Watchlist"
-msgstr "[B]TRAKT[/B] : Figyelőlista"
-
-msgctxt "#30087"
-msgid "[B]TRAKT[/B] : TV Watchlist"
-msgstr "[B]TRAKT[/B] : TV figyelőlista"
-
-msgctxt "#30088"
-msgid "[B]IMDB[/B] : Watchlist"
-msgstr "[B]IMDB[/B] : Figyelőlista"
-
-msgctxt "#30089"
-msgid "[B]IMDB[/B] : TV Watchlist"
-msgstr "[B]IMDB[/B] : TV figyelőlista"
-
-msgctxt "#30090"
-msgid "[B]TRAKT[/B] : Featured"
-msgstr "[B]TRAKT[/B] : Ajánlott"
-
-msgctxt "#30091"
-msgid "[B]TRAKT[/B] : TV Featured"
-msgstr "[B]TRAKT[/B] : Ajánlott sorozatok"
-
-msgctxt "#30092"
-msgid "[B]TRAKT[/B] : History"
-msgstr "[B]TRAKT[/B] : Előzmények"
-
-msgctxt "#30093"
-msgid "[B]TRAKT[/B] : TV History"
-msgstr "[B]TRAKT[/B] : TV Előzmények"
-
-msgctxt "#30094"
-msgid "[B]TRAKT[/B] : Progress"
-msgstr "[B]TRAKT[/B] : Előrehaladás"
-
-msgctxt "#30095"
-msgid "[B]TRAKT[/B] : Episodes"
-msgstr "[B]TRAKT[/B] : Epizódok"
-
-msgctxt "#30096"
-msgid "Movie Lists"
-msgstr "Filmes listák"
-
-msgctxt "#30097"
-msgid "TV Show Lists"
-msgstr "Sorozat listák"
-
-msgctxt "#30098"
-msgid "Episode Lists"
-msgstr "Epizódlisták"
-
-msgctxt "#30111"
-msgid "[B]SETTINGS[/B] : General"
-msgstr "[B]BEÁLLÍTÁSOK[/B] : Általános"
-
-msgctxt "#30112"
-msgid "[B]SETTINGS[/B] : Accounts"
-msgstr "[B]BEÁLLÍTÁSOK[/B] : Fiókok"
-
-msgctxt "#30113"
-msgid "[B]SETTINGS[/B] : Playback"
-msgstr "[B]BEÁLLÍTÁSOK[/B] : Lejátszás"
-
-msgctxt "#30114"
-msgid "[B]SETTINGS[/B] : Subtitles"
-msgstr "[B]BEÁLLÍTÁSOK[/B] : Feliratok"
-
-msgctxt "#30115"
-msgid "[B]SETTINGS[/B] : Providers"
-msgstr "[B]BEÁLLÍTÁSOK[/B] : Kiszolgálók"
-
-msgctxt "#30119"
-msgid "[B]EXODUS[/B] : Clear providers..."
-msgstr "[B]EXODUS[/B] : Kiszolgálók megtisztítása..."
-
-msgctxt "#30120"
-msgid "[B]EXODUS[/B] : Clear cache..."
-msgstr "[B]EXODUS[/B] : Gyorsítótár megtisztítása..."
-
-msgctxt "#30122"
-msgid "[B]EXODUS[/B] : Downloads"
-msgstr "[B]EXODUS[/B] : Letöltések"
-
-msgctxt "#30141"
-msgid "Movies"
-msgstr "Filmek"
-
-msgctxt "#30142"
-msgid "TV Shows"
-msgstr "Sorozatok"
-
-msgctxt "#30151"
-msgid "Movies"
-msgstr "Filmek"
-
-msgctxt "#30152"
-msgid "TV Shows"
-msgstr "Sorozatok"
-
-msgctxt "#30153"
-msgid "People (Movies)"
-msgstr "Színészek (Filmek)"
-
-msgctxt "#30154"
-msgid "People (TV)"
-msgstr "Színészek (Sorozatok)"
-
-msgctxt "#30155"
-msgid "Queue item"
-msgstr "Lejátszási sorba tesz"
-
-msgctxt "#30201"
-msgid "Search"
-msgstr "Keresés"
-
-msgctxt "#30202"
-msgid "Queue item"
-msgstr "Lejátszási sorba tesz"
-
-msgctxt "#30203"
-msgid "Auto-play"
-msgstr "Automatikus lejátszás"
-
-msgctxt "#30204"
-msgid "Play using..."
-msgstr "Egyéb lejátszóval..."
-
-msgctxt "#30205"
-msgid "Movie information"
-msgstr "Film információ"
-
-msgctxt "#30206"
-msgid "Mark as watched"
-msgstr "Megnézettként megjelöl"
-
-msgctxt "#30207"
-msgid "Mark as unwatched"
-msgstr "Nem látottként megjelöl"
-
-msgctxt "#30208"
-msgid "Trakt Manager"
-msgstr "Trakt Kezelő"
-
-msgctxt "#30209"
-msgid "Add to favourites"
-msgstr "Hozzáadás kedvencekhez"
-
-msgctxt "#30210"
-msgid "Remove from favourites"
-msgstr "Eltávolítás kedvencekből"
-
-msgctxt "#30212"
-msgid "Set Movies view"
-msgstr "Filmek nézetének beállítása"
-
-msgctxt "#30213"
-msgid "[I]Next Page[/I]"
-msgstr "[I]Következő oldal[/I]"
-
-msgctxt "#30214"
-msgid "Movie trailer"
-msgstr "Film előzetese"
-
-msgctxt "#30231"
-msgid "Search"
-msgstr "Keresés"
-
-msgctxt "#30232"
-msgid "Queue item"
-msgstr "Lejátszási sorba tesz"
-
-msgctxt "#30233"
-msgid "TV show information"
-msgstr "Sorozat információ"
-
-msgctxt "#30234"
-msgid "Mark as watched"
-msgstr "Megnézettként megjelöl"
-
-msgctxt "#30235"
-msgid "Mark as unwatched"
-msgstr "Nem látottként megjelöl"
-
-msgctxt "#30236"
-msgid "Trakt Manager"
-msgstr "Trakt Kezelő"
-
-msgctxt "#30237"
-msgid "Add to favourites"
-msgstr "Hozzáadás kedvencekhez"
-
-msgctxt "#30238"
-msgid "Remove from favourites"
-msgstr "Eltávolítás kedvencekből"
-
-msgctxt "#30240"
-msgid "Set TV Shows view"
-msgstr "Sorozatok nézetének beállítása"
-
-msgctxt "#30241"
-msgid "[I]Next Page[/I]"
-msgstr "[I]Következő oldal[/I]"
-
-msgctxt "#30242"
-msgid "TV show trailer"
-msgstr "Sorozat előzetese"
-
-msgctxt "#30261"
-msgid "Queue item"
-msgstr "Lejátszási sorba tesz"
-
-msgctxt "#30262"
-msgid "TV show information"
-msgstr "Sorozat információ"
-
-msgctxt "#30263"
-msgid "Mark as watched"
-msgstr "Megnézettként megjelöl"
-
-msgctxt "#30264"
-msgid "Mark as unwatched"
-msgstr "Nem látottként megjelöl"
-
-msgctxt "#30265"
-msgid "Trakt Manager"
-msgstr "Trakt Kezelő"
-
-msgctxt "#30266"
-msgid "Add to favourites"
-msgstr "Hozzáadás kedvencekhez"
-
-msgctxt "#30267"
-msgid "Remove from favourites"
-msgstr "Eltávolítás kedvencekből"
-
-msgctxt "#30268"
-msgid "TV show trailer"
-msgstr "Sorozat előzetese"
-
-msgctxt "#30269"
-msgid "Set Seasons view"
-msgstr "Évadok nézetének beállítása"
-
-msgctxt "#30270"
-msgid "Auto-play"
-msgstr "Automatikus lejátszás"
-
-msgctxt "#30271"
-msgid "Play using..."
-msgstr "Egyéb lejátszóval..."
-
-msgctxt "#30272"
-msgid "Episode information"
-msgstr "Epizód információ"
-
-msgctxt "#30273"
-msgid "Set Episodes view"
-msgstr "Epizódok nézetének beállítása"
-
-msgctxt "#30274"
-msgid "Browse Seasons"
-msgstr "Évadok megtekintése"
-
-msgctxt "#30275"
-msgid "Season"
-msgstr "Évad"
-
-msgctxt "#30291"
-msgid "Auto-play"
-msgstr "Automatikus lejátszás"
-
-msgctxt "#30292"
-msgid "Play using..."
-msgstr "Egyéb lejátszóval..."
-
-msgctxt "#30293"
-msgid "Information"
-msgstr "Információ"
-
-msgctxt "#30294"
-msgid "Refresh"
-msgstr "Frissítés"
-
-msgctxt "#30295"
-msgid "Add-on settings"
-msgstr "Kiegészítő beállítások"
-
-msgctxt "#30296"
-msgid "Now playing..."
-msgstr "Jelenlegi játszáslista"
-
-msgctxt "#30297"
-msgid "Trailer"
-msgstr "Előzetes"
-
-msgctxt "#30401"
-msgid "Are you sure?"
-msgstr "Biztos benne?"
-
-msgctxt "#30402"
-msgid "Process Complete"
-msgstr "Folyamat befejeződött"
-
-msgctxt "#30411"
-msgid "A RealDebrid account already exists"
-msgstr "A RealDebrid fiók már létezik"
-
-msgctxt "#30413"
-msgid "Do you want to reset?"
-msgstr "Szeretné visszaállítani?"
-
-msgctxt "#30414"
-msgid "Yes"
-msgstr "Igen"
-
-msgctxt "#30415"
-msgid "No"
-msgstr "Nem"
-
-msgctxt "#30416"
-msgid "1) Visit : "
-msgstr "1.) Látogassa meg :"
-
-msgctxt "#30417"
-msgid "2) When prompted enter : "
-msgstr "2.) Amikor kéri írja be ezt :"
-
-msgctxt "#30451"
-msgid "Getting information"
-msgstr "Információ beszerzése"
-
-msgctxt "#30461"
-msgid "Resume from"
-msgstr "Folytatás innen"
-
-msgctxt "#30462"
-msgid "Start from beginning"
-msgstr "Lejátszás az elejéről"
-
-msgctxt "#30463"
-msgid "Resume"
-msgstr "Folytatás"
-
-msgctxt "#30464"
-msgid "Loaded in"
-msgstr "Betöltve"
-
-msgctxt "#30465"
-msgid "seconds"
-msgstr "másodperc alatt"
-
-msgctxt "#30471"
-msgid "Trakt Manager"
-msgstr "Trakt Kezelő"
-
-msgctxt "#30472"
-msgid "Add to Collection"
-msgstr "Hozzáadás gyűjteményhez"
-
-msgctxt "#30473"
-msgid "Remove from Collection"
-msgstr "Eltávolítás gyűjteményből"
-
-msgctxt "#30474"
-msgid "Add to Watchlist"
-msgstr "Hozzáadás figyelőlistához"
-
-msgctxt "#30475"
-msgid "Remove from Watchlist"
-msgstr "Eltávolítás figyelőlistából"
-
-msgctxt "#30476"
-msgid "Add to new List"
-msgstr "Hozzáadás új listához"
-
-msgctxt "#30477"
-msgid "Add to"
-msgstr "Hozzáadás ehhez"
-
-msgctxt "#30478"
-msgid "Remove from"
-msgstr "Eltávolítás innen"
-
-msgctxt "#30479"
-msgid "A Trakt account already exists"
-msgstr "A Trakt fiók már létezik"
-
-msgctxt "#30481"
-msgid "Do you want to reset?"
-msgstr "Szeretné visszaállítani?"
-
-msgctxt "#30482"
-msgid "Yes"
-msgstr "Igen"
-
-msgctxt "#30483"
-msgid "No"
-msgstr "Nem"
-
-msgctxt "#30491"
-msgid "This View is now Default"
-msgstr "Ez a nézet most alapértelmezett lett"
-
-msgctxt "#30501"
-msgid "No stream available"
-msgstr "Nincs elérhető adatfolyam"
-
-msgctxt "#30502"
-msgid "Movie information"
-msgstr "Film információ"
-
-msgctxt "#30503"
-msgid "Episode information"
-msgstr "Epizód információ"
-
-msgctxt "#30504"
-msgid "Queue item"
-msgstr "Lejátszási sorba tesz"
-
-msgctxt "#30505"
-msgid "Download item"
-msgstr "Letöltés"
-
-msgctxt "#30506"
-msgid "Refresh providers"
-msgstr "Kiszolgálók frissítése"
-
-msgctxt "#30507"
-msgid "Add-on settings"
-msgstr "Kiegészítő beállítások"
-
-msgctxt "#30508"
-msgid "Now playing..."
-msgstr "Jelenlegi játszáslista"
-
-msgctxt "#30509"
-msgid "Auto-play"
-msgstr "Automatikus lejátszás"
-
-msgctxt "#30510"
-msgid "Are you sure?"
-msgstr "Biztos benne?"
-
-msgctxt "#30511"
-msgid "Process Complete"
-msgstr "Folyamat befejeződött"
-
-msgctxt "#30512"
-msgid "Time elapsed"
-msgstr "Eltelt idő"
-
-msgctxt "#30513"
-msgid "seconds"
-msgstr "másodperc"
-
-msgctxt "#30514"
-msgid "Remaining providers"
-msgstr "Hátralévő kiszolgálók"
-
-msgctxt "#30515"
-msgid "Loading streams"
-msgstr "Adatfolyamok megnyitása"
-
-msgctxt "#30516"
-msgid "Movie trailer"
-msgstr "Film előzetese"
-
-msgctxt "#30517"
-msgid "TV show trailer"
-msgstr "Sorozat előzetese"
-
-msgctxt "#30518"
-msgid "Playback outside Exodus is not allowed"
-msgstr "Exoduson kívüli lejátszás nem engedélyezett"
-
-msgctxt "#30521"
-msgid "Monday"
-msgstr "Hétfő"
-
-msgctxt "#30522"
-msgid "Tuesday"
-msgstr "Kedd"
-
-msgctxt "#30523"
-msgid "Wednesday"
-msgstr "Szerda"
-
-msgctxt "#30524"
-msgid "Thursday"
-msgstr "Csütörtök"
-
-msgctxt "#30525"
-msgid "Friday"
-msgstr "Péntek"
-
-msgctxt "#30526"
-msgid "Saturday"
-msgstr "Szombat"
-
-msgctxt "#30527"
-msgid "Sunday"
-msgstr "Vasárnap"
-
-msgctxt "#30528"
-msgid "January"
-msgstr "Január"
-
-msgctxt "#30529"
-msgid "February"
-msgstr "Február"
-
-msgctxt "#30530"
-msgid "March"
-msgstr "Március"
-
-msgctxt "#30531"
-msgid "April"
-msgstr "Április"
-
-msgctxt "#30532"
-msgid "May"
-msgstr "Május"
-
-msgctxt "#30533"
-msgid "June"
-msgstr "Június"
-
-msgctxt "#30534"
-msgid "July"
-msgstr "Július"
-
-msgctxt "#30535"
-msgid "August"
-msgstr "Augusztus"
-
-msgctxt "#30536"
-msgid "September"
-msgstr "Szeptember"
-
-msgctxt "#30537"
-msgid "October"
-msgstr "Október"
-
-msgctxt "#30538"
-msgid "November"
-msgstr "November"
-
-msgctxt "#30539"
-msgid "December"
-msgstr "December"
-
-msgctxt "#30800"
-msgid "General"
-msgstr "Általános"
-
-msgctxt "#30801"
-msgid "Appearance"
-msgstr "Megjelenés"
-
-msgctxt "#30802"
-msgid "Enable Fanart"
-msgstr "Fanart engedélyezése"
-
-msgctxt "#30803"
-msgid "Info Language"
-msgstr "Info nyelve"
-
-msgctxt "#30804"
-msgid "Providers Timeout"
-msgstr "Kiszolgálók időtúllépése"
-
-msgctxt "#30805"
-msgid "Main menu"
-msgstr "Főmenü"
-
-msgctxt "#30806"
-msgid "Latest Movies"
-msgstr "Legújabb filmek"
-
-msgctxt "#30807"
-msgid "Disabled"
-msgstr "Letiltva"
-
-msgctxt "#30808"
-msgid "Featured"
-msgstr "Ajánlott"
-
-msgctxt "#30809"
+msgctxt "#32017"
 msgid "People Watching"
 msgstr "Népszerű"
 
-msgctxt "#30810"
+msgctxt "#32018"
 msgid "Most Popular"
 msgstr "Legnépszerűbb"
 
-msgctxt "#30811"
+msgctxt "#32019"
+msgid "Most Voted"
+msgstr "Legtöbb szavazatot kapott"
+
+msgctxt "#32020"
+msgid "Box Office"
+msgstr "Legnagyobb bevételek"
+
+msgctxt "#32021"
+msgid "Oscar Winners"
+msgstr "Oscar-nyertesek"
+
+msgctxt "#32022"
 msgid "In Theaters"
 msgstr "Jelenleg a mozikban"
 
-msgctxt "#30812"
-msgid "Latest Episodes"
-msgstr "Legújabb sorozatok"
+msgctxt "#32023"
+msgid "Highly Rated"
+msgstr "Magasan értékelt"
 
-msgctxt "#30813"
-msgid "Disabled"
-msgstr "Letiltva"
+msgctxt "#32024"
+msgid "Airing today"
+msgstr "Ma vetítik"
 
-msgctxt "#30814"
-msgid "Episodes"
-msgstr "Epizódok"
+msgctxt "#32025"
+msgid "Returning TV Shows"
+msgstr "Visszatérő sorozatok"
 
-msgctxt "#30815"
-msgid "Trakt Progress"
-msgstr "Trakt Előrehaladás"
+msgctxt "#32026"
+msgid "New TV Shows"
+msgstr "Új sorozatok"
 
-msgctxt "#30816"
-msgid "Trakt Episodes"
-msgstr "Trakt Epizódok"
-
-msgctxt "#30817"
+msgctxt "#32027"
 msgid "TV Calendar"
 msgstr "TV naptár"
 
-msgctxt "#30818"
-msgid "Disabled"
-msgstr "Letiltva"
+msgctxt "#32028"
+msgid "People Search"
+msgstr "Keresés színészre"
 
-msgctxt "#30819"
+msgctxt "#32029"
+msgid "People (Movies)"
+msgstr "Színészek (Filmek)"
+
+msgctxt "#32030"
+msgid "People (TV)"
+msgstr "Színészek (Sorozatok)"
+
+msgctxt "#32031"
+msgid "Discover"
+msgstr "Böngészés"
+
+msgctxt "#32032"
+msgid "Collection"
+msgstr "Gyűjtemény"
+
+msgctxt "#32033"
+msgid "Watchlist"
+msgstr "Figyelőlista"
+
+msgctxt "#32034"
+msgid "IMDb"
+msgstr "IMDb"
+
+msgctxt "#32035"
+msgid "Featured"
+msgstr "Kiemelt"
+
+msgctxt "#32036"
+msgid "History"
+msgstr "Előzmények"
+
+msgctxt "#32037"
+msgid "Progress"
+msgstr "Előrehaladás"
+
+msgctxt "#32038"
+msgid "Episodes"
+msgstr "Epizódok"
+
+msgctxt "#32039"
+msgid "Movie Lists"
+msgstr "Filmes listák"
+
+msgctxt "#32040"
+msgid "TV Show Lists"
+msgstr "Sorozat listák"
+
+msgctxt "#32041"
+msgid "Episode Lists"
+msgstr "Epizódlisták"
+
+msgctxt "#32042"
+msgid "No Trakt or IMDb account found."
+msgstr "Nem található Trakt vagy IMDb fiók."
+
+msgctxt "#32043"
+msgid "[B]SETTINGS[/B] : General"
+msgstr "[B]BEÁLLÍTÁSOK[/B] : Általános"
+
+msgctxt "#32044"
+msgid "[B]SETTINGS[/B] : Accounts"
+msgstr "[B]BEÁLLÍTÁSOK[/B] : Fiókok"
+
+msgctxt "#32045"
+msgid "[B]SETTINGS[/B] : Playback"
+msgstr "[B]BEÁLLÍTÁSOK[/B] : Lejátszás"
+
+msgctxt "#32046"
+msgid "[B]SETTINGS[/B] : Subtitles"
+msgstr "[B]BEÁLLÍTÁSOK[/B] : Feliratok"
+
+msgctxt "#32047"
+msgid "[B]SETTINGS[/B] : Providers"
+msgstr "[B]BEÁLLÍTÁSOK[/B] : Kiszolgálók"
+
+msgctxt "#32048"
+msgid "[B]EXODUS[/B] : Downloads"
+msgstr "[B]EXODUS[/B] : Letöltések"
+
+msgctxt "#32049"
+msgid "[B]EXODUS[/B] : Viewtypes"
+msgstr "[B]EXODUS[/B] : Nézet"
+
+msgctxt "#32050"
+msgid "[B]EXODUS[/B] : Clear providers..."
+msgstr "[B]EXODUS[/B] : Kiszolgálók megtisztítása..."
+
+msgctxt "#32051"
+msgid "[B]EXODUS[/B] : Clear metadata..."
+msgstr "[B]EXODUS[/B] : Metaadatok megtisztítása..."
+
+msgctxt "#32052"
+msgid "[B]EXODUS[/B] : Clear cache..."
+msgstr "[B]EXODUS[/B] : Gyorsítótár megtisztítása..."
+
+msgctxt "#32053"
+msgid "[I]Next Page[/I]"
+msgstr "[I]Következő oldal[/I]"
+
+msgctxt "#32054"
+msgid "Seasons"
+msgstr "Évadok"
+
+msgctxt "#32055"
+msgid "Season"
+msgstr "Évad"
+
+msgctxt "#32056"
+msgid "Are you sure?"
+msgstr "Biztos benne?"
+
+msgctxt "#32057"
+msgid "Process Complete"
+msgstr "Folyamat befejeződött"
+
+msgctxt "#32058"
+msgid "This will slow down things until they are re-cached!"
+msgstr "Ez lelassítja a működést, amíg a tartalmak újra bekerülnek a gyorsítótárba!"
+
+msgctxt "#32059"
+msgid "CLICK HERE TO SAVE VIEW"
+msgstr "A NÉZET MENTÉSÉHEZ KATTINTSON IDE"
+
+msgctxt "#32060"
+msgid ""
+"January|February|March|April|May|June|July|August|September|October|November|December"
+msgstr "Január|Február|Március|Április|Május|Június|Július|Augusztus|Szeptember|Október|November|December"
+
+msgctxt "#32061"
+msgid "Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday"
+msgstr "Hétfő|Kedd|Szerda|Csütörtök|Péntek|Szombat|Vasárnap"
+
+msgctxt "#32062"
+msgid "[B]%s[/B] : %s"
+msgstr "[B]%s[/B] : %s"
+
+msgctxt "#32063"
+msgid "Play using..."
+msgstr "Egyéb lejátszóval..."
+
+msgctxt "#32064"
+msgid "Auto Play"
+msgstr "Automatikus lejátszás"
+
+msgctxt "#32065"
+msgid "Queue item"
+msgstr "Lejátszási sorba tesz"
+
+msgctxt "#32066"
+msgid "Watched in Exodus"
+msgstr "Megnézettként megjelöl (Exodus)"
+
+msgctxt "#32067"
+msgid "Unwatched in Exodus"
+msgstr "Nem látottként megjelöl (Exodus)"
+
+msgctxt "#32068"
+msgid "Watched in Trakt"
+msgstr "Megnézettként megjelöl (Trakt)"
+
+msgctxt "#32069"
+msgid "Unwatched in Trakt"
+msgstr "Nem látottként megjelöl (Trakt)"
+
+msgctxt "#32070"
+msgid "Trakt Manager"
+msgstr "Trakt Kezelő"
+
+msgctxt "#32071"
+msgid "Browse Series"
+msgstr "Évadok megtekintése"
+
+msgctxt "#32072"
+msgid "Refresh"
+msgstr "Frissítés"
+
+msgctxt "#32073"
+msgid "[B]TRAKT[/B] : Authorize"
+msgstr "[B]TRAKT[/B]: Engedélyezés"
+
+msgctxt "#32074"
+msgid "[B]HELP[/B]"
+msgstr "[B]SEGÍTSÉG[/B]"
+
+msgctxt "#32301"
 msgid "Enabled"
 msgstr "Engedélyezve"
 
-msgctxt "#30820"
-msgid "Indicators"
-msgstr "Tartalmak"
-
-msgctxt "#30821"
-msgid "Local"
-msgstr "Helyi"
-
-msgctxt "#30822"
-msgid "Trakt"
-msgstr "Trakt"
-
-msgctxt "#30823"
-msgid "My Lists"
-msgstr "Listáim"
-
-msgctxt "#30824"
+msgctxt "#32302"
 msgid "Disabled"
 msgstr "Letiltva"
 
-msgctxt "#30825"
-msgid "Enabled"
-msgstr "Engedélyezve"
-
-msgctxt "#30826"
-msgid "Sub menu"
-msgstr "Almenü"
-
-msgctxt "#30827"
-msgid "Classic"
-msgstr "Klasszikus"
-
-msgctxt "#30828"
-msgid "Flatten TV show seasons"
-msgstr "Sorozatévadok szűkítése"
-
-msgctxt "#30830"
-msgid "Playback"
-msgstr "Lejátszás"
-
-msgctxt "#30831"
-msgid "Max Quality"
-msgstr "Legjobb minőség"
-
-msgctxt "#30832"
-msgid "Host selection"
-msgstr "Tárhely kiválasztó"
-
-msgctxt "#30833"
-msgid "Dialog"
-msgstr "Ablak"
-
-msgctxt "#30834"
-msgid "Directory"
-msgstr "Mappa"
-
-msgctxt "#30835"
-msgid "File Hosting Filters"
-msgstr "Tárhely szűrők"
-
-msgctxt "#30836"
-msgid "Hosters with captchas"
-msgstr "Tárhelyek captchaval"
-
-msgctxt "#30837"
-msgid "Sort by Provider"
-msgstr "Rendezés kiszolgálók szerint"
-
-msgctxt "#30839"
-msgid "Auto-play"
-msgstr "Automatikus lejátszás"
-
-msgctxt "#30840"
-msgid "Auto-play"
-msgstr "Automatikus lejátszás"
-
-msgctxt "#30842"
-msgid "Force SD playback in Auto-play"
-msgstr "Kényszerített SD lejátszás Automatikus lejátszás módban"
-
-msgctxt "#30843"
-msgid "When playback starts..."
-msgstr "Lejátszás elindulásakor..."
-
-msgctxt "#30844"
-msgid "Resume Playback"
-msgstr "Lejátszás folytatása"
-
-msgctxt "#30845"
-msgid "Playback Info"
-msgstr "Lejátszási információ"
-
-msgctxt "#30846"
-msgid "Progress Dialog"
-msgstr "Folyamat párbeszédablak"
-
-msgctxt "#30847"
-msgid "Safe"
-msgstr "Biztonságos"
-
-msgctxt "#30848"
-msgid "Unsafe"
-msgstr "Nem biztonságos"
-
-msgctxt "#30860"
-msgid "Providers"
-msgstr "Kiszolgálók"
-
-msgctxt "#30910"
-msgid "Accounts"
-msgstr "Fiókok"
-
-msgctxt "#30911"
+msgctxt "#32303"
 msgid "User"
 msgstr "Felhasználó"
 
-msgctxt "#30912"
+msgctxt "#32304"
 msgid "Email"
 msgstr "E-mail cím"
 
-msgctxt "#30913"
-msgid "Password"
-msgstr "Jelszó"
+msgctxt "#32305"
+msgid "ID"
+msgstr "ID"
 
-msgctxt "#30914"
+msgctxt "#32306"
 msgid "Authorization..."
 msgstr "Engedélyezés..."
 
-msgctxt "#30940"
-msgid "Subtitles"
-msgstr "Feliratok"
+msgctxt "#32307"
+msgid "Password"
+msgstr "Jelszó"
 
-msgctxt "#30941"
-msgid "Subtitles could be unavailable or out of sync."
-msgstr "A feliratok egyes esetekben nem elérhetőek vagy nincsenek szinkronban."
+msgctxt "#32308"
+msgid "PIN"
+msgstr "PIN"
 
-msgctxt "#30942"
-msgid "In that case use your own subtitles."
-msgstr "Ebben az esetben használj saját feliratokat."
+msgctxt "#32309"
+msgid "API"
+msgstr "API"
 
-msgctxt "#30943"
-msgid "Enable subtitles"
-msgstr "Feliratok engedélyezése"
+msgctxt "#32310"
+msgid "General"
+msgstr "Általános"
 
-msgctxt "#30944"
-msgid "Convert subtitles to UTF-8"
-msgstr "Feliratok konvertálása UTF-8 formátumba"
+msgctxt "#32311"
+msgid "Appearance"
+msgstr "Megjelenés"
 
-msgctxt "#30945"
-msgid "Primary Language"
-msgstr "Elsődleges nyelv"
+msgctxt "#32312"
+msgid "Providers Timeout"
+msgstr "Kiszolgálók időtúllépése"
 
-msgctxt "#30946"
-msgid "Secondary Language"
-msgstr "Másodlagos nyelv"
+msgctxt "#32313"
+msgid "Indicators"
+msgstr "Tartalmak"
 
-msgctxt "#30950"
+msgctxt "#32314"
+msgid "Local"
+msgstr "Helyi"
+
+msgctxt "#32315"
+msgid "Trakt"
+msgstr "Trakt"
+
+msgctxt "#32316"
+msgid "Info Language"
+msgstr "Info nyelve"
+
+msgctxt "#32317"
+msgid "Flatten TV seasons"
+msgstr "Sorozatévadok szűkítése"
+
+msgctxt "#32318"
+msgid "Enable Fanart"
+msgstr "Fanart engedélyezése"
+
+msgctxt "#32319"
+msgid "Menu"
+msgstr "Menü"
+
+msgctxt "#32320"
+msgid "New Movies"
+msgstr "Legújabb filmek"
+
+msgctxt "#32321"
+msgid "Featured"
+msgstr "Kiemelt"
+
+msgctxt "#32322"
+msgid "People Watching"
+msgstr "Népszerű"
+
+msgctxt "#32323"
+msgid "Most Popular"
+msgstr "Legnépszerűbb"
+
+msgctxt "#32324"
+msgid "In Theaters"
+msgstr "Jelenleg a mozikban"
+
+msgctxt "#32325"
+msgid "New Episodes"
+msgstr "Legújabb epizódok"
+
+msgctxt "#32326"
+msgid "Episodes"
+msgstr "Epizódok"
+
+msgctxt "#32327"
+msgid "Trakt Progress"
+msgstr "Trakt Előrehaladás"
+
+msgctxt "#32328"
+msgid "Trakt Episodes"
+msgstr "Trakt Epizódok"
+
+msgctxt "#32329"
+msgid "My Lists"
+msgstr "Listáim"
+
+msgctxt "#32330"
+msgid "Playback"
+msgstr "Lejátszás"
+
+msgctxt "#32331"
+msgid "Default action"
+msgstr "Tárhely kiválasztó"
+
+msgctxt "#32332"
+msgid "Dialog"
+msgstr "Ablak"
+
+msgctxt "#32333"
+msgid "Directory"
+msgstr "Mappa"
+
+msgctxt "#32334"
+msgid "Auto Play"
+msgstr "Automatikus lejátszás"
+
+msgctxt "#32335"
+msgid "Progress Dialog"
+msgstr "Folyamat párbeszédablak"
+
+msgctxt "#32336"
+msgid "Foreground"
+msgstr "Előtérben"
+
+msgctxt "#32337"
+msgid "Background"
+msgstr "Háttérben"
+
+msgctxt "#32338"
+msgid "File Hosting Filters"
+msgstr "Tárhely szűrők"
+
+msgctxt "#32339"
+msgid "Max Quality"
+msgstr "Legjobb minőség"
+
+msgctxt "#32340"
+msgid "SD Hosters in Auto Play"
+msgstr "Kényszerített SD lejátszás Automatikus lejátszás módban"
+
+msgctxt "#32341"
+msgid "Hosters with captchas"
+msgstr "Tárhelyek captchaval"
+
+msgctxt "#32342"
+msgid "Sort by Provider"
+msgstr "Rendezés kiszolgálók szerint"
+
+msgctxt "#32343"
+msgid "When playback starts..."
+msgstr "Lejátszás elindulásakor..."
+
+msgctxt "#32344"
+msgid "Resume Playback"
+msgstr "Lejátszás folytatása"
+
+msgctxt "#32345"
+msgid "Providers"
+msgstr "Kiszolgálók"
+
+msgctxt "#32346"
+msgid "Accounts"
+msgstr "Fiókok"
+
+msgctxt "#32347"
 msgid "Downloads"
 msgstr "Letöltések"
 
-msgctxt "#30951"
-msgid "Movies"
-msgstr "Filmek"
-
-msgctxt "#30952"
-msgid "TV"
-msgstr "Sorozatok"
-
-msgctxt "#30953"
+msgctxt "#32348"
 msgid "Enable downloads"
 msgstr "Letöltések engedélyezése"
 
-msgctxt "#30954"
+msgctxt "#32349"
+msgid "Movies"
+msgstr "Filmek"
+
+msgctxt "#32350"
+msgid "TV"
+msgstr "Sorozatok"
+
+msgctxt "#32351"
 msgid "Downloading features are disabled by default."
 msgstr "A letöltések alapértelmezés szerint le vannak tiltva."
 
-msgctxt "#30955"
+msgctxt "#32352"
 msgid "Set up your download folders in order to enable them."
 msgstr "Állítsd be a letöltési mappáidat, annak érdekében hogy engedélyezd őket."
+
+msgctxt "#32353"
+msgid "Subtitles"
+msgstr "Feliratok"
+
+msgctxt "#32354"
+msgid "Enable subtitles"
+msgstr "Feliratok engedélyezése"
+
+msgctxt "#32355"
+msgid "Convert subtitles to UTF-8"
+msgstr "Feliratok konvertálása UTF-8 formátumba"
+
+msgctxt "#32356"
+msgid "Primary Language"
+msgstr "Elsődleges nyelv"
+
+msgctxt "#32357"
+msgid "Secondary Language"
+msgstr "Másodlagos nyelv"
+
+msgctxt "#32358"
+msgid "Subtitles could be unavailable or out of sync."
+msgstr "A feliratok egyes esetekben nem elérhetőek vagy nincsenek szinkronban."
+
+msgctxt "#32359"
+msgid "In that case use your own subtitles."
+msgstr "Ebben az esetben használj saját feliratokat."
+
+msgctxt "#32360"
+msgid "Providers Language"
+msgstr "Kiszolgálók nyelve"
+
+msgctxt "#32401"
+msgid "No stream available"
+msgstr "Nincs elérhető adatfolyam"
+
+msgctxt "#32402"
+msgid "Playback outside Exodus is not allowed"
+msgstr "Exoduson kívüli lejátszás nem engedélyezett"
+
+msgctxt "#32403"
+msgid "Download"
+msgstr "Letöltés"
+
+msgctxt "#32404"
+msgid "Time elapsed: %s seconds"
+msgstr "Eltelt idő: %s másodperc"
+
+msgctxt "#32405"
+msgid "%s seconds"
+msgstr "%s másodperc"
+
+msgctxt "#32406"
+msgid "Remaining providers: %s"
+msgstr "Hátralévő kiszolgálók: %s"
+
+msgctxt "#32407"
+msgid "Are you sure?"
+msgstr "Biztos benne?"
+
+msgctxt "#32408"
+msgid "Process Complete"
+msgstr "Folyamat befejeződött"
+
+msgctxt "#32501"
+msgid "Start from beginning"
+msgstr "Lejátszás az elejéről"
+
+msgctxt "#32502"
+msgid "Resume from %s"
+msgstr "Folytatás innen %s"
+
+msgctxt "#32503"
+msgid "Resume"
+msgstr "Folytatás"
+
+msgctxt "#32511"
+msgid "An account already exists."
+msgstr "Egy fiók már meg van adva."
+
+msgctxt "#32512"
+msgid "Do you want to reset?"
+msgstr "Szeretné visszaállítani?"
+
+msgctxt "#32513"
+msgid "1) Visit : [COLOR skyblue]%s[/COLOR]"
+msgstr "1) Látogassa meg : [COLOR skyblue]%s[/COLOR]"
+
+msgctxt "#32514"
+msgid "2) When prompted enter : [COLOR skyblue]%s[/COLOR]"
+msgstr "2) Amikor kéri írja be ezt : [COLOR skyblue]%s[/COLOR]"
+
+msgctxt "#32515"
+msgid "Trakt Manager"
+msgstr "Trakt Kezelő"
+
+msgctxt "#32516"
+msgid "Add to [B]Collection[/B]"
+msgstr "Hozzáadás a [B]Gyűjteményhez[/B]"
+
+msgctxt "#32517"
+msgid "Remove from [B]Collection[/B]"
+msgstr "Eltávolítás a [B]Gyűjteményből[/B]"
+
+msgctxt "#32518"
+msgid "Add to [B]Watchlist[/B]"
+msgstr "Hozzáadás a [B]Figyelőlistához[/B]"
+
+msgctxt "#32519"
+msgid "Remove from [B]Watchlist[/B]"
+msgstr "Eltávolítás a [B]Figyelőlistából[/B]"
+
+msgctxt "#32520"
+msgid "Add to [B]new List[/B]"
+msgstr "Hozzáadás [B]új Listához[/B]"
+
+msgctxt "#32521"
+msgid "Add to [B]%s[/B]"
+msgstr "Hozzáadás ehhez [B]%s[/B]"
+
+msgctxt "#32522"
+msgid "Remove from [B]%s[/B]"
+msgstr "Eltávolítás innen [B]%s[/B]"
+
+msgctxt "#32531"
+msgid "An account already exists."
+msgstr "Egy fiók már meg van adva."
+
+msgctxt "#32532"
+msgid "Do you want to reset?"
+msgstr "Szeretné visszaállítani?"
+
+msgctxt "#32533"
+msgid "1) Visit : [COLOR skyblue]%s[/COLOR]"
+msgstr "1) Látogassa meg : [COLOR skyblue]%s[/COLOR]"
+
+msgctxt "#32534"
+msgid "2) When prompted enter : [COLOR skyblue]%s[/COLOR]"
+msgstr "2) Amikor kéri írja be ezt : [COLOR skyblue]%s[/COLOR]"
+
+msgctxt "#32535"
+msgid "Play Random"
+msgstr "Véletlenszerű lejátszás"
+
+msgctxt "#32536"
+msgid "Playing"
+msgstr "Lejátszás"
+
+msgctxt "#32537"
+msgid "Nothing found to play"
+msgstr "Nem található lejátszható elem"
+
+msgctxt "#32538"
+msgid "DEBRID-SERVICE"
+msgstr "DEBRID SZOLGÁLTATÁS"
+
+msgctxt "#32539"
+msgid "Configure Debrid Services in URLResolver Settings."
+msgstr "Debrid szolgáltatások konfigurálása az URLResolver beállíásokban"
+
+msgctxt "#32540"
+msgid "URLResolver Settings"
+msgstr "URLResolver beállítások"
+
+msgctxt "#32541"
+msgid "Library"
+msgstr "Médiatár"
+
+msgctxt "#32542"
+msgid ""
+"Exodus folders will be imported to library if they are added to media "
+"sources."
+msgstr "Az Exodus mappák bekerülnek a médiatárba, ha hozzá vannak adva a forrásokhoz."
+
+msgctxt "#32543"
+msgid "Movies"
+msgstr "Filmek"
+
+msgctxt "#32544"
+msgid "TV"
+msgstr "Sorozatok"
+
+msgctxt "#32545"
+msgid "Auto update TV Shows"
+msgstr "Sorozatok automatikus frissítése"
+
+msgctxt "#32546"
+msgid "Show notifications during update"
+msgstr "Értesítések megjelenítése frissítés közben"
+
+msgctxt "#32547"
+msgid "Update library after adding content"
+msgstr "Médiatár frissítése tartalom hozzáadása után"
+
+msgctxt "#32548"
+msgid "Avoid creating duplicate content"
+msgstr "Duplikált tartalom létrehozásának elkerülése"
+
+msgctxt "#32549"
+msgid "Check movie before adding it"
+msgstr "Film leellenőrzése hozzáadás előtt"
+
+msgctxt "#32550"
+msgid "Check first episode of season before adding it"
+msgstr "Sorozat első epizódjának leellenőrzése hozzáadás előtt"
+
+msgctxt "#32551"
+msgid "Add to Library"
+msgstr "Hozzáadás a Médiatárhoz"
+
+msgctxt "#32552"
+msgid "Adding to library..."
+msgstr "Médiatárhoz adás..."
+
+msgctxt "#32553"
+msgid "Updating TV shows..."
+msgstr "Sorozatok frissítése..."
+
+msgctxt "#32554"
+msgid "Process Complete"
+msgstr "A folyamat befejeződött"
+
+msgctxt "#32555"
+msgid "Are you sure?"
+msgstr "Biztos benne?"
+
+msgctxt "#32556"
+msgid "[B]EXODUS[/B] : Library"
+msgstr "[B]EXODUS[/B] : Médiatár"
+
+msgctxt "#32557"
+msgid "[B]LIBRARY[/B] : Settings"
+msgstr "[B]MÉDIATÁR[/B] : Beállítások"
+
+msgctxt "#32558"
+msgid "[B]EXODUS[/B] : Update library..."
+msgstr "[B]EXODUS[/B] : Médiatár frissítése..."
+
+msgctxt "#32559"
+msgid "[B]EXODUS[/B] : Movie folder..."
+msgstr "[B]EXODUS[/B] : Filmek mappa..."
+
+msgctxt "#32560"
+msgid "[B]EXODUS[/B] : TV folder..."
+msgstr "[B]EXODUS[/B] : Sorozatok mappa..."
+
+msgctxt "#32561"
+msgid "[B]TRAKT[/B] : Import Collection..."
+msgstr "[B]TRAKT[/B] : Gyűjtemény importálása..."
+
+msgctxt "#32562"
+msgid "[B]TRAKT[/B] : Import Watchlist..."
+msgstr "[B]TRAKT[/B] : Figyelőlista importálása..."
+
+msgctxt "#32563"
+msgid "[B]TRAKT[/B] : Import TV Collection..."
+msgstr "[B]TRAKT[/B] : TV Gyűjtemény importálása..."
+
+msgctxt "#32564"
+msgid "[B]TRAKT[/B] : Import TV Watchlist..."
+msgstr "[B]TRAKT[/B] : TV figyelőlista importálása..."
+
+msgctxt "#32565"
+msgid "Include episodes with unknown air dates"
+msgstr "Megjelenési időpont nélküli epizódok importálása"
+

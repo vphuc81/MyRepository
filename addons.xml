@@ -315,22 +315,41 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
     </extension>
 </addon>
 
-<addon id="plugin.video.exodus" version="1.2.1" name="Exodus" provider-name="Exodus">
+<addon id="plugin.video.exodus" version="4.2.01" name="Exodus" provider-name="Exodus">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
-		<import addon="repository.exodus" version="1.0.0" />
-		<import addon="script.module.urlresolver" version="2.10.11"/>
+		<import addon="repository.exodus" />
+		<import addon="script.module.exodus" />
+		<import addon="script.exodus.artwork" version="1.0.0" />
+		<import addon="script.exodus.metadata" version="1.0.0" />
+		<import addon="script.module.urlresolver" version="3.0.0" />
+		<import addon="script.module.requests" />
 		<import addon="script.module.metahandler" version="1.0.0" />
-		<import addon="plugin.video.youtube" optional="true" />
 	</requires>
-	<extension point="xbmc.python.pluginsource" library="default.py">
+	<extension point="xbmc.python.pluginsource" library="exodus.py">
 		<provides>video</provides>
 	</extension>
+	<extension point="xbmc.service" library="service.py" start="startup" />
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en">Exodus</summary>
-		<description lang="en">Please visit www.tvaddons.ag for Exodus support and assistance! Kindly note that Exodus is not an official part of the media player you are running, and therefore not to be mentioned within official support channels, this addon has nothing to do with the media player itself, nor it’s intended use, it is simply a third party plugin which has been added to your system.</description>
+		<description lang="en">Please visit [COLOR blue]www.tvaddons.co[/COLOR] for Exodus support and assistance! Kindly note that Exodus is not an official part of the media player you are running, and therefore not to be mentioned within official support channels, this addon has nothing to do with the media player itself, nor it’s intended use, it is simply a third party plugin which has been added to your system.</description>
 		<disclaimer lang="en">The author does not host or distribute any of the content displayed by this addon. The author does not have any affiliation with the content provider.</disclaimer>
+		<description lang="de">Bitte besuche [COLOR blue]www.tvaddons.co[/COLOR] für Unterstützung und Fragen zu Exodus! Beachte dabei, dass Exodus nicht offizieller Teil des Media Players ist den du gerade verwendest und daher nicht von dem offiziellen Support-Kanäle abgedeckt wird, dieses Addon hat nichts zu tun mit dem Media-Player selbst, noch ist es dafür beabsichtigt, es handelt sich hierbei lediglich um ein Drittanbieter-Anwendung die dem System hinzugefügt wurde.</description>
+		<disclaimer lang="de">Die von diesem Addon dargestellten Inhalte werden von den Erstellern des Addons weder gehostet oder verbreitet, noch stehen die Ersteller in irgendeiner Beziehung zu den Content-Anbietern.</disclaimer>
+		<description lang="fr">SVP visitez [COLOR blue]www.tvaddons.co[/COLOR] pour avoir de l'aide sur Exodus. Prenez note qu'Exodus n'est pas une partie intégrante de votre outil de visionnement multimedia et SVP ne le mentionnez pas dans les media sociaux officiels, cet addiciel n'a rien a voir avec votre lecteur multimedia lui même, c'est simplement un addiciel qui a été ajouté à votre système.</description>
+		<disclaimer lang="fr">L'auteur n'héberge pas ou ne distribue pas le contenu qui vous est affiché avec cet addiciel. L'auteur n'a pas d'alliance avec les distributeurs de contenu.</disclaimer>
 		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+		<forum>https://www.tvaddons.co/forums/</forum>
+		<website>https://www.tvaddons.co/</website>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+    			<screenshot>resources/screenshots/screenshot-01.jpg</screenshot>
+    			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
+    			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
+		</assets>
+		<news></news>
 	</extension>
 </addon>
 
@@ -1832,6 +1851,30 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 	</extension>
 </addon>
 
+<addon id="script.exodus.artwork" version="1.0.7" name="Exodus Artwork" provider-name="Exodus">
+	<requires>
+		<import addon="xbmc.python" version="2.19.0"/>
+	</requires>
+	<extension point="xbmc.python.module" library="lib" />
+	<extension point="xbmc.addon.metadata">
+		<summary>Themes for the Exodus Addon</summary>
+		<description></description>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="script.exodus.metadata" version="1.0.2" name="Exodus Metadata" provider-name="Exodus">
+	<requires>
+		<import addon="xbmc.python" version="2.19.0"/>
+	</requires>
+	<extension point="xbmc.python.module" library="lib" />
+	<extension point="xbmc.addon.metadata">
+		<summary>Metadata for the Exodus Addon</summary>
+		<description>Metadata for Exodus are maintained separately to make distribution of the the addon itself easier/faster.</description>
+		<platform>all</platform>
+	</extension>
+</addon>
+
 <addon id="script.fantastic.artwork" version="1.0.3" name="fantastic Artwork" provider-name="fantastic">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0"/>
@@ -1856,6 +1899,17 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 	</extension>
 </addon>
 
+<addon id="script.module.exodus" name="Exodus Module" version="1.00.031" provider-name="Exodus">
+	<requires>
+		<import addon="xbmc.python" version="2.1.0" />
+	</requires>
+	<extension point="xbmc.python.module" library="lib" />
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="en">Exodus</summary>
+	</extension>
+</addon>
+
 <addon id="script.module.fantastic" name="fantastic Module" version="1.00.024.1" provider-name="fantastic">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
@@ -1865,6 +1919,77 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 	<extension point="xbmc.addon.metadata">
 		<platform>all</platform>
 		<summary lang="en">fantastic</summary>
+	</extension>
+</addon>
+
+<addon id="script.module.metahandler"
+     name="metahandler"
+     version="3.0.2"
+     provider-name="Eldorado, jsergio">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0" />
+    <import addon="script.module.simplejson" version="3.3.0"/>
+    <import addon="script.module.addon.common" version="2.0.0"/>
+    <import addon="script.module.myconnpy" version="1.1.6"/>
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Downloads Artwork for TV shows, Movies and Music videos for addons and stores them in a local SQLITE database</summary>
+    <description lang="en">Queries, stores, and returns metadata for TV shows, Movies and Musicvideos. [CR]Sources:[CR]www.thetvdb.com[CR]www.themoviedb.org[CR]www.imdb.com[CR]www.omdbapi.com[CR]This product uses the TMDb API but is not endorsed or certified by TMDb.</description>
+    <disclaimer lang="en"></disclaimer>
+    <language></language>
+    <platform>all</platform>
+    <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+    <forum></forum>
+    <website></website>
+    <email></email>
+    <source></source>
+  </extension>
+</addon>
+
+<addon id="script.module.requests"
+       name="requests"
+       version="2.18.4"
+       provider-name="kennethreitz">
+  <requires>
+    <import addon="xbmc.python" version="2.25.0"/>
+    <import addon="script.module.urllib3" version="1.22"/>
+    <import addon="script.module.chardet" version="3.0.4"/>
+    <import addon="script.module.idna" version="2.6"/>
+    <import addon="script.module.certifi" version="2017.07.27.1"/>
+  </requires>
+  <extension point="xbmc.python.module"
+             library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Python HTTP for Humans</summary>
+    <description lang="en_GB">Packed for KODI from https://github.com/requests/requests</description>
+    <platform>all</platform>
+    <language></language>
+    <license>Apache2</license>
+    <forum></forum>
+    <website>http://python-requests.org</website>
+    <source>https://github.com/beenje/script.module.requests</source>
+    <email>beenje AT gmail.com</email>
+  </extension>
+</addon>
+
+<addon id="script.module.urlresolver" name="URLResolver" version="4.0.16" provider-name="Eldorado, tknorris, tvaddons">
+	<requires>
+		<import addon="xbmc.python" version="2.1.0" />
+		<import addon="plugin.video.youtube" optional="true" />
+		<import addon="script.module.python.twitch" optional="true" />
+		<import addon="script.module.cryptopy" version="1.2.6" optional="true" />
+	</requires>
+	<extension point="xbmc.python.module" library="lib" />
+	<extension point="xbmc.python.pluginsource" library="lib/default.py" />
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="en">Resolve common video host URL's to be playable in XBMC/Kodi.</summary>
+		<summary lang="hr">Prilagodi najčešće URL-ove video izvora kako bi radili u XBMC/Kodiju.</summary>
+		<description lang="en">Resolve common video host URL's to be playable in XBMC/Kodi, simplify addon development of video plugins requiring multi video hosts.</description>
+		<description lang="hr">Prilagodi najčešće URL-ove video izvora kako bi radili u XBMC/Kodiju, pojednostavnjuje razvoj priključaka za video dodatke koji zahtjevaju višestruke video izvore.</description>
+        <forum>https://www.tvaddons.co/forums</forum>
+        <website>https://www.tvaddons.co</website>
 	</extension>
 </addon>
 
