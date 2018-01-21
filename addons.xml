@@ -649,7 +649,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon
   id="plugin.video.kodi4vn.vtvgo"
-  version="0.14.1"
+  version="0.15.1"
   name="*[COLOR yellow]VTV GO[/COLOR]"
   provider-name="thongld">
   <requires>

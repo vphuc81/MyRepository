@@ -88,26 +88,25 @@ def I1Ii ( args_json = { } ) :
  json . dumps ( Oo0oO0oo0oO00 [ "payloads" ] ) if "payloads" in Oo0oO0oo0oO00 else "{}"
  )
  )
- if 28 - 28: O0
- iii11iII = re . compile ( '(?s)<li id="(.+?)"[^>]*>.+?(\d\d\:\d\d).+?<h3>(.+?)</h3>.+?<i>(.*?)</i></h4>' ) . findall ( OooO0OO )
+ iiiIi = re . compile ( '(?s)<li id="(.+?)"[^>]*>.+?(\d\d\:\d\d).+?<h3>(.+?)</h3>.+?<i>(.*?)</i></h4>' ) . findall ( OooO0OO )
  if len ( o0oOo0Ooo0O ) > 0 :
-  i1I111I = [ ]
-  i11I1IIiiIi = time . strptime ( o0oOo0Ooo0O [ 1 ] , "%H:%M" )
-  IiIiIi = II ( i11I1IIiiIi )
-  for I111IiIi in iii11iII :
-   iI = time . strptime ( I111IiIi [ 1 ] , "%H:%M" )
-   if II ( iI ) <= IiIiIi :
-    i1I111I += [ I111IiIi ]
+  IiIIIiI1I1 = [ ]
+  OoO000 = time . strptime ( o0oOo0Ooo0O [ 1 ] , "%H:%M" )
+  IIiiIiI1 = iiIiIIi ( OoO000 )
+  for I111IiIi in iiiIi :
+   ooOoo0O = time . strptime ( I111IiIi [ 1 ] , "%H:%M" )
+   if iiIiIIi ( ooOoo0O ) <= IIiiIiI1 :
+    IiIIIiI1I1 += [ I111IiIi ]
    else : break
-  iii11iII = i1I111I [ : : - 1 ]
-  if 22 - 22: oOo0O0Ooo % o00O0oo
- for ooOO0O00 , iI , ii1 , o0oO0o00oo in iii11iII :
+  iiiIi = IiIIIiI1I1 [ : : - 1 ]
+  if 76 - 76: OO0OO0O0O0 / iiiiIi11i . ooOO00oOo * o00O0oo - I1Ii111
+ for Oooo , ooOoo0O , O00o , O00 in iiiIi :
   IiiIIiiI11 = { }
-  II1i1Ii11Ii11 = "http://vtvgo.vn/ajax-get-epg-detail?epg_id=" + ooOO0O00 . split ( "_" ) [ - 1 ]
-  IiiIIiiI11 [ "label" ] = "[B][%s %s][/B] %s - %s" % ( Oo0oO0oo0oO00 [ "date" ] , iI , ii1 , o0oO0o00oo )
+  i11I1 = "http://vtvgo.vn/ajax-get-epg-detail?epg_id=" + Oooo . split ( "_" ) [ - 1 ]
+  IiiIIiiI11 [ "label" ] = "[B][%s %s][/B] %s - %s" % ( Oo0oO0oo0oO00 [ "date" ] , ooOoo0O , O00o , O00 )
   OOoO00o = {
  "title" : IiiIIiiI11 [ "label" ] ,
- "url" : II1i1Ii11Ii11
+ "url" : i11I1
  }
   IiiIIiiI11 [ "path" ] = '%s/play/%s' % (
  oOOo ,
@@ -115,9 +114,8 @@ def I1Ii ( args_json = { } ) :
  )
   IiiIIiiI11 [ "is_playable" ] = True
   i1ii1iIII += [ IiiIIiiI11 ]
-  if 35 - 35: iiiiIi11i + o0oOoO00o + o0oOoO00o
  if len ( o0oOo0Ooo0O ) > 0 :
-  i1ii1iIII [ 0 ] [ "label" ] = "[B][%s %s Đang chiếu...][/B] %s - %s" % ( Oo0oO0oo0oO00 [ "date" ] . encode ( "utf8" ) , o0oOo0Ooo0O [ 1 ] . encode ( "utf8" ) , iii11iII [ 0 ] [ 2 ] . encode ( "utf8" ) , iii11iII [ 0 ] [ 3 ] . encode ( "utf8" ) )
+  i1ii1iIII [ 0 ] [ "label" ] = "[B][%s %s [COLOR yellow]Đang chiếu...[/COLOR]][/B] %s - %s" % ( Oo0oO0oo0oO00 [ "date" ] . encode ( "utf8" ) , o0oOo0Ooo0O [ 1 ] . encode ( "utf8" ) , iiiIi [ 0 ] [ 2 ] . encode ( "utf8" ) , iiiIi [ 0 ] [ 3 ] . encode ( "utf8" ) )
   OOoO00o = {
  "title" : i1ii1iIII [ 0 ] [ "label" ] ,
  "url" : "http://vtvgo.vn/?xem-truc-tuyen-vtv-%s.html" % Oo0oO0oo0oO00 [ "channel_id" ]
@@ -126,15 +124,15 @@ def I1Ii ( args_json = { } ) :
  oOOo ,
  urllib . quote_plus ( json . dumps ( OOoO00o ) )
  )
-  if 11 - 11: o0oOoO00o - Ooo00oOo00o % i1IIi11111i % o0oOoO00o / oOoO0oo0OOOo - Ooo00oOo00o
- o0o0oOOOo0oo = { }
- o0o0oOOOo0oo [ "label" ] = "Xem thêm..."
- o0o0oOOOo0oo [ "path" ] = '%s/list_date/%s' % (
+  if 8 - 8: iiiIIii1IIi - oo % iiiIIii1IIi - o00O0oo * ooOO00oOo
+ iI11i1I1 = { }
+ iI11i1I1 [ "label" ] = "Xem thêm..."
+ iI11i1I1 [ "path" ] = '%s/list_date/%s' % (
  oOOo ,
  urllib . quote_plus ( json . dumps ( Oo0oO0oo0oO00 ) )
  )
- o0o0oOOOo0oo [ "thumbnail" ] = "https://docs.google.com/drawings/d/16wuwv1LBUL030G13aypfrRxpQ8rs6b011WnQc_uF0z4/pub?w=256&h=256"
- i1ii1iIII . append ( o0o0oOOOo0oo )
+ iI11i1I1 [ "thumbnail" ] = "https://docs.google.com/drawings/d/16wuwv1LBUL030G13aypfrRxpQ8rs6b011WnQc_uF0z4/pub?w=256&h=256"
+ i1ii1iIII . append ( iI11i1I1 )
  if oo000 . get_setting ( 'thumbview' , bool ) :
   if xbmc . getSkinDir ( ) in ( 'skin.confluence' , 'skin.eminence' ) :
    return oo000 . finish ( i1ii1iIII , view_mode = 500 )
@@ -144,9 +142,9 @@ def I1Ii ( args_json = { } ) :
    return oo000 . finish ( i1ii1iIII )
  else :
   return oo000 . finish ( i1ii1iIII )
-  if 80 - 80: ooOoO0o * Oo0Ooo / O0Oooo00
+  if 71 - 71: i1IIi11111i % o0oOoO00o / iiiiIi11i
 @ oo000 . route ( '/play/<args_json>' )
-def I11II1i ( args_json = { } ) :
+def ii11i1iIII ( args_json = { } ) :
  Oo0oO0oo0oO00 = json . loads ( args_json )
  II1Ii1iI1i (
  "[Play] %s" % (
@@ -157,56 +155,56 @@ def I11II1i ( args_json = { } ) :
  json . dumps ( Oo0oO0oo0oO00 [ "payloads" ] ) if "payloads" in Oo0oO0oo0oO00 else "{}"
  )
  )
- IIIII = xbmcgui . DialogProgress ( )
- IIIII . create ( 'VTVGo' , 'Đang tải, Xin quý khách vui lòng đợi trong giây lát...' )
- oo000 . set_resolved_url ( ooooooO0oo ( Oo0oO0oo0oO00 [ "url" ] ) , subtitles = "https://raw.githubusercontent.com/vinhcomp/xml/master/xml/sub1.tsv" )
- IIIII . close ( )
- del IIIII
- if 49 - 49: iiiiIi11i * iiiIIii1IIi / I1IiiI / Oo0Ooo / iiiiIi11i
-def ooooooO0oo ( url ) :
- I1i1I1II = {
+ Ii1IOo0o0 = xbmcgui . DialogProgress ( )
+ Ii1IOo0o0 . create ( 'VTVGo' , 'Đang tải, Xin quý khách vui lòng đợi trong giây lát...' )
+ oo000 . set_resolved_url ( III1ii1iII ( Oo0oO0oo0oO00 [ "url" ] ) , subtitles = "https://raw.githubusercontent.com/vinhcomp/xml/master/xml/sub1.tsv" )
+ Ii1IOo0o0 . close ( )
+ del Ii1IOo0o0
+ if 54 - 54: ooOO00oOo % O0 % O0
+def III1ii1iII ( url ) :
+ iI1 = {
  "User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" ,
  "Accept-Encoding" : "gzip, deflate" ,
  "Referer" : "http://vtvgo.vn/" ,
  }
- i1IiIiiI = "|Referer=http%3A%2F%2Fvtvgo.vn%2F"
+ i11Iiii = "|Referer=http%3A%2F%2Fvtvgo.vn%2F"
  try :
   if "ajax-get-epg-detail" in url :
-   I1I = requests . get ( url , headers = I1i1I1II )
-   return I1I . json ( ) [ "data" ]
+   iI = requests . get ( url , headers = iI1 )
+   return iI . json ( ) [ "data" ]
   else :
-   I1I = requests . get ( url , headers = I1i1I1II )
-   return re . search ( "addPlayer\('(.+?.m3u8)" , I1I . text ) . group ( 1 ) + i1IiIiiI
+   iI = requests . get ( url , headers = iI1 )
+   return re . search ( "addPlayer\('(.+?.m3u8)" , iI . text ) . group ( 1 ) + i11Iiii
  except :
   return ""
-  if 80 - 80: oOoO0oo0OOOo - Ooo00oOo00o
-def II ( time_object ) :
+  if 28 - 28: I1Ii111 - oo . oo + oOoO0oo0OOOo - iII111iiiii11 + OO0OO0O0O0
+def iiIiIIi ( time_object ) :
  return time_object . tm_hour * 60 + time_object . tm_min
- if 87 - 87: IiII / ooOoO0o - I1IiiI * I1Ii111 / iII111iiiii11 . OO0OO0O0O0
+ if 95 - 95: Ooo00oOo00o % IiII . OO0OO0O0O0
 def II1Ii1iI1i ( title = "Home" , page = "/" ) :
  try :
-  iii11I111 = "http://www.google-analytics.com/collect"
-  OOOO00ooo0Ooo = open ( OOOooOooo00O0 ) . read ( )
-  Oo0OO = {
+  I1i1I = "http://www.google-analytics.com/collect"
+  oOO00oOO = open ( OoOo ) . read ( )
+  iIo00O = {
  'v' : '1' ,
  'tid' : 'UA-52209804-5' ,
- 'cid' : OOOO00ooo0Ooo ,
+ 'cid' : oOO00oOO ,
  't' : 'pageview' ,
  'dp' : "VTVGo" + page ,
  'dt' : "[VTVGo] - %s" % title
  }
-  requests . post ( iii11I111 , data = urllib . urlencode ( Oo0OO ) )
+  requests . post ( I1i1I , data = urllib . urlencode ( iIo00O ) )
  except : pass
- if 92 - 92: IiII - oOoO0oo0OOOo
-i11i1 = xbmc . translatePath ( 'special://userdata' )
-if os . path . exists ( i11i1 ) == False :
- os . mkdir ( i11i1 )
-OOOooOooo00O0 = os . path . join ( i11i1 , 'cid' )
-if 29 - 29: iII111i % ooOO00oOo + i1IIi11111i / iiiiIi11i + I1Ii111 * iiiiIi11i
-if os . path . exists ( OOOooOooo00O0 ) == False :
- with open ( OOOooOooo00O0 , "w" ) as i1I1iI :
-  i1I1iI . write ( str ( uuid . uuid1 ( ) ) )
-  if 93 - 93: iiiIIii1IIi % IiII * I1IiiI
+ if 69 - 69: IiII % O0Oooo00 - iiiiIi11i + O0Oooo00 - OO0OO0O0O0 % iII111iiiii11
+Iii111II = xbmc . translatePath ( 'special://userdata' )
+if os . path . exists ( Iii111II ) == False :
+ os . mkdir ( Iii111II )
+OoOo = os . path . join ( Iii111II , 'cid' )
+if 9 - 9: Ooo00oOo00o
+if os . path . exists ( OoOo ) == False :
+ with open ( OoOo , "w" ) as i11 :
+  i11 . write ( str ( uuid . uuid1 ( ) ) )
+  if 58 - 58: I1Ii111 * Oo0Ooo / oOoO0oo0OOOo % O0Oooo00 - iII111i / IiII
 if __name__ == '__main__' :
  oo000 . run ( )
 # dd678faae9ac167bc83abf78e5cb2f3f0688d3a3
