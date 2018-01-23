@@ -133,7 +133,7 @@ def TVChannel(url):
                ("tomdafdah" in link) or ("tomdhdbox" in link) or ("tomdpubfilm" in link) or ("tomdscenepeeper" in link) or ("tomdluckytv" in link) or ("topac12" in link) or \
                ("tomic" in link) or ("tohappymovies" in link) or ("tosureshot" in link) or ("tomdyesmovies" in link) or ("toicefilms" in link) or ("tovtvgo" in link) or ("tophimltv137" in link) or \
                ("tozen" in link) or ("tometalliq" in link) or ("tobob1" in link) or ("tokodi4vnlauncher" in link) or ("tobennu" in link) or ("tobobunleashed" in link) or ("tofilmon3" in link) or \
-               ("tohieuhientt" in link) or ("tophimhot" in link) or ("tomovies1" in link) or ("tofantastic" in link) or ("tocovenant" in link) or ("tomobdro" in link):
+               ("tohieuhientt" in link) or ("tophimhot" in link) or ("tomovies1" in link) or ("tofantastic" in link) or ("tocovenant" in link) or ("tomobdro" in link) or ("toplanetmma" in link):
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]            
             add_Link(title, link, thumb)
         xbmc.executebuiltin('Container.SetViewMode(52)')		
@@ -771,6 +771,10 @@ def add_Link(name,url,iconimage):
         u = xbmc . executebuiltin ( 'StartAndroidActivity ( com.mobdro.android )' )
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)
         return ok
+    if 'toplanetmma' in url:
+        u = 'plugin://plugin.video.ufc-finest'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)  
 
 def addLink(name,url,mode,iconimage):
@@ -810,12 +814,20 @@ def addDir(name,url,mode,iconimage):
     if 'redirecttovkool' in url:
         u = 'plugin://plugin.video.vkool'
     '''
+    '''if ('plugin://plugin.video.youtube/play/?video_id=EI8oVmdK6r8' in url):
+        u = PlayVideo(url,name)'''
     if ('www.youtube.com/user/' in url) or ('www.youtube.com/channel/' in url):
         u = 'plugin://plugin.video.youtube/%s/%s/' % (url.split( '/' )[-2], url.split( '/' )[-1])
         ok = xbmcplugin.addDirectoryItem(handle = int(sys.argv[1]), url = u, listitem = liz, isFolder = True)
-        return ok	
+        return ok
+    '''elif ('plugin://plugin.video.youtube/play/' in url):
+        u = 'plugin://plugin.video.youtube/play/?video_id=EI8oVmdK6r8'
+        #ok = PlayVideo(url,name)'''
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
-    return ok	
+    return ok
+    '''if ('plugin://plugin.video.youtube/play/' in url):
+        u = PlayVideo(url,name)
+        #ok = PlayVideo(url,name)'''	
 	
 def parameters_string_to_dict(parameters):
     ''' Convert parameters encoded in a URL to a dict. '''
