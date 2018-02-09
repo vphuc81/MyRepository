@@ -1366,6 +1366,27 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
   </extension>
 </addon>
 
+<addon id="plugin.video.xshare" name="[COLOR red][B]Xshare[/COLOR] [COLOR green]XBMC[/COLOR] [COLOR blue]HDVideo[/B][/COLOR]" version="3.5.8.23" provider-name="thaitni">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.video.F4mProxy" optional="true"/>
+		<import addon="script.module.youtube.dl" optional="true"/>
+		<import addon="xbmc.repo.xshare"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="xshare.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Xshare - XBMC HD Video</summary>
+		<description lang="en">Tìm và Xem HD Video trên XBMC từ: fshare.vn, 4share.vn, vaphim.com, ifile.tv, phimfshare.com, fptplay.net, hdvietnam.com, megabox.vn, dangcaphd.com, hayhaytv.vn, hdviet.com, pubvn.net, vuahd.tv, phimmoi.net, hdonline.vn, phim3s.net, kenh88.com, phimdata.com, phimsot.com, phim47.com</description>
+		<platform>all</platform>
+		<language>en</language>
+		<license>GNU General Public License - v2</license>
+		<source>https://github.com/thaitni/xbmc.repo.xshare</source>
+		<email>thai@thanhthai.net</email>
+    </extension>
+</addon>
+
 <addon
   id="plugin.video.yeuphim1"
   version="1.5.1"
@@ -2139,7 +2160,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
                 <platform>all</platform>
                 <website>https://superrepo.org/</website>
                 </extension>
-                </addon>
+</addon>
 
 <addon id="superrepo.kodi.helix.all" name="SuperRepo All [Helix][v7]" version="0.7.04" provider-name="Bart Otten">
                 <requires>
@@ -2207,5 +2228,23 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
                 <platform>all</platform>
                 <website>https://superrepo.org/</website>
                 </extension>
-                </addon>
+</addon>
+
+<addon id="xbmc.repo.xshare" name="[COLOR red][B]Xshare[/COLOR] [COLOR blue]Repository[/B][/COLOR]" version="1.0.0" provider-name="thaitni">
+	<extension point="xbmc.addon.repository" name="Official XBMC.org Add-on Repository">
+		<info compressed="true">https://raw.githubusercontent.com/thaitni/xbmc.repo.xshare/master/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/thaitni/xbmc.repo.xshare/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/thaitni/xbmc.repo.xshare/master</datadir>
+		<hashes>true</hashes>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Play Video with find subs on XBMC from many host</summary>
+		<description>Download and install addons from Xshare Repository: Watch movies from fshare.vn, 4share.vn, tenlua.vn, ...</description>
+		<language>en</language>
+		<platform>all</platform>
+		<license>GNU General Public License - v2</license>
+		<source>https://github.com/thaitni/xbmc.repo.xshare</source>
+		<email>thai@thanhthai.net</email>
+	</extension>
+</addon>
 </addons>

@@ -1,0 +1,76 @@
+﻿<settings>
+	<category label="Thông tin Account">
+		<setting id="usernamef" type="text" label="User name [COLOR gold]fshare.vn[/COLOR] (email)"/>
+		<setting id="passwordf" type="text" option="hidden" label="Password [COLOR gold]fshare.vn[/COLOR]"/>
+		<setting id="getLinkFree" type="bool" label="Sử dụng Acc [COLOR gold]fshare[/COLOR] của [COLOR green]Xshare[/COLOR]" default="true"/>
+		<setting id="username4" type="text" label="User name [COLOR blue]4share.vn[/COLOR]"/>
+		<setting id="password4" type="text" option="hidden" label="Password [COLOR blue]4share.vn[/COLOR]"/>
+		<setting id="usernamet" type="text" label="User name [COLOR fuchsia]tenlua.vn[/COLOR] (email)"/>
+		<setting id="passwordt" type="text" option="hidden" label="Password [COLOR fuchsia]tenlua.vn[/COLOR]"/>
+		<setting id="usernameh" type="text" label="User name [COLOR crimson]HDVietnam.com[/COLOR]"/>
+		<setting id="passwordh" type="text" option="hidden" label="Password [COLOR crimson]HDVietnam.com[/COLOR]"/>
+		<setting id="mail_dchd" type="text" label="User name [COLOR yellow]dangcaphd.com[/COLOR] (email)"/>
+		<setting id="pass_dchd" type="text" option="hidden" label="Password [COLOR yellow]dangcaphd.com[/COLOR]"/>
+		<setting id="usernamep" type="text" label="User name [COLOR deepskyblue]pub.vn[/COLOR]"/>
+		<setting id="passwordp" type="text" option="hidden" label="Password [COLOR deepskyblue]pub.vn[/COLOR]"/>
+		<setting id="usernamev" type="text" label="User name [COLOR deeppink]vuahd.tv[/COLOR] (email)"/>
+		<setting id="passwordv" type="text" option="hidden" label="Password [COLOR deeppink]vuahd.tv[/COLOR]"/>
+		<setting id="userhayhay" type="text" label="User name [COLOR tomato]hayhaytv.vn[/COLOR] (email/Số ĐT)"/>
+		<setting id="passhayhay" type="text" option="hidden" label="Password [COLOR tomato]hayhaytv.vn[/COLOR]"/>
+		<setting id="phone_fptplay" type="text" label="User name [COLOR orange]fptplay.net[/COLOR] (Your Phone Number)"/>
+		<setting id="pass_fptplay" type="text" option="hidden" label="Password [COLOR orange]fptplay.net[/COLOR]"/>
+		<setting id="country_fptplay" type="select" label="Country code [COLOR orange]fptplay.net[/COLOR]" values="FR (33)|DE (49)|JP (81)|HK (852)|RU (7)|LA (856)|TW (886)|NZ (64)|TH (66)|CN (86)|CA (1)|VN (84)|AU (61)|GB (44)|IN (91)|ID (62)|MM (95)|MY (60)|KH (855)|US (1)|KR (82)|SG (65)|IL (972)" default="VN (84)"/>
+	</category>
+	<category label="Servers khác">
+		<setting id="gdriveID" type="text" label="[COLOR FF18AB67]ID/link của Google spreadsheets/Drive[/COLOR]" default="Hãy set ID của bạn"/>
+		<setting id="gdrivePlay" type="bool" label="[COLOR FF18AB67]Play Gdrive bằng link Dơnload[/COLOR]" default="false"/>
+		
+		<setting id="userhdviet" type="text" label="User name [COLOR darkorange]hdviet.com[/COLOR] (email/Số ĐT)"/>
+		<setting id="passhdviet" type="text" option="hidden" label="Password [COLOR darkorange]hdviet.com[/COLOR]"/>
+		<setting id="hdvietresolution" type="labelenum" label="[COLOR darkorange]Chọn độ phân giải tối đa trên hdviet.com[/COLOR]" values="720|1080" default="720"/>
+		<setting id="hdvietaudio" type="labelenum" label="[COLOR darkorange]Chọn Audio trên hdviet.com[/COLOR]" values="Thuyết Minh (nếu có)|Tiếng Gốc|Hỏi khi xem" default="Thuyết Minh (nếu có)"/>
+		<setting id="nct_u" type="text" label="User name [COLOR turquoise]nhaccuatui.com[/COLOR]"/>
+		<setting id="nct_p" type="text" option="hidden" label="Password [COLOR turquoise]nhaccuatui.com[/COLOR]"/>
+		<setting id="csn_u" type="text" label="User name [COLOR green]chiasenhac.com[/COLOR]"/>
+		<setting id="csn_p" type="text" option="hidden" label="Password [COLOR green]chiasenhac.com[/COLOR]"/>
+		<setting id="csn_s" type="labelenum" label="[COLOR green]Tìm kiếm theo[/COLOR]" values="Tên bài hát/Ca sĩ|Ca sĩ|Sáng tác|Tên Album|Lời bài hát" default="Tên bài hát/Ca sĩ"/>
+		<setting id="csn_l" type="bool" label="" default="false" visible="false"/>
+		<setting id="userphimmoi" type="text" label="User name [COLOR ghostwhite]phimmoi.net[/COLOR]"/>
+		<setting id="passphimmoi" type="text" option="hidden" label="Password [COLOR ghostwhite]phimmoi.net[/COLOR]"/>
+		<setting id="p3s_u" type="text" label="User name [COLOR lightgray]phim3s.net[/COLOR]"/>
+		<setting id="p3s_p" type="text" option="hidden" label="Password [COLOR lightgray]phim3s.net[/COLOR]"/>
+		<setting id="hdo_u" type="text" label="User name [COLOR turquoise]hdonline.vn[/COLOR]"/>
+		<setting id="hdo_p" type="text" option="hidden" label="Password [COLOR turquoise]hdonline.vn[/COLOR]"/>
+		<setting id="fcine_user" type="text" label="User name [COLOR orangered]fcine.net[/COLOR]"/>
+		<setting id="fcine_pass" type="text" option="hidden" label="Password [COLOR orangered]fcine.net[/COLOR]"/>
+		<setting id="taiphimhdnet_user" type="text" label="User name [COLOR FF2976BB]taiphimhd.net[/COLOR]"/>
+		<setting id="taiphimhdnet_pass" type="text" option="hidden" label="Password [COLOR FF2976BB]taiphimhd.net[/COLOR]"/>
+		<setting id="sctv_user" type="text" label="User name [COLOR tomato]tv24.vn[/COLOR]"/>
+		<setting id="sctv_pass" type="text" option="hidden" label="Password [COLOR tomato]tv24.vn[/COLOR]"/>
+		<setting id="chonserver" type="select" label="Ưu tiên Chọn Thuyết minh/VietSub" values="Thuyết minh|VietSub|Không" default="Không" />
+	</category>
+	<category label="Thông tin khác">
+		<setting id="thumucrieng" type="text" label="[COLOR blue]Mục chia sẻ của tôi trên Fshare[/COLOR] ([COLOR gold]ID MyFshare[/COLOR])" default="RDA4FHXVE2UU"/>
+		<setting id="thumuccucbo" type="folder" label="[COLOR blue]Thư mục cục bộ[/COLOR] ([COLOR gold]MyFolder[/COLOR])" default="" option="writeable"/>
+		<setting id="subsfolder" type="folder" label="[COLOR green]Thư mục chứa sub của xshare[/COLOR] [COLOR red](Will delete ALL!!!)[/COLOR]" default=""/>
+		<setting id="sodonghienthi" type="labelenum" label="[COLOR blue]Số dòng hiển thị cho 1 trang[/COLOR]" values="20|30|50" default="30"/>
+		<setting id="nas_info" type="text" label="[COLOR blue]My NAS info[/COLOR] (url1:acc1:pass1|url2:acc2:pass2|...)" default="http://buffalonas.com/:user:pass"/>
+		<setting id="cookie" type="text" label="cookiestring" default="" visible="false"/>
+		<setting id="listIPTV" type="text" label='[COLOR cyan]List IPTV trên [COLOR orange]textuploader.com[/COLOR] của người dùng[/COLOR] (dấu "," giữa các list)' default="http://pastebin.com/raw/fBQTPU2v,https://friendpaste.com/2ze8Z4V9aDywcVqs9NKkUx/raw"/>
+		<setting id="tvhaytk" type="text" label="TVHAY Token" default=""/>
+	</category>
+	<category label="Các tùy chọn riêng">
+		<setting id="resolut" type="labelenum" label="[COLOR gold]Chọn độ phân giải cho các server free (max/min)[/COLOR]" values="Max|Min" default="Max"/>
+		<setting id="auto_update" type="bool" label="[COLOR gold]Auto update xshare database[/COLOR] (y/n)" default="true"/>
+		<setting id="copyxml" type="bool" label="[COLOR green]Tự động Copy list phim xml vào [COLOR gold]MyFolder[/COLOR][/COLOR] (y/n)" default="false"/>
+		<setting id="checkdatabase" type="bool" label="[COLOR green]Mở chế độ kiểm tra database cho xshare[/COLOR] (y/n)" default="false"/>
+		<setting id="logoutf" type="bool" label="[COLOR green]Tự động Logout [COLOR gold]Fshare, [COLOR blue]4share.vn, [COLOR fuchsia]Tenlua.vn[/COLOR][/COLOR][/COLOR][/COLOR] (yes/no)" default="true"/>
+		<setting id="autoload_sub" type="bool" label="[COLOR green]Tự động load sub trong [COLOR green]SubsFolder[/COLOR][/COLOR] (y/n)" default="true"/>
+		<setting id="autotrans_sub" type="bool" label="[COLOR green]Tự động dịch sau khi download sub tiếng Anh[/COLOR] (y/n)" default="true"/>
+		<setting id="autodel_sub" type="bool" label="[COLOR green]Tự động xóa thư mục SubsFolder[/COLOR] (y/n)" default="true"/>
+		<setting id="hdvnfindall" type="bool" label="[COLOR green]Không giới hạn tìm kiếm trên [COLOR red]hdvietnam.com[/COLOR][/COLOR] (All Uploader) (y/n)" default="true"/>
+		<setting id="history" type="bool" label="[COLOR green]Cho phép hiển thị lịch sử tìm kiếm[/COLOR] (y/n)" default="true"/>
+		<setting id="fcinefshare" type="bool" label="[COLOR green]Sử dung link Fshare trên Fcine.net[/COLOR] (y/n)" default="false"/>
+		<setting id="phim18" type="bool" label="[COLOR red]Kích hoạt xem phim 18+[/COLOR] (y/n)" default="false"/>
+	</category>
+</settings>

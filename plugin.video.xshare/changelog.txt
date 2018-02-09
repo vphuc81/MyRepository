@@ -1,0 +1,627 @@
+[B]Version 3.5.8.23[/B] <07/02/2018>:
+fix Fshare Favourite
+
+[B]Version 3.5.8.22[/B] <04/02/2018>:
+fix Fshare
+
+[B]Version 3.5.8.21[/B] <03/02/2018>:
+fix Fshare ...
+
+[B]Version 3.5.8.20[/B] <04/01/2018>:
+fix Login HDVN, GG search, bilutv search, phu de cua fcine, phimmoi, ...
+
+[B]Version 3.5.8.19[/B] <03/12/2017>:
+fix Login Fcine.net, ...
+
+[B]Version 3.5.8.18[/B] <14/11/2017>:
+fix Vaphim. Login HDVietnam, ...
+
+[B]Version 3.5.8.17[/B] <05/11/2017>:
+fix kphim, phimmoi, phimbathu, HDVietnam, ...
+
+[B]Version 3.5.8.16[/B] <08/10/2017>:
+fix vaphim, HDsieunhanh, bilutv, fsharefilm, ...
+
+[B]Version 3.5.8.15[/B] <01/10/2017>:
+fix thvl, phim.media, xsharesub, ...
+
+[B]Version 3.5.8.14[/B] <24/09/2017>:
+fix Google search, fpyplay, CSN, bilu, ...
+
+[B]Version 3.5.8.13[/B] <17/09/2017>:
+Fix Google search
+
+[B]Version 3.5.8.12[/B] <21/08/2017>:
+Fix hdviet, tvhay, ...
+
+[B]Version 3.5.8.11[/B] <14/08/2017>:
+Fix vaphim, fcine, phimmoi, bilu, banhtv, ...
+
+[B]Version 3.5.8.10[/B] <01/08/2017>:
+Fix kphim
+
+[B]Version 3.5.8.9[/B] <31/07/2017>:
+Fix bilu, bathu
+
+[B]Version 3.5.8.8[/B] <26/07/2017>:
+Fix phimmoi, bilu, bathu
+
+[B]Version 3.5.8.7[/B] <25/07/2017>:
+Fix một số servers free
+
+[B]Version 3.5.8.6[/B] <02/07/2017>:
+Fix Fshare và một số servers free
+
+[B]Version 3.5.8.5[/B] <11/06/2017>:
+Fix một số servers free
+
+[B]Version 3.5.8.4.14[/B] <13/04/2017>:
+Fix animetvn
+
+[B]Version 3.5.8.4.13[/B] <11/04/2017>:
+Fix anime47
+
+[B]Version 3.5.8.4.12[/B] <31/03/2017>:
+Add use Fshare Acc Shared option
+
+[B]Version 3.5.8.4.11[/B] <30/03/2017>:
+fix anime47, kenhphimbo
+
+[B]Version 3.5.8.4.10[/B] <27/03/2017>:
+fix GDrive list
+
+[B]Version 3.5.8.4.8/9[/B] <23/03/2017>:
+fix PhimNhanh, anime47
+
+[B]Version 3.5.8.4.7[/B] <23/03/2017>:
+fix Free Servers
+
+[B]Version 3.5.8.4.6[/B] <21/03/2017>:
+fix Fshare
+
+[B]Version 3.5.8.4.5[/B] <19/03/2017>:
+fix vài server free
+
+[B]Version 3.5.8.4.4[/B] <17/03/2017>:
+fix anime47
+
+[B]Version 3.5.8.4.3[/B] <17/03/2017>:
+fix Fshare
+
+[B]Version 3.5.8.4.2[/B] <16/03/2017>:
+fix kphim
+
+[B]Version 3.5.8.4.1[/B] <15/03/2017>:
+Change host get link Fshare
+
+[B]Version 3.5.8.4[/B] <14/03/2017>:
+Fix Fshare
+
+[B]Version 3.5.8.3.3[/B] <11/03/2017>:
+Fix Kphim
+Ho tro goo.gl cho Google Drive/Spreadsheet
+
+[B]Version 3.5.8.3.2[/B] <10/03/2017>:
+Update Google Drive/Spreadsheet
+Fix Servers Free
+
+[B]Version 3.5.8.3.1[/B] <10/03/2017>:
+Fix Kphim
+
+[B]Version 3.5.8.2[/B] <05/03/2017>:
+Bổ sung Google Spreadsheet
+
+[B]Version 3.5.8.1[/B] <03/03/2017>:
+Fix mphim.net search, anime47.com
+
+[B]Version 3.5.8[/B] <02/03/2017>:
+Thêm get Google Drive link
+Fix servers lẻ
+
+[B]Version 3.5.7[/B] <18/02/2017>:
+Thêm THVL, truyền hình xem lại
+Fix ...
+
+[B]Version 3.5.6.3[/B] <14/02/2017>:
+Fix Giai phap tam thoi cho tvhay
+
+[B]Version 3.5.6.2[/B] <13/02/2017>:
+Giai phap tam thoi cho tvhay
+
+[B]Version 3.5.6.1[/B] <12/02/2017>:
+Fix animetvn!
+
+[B]Version 3.5.6[/B] <10/02/2017>:
+Fix một số server lẻ!
+
+[B]Version 3.5.5.1[/B] <05/02/2017>:
+Fix lỗi tương thích
+
+[B]Version 3.5.5[/B] <04/02/2017>:
+Fix một số server lẻ!
+Thêm kenhphimbo.net, anivn.com, animetvn.com
+
+[B]Version 3.5.4[/B] <27/01/2017>:
+Fix một số server lẻ!
+Thêm tvnet.gov.vn
+
+[B]Version 3.5.3[/B] <26/01/2017>:
+Fix một số server lẻ!
+
+[B]Version 3.5.2[/B] <18/01/2017>:
+Fix 4share
+
+[B]Version 3.5.1[/B] <16/01/2017>:
+Thêm module login http://tv24.vn/
+
+[B]Version 3.5.0[/B] <16/01/2017>:
+Thêm module sctv trong mục "Xem truyền hình"
+
+[B]Version 3.4.9.10[/B] <15/01/2017>:
+Fix Anime47, phimmoi.net , Imovies.vn , Kphim.tv , VungTV.com , bịphim.com
+
+[B]Version 3.4.9.9.6[/B] <14/01/2017>:
+Thêm Fshare download.
+Fix Multi Fshare acc
+
+[B]Version 3.4.9.9.5[/B] <11/01/2017>:
+Fix Multi Fshare acc
+
+[B]Version 3.4.9.9.4[/B] <06/01/2017>:
+Fix Multi Fshare acc
+
+[B]Version 3.4.9.9.2,3[/B] <05/01/2017>:
+Fix Multi Fshare acc
+
+[B]Version 3.4.9.9.1[/B] <04/01/2017>:
+Fix Multi Fshare acc, Banhtv
+
+[B]Version 3.4.9.9[/B] <03/01/2017>:
+Fix 4share, ...
+Add fsharefilm, MyFavourites sub Folder, Multi Fshare acc
+
+[B]Version 3.4.9.8[/B] <22/12/2016>:
+Fix tvhay
+
+[B]Version 3.4.9.7[/B] <20/12/2016>:
+Fix tvhay
+
+[B]Version 3.4.9.6[/B] <19/12/2016>:
+Fix tvhay
+
+[B]Version 3.4.9.5[/B] <18/12/2016>:
+Fix phimbathu
+
+[B]Version 3.4.9.4[/B] <17/12/2016>:
+Fix fptplay, get link free Fshare
+
+[B]Version 3.4.9.3[/B] <15/12/2016>:
+Fix tvhay, text hosts.
+
+[B]Version 3.4.9.2[/B] <12/12/2016>:
+Fix tvhay.
+
+[B]Version 3.4.9.1[/B] <11/12/2016>:
+Fix free servers.
+
+[B]Version 3.4.9.0[/B] <27/11/2016>:
+Fix tvhay, add free servers.
+
+[B]Version 3.4.9.0[/B] <27/11/2016>:
+Fix tvhay, add free servers.
+
+[B]Version 3.4.8.13[/B] <21/11/2016>:
+Fix tvhay
+
+[B]Version 3.4.8.12[/B] <20/11/2016>:
+Bổ sung module get link cho tvhay
+
+[B]Version 3.4.8.11[/B] <19/11/2016>:
+Fix fptplay, anime47
+
+[B]Version 3.4.8.10[/B] <18/11/2016>:
+Fix tvhay
+
+[B]Version 3.4.8.9[/B] <16/11/2016>:
+Fix fptplay
+
+[B]Version 3.4.8.8[/B] <15/11/2016>:
+Fix free servers
+
+[B]Version 3.4.8.7[/B] <13/11/2016>:
+Fix free servers
+
+[B]Version 3.4.8.6[/B] <27/10/2016>:
+Fix xml for F4mProxy, Youtube (search/play)
+
+[B]Version 3.4.8.5[/B] <27/10/2016>:
+Fix xml for F4mProxy, fptplay/television
+
+[B]Version 3.4.8.4[/B] <18/10/2016>:
+Fix F4mProxy
+
+[B]Version 3.4.8.3[/B] <16/10/2016>:
+Fix anime47, youtube, tivi, hdonline, hdvietnam
+
+[B]Version 3.4.8.2[/B] <09/10/2016>:
+Fix imovies, fcine, myFavourites, subfolder, vaphim, csn, youtube
+
+[B]Version 3.4.8.1[/B] <03/10/2016>:
+Fix taiphimhd.net
+
+[B]Version 3.4.8.0[/B] <02/10/2016>:
+Fix fptpaly, hdsieunhanh phimbathu vietsubhd 
+Bổ sung fcine.net, taiphimhd.net
+
+[B]Version 3.4.7.4[/B] <25/9/2016>:
+Fix fptpaly, Youtube xml
+
+[B]Version 3.4.7.3[/B] <18/9/2016>:
+Fix chiasenhac, Youtube, tvhay
+Bổ sung module Fshare following search, youtube format, chiasenhac search, lịch phát sóng truyền hình
+
+[B]Version 3.4.7.2[/B] <12/9/2016>:
+Fix fptplay, VTVGo, Youtube
+
+[B]Version 3.4.7.1[/B] <04/9/2016>:
+Fix HDVietnam search, youtube search, Fadio fptplay.net
+
+[B]Version 3.4.7[/B] <01/9/2016>:
+Fix HDVietnam and "Cac servers khac"
+
+[B]Version 3.4.6.4[/B] <07/8/2016>:
+Fix FPTPlay Login, Olympic Rio 2016
+
+[B]Version 3.4.6.3[/B] <07/8/2016>:
+Fix FPTPlay
+Bổ sung module "Olympic Rio 2016"
+
+[B]Version 3.4.6.2[/B] <03/8/2016>:
+Fix My Favourite
+Bổ sung module đọc "Thư mục theo dõi của tôi trên Fshare"
+
+[B]Version 3.4.6.1[/B] <02/8/2016>:
+Fix Error incompatible in Android
+
+[B]Version 3.4.6[/B] <21/7/2016>:
+Fix phim47 search, phimbathu, phim14, ...
+Bổ sung: youtube.com (beta), support youtube in xml list, search all server list
+Recode google search on fshare, vaphim, 4share, hdvietnam, tenlua
+
+[B]Version 3.4.5.2[/B] <09/07/2016>:
+Fix kênh88, CSN
+
+[B]Version 3.4.5.1[/B] <03/07/2016>:
+Fix Kphim, CSN (Search), Phim47 (Google Drive, YT), hayhaytv (sub), fptplay (login - TV)
+
+[B]Version 3.4.5[/B] <30/06/2016>:
+Fix VTV Euro 2016 Live TV, CSN, Phim14, HDonline, Phim47
+
+[B]Version 3.4.4.2[/B] <15/06/2016>:
+Fix VTV Euro 2016 xem lại
+
+[B]Version 3.4.4.1[/B] <15/06/2016>:
+Thêm FPTPlay VTV Euro 2016
+
+[B]Version 3.4.4[/B] <15/06/2016>:
+Thêm VTVGo Euro 2016
+
+[B]Version 3.4.3.2[/B] <14/06/2016>:
+fix phim47 search va cac loi khac
+
+[B]Version 3.4.3.1[/B] <12/06/2016>:
+fix fptplay eps, phim47 sub, phim47.com va cac loi khac
+
+[B]Version 3.4.3[/B] <10/06/2016>:
+fix fptplay, hdonline va cac loi khac
+them NCT, imovies, vietsubhd, mphim
+
+[B]Version 3.4.2[/B] <30/05/2016>:
+Sắp xếp lại list mục lục của xshare
+recode hdvietnam, fix search hdviet, fix phim47, recode hayhaytv
+Thêm mục My Favourites V2
+Thêm mục Thông tin từ taiphimhd.com
+Thêm chức năng sắp xếp mục "Kho phim trên các server khác"
+
+[B]Version 3.4.1[/B] <15/05/2016>:
+fix một số lỗi nhỏ và mục hdvietnam
+
+[B]Version 3.4.0[/B] <08/05/2016>:
+add: TVhay.org, phimbathu.com
+fix: Hdonline.vn, Fshare list folder
+
+[B]Version 3.3.9[/B] <03/05/2016>:
+add:
+- search on taifile.net
+- phim.media
+
+fix :  Hdonline.vn, Phim 47.com
+
+[B]Version 3.3.8[/B] <19/04/2016>:
+fix : bilutv
+
+[B]Version 3.3.7[/B] <18/04/2016>:
+add:bilutv, anime47
+Fix:
+- phimmoi,ifile.tv
+- hdviet thêm phân loại, quốc gia
+- download subs
+ 
+[B]Version 3.3.6[/B] <03/04/2016>:
+- Fix:get id fshare/4share/tenlua, phimmoi,phim88, magabox, hdonline, kenh88, phimdata
+- re-up:dangcaphd (dành cho các bạn có acc VIP của dangcaphd)
+ 
+[B]Version 3.3.5[/B] <16/03/2016>:
+ Fix:
+ - MegaBox, HDOnline, MyNAS
+ 
+[B]Version 3.3.4[/B] <13/03/2016>:
+ Fix:
+ - Fshare.vn: cải thiện tốc độ get link Fshare.
+ - Cải tốc độ get vaphim.com page
+ - Fix search on vaphim.com
+ - Fix Google search trên Fshare, vaphim.
+ - Cải tốc độ Goolge Web search for Fshare.vn (Thanks to datnt75)
+ - Fix HDViet play HD
+ - Fix tạm phimmoi.net (Vì server chưa ổn định)
+ - Fix hayhaytv
+
+Bổ sung:
+- Fshare.vn: get cả 2 chế độ "trực tiếp/gián tiếp", cải thiện tốc đọ get link Fshare.
+- Thêm mục "Phim yêu thích trên HDOnline.vn
+- Thêm mục "Phim yêu thích trên FPTplay.vn
+- CSN: Phân lọa search theo Tên bài hát/Ca sĩ, Ca sĩ, Sáng tác, Tên Album, Lời bài hát; Bảng xếp hạng
+- NAS login
+- kphim.tv
+- phimnhanh.com
+  
+[B]Version 3.3.3[/B] <20/02/2016>:
+ Fix My Fshare
+  
+[B]Version 3.3.2[/B] <20/02/2016>:
+ Fix hayhaytv,fptplay,phim3s,get link ID Fshare
+  
+[B]Version 3.3.1[/B] <17/02/2016>:
+ Fix hdviet,fptplay. Cải thiện tốc độ get link Fshare
+ Bổ sung:hdonline.vn, phim3s.net, kenh88.com, phimdata.com, phimsot.com, phim47.com
+ 
+[B]Version 3.3.0[/B] <07/02/2016>:
+ Fix hdviet.com: stream HD,ftpplay,hayhaytv
+ 
+[B]Version 3.2.30[/B] <20/11/2015>:
+ Fix megabox.vn
+ 
+[B]Version 3.2.29[/B] <11/11/2015>:
+ Fix phimmoi.net, Muc chia se phim cua hdvietnam
+ 
+[B]Version 3.2.28[/B] <10/11/2015>:
+ Fix HDViet, hayhaytv, download sub
+ 
+[B]Version 3.2.27[/B] <08/11/2015>:
+ Bổ sung phiên bản thử nghiệm: Mục chia sẻ nhac của HDVN
+ 
+ B]Version 3.2.26[/B] <08/11/2015>:
+ Fix HDViet auto download sub
+ 
+[B]Version 3.2.25[/B] <07/11/2015>:
+ Ra mắt bản thử nghiệm Download rar file
+ Fix goole search, GET maxspeed link Fshare
+ 
+[B]Version 3.2.22-24[/B] <01/11/2015>:
+ Ra mắt bản thử nghiệm vaphim mới, gở bỏ phimfshare.com
+ Fix goole search và một số lỗi nhỏ
+ 
+[B]Version 3.2.21[/B] <27/10/2015>:
+ Update Xshare search, hayhaytv
+ Fix vuahd và một số lỗi nhỏ
+ 
+[B]Version 3.2.20[/B] <21/10/2015>:
+ Rebuild Xshare search
+ Fix hdviet.com, phimmoi.net, 4share, getlink Fshare và một số lỗi nhỏ
+ 
+[B]Version 3.2.19[/B] <04/10/2015>:
+ Rebuild hdvietnam.com (Bổ sung mục "Room theo dõi của tôi")
+ Fix một số lỗi nhỏ
+ 
+[B]Version 3.2.18[/B] <21/09/2015>:
+ Rebuild phimmoi.net (Bổ sung mục "Tủ phim" của phimmoi.net)
+ Fix megabox.vn và một số lỗi nhỏ
+ 
+[B]Version 3.2.17[/B] <20/09/2015>:
+ Update phimmoi.net, hayhaytv
+ Fix một số lỗi nhỏ
+ 
+[B]Version 3.2.16[/B] <18/09/2015>:
+ Update HDViet.com
+ Fix một số lỗi nhỏ
+ Bổ sung HTVonline.com.vn
+
+[B]Version 3.2.15[/B] <14/09/2015>:
+ Update HDViet.com, hayhaytv.vn, FPTplay.net, Megabox.vn
+ Fix một số lỗi nhỏ
+ Thử nghiệm ViewMode Movie detail cho hayhaytv.vn
+
+[B]Version 3.2.14[/B] <14/08/2015>:
+ Update Megabox.vn
+ Fix một số lỗi nhỏ
+
+[B]Version 3.2.13[/B] <02/08/2015>:
+ fix lỗi không tương thích AB
+ Bổ sung get ID Fsend.vn
+
+[B]Version 3.2.12[/B] <31/07/2015>:
+ fix 18+ filter.
+ fix phimmoi.net nhieu part 
+ và một số hiệu chỉnh nhỏ khác
+ Thêm ContextMenu mục "Add to My Fshare favorite" và "Remove from My Fshare favorite"
+ 
+
+[B]Version 3.2.11[/B] <26/07/2015>:
+- Bổ sung: cụm server phimmoi.net
+- Update fptplay,vaphim,hdvietnam
+
+[B]Version 3.2.10[/B] <05/07/2015>:
+- Fix: Đọc thư muc phim hdviet.com
+
+[B]Version 3.2.9[/B] <04/07/2015>:
+- Fix: Đọc thư muc Myfhare và một số lỗi nhỏ khác
+- Bổ sung: 2 cụm server hdviet.com và hayhaytv.vn
+
+[B]Version 3.2.8[/B] <21/06/2015>:
+Fix chế độ tự động chuyển từ phương thức search API sang Web của google search một cách trông suốt.
+Updata:
+- Get direct link Fshare - Cố gắng thực hiện lại 3 lần khi bị "Lỗi hệ thống"
+- Auto load 
+- Cải thiện tốc độ load mục "Phim mới nhất" và "Xem nhiều nhất" của vaphim.com
+Thêm:
+- phần phụ mục (WEB-DL, HDTV; Bluray Remux; mHD, SD; Bluray nguyên gốc) trong "Mục Chia sẻ phim"-Fshare.vn của hdvietnam
+- 2 cụm server mới: pub.vn, vuahd.tv
+
+[B]Version 3.2.7[/B] <09/06/2015>:
+Fix: Bỏ mục auto post thanks lits trên hdvietnam
+
+[[B]Version 3.2.6[/B] <08/06/2015>:
+update: get direct links Fshare.vn
+Fix: một số lỗi nhỏ
+
+[B]Version 3.2.5[/B] <03/06/2015>:
+update: Thay bộ icon cũ bằng bộ mới của LUC QUYET CHIEN, update từ tất cả RSS của hdvietnam
+Fix: một số lỗi nhỏ
+Thêm mục update từ RSS của hdvietnam.com
+
+[B]Version 3.2.4[/B] <01/06/2015>:
+update: auto load subs
+Fix: một số lỗi về tên file, tên film, tên thư mục sử dụng font unicode
+Thêm một số thông tin từ hdvietnam.com
+
+[[B]Version 3.2.3[/B] <29/05/2015>:
+update: auto load subs, fptplay
+Fix: một số lỗi về tên file, tên film, tên thư mục sử dụng font unicode
+Thêm một số tools: MyFshare, MyList menuContext
+
+[B]Version 3.2.2[/B] <25/05/2015>:
+update: dangcaphd.com, Mở ID file
+Fix: một số lỗi nhỏ
+
+[B]Version 3.2.1[/B] <24/05/2015>:
+update: 4share.vn
+Thêm một số tools: MyFshare, MyList menuContext
+
+[B]Version 3.2.0[/B] <15/05/2015>:
+Fix: Kho phim trên fptplay.net
+Thêm các cụm server megabox.vn, dangcaphd.com
+Thêm tùy chọn không tự động dịch subs
+
+[B]Version 3.1.5[/B] <08/05/2015>:
+Fix: Thông báo lỗi Fshare
+
+[B]Version 3.1.4[/B] <07/05/2015>:
+Fix: Get maxspeed link 4share
+
+[B]Version 3.1.3[/B] <05/05/2015>:
+Fix: Open Fshare ID
+
+[B]Version 3.1.2[/B] <05/05/2015>:
+Fix: 4share search, chỉnh lại một số bất tiện đã phát hiện
+Thêm subscene vào kết quả search
+Cải thiện tốc độ search trên hdvietnam
+Thêm các tùy chọn ngữ cảnh file trên thư mục cục bộ
+
+
+[B]Version 3.1.1[/B] <30/04/2015>:
+Fix: Mở link Fshare, 4share, tenlua theo ID
+
+[B]Version 3.1.0[/B] <30/04/2015>:
+- Dùng python ver 2.1.0 tương thích XBMC 2.x
+- Thêm chức năng Google search trên hdvietnam
+- Thêm chức năng tải file zip phụ đề fshare và subscene vào thumucrieng.
+- Thêm chức năng xshare favouris
+- Bố trí lại menu, code lại một số tính năng cũ
+
+[B]Version 3.0.5[/B] </04/2015>:
+Fix:
+- Mục "Phim được xem nhiều nhất" của Vaphim.com
+Recode:
+- menuContext
+Add:
+- Xshare favourites
+
+[B]Version 3.0.4[/B] <12/04/2015>:
+- Thêm mục "Thông tin phim mới nhất từ HDVietnam.com Forums"
+
+[B]Version 3.0.3[/B] <10/04/2015>:
+Fix:
+- Get link 4share, tenlua
+
+[B]Version 3.0.2[/B] <08/04/2015>:
+Fix:
+- Get link maxspeed fshare không kích hoạt tải trực tiếp
+- update rss vaphim.com (mục Tuyển tập phim HOT nhất trong tuần)
+- Gỡ bỏ thư viện "script.module.parsedom"
+
+
+[B]Version 3.0.1[/B] <07/04/2015>:
+Fix:
+- Lật trang 2,3, ...
+- Và một số lỗi nhỏ khác
+Bổ sung:
+- Tùy chọn ghi lịch sử tìm kiếm
+
+[B]Version 3.0.0[/B] <06/04/2015>:
+Thay toàn bộ code của xshare 2.21. Quá trình web Scraping sẽ nhanh hơn.
+Fix: 
+- Hỗ trợ Get link VIP Fshare ở chế độ "Không kích hoạt tải trực tiếp"
+- Mở Folder ID Fshare trong mục "Mở link theo ID"
+- Đọc folder Fshare không hạn chế số lượng files
+Bổ sung: 
+- Hỗ trợ play file Fshare có pass.
+- Thêm tính năng google search trên fshare,4share,tênlửa
+- Ghi lại lịch sử tìm kiếm, mở ID file
+- Thêm menu ngữ cảnh cho lịch sử tìm kiếm, mở ID file
+- Auto rss update Vaphim.com
+- Get phim từ các Server http://phimfshare.com, http://fptplay.net, https:\\tenlua.vn
+- Fix lật trang PhimFshare.com
+
+[B]Version 2.2.1[/B] <06/01/2015>:
+- fix phần "Mở link Fshare theo ID & ý tưởng share phim cho nhau" cho tiện dụng. 
+- Gộp 2 phần mở phim theo ID và share phim cho nhau.
+- Bổ sung mục "Phim mới nhất trên Vaphim".
+- Bổ sung fanart cho các phim get trên Vaphim.
+
+[B]Version 2.2.0[/B] <31/12/2014>
+- Fix các lỗi đã phát hiện: ưu tiên dùng acc VIP fshare khi bỏ chế độ dùng acc free.
+- Xóa Cookie ngay lập tức khi chuyển setting download trên Fshare sang gián tiếp.
+- Phân rõ 2 mục Vaphim - Fshare và Ifile.tv - 4share.
+- Phân trang list phim share cho nhau.
+- Cập nhật lai DS phim Vaphim theo hướng chia nhiều trang, tăng tốc độ load DS phim.
+- Phần quan trọng: Bổ sung kho phim trên Ifile.tv của 4share (tich hợp acc VIP 4share), gồm cả modun tìm kiếm trên 4share.
+
+[B]Version 2.1.1[/B] <27/12/2014>
+- Bổ sung phần: "Tạo list phim mới" trong mục "Kho phim riêng"
+- Bổ sung phần: "Mở list phim trên Fshare - ý tưởng share phim cho nhau"
+
+[B]Version 2.1.0[/B] <26/12/2014>
+- Gộp 2 mục Mở link phim trên File server Fshare và 4share vào chung một thư mục.
+- Fix lỗi login vào Fshare và bổ sung tùy chọn thiết lập trực tiếp acc VIP Fshare trên ứng dụng. 
+- Cho phép chọn chế độ Logout khỏi Fshare ngay sau khi bắt được Link phim 
+  (tùy chọn này dành cho các bạn dùng chung 1 Acc VIP).
+- Biên tập lại đầy đủ danh mục phim trên Vaphim
+- Bổ sung phần tìm kiếm trên Vaphim ("Search trên Vaphim")
+- Bổ sung mục "Phim xem nhiều nhất" trên Vaphim.
+
+[B]Version 2.0.0[/B] <20/12/2014>
+- Đưa nội dung trang Vaphim vào danh sách phim.
+- Đặc biệt DS phim được cập nhật về tại máy.
+- Có thêm DS phim riêng của cá nhân tự soạn.
+- Riêng mục Phim 18+ được set mặc định là Disable. Set lại trong mục Setting Add-on.
+- Fix lỗi login Fshare
+- Set "download trực tiếp" Acc VIP Fshare ngay trên ứng dụng.
+
+[B]Version 1.1.1[/B] <15/12/2014>
+- Load phim trực tiếp từ Fshare.vn cả 2 chế độ thiết lập / không thiết lập "Kích hoạt tải trực tiếp"
+
+[B]Version 1.1.0[/B] <13/12/2014>
+- Thêm load phim từ server 4share.vn
+
+[B]Version 1.0.0[/B] <08/12/2014>
+- Initial release
