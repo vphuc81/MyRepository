@@ -7,7 +7,7 @@
 	    <setting label="Chọn chế độ hiển thị" type="labelenum" id="view_mode" default="Thumbnails" values="List|Thumbnails" />
 	    <setting label="Hiện thị icon lớn" type="bool" id="big_icon" default="false" />
         <setting label="Chọn Thumbail làm Fanart (y/n)" type="bool" id="use_fanart" default="true" />	
-	    <setting label="Mở chế độ tự động vào addon khi kodi khởi động (y/n)" type="bool" id="auto_mode" default="false" />
+	    <setting label="Mở chế độ tự động vào addon khi kodi khởi động (y/n)" type="bool" id="auto_mode" default="true" />
 	    <setting label="Tắt quảng cáo (y/n)" type="bool" id="temp_mode" default="false "/>
 	    <setting label="Thông tin quảng cáo" type="text" id="temp_patch" default="advertisement" visible="false" />
         <setting label="information" type="text" id="lock_patch" default="agent" visible="false"/>

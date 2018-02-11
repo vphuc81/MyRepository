@@ -567,12 +567,13 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 </addon>
 
 <addon id="plugin.video.itvplus"
-       version="2.9.0"
+       version="2.9.4.1"
        name="[COLOR ffff0000]*ITV*[/COLOR]Plus"
        provider-name="itv member">
     <requires>
         <import addon="xbmc.python" version="2.1.0" optional="true" />
 		<import addon="script.module.requests" version="1.0" />
+		<import addon="script.module.httplib2" version="0.8.0" />
     </requires>
     <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
@@ -2160,7 +2161,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
                 <platform>all</platform>
                 <website>https://superrepo.org/</website>
                 </extension>
-</addon>
+                </addon>
 
 <addon id="superrepo.kodi.helix.all" name="SuperRepo All [Helix][v7]" version="0.7.04" provider-name="Bart Otten">
                 <requires>
@@ -2228,7 +2229,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
                 <platform>all</platform>
                 <website>https://superrepo.org/</website>
                 </extension>
-</addon>
+                </addon>
 
 <addon id="xbmc.repo.xshare" name="[COLOR red][B]Xshare[/COLOR] [COLOR blue]Repository[/B][/COLOR]" version="1.0.0" provider-name="thaitni">
 	<extension point="xbmc.addon.repository" name="Official XBMC.org Add-on Repository">

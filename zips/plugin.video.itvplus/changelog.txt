@@ -1,4 +1,80 @@
-﻿Version_2.7.0 <22/02/2017>
+﻿Version_2.9.4 <02/02/2018>
+- Fix link drive
+
+Version_2.9.1 <23/11/2017>
+- Fix bug
+
+Version_2.9.0 <23/11/2017>
+- Edit source
+- Fix bug
+
+Version_2.8.9 <30/10/2017>
+- Fix bug
+
+Version_2.8.8 <15/10/2017>
+- Fix bug
+
+Version_2.8.7 <02/08/2017>
+- Fix Truyền hình
+- Fix ca nhạc
+- Fix All bug
+
+Version_2.8.6 <02/08/2017>
+- Fix bug FPTPlay, Tivi Xem lại
+- Fix all channel
+- Add new channel group vtv.vn
+
+Version_2.8.5 <27/07/2017>
+- Fix server Film
+- Add new VNOpen Playlist
+
+Version_2.8.3 <12/07/2017>
+- Fix Minor
+
+Version_2.8.2 <01/06/2017>
+- Fix VTVGo
+
+Version_2.8.1 <15/05/2017>
+- Fix Version
+
+Version_2.8.0 <15/05/2017>
+- Add VIP CHANNEL
+
+Version_2.7.9 <14/05/2017>
+- Fix vtvgo
+- Add Mobifone TV
+
+Version_2.7.8 <07/05/2017>
+- Fix Youtube
+- Fix Menu
+- Update All
+
+Version_2.7.7 <02/04/2017>
+- Minor fix
+
+Version_2.7.6 <19/03/2017>
+- Fix "TÌM KIẾM"
+- Fix "Fshare"
+- Add new "Next Channel"
+
+Version_2.7.5 <13/03/2017>
+- Fix "TVPlus"
+- Fix "Video + Clip CSN"
+- Add new group FPTPlay
+
+Version_2.7.4 <10/03/2017>
+- Fix "Kho Phim 2"
+
+Version_2.7.3 <07/03/2017>
+- Fix Get Link vtvgo live
+
+Version_2.7.2 <04/03/2017>
+- Fix Get Link vtvgo, flixtv
+
+Version_2.7.1 <27/02/2017>
+- Fix Get Link vtvcab, vtvgo
+
+Version_2.7.0 <22/02/2017>
 - Fix Get Link
 
 Version_2.6.9 <22/02/2017>
