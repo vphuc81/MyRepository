@@ -174,7 +174,7 @@ def III1ii1iII ( url ) :
    return iI . json ( ) [ "data" ]
   else :
    iI = requests . get ( url , headers = iI1 )
-   return re . search ( "addPlayer\('(.+?.m3u8)" , iI . text ) . group ( 1 ) + i11Iiii
+   return re . search ( "link = '(.+?.m3u8)'" , iI . text ) . group ( 1 ) + i11Iiii
  except :
   return ""
   if 28 - 28: I1Ii111 - oo . oo + oOoO0oo0OOOo - iII111iiiii11 + OO0OO0O0O0

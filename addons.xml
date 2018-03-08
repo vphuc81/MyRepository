@@ -567,7 +567,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 </addon>
 
 <addon id="plugin.video.itvplus"
-       version="2.9.4.1"
+       version="2.9.5.1"
        name="[COLOR ffff0000]*ITV*[/COLOR]Plus"
        provider-name="itv member">
     <requires>
@@ -650,7 +650,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon
   id="plugin.video.kodi4vn.vtvgo"
-  version="0.15.1"
+  version="0.16.1"
   name="*[COLOR yellow]VTV GO[/COLOR]"
   provider-name="thongld">
   <requires>

@@ -38,7 +38,7 @@ O00OO0OOO0 = addon.getSetting('use_fanart')
 sys.path.append(os.path.join(home,'resources','lib'));from BeautifulSoup import BeautifulSoup;import visitor;import urlfetch;import gdrive
 favfolder = xbmc.translatePath('special://userdata/favourites.xml')
 ulink = 'http://xbmc.itvplus.net/UNPACK/settings.xml'
-udata = xbmc.translatePath('special://userdata/addon_data/skin.confluence/settings.xml')
+udata = xbmc.translatePath('special://userdata/playercorefactory.xml')
 
 
 
@@ -1096,7 +1096,7 @@ def I11111iII11i(url):
 		headers =  { "User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" , "Accept-Encoding" : "gzip, deflate" ,"Referer" : "http://vtvgo.vn/" }
 		fake_referer = "|Referer=http%3A%2F%2Fvtvgo.vn%2F"
 		I1I = requests . get ( url , headers = headers )
-		mediaUrl = re . search ( "addPlayer\('(.+?.m3u8)" , I1I . text ) . group ( 1 ) + fake_referer
+		mediaUrl = re . search ( "link = '(.+?.m3u8)'" , I1I . text ) . group ( 1 ) + fake_referer
 
 	elif 'vtv.vn' in url:
 		response = urlfetch.get(url)
