@@ -1,242 +1,210 @@
-# -*- coding: utf-8 -*-
-import os
-import urllib
-import urllib2
-import xbmcplugin
-import xbmcgui
-import xbmcaddon
-import sys
-import xbmc
-import re
-import json
-# vtvgolive code ++++++++++++++++
-from resources.lib.common import *
-from resources.lib.vtvgovn import vtvgovn
-addon_id = 'plugin.video.vtvgolive'
-my_addon = xbmcaddon.Addon(addon_id)
-download_path = str(my_addon.getSetting(id='download_path'))
-
-addonPath = my_addon.getAddonInfo('path')
-version = my_addon.getAddonInfo('version')
-icon = os.path.join(addonPath,'icon.png')
-m3u = os.path.join(addonPath,'m3u.png')
-reload = os.path.join(addonPath,'reload.jpg')
-fanart = os.path.join(addonPath,'fanart.jpg')
-iconbtn = os.path.join(addonPath,'iconbtn.png')
-fanartbtn = os.path.join(addonPath,'fanartbtn.jpg')
-setting_logo = os.path.join(addonPath,'setting.jpg')
-logo_dir = os.path.join(Paths.resDir,'logos')
-
-vnLogoHost = "http://www.tv-logo.com/pt-data/uploads/images/logo/"
-
-m3u_file = "vtvlist_all.m3u"
-addondir    = xbmc.translatePath( my_addon.getAddonInfo('profile') ) 
-vtvgovnlivelist = addondir + "vtvgovnlivelist.txt"
-vtvnetvnlivelist = addondir + "vtvnetvnlivelist.txt"
-decripter_url = addondir + "decripter_url.txt"
-
-if download_path == "":
-	vtvm3u_all = os.path.join(addondir,m3u_file)
-else:
-	vtvm3u_all = os.path.join(download_path, m3u_file)
-
-vtc_chid = ["vtv1","vtv2","vtv3","vtv4","ttxvn","htv9","vtc1","vtc10","vtc16","hn1"]
-logo_id = ["vtv1_vn", "vtv2_vn","vtv3_vn","vtv4_vn", "ttx_vn", "htv_9", "vtc_1", "vtc_10", "vtc_16_vn", "hanoi_tv1"]	
-url_vtvgovn = base64.b64decode("aHR0cDovLzEyNy4wLjAuMToxOTA5Ni92dHZnb3ZuUHJveHkv")
-vntvnet_pxy = base64.b64decode("aHR0cDovLzEyNy4wLjAuMToxOTA5Ni92bnR2bmV0cHJveHkv")
-m3uHdr = '#EXTINF:-1 group-title="Top 10 USA Channels",  tvg-id="" tvg-name="" tvg-logo='
-m3uHdr_vtvgo = '#EXTINF:-1 group-title="VTVGoVN Live",  tvg-id="" tvg-name="" tvg-logo='	
-m3uHdr_tvnet = '#EXTINF:-1 group-title="Top VTV VTC Live",  tvg-id="" tvg-name="" tvg-logo='
-ProxyMode = str(my_addon.getSetting(id='isProxyMode'))
-
-maxCacheSize = int(my_addon.getSetting(id='maxCacheSize'))
-if maxCacheSize == 0: CacheSize = 12000
-elif maxCacheSize == 1: CacheSize = 32000
-else: CacheSize = 64000	
-	
-def isMaxSize(file):
-	try:				
-		if os.path.isfile(file):
-			file_size = os.stat(file).st_size		
-			value = file_size > CacheSize
-			if value: return True
-			else: return False
-	except: return False
- 
-def clearCache(): # keep the files as low as maxCacheSize.
-	try:
-		if isMaxSize(vtvgovnlivelist): deleteContent(vtvgovnlivelist)
-		if isMaxSize(vtvnetvnlivelist): deleteContent(vtvnetvnlivelist)
-		if isMaxSize(decripter_url): deleteContent(decripter_url)
-		if isMaxSize(decripter_url): infoDialog("selfClearCache", "checked and cleared VtvGo-Cache")
-	except: pass
-
-try: # intial/refresh
-	ProxyMode = str(my_addon.getSetting(id='isProxyMode'))
-	mydebug = str(my_addon.getSetting(id='debug_message'))
-	clearCache()
-except: pass
-
-def vtvnet_livelist(m3uList=False,chid=vtc_chid):
-	global vntvnet_pxy, ProxyMode 
-	ProxyMode = str(my_addon.getSetting(id='isProxyMode'))
-	if ProxyMode == "false": vntvnet_pxy = ""
-	else: vntvnet_pxy = base64.b64decode("aHR0cDovLzEyNy4wLjAuMToxOTA5Ni92bnR2bmV0cHJveHkv")
-	if not m3uList:
-		deleteContent(vtvnetvnlivelist)
-		for idx in range(0, len(chid)):
-			name = chid[idx]
-			image = logo_id[idx]
-			thumb = vnLogoHost + image + ".jpg"
-			addLink(name.upper() + " HD", vntvnet_pxy + name, 2, thumb, fanart, ' HD')
-			writeappend_file(vtvnetvnlivelist, m3uHdr_tvnet +'"'+ thumb +'",' + name)
-			writeappend_file(vtvnetvnlivelist, vntvnet_pxy + chid[idx])
-	else:# create m3u
-		deleteContent(vtvnetvnlivelist)
-		for idx in range(0, len(chid)):
-			infoDialog("process index: " + str(idx), "vtvnet m3uList. Please wait..")
-			name = chid[idx]
-			image = logo_id[idx]
-			thumb = vnLogoHost + image + ".jpg"
-			writeappend_file(vtvnetvnlivelist, m3uHdr_tvnet +'"'+ thumb +'",' + name)
-			writeappend_file(vtvnetvnlivelist, vntvnet_pxy + chid[idx])
-			
-def vtvgo_livelist(m3uList=False):
-	global url_vtvgovn, ProxyMode
-	myvtvgo=vtvgovn() 
-	index = 0
-	ProxyMode = str(my_addon.getSetting(id='isProxyMode'))
-	if ProxyMode == "false": url_vtvgovn = ""
-	else: url_vtvgovn = base64.b64decode("aHR0cDovLzEyNy4wLjAuMToxOTA5Ni92dHZnb3ZuUHJveHkv")
-	if m3uList:
-		deleteContent(vtvgovnlivelist)
-		for name, url, thumb in myvtvgo.liveList():
-		    index += 1
-		    infoDialog("process index: " + str(index), "vtvgo m3uList. Please wait..")
-		    writeappend_file(vtvgovnlivelist, m3uHdr_vtvgo +'"'+ thumb +'",' + name.replace(",", " -"))
-		    writeappend_file(vtvgovnlivelist, url_vtvgovn + url + "\n")# url link
-	else:
-		deleteContent(vtvgovnlivelist)
-		for name, url, thumb in myvtvgo.liveList():
-			addLink(name, url_vtvgovn + url, 2, thumb, fanart, ' HD')
-			writeappend_file(vtvgovnlivelist, m3uHdr_vtvgo +'"'+ thumb +'",' + name.replace(",", " -"))
-			writeappend_file(vtvgovnlivelist, url_vtvgovn + url + "\n")# url link
-		
-def vtvm3uList_all(list=vtvm3u_all, chid=vtc_chid):
-	global vtvm3u_all
-	import time
-	myvtvgo=vtvgovn()
-	index = 0
-	deleteContent(list)
-	writeappend_file(list, "#EXTM3U \n")
-	for name, url, thumb in myvtvgo.liveList():
-		index += 1
-		infoDialog("process index " + "vtvgo: " + str(index), "vtvgo m3uList. Please wait..")
-		writeappend_file(list, m3uHdr_vtvgo +'"'+ thumb +'",' + name.replace(",", " -"))
-		writeappend_file(list, url_vtvgovn + url + "\n")# url link
-	for idx in range(0, len(chid)):
-		infoDialog("process index "  + "vtvnet: " + str(idx), "vtvnet m3uList. Please wait..")
-		name = chid[idx]			
-		image = logo_id[idx]
-		thumb = vnLogoHost + image + ".jpg"
-		writeappend_file(list, m3uHdr_vtvgo +'"'+ thumb +'",' + name.upper() + " HD")
-		writeappend_file(list, vntvnet_pxy + chid[idx])	
-	infoDialog("Done m3u list for IPTV Simple Client", "vtvm3uList_all")
-	time.sleep(3)
-	ShowMessage("M3U list for PVR IPTV Simple Client", "Creating M3U file in: \n" + str(list))
-	
-def get_vtvgo_chid(pattern,string,group=1,flags=0,result=''):
-	try:s=re.search(pattern,string,flags).group(group)
-	except:s=result
-	return s	
-
-def Categories():	
-    xbmc.executebuiltin('Container.SetViewMode(500)')
-    addLink("[COLOR teal]Settings[/COLOR]", "url", 1, setting_logo, fanart, " HD")
-    addLink("[COLOR teal]Export M3U file[/COLOR]", "url", 3, m3u, fanart, " HD")	
-    vtvgo_livelist(False)	
-    vtvnet_livelist(False,vtc_chid)	
-	
-def addLink(name, url, mode, iconimage, fanart, description, isFolder=False):
-    title = ''
-    u = sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)+"&iconimage="+urllib.quote_plus(iconimage)+"&fanart="+urllib.quote_plus(fanart)
-    ok = True
-    liz = xbmcgui.ListItem(name + '[I]' + title + '[/I]', iconImage="DefaultFolder.png", thumbnailImage=iconimage)
-    liz.setInfo(type="Video", infoLabels={"Title": name, "Plot": ''})
-    liz.setProperty("Fanart_Image", fanart)
-    ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=u, listitem=liz, isFolder=isFolder)
-    return ok
-
-def playStream(url, name, icon):
-    li = xbmcgui.ListItem(label=name, iconImage=icon, thumbnailImage=icon, path="")
-    xbmc.Player().play(item=url, listitem=li)
-
-def get_params():
-        param = []
-        paramstring = sys.argv[2]
-        if len(paramstring) >= 2:
-                params = sys.argv[2]
-                cleanedparams = params.replace('?', '')
-                if (params[len(params) - 1] == '/'):
-                        params = params[0:len(params) - 2]
-                pairsofparams = cleanedparams.split('&')
-                param = {}
-                for i in range(len(pairsofparams)):
-                        splitparams = {}
-                        splitparams = pairsofparams[i].split('=')
-                        if (len(splitparams)) == 2:
-                                param[splitparams[0]] = splitparams[1]
-        return param
-
-params = get_params()
-url = None
-name = None
-mode = None
-
-try: url = urllib.unquote_plus(params["url"])
-except: pass
-try: name = urllib.unquote_plus(params["name"])
-except: pass
-try: mode = int(params["mode"])
-except: pass
-
-print "Mode: "+str(mode)
-print "URL: "+str(url)
-print "Name: "+str(name)
-
-if mode == None or url == None or len(url) < 1:
-        print ""
-        Categories()
-
-elif mode==1:
-	showAddonSettings()
-	Categories()
-		
-elif mode == 2:
-	global ProxyMode
-	ProxyMode = str(my_addon.getSetting(id='isProxyMode'))
-	if ProxyMode == "false" and "vtvgo.vn" in url:
-		try:
-			url_stream = vtvgovn().getStream(url)
-			playStream(url_stream, name, icon)
-		except: pass
-	elif ProxyMode == "false" and url in vtc_chid:
-		try:
-			url_stream = vtvgovn().getStreamTvnet(url)
-			playStream(url_stream, name, icon)
-		except: pass
-	else:
-		playStream(url, name, icon)
-	infoDialog('Status: Start/Stop', '[COLOR yellow]Media Player[/COLOR]', time=5000)
-	
-elif mode == 3:
-	infoDialog('Process channel list', '[COLOR yellow]vtvm3uList_all M3U Creator[/COLOR]')
-	vtvm3uList_all()
-	xbmc.sleep(5)
-	infoDialog('Done channel list', '[COLOR yellow]vtvm3uList_all M3U Creator[/COLOR]')
-	exit()	
-
-elif mode == 4:
-        Categories()
-
-xbmcplugin.endOfDirectory(int(sys.argv[1]))
+#!/usr/bin/python
+# coding=utf-8
+import urllib , requests , re , json , HTMLParser , os , uuid , datetime , time
+from xbmcswift2 import Plugin , xbmc , xbmcgui , xbmcaddon
+requests . packages . urllib3 . disable_warnings ( )
+oo000 = Plugin ( )
+ii = HTMLParser . HTMLParser ( )
+oOOo = "plugin://plugin.video.vtvgolive"
+if 59 - 59: Oo0Ooo . OO0OO0O0O0 * iiiIIii1IIi . iII111iiiii11 % I1IiiI
+IIi1IiiiI1Ii = "http://echipstore.com:8000/vntime"
+if 39 - 39: O0 - ooOO00oOo % oOo0O0Ooo * Ooo00oOo00o . oOoO0oo0OOOo + iiiiIi11i
+def Ii1I ( s ) :
+ s = '' . join ( s . splitlines ( ) ) . replace ( '\'' , '"' )
+ s = s . replace ( '\n' , '' )
+ s = s . replace ( '\t' , '' )
+ s = re . sub ( '  +' , ' ' , s )
+ s = s . replace ( '> <' , '><' )
+ return ii . unescape ( s )
+ if 48 - 48: iII111i % IiII + I1Ii111 / ooOoO0o * o00O0oo
+@ oo000 . route ( '/list_date/<args_json>' )
+def O0oOO0o0 ( args_json = { } ) :
+ i1ii1iIII = [ ]
+ Oo0oO0oo0oO00 = json . loads ( args_json )
+ i111I = requests . get ( IIi1IiiiI1Ii ) . text
+ Oo0oO0oo0oO00 [ "date" ] = i111I [ : 10 ] . replace ( "-" , "" )
+ II1Ii1iI1i (
+ "[List date] from %s" % (
+ Oo0oO0oo0oO00 [ "date" ]
+ ) ,
+ '/list_date/%s/%s' % (
+ Oo0oO0oo0oO00 [ "url" ] ,
+ json . dumps ( Oo0oO0oo0oO00 [ "payloads" ] ) if "payloads" in Oo0oO0oo0oO00 else "{}"
+ )
+ )
+ if 12 - 12: o0oOoO00o
+ i1 = datetime . datetime ( year = 2016 , month = 1 , day = 1 )
+ if 64 - 64: oo % O0Oooo00
+ if 87 - 87: i1IIi11111i / ooOO00oOo % o0oOoO00o * o0oOoO00o * o00O0oo / iiiIIii1IIi
+ if 88 - 88: o0oOoO00o / ooOO00oOo + I1IiiI % iII111iiiii11 . oo / i1IIi11111i
+ try :
+  I1I1i1 = datetime . datetime . strptime ( i111I , "%Y-%m-%d %H:%M" )
+ except TypeError :
+  I1I1i1 = datetime . datetime ( * ( time . strptime ( i111I , "%Y-%m-%d %H:%M" ) [ 0 : 6 ] ) )
+  if 18 - 18: iiiIIii1IIi / ooOoO0o + IiII / oOo0O0Ooo - O0 - ooOoO0o
+ for I111IiIi in xrange ( 1 , ( I1I1i1 - i1 ) . days ) :
+  IiiIIiiI11 = { }
+  OOooO = ( I1I1i1 - datetime . timedelta ( days = I111IiIi ) )
+  IiiIIiiI11 [ "label" ] = "%s %s" % ( OOooO . strftime ( "%Y-%m-%d" ) , Oo0oO0oo0oO00 [ "title" ] )
+  OOoO00o = {
+ "title" : Oo0oO0oo0oO00 [ "title" ] ,
+ "url" : Oo0oO0oo0oO00 [ "url" ] ,
+ "date" : OOooO . strftime ( "%Y-%m-%d" ) ,
+ "channel_id" : Oo0oO0oo0oO00 [ "channel_id" ]
+ }
+  IiiIIiiI11 [ "path" ] = '%s/list_media/%s' % (
+ oOOo ,
+ urllib . quote_plus ( json . dumps ( OOoO00o ) )
+ )
+  IiiIIiiI11 [ "thumbnail" ] = "https://docs.google.com/drawings/d/16wuwv1LBUL030G13aypfrRxpQ8rs6b011WnQc_uF0z4/pub?w=256&h=256"
+  i1ii1iIII . append ( IiiIIiiI11 )
+ if oo000 . get_setting ( 'thumbview' , bool ) :
+  if xbmc . getSkinDir ( ) in ( 'skin.confluence' , 'skin.eminence' ) :
+   return oo000 . finish ( i1ii1iIII , view_mode = 500 )
+  elif xbmc . getSkinDir ( ) == 'skin.xeebo' :
+   return oo000 . finish ( i1ii1iIII , view_mode = 52 )
+  else :
+   return oo000 . finish ( i1ii1iIII )
+ else :
+  return oo000 . finish ( i1ii1iIII )
+  if 9 - 9: ooOO00oOo - o00O0oo % I1IiiI % iII111iiiii11
+  if 3 - 3: o0oOoO00o + OO0OO0O0O0
+@ oo000 . route ( '/list_media/<args_json>' )
+def I1Ii ( args_json = { } ) :
+ i1ii1iIII = [ ]
+ Oo0oO0oo0oO00 = json . loads ( args_json )
+ o0oOo0Ooo0O = [ ]
+ if Oo0oO0oo0oO00 [ "date" ] == "" :
+  o0oOo0Ooo0O = requests . get ( IIi1IiiiI1Ii ) . text . split ( " " )
+  Oo0oO0oo0oO00 [ "date" ] = o0oOo0Ooo0O [ 0 ]
+  if 81 - 81: iII111i * oo * ooOoO0o - o0oOoO00o - iiiiIi11i
+ OooO0OO = requests . get ( Oo0oO0oo0oO00 [ "url" ] % ( Oo0oO0oo0oO00 [ "date" ] , Oo0oO0oo0oO00 [ "channel_id" ] ) ) . text
+ II1Ii1iI1i (
+ "[Browse Media of] %s" % (
+ Oo0oO0oo0oO00 [ "title" ] if "title" in Oo0oO0oo0oO00 else "Unknow Title"
+ ) ,
+ '/list_media/%s/%s' % (
+ Oo0oO0oo0oO00 [ "url" ] ,
+ json . dumps ( Oo0oO0oo0oO00 [ "payloads" ] ) if "payloads" in Oo0oO0oo0oO00 else "{}"
+ )
+ )
+ iiiIi = re . compile ( '(?s)<li id="(.+?)"[^>]*>.+?(\d\d\:\d\d).+?<h3>(.+?)</h3>.+?<i>(.*?)</i></h4>' ) . findall ( OooO0OO )
+ if len ( o0oOo0Ooo0O ) > 0 :
+  IiIIIiI1I1 = [ ]
+  OoO000 = time . strptime ( o0oOo0Ooo0O [ 1 ] , "%H:%M" )
+  IIiiIiI1 = iiIiIIi ( OoO000 )
+  for I111IiIi in iiiIi :
+   ooOoo0O = time . strptime ( I111IiIi [ 1 ] , "%H:%M" )
+   if iiIiIIi ( ooOoo0O ) <= IIiiIiI1 :
+    IiIIIiI1I1 += [ I111IiIi ]
+   else : break
+  iiiIi = IiIIIiI1I1 [ : : - 1 ]
+  if 76 - 76: OO0OO0O0O0 / iiiiIi11i . ooOO00oOo * o00O0oo - I1Ii111
+ for Oooo , ooOoo0O , O00o , O00 in iiiIi :
+  IiiIIiiI11 = { }
+  i11I1 = "http://vtvgo.vn/ajax-get-epg-detail?epg_id=" + Oooo . split ( "_" ) [ - 1 ]
+  IiiIIiiI11 [ "label" ] = "[B][%s %s][/B] %s - %s" % ( Oo0oO0oo0oO00 [ "date" ] , ooOoo0O , O00o , O00 )
+  OOoO00o = {
+ "title" : IiiIIiiI11 [ "label" ] ,
+ "url" : i11I1
+ }
+  IiiIIiiI11 [ "path" ] = '%s/play/%s' % (
+ oOOo ,
+ urllib . quote_plus ( json . dumps ( OOoO00o ) )
+ )
+  IiiIIiiI11 [ "is_playable" ] = True
+  i1ii1iIII += [ IiiIIiiI11 ]
+ if len ( o0oOo0Ooo0O ) > 0 :
+  i1ii1iIII [ 0 ] [ "label" ] = "[B][%s %s [COLOR yellow]Đang chiếu...[/COLOR]][/B] %s - %s" % ( Oo0oO0oo0oO00 [ "date" ] . encode ( "utf8" ) , o0oOo0Ooo0O [ 1 ] . encode ( "utf8" ) , iiiIi [ 0 ] [ 2 ] . encode ( "utf8" ) , iiiIi [ 0 ] [ 3 ] . encode ( "utf8" ) )
+  OOoO00o = {
+ "title" : i1ii1iIII [ 0 ] [ "label" ] ,
+ "url" : "http://vtvgo.vn/?xem-truc-tuyen-vtv-%s.html" % Oo0oO0oo0oO00 [ "channel_id" ]
+ }
+  i1ii1iIII [ 0 ] [ "path" ] = '%s/play/%s' % (
+ oOOo ,
+ urllib . quote_plus ( json . dumps ( OOoO00o ) )
+ )
+  if 8 - 8: iiiIIii1IIi - oo % iiiIIii1IIi - o00O0oo * ooOO00oOo
+ iI11i1I1 = { }
+ iI11i1I1 [ "label" ] = "Xem thêm..."
+ iI11i1I1 [ "path" ] = '%s/list_date/%s' % (
+ oOOo ,
+ urllib . quote_plus ( json . dumps ( Oo0oO0oo0oO00 ) )
+ )
+ iI11i1I1 [ "thumbnail" ] = "https://docs.google.com/drawings/d/16wuwv1LBUL030G13aypfrRxpQ8rs6b011WnQc_uF0z4/pub?w=256&h=256"
+ i1ii1iIII . append ( iI11i1I1 )
+ if oo000 . get_setting ( 'thumbview' , bool ) :
+  if xbmc . getSkinDir ( ) in ( 'skin.confluence' , 'skin.eminence' ) :
+   return oo000 . finish ( i1ii1iIII , view_mode = 500 )
+  elif xbmc . getSkinDir ( ) == 'skin.xeebo' :
+   return oo000 . finish ( i1ii1iIII , view_mode = 52 )
+  else :
+   return oo000 . finish ( i1ii1iIII )
+ else :
+  return oo000 . finish ( i1ii1iIII )
+  if 71 - 71: i1IIi11111i % o0oOoO00o / iiiiIi11i
+@ oo000 . route ( '/play/<args_json>' )
+def ii11i1iIII ( args_json = { } ) :
+ Oo0oO0oo0oO00 = json . loads ( args_json )
+ II1Ii1iI1i (
+ "[Play] %s" % (
+ Oo0oO0oo0oO00 [ "title" ] . encode ( "utf8" ) if "title" in Oo0oO0oo0oO00 else "Unknow Title"
+ ) ,
+ '/play/%s/%s' % (
+ Oo0oO0oo0oO00 [ "url" ] ,
+ json . dumps ( Oo0oO0oo0oO00 [ "payloads" ] ) if "payloads" in Oo0oO0oo0oO00 else "{}"
+ )
+ )
+ Ii1IOo0o0 = xbmcgui . DialogProgress ( )
+ Ii1IOo0o0 . create ( 'VTVGo' , 'Đang tải, Xin quý khách vui lòng đợi trong giây lát...' )
+ oo000 . set_resolved_url ( III1ii1iII ( Oo0oO0oo0oO00 [ "url" ] ) , subtitles = "https://raw.githubusercontent.com/vinhcomp/xml/master/xml/sub1.tsv" )
+ Ii1IOo0o0 . close ( )
+ del Ii1IOo0o0
+ if 54 - 54: ooOO00oOo % O0 % O0
+def III1ii1iII ( url ) :
+ iI1 = {
+ "User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" ,
+ "Accept-Encoding" : "gzip, deflate" ,
+ "Referer" : "http://vtvgo.vn/" ,
+ }
+ i11Iiii = "|Referer=http%3A%2F%2Fvtvgo.vn%2F"
+ try :
+  if "ajax-get-epg-detail" in url :
+   iI = requests . get ( url , headers = iI1 )
+   return iI . json ( ) [ "data" ]
+  else :
+   iI = requests . get ( url , headers = iI1 )
+   return re . search ( "link = '(.+?.m3u8)'" , iI . text ) . group ( 1 ) + i11Iiii
+ except :
+  return ""
+  if 28 - 28: I1Ii111 - oo . oo + oOoO0oo0OOOo - iII111iiiii11 + OO0OO0O0O0
+def iiIiIIi ( time_object ) :
+ return time_object . tm_hour * 60 + time_object . tm_min
+ if 95 - 95: Ooo00oOo00o % IiII . OO0OO0O0O0
+def II1Ii1iI1i ( title = "Home" , page = "/" ) :
+ try :
+  I1i1I = "http://www.google-analytics.com/collect"
+  oOO00oOO = open ( OoOo ) . read ( )
+  iIo00O = {
+ 'v' : '1' ,
+ 'tid' : 'UA-52209804-5' ,
+ 'cid' : oOO00oOO ,
+ 't' : 'pageview' ,
+ 'dp' : "VTVGo" + page ,
+ 'dt' : "[VTVGo] - %s" % title
+ }
+  requests . post ( I1i1I , data = urllib . urlencode ( iIo00O ) )
+ except : pass
+ if 69 - 69: IiII % O0Oooo00 - iiiiIi11i + O0Oooo00 - OO0OO0O0O0 % iII111iiiii11
+Iii111II = xbmc . translatePath ( 'special://userdata' )
+if os . path . exists ( Iii111II ) == False :
+ os . mkdir ( Iii111II )
+OoOo = os . path . join ( Iii111II , 'cid' )
+if 9 - 9: Ooo00oOo00o
+if os . path . exists ( OoOo ) == False :
+ with open ( OoOo , "w" ) as i11 :
+  i11 . write ( str ( uuid . uuid1 ( ) ) )
+  if 58 - 58: I1Ii111 * Oo0Ooo / oOoO0oo0OOOo % O0Oooo00 - iII111i / IiII
+if __name__ == '__main__' :
+ oo000 . run ( )
+# dd678faae9ac167bc83abf78e5cb2f3f0688d3a3
