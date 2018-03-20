@@ -40,6 +40,8 @@ action = params.get('action')
 control.moderator()
 
 
+
+
 class tvshows:
     def __init__(self):
         self.list = []
@@ -67,7 +69,7 @@ class tvshows:
 
         self.persons_link = 'http://www.imdb.com/search/name?count=100&name='
         self.personlist_link = 'http://www.imdb.com/search/name?count=100&gender=male,female'
-        self.popular_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&release_date=,date[0]&sort=moviemeter,asc&count=40&start=1'
+        self.popular_link = 'http://www.imdb.com/search/title?title_type=tv_series,tv_episode,tv_miniseries&genres=comedy&keywords=marijuana&sort=moviemeter,asc&count=40&start=1'
         self.airing_link = 'http://www.imdb.com/search/title?title_type=tv_episode&release_date=date[1],date[0]&sort=moviemeter,asc&count=40&start=1'
         self.active_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=10,&production_status=active&sort=moviemeter,asc&count=40&start=1'
         #self.premiere_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&languages=en&num_votes=10,&release_date=date[60],date[0]&sort=moviemeter,asc&count=40&start=1'
@@ -87,9 +89,9 @@ class tvshows:
         self.traktcollection_link = 'http://api.trakt.tv/users/me/collection/shows'
         self.traktwatchlist_link = 'http://api.trakt.tv/users/me/watchlist/shows'
         self.traktfeatured_link = 'http://api.trakt.tv/recommendations/shows?limit=40'
-        self.imdblists_link = 'http://www.imdb.com/user/ur%s/lists?tab=all&sort=modified:desc&filter=titles' % self.imdb_user
-        self.imdblist_link = 'http://www.imdb.com/list/%s/?view=detail&sort=title:asc&title_type=tv_series,mini_series&start=1'
-        self.imdblist2_link = 'http://www.imdb.com/list/%s/?view=detail&sort=created:desc&title_type=tv_series,mini_series&start=1'
+        self.imdblists_link = 'http://www.imdb.com/user/ur%s/lists?tab=all&sort=mdfd&order=desc&filter=titles' % self.imdb_user
+        self.imdblist_link = 'http://www.imdb.com/list/%s/?view=detail&sort=alpha,asc&title_type=tvSeries,tvMiniSeries&start=1'
+        self.imdblist2_link = 'http://www.imdb.com/list/%s/?view=detail&sort=date_added,desc&title_type=tvSeries,tvMiniSeries&start=1'
         self.imdbwatchlist_link = 'http://www.imdb.com/user/ur%s/watchlist?sort=alpha,asc' % self.imdb_user
         self.imdbwatchlist2_link = 'http://www.imdb.com/user/ur%s/watchlist?sort=date_added,desc' % self.imdb_user
 
@@ -149,19 +151,19 @@ class tvshows:
         navigator.navigator().addDirectoryItem(32603, 'tvSearchnew', 'search.png', 'DefaultTVShows.png')
         try: from sqlite3 import dbapi2 as database
         except: from pysqlite2 import dbapi2 as database
-        
+
         dbcon = database.connect(control.searchFile)
         dbcur = dbcon.cursor()
-             
+
         try:
             dbcur.executescript("CREATE TABLE IF NOT EXISTS tvshow (ID Integer PRIMARY KEY AUTOINCREMENT, term);")
         except:
             pass
-            
+
         dbcur.execute("SELECT * FROM tvshow ORDER BY ID DESC")
-        
+
         lst = []
-        
+
         delete_option = False
         for (id,term) in dbcur.fetchall():
             if term not in str(lst):
@@ -169,12 +171,12 @@ class tvshows:
                 navigator.navigator().addDirectoryItem(term, 'tvSearchterm&name=%s' % term, 'search.png', 'DefaultTVShows.png')
                 lst += [(term)]
         dbcur.close()
-        
+
         if delete_option:
             navigator.navigator().addDirectoryItem(32605, 'clearCacheSearch', 'tools.png', 'DefaultAddonProgram.png')
 
         navigator.navigator().endDirectory()
-        
+
     def search_new(self):
             control.idle()
 
@@ -183,10 +185,10 @@ class tvshows:
             q = k.getText() if k.isConfirmed() else None
 
             if (q == None or q == ''): return
-            
+
             try: from sqlite3 import dbapi2 as database
             except: from pysqlite2 import dbapi2 as database
-            
+
             dbcon = database.connect(control.searchFile)
             dbcur = dbcon.cursor()
             dbcur.execute("INSERT INTO tvshow VALUES (?,?)", (None,q))
@@ -263,6 +265,7 @@ class tvshows:
         networks = [
         ('A&E', '/networks/29/ae', 'https://i.imgur.com/xLDfHjH.png'),
         ('ABC', '/networks/3/abc', 'https://i.imgur.com/qePLxos.png'),
+		('AHC American Heroes Channel ', '/networks/229/ahc', 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/American_Heroes_Channel_logo.svg/1000px-American_Heroes_Channel_logo.svg.png'),
         ('AMC', '/networks/20/amc', 'https://i.imgur.com/ndorJxi.png'),
         ('AT-X', '/networks/167/at-x', 'https://i.imgur.com/JshJYGN.png'),
         ('Adult Swim', '/networks/10/adult-swim', 'https://i.imgur.com/jCqbRcS.png'),
@@ -280,7 +283,7 @@ class tvshows:
         ('CBS', '/networks/2/cbs', 'https://i.imgur.com/8OT8igR.png'),
         ('CTV', '/networks/48/ctv', 'https://i.imgur.com/qUlyVHz.png'),
         ('CW', '/networks/5/the-cw', 'https://i.imgur.com/Q8tooeM.png'),
-        ('CW Seed', '/webchannels/13/cw-seed', 'https://i.imgur.com/nOdKoEy.png'),
+        ('CMT', '/networks/173/cmt', 'https://upload.wikimedia.org/wikipedia/en/thumb/c/c2/CMT_old_logo.svg/1280px-CMT_old_logo.svg.png'),
         ('Cartoon Network', '/networks/11/cartoon-network', 'https://i.imgur.com/zmOLbbI.png'),
         ('Channel 4', '/networks/45/channel-4', 'https://i.imgur.com/6ZA9UHR.png'),
         ('Channel 5', '/networks/135/channel-5', 'https://i.imgur.com/5ubnvOh.png'),
@@ -290,9 +293,12 @@ class tvshows:
         ('Discovery Channel', '/networks/66/discovery-channel', 'https://i.imgur.com/8UrXnAB.png'),
         ('Discovery ID', '/networks/89/investigation-discovery', 'https://i.imgur.com/07w7BER.png'),
         ('Disney Channel', '/networks/78/disney-channel', 'https://i.imgur.com/ZCgEkp6.png'),
+		('Disney Jr', '/networks/1039/disney-junior', 'https://seeklogo.com/images/D/disney-junior-logo-1F38185449-seeklogo.com.png'),
         ('Disney XD', '/networks/25/disney-xd', 'https://i.imgur.com/PAJJoqQ.png'),
         ('E! Entertainment', '/networks/43/e', 'https://i.imgur.com/3Delf9f.png'),
         ('E4', '/networks/41/e4', 'https://i.imgur.com/frpunK8.png'),
+		('ESPN NEWS', '/networks/181/espnews', 'http://skysportsball.com/wp-content/uploads/2017/08/ESPN-Logo.png'),
+		('Food Network', '/networks/81/food-network', 'https://vignette.wikia.nocookie.net/logopedia/images/5/59/FoodNetLogo.svg/revision/latest/scale-to-width-down/200?cb=20170817165558'),
         ('FOX', '/networks/4/fox', 'https://i.imgur.com/6vc0Iov.png'),
         ('FX', '/networks/13/fx', 'https://i.imgur.com/aQc1AIZ.png'),
         ('Freeform', '/networks/26/freeform', 'https://i.imgur.com/f9AqoHE.png'),
@@ -305,8 +311,11 @@ class tvshows:
         ('MTV', '/networks/22/mtv', 'https://i.imgur.com/QM6DpNW.png'),
         ('NBC', '/networks/1/nbc', 'https://i.imgur.com/yPRirQZ.png'),
         ('National Geographic', '/networks/42/national-geographic-channel', 'https://i.imgur.com/XCGNKVQ.png'),
+		('NFL Network', '/networks/205/nfl-network', 'https://lh4.googleusercontent.com/-V_P5kDWxm20/AAAAAAAAAAI/AAAAAAAACFQ/pOgMC6p5ruY/s0-c-k-no-ns/photo.jpg'),
         ('Netflix', '/webchannels/1/netflix', 'https://i.imgur.com/jI5c3bw.png'),
         ('Nickelodeon', '/networks/27/nickelodeon', 'https://i.imgur.com/OUVoqYc.png'),
+		('Nicktoons', '/networks/73/nicktoons', 'https://vignette.wikia.nocookie.net/nickelodeon/images/f/f0/NickToons_logo_2009.png/revision/latest?cb=20111126221448'),
+		('OWN Oprah Winfrey Network', '/networks/236/oprah-winfrey-network', 'https://vignette.wikia.nocookie.net/logopedia/images/f/fd/Oprah-Winfrey-Network-OWN-logo-2011.png/revision/latest?cb=20150827211405'),
         ('PBS', '/networks/85/pbs', 'https://i.imgur.com/r9qeDJY.png'),
         ('Showtime', '/networks/9/showtime', 'https://i.imgur.com/SawAYkO.png'),
         ('Sky1', '/networks/63/sky-1', 'https://i.imgur.com/xbgzhPU.png'),
@@ -321,7 +330,8 @@ class tvshows:
         ('TruTV', '/networks/84/trutv', 'https://i.imgur.com/HnB3zfc.png'),
         ('USA', '/networks/30/usa-network', 'https://i.imgur.com/Doccw9E.png'),
         ('VH1', '/networks/55/vh1', 'https://i.imgur.com/IUtHYzA.png'),
-        ('WGN', '/networks/28/wgn-america', 'https://i.imgur.com/TL6MzgO.png')
+        ('WGN', '/networks/28/wgn-america', 'https://i.imgur.com/TL6MzgO.png'),
+		('WWE Network', '/webchannels/15/wwe-network', 'https://orig00.deviantart.net/bb88/f/2015/139/5/4/wwe_network_logo_by_jjk100-d8txzp1.png'),
         ]
 
         for i in networks: self.list.append({'name': i[0], 'url': self.tvmaze_link + i[1], 'image': i[2], 'action': 'tvshows'})
@@ -570,13 +580,13 @@ class tvshows:
 
             result = result.replace('\n', ' ')
 
-            items = client.parseDOM(result, 'div', attrs = {'class': 'lister-item mode-advanced'})
+            items = client.parseDOM(result, 'div', attrs = {'class': 'lister-item .+?'})
             items += client.parseDOM(result, 'div', attrs = {'class': 'list_item.+?'})
         except:
             return
 
         try:
-            next = client.parseDOM(result, 'a', ret='href', attrs = {'class': 'lister-page-next.+?'})
+            next = client.parseDOM(result, 'a', ret='href', attrs = {'class': '.+?ister-page-nex.+?'})
 
             if len(next) == 0:
                 next = client.parseDOM(result, 'div', attrs = {'class': 'pagination'})[0]
@@ -680,7 +690,7 @@ class tvshows:
     def imdb_user_list(self, url):
         try:
             result = client.request(url)
-            items = client.parseDOM(result, 'div', attrs = {'class': 'list_name'})
+            items = client.parseDOM(result, 'li', attrs = {'class': 'ipl-zebra-list__item user-list'})
         except:
             pass
 
@@ -691,7 +701,7 @@ class tvshows:
                 name = name.encode('utf-8')
 
                 url = client.parseDOM(item, 'a', ret='href')[0]
-                url = url.split('/list/', 1)[-1].replace('/', '')
+                url = url = url.split('/list/', 1)[-1].strip('/')
                 url = self.imdblist_link % url
                 url = client.replaceHTMLCodes(url)
                 url = url.encode('utf-8')
@@ -709,7 +719,7 @@ class tvshows:
             result = client.request(url)
             result = client.parseDOM(result, 'section', attrs = {'id': 'this-seasons-shows'})
 
-            items = client.parseDOM(result, 'li')
+            items = client.parseDOM(result, 'div', attrs = {'class': 'content auto cell'})
             items = [client.parseDOM(i, 'a', ret='href') for i in items]
             items = [i[0] for i in items if len(i) > 0]
             items = [re.findall('/(\d+)/', i) for i in items]
@@ -746,7 +756,7 @@ class tvshows:
                 tvdb = tvdb.encode('utf-8')
 
                 if tvdb == None or tvdb == '': raise Exception()
- 
+
                 try: poster = item['image']['original']
                 except: poster = '0'
                 if poster == None or poster == '': poster = '0'
@@ -816,7 +826,7 @@ class tvshows:
         self.meta = []
         total = len(self.list)
 
-        self.fanart_tv_headers = {'api-key': 'NDZkZmMyN2M1MmE0YTc3MjY3NWQ4ZTMyYjdiY2E2OGU='.decode('base64')}
+        self.fanart_tv_headers = {'api-key': 'ZDY5NTRkYTk2Yzg4ODFlMzdjY2RkMmQyNTlmYjk1MzQ='.decode('base64')}
         if not self.fanart_tv_user == '':
             self.fanart_tv_headers.update({'client-key': self.fanart_tv_user})
 
@@ -1256,5 +1266,3 @@ class tvshows:
 
         control.content(syshandle, 'addons')
         control.directory(syshandle, cacheToDisc=True)
-
-

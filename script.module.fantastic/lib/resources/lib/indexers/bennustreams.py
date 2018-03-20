@@ -732,7 +732,7 @@ class indexer:
         if total == 0: return
      
         self.fanart_tv_art_link = 'http://webservice.fanart.tv/v3/movies/%s'     
-        self.fanart_tv_headers = {'api-key': 'NDZkZmMyN2M1MmE0YTc3MjY3NWQ4ZTMyYjdiY2E2OGU='.decode('base64')}
+        self.fanart_tv_headers = {'api-key': 'ZDY5NTRkYTk2Yzg4ODFlMzdjY2RkMmQyNTlmYjk1MzQ='.decode('base64')}
 
         for i in range(0, total): self.list[i].update({'metacache': False})
         

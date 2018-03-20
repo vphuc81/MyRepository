@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.exodus" version="4.2.01" name="Exodus" provider-name="Exodus">
+<addon id="plugin.video.exodus" version="5.0.0.1" name="Exodus" provider-name="Exodus">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
-		<import addon="repository.exodus" />
 		<import addon="script.module.exodus" />
 		<import addon="script.exodus.artwork" version="1.0.0" />
 		<import addon="script.exodus.metadata" version="1.0.0" />

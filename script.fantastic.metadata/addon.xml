@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.fantastic.metadata" version="1.0.2" name="fantastic Metadata" provider-name="fantastic">
+<addon id="script.fantastic.metadata" version="1.0.7" name="fantastic Metadata" provider-name="fantastic">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0"/>
 	</requires>

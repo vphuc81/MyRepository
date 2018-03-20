@@ -1,9 +1,6 @@
-# NEEDS FIXING
-
-# -*- coding: utf-8 -*-
-
 '''
-    fantastic Add-on
+    Fantastic Add-on
+    
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,10 +14,11 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 '''
 
 
-import re,urllib,urlparse,hashlib,random,string,json,base64,sys
+import re,urllib,urlparse,hashlib,random,string,json,base64,sys,xbmc
 
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
@@ -53,8 +51,8 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['solarmoviez.to']
-        self.base_link = 'https://solarmoviez.to'
+        self.domains = ['solarmoviez.to', 'solarmoviez.ru']
+        self.base_link = 'https://solarmoviez.ru'
         self.search_link = '/movie/search/%s.html'
         self.info_link = '/ajax/movie_info/%s.html?is_login=false'
         self.server_link = '/ajax/v4_movie_episodes/%s'
@@ -103,15 +101,15 @@ class source:
     def searchShow(self, title, season, aliases, headers):
         try:
             title = cleantitle.normalize(title)
-            search = '%s Season %01d' % (title, int(season))
+            search = '%s Season %s' % (title, season)
             url = urlparse.urljoin(self.base_link, self.search_link % urllib.quote_plus(cleantitle.getsearch(search)))
-            r = client.request(url, headers=headers, timeout='15')
-            r = client.parseDOM(r, 'div', attrs={'class': 'ml-item'})
-            r = zip(client.parseDOM(r, 'a', ret='href'), client.parseDOM(r, 'a', ret='title'))
-            r = [(i[0], i[1], re.findall('(.*?)\s+-\s+Season\s+(\d)', i[1])) for i in r]
-            r = [(i[0], i[1], i[2][0]) for i in r if len(i[2]) > 0]
-            url = [i[0] for i in r if self.matchAlias(i[2][0], aliases) and i[2][1] == season][0]
+
+            r = client.request(url)
+
+            url = re.findall('<a href=\"(.+?\/movie\/%s-season-%s-.+?\.html)\"' % (cleantitle.geturl(title), season), r)[0]
+
             return url
+
         except:
             return
 
@@ -162,14 +160,16 @@ class source:
                 r = client.request(u, headers=headers, XHR=True)
                 r = json.loads(r)['html']
                 r = client.parseDOM(r, 'div', attrs = {'class': 'pas-list'})
+
                 ids = client.parseDOM(r, 'li', ret='data-id')
                 servers = client.parseDOM(r, 'li', ret='data-server')
                 labels = client.parseDOM(r, 'a', ret='title')
                 r = zip(ids, servers, labels)
+
                 for eid in r:
                     try:
                         try:
-                            ep = re.findall('episode.*?(\d+).*?',eid[2].lower())[0]
+                            ep = re.findall('episode.*?(\d+).*?', eid[2].lower())[0]
                         except:
                             ep = 0
                         if (episode == 0) or (int(ep) == episode):
@@ -185,15 +185,39 @@ class source:
                                 params = {'x': x, 'y': y}
                             else:
                                 raise Exception()
+
                             u = urlparse.urljoin(self.base_link, self.source_link % (eid[0], params['x'], params['y']))
                             r = client.request(u, XHR=True)
-                            url = json.loads(r)['playlist'][0]['sources']
-                            url = [i['file'] for i in url if 'file' in i]
-                            url = [directstream.googletag(i) for i in url]
-                            url = [i[0] for i in url if i]
-                            for s in url:
-                                sources.append({'source': 'gvideo', 'quality': s['quality'], 'language': 'en',
-                                                'url': s['url'], 'direct': True, 'debridonly': False})
+                            json_sources = json.loads(r)['playlist'][0]['sources']
+
+                            try:
+                                if 'google' in json_sources['file']:
+                                    quality = 'HD'
+
+                                    if 'bluray' in json_sources['file'].lower():
+                                        quality = '1080p'
+
+                                    sources.append({'source': 'gvideo', 'quality': quality, 'language': 'en',
+                                                    'url': json_sources['file'], 'direct': True, 'debridonly': False})
+
+                            except Exception:
+                                if 'blogspot' in json_sources[0]['file']:
+                                    url = [i['file'] for i in json_sources if 'file' in i]
+                                    url = [directstream.googletag(i) for i in url]
+                                    url = [i[0] for i in url if i]
+
+                                    for s in url:
+                                        sources.append({'source': 'gvideo', 'quality': s['quality'], 'language': 'en',
+                                                        'url': s['url'], 'direct': True, 'debridonly': False})
+
+                                elif 'lemonstream' in json_sources[0]['file']:
+                                    sources.append({
+                                        'source': 'CDN',
+                                        'quality': 'HD',
+                                        'language': 'en',
+                                        'url': json_sources[0]['file'] + '|Referer=' + self.base_link,
+                                        'direct': True,
+                                        'debridonly': False})
                     except:
                         pass
             except:
@@ -204,21 +228,7 @@ class source:
             return sources
 
     def resolve(self, url):
-        try:
-            if self.embed_link in url:
-                result = client.request(url, XHR=True)
-                url = json.loads(result)['embed_url']
-                return url
-
-            try:
-                for i in range(3):
-                    u = directstream.googlepass(url)
-                    if not u == None: break
-                return u
-            except:
-                return
-        except:
-            return
+        return url
 
     def uncensored(a, b):
         x = '' ; i = 0

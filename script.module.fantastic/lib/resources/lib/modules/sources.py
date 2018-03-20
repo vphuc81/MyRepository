@@ -18,7 +18,7 @@
 '''
 
 
-import xbmc,sys,re,json,urllib,urlparse,random,datetime,time
+import sys,re,json,urllib,urlparse,random,datetime,time
 
 from resources.lib.modules import trakt
 from resources.lib.modules import tvmaze
@@ -41,15 +41,14 @@ except: pass
 try: import xbmc
 except: pass
 
-
 class sources:
     def __init__(self):
         self.getConstants()
         self.sources = []
 
     def play(self, title, year, imdb, tvdb, season, episode, tvshowtitle, premiered, meta, select):
+
         try:
-              
             url = None
             
             control.moderator()
@@ -96,8 +95,8 @@ class sources:
 
 
     def addItem(self, title):
-        control.playlist.clear()
 
+        control.playlist.clear()
         items = control.window.getProperty(self.itemProperty)
         items = json.loads(items)
 
@@ -298,7 +297,6 @@ class sources:
             pass
 
     def getSources(self, title, year, imdb, tvdb, season, episode, tvshowtitle, premiered, quality='HD', timeout=30):
-        
         progressDialog = control.progressDialog if control.setting('progress.dialog') == '0' else control.progressDialogBG
         progressDialog.create(control.addonInfo('name'), '')
         progressDialog.update(0)
@@ -306,9 +304,8 @@ class sources:
         self.prepareSources()
 
         sourceDict = self.sourceDict
-        
-        progressDialog.update(0, control.lang(32600).encode('utf-8'))
 
+        progressDialog.update(0, control.lang(32600).encode('utf-8'))
         content = 'movie' if tvshowtitle == None else 'episode'
         if content == 'movie':
             sourceDict = [(i[0], i[1], getattr(i[1], 'movie', None)) for i in sourceDict]
@@ -344,7 +341,8 @@ class sources:
             tvshowtitle = self.getTitle(tvshowtitle)
             localtvshowtitle = self.getLocalTitle(tvshowtitle, imdb, tvdb, content)
             aliases = self.getAliasTitles(imdb, localtvshowtitle, content)
-            season, episode = thexem.get_scene_episode_number(tvdb, season, episode)
+            #Disabled on 11/11/17 due to hang. Should be checked in the future and possible enabled again.
+            #season, episode = thexem.get_scene_episode_number(tvdb, season, episode)
             for i in sourceDict: threads.append(workers.Thread(self.getEpisodeSource, title, year, imdb, tvdb, season, episode, tvshowtitle, localtvshowtitle, aliases, premiered, i[0], i[1]))
 
         s = [i[0] + (i[1],) for i in zip(sourceDict, threads)]
@@ -370,7 +368,11 @@ class sources:
         if quality == '': quality = '0'
         
         line1 = line2 = line3 = ""
-        
+        debrid_only = control.setting('debrid.only')
+
+        pre_emp =  control.setting('preemptive.termination')
+        pre_emp_limit = control.setting('preemptive.limit')
+
         source_4k = d_source_4k = 0
         source_1080 = d_source_1080 = 0
         source_720 = d_source_720 = 0
@@ -385,6 +387,16 @@ class sources:
         pdiag_bg_format = '4K:%s(%s)|1080p:%s(%s)|720p:%s(%s)|SD:%s(%s)|T:%s(%s)'.split('|')
         
         for i in range(0, 4 * timeout):
+            if str(pre_emp) == 'true':
+                if quality in ['1','0']:
+                    if (source_1080 + d_source_1080) > int(pre_emp_limit): break
+                elif quality in ['2']:
+                    if (source_720 + d_source_720) > int(pre_emp_limit): break
+                elif quality in ['3']:
+                    if (source_sd + d_source_sd) > int(pre_emp_limit): break
+                else:
+                    if (source_sd + d_source_sd) > int(pre_emp_limit): break
+
             try:
                 if xbmc.abortRequested == True: return sys.exit()
 
@@ -412,7 +424,7 @@ class sources:
                         source_sd = len([e for e in self.sources if e['quality'] == 'SD' and e['debridonly'] == False])
                     else:
                         source_sd = len([e for e in self.sources if e['quality'] == 'SD' and e['debridonly'] == False])
-                    
+
                     total = source_4k + source_1080 + source_720 + source_sd
 
                     if debrid_status:
@@ -548,7 +560,7 @@ class sources:
                 if progressDialog: progressDialog.update(100, control.lang(30726).encode('utf-8'), control.lang(30731).encode('utf-8'))
 
                 items = self.sourcesFilter()
-                
+
                 if quality == 'RD': items = [i for i in items if i['debrid'] != '']
                 elif quality == 'SD': items = [i for i in items if i['quality'] == 'SD' and i['debrid'] == '']
                 elif quality == 'HD': items = [i for i in items if i['quality'] != 'SD']
@@ -607,7 +619,7 @@ class sources:
 
 
     def getMovieSource(self, title, localtitle, aliases, year, imdb, source, call):
-    
+
         try:
             dbcon = database.connect(self.sourceFile)
             dbcur = dbcon.cursor()
@@ -738,6 +750,7 @@ class sources:
 
 
     def alterSources(self, url, meta):
+
         try:
             if control.setting('hosts.mode') == '2': url += '&select=1'
             else: url += '&select=2'
@@ -767,9 +780,13 @@ class sources:
 
 
     def sourcesFilter(self):
+
         provider = control.setting('hosts.sort.provider')
         if provider == '': provider = 'false'
-        
+
+        debrid_only = control.setting('debrid.only')
+        if debrid_only == '': debrid_only = 'false'
+
         quality = control.setting('hosts.quality')
         if quality == '': quality = '0'
 
@@ -797,13 +814,13 @@ class sources:
         self.sources = filter
 
         filter = []
-        
 
         for d in debrid.debrid_resolvers:
             valid_hoster = set([i['source'] for i in self.sources])
             valid_hoster = [i for i in valid_hoster if d.valid_url('', i)]
             filter += [dict(i.items() + [('debrid', d.name)]) for i in self.sources if i['source'] in valid_hoster]
-        filter += [i for i in self.sources if not i['source'].lower() in self.hostprDict and i['debridonly'] == False]
+        if debrid_only == 'false' or  debrid.status() == False:
+            filter += [i for i in self.sources if not i['source'].lower() in self.hostprDict and i['debridonly'] == False]
 
         self.sources = filter
       

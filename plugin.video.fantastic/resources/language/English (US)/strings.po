@@ -48,7 +48,7 @@ msgid "My TV Shows"
 msgstr ""
 
 msgctxt "#32005"
-msgid "New Movies"
+msgid "420 Movies"
 msgstr ""
 
 msgctxt "#32006"
@@ -100,7 +100,7 @@ msgid "People Watching"
 msgstr ""
 
 msgctxt "#32018"
-msgid "Most Popular"
+msgid "The High Life"
 msgstr ""
 
 msgctxt "#32019"
@@ -108,15 +108,19 @@ msgid "Most Voted"
 msgstr ""
 
 msgctxt "#32020"
-msgid "Box Office"
+msgid "Kids Animation"
 msgstr ""
 
 msgctxt "#32021"
-msgid "Oscar Winners"
+msgid "Best of the best movies"
 msgstr ""
 
 msgctxt "#32022"
 msgid "In Theaters"
+msgstr ""
+
+msgctxt "#32075"
+msgid "Highly Rated""
 msgstr ""
 
 msgctxt "#32023"

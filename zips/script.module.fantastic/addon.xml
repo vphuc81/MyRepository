@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.module.fantastic" name="fantastic Module" version="1.00.024.1" provider-name="fantastic">
+<addon id="script.module.fantastic" name="fantastic Module" version="1.16.1" provider-name="fantastic">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
-		<import addon="script.module.requests" />
+		<import addon="script.module.beautifulsoup4"/>
 	</requires>
 	<extension point="xbmc.python.module" library="lib" />
 	<extension point="xbmc.addon.metadata">

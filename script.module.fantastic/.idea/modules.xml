@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../plugin.video.fantastic/.idea/plugin.video.fantastic.iml" filepath="$PROJECT_DIR$/../plugin.video.fantastic/.idea/plugin.video.fantastic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../script.fantastic.artwork/.idea/script.fantastic.artwork.iml" filepath="$PROJECT_DIR$/../script.fantastic.artwork/.idea/script.fantastic.artwork.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../script.fantastic.metadata/.idea/script.fantastic.metadata.iml" filepath="$PROJECT_DIR$/../script.fantastic.metadata/.idea/script.fantastic.metadata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/script.module.fantastic.iml" filepath="$PROJECT_DIR$/.idea/script.module.fantastic.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 '''
-    fanastic Add-on
+    bennu Add-on
     Code ported from Shani's LiveStreamsPro Add-on
 
     This program is free software: you can redistribute it and/or modify

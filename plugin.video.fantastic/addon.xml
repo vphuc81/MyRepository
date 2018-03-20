@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.fantastic" version="1.1.30.1" name="Fantastic" provider-name="Firestickplusman">
+<addon id="plugin.video.fantastic" version="2.4.1" name="Fantastic" provider-name="Firestickplusman">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="script.module.fantastic" />
 		<import addon="script.fantastic.artwork" version="1.0.0" />
-		<import addon="script.fantastic.metadata" version="1.0.0" />
+		<import addon="script.fantastic.metadata" version="0.0.0" />
 		<import addon="script.module.urlresolver" version="3.0.0" />
 		<import addon="script.module.metahandler" version="1.0.0" />
+		<import addon="script.module.requests" />
 	</requires>
 	<extension point="xbmc.python.pluginsource" library="fantastic.py">
 		<provides>video</provides>
@@ -14,7 +15,7 @@
 	<extension point="xbmc.service" library="service.py" start="startup" />
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en">fantastic</summary>
-		<description lang="en">[COLOR dodgerblue]A New Fantastic Movies and TV. This addon does not form part of the Kodi Media Centre. Please do not seek assistance with this addon from any of the Official Kodi Support Channels. The author does not host any of the content in this addon and takes no responsibility for content found[/COLOR].</description>
+		<description lang="en">[COLOR blue]A New Fantastic Movies and TV. This addon does not form part of the Kodi Media Centre. Please do not seek assistance with this addon from any of the Official Kodi Support Channels. The author does not host any of the content in this addon and takes no responsibility for content found[/COLOR].</description>
 		<platform>all</platform>
 		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
 		<forum></forum>

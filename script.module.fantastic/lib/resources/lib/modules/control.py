@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-    fantastic Add-on
+    //fantastic Add-on//
+    Updated for fantastic Add-on
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -132,6 +133,10 @@ key = "RgUkXp2s5v8x/A?D(G+KbPeShVmYq3t6"
 
 iv = "p2s5v8y/B?E(H+Mb"
 
+def autoTraktSubscription(tvshowtitle, year, imdb, tvdb):
+    from . import libtools
+    libtools.libtvshows().add(tvshowtitle, year, imdb, tvdb)
+
 def addonIcon():
     theme = appearance() ; art = artPath()
     if not (art == None and theme in ['-', '']): return os.path.join(art, 'icon.png')
@@ -223,9 +228,9 @@ def selectDialog(list, heading=addonInfo('name')):
 
 
 def moderator():
-    netloc = [urlparse.urlparse(sys.argv[0]).netloc, '', 'plugin.video.live.streamspro', 'plugin.video.phstreams', 'plugin.video.cpstreams', 'plugin.video.tinklepad', 'script.tvguide.fullscreen', 'script.tvguide.assassins']
+    netloc = [urlparse.urlparse(sys.argv[0]).netloc, '','plugin.video.metalliq', 'plugin.video.live.streamspro', 'plugin.video.phstreams', 'plugin.video.cpstreams', 'plugin.video.tinklepad', 'script.tvguide.fullscreen', 'script.tvguide.assassins']
 
-    if not infoLabel('Container.PluginName') in netloc: pass #sys.exit() disable block
+    if not infoLabel('Container.PluginName') in netloc: pass #Unlocked
 
 
 def metaFile():
@@ -319,3 +324,4 @@ def idle():
 
 def queueItem():
     return execute('Action(Queue)')
+

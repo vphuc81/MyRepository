@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 
 '''
-    fantastic Add-on
-    Copyright (C) 2016 fantastic
+    Fantastic Add-on
+
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,10 +30,10 @@ class source:
     def __init__(self):
         self.priority = 0
         self.language = ['en']
-        self.domains = ['xwatchseries.to','onwatchseries.to']
-        self.base_link = 'http://xwatchseries.to'
-        self.search_link = 'http://xwatchseries.to/show/search-shows-json'
-        self.search_link_2 = 'http://xwatchseries.to/search/%s'
+        self.domains = ['xwatchseries.to','onwatchseries.to','itswatchseries.to']
+        self.base_link = 'http://dwatchseries.to'
+        self.search_link = 'http://dwatchseries.to/show/search-shows-json'
+        self.search_link_2 = 'http://dwatchseries.to/search/%s'
 
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):

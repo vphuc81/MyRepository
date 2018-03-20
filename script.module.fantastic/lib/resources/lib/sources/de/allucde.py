@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 '''
-    Fantastic Add-on
+    Covenant Add-on
     Bubbles Add-on
     Copyright (C) 2016 Bubbles
 

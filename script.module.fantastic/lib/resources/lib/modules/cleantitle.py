@@ -80,3 +80,9 @@ def normalize(title):
         return str(''.join(c for c in unicodedata.normalize('NFKD', unicode(title.decode('utf-8'))) if unicodedata.category(c) != 'Mn'))
     except:
         return title
+
+
+def clean_search_query(url):
+    url = url.replace('-','+')
+    url = url.replace(' ', '+')
+    return url

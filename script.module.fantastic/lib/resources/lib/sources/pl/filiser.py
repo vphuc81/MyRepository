@@ -157,9 +157,9 @@ class source:
             url_to_exec = urlparse.urljoin(self.base_link, self.url_transl) % url
             result = client.request(url_to_exec)
 
-            search_string = 'var b="';
+            search_string = "var url = '";
             begin = result.index(search_string) + len(search_string)
-            end = result.index('"', begin)
+            end = result.index("'", begin)
 
             result_url = result[begin:end]                                    
             result_url = result_url.replace('#WIDTH', '100')
