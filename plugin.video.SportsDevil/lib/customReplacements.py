@@ -102,6 +102,7 @@ class CustomReplacements(object):
                     common.log('Skipped Catcher: ' + catcherName)
                     continue
                 dataImp = fu.getFileContent(pathImp)
+                
                 for i in range(len(ps)):
                     dataImp = dataImp.replace('@PARAM' + str(i+1) + '@',ps.pop(i).strip())
 

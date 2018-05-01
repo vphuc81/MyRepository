@@ -11,7 +11,7 @@ item_info_build=http:%s
 
 item_info_name=pars
 item_info_from=sUrl
-item_info_convert=getInfo('%s','.+var\sjdtk="([^"]+).+="([^"]+)";','@REFERER@','token|hostid')
+item_info_convert=getInfo('%s','.+var\sjdtk="([^"]+).+var\s+host_tmg="([^"]+)";','@REFERER@','token|hostid')
 #item_info_convert=debug
 item_info_build=%s
 

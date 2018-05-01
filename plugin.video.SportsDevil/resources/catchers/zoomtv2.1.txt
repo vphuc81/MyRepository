@@ -54,11 +54,18 @@ item_info_build=%s
 item_info_name=tmp_
 item_info_from=pageUrl
 #item_info_convert=getInfo('%s','.*iscache\s*=\s*"(\w+)".*?function\s+(\w+)\((\w+).*function\s+\w+\(\3.*\w+\s*=\s*"(http.*m3u8).*\2','@REFERER@','iscache|junk|junk2|file')
-item_info_convert=getInfo('%s','.*?[^']iscache\s*=\s*"([a-f0-9]+)".*(http.*m3u8)','@REFERER@','iscache|file')
+item_info_convert=getInfo('%s','.*?[^']iscache\s*=\s*"([a-f0-9]+)".*(http.*m3u8.*?)"','@REFERER@','iscache|file')
 item_info_build=%s
 
 item_info_name=ref
 item_info_from=pageUrl2+'&vw='+iscache+'&s=
+item_info_convert=quote(%s)
+#item_info_convert=quote(%s)
+item_info_build=%s
+
+item_info_name=ref2
+item_info_from=pageUrl2+'&vw='+iscache+'&s=
+item_info_convert=quote(%s)
 item_info_convert=quote(%s)
 item_info_build=%s
 
@@ -69,10 +76,31 @@ item_info_convert=encodeBase64
 item_info_build=%s
 
 item_info_name=ls_url
-#item_info_from=http://127.0.0.1:19000/livestreamer/'+url4+'
-item_info_from=http://127.1.2.3:45678/livestreamer/'+url4+'
+item_info_from=http://127.1.2.3:45678/streamlink/?url='+url4+'&q=best'
+#item_info_from=http://127.1.2.3:45678/livestreamer/'+url4
+item_info_build=%s
+
+item_info_name=dash_url_
+item_info_from=pageUrl
+item_info_convert=getInfo('%s','.*(http.*master.m3u8.*?)\"','@REFERER@')
+item_info_convert=debug
+item_info_build=%s
+
+item_info_name=dash_url
+item_info_from=dash_url_+'|Referer='+ref2+'&User-Agent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML,%20like%20Gecko)%20Chrome%2F61.0.3163.100%20Safari%2F537.36&Cookie='+cookies
+item_info_convert=ifEmpty('@dash_url_@','','%s')
+item_info_convert=debug
+item_info_build=%s
+
+item_info_name=adaptive
+item_info_build=adaptive_hls
+
+item_info_name=videoType
+item_info_from=adaptive
+item_info_convert=ifEmpty('@dash_url_@','default','%s')
+item_info_convert=debug
 item_info_build=%s
 
 item_info_name=url
-item_info_from=p_file || ls_url
+item_info_from=dash_url || p_file || ls_url
 item_info_build=%s

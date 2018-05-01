@@ -51,6 +51,6 @@ item_info_build=%s
 
 item_info_name=url
 #item_info_from=file+'|Referer='+ref+'&User-Agent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML,%20like%20Gecko)%20Chrome%2F61.0.3163.100%20Safari%2F537.36
-item_info_from=http://127.1.2.3:45678/livestreamer/'+url2+'|seekable=0
+item_info_from=http://127.1.2.3:45678/streamlink/?url='+url2+'|seekable=0
 #item_info_from=plugin://plugin.video.f4mTester/?streamtype=HLSRETRY&amp;name='+title+'&amp;url='+url_
 item_info_build=%s

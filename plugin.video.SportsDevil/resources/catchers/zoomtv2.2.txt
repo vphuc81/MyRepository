@@ -25,6 +25,26 @@ item_info_name=postUrl
 item_info_from=zmhost + '|' + postData
 item_info_build=%s
 
+item_info_name=cookie1
+item_info_from=postUrl
+item_info_convert=getCookies(a)
+#item_info_convert=debug
+item_info_build=%s
+
+item_info_name=cookie2
+item_info_from=postUrl
+item_info_convert=getCookies(rmmad)
+#item_info_convert=debug
+item_info_build=%s
+
+item_info_name=cookies
+item_info_from=rmmad='+cookie2+'
+#item_info_from=2bfd_unique_user=1; a=' + cookie1 + '; token=1515646365,dd38af7c5189e2ee6088cbe3746ecd68; rmmad='+cookie2+'
+item_info_convert=debug
+item_info_convert=quote(%s)
+#item_info_convert=quote(%s)
+item_info_build=%s
+
 item_info_name=data0
 item_info_from=postUrl
 item_info_convert=getInfo('%s','.*(Clappr\.Player.*?<style>)','@REFERER@')
@@ -40,7 +60,7 @@ item_info_from=data0
 item_info_convert=parseText('%s','.*replace\('(\w+)',\s*window.atob\(\"(.*?)\"','r_|ts_')
 item_info_build=%s
 
-item_info_name=ts
+item_info_name=tsf
 item_info_from=ts_
 item_info_convert=decodeBase64
 #item_info_convert=debug
@@ -52,6 +72,29 @@ item_info_convert=ifEmpty('@hls_@','','%s')
 item_info_convert=replaceRegex('%s','/(\w+)/\d+','@ts@')
 #item_info_convert=debug
 item_info_build=%s
+
+item_info_name=hls2_
+item_info_from=postUrl
+item_info_convert=getInfo('%s','.*jwplayer.*"(http.*m3u8.*?)\".*','@REFERER@')
+item_info_build=%s
+
+#item_info_name=hls2
+#item_info_from=hls2_+'+'|Referer='+zmhost+'&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36&Cookie='+cookies
+#item_info_convert=ifEmpty('@hls2_@','','%s')
+#item_info_convert=debug
+#item_info_build=%s
+
+item_info_name=ref
+item_info_from=zmhost
+item_info_convert=quote(%s)
+item_info_build=%s
+
+item_info_name=hls2
+item_info_from=httpstream://'+hls2_+'|Referer='+ref+'&User-Agent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML,%20like%20Gecko)%20Chrome%2F61.0.3163.100%20Safari%2F537.36&Cookie='+cookies
+item_info_convert=debug
+item_info_convert=encodeBase64
+item_info_convert=ifEmpty('@hls2_@','','%s')
+item_info_build=http://127.1.2.3:45678/streamlink/?url=%s
 
 item_info_name=file1
 item_info_from=postUrl
@@ -137,10 +180,10 @@ item_info_build=%s
 #this._connection.connect(this._application,config.qoeFrl2,config.TRiexl4,config.hlUDia0,config.g2ajieQ);
 
 item_info_name=rtmp
-item_info_from=rtmp_ + ' playpath=' + file + ' swfVfy=1 swfUrl=http://sts.livecamtv.me/player/7.12/jwplayer.flash.swf flashVer=WIN\27,0,0,117 conn=S:' + file + ' conn=S:'+num+' conn=S:'+tok+' conn=S:V&gt;JWhui^@2ESdu0?}&gt;AN live=1 token=Q!lrB@G1)ww(-dQ4J4 pageUrl=' + zmhost
+item_info_from=rtmp_ + ' playpath=' + file + ' swfVfy=1 swfUrl=http://sts.livecamtv.me/player/7.12/jwplayer.flash.swf flashVer=WIN\2028,0,0,126 conn=S:' + file + ' conn=S:'+num+' conn=S:'+tok+' conn=S:V&gt;JWhui^@2ESdu0?}&gt;AN live=1 token=Q!lrB@G1)ww(-dQ4J4 pageUrl=' + zmhost
 item_info_build=%s
 
 
 item_info_name=url
-item_info_from=hls||rtmp
+item_info_from=hls||hls2||rtmp
 item_info_build=%s

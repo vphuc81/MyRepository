@@ -16,7 +16,7 @@ item_info_build=%s
 item_info_name=p0
 item_info_from=p0z
 item_info_convert=getInfo('%s','.*src="(http://\w+.sawlive.tv/embed\w+/[^"]+)"','@REFERER@')
-#item_info_convert=debug
+item_info_convert=debug
 item_info_build=%s
 
 item_info_name=ref
@@ -30,7 +30,7 @@ item_info_convert=getInfo('%s','.*(http[^"']+\.m3u8[^"']*).*','@REFERER@')
 item_info_convert=ifEmpty('%s','','hls://%s|Referer=___&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36')
 item_info_convert=replace('%s','___','@ref@')
 item_info_convert=encodeBase64
-item_info_convert=ifEmpty('%s','','http://127.1.2.3:45678/livestreamer/%s')
+item_info_convert=ifEmpty('%s','','http://127.1.2.3:45678/streamlink/?url=%s')
 #item_info_convert=ifEmpty('%s','','http://127.0.0.1:19000/livestreamer/%s')
 item_info_build=%s
 

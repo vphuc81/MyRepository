@@ -6,7 +6,7 @@
 #Freedocast fix
 #http://forum.xbmc.org/showthread.php?tid=100597&pid=1094333#pid1094333
 
-import os
+import os,sys
 import xbmcplugin
 import xbmc, xbmcgui
 import urllib
@@ -69,6 +69,8 @@ class Main:
         self.addon = None
         
         common.log('SportsDevil initialized')
+        common.log('Running on Python %s'%(str(sys.version)))
+
         
     def playVideo(self, videoItem, isAutoplay = False):
         if not videoItem:
@@ -243,10 +245,15 @@ class Main:
             
         return tmpList
 
-    def createXBMCListItem(self, item):
+    def createXBMCListItem(self, item):        
         title = item['title']
         m_type = item['type']
-        icon = item['icon']
+        icon = item['icon']    
+        v_type = 'default'  
+        try:
+            v_type = item['videoType'] if item['videoType'] is not None else 'default'
+        except:
+            v_type = 'default'
 
         if icon and not icon.startswith('http'):
             try:
@@ -344,6 +351,37 @@ class Main:
                 liz.setMimeType('video/x-mpegts')
                 liz.setContentLookup(False)
             except:
+                pass
+        
+        if v_type is not None and v_type != 'default':
+            try:
+                if float(common.xbmcVersion) >= 17.0:
+                    common.log('Trying to use inputstream.adaptive to demux stream... ', xbmc.LOGINFO)
+                    liz.setProperty('inputstreamaddon', 'inputstream.adaptive')
+                    liz.setContentLookup(False)
+
+                    if v_type == 'adaptive_hls':
+                        if float(common.xbmcVersion) >= 17.5:
+                            liz.setMimeType('application/vnd.apple.mpegurl')
+                            liz.setProperty('inputstream.adaptive.manifest_type', 'hls')
+                        else:
+                            liz.setProperty('inputstreamaddon', None)
+                            liz.setContentLookup(True)
+                        
+                    elif v_type == 'adaptive_mpd':                    
+                        liz.setMimeType('application/dash+xml')
+                        liz.setProperty('inputstream.adaptive.manifest_type', 'mpd')                                        
+                        
+                    elif v_type == 'adaptive_drm':
+                        pass
+                    
+                else:
+                    pass
+            except:
+                common.log('Error using inputstream.adaptive. Make sure plugin is installed and Kodi is version 17+. Falling back to ffmpeg ...')
+                #common.showError('Error using inputstream.adaptive. Make sure plugin is installed and Kodi is version 17+.')
+                liz.setProperty('inputstreamaddon', None)
+                liz.setContentLookup(True)
                 pass
 
         return liz

@@ -23,7 +23,7 @@ item_info_convert=encodeBase64
 item_info_build=%s
 
 #item_info_name=url
-#item_info_from=http://127.0.0.1:19000/livestreamer/'+url4+'
+#item_info_from=http://127.0.0.1:19000/streamlink/?url='+url4+'
 #item_info_build=%s
 
 #hls:93.189.57.254,91.192.80.210,93.189.62.10

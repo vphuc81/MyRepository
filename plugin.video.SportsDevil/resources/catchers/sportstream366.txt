@@ -38,8 +38,8 @@ item_info_convert=ifEmpty('@hlshost@','','%s')
 item_info_build=%s
 
 item_info_name=rtmpurl
-item_info_from=rtmp+'?vi=' + file + '& playpath=raw:' + file + ' flashVer=WIN\27,0,0,180 conn=S:client conn=S:3.1.3.29 conn=S:en conn=O:1 conn=NB:disAllowScriptAccess:0 conn=O:0 swfhash=511030919c49942573ad1ad1d1e1394a1cfdd12d39c4e7c2581bd2c2881f4072 swfsize=513352 live=true pageUrl=' + purl
-#item_info_from=rtmp+' app=xlive flashVer=WIN\23,0,0,166 conn=S:client conn=S:3.1.3.8 conn=S:en swfhash=d42335ee990a4841d741c40525fd316e9ff96188fa062f68403104463405b4f3 swfsize=575927 live=true playpath=raw:'+file+'
+item_info_from=rtmp+'?vi=' + file + '& playpath=raw:' + file + ' flashVer=WIN\27,0,0,180 conn=S:client conn=S:3.1.3.31 conn=S:en conn=O:1 conn=NB:disAllowScriptAccess:0 conn=O:0 swfhash=a94f08c0d38900be600939b97f82ce7eda17707d967bccf676f543c06501445f swfsize=517503 live=true pageUrl=' + purl
+#item_info_from=rtmp+' app=xlive flashVer=WIN\23,0,0,166 conn=S:client conn=S:3.1.3.8 conn=S:en swfhash=d42335ee990a4841d741c40525fd316e9ff96188fa062f68403104463405b4f3 swfsize=517503 live=true playpath=raw:'+file+'
 item_info_build=%s
 
 item_info_name=url

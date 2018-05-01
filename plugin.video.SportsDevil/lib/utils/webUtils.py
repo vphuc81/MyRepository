@@ -128,7 +128,7 @@ class BaseRequest(object):
         if 'vipleague' in url or 'strikeout' in url or 'homerun' or 'nbastreams' in url:
             self.s.verify = False
 
-        if 'firstonetv' in url:
+        if 'firstonetv' in url or 'bypassed' in url or 'livecamtv' in url:
             self.s.verify = False
 
         

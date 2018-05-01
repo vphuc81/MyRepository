@@ -88,9 +88,11 @@ def zadd(data):
 
 def zadd2(data):
     #lib.common.log("JairoXZADD:" + data)
-    if re.search(".*\w+\s*=\s*eval\(\"\(\"\s*\+\s*\w+",data):
+    if re.search(r".*\w+\s*=\s*eval\(\"\(\"\s*\+\s*\w+",data):
         #jsvar = re.findall(".*\w+\s*=\s*eval\(\"\(\"\+(\w+)\+", data)[0]
-        matches = re.findall('\w+\s*=\s*\w+\s*\+\s*(\w+)',data)
+        matches = re.findall(r'\w+\s*=\s*\w+\s*\+\s*(\w+)',data)
+        if len(matches)==0:
+            matches = re.findall(r'\w+\s*=\s*\w+\s*\+\s*\'\'\s*\+\s*(\w+);',data)
         jsall = ''
         try:
             firstword = matches[0]
@@ -113,6 +115,7 @@ def zadd2(data):
             pass
 
     return data
+
 
 def zdecode(data):
     import csv

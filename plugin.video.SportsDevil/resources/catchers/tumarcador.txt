@@ -70,6 +70,6 @@ item_info_convert=encodeBase64
 item_info_build=%s
 
 item_info_name=url
-item_info_from=http://127.1.2.3:45678/livestreamer/'+url_tmp+'|seekable=0
+item_info_from=http://127.1.2.3:45678/streamlink/?url='+url_tmp+'|seekable=0
 item_info_build=%s
 

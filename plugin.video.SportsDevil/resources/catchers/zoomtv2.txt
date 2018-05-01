@@ -54,7 +54,7 @@ item_info_build=%s
 
 item_info_name=ls_url
 #item_info_from=http://127.0.0.1:19000/livestreamer/'+url4+'
-item_info_from=http://127.1.2.3:45678/livestreamer/'+url4+'
+item_info_from=http://127.1.2.3:45678/streamlink/?url='+url4+'
 item_info_build=%s
 
 item_info_name=url
