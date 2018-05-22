@@ -690,7 +690,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon id="plugin.video.livetvinternational"
        name=" **[COLOR yellow]Live TV-International[/COLOR]"
-       version="2.2.31"
+       version="2.2.32"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
