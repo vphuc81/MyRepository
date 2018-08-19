@@ -1413,7 +1413,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 
 <addon
   id="plugin.video.xomgiaitri"
-  version="2.0.50"
+  version="2.0.51"
   name="*[COLOR yellow]XomGiaiTri.com[/COLOR]"
   provider-name="thongld">
   <requires>
