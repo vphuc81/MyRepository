@@ -428,7 +428,6 @@ class seasons:
 
         addToLibrary = control.lang(32551).encode('utf-8')
 
-
         for i in items:
             try:
                 label = '%s %s' % (labelMenu, i['season'])

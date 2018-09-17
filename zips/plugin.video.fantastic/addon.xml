@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.fantastic" version="2.4.1" name="Fantastic" provider-name="Firestickplusman">
+<addon id="plugin.video.fantastic" version="3.2.2" name="Fantastic" provider-name="Firestickplusman">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="script.module.fantastic" />
@@ -7,7 +7,6 @@
 		<import addon="script.fantastic.metadata" version="0.0.0" />
 		<import addon="script.module.urlresolver" version="3.0.0" />
 		<import addon="script.module.metahandler" version="1.0.0" />
-		<import addon="script.module.requests" />
 	</requires>
 	<extension point="xbmc.python.pluginsource" library="fantastic.py">
 		<provides>video</provides>
@@ -15,15 +14,13 @@
 	<extension point="xbmc.service" library="service.py" start="startup" />
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en">fantastic</summary>
-		<description lang="en">[COLOR blue]A New Fantastic Movies and TV. This addon does not form part of the Kodi Media Centre. Please do not seek assistance with this addon from any of the Official Kodi Support Channels. The author does not host any of the content in this addon and takes no responsibility for content found[/COLOR].</description>
+<description lang="en">[I]New Resistance[/I][CR][CR][B]Fantastic - Media for the Masses[/B][CR][CR]This addon is not have any part of the Kodi Media Centre. Please do not seek assistance with this addon from any of the Official Kodi Support Channels.[CR][CR]The author does not host any of the content in this addon and takes no responsibility for content found.</description>
 		<platform>all</platform>
 		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
 		<forum></forum>
 		<website></website>
 		<source></source>
 		<disclaimer lang="en">The author of this addon do not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
-		<disclaimer lang="hr">Autor ovog dodatka ne posjeduje bilo kakav sadržaj koji je pronađen i nije povezan sa bilo kojim izvorom sadržaja. Ovaj dodatak samo pretražuje sadržaj na web stranicama. Koristite ga na vlastitu odgovornost!</disclaimer>
-		<disclaimer lang="he">מחבר ההרחבה זה אינו מארח את התוכן שיתכן ויימצא ואין לו זיקה לאף אחד מספקי התוכן. הרחבה רק מחפשת תוכן שקיים באתרי אינטרנט. השימוש בהרחבה הוא על אחריותך בלבד!</disclaimer>
 		<assets>
 			<icon>icon.png</icon>
 			<fanart>fanart.jpg</fanart>
@@ -31,6 +28,91 @@
     			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
     			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news></news>
+		<news>
+[COLOR red]Fixed double scrapers[/COLOR]
+List of providers 
+https://www.ultrahdindir.net
+https://tvbox.ag
+https://xmovies8.nz
+https://yesmovies.to
+https://www1.seriesonline8.co
+https://123movies.ph
+http://www2.vioozfree.net
+http://freeputlockers.org
+http://hdpopcorns.co
+http://www3.fmovies.sc
+http://www2.fmovies.ag
+http://123moviesb.com
+http://putlocker.bypassed.in
+http://enjoyelegance.com
+http://seriesonline.bz
+http://enigma-life.fr
+http://startingtogether.co.uk
+http://movies1234.net
+http://meimei-movie.com
+http://moviesonline.mx
+http://huluplus.in
+http://321movies.club
+http://putlockers.sh
+http://aln5eel.com
+http://moonsshine.com.br
+http://vetdonations.org
+http://rajahoki88.com
+http://imagebrickworks.com
+http://powerofgoddeliverancecenter.com
+http://seasidebrighton.com
+http://kabarmalay.info
+http://giochigratis.fr
+http://123netflix.unblockall.org
+http://spicewoodpoint.com
+http://asuransitakaful.net
+http://alchemyherbalhealing.com
+http://moviesonline.tl
+http://123free.net
+http://subscene.tv
+http://search.rlsbb.ru
+http://2ddl.io
+http://putlockers.tw
+http://moviestream1.site
+http://www2.putlockers.tf
+http://hd.today
+http://moviesonline.mn
+http://movies123.xyz
+http://123movie.ac
+http://123movie.fm
+http://putlockers.la
+http://putlocker.io
+http://moviesonline.gy
+http://123movie.sc
+http://e123movies.com
+http://i123movies.net
+http://123moviesonline.stream
+http://flenix.org
+http://coolmoviezone.info
+http://m4ufree.net
+http://123movieser.com
+http://chadan1.com
+http://freemoviedownloads6.com
+http://www.divxcrawler.tv 
+http://fmovie.fm
+http://movies123.ac
+http://123movies.net
+http://movies123.fm
+http://huluvip.net
+http://123moviesfreenow.com
+http://123movie.plus
+http://l23movies.com
+http://123movies.mn
+http://plocker.unblocked.wtf
+http://gomovies.gs
+http://z123movies.com
+http://www1.putlockers.mn
+http://gomoviesto.org
+http://solarmovie.net
+http://37rmm.com
+http://www2.0123movies.org
+http://www2.gostream.sc
+		</news>
 	</extension>
 </addon>
+

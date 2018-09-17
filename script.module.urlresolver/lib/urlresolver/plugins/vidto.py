@@ -14,9 +14,9 @@
     Special thanks for help with this resolver go out to t0mm0, jas0npc,
     mash2k3, Mikey1234,voinage and of course Eldorado. Cheers guys :)
 """
-from __generic_resolver__ import GenericResolver
+from __generic_resolver__ import GenericResolver 
 
 class VidtoResolver(GenericResolver):
     name = "vidto"
-    domains = ["vidto.me"]
-    pattern = '(?://|\.)(vidto\.me)/(?:embed-)?([0-9a-zA-Z]+)'
+    domains = ["vidto.me", "vidto.se"]
+    pattern = '(?://|\.)(vidto\.[sm]e)/(?:embed-)?([0-9a-zA-Z]+)'

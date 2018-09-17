@@ -3,6 +3,7 @@ import logging
 import random
 import re
 from requests.sessions import Session
+from resources.lib.modules import jsunfuck
 from copy import deepcopy
 
 try:
@@ -34,7 +35,7 @@ class CloudflareScraper(Session):
 
         # Check if Cloudflare anti-bot is on
         if ( resp.status_code == 503
-             and resp.headers.get("Server").startswith("cloudflare")
+             and resp.headers.get("Server") == "cloudflare-nginx"
              and b"jschl_vc" in resp.content
              and b"jschl_answer" in resp.content
         ):
@@ -61,17 +62,7 @@ class CloudflareScraper(Session):
             params["pass"] = re.search(r'name="pass" value="(.+?)"', body).group(1)
 
             # Extract the arithmetic operation
-            init = re.findall('setTimeout\(function\(\){\s*.*?.*:(.*?)};', body)[-1]
-            builder = re.findall(r"challenge-form\'\);\s*(.*)a.v", body)[0]
-            decryptVal = self.parseJSString(init)
-            lines = builder.split(';')
-            for line in lines:
-                if len(line) > 0 and '=' in line:
-                    sections=line.split('=')
-                    line_val = self.parseJSString(sections[1])
-                    decryptVal = int(eval(str(decryptVal)+sections[0][-1]+str(line_val)))
-
-            answer = decryptVal + len(domain)
+            js = self.extract_js(body)
 
         except Exception:
             # Something is wrong with the page.
@@ -85,7 +76,7 @@ class CloudflareScraper(Session):
                           "before submitting a bug report.")
             raise
 
-        try: params["jschl_answer"] = str(answer) #str(int(jsunfuck.cfunfuck(js)) + len(domain))
+        try: params["jschl_answer"] = str(int(jsunfuck.cfunfuck(js)) + len(domain))
         except: pass
         # Requests transforms any request into a GET after a redirect,
         # so the redirect has to be handled manually here to allow for
@@ -95,14 +86,17 @@ class CloudflareScraper(Session):
         redirect = self.request(method, submit_url, **cloudflare_kwargs)
         return self.request(method, redirect.headers["Location"], **original_kwargs)
 
-    def parseJSString(self, s):
-        try:
-            offset=1 if s[0]=='+' else 0
-            val = int(eval(s.replace('!+[]','1').replace('!![]','1').replace('[]','0').replace('(','str(')[offset:]))
-            return val
-        except:
-            pass
+    def extract_js(self, body):
+        js = re.search(r"setTimeout\(function\(\){\s+(var "
+                        "s,t,o,p,b,r,e,a,k,i,n,g,f.+?\r?\n[\s\S]+?a\.value =.+?)\r?\n", body).group(1)
+        js = re.sub(r"a\.value = (parseInt\(.+?\)).+", r"\1", js)
+        js = re.sub(r"\s{3,}[a-z](?: = |\.).+", "", js)
 
+        # Strip characters that could be used to exit the string context
+        # These characters are not currently used in Cloudflare's arithmetic snippet
+        js = re.sub(r"[\n\\']", "", js)
+
+        return js
 
     @classmethod
     def create_scraper(cls, sess=None, **kwargs):

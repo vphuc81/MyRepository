@@ -21,8 +21,8 @@ from urlresolver.resolver import UrlResolver, ResolverError
 
 class StreamangoResolver(UrlResolver):
     name = "streamango"
-    domains = ['streamango.com', "streamcherry.com"]
-    pattern = '(?://|\.)(stream(?:ango|cherry)\.com)/(?:v/d|f|embed)/([0-9a-zA-Z]+)'
+    domains = ['streamango.com', 'streamcherry.com', 'fruitstreams.com', 'fruitadblock.net']
+    pattern = '(?://|\.)((?:stream(?:ango|cherry)|fruitstreams|fruitadblock)\.(?:com|net))/(?:v/d|f|embed)/([0-9a-zA-Z]+)'
     
     def __init__(self):
         self.net = common.Net()
@@ -33,7 +33,7 @@ class StreamangoResolver(UrlResolver):
         html = self.net.http_GET(web_url, headers=headers).content
         
         if html:
-            encoded = re.search('''srces\.push\({type:"video/mp4",src:\w+\('([^']+)',(\d+)''', html)
+            encoded = re.search('''srces\.push\(\s*{type:"video/mp4",src:\w+\('([^']+)',(\d+)''', html)
             if encoded:
                 source = self.decode(encoded.group(1), int(encoded.group(2)))
                 if source:
@@ -80,4 +80,4 @@ class StreamangoResolver(UrlResolver):
         return _0x59b81a
 
     def get_url(self, host, media_id):
-        return self._default_get_url(host, media_id, 'http://{host}/embed/{media_id}')
+        return self._default_get_url(host, media_id, 'https://streamango.com/embed/{media_id}')

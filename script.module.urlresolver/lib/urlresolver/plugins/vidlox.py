@@ -23,25 +23,28 @@ from lib import helpers
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
 
+
 class VidloxResolver(UrlResolver):
     name = "vidlox"
-    domains = ['vidlox.tv']
-    pattern = '(?://|\.)(vidlox\.tv)/(?:embed-)?([0-9a-zA-Z]+)'
+    domains = ['vidlox.tv', 'vidlox.me']
+    pattern = '(?://|\.)(vidlox\.(?:tv|me))/(?:embed-)?([0-9a-zA-Z]+)'
 
     def __init__(self):
         self.net = common.Net()
 
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)
-        headers = {'User-Agent': common.IE_USER_AGENT, 'Referer': web_url}
+        headers = {'User-Agent': common.FF_USER_AGENT, 'Referer': web_url}
         html = self.net.http_GET(web_url, headers=headers).content
-        try: sources = re.search(r'sources\s*:\s*\[(.+?)\]', html).groups()[0]
-        except: raise ResolverError('Unable to locate link')
 
-        if sources:
-            sources = helpers.scrape_sources(sources, patterns=['''["'](?P<url>http[^"']+)'''])
-            if sources: return helpers.pick_source(sources) + helpers.append_headers(headers)
-            
+        if html:
+            _srcs = re.search(r'sources\s*:\s*\[(.+?)\]', html)
+            if _srcs:
+                srcs = helpers.scrape_sources(_srcs.group(1), patterns=['''["'](?P<url>http[^"']+)'''],
+                                              result_blacklist=['.m3u8'])
+                if srcs:
+                    return helpers.pick_source(srcs) + helpers.append_headers(headers)
+
         raise ResolverError('Unable to locate link')
 
     def get_url(self, host, media_id):

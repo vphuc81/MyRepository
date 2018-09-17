@@ -370,7 +370,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
     </extension>
 </addon>
 
-<addon id="plugin.video.fantastic" version="2.4.1" name="Fantastic" provider-name="Firestickplusman">
+<addon id="plugin.video.fantastic" version="3.2.2" name="Fantastic" provider-name="Firestickplusman">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="script.module.fantastic" />
@@ -378,7 +378,6 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 		<import addon="script.fantastic.metadata" version="0.0.0" />
 		<import addon="script.module.urlresolver" version="3.0.0" />
 		<import addon="script.module.metahandler" version="1.0.0" />
-		<import addon="script.module.requests" />
 	</requires>
 	<extension point="xbmc.python.pluginsource" library="fantastic.py">
 		<provides>video</provides>
@@ -386,15 +385,13 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 	<extension point="xbmc.service" library="service.py" start="startup" />
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en">fantastic</summary>
-		<description lang="en">[COLOR blue]A New Fantastic Movies and TV. This addon does not form part of the Kodi Media Centre. Please do not seek assistance with this addon from any of the Official Kodi Support Channels. The author does not host any of the content in this addon and takes no responsibility for content found[/COLOR].</description>
+<description lang="en">[I]New Resistance[/I][CR][CR][B]Fantastic - Media for the Masses[/B][CR][CR]This addon is not have any part of the Kodi Media Centre. Please do not seek assistance with this addon from any of the Official Kodi Support Channels.[CR][CR]The author does not host any of the content in this addon and takes no responsibility for content found.</description>
 		<platform>all</platform>
 		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
 		<forum></forum>
 		<website></website>
 		<source></source>
 		<disclaimer lang="en">The author of this addon do not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
-		<disclaimer lang="hr">Autor ovog dodatka ne posjeduje bilo kakav sadržaj koji je pronađen i nije povezan sa bilo kojim izvorom sadržaja. Ovaj dodatak samo pretražuje sadržaj na web stranicama. Koristite ga na vlastitu odgovornost!</disclaimer>
-		<disclaimer lang="he">מחבר ההרחבה זה אינו מארח את התוכן שיתכן ויימצא ואין לו זיקה לאף אחד מספקי התוכן. הרחבה רק מחפשת תוכן שקיים באתרי אינטרנט. השימוש בהרחבה הוא על אחריותך בלבד!</disclaimer>
 		<assets>
 			<icon>icon.png</icon>
 			<fanart>fanart.jpg</fanart>
@@ -402,7 +399,91 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
     			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
     			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news></news>
+		<news>
+[COLOR red]Fixed double scrapers[/COLOR]
+List of providers
+https://www.ultrahdindir.net
+https://tvbox.ag
+https://xmovies8.nz
+https://yesmovies.to
+https://www1.seriesonline8.co
+https://123movies.ph
+http://www2.vioozfree.net
+http://freeputlockers.org
+http://hdpopcorns.co
+http://www3.fmovies.sc
+http://www2.fmovies.ag
+http://123moviesb.com
+http://putlocker.bypassed.in
+http://enjoyelegance.com
+http://seriesonline.bz
+http://enigma-life.fr
+http://startingtogether.co.uk
+http://movies1234.net
+http://meimei-movie.com
+http://moviesonline.mx
+http://huluplus.in
+http://321movies.club
+http://putlockers.sh
+http://aln5eel.com
+http://moonsshine.com.br
+http://vetdonations.org
+http://rajahoki88.com
+http://imagebrickworks.com
+http://powerofgoddeliverancecenter.com
+http://seasidebrighton.com
+http://kabarmalay.info
+http://giochigratis.fr
+http://123netflix.unblockall.org
+http://spicewoodpoint.com
+http://asuransitakaful.net
+http://alchemyherbalhealing.com
+http://moviesonline.tl
+http://123free.net
+http://subscene.tv
+http://search.rlsbb.ru
+http://2ddl.io
+http://putlockers.tw
+http://moviestream1.site
+http://www2.putlockers.tf
+http://hd.today
+http://moviesonline.mn
+http://movies123.xyz
+http://123movie.ac
+http://123movie.fm
+http://putlockers.la
+http://putlocker.io
+http://moviesonline.gy
+http://123movie.sc
+http://e123movies.com
+http://i123movies.net
+http://123moviesonline.stream
+http://flenix.org
+http://coolmoviezone.info
+http://m4ufree.net
+http://123movieser.com
+http://chadan1.com
+http://freemoviedownloads6.com
+http://www.divxcrawler.tv
+http://fmovie.fm
+http://movies123.ac
+http://123movies.net
+http://movies123.fm
+http://huluvip.net
+http://123moviesfreenow.com
+http://123movie.plus
+http://l23movies.com
+http://123movies.mn
+http://plocker.unblocked.wtf
+http://gomovies.gs
+http://z123movies.com
+http://www1.putlockers.mn
+http://gomoviesto.org
+http://solarmovie.net
+http://37rmm.com
+http://www2.0123movies.org
+http://www2.gostream.sc
+		</news>
 	</extension>
 </addon>
 
@@ -1686,6 +1767,23 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 	</extension>
 </addon>
 
+    <addon id="repository.Firestickplusman" name="Firestickplusman Addons" version="4.0" provider-name="Firestickplusman">
+        <requires>
+            <import addon="xbmc.addon" version="12.0.0"/>
+        </requires>
+        <extension point="xbmc.addon.repository" name="Firestickplusman Addons">
+            <info compressed="false">http://fspmkodi.com/_repo/addons.xml</info>
+            <checksum>http://fspmkodi.com/_repo/addons.xml.md5</checksum>
+            <datadir zip="true">http://fspmkodi.com/_repo/</datadir>
+            <hashes>false</hashes>
+        </extension>
+        <extension point="xbmc.addon.metadata">
+            <summary>Firestickplusman addon repo</summary>
+            <description>Firestickplusman addon repo to in the best and update addons from Firestickplusman.</description>
+            <platform>all</platform>
+    </extension>
+</addon>
+
 <addon id="repository.hdrepo.com"
 		name="hdrepo Add-ons"
 		version="1.0.0"
@@ -2036,7 +2134,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 	</extension>
 </addon>
 
-<addon id="script.fantastic.artwork" version="1.0.8" name="fantastic Artwork" provider-name="Firestickplusman">
+<addon id="script.fantastic.artwork" version="3.0" name="fantastic Artwork" provider-name="fantastic">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0"/>
 	</requires>
@@ -2048,7 +2146,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 	</extension>
 </addon>
 
-<addon id="script.fantastic.metadata" version="1.0.7" name="fantastic Metadata" provider-name="fantastic">
+<addon id="script.fantastic.metadata" version="3.0" name="fantastic Metadata" provider-name="fantastic">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0"/>
 	</requires>
@@ -2072,10 +2170,10 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 	</extension>
 </addon>
 
-<addon id="script.module.fantastic" name="fantastic Module" version="1.16.1" provider-name="fantastic">
+<addon id="script.module.fantastic" name="fantastic Module" version="3.5.1" provider-name="fantastic">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
-		<import addon="script.module.beautifulsoup4"/>
+		<import addon="script.module.requests" />
 	</requires>
 	<extension point="xbmc.python.module" library="lib" />
 	<extension point="xbmc.addon.metadata">
@@ -2086,7 +2184,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 
 <addon id="script.module.metahandler"
      name="metahandler"
-     version="3.0.2"
+     version="3.0.3"
      provider-name="Eldorado, jsergio">
   <requires>
     <import addon="xbmc.python" version="2.1.0" />
@@ -2135,22 +2233,24 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
   </extension>
 </addon>
 
-<addon id="script.module.urlresolver" name="URLResolver" version="4.0.16" provider-name="Eldorado, tknorris, tvaddons">
+<addon id="script.module.urlresolver" name="URLResolver" version="5.0.22" provider-name="tvaddons">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
 		<import addon="plugin.video.youtube" optional="true" />
 		<import addon="script.module.python.twitch" optional="true" />
 		<import addon="script.module.cryptopy" version="1.2.6" optional="true" />
+		<import addon="plugin.video.gdrive" optional="true" />
 	</requires>
 	<extension point="xbmc.python.module" library="lib" />
 	<extension point="xbmc.python.pluginsource" library="lib/default.py" />
 	<extension point="xbmc.addon.metadata">
 		<platform>all</platform>
 		<summary lang="en">Resolve common video host URL's to be playable in XBMC/Kodi.</summary>
+		<summary lang="es">Resolver enlaces a videos de sitios populares para poder reproducirlos en XBMC/Kodi.</summary>
 		<summary lang="hr">Prilagodi najčešće URL-ove video izvora kako bi radili u XBMC/Kodiju.</summary>
 		<description lang="en">Resolve common video host URL's to be playable in XBMC/Kodi, simplify addon development of video plugins requiring multi video hosts.</description>
 		<description lang="hr">Prilagodi najčešće URL-ove video izvora kako bi radili u XBMC/Kodiju, pojednostavnjuje razvoj priključaka za video dodatke koji zahtjevaju višestruke video izvore.</description>
-        <forum>https://www.tvaddons.co/forums</forum>
+		<forum>https://www.tvaddons.co/forums</forum>
         <website>https://www.tvaddons.co</website>
 	</extension>
 </addon>

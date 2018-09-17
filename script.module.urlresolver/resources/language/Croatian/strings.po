@@ -199,12 +199,10 @@ msgctxt "#33044"
 msgid "Flashx Stream Authorization"
 msgstr "Flashx ovjera strujanja"
 
-#, fuzzy
 msgctxt "#33045"
 msgid "AllDebrid Authorization Reset"
 msgstr "Real-Debrid razrješitelj vraćen na izvorno"
 
-#, fuzzy
 msgctxt "#33046"
 msgid "AllDebrid Resolver Authorized"
 msgstr "Real-Debrid razrješitelj ovjeren"

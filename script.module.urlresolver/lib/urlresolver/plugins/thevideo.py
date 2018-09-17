@@ -25,15 +25,21 @@ from urlresolver.resolver import UrlResolver, ResolverError
 
 class TheVideoResolver(UrlResolver):
     name = "thevideo"
-    domains = ["thevideo.me", "tvad.me"]
-    pattern = '(?://|\.)((?:thevideo|tvad)\.me)/(?:embed-|download/)?([0-9a-zA-Z]+)'
+    domains = ["thevideo.me", "tvad.me", "thevideo.cc", "thevideo.us", "thevideo.io", "thevideo.website"]
+    pattern = '(?://|\.)((?:thevideo\.(?:me|cc|us|io|website))|tvad\.me)/(?:embed-|download/)?([0-9a-zA-Z]+)'
 
     def __init__(self):
         self.net = common.Net()
         self.headers = {'User-Agent': common.SMU_USER_AGENT}
 
     def get_media_url(self, host, media_id):
-        result = self.__auth_ip(media_id)
+        try:
+            result = self.__check_auth(media_id)
+            if not result:
+                result = self.__auth_ip(media_id)
+        except ResolverError:
+            raise
+
         if 'vt' in result:
             vt = result['vt']
             del result['vt']
@@ -48,10 +54,10 @@ class TheVideoResolver(UrlResolver):
         line3 = i18n('click_pair') % ('https://tvad.me/pair')
         with common.kodi.CountdownDialog(header, line1, line2, line3) as cd:
             return cd.start(self.__check_auth, [media_id])
-        
+
     def __check_auth(self, media_id):
         common.logger.log('Checking Auth: %s' % (media_id))
-        url = 'https://thevideo.me/pair?file_code=%s&check' % (media_id)
+        url = 'https://tvad.me/pair?file_code=%s&check' % (media_id)
         try: js_result = json.loads(self.net.http_GET(url, headers=self.headers).content)
         except ValueError:
             raise ResolverError('Unusable Authorization Response')
@@ -60,12 +66,12 @@ class TheVideoResolver(UrlResolver):
                 js_result = json.loads(str(e.read()))
             else:
                 raise
-            
+
         common.logger.log('Auth Result: %s' % (js_result))
         if js_result.get('status'):
             return js_result.get('response', {})
         else:
             return {}
-        
+
     def get_url(self, host, media_id):
         return self._default_get_url(host, media_id, template='https://tvad.me/embed-{media_id}.html')

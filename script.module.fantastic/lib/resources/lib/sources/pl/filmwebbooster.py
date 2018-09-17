@@ -21,8 +21,7 @@
 
 import urlparse
 
-from resources.lib.modules import source_utils, dom_parser, client, cleantitle
-import urllib
+from resources.lib.modules import source_utils, dom_parser, client
 
 class source:
     def __init__(self):
@@ -32,10 +31,8 @@ class source:
         
         self.base_link = 'http://178.19.110.218/filmweb/'
         self.search_more = 'wiecejzrodel.php'
-        self.search_tvshow = 'search_serial.php'
-        self.search_movie = 'search_film.php'      
-        self.film_web='http://www.filmweb.pl' 
-        self.filmweb_search = '/search/%s?q=%s&startYear=%s&endYear=%s&startRate=&endRate=&startCount=&endCount='   
+        self.search_tvshow = 'search.php'
+        self.search_movie = 'search_film.php'          
 
     def create_search_more(self, title, localtitle, year):
         return {'tytul':localtitle, 'engTitle':title, 'rok':year}
@@ -43,16 +40,14 @@ class source:
     def movie(self, imdb, title, localtitle, aliases, year):
         result = {}
         result['url'] = urlparse.urljoin(self.base_link, self.search_movie)
-        fw = self.get_filmweb_data('film', title, localtitle, year)
-        result['post'] = {'engTitle':title, 'szukany':localtitle, 'rok':year, 'filmid':fw['id'], 'urlstrony':fw['href']}
+        result['post'] = {'engTitle':title, 'szukany':localtitle, 'rok':year}
         result['more'] = self.create_search_more(title, localtitle, year)
         return result
     
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         result = {}
-        fw = self.get_filmweb_data('serial', tvshowtitle, localtvshowtitle, year)
         result['url'] = urlparse.urljoin(self.base_link, self.search_tvshow)
-        result['post'] = {'title':localtvshowtitle, 'filmid':fw['id'], 'urlstrony':fw['href']}
+        result['post'] = {'title':localtvshowtitle}
         result['more'] = self.create_search_more(tvshowtitle, localtvshowtitle, year)
         return result
 
@@ -61,30 +56,7 @@ class source:
         url['post']['odcinek'] = episode
         url['post']['sezon'] = season
         return url
-    
-    def get_filmweb_data(self, type_url, title, localtitle, year):
-        try:
-            url = urlparse.urljoin(self.film_web, self.filmweb_search)
-            url = url % (type_url, urllib.quote_plus(cleantitle.query(title)), year, year)
-            result = client.request(url)
-            rows = client.parseDOM(result, 'div', attrs={'class':'hitImage'})
-            if not rows:
-                url = urlparse.urljoin(self.film_web, self.filmweb_search)
-                url = url % (type_url, urllib.quote_plus(cleantitle.query(localtitle)), year, year)
-                result = client.request(url)
-                rows = client.parseDOM(result, 'div', attrs={'class':'hitImage'})
-            local_clean = cleantitle.get(localtitle)
-            title_clean = cleantitle.get(title)
-            for row in rows:
-                row = row.replace('\n', ' ').replace('\r', '')
-                href = client.parseDOM(row, 'a', ret='href')[0]
-                found_title = client.parseDOM(row, 'a', ret='title')[0].strip()
-                found_clean = cleantitle.get(found_title)
-                if title_clean == found_clean or local_clean == found_clean:
-                    return {'href':href, 'id':href.split('-')[-1]}                
-        except:
-            pass
-        
+           
 
     def get_info_from_others(self, sources):
         infos = []
@@ -102,8 +74,7 @@ class source:
             search_url = url['url'] 
             post = url['post']
             search_more_post = url['more']
-            referer = urlparse.urljoin(self.film_web, post['urlstrony'])
-            result = client.request(search_url, post=post,referer=referer)
+            result = client.request(search_url, post=post)
                    
             sources = []
             if not result.startswith('http'):
@@ -111,9 +82,8 @@ class source:
             
             valid, host = source_utils.is_host_valid(result, hostDict)
             q = source_utils.check_sd_url(result)
-            first_found = {'source': host, 'quality': q, 'language': 'pl', 'url': result, 'info': '', 'direct': False, 'debridonly': False}      
-            
-#             if control.setting('provider.filmwebbooster.extrasearch') == 'true':
+            first_found = {'source': host, 'quality': q, 'language': 'pl', 'url': result, 'info': '', 'direct': False, 'debridonly': False}        
+           
             search_url = urlparse.urljoin(self.base_link, self.search_more)
             result = client.request(search_url, post=search_more_post)
             result = dom_parser.parse_dom(result, 'a')            
@@ -122,8 +92,8 @@ class source:
                 info = desc[desc.find("(") + 1:desc.find(")")]
                 lang = 'pl'
                 if info.lower() == 'eng':
-                    lang = 'en'
-                    info = None
+                    lang='en'
+                    info=None
                 link = el.attrs['href']                                 
                 
                 valid, host = source_utils.is_host_valid(link, hostDict)

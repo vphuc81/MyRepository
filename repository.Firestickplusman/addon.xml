@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <addon id="repository.Firestickplusman" name="Firestickplusman Addons" version="4.0" provider-name="Firestickplusman">
+        <requires>
+            <import addon="xbmc.addon" version="12.0.0"/>
+        </requires>
+        <extension point="xbmc.addon.repository" name="Firestickplusman Addons">
+            <info compressed="false">http://fspmkodi.com/_repo/addons.xml</info>
+            <checksum>http://fspmkodi.com/_repo/addons.xml.md5</checksum>
+            <datadir zip="true">http://fspmkodi.com/_repo/</datadir>
+            <hashes>false</hashes>
+        </extension>
+        <extension point="xbmc.addon.metadata">
+            <summary>Firestickplusman addon repo</summary>
+            <description>Firestickplusman addon repo to in the best and update addons from Firestickplusman.</description>
+            <platform>all</platform>
+    </extension>
+</addon>

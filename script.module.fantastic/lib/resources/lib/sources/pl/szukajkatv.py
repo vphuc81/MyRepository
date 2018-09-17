@@ -19,7 +19,7 @@
 '''
 
 
-import re, urlparse, base64, json
+import re, urllib, urlparse, base64, json
 
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
@@ -39,14 +39,13 @@ class source:
         return result.strip()
     
     def movie(self, imdb, title, localtitle, aliases, year):
-        return [self.clean_serach(title) + ' ' + year, self.clean_serach(localtitle) + ' ' + year]
+        return self.clean_serach(title) + ' ' + year
     
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
-        return [self.clean_serach(tvshowtitle), self.clean_serach(localtvshowtitle)]
+        return self.clean_serach(tvshowtitle)
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
-        epNo = ' s' + season.zfill(2) + 'e' + episode.zfill(2)
-        return [url[0] + epNo, url[1] + epNo] 
+        return url + ' s' + season.zfill(2) + 'e' + episode.zfill(2)
         
     def contains_word(self, str_to_check, word):
         return re.search(r'\b' + word + r'\b', str_to_check, re.IGNORECASE)
@@ -59,40 +58,40 @@ class source:
     
     def sources(self, url, hostDict, hostprDict):
         try:
-            sources = []
-            for url_single in set(url):
-                words = url_single.split(' ')
-                    
-                search_url = urlparse.urljoin(self.base_link, self.search_link) % url_single
-                result = client.request(search_url)
-    
-    
-                result = client.parseDOM(result, 'div', attrs={'class':'element'})
-                for el in result :
-                    
-                    found_title = client.parseDOM(el, 'div', attrs={'class':'title'})[0]
-                    if not self.contains_all_wors(found_title, words):
-                        continue
-                    
-                    q = 'SD'
-                    if self.contains_word(found_title, '1080p'):
-                        q = '1080p'
-                    elif self.contains_word(found_title, '720p'):
-                        q = 'HD'
-                    
-                    link = client.parseDOM(el, 'a', attrs={'class':'link'}, ret='href')[0]
-                    transl_type = client.parseDOM(el, 'span', attrs={'class':'version'})[0]               
-                    transl_type = transl_type.split(' ')
-                    transl_type = transl_type[-1]
-                     
-                    host = client.parseDOM(el, 'span', attrs={'class':'host'})[0]
-                    host = host.split(' ')
-                    host = host[-1]
-                     
-                    lang, info = self.get_lang_by_type(transl_type)
-                     
-                    sources.append({'source': host, 'quality': q, 'language': lang, 'url': link, 'info': info, 'direct': False, 'debridonly': False})
+            
+            words = url.split(' ')
                 
+            search_url = urlparse.urljoin(self.base_link, self.search_link) % url
+            result = client.request(search_url)
+
+            sources = []
+
+            result = client.parseDOM(result, 'div', attrs={'class':'element'})
+            for el in result :
+                
+                found_title = client.parseDOM(el, 'div', attrs={'class':'title'})[0]
+                if not self.contains_all_wors(found_title, words):
+                    continue
+                
+                q = 'SD'
+                if self.contains_word(found_title, '1080p'):
+                    q = '1080p'
+                elif self.contains_word(found_title, '720p'):
+                    q = 'HD'
+                
+                link = client.parseDOM(el, 'a', attrs={'class':'link'}, ret='href')[0]
+                transl_type = client.parseDOM(el, 'span', attrs={'class':'version'})[0]               
+                transl_type = transl_type.split(' ')
+                transl_type = transl_type[-1]
+                 
+                host = client.parseDOM(el, 'span', attrs={'class':'host'})[0]
+                host = host.split(' ')
+                host = host[-1]
+                 
+                lang, info = self.get_lang_by_type(transl_type)
+                 
+                sources.append({'source': host, 'quality': q, 'language': lang, 'url': link, 'info': info, 'direct': False, 'debridonly': False})
+            
             return sources
         except:
             return sources

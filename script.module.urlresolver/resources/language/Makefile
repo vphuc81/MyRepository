@@ -14,3 +14,4 @@ update-po:
 	msgmerge -U Czech/strings.po English/strings.po
 	msgmerge -U Swedish/strings.po English/strings.po
 	msgmerge -U Spanish/strings.po English/strings.po
+	msgmerge -U Italian/strings.po English/strings.po

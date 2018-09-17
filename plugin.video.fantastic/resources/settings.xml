@@ -2,8 +2,8 @@
 <settings>
     <category label="32310">
         <setting id="appearance.alt" type="action" label="32311" default="-" option="close" action="RunPlugin(plugin://plugin.video.fantastic/?action=artwork)" visible="!System.HasAddon(script.fantastic.artwork)" />
-        <setting id="appearance.1" type="select" label="32311" values="Exuary|fantastic|Stealth" default="fantastic" visible="System.HasAddon(script.fantastic.artwork)" />
-        <setting id="scrapers.timeout.1" type="slider" label="32312" default="60" range="10,60" option="int" />
+        <setting id="appearance.1" type="select" label="32311" values="Exuary|fantastic" default="fantastic" visible="System.HasAddon(script.fantastic.artwork)" />
+        <setting id="scrapers.timeout.1" type="slider" label="32312" default="30" range="10,60" option="int" />
         <setting id="trakt.user" type="text" default="" visible="false" />
         <setting id="indicators.alt" type="enum" label="32313" lvalues="32314|32315" default="1" visible="!eq(-1,)" />
         <setting id="indicators" type="enum" label="32313" lvalues="32314" default="0" visible="eq(-2,)" />
@@ -19,25 +19,18 @@
         <setting id="tv.widget" type="enum" label="32325" lvalues="32302|32326" default="1" visible="eq(-12,)" />
         <setting id="prgr.sortorder" type="enum" label="32584" lvalues="32585|32586" default="1" visible="!eq(-13,)" />
         <setting id="lists.widget" type="enum" label="32329" lvalues="32302|32301" default="1" />
-        <setting type="lsep" label="Auto Trakt Collections Syncing" />
-        <setting id="autoTraktOnStart" type="bool" label="Sync on Kodi Start" default="False" />
-        <setting id="schedTraktTime" type="slider" label="Schedule Updates Every - Hour/s" default="0" range="0,24" option="int" />
-        <setting type="lsep" label="0 Value Disables Scheduling" />
     </category>
     <category label="32330">
         <setting id="hosts.mode" type="enum" label="32331" lvalues="32332|32333|32334" default="1" />
         <setting id="progress.dialog" type="enum" label="32335" lvalues="32336|32337" default="0" />
         <setting id="prem.identify" type="enum" label="32588" lvalues="32589|32590|32591|32592|32593|32594|32595|32596|32597|32598" default="0" />
-        <setting id="preemptive.termination" type="bool" label="Pre-emptive Termination" default="False" />
-        <setting id="preemptive.limit" type="slider" label="Pre-emptive Limit" default="10" range="1,50" option="int" />
         <setting type="lsep" label="32338" />
         <setting id="hosts.quality" type="enum" label="32339" values="4K|1440p|1080p|720p|480p" default="0" />
-        <setting id="autoplay.sd" type="bool" label="Autoplay SD Quality only" default="false" />
+        <setting id="autoplay.sd" type="bool" label="32340" default="false" />
         <setting id="sources.extrainfo" type="bool" label="32587" default="true" />
         <setting id="HEVC" type="bool" label="32363" default="true" />
         <setting id="hosts.captcha" type="bool" label="32341" default="true" />
         <setting id="hosts.sort.provider" type="bool" label="32342" default="false" />
-        <setting id="debrid.only" type="bool" label="Debrid Sources Only" default="false" />
         <setting type="lsep" label="32343" />
         <setting id="bookmarks" type="bool" label="32344" default="true" />
         <setting type="lsep" label="32372" />
@@ -46,66 +39,153 @@
     <category label="32345">
         <setting label="English" type="lsep" />
         <setting type="sep" />
-		<setting id="provider.123hulu" type="bool" label="123HULU" default="true" />
-		<setting id="provider.123netflix" type="bool" label="123NETFLIX" default="true" />
-        <setting id="provider.2dll" type="bool" label="2DLL" default="true" />
-        <setting id="provider.allrls" type="bool" label="ALLRLS" default="true" />
-		<setting id="provider.bestmoviez" type="bool" label="BESTMOVIEZ" default="true" />
-        <setting id="provider.afdah" type="bool" label="AFDAH" default="true" />
-        <setting id="provider.animeultima" type="bool" label="ANIMEULTIMA" default="true" />
-        <setting id="provider.beetv" type="bool" label="BEETV" default="true" />
-        <setting id="provider.bestmoviez" type="bool" label="BESTMOVIEZ" default="true" />
-        <setting id="provider.chillax" type="bool" label="CHILLAX" default="true" />
-        <setting id="provider.cmovies" type="bool" label="CMOVIES" default="true" />
-        <setting id="provider.ddls" type="bool" label="DDLS" default="true" />
-        <setting id="provider.ddlvalley" type="bool" label="DDLVALLEY" default="true" />
-        <setting id="provider.directdl" type="bool" label="DIRECTDL" default="true" />
-        <setting id="provider.divxcrawler" type="bool" label="DIVXCRAWLER" default="true" />
-        <setting id="provider.dizigold" type="bool" label="DIZIGOLD" default="true" />
-        <setting id="provider.einthusan" type="bool" label="EINTHUSAN" default="true" />
-		<setting id="provider.flixanity" type="bool" label="FLIXANITY" default="true" />
-		<setting id="provider.furk" type="bool" label="FURK" default="true" />
-        <setting id="provider.genvideos" type="bool" label="GENVIDEOS" default="true" />
-        <setting id="provider.gogoanime" type="bool" label="GOGOANIME" default="true" />
-        <setting id="provider.hevcfilm" type="bool" label="HEVCFILM" default="true" />
-        <setting id="provider.icefilms" type="bool" label="ICEFILMS" default="true" />
-        <setting id="provider.imdark" type="bool" label="IMDARK" default="true" />
-        <setting id="provider.kingmovies" type="bool" label="KINGMOVIES" default="true" />
-        <setting id="provider.library" type="bool" label="LIBRARY" default="true" />
-        <setting id="provider.mehliz" type="bool" label="MEHLIZ" default="true" />
-        <setting id="provider.movie4kis" type="bool" label="MOVIE4KIS" default="true" />
-        <setting id="provider.movie4korg" type="bool" label="MOVIE4KORG" default="true" />
-        <setting id="provider.movie4uch" type="bool" label="MOVIE4UCH" default="true" />
-        <setting id="provider.moviesgold" type="bool" label="MOVIESGOLD" default="true" />
-        <setting id="provider.mywatchseries" type="bool" label="MYWATCHSERIES" default="true" />
-        <setting id="provider.mzmovies" type="bool" label="MZMOVIES" default="true" />
-        <setting id="provider.ninemovies" type="bool" label="NINEMOVIES" default="true" />
-        <setting id="provider.onetwothree" type="bool" label="ONETWOTHREE" default="true" />
-        <setting id="provider.onlinedizi" type="bool" label="ONLINEDIZI" default="true" />
-        <setting id="provider.openloadmovies" type="bool" label="OPENLOADMOVIES" default="true" />
-        <setting id="provider.ororo" type="bool" label="ORORO" default="true" />
-        <setting id="provider.phazeddl" type="bool" label="PHAZEDLL" default="true" />
-        <setting id="provider.plocker" type="bool" label="PLOCKER" default="true" />
-        <setting id="provider.popcorn" type="bool" label="POPCORN" default="true" />
-		<setting id="provider.primewire" type="bool" label="PRIMEWIRE" default="true" />
-        <setting id="provider.rlsbb" type="bool" label="RLSBB" default="true" />
-        <setting id="provider.rlsmovies" type="bool" label="RLSMOVIES" default="true" />
-        <setting id="provider.seriescr" type="bool" label="SERIESCR" default="true" />
-        <setting id="provider.seriesfree" type="bool" label="SERIESFREE" default="true" />
-        <setting id="provider.seriesonline" type="bool" label="SERIESONLINE" default="true" />
-        <setting id="provider.showbox" type="bool" label="SHOWBOX" default="true" />
-        <setting id="provider.soaptv" type="bool" label="SOAPTV" default="true" />
-        <setting id="provider.solarmovie" type="bool" label="SOLARMOVIE" default="true" />
-        <setting id="provider.tvrelease" type="bool" label="TVRELEASE" default="true" />
-        <setting id="provider.ultrahd" type="bool" label="ULTRAHD" default="true" />
-        <setting id="provider.videoscraper" type="bool" label="VIDEOSCRAPER" default="true" />
-        <setting id="provider.vodly" type="bool" label="VODLY" default="true" />
-		<setting id="provider.vumoo" type="bool" label="VUMOO" default="true" />
-        <setting id="provider.watch32" type="bool" label="WATCH32" default="true" />
-        <setting id="provider.watchseries" type="bool" label="WATCHSERIES" default="true" />
-        <setting id="provider.wrzcraft" type="bool" label="WRZCRAFT" default="true" />
-        <setting id="provider.xmovies" type="bool" label="XMOVIES" default="true" />
-        <setting id="provider.ymovies" type="bool" label="YMOVIES" default="true" />
+		<setting id="provider.Fantastic (1)" type="bool" label="Fantastic (1)" default="true" />
+		<setting id="provider.Fantastic (2)" type="bool" label="Fantastic (2)" default="true" />
+		<setting id="provider.Fantastic (3)" type="bool" label="Fantastic (3)" default="true" />
+		<setting id="provider.Fantastic (4)" type="bool" label="Fantastic (4)" default="true" />
+		<setting id="provider.Fantastic (5)" type="bool" label="Fantastic (5)" default="true" />
+		<setting id="provider.Fantastic (6)" type="bool" label="Fantastic (6)" default="true" />
+		<setting id="provider.Fantastic (7)" type="bool" label="Fantastic (7)" default="true" />
+		<setting id="provider.Fantastic (8)" type="bool" label="Fantastic (8)" default="true" />
+		<setting id="provider.Fantastic (9)" type="bool" label="Fantastic (9)" default="true" />
+		<setting id="provider.Fantastic (10)" type="bool" label="Fantastic (10)" default="true" />
+		<setting id="provider.Fantastic (11)" type="bool" label="Fantastic (11)" default="true" />
+		<setting id="provider.Fantastic (12)" type="bool" label="Fantastic (12)" default="true" />
+		<setting id="provider.Fantastic (13)" type="bool" label="Fantastic (13)" default="true" />
+		<setting id="provider.Fantastic (14)" type="bool" label="Fantastic (14)" default="true" />
+		<setting id="provider.Fantastic (15)" type="bool" label="Fantastic (15)" default="true" />
+		<setting id="provider.Fantastic (16)" type="bool" label="Fantastic (16)" default="true" />
+		<setting id="provider.Fantastic (17)" type="bool" label="Fantastic (17)" default="true" />
+		<setting id="provider.Fantastic (18)" type="bool" label="Fantastic (18)" default="true" />
+		<setting id="provider.Fantastic (19)" type="bool" label="Fantastic (19)" default="true" />
+		<setting id="provider.Fantastic (20)" type="bool" label="Fantastic (20)" default="true" />
+		<setting id="provider.Fantastic (21)" type="bool" label="Fantastic (21)" default="true" />
+		<setting id="provider.Fantastic (22)" type="bool" label="Fantastic (22)" default="true" />
+		<setting id="provider.Fantastic (23)" type="bool" label="Fantastic (23)" default="true" />
+		<setting id="provider.Fantastic (24)" type="bool" label="Fantastic (24)" default="true" />
+		<setting id="provider.Fantastic (25)" type="bool" label="Fantastic (25)" default="true" />
+		<setting id="provider.Fantastic (26)" type="bool" label="Fantastic (26)" default="true" />
+		<setting id="provider.Fantastic (27)" type="bool" label="Fantastic (27)" default="true" />
+		<setting id="provider.Fantastic (28)" type="bool" label="Fantastic (28)" default="true" />
+		<setting id="provider.Fantastic (29)" type="bool" label="Fantastic (29)" default="true" />
+		<setting id="provider.Fantastic (30)" type="bool" label="Fantastic (30)" default="true" />
+		<setting id="provider.Fantastic (31)" type="bool" label="Fantastic (31)" default="true" />
+		<setting id="provider.Fantastic (32)" type="bool" label="Fantastic (32)" default="true" />
+		<setting id="provider.Fantastic (33)" type="bool" label="Fantastic (33)" default="true" />
+		<setting id="provider.Fantastic (34)" type="bool" label="Fantastic (34)" default="true" />
+		<setting id="provider.Fantastic (35)" type="bool" label="Fantastic (35)" default="true" />
+		<setting id="provider.Fantastic (36)" type="bool" label="Fantastic (36)" default="true" />
+		<setting id="provider.Fantastic (37)" type="bool" label="Fantastic (37)" default="true" />
+		<setting id="provider.Fantastic (38)" type="bool" label="Fantastic (38)" default="true" />
+		<setting id="provider.Fantastic (39)" type="bool" label="Fantastic (39)" default="true" />
+		<setting id="provider.Fantastic (40)" type="bool" label="Fantastic (40)" default="true" />
+		<setting id="provider.Fantastic (41)" type="bool" label="Fantastic (41)" default="true" />
+		<setting id="provider.Fantastic (42)" type="bool" label="Fantastic (42)" default="true" />
+		<setting id="provider.Fantastic (43)" type="bool" label="Fantastic (43)" default="true" />
+		<setting id="provider.Fantastic (44)" type="bool" label="Fantastic (44)" default="true" />
+		<setting id="provider.Fantastic (45)" type="bool" label="Fantastic (45)" default="true" />
+		<setting id="provider.Fantastic (46)" type="bool" label="Fantastic (46)" default="true" />
+		<setting id="provider.Fantastic (47)" type="bool" label="Fantastic (47)" default="true" />
+		<setting id="provider.Fantastic (48)" type="bool" label="Fantastic (48)" default="true" />
+		<setting id="provider.Fantastic (49)" type="bool" label="Fantastic (49)" default="true" />
+		<setting id="provider.Fantastic (50)" type="bool" label="Fantastic (50)" default="true" />
+		<setting id="provider.Fantastic (51)" type="bool" label="Fantastic (51)" default="true" />
+		<setting id="provider.Fantastic (52)" type="bool" label="Fantastic (52)" default="true" />
+		<setting id="provider.Fantastic (53)" type="bool" label="Fantastic (53)" default="true" />
+		<setting id="provider.Fantastic (54)" type="bool" label="Fantastic (54)" default="true" />
+		<setting id="provider.Fantastic (55)" type="bool" label="Fantastic (55)" default="true" />
+		<setting id="provider.Fantastic (56)" type="bool" label="Fantastic (56)" default="true" />
+		<setting id="provider.Fantastic (57)" type="bool" label="Fantastic (57)" default="true" />
+		<setting id="provider.Fantastic (58)" type="bool" label="Fantastic (58)" default="true" />
+		<setting id="provider.Fantastic (59)" type="bool" label="Fantastic (59)" default="true" />
+		<setting id="provider.Fantastic (60)" type="bool" label="Fantastic (60)" default="true" />
+		<setting id="provider.Fantastic (61)" type="bool" label="Fantastic (61)" default="true" />
+		<setting id="provider.Fantastic (62)" type="bool" label="Fantastic (62)" default="true" />
+		<setting id="provider.Fantastic (63)" type="bool" label="Fantastic (63)" default="true" />
+		<setting id="provider.Fantastic (64)" type="bool" label="Fantastic (64)" default="true" />
+		<setting id="provider.Fantastic (65)" type="bool" label="Fantastic (65)" default="true" />
+		<setting id="provider.Fantastic (66)" type="bool" label="Fantastic (66)" default="true" />
+		<setting id="provider.Fantastic (67)" type="bool" label="Fantastic (67)" default="true" />
+		<setting id="provider.Fantastic (68)" type="bool" label="Fantastic (68)" default="true" />
+		<setting id="provider.Fantastic (69)" type="bool" label="Fantastic (69)" default="true" />
+		<setting id="provider.Fantastic (70)" type="bool" label="Fantastic (70)" default="true" />
+		<setting id="provider.Fantastic (71)" type="bool" label="Fantastic (71)" default="true" />
+		<setting id="provider.Fantastic (72)" type="bool" label="Fantastic (72)" default="true" />
+		<setting id="provider.Fantastic (73)" type="bool" label="Fantastic (73)" default="true" />
+		<setting id="provider.Fantastic (74)" type="bool" label="Fantastic (74)" default="true" />
+		<setting id="provider.Fantastic (75)" type="bool" label="Fantastic (75)" default="true" />
+		<setting id="provider.Fantastic (76)" type="bool" label="Fantastic (76)" default="true" />
+		<setting id="provider.Fantastic (77)" type="bool" label="Fantastic (77)" default="true" />
+		<setting id="provider.Fantastic (78)" type="bool" label="Fantastic (78)" default="true" />
+		<setting id="provider.Fantastic (79)" type="bool" label="Fantastic (79)" default="true" />
+		<setting id="provider.Fantastic (80)" type="bool" label="Fantastic (80)" default="true" />
+		<setting id="provider.Fantastic (81)" type="bool" label="Fantastic (81)" default="true" />
+		<setting id="provider.Fantastic (82)" type="bool" label="Fantastic (82)" default="true" />
+		<setting id="provider.Fantastic (83)" type="bool" label="Fantastic (83)" default="true" />
+		<setting id="provider.Fantastic (84)" type="bool" label="Fantastic (84)" default="true" />
+		<setting id="provider.Fantastic (85)" type="bool" label="Fantastic (85)" default="true" />
+		<setting id="provider.Fantastic (86)" type="bool" label="Fantastic (86)" default="true" />
+		<setting id="provider.Fantastic (87)" type="bool" label="Fantastic (87)" default="true" />
+		<setting id="provider.Fantastic (88)" type="bool" label="Fantastic (88)" default="true" />
+		<setting id="provider.Fantastic (89)" type="bool" label="Fantastic (89)" default="true" />
+		<setting id="provider.Fantastic (90)" type="bool" label="Fantastic (90)" default="true" />
+		<setting id="provider.Fantastic (91)" type="bool" label="Fantastic (91)" default="true" />
+		<setting id="provider.Fantastic (92)" type="bool" label="Fantastic (92)" default="true" />
+		<setting id="provider.Fantastic (93)" type="bool" label="Fantastic (93)" default="true" />
+		<setting id="provider.Fantastic (94)" type="bool" label="Fantastic (94)" default="true" />
+		<setting id="provider.Fantastic (95)" type="bool" label="Fantastic (95)" default="true" />
+		<setting id="provider.Fantastic (96)" type="bool" label="Fantastic (96)" default="true" />
+		<setting id="provider.Fantastic (97)" type="bool" label="Fantastic (97)" default="true" />
+		<setting id="provider.Fantastic (98)" type="bool" label="Fantastic (98)" default="true" />
+		<setting id="provider.Fantastic (99)" type="bool" label="Fantastic (99)" default="true" />
+		<setting id="provider.Fantastic (100)" type="bool" label="Fantastic (100)" default="true" />
+		<setting id="provider.Fantastic (101)" type="bool" label="Fantastic (101)" default="true" />
+		<setting id="provider.Fantastic (102)" type="bool" label="Fantastic (102)" default="true" />
+		<setting id="provider.Fantastic (103)" type="bool" label="Fantastic (103)" default="true" />
+		<setting id="provider.Fantastic (104)" type="bool" label="Fantastic (104)" default="true" />
+		<setting id="provider.Fantastic (105)" type="bool" label="Fantastic (105)" default="true" />
+		<setting id="provider.Fantastic (106)" type="bool" label="Fantastic (106)" default="true" />
+		<setting id="provider.Fantastic (107)" type="bool" label="Fantastic (107)" default="true" />
+		<setting id="provider.Fantastic (108)" type="bool" label="Fantastic (108)" default="true" />
+		<setting id="provider.Fantastic (109)" type="bool" label="Fantastic (109)" default="true" />
+		<setting id="provider.Fantastic (110)" type="bool" label="Fantastic (110)" default="true" />
+		<setting id="provider.Fantastic (111)" type="bool" label="Fantastic (111)" default="true" />
+		<setting id="provider.Fantastic (112)" type="bool" label="Fantastic (112)" default="true" />
+		<setting id="provider.Fantastic (113)" type="bool" label="Fantastic (113)" default="true" />
+		<setting id="provider.Fantastic (114)" type="bool" label="Fantastic (114)" default="true" />
+		<setting id="provider.Fantastic (115)" type="bool" label="Fantastic (115)" default="true" />
+		<setting id="provider.Fantastic (116)" type="bool" label="Fantastic (116)" default="true" />
+		<setting id="provider.Fantastic (117)" type="bool" label="Fantastic (117)" default="true" />
+		<setting id="provider.Fantastic (118)" type="bool" label="Fantastic (118)" default="true" />
+		<setting id="provider.Fantastic (119)" type="bool" label="Fantastic (119)" default="true" />
+		<setting id="provider.Fantastic (120)" type="bool" label="Fantastic (120)" default="true" />
+		<setting id="provider.Fantastic (121)" type="bool" label="Fantastic (121)" default="true" />
+		<setting id="provider.Fantastic (122)" type="bool" label="Fantastic (122)" default="true" />
+		<setting id="provider.Fantastic (123)" type="bool" label="Fantastic (123)" default="true" />
+		<setting id="provider.Fantastic (124)" type="bool" label="Fantastic (124)" default="true" />
+		<setting id="provider.Fantastic (125)" type="bool" label="Fantastic (125)" default="true" />
+		<setting id="provider.Fantastic (126)" type="bool" label="Fantastic (126)" default="true" />
+		<setting id="provider.Fantastic (127)" type="bool" label="Fantastic (127)" default="true" />
+		<setting id="provider.Fantastic (128)" type="bool" label="Fantastic (128)" default="true" />
+		<setting id="provider.Fantastic (129)" type="bool" label="Fantastic (129)" default="true" />
+		<setting id="provider.Fantastic (130)" type="bool" label="Fantastic (130)" default="true" />
+		<setting id="provider.Fantastic (131)" type="bool" label="Fantastic (131)" default="true" />
+		<setting id="provider.Fantastic (132)" type="bool" label="Fantastic (132)" default="true" />
+		<setting id="provider.Fantastic (134)" type="bool" label="Fantastic (134)" default="true" />
+		<setting id="provider.Fantastic (135)" type="bool" label="Fantastic (135)" default="true" />
+		<setting id="provider.Fantastic (136)" type="bool" label="Fantastic (136)" default="true" />
+		<setting id="provider.Fantastic (137)" type="bool" label="Fantastic (137)" default="true" />
+		<setting id="provider.Fantastic (138)" type="bool" label="Fantastic (138)" default="true" />
+		<setting id="provider.Fantastic (139)" type="bool" label="Fantastic (139)" default="true" />
+		<setting id="provider.Fantastic (140)" type="bool" label="Fantastic (140)" default="true" />
+		<setting id="provider.Fantastic (141)" type="bool" label="Fantastic (141)" default="true" />
+		<setting id="provider.Fantastic (142)" type="bool" label="Fantastic (142)" default="true" />
+		<setting id="provider.Fantastic (143)" type="bool" label="Fantastic (143)" default="true" />
+		<setting id="provider.Fantastic (144)" type="bool" label="Fantastic (144)" default="true" />
+		<setting id="provider.Fantastic (145)" type="bool" label="Fantastic (145)" default="true" />
+		<setting id="provider.Fantastic (146)" type="bool" label="Fantastic (146)" default="true" />
+		<setting id="provider.Fantastic (147)" type="bool" label="Fantastic (147)" default="true" />
+		<setting id="provider.Fantastic (148)" type="bool" label="Fantastic (148)" default="true" />
         <setting label="Italian" type="lsep" />
         <setting id="provider.allucit" type="bool" label="ALLUC" default="true" />
         <setting label="German" type="lsep" />
@@ -204,7 +284,7 @@
         <setting id="fanart.tv.user" type="text" label="32309" default="" />
         <setting type="sep" />
         <setting type="lsep" label="TMDb" />
-        <setting id="tm.user" type="text" option="hidden" label="32309" default="3b3eccd1c6bc0f679223fdbd7cf0d06d" />
+        <setting id="tm.user" type="text" option="hidden" label="32309" default="b39ceffd0d76c1cd38e4854f94dac467" />
         <setting type="sep" />
         <setting type="lsep" label="Trakt" />
         <setting id="trakt.user" type="action" label="32306" option="close" action="RunPlugin(plugin://plugin.video.fantastic/?action=authTrakt)" />
@@ -232,7 +312,7 @@
         <setting type="sep" />
         <setting type="lsep" label="SerienStream.to" />
         <setting id="serienstream.user" type="text" label="32304" default="" />
-        <setting id="serienstream.pass" type="text" option="hidden" label="32307" default="" />
+        <setting id="serienstream.pass" type="text" label="32307" default="" />
         <setting type="sep" />
         <setting type="lsep" label="Seriesever.net" />
         <setting id="seriesever.user" type="text" label="32303" default="" />
@@ -241,14 +321,7 @@
         <setting type="lsep" label="ALLUC" />
         <setting id="alluc.api" type="text" label="32309" default="" />
         <setting id="alluc.limit" type="labelenum" label="32581" default="100" values="10|20|30|40|50|60|70|80|90|100|150|200" />
-        <setting id="alluc.download" type="bool" label="32009" default="false" />
-        <setting type="sep" />
-        <setting type="lsep" label="Chillax.ws" />
-        <setting type="lsep" label="Security Warning: Chillax does not use SSL" />
-        <setting type="lsep" label="Your login details are not protected" />
-        <setting id="chillax.username" type="text" label="32303" default="" />
-        <setting id="chillax.password" type="text" option="hidden" label="32307" default="" />
-        <setting id="furk.api" type="text" label="Furk API Key" default="" />
+        <setting id="alluc.download" type="bool" label="32009" default="false" />        
     </category>
     <category label="32541">
         <setting id="library.movie" type="folder" label="32543" default="special://userdata/addon_data/plugin.video.fantastic/Movies" />

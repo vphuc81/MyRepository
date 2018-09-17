@@ -18,7 +18,7 @@
 # junga jungario, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Covenant\n"
+"Project-Id-Version: fantastic\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2017-05-30 09:11+0000\n"
 "Last-Translator: Viper2k4\n"
