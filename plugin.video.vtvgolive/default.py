@@ -5,7 +5,7 @@ from xbmcswift2 import Plugin , xbmc , xbmcgui , xbmcaddon
 requests . packages . urllib3 . disable_warnings ( )
 oo000 = Plugin ( )
 ii = HTMLParser . HTMLParser ( )
-oOOo = "plugin://plugin.video.vtvgolive"
+oOOo = "plugin://plugin.video.vtvgo"
 if 59 - 59: Oo0Ooo . OO0OO0O0O0 * iiiIIii1IIi . iII111iiiii11 % I1IiiI
 IIi1IiiiI1Ii = "http://echipstore.com:8000/vntime"
 if 39 - 39: O0 - ooOO00oOo % oOo0O0Ooo * Ooo00oOo00o . oOoO0oo0OOOo + iiiiIi11i
@@ -166,6 +166,9 @@ def III1ii1iII ( url ) :
  "User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" ,
  "Accept-Encoding" : "gzip, deflate" ,
  "Referer" : "http://vtvgo.vn/" ,
+ "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" ,
+ "Origin" : "http://vtvgo.vn" ,
+ "X-Requested-With" : "XMLHttpRequest"
  }
  i11Iiii = "|Referer=http%3A%2F%2Fvtvgo.vn%2F"
  try :
@@ -173,38 +176,47 @@ def III1ii1iII ( url ) :
    iI = requests . get ( url , headers = iI1 )
    return iI . json ( ) [ "data" ]
   else :
-   iI = requests . get ( url , headers = iI1 )
-   return re . search ( "link = '(.+?.m3u8)'" , iI . text ) . group ( 1 ) + i11Iiii
+   I1i1I1II = requests . Session ( )
+   I1i1I1II . headers . update ( iI1 )
+   iI = I1i1I1II . get ( url , headers = iI1 )
+   i1IiIiiI = iI . text . encode ( "utf8" )
+   I1I = {
+ "id" : re . search ( "id = (\d+);" , i1IiIiiI ) . group ( 1 ) ,
+ "time" : re . search ( "time: '(\d+)'" , i1IiIiiI ) . group ( 1 ) ,
+ "token" : re . search ( "token: '(.+?)'" , i1IiIiiI ) . group ( 1 )
+ }
+   iI = I1i1I1II . post ( "http://vtvgo.vn/ajax-get-stream" , headers = iI1 , data = I1I , verify = False )
+   return iI . json ( ) [ "stream_url" ] [ 0 ] + i11Iiii
  except :
   return ""
-  if 28 - 28: I1Ii111 - oo . oo + oOoO0oo0OOOo - iII111iiiii11 + OO0OO0O0O0
+  if 80 - 80: oOoO0oo0OOOo - Ooo00oOo00o
 def iiIiIIi ( time_object ) :
  return time_object . tm_hour * 60 + time_object . tm_min
- if 95 - 95: Ooo00oOo00o % IiII . OO0OO0O0O0
+ if 87 - 87: IiII / ooOoO0o - I1IiiI * I1Ii111 / iII111iiiii11 . OO0OO0O0O0
 def II1Ii1iI1i ( title = "Home" , page = "/" ) :
  try :
-  I1i1I = "http://www.google-analytics.com/collect"
-  oOO00oOO = open ( OoOo ) . read ( )
-  iIo00O = {
+  iii11I111 = "http://www.google-analytics.com/collect"
+  OOOO00ooo0Ooo = open ( OOOooOooo00O0 ) . read ( )
+  I1I = {
  'v' : '1' ,
  'tid' : 'UA-52209804-5' ,
- 'cid' : oOO00oOO ,
+ 'cid' : OOOO00ooo0Ooo ,
  't' : 'pageview' ,
  'dp' : "VTVGo" + page ,
  'dt' : "[VTVGo] - %s" % title
  }
-  requests . post ( I1i1I , data = urllib . urlencode ( iIo00O ) )
+  requests . post ( iii11I111 , data = urllib . urlencode ( I1I ) )
  except : pass
- if 69 - 69: IiII % O0Oooo00 - iiiiIi11i + O0Oooo00 - OO0OO0O0O0 % iII111iiiii11
-Iii111II = xbmc . translatePath ( 'special://userdata' )
-if os . path . exists ( Iii111II ) == False :
- os . mkdir ( Iii111II )
-OoOo = os . path . join ( Iii111II , 'cid' )
-if 9 - 9: Ooo00oOo00o
-if os . path . exists ( OoOo ) == False :
- with open ( OoOo , "w" ) as i11 :
-  i11 . write ( str ( uuid . uuid1 ( ) ) )
-  if 58 - 58: I1Ii111 * Oo0Ooo / oOoO0oo0OOOo % O0Oooo00 - iII111i / IiII
+ if 100 - 100: Oo0Ooo / oOoO0oo0OOOo % O0Oooo00 - iII111i / IiII
+ii11i1 = xbmc . translatePath ( 'special://userdata' )
+if os . path . exists ( ii11i1 ) == False :
+ os . mkdir ( ii11i1 )
+OOOooOooo00O0 = os . path . join ( ii11i1 , 'cid' )
+if 29 - 29: iII111i % ooOO00oOo + i1IIi11111i / iiiiIi11i + I1Ii111 * iiiiIi11i
+if os . path . exists ( OOOooOooo00O0 ) == False :
+ with open ( OOOooOooo00O0 , "w" ) as i1I1iI :
+  i1I1iI . write ( str ( uuid . uuid1 ( ) ) )
+  if 93 - 93: iiiIIii1IIi % IiII * I1IiiI
 if __name__ == '__main__' :
  oo000 . run ( )
 # dd678faae9ac167bc83abf78e5cb2f3f0688d3a3
