@@ -750,7 +750,7 @@ http://www2.gostream.sc
 
 <addon id="plugin.video.livetv"
        name=" ***[COLOR yellow]LIVE-TV[/COLOR]"
-       version="2.2.45"
+       version="2.2.46"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
@@ -771,7 +771,7 @@ http://www2.gostream.sc
 
 <addon id="plugin.video.livetvinternational"
        name=" **[COLOR yellow]Live TV-International[/COLOR]"
-       version="2.2.32"
+       version="2.2.33"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />

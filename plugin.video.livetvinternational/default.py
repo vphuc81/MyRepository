@@ -58,7 +58,7 @@ def TVChannel(url):
                ("tomic" in link) or ("tohappymovies" in link) or ("tosureshot" in link) or ("tomdyesmovies" in link) or ("toicefilms" in link) or \
                ("tozen" in link) or ("tometalliq" in link) or ("tobob1" in link) or ("tokodi4vnlauncher" in link) or ("tobennu" in link) or ("tobobunleashed" in link) or ("tofilmon3" in link) or \
                ("tohieuhientt" in link) or ("tophimhot" in link) or ("tomovies1" in link) or ("tofantastic" in link) or ("tocovenant" in link) or ("tomobdro" in link)  or ("toplanetmma" in link) or \
-               ("tofirefox" in link) or ("tosilk" in link) or ("tostreamhub" in link) or ("tosport365" in link):
+               ("tofirefox" in link) or ("tosilk" in link) or ("tostreamhub" in link) or ("tosport365" in link) or ("tosupremacysports" in link):
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]              
             add_Link(title, link, thumb)
         xbmc.executebuiltin('Container.SetViewMode(52)')        
@@ -679,6 +679,10 @@ def add_Link(name,url,iconimage):
         return ok
     if 'tosport365' in url:
         u = 'plugin://plugin.video.sport365.live'  
+        ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'tosupremacysports' in url:
+        u = 'plugin://plugin.video.Supremacy.Sports'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)   
