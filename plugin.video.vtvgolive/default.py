@@ -181,11 +181,12 @@ def III1ii1iII ( url ) :
    iI = I1i1I1II . get ( url , headers = iI1 )
    i1IiIiiI = iI . text . encode ( "utf8" )
    I1I = {
+ "type_id" : "1" ,
  "id" : re . search ( "id = (\d+);" , i1IiIiiI ) . group ( 1 ) ,
- "time" : re . search ( "time: '(\d+)'" , i1IiIiiI ) . group ( 1 ) ,
- "token" : re . search ( "token: '(.+?)'" , i1IiIiiI ) . group ( 1 )
+ "time" : re . search ( "time = '(\d+)';" , i1IiIiiI ) . group ( 1 ) ,
+ "token" : re . search ( "token = '(.+?)';" , i1IiIiiI ) . group ( 1 )
  }
-   iI = I1i1I1II . post ( "http://vtvgo.vn/ajax-get-stream" , headers = iI1 , data = I1I , verify = False )
+   iI = I1i1I1II . post ( "http://vtvgo.vn/ajax-get-stream" , data = I1I , verify = False )
    return iI . json ( ) [ "stream_url" ] [ 0 ] + i11Iiii
  except :
   return ""

@@ -1446,7 +1446,7 @@ http://www2.gostream.sc
 	</extension>
 </addon>
 
-<addon id="plugin.video.vtvgolive" version="1.0.6" name="*VTVGoLive" provider-name="thongld">
+<addon id="plugin.video.vtvgolive" version="1.0.7" name="*VTVGoLive" provider-name="thongld">
     <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.xbmcswift2" version="1.3.1" />
