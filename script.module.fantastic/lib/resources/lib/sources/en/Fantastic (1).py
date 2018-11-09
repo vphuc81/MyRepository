@@ -17,147 +17,128 @@
 
 '''
 
+import re,traceback,urllib,urlparse,json
 
-import re,urlparse,json, traceback, urllib, time
-
-from bs4 import BeautifulSoup
-
+from resources.lib.modules import debrid
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
-from resources.lib.modules import cfscrape
-from resources.lib.modules import dom_parser
-from resources.lib.modules import debrid
-
+from resources.lib.modules import log_utils
+from resources.lib.modules import proxy
 
 class source:
     def __init__(self):
-        self.priority = 1
+        self.priority = 0
         self.language = ['en']
-        self.domains = ['xmovies8.tv', 'xmovies8.ru', 'xmovies8.es']
-        self.base_link = 'https://xmovies8.nz'
-        self.search_link = '/movies/search?s=%s'
-        self.scraper = cfscrape.create_scraper()
-
-    def movie(self, imdb, title, localtitle, aliases, year):
-        try:
-            aliases.append({'country': 'us', 'title': title})
-            url = {'imdb': imdb, 'title': title, 'year': year, 'aliases': aliases}
-            return url
-        except:
-            return
+        self.domains = ['xwatchseries.to','onwatchseries.to','itswatchseries.to']
+        self.base_link = 'https://www1.swatchseries.to'
+        self.search_link = 'https://www1.swatchseries.to/show/search-shows-json'
+        self.search_link_2 = 'https://www1.swatchseries.to/search/%s'
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            aliases.append({'country': 'us', 'title': tvshowtitle})
-            url = {'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'year': year, 'aliases': aliases}
+            t = cleantitle.get(tvshowtitle)
+
+            q = urllib.quote_plus(cleantitle.query(tvshowtitle))
+            p = urllib.urlencode({'term': q})
+
+            r = client.request(self.search_link, post=p, XHR=True)
+            try: r = json.loads(r)
+            except: r = None
+            r = None
+
+            if r:
+                r = [(i['seo_url'], i['value'], i['label']) for i in r if 'value' in i and 'label' in i and 'seo_url' in i]
+            else:
+                r = proxy.request(self.search_link_2 % q, 'tv shows')
+                r = client.parseDOM(r, 'div', attrs = {'valign': '.+?'})
+                r = [(client.parseDOM(i, 'a', ret='href'), client.parseDOM(i, 'a', ret='title'), client.parseDOM(i, 'a')) for i in r]
+                r = [(i[0][0], i[1][0], i[2][0]) for i in r if i[0] and i[1] and i[2]]
+
+            r = [(i[0], i[1], re.findall('(\d{4})', i[2])) for i in r]
+            r = [(i[0], i[1], i[2][-1]) for i in r if i[2]]
+            r = [i for i in r if t == cleantitle.get(i[1]) and year == i[2]]
+
+            url = r[0][0]
+            url = proxy.parse(url)
+
+            url = url.strip('/').split('/')[-1]
+            url = url.encode('utf-8')
             return url
         except:
+            failure = traceback.format_exc()
+            log_utils.log('XWatchSeries - Exception: \n' + str(failure))
             return
-
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
         try:
             if url == None: return
-            url['title'], url['premiered'], url['season'], url['episode'] = title, premiered, season, episode
+
+            url = '%s/serie/%s' % (self.base_link, url)
+
+            r = proxy.request(url, 'tv shows')
+            r = client.parseDOM(r, 'li', attrs = {'itemprop': 'episode'})
+
+            t = cleantitle.get(title)
+
+            r = [(client.parseDOM(i, 'a', ret='href'), client.parseDOM(i, 'span', attrs = {'itemprop': 'name'}), re.compile('(\d{4}-\d{2}-\d{2})').findall(i)) for i in r]
+            r = [(i[0], i[1][0].split('&nbsp;')[-1], i[2]) for i in r if i[1]] + [(i[0], None, i[2]) for i in r if not i[1]]
+            r = [(i[0], i[1], i[2][0]) for i in r if i[2]] + [(i[0], i[1], None) for i in r if not i[2]]
+            r = [(i[0][0], i[1], i[2]) for i in r if i[0]]
+
+            url = [i for i in r if t == cleantitle.get(i[1]) and premiered == i[2]][:1]
+            if not url: url = [i for i in r if t == cleantitle.get(i[1])]
+            if len(url) > 1 or not url: url = [i for i in r if premiered == i[2]]
+            if len(url) > 1 or not url: raise Exception() 
+
+            url = url[0][0]
+            url = proxy.parse(url)
+
+            url = re.findall('(?://.+?|)(/.+)', url)[0]
+            url = client.replaceHTMLCodes(url)
+            url = url.encode('utf-8')
             return url
         except:
+            failure = traceback.format_exc()
+            log_utils.log('XWatchSeries - Exception: \n' + str(failure))
             return
-
-    def searchShow(self, title, season, year, aliases, headers):
-        try:
-
-            clean_title = cleantitle.geturl(title).replace('-','+')
-            url = urlparse.urljoin(self.base_link, self.search_link % ('%s+Season+%01d' % (clean_title, int(season))))
-            r = self.scraper.get(url).content
-
-            r = BeautifulSoup(r, 'html.parser').find('div', {'class': 'list_movies'})
-            r = r.findAll(lambda tag: tag.name == 'a' and 'href' in tag.attrs)
-            r = [i['href'] for i in r if '%s - Season %s' % (title, season) in i.text]
-
-            return r[0]
-        except:
-            traceback.print_exc()
-            return
-
-    def searchMovie(self, title, year, aliases, headers):
-        try:
-            clean_title = cleantitle.geturl(title).replace('-','+')
-
-            url = urlparse.urljoin(self.base_link, self.search_link % ('%s' %clean_title))
-            r = self.scraper.get(url).content
-
-            r = client.parseDOM(r, 'div', attrs={'class': 'list_movies'})
-            r = dom_parser.parse_dom(r, 'a', req='href')
-            r = [(i.attrs['href']) for i in r if i.content == '%s (%s)' %(title,year)]
-
-            return r[0]
-        except:
-            return
-
 
     def sources(self, url, hostDict, hostprDict):
-        sources = []
         try:
-            data = url
-
-            aliases = data['aliases']
-            headers = {}
-
-            if 'tvshowtitle' in data:
-                episode = int(data['episode'])
-                url = self.searchShow(data['tvshowtitle'], data['season'], data['year'], aliases, headers)
-            else:
-                episode = 0
-                url = self.searchMovie(data['title'], data['year'], aliases, headers)
+            sources = []
 
             if url == None: return sources
 
-            url = re.sub('/watching.html$', '', url.strip('/'))
-            url = url + '/watching.html'
+            url = urlparse.urljoin(self.base_link, url)
 
-            p = self.scraper.get(url).text
+            r = proxy.request(url, 'tv shows')
 
-            if episode > 0:
-                p = BeautifulSoup(p, 'html.parser')
-                p = p.find('div', {'class': 'ep_link'}).findAll('a')
-                for i in p:
-                    if 'Episode %s' % episode in i.text:
-                        url = i['href']
+            links = client.parseDOM(r, 'a', ret='href', attrs = {'target': '.+?'})
+            links = [x for y,x in enumerate(links) if x not in links[:y]]
 
-                p = self.scraper.get(url).text
+            for i in links:
+                try:
+                    url = i
+                    url = proxy.parse(url)
+                    url = urlparse.parse_qs(urlparse.urlparse(url).query)['r'][0]
+                    url = url.decode('base64')
+                    url = client.replaceHTMLCodes(url)
+                    url = url.encode('utf-8')
 
-            referer = url
+                    host = re.findall('([\w]+[.][\w]+)$', urlparse.urlparse(url.strip().lower()).netloc)[0]
+                    if not host in hostDict: raise Exception()
+                    host = host.encode('utf-8')
 
-            headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
-                'Referer': url,
-                'Accept': 'application/json, text/javascript, */*; q=0.01',
-                'Origin': 'https://xmovies8.nu'
-            }
-
-            id = re.findall(r'load_player\(.+?(\d+)', p)[0]
-            r = urlparse.urljoin(self.base_link, '/ajax/movie/load_player_v3?id=%s' % id)
-            r = self.scraper.get(r, headers=headers).content
-
-            url = json.loads(r)['value']
-
-            if (url.startswith('//')):
-                url = 'https:' + url
-
-            url = url + '&_=%s' % int(time.time())
-
-            r = self.scraper.get(url, headers=headers)
-            headers = '|' + urllib.urlencode(headers)
-
-            source = str(json.loads(r.text)['playlist'][0]['file']) + headers
-
-            sources.append({'source': 'CDN', 'quality': 'HD', 'language': 'en', 'url': source, 'direct': True, 'debridonly': False})
+                    sources.append({'source': host, 'quality': 'SD', 'language': 'en', 'url': url, 'direct': False, 'debridonly': False})
+                except:
+                    pass
 
             return sources
         except:
-            traceback.print_exc()
+            failure = traceback.format_exc()
+            log_utils.log('XWatchSeries - Exception: \n' + str(failure))
             return sources
-
 
     def resolve(self, url):
         return url
+
+

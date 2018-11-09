@@ -18,148 +18,166 @@
 '''
 
 import re
-import urllib
-import urlparse
+import base64
+import requests
+from time import time
 
-from resources.lib.modules import cache
-from resources.lib.modules import cleantitle
-from resources.lib.modules import client
-from resources.lib.modules import source_utils
-from resources.lib.modules import dom_parser
+import xbmc
 from resources.lib.modules import debrid
+from resources.lib.modules import client
 
 
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['movie4k.to']
-        self._base_link = 'https://movie4k.io'
-        self.search_link = '/movies.php?list=search&search=%s'
+        self.domains = ['ondarewatch.com', 'dailytvfix.com']
+        self.base_link = 'http://www.dailytvfix.com'
+        self.search_link = self.base_link + '/ajax/search.php'
+        self.ua = client.randomagent()
 
-    @property
-    def base_link(self):
-        if not self._base_link:
-            self._base_link = cache.get(self.__get_base_url, 120, 'http://%s' % self.domains[0])
-        return self._base_link
+        # Search headers for 'http://www.dailytvfix/ajax/search.php'.
+        self.search_headers = {
+            'Host': self.base_link.replace('http://', '', 1),
+            'User-Agent': self.ua,
+            'Accept': 'application/json, text/javascript, */*; q=0.01',
+            'Accept-Language': 'en-US,en;q=0.5',
+            'Accept-Encoding': 'gzip, deflate',
+            'Referer': self.base_link + '/',
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'X-Requested-With': 'XMLHttpRequest',
+            'DNT': '1'
+        }
+
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            url = self.__search(imdb, [localtitle] + source_utils.aliases_to_array(aliases), year)
-            if not url and title != localtitle: url = self.__search(imdb, [title] + source_utils.aliases_to_array(aliases), year)
-            return url
-        except:
-            return
+            possible_titles = set(
+                (title.lower(),) + tuple((alias['title'].lower() for alias in aliases) if aliases else ())
+            )
+            json_data = self._ajax_post(title.lower())
+            for entry in json_data:
+                if 'movie' in entry['meta'].lower():
+                    if entry['title'].lower() in possible_titles:
+                        url = self.base_link + entry['permalink']
+                        return url
+            return None
+        except Exception as e:
+            self._error(repr(e))
+            return None
+
+
+    def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
+        try:
+            tvshowtitle = tvshowtitle.lower()
+            possible_titles = set(
+                (tvshowtitle,) + tuple((alias['title'] for alias in aliases) if aliases else ())
+            )
+            best_guesses = [ ]
+            json_data = self._ajax_post(tvshowtitle)
+            for entry in json_data:
+                if 'tv' in entry['meta'].lower():
+                    entry_title_lower = entry['title'].lower()
+                    if entry_title_lower in possible_titles:
+                        best_guesses.append(entry['permalink'])
+                    elif tvshowtitle in entry_title_lower and year in entry_title_lower:
+                        # For special cases like 'The Flash' vs 'The Flash 2014', make the entry
+                        # that matches the most (including year) be prepended.
+                        best_guesses.insert(0, entry['permalink'])
+            if best_guesses:
+                url = self.base_link + best_guesses[0]
+                return url
+        except Exception as e:
+            self._error(repr(e))
+            return None
+
+
+    def episode(self, url, imdb, tvdb, title, premiered, season, episode):
+        return url + '/season/%s/episode/%s' % (season, episode)
+
 
     def sources(self, url, hostDict, hostprDict):
-        sources = []
+        sources = [ ]
+
         try:
-            if not url:
-                return sources
-
-            url = urlparse.urljoin(self.base_link, url)
-
-            r = client.request(url)
-            r = r.replace('\\"', '"')
-
-            links = dom_parser.parse_dom(r, 'tr', attrs={'id': 'tablemoviesindex2'})
-
-            for i in links:
-                try:
-                    host = dom_parser.parse_dom(i, 'img', req='alt')[0].attrs['alt']
-                    host = host.split()[0].rsplit('.', 1)[0].strip().lower()
-                    host = host.encode('utf-8')
-
-                    valid, host = source_utils.is_host_valid(host, hostDict)
-                    if not valid: continue
-
-                    url = dom_parser.parse_dom(i, 'a', req='href')[0].attrs['href']
-                    url = client.replaceHTMLCodes(url)
-                    url = urlparse.urljoin(self.base_link, url)
-                    url = url.encode('utf-8')
-
-                    sources.append({'source': host, 'quality': 'SD', 'language': 'en', 'url': url, 'direct': False, 'debridonly': False})
-                except:
-                    pass
-
-            return sources
+            # If in the future there's a Cloudflare challenge, use client.request() instead.
+            r = requests.get(url, headers={'User-Agent': self.ua}, timeout=10)
         except:
-            return sources
+            r = type('FailedResponse', (object,), {'ok': False})
+
+        # On some movies there's like 20+ Openload links, most of the time there's no need for so many.
+        openload_limit = 5 # Set this as the maximum amount of Openload links obtained from Darewatch.
+
+        if r.ok:
+            match = re.findall("] = '(.+?)'", r.text, re.DOTALL)
+            for iframe_blob in match:
+                iframe = base64.b64decode(iframe_blob)
+                temp = re.search('src="(.+?)"', iframe, re.DOTALL|re.IGNORECASE)
+                if temp:
+                    host_url = temp.group(1).strip() # strip() because sometimes there's an '\r' at the end.
+                else:
+                    continue
+
+                if 'openload' in host_url:
+                    # Avoids some duplicate Openload links, both of these come up:
+                    # https://openload.co/embed/dVdG-TGRkZc/Ready.Player.One.2018.(...)
+                    # https://openload.co/embed/dVdG-TGRkZc
+                    is_duplicate = next(
+                        (
+                            True
+                            for source in sources
+                            if (len(host_url) < len(source['url']) and host_url in source['url'])
+                            or (len(source['url']) < len(host_url) and source['url'] in host_url)
+                        ),
+                        False
+                    )
+                    if is_duplicate or openload_limit < 1:
+                        continue # Skip this source.
+                    else:
+                        quality = 'HD'
+                        openload_limit -= 1 # Count towards the Openload links limit.
+                else:
+                    quality = 'SD'
+
+                hoster = host_url.split('//', 1)[1].replace('www.', '', 1)
+                hoster = hoster[ : hoster.find('/')]
+                sources.append(
+                    {
+                        'source': hoster,
+                        'quality': quality,
+                        'language': 'en',
+                        'url': host_url,
+                        'direct': False,
+                        'debridonly': False
+                    }
+                )
+        return sources
+
 
     def resolve(self, url):
-        try:
-            h = urlparse.urlparse(url.strip().lower()).netloc
-
-            r = client.request(url)
-            r = r.rsplit('"underplayer"')[0].rsplit("'underplayer'")[0]
-
-            u = re.findall('\'(.+?)\'', r) + re.findall('\"(.+?)\"', r)
-            u = [client.replaceHTMLCodes(i) for i in u]
-            u = [i for i in u if i.startswith('http') and not h in i]
-
-            url = u[-1].encode('utf-8')
+        if "google" in url:
+            return directstream.googlepass(url)
+        else:
             return url
-        except:
-            return
 
-    def __search(self, imdb, titles, year):
+
+    def _ajax_post(self, query):
         try:
-            q = self.search_link % urllib.quote_plus(cleantitle.query(titles[0]))
-            q = urlparse.urljoin(self.base_link, q)
-
-            t = [cleantitle.get(i) for i in set(titles) if i]
-            y = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1), '0']
-
-            r = client.request(q)
-
-            r = dom_parser.parse_dom(r, 'tr', attrs={'id': re.compile('coverPreview.+?')})
-            r = [(dom_parser.parse_dom(i, 'a', req='href'), dom_parser.parse_dom(i, 'div', attrs={'style': re.compile('.+?')}), dom_parser.parse_dom(i, 'img', req='src')) for i in r]
-            r = [(i[0][0].attrs['href'].strip(), i[0][0].content.strip(), i[1], i[2]) for i in r if i[0] and i[2]]
-            r = [(i[0], i[1], [x.content for x in i[2] if x.content.isdigit() and len(x.content) == 4], i[3]) for i in r]
-            r = [(i[0], i[1], i[2][0] if i[2] else '0', i[3]) for i in r]
-            r = [i for i in r if any('us_flag' in x.attrs['src'] for x in i[3])]
-            r = [(i[0], i[1], i[2], [re.findall('(\d+)', x.attrs['src']) for x in i[3] if 'smileys' in x.attrs['src']]) for i in r]
-            r = [(i[0], i[1], i[2], [x[0] for x in i[3] if x]) for i in r]
-            r = [(i[0], i[1], i[2], int(i[3][0]) if i[3] else 0) for i in r]
-            r = sorted(r, key=lambda x: x[3])[::-1]
-            r = [(i[0], i[1], i[2], re.findall('\((.+?)\)$', i[1])) for i in r]
-            r = [(i[0], i[1], i[2]) for i in r if not i[3]]
-            r = [i for i in r if i[2] in y]
-            r = sorted(r, key=lambda i: int(i[2]), reverse=True)  # with year > no year
-
-            r = [(client.replaceHTMLCodes(i[0]), i[1], i[2]) for i in r]
-
-            match = [i[0] for i in r if cleantitle.get(i[1]) in t and year == i[2]]
-
-            match2 = [i[0] for i in r]
-            match2 = [x for y, x in enumerate(match2) if x not in match2[:y]]
-            if match2 == []: return
-
-            for i in match2[:5]:
-                try:
-                    if match: url = match[0]; break
-                    r = client.request(urlparse.urljoin(self.base_link, i))
-                    r = re.findall('(tt\d+)', r)
-                    if imdb in r: url = i; break
-                except:
-                    pass
-
-            return source_utils.strip_domain(url)
+            data = {'limit': 15, 'q': query, 'timestamp': int(time() * 1000)}
+            r = requests.post(self.search_link, data=data, headers=self.search_headers, timeout=8)
         except:
-            return
+            r = type('FailedResponse', (object,), {'ok': False})
 
-    def __get_base_url(self, fallback):
-        try:
-            for domain in self.domains:
-                try:
-                    url = 'http://%s' % domain
-                    r = client.request(url, limit=1, timeout='10')
-                    r = dom_parser.parse_dom(r, 'meta', attrs={'name': 'author'}, req='content')
-                    if r and 'movie4k.to' in r[0].attrs.get('content').lower():
-                        return url
-                except:
-                    pass
-        except:
-            pass
+        if r.ok and r.text != 'Restricted access':
+            json_data = r.json()
+            return json_data if (len(json_data) > 1 or json_data[0]['meta'].lower() != 'more') else ()
+        else:
+            return ()
 
-        return fallback
+
+    def _error(self, e):
+        xbmc.log('DAREWATCH Error > ' + repr(e), xbmc.LOGERROR)
+
+
+    def _debug(self, name, val):
+        xbmc.log('DAREWATCH Debug > %s %s' % (name, repr(val)), xbmc.LOGWARNING)

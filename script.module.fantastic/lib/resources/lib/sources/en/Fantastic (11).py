@@ -17,86 +17,98 @@
 
 '''
 
-import re,traceback,urllib,urlparse,json
+import re,urllib,urlparse
 
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
-from resources.lib.modules import control
-from resources.lib.modules import log_utils
-from resources.lib.modules import source_utils
+from resources.lib.modules import directstream
+from resources.lib.modules import cache
 from resources.lib.modules import debrid
 
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['bestrls.xyz']
-        self.base_link = 'http://bestrls.xyz/'
-        self.search_link = '?s=%s+%s&go=Search'
+        self.domains = ['seriesonline8.co']
+        self.base_link = 'https://www2.seriesonline8.co/'
+        self.search_link = '/movie/search/%s'
+
+    def matchAlias(self, title, aliases):
+        try:
+            for alias in aliases:
+                if cleantitle.get(title) == cleantitle.get(alias['title']):
+                    return True
+        except:
+            return False
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            pages = []
-            scrape_title = cleantitle.geturl(title).replace('-', '+')
-            start_url = urlparse.urljoin(self.base_link, self.search_link % (scrape_title, year))
-
-            html = client.request(start_url)
-            results = client.parseDOM(html, 'h2', attrs={'class':'entry-title'})
-            for content in results:
-                found_link = client.parseDOM(content, 'a', ret='href')[0]
-                if self.base_link in found_link:
-                    if cleantitle.get(title) in cleantitle.get(found_link):
-                        if year in found_link:
-                            pages.append(found_link)
-            return pages
+            aliases.append({'country': 'us', 'title': title})
+            url = {'imdb': imdb, 'title': title, 'year': year, 'aliases': aliases}
+            url = urllib.urlencode(url)
+            return url
         except:
-            failure = traceback.format_exc()
-            log_utils.log('ALLRLS - Exception: \n' + str(failure))
-            return pages
+            return        
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            data = {'tvshowtitle': tvshowtitle, 'year': year}
-            return urllib.urlencode(data)
+            aliases.append({'country': 'us', 'title': tvshowtitle})
+            url = {'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'year': year, 'aliases': aliases}
+            url = urllib.urlencode(url)
+            return url
         except:
-            failure = traceback.format_exc()
-            log_utils.log('ALLRLS - Exception: \n' + str(failure))
             return
+
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
         try:
-            pages = []
-            data = urlparse.parse_qs(url)
-            data = dict((i, data[i][0]) for i in data)
-            data.update({'season': season, 'episode': episode, 'title': title, 'premiered': premiered})
-
-            season_base = 'S%02dE%02d' % (int(data['season']), int(data['episode']))
-            query = re.sub('(\\\|/| -|:|;|\*|\?|"|\'|<|>|\|)', '', season_base)
-            tvshowtitle = data['tvshowtitle']
-            tvshowtitle = re.sub('(\\\|/| -|:|;|\*|\?|"|\'|<|>|\|)', '', tvshowtitle)
-
-            query = query.replace("&", "and")
-            query = query.replace("  ", " ")
-            query = query.replace(" ", "+")
-            tvshowtitle = tvshowtitle.replace("&", "and")
-            tvshowtitle = tvshowtitle.replace("  ", " ")
-            tvshowtitle = tvshowtitle.replace(" ", "+")
-
-            start_url = urlparse.urljoin(self.base_link, self.search_link % (tvshowtitle, query))
-
-            html = client.request(start_url)
-            results = client.parseDOM(html, 'h2', attrs={'class':'entry-title'})
-            for content in results:
-                found_link = client.parseDOM(content, 'a', ret='href')[0]
-                if self.base_link in found_link:
-                    if cleantitle.get(data['tvshowtitle']) in cleantitle.get(found_link):
-                        if cleantitle.get(season_base) in cleantitle.get(found_link):
-                            pages.append(found_link)
-            return pages
+            if url == None: return
+            url = urlparse.parse_qs(url)
+            url = dict([(i, url[i][0]) if url[i] else (i, '') for i in url])
+            url['title'], url['premiered'], url['season'], url['episode'] = title, premiered, season, episode
+            url = urllib.urlencode(url)
+            return url
         except:
-            failure = traceback.format_exc()
-            log_utils.log('ALLRLS - Exception: \n' + str(failure))
-            return pages
+            return
+
+    def searchShow(self, title, season, aliases, headers):
+        try:
+            title = cleantitle.normalize(title)
+            search = '%s Season %01d' % (title, int(season))
+            url = urlparse.urljoin(self.base_link, self.search_link % cleantitle.geturl(search))
+            r = client.request(url, headers=headers, timeout='15')
+            r = client.parseDOM(r, 'div', attrs={'class': 'ml-item'})
+            r = zip(client.parseDOM(r, 'a', ret='href'), client.parseDOM(r, 'a', ret='title'))
+            r = [(i[0], i[1], re.findall('(.*?)\s+-\s+Season\s+(\d)', i[1])) for i in r]
+            r = [(i[0], i[1], i[2][0]) for i in r if len(i[2]) > 0]
+            url = [i[0] for i in r if self.matchAlias(i[2][0], aliases) and i[2][1] == season][0]
+            url = urlparse.urljoin(self.base_link, '%s/watching.html' % url)
+            return url
+        except:
+            return
+
+    def searchMovie(self, title, year, aliases, headers):
+        try:
+            title = cleantitle.normalize(title)
+            url = urlparse.urljoin(self.base_link, self.search_link % cleantitle.geturl(title))
+            r = client.request(url, headers=headers, timeout='15')
+            r = client.parseDOM(r, 'div', attrs={'class': 'ml-item'})
+            r = zip(client.parseDOM(r, 'a', ret='href'), client.parseDOM(r, 'a', ret='title'))
+            results = [(i[0], i[1], re.findall('\((\d{4})', i[1])) for i in r]
+            try:
+                r = [(i[0], i[1], i[2][0]) for i in results if len(i[2]) > 0]
+                url = [i[0] for i in r if self.matchAlias(i[1], aliases) and (year == i[2])][0]
+            except:
+                url = None
+                pass
+
+            if (url == None):
+                url = [i[0] for i in results if self.matchAlias(i[1], aliases)][0]
+
+            url = urlparse.urljoin(self.base_link, '%s/watching.html' % url)
+            return url
+        except:
+            return
 
     def sources(self, url, hostDict, hostprDict):
         try:
@@ -104,36 +116,60 @@ class source:
 
             if url == None: return sources
 
-            hostDict = hostprDict + hostDict
-            pages = url
-            for page_url in pages:
-                r = client.request(page_url)
-                urls = client.parseDOM(r, 'a', ret = 'href')
-                for url in urls:
+            data = urlparse.parse_qs(url)
+            data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
+            aliases = eval(data['aliases'])
+            headers = {}
+
+            if 'tvshowtitle' in data:
+                ep = data['episode']
+                url = '%s/film/%s-season-%01d/watching.html?ep=%s' % (self.base_link, cleantitle.geturl(data['tvshowtitle']), int(data['season']), ep)
+                r = client.request(url, headers=headers, timeout='10', output='geturl')
+
+                if url == None:
+                    url = self.searchShow(data['tvshowtitle'], data['season'], aliases, headers)
+
+            else:
+                url = self.searchMovie(data['title'], data['year'], aliases, headers)
+
+            if url == None: raise Exception()
+
+            r = client.request(url, headers=headers, timeout='10')
+            r = client.parseDOM(r, 'div', attrs={'class': 'les-content'})
+            if 'tvshowtitle' in data:
+                ep = data['episode']
+                links = client.parseDOM(r, 'a', attrs={'episode-data': ep}, ret='player-data')
+            else:
+                links = client.parseDOM(r, 'a', ret='player-data')
+
+            for link in links:
+                if '123movieshd' in link or 'seriesonline' in link:
+                    r = client.request(link, headers=headers, timeout='10')
+                    r = re.findall('(https:.*?redirector.*?)[\'\"]', r)
+
+                    for i in r:
+                        try: sources.append({'source': 'gvideo', 'quality': directstream.googletag(i)[0]['quality'], 'language': 'en', 'url': i, 'direct': True, 'debridonly': False})
+                        except: pass
+                else:
                     try:
-                        host = re.findall('([\w]+[.][\w]+)$', urlparse.urlparse(url.strip().lower()).netloc)[0]
+                        host = re.findall('([\w]+[.][\w]+)$', urlparse.urlparse(link.strip().lower()).netloc)[0]
                         if not host in hostDict: raise Exception()
-
-                        if any(x in url for x in ['.rar', '.zip', '.iso']): continue
-
-                        quality, info = source_utils.get_release_quality(url)
-
-                        info = []
-
-                        if any(x in url.upper() for x in ['HEVC', 'X265', 'H265']): info.append('HEVC')
-
-                        info = ' | '.join(info)
-
                         host = client.replaceHTMLCodes(host)
                         host = host.encode('utf-8')
-                        sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url, 'info': info, 'direct': False, 'debridonly': False})
+
+                        sources.append({'source': host, 'quality': 'SD', 'language': 'en', 'url': link, 'direct': False, 'debridonly': False})
                     except:
                         pass
+
             return sources
         except:
-            failure = traceback.format_exc()
-            log_utils.log('ALLRLS - Exception: \n' + str(failure))
             return sources
 
+
     def resolve(self, url):
-        return url
+        if "google" in url:
+            return directstream.googlepass(url)
+        else:
+            return url
+
+

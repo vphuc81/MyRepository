@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 '''
 	
     ***FSPM was here*****
@@ -18,215 +16,212 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
+import re
+import requests
+from bs4 import BeautifulSoup
+from datetime import datetime
+try:
+    from urllib import quote
+except ImportError:
+    from urllib.parse import quote
 
-import re,urlparse,random,urllib,time
+import xbmc
+from resources.lib.modules import debrid
+from resources.lib.modules.client import randomagent
 
-from resources.lib.modules import cleantitle
-from resources.lib.modules import client
-from resources.lib.modules import cache
-from resources.lib.modules import dom_parser2
-from resources.lib.modules import log_utils
-from resources.lib.modules import cfscrape
-from resources.lib.modules import workers
 
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['www.icefilms.info']
-        self.base_link = 'https://www.icefilms.info'
-        self.search_link = urlparse.urljoin(self.base_link, 'search.php?q=%s+%s&x=0&y=0')
-        self.list_url = urlparse.urljoin(self.base_link, 'membersonly/components/com_iceplayer/video.php?h=374&w=631&vid=%s&img=')
-        self.post = 'id=%s&s=%s&iqs=&url=&m=%s&cap= &sec=%s&t=%s'
-                       
+        self.domains = ['vidics.ch, vidics.to']
+
+        self.BASE_URL = 'https://www.vidics.to'
+        self.QUICK_SEARCH_URL = self.BASE_URL + '/searchSuggest/{category}/{query}'
+        self.SLOW_SEARCH_URL = self.BASE_URL + '/Category-{category}/Genre-Any/{year}-{year}/Letter-Any/ByPopularity/1/Search-{query}.htm'
+        self.EPISODE_PATH = '-Season-{season}-Episode-{episode}'
+
+
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            clean_title = cleantitle.geturl(title)
-            search_url = self.search_link % (clean_title.replace('-','+'), year)
-            self.scraper = cfscrape.create_scraper()
-            r = self.scraper.get(search_url).content
-            if 'To proceed, you must allow popups' in r:
-                for i in range(0, 5):
-                    r = self.scraper.get(search_url).content
-                    if 'To proceed, you must allow popups' not in r: break  
-            r = dom_parser2.parse_dom(r, 'div', attrs={'class':'title'})
+            return self._getSearchData(title, aliases, year, self._createSession(), season=None, episode=None)
+        except:
+            self._logException()
+            return None
 
-            r = [dom_parser2.parse_dom(i, 'a', req='href') for i in r]
-            r = [(urlparse.urljoin(self.base_link, i[0].attrs['href'])) for i in r if title.lower() in i[0].content.lower() and year in i[0].content]
-            url = r[0]
-            url = url[:-1]
-            url = url.split('?v=')[1]
-            url = self.list_url % url
-            return url
-        except Exception:
-            return
-            
+
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            clean_title = cleantitle.geturl(tvshowtitle)
-            search_url = self.search_link % (clean_title.replace('-','+'), year)
-            self.scraper = cfscrape.create_scraper()
-            r = self.scraper.get(search_url).content
-
-            if 'To proceed, you must allow popups' in r:
-                for i in range(0, 5):
-                    r = self.scraper.get(search_url).content
-                    if 'To proceed, you must allow popups' not in r: break
-            r = dom_parser2.parse_dom(r, 'div', attrs={'class': 'title'})
-
-            r = [dom_parser2.parse_dom(i, 'a', req='href') for i in r]
-            r = [(urlparse.urljoin(self.base_link, i[0].attrs['href'])) for i in r if tvshowtitle.lower() in i[0].content.lower() and year in i[0].content]
-            url = r[0]
-            return url
+            return tvshowtitle, aliases, year
         except:
-            return
-            
-    def episode(self, url, imdb, tvdb, title, premiered, season, episode):
+            self._logException()
+            return None
+
+
+    def episode(self, data, imdb, tvdb, title, premiered, season, episode):
         try:
-            if not url: return
-            sep = '%dx%02d' % (int(season), int(episode))
-            r = self.scraper.get(url).content
-            if 'To proceed, you must allow popups' in r:
-                for i in range(0, 5):
-                    r = self.scraper.get(url).content
-                    if 'To proceed, you must allow popups' not in r: break    
-            r = dom_parser2.parse_dom(r, 'span', attrs={'class': 'list'})
-            r1 = dom_parser2.parse_dom(r, 'br')
-            r1 = [dom_parser2.parse_dom(i, 'a', req='href') for i in r1]
-            try:
-                if int(season) == 1 and int(episode) == 1:
-                    url = dom_parser2.parse_dom(r, 'a', req='href')[1].attrs['href']
-                else:
-                    for i in r1:
-                        if sep in i[0].content:
-                            url = urlparse.urljoin(self.base_link, i[0].attrs['href'])
-            except:
-                pass
-            url = url[:-1]
-            url = url.split('?v=')[1]
-            url = self.list_url % url
-            return url
+            tvshowtitle, aliases, year = data
+            return self._getSearchData(tvshowtitle, aliases, year, self._createSession(), int(season), int(episode))
         except:
-            return
-            
-    def sources(self, url, hostDict, hostprDict):
-    
-        self._sources = []
-        try:                
-            if not url: return self._sources
-            
-            self.hostDict = hostDict
-            self.hostprDict = hostprDict
-   
-            referer = url
-            
-            html = self.scraper.get(url).content
-            if 'To proceed, you must allow popups' in html:
-                for i in range(0, 5):
-                    html = self.scraper.get(url).content
-                    if 'To proceed, you must allow popups' not in html: break
-            match = re.search('lastChild\.value="([^"]+)"(?:\s*\+\s*"([^"]+))?', html)
-            
-            secret = ''.join(match.groups(''))
-            match = re.search('"&t=([^"]+)', html)
-            t = match.group(1)
-            match = re.search('(?:\s+|,)s\s*=(\d+)', html)
-            s_start = int(match.group(1))
-            
-            match = re.search('(?:\s+|,)m\s*=(\d+)', html)
-            m_start = int(match.group(1))
-            
-            threads = []
-            
-            for fragment in dom_parser2.parse_dom(html, 'div', {'class': 'ripdiv'}):
-                match = re.match('<b>(.*?)</b>', fragment.content)
-                if match:
-                    q_str = match.group(1).replace(' ', '').upper()
-                    if '1080' in q_str: quality = '1080p'
-                    elif '720' in q_str: quality = '720p'
-                    elif '4k' in q_str.lower(): quality = '4K'
-                    else: quality = 'SD'
-                else:
-                    quality = 'SD'
-                                
-                pattern = '''onclick='go\((\d+)\)'>([^<]+)(<span.*?)</a>'''
-                for match in re.finditer(pattern, fragment.content):
-                    link_id, label, host_fragment = match.groups()
-                    s = s_start + random.randint(3, 1000)
-                    m = m_start + random.randint(21, 1000)                            
-                    post = self.post % (link_id, s, m, secret, t)
-                    url = urlparse.urljoin(self.base_link, 'membersonly/components/com_iceplayer/video.phpAjaxResp.php?s=%s&t=%s' % (link_id, t))
-                                        
-                    threads.append(workers.Thread(self._get_sources, url, post, host_fragment, quality, referer))
-            
-            [i.start() for i in threads]
-            [i.join() for i in threads]
+            self._logException()
+            return None
 
-            alive = [x for x in threads if x.is_alive() == True]
-            while alive:
-                alive = [x for x in threads if x.is_alive() == True]
-                time.sleep(0.1)
-            return self._sources
-        except:
-            return self._sources
-            
-    def _get_sources(self, url, post, host_fragment, quality, referer):
+
+    def sources(self, data, hostDict, hostprDict):
         try:
-            url = {'link': url, 'post': post, 'referer': referer}
-            url = urllib.urlencode(url)
-
-            valid = True
-            host_size = re.sub('(</?[^>]*>)', '', host_fragment)
-            host = re.search('([a-zA-Z]+)', host_size)
-            host = host.group(1)
-            if host.lower() in str(self.hostDict): debrid_only = False
-            elif host.lower() in str(self.hostprDict): debrid_only = True
-            else: valid = False
+            session = self._createSession({'UA': data['UA']})
+            r = self._sessionRequest(data['pageURL'], session, 1500)
+            if not r.ok:
+                self._logException('Sources page request failed: ' + pageURL)
+                return None
             
-            if valid:
-                info = []
+            soup = BeautifulSoup(r.content, 'html.parser')
+            for langDIV in soup.findAll('div', class_='lang'):
+                # Find the DIV with English-dubbed hosts.
+                if next(langDIV.strings, None).strip().lower() == 'english':
+                    userAgent = data['UA']
+                    pageURL = data['pageURL']
+                    sources = [
+                        {
+                            'source': a.text.strip().lower(),
+                            'quality': 'SD',
+                            'language': 'en',
+                            'url': {
+                                'pageURL': self.BASE_URL + a['href'],
+                                'UA': userAgent,
+                                'referer': pageURL
+                            },
+                            'direct': False,
+                            'debridonly': False
+                        }
+                        for a in langDIV.findAll('a', href=True)
+                    ]
+                    return sources
+            return None
+        except:
+            self._logException()
+            return None
+
+
+    def resolve(self, data):
+        session = self._createSession({'UA': data['UA'], 'referer': data['referer']})
+
+        r = self._sessionRequest(data['pageURL'], session, 1500)
+        if not r.ok:
+            self._logException('Resolve request failed' + data['pageURL'])
+            return None
+        
+        match = re.search('movie_link1.*?<a.*?href=\"(.*?)\"', r.text, re.DOTALL)
+        if match:
+            return match.group(1)
+        else:
+            return None
+
+
+    def _sessionRequest(self, url, session, delayAmount, data=None):
+        try:
+            startTime = datetime.now() if delayAmount else None
+            if data:
+                r = session.post(url, data=data, timeout=8)
+            else:
+                r = session.get(url, timeout=8)
+
+            if delayAmount:
+                elapsed = int((datetime.now() - startTime).total_seconds() * 1000)
+                if elapsed < delayAmount and elapsed > 100:
+                    xbmc.sleep(delayAmount - elapsed)
+            return r
+        except:
+            return type('FailedResponse', (object,), {'ok': False})
+
+
+    def _createSession(self, customHeaders={}):
+        # Create a 'requests.Session' and try to spoof a header from a web browser.
+        session = requests.Session()
+        session.headers.update(
+            {
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'User-Agent': customHeaders.get('UA', randomagent()),
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Referer': customHeaders.get('referer', self.BASE_URL + '/'),
+                'DNT': '1'
+            }
+        )
+        return session
+
+
+    def _getSearchData(self, title, aliases, year, session, season, episode):
+        try:
+            query = quote(title.lower())
+
+            # Prepare the session and make the search request.
+            oldAccept = session.headers['Accept']
+            session.headers.update({'Accept': '*/*', 'X-Requested-With': 'XMLHttpRequest'})
+            searchURL = self.QUICK_SEARCH_URL.format(
+                category='TvShows' if episode else 'Movies', query=query
+            )
+            r = self._sessionRequest(searchURL, session, 1000, {'ajax': '1'})
+            if not r.ok:
+                return None
                 
-                try:
-                    size = re.findall('((?:\d+\.\d+|\d+\,\d+|\d+) (?:GB|GiB|MB|MiB))', host_size)[-1]
-                    div = 1 if size.endswith(('GB', 'GiB')) else 1024
-                    size = float(re.sub('[^0-9|/.|/,]', '', size)) / div
-                    size = '%.2f GB' % size
-                    info.append(size)
-                except:
-                    pass
+            # Restore the session headers.
+            session.headers['Accept'] = oldAccept
+            del session.headers['X-Requested-With']
 
-                info = ' | '.join(info)
-                self._sources.append({
-                    'source': host,
-                    'info': info,
-                    'quality': quality,
-                    'language': 'en',
-                    'url': url,
-                    'direct': False,
-                    'debridonly': debrid_only
-                })
-        except:
-            pass
+            possibleTitles = set(
+                (title.lower(),) + tuple((alias['title'].lower() for alias in aliases) if aliases else ())
+            )
+            
+            # Using the pop-up search results uses way less bandwidth from them, like 1 KB (instead of 43 KB with
+            # the traditional search page).
+            # But when the search results have multiple entries with the same title (like the TV show "The Flash"
+            # or the movie "The Dark Knight"), need to use an extra search with the year to differentiate them.
+            
+            bestURL = None
+            
+            soup = BeautifulSoup(r.content, 'html.parser')
+            for a in soup.findAll('a', href=True):
+                if a.text.lower() in possibleTitles:
+                    if not bestURL:
+                        bestURL = self.BASE_URL + a['href']
+                    else:
+                        bestURL = self._extraSearch(query, year, (episode == None), session, bestURL)
+                        break
 
-    def resolve(self, url):
-        try:
-            scraper = cfscrape.create_scraper()
-            data_dict = urlparse.parse_qs(url)
-            data_dict = dict([(i, data_dict[i][0]) if data_dict[i] else (i, '') for i in data_dict])
-            link = data_dict['link']
-            post = data_dict['post']
-            referer = data_dict['referer']
-            for i in range(0, 5):
-                scraper.get(referer).content
-                getheaders =  {'Host': 'icefilms.unblocked.vet',
-                                'Origin': 'https://icefilms.unblocked.vet/',
-                                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36',
-                                'Content-type': 'application/x-www-form-urlencoded',
-                                'Referer': referer}
-                r = scraper.post(link, data=post, headers=getheaders).text
-                match = re.search('url=(http.*)', r)
-                if match: 
-                    return urllib.unquote_plus(match.group(1))
-            return
+            if bestURL:
+                if episode:
+                    bestURL += self.EPISODE_PATH.format(season=season, episode=episode)
+                return {'pageURL': bestURL, 'UA': session.headers['User-Agent']}
+            else:
+                return None # No results found.
         except:
-            return
+            self._logException()
+            return None
+            
+            
+    def _extraSearch(self, query, year, isMovie, session, bestURL):
+        searchURL = self.SLOW_SEARCH_URL.format(category='Movies' if isMovie else 'TvShows', year=year, query=query)
+        r = self._sessionRequest(searchURL, session, 1500)
+        if not r.ok:
+            return bestURL
+            
+        soup = BeautifulSoup(r.content, 'html.parser')
+        resultsTD = soup.find('td', id='searchResults')
+        if resultsTD:
+            a = resultsTD.find('a', itemprop=True)
+            if a:
+                return self.BASE_URL + a['href']            
+        return bestURL        
+
+
+    def _debug(self, name, val=None):
+        xbmc.log('VIDICS Debug > ' + name + (' %s' % repr(val) if val else ''), xbmc.LOGWARNING)
+
+
+    def _logException(self, text=None):
+        return # Comment this return statement to output errors to the Kodi log, useful for debugging this script.
+        if text:
+            xbmc.log('VIDICS Error >' + text, xbmc.LOGERROR)
+        else:
+            import traceback
+            xbmc.log(traceback.format_exc(), xbmc.LOGERROR)

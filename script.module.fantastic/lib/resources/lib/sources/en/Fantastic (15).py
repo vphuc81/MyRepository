@@ -17,20 +17,21 @@
 
 '''
 
-import re,urllib,urlparse
+import re,traceback,urllib,urlparse
 
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import debrid
 from resources.lib.modules import source_utils
-from resources.lib.modules import dom_parser2
+from resources.lib.modules import log_utils
+from resources.lib.modules import debrid
 
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['300mbfilms.co']
-        self.base_link = 'https://www.300mbfilms.co/'
+        self.domains = ['2ddl.io']
+        self.base_link = 'http://2ddl.io/'
         self.search_link = '/search/%s/feed/rss2/'
 
     def movie(self, imdb, title, localtitle, aliases, year):
@@ -39,7 +40,10 @@ class source:
             url = urllib.urlencode(url)
             return url
         except:
+            failure = traceback.format_exc()
+            log_utils.log('2DDL - Exception: \n' + str(failure))
             return
+
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
@@ -47,11 +51,13 @@ class source:
             url = urllib.urlencode(url)
             return url
         except:
+            failure = traceback.format_exc()
+            log_utils.log('2DDL - Exception: \n' + str(failure))
             return
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
         try:
-            if url is None: return
+            if url == None: return
 
             url = urlparse.parse_qs(url)
             url = dict([(i, url[i][0]) if url[i] else (i, '') for i in url])
@@ -59,14 +65,15 @@ class source:
             url = urllib.urlencode(url)
             return url
         except:
+            failure = traceback.format_exc()
+            log_utils.log('2DDL - Exception: \n' + str(failure))
             return
-
 
     def sources(self, url, hostDict, hostprDict):
         try:
             sources = []
 
-            if url is None: return sources
+            if url == None: return sources
 
             if debrid.status() is False: raise Exception()
 
@@ -77,15 +84,16 @@ class source:
 
             hdlr = 'S%02dE%02d' % (int(data['season']), int(data['episode'])) if 'tvshowtitle' in data else data['year']
 
-            query = '%s S%02dE%02d' % (data['tvshowtitle'], int(data['season']), int(data['episode'])) if 'tvshowtitle' in data else '%s %s' % (data['title'], data['year'])
+            query = '%s S%02dE%02d' % (
+            data['tvshowtitle'], int(data['season']), int(data['episode'])) if 'tvshowtitle' in data else '%s %s' % (
+            data['title'], data['year'])
             query = re.sub('(\\\|/| -|:|;|\*|\?|"|\'|<|>|\|)', ' ', query)
 
             url = self.search_link % urllib.quote_plus(query)
             url = urlparse.urljoin(self.base_link, url)
 
-            r = client.request(url)
-
-            posts = client.parseDOM(r, 'item')
+            html = client.request(url)
+            posts = client.parseDOM(html, 'item')
 
             hostDict = hostprDict + hostDict
 
@@ -94,23 +102,30 @@ class source:
             for post in posts:
                 try:
                     t = client.parseDOM(post, 'title')[0]
-                    u = client.parseDOM(post, 'link')[0]
-                    s = re.findall('((?:\d+\.\d+|\d+\,\d+|\d+)\s*(?:GiB|MiB|GB|MB))', t)
-                    s = s[0] if s else '0'
-
-                    items += [(t, u, s) ]
-
+                    u = client.parseDOM(post, 'a', ret='href')
+                    s = re.search('((?:\d+\.\d+|\d+\,\d+|\d+)\s*(?:GB|GiB|MB|MiB))', post)
+                    s = s.groups()[0] if s else '0'
+                    items += [(t, i, s) for i in u]
                 except:
                     pass
 
-            urls = []
             for item in items:
-
                 try:
+
+                    url = item[1]
+                    if any(x in url for x in ['.rar', '.zip', '.iso']): raise Exception()
+                    url = client.replaceHTMLCodes(url)
+                    url = url.encode('utf-8')
+
+                    valid, host = source_utils.is_host_valid(url, hostDict)
+                    if not valid: raise Exception()
+                    host = client.replaceHTMLCodes(host)
+                    host = host.encode('utf-8')
+
                     name = item[0]
                     name = client.replaceHTMLCodes(name)
 
-                    t = re.sub('(\.|\(|\[|\s)(\d{4}|S\d*E\d*|S\d*|3D)(\.|\)|\]|\s|)(.+|)', '', name)
+                    t = re.sub('(\.|\(|\[|\s)(\d{4}|S\d*E\d*|S\d*|3D)(\.|\)|\]|\s|)(.+|)', '', name, flags=re.I)
 
                     if not cleantitle.get(t) == cleantitle.get(title): raise Exception()
 
@@ -118,13 +133,12 @@ class source:
 
                     if not y == hdlr: raise Exception()
 
-                    quality, info = source_utils.get_release_quality(name, item[1])
-                    if any(x in quality for x in ['CAM', 'SD']): continue
+                    quality, info = source_utils.get_release_quality(name, url)
 
                     try:
-                        size = re.sub('i', '', item[2])
-                        div = 1 if size.endswith('GB') else 1024
-                        size = float(re.sub('[^0-9|/.|/,]', '', size))/div
+                        size = re.findall('((?:\d+\.\d+|\d+\,\d+|\d+)\s*(?:GB|GiB|MB|MiB))', item[2])[-1]
+                        div = 1 if size.endswith(('GB', 'GiB')) else 1024
+                        size = float(re.sub('[^0-9|/.|/,]', '', size)) / div
                         size = '%.2f GB' % size
                         info.append(size)
                     except:
@@ -132,62 +146,19 @@ class source:
 
                     info = ' | '.join(info)
 
-                    url = item[1]
-                    links = self.links(url)
-                    urls += [(i, quality, info) for i in links]
-
+                    sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url, 'info': info,
+                                    'direct': False, 'debridonly': False})
                 except:
                     pass
 
-            for item in urls:
-
-                if 'earn-money' in item[0]: continue
-                if any(x in item[0] for x in ['.rar', '.zip', '.iso']): continue
-                url = client.replaceHTMLCodes(item[0])
-                url = url.encode('utf-8')
-
-                valid, host = source_utils.is_host_valid(url, hostDict)
-                if not valid: continue
-                host = client.replaceHTMLCodes(host)
-                host = host.encode('utf-8')
-
-                sources.append({'source': host, 'quality': item[1], 'language': 'en', 'url': url, 'info': item[2], 'direct': False, 'debridonly': True})
+            check = [i for i in sources if not i['quality'] == 'CAM']
+            if check: sources = check
 
             return sources
         except:
+            failure = traceback.format_exc()
+            log_utils.log('2DDL - Exception: \n' + str(failure))
             return sources
-
-    def links(self, url):
-        urls = []
-        try:
-            if url is None: return
-            r = client.request(url)
-            r = client.parseDOM(r, 'div', attrs={'class': 'entry'})
-            r = client.parseDOM(r, 'a', ret='href')
-            r1 = [(i) for i in r if 'money' in i][0]
-            r = client.request(r1)
-            r = client.parseDOM(r, 'div', attrs={'id': 'post-\d+'})[0]
-
-            if 'enter the password' in r:
-                plink= client.parseDOM(r, 'form', ret='action')[0]
-
-                post = {'post_password': '300mbfilms', 'Submit': 'Submit'}
-                send_post = client.request(plink, post=post, output='cookie')
-                link = client.request(r1, cookie=send_post)
-            else:
-                link = client.request(r1)
-
-            link = re.findall('<strong>Single(.+?)</tr', link, re.DOTALL)[0]
-            link = client.parseDOM(link, 'a', ret='href')
-            link = [(i.split('=')[-1]) for i in link]
-            for i in link:
-                urls.append(i)
-
-            return urls
-        except:
-            pass
 
     def resolve(self, url):
         return url
-
-

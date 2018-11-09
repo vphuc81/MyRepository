@@ -16,72 +16,63 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 '''
-
-import re,traceback,urllib,urlparse
-
+import re
+import urllib
+import urlparse
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
-from resources.lib.modules import log_utils
+from resources.lib.modules import proxy
 from resources.lib.modules import debrid
 
 class source:
-    def __init__(self):
-        self.priority = 1
-        self.language = ['en']
-        self.domains = ['freemoviedownloads6.com']
-        self.base_link = 'http://freemoviedownloads6.com/'
-        self.search_link = '%s/search?q=freemoviedownloads6.com+%s+%s'
-        self.goog = 'https://www.google.co.uk'
+	def __init__(self):
+		self.priority = 1
+		self.language = ['en']
+		self.domains = ['reddit.com']
+		self.base_link = 'https://www.reddit.com/user/nbatman/m/streaming2/search?q=%s&restrict_sr=on'
 
-    def movie(self, imdb, title, localtitle, aliases, year):
-        try:
-            scrape = title.lower().replace(' ','+').replace(':', '')
+	def movie(self, imdb, title, localtitle, aliases, year):
+		try:
+			title = cleantitle.geturl(title)
+			title = title.replace('-','+')
+			query = '%s+%s' % (title,year)
+			url = self.base_link % query
+			return url
+		except:
+			return
 
-            start_url = self.search_link %(self.goog,scrape,year)
+	def sources(self, url, hostDict, hostprDict):
+		try:
+			sources = []
+			r = client.request(url)
+			try:
+				match = re.compile('class="search-title may-blank" >(.+?)</a>.+?<span class="search-result-icon search-result-icon-external"></span><a href="(.+?)://(.+?)/(.+?)" class="search-link may-blank" >').findall(r)
+				for info,http,host,ext in match: 
+					if '2160' in info: quality = '4K'
+					elif '1080' in info: quality = '1080p'
+					elif '720' in info: quality = 'HD'
+					elif '480' in info: quality = 'SD'
+					else: quality = 'SD'
+					
+					url = '%s://%s/%s' % (http,host,ext)
+					if 'google' in host: host = 'GDrive'
+					if 'Google' in host: host = 'GDrive'
+					if 'GOOGLE' in host: host = 'GDrive'
+					
+					sources.append({
+						'source': host,
+						'quality': quality,
+						'language': 'en',
+						'url': url,
+						'info': info,
+						'direct': False,
+						'debridonly': False
+					})
+			except:
+				return
+		except Exception:
+			return
+		return sources
 
-            html = client.request(start_url)
-            results = re.compile('href="(.+?)"',re.DOTALL).findall(html)
-            for url in results:
-                if self.base_link in url:
-                    if 'webcache' in url:
-                        continue
-                    if cleantitle.get(title) in cleantitle.get(url):
-                        chkhtml = client.request(url)
-                        chktitle = re.compile('<title>(.+?)</title>',re.DOTALL).findall(chkhtml)[0]
-                        if cleantitle.get(title) in cleantitle.get(chktitle):
-                            if year in chktitle:
-                                return url
-            return
-        except:
-            failure = traceback.format_exc()
-
-            return
-
-    def sources(self, url, hostDict, hostprDict):
-        try:
-            if url == None: return
-            sources = []
-            html = client.request(url)
-            html = html.split("type='video/mp4'")[1]
-            match = re.compile('href="(.+?)"',re.DOTALL).findall(html)
-            for link in match:
-                if '1080' in link:
-                    quality = '1080p'
-                elif '720' in link:
-                    quality = '720p'
-                elif '480' in link:
-                    quality = '480p'
-                else:
-                    quality = 'SD'
-                if '.mkv' in link:
-                    sources.append({'source': 'DirectLink', 'quality': quality, 'language': 'en', 'url': link, 'direct': True, 'debridonly': False})
-                if '.mp4' in link:
-                    sources.append({'source': 'DirectLink', 'quality': quality, 'language': 'en', 'url': link, 'direct': True, 'debridonly': False})
-            return sources
-        except:
-            failure = traceback.format_exc()
-
-            return
-
-    def resolve(self, url):
-        return url
+	def resolve(self, url):
+		return url

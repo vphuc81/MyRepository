@@ -17,27 +17,22 @@
 
 '''
 
-import re,urllib,urlparse,json,random,base64
+import re,urllib,urlparse,time,json
 
+from resources.lib.modules import control
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
-from resources.lib.modules import cache
 from resources.lib.modules import debrid
-
+from resources.lib.modules import source_utils
 
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['directdownload.tv']
-        self.base_link = 'https://directdownload.tv'
-        self.search_link = base64.b64decode('L2FwaT9rZXk9NEIwQkI4NjJGMjRDOEEyOSZrZXl3b3JkPQ==')
-        self.b_link = 'aHR0cDovL2lwdjYuaWNlZmlsbXMuaW5mbw=='
-        self.u_link = 'aHR0cDovL2lwdjYuaWNlZmlsbXMuaW5mby9tZW1iZXJzb25seS9jb21wb25lbnRzL2NvbV9pY2VwbGF5ZXIvdmlkZW8ucGhwP2g9Mzc0Jnc9NjMxJnZpZD0lcyZpbWc9'
-        self.r_link = 'aHR0cDovL2lwdjYuaWNlZmlsbXMuaW5mby9pcC5waHA/dj0lcyY='
-        self.j_link = 'aHR0cDovL2lwdjYuaWNlZmlsbXMuaW5mby9tZW1iZXJzb25seS9jb21wb25lbnRzL2NvbV9pY2VwbGF5ZXIvdmlkZW8ucGhwQWpheFJlc3AucGhwP3M9JXMmdD0lcw=='
-        self.p_link = 'aWQ9JXMmcz0lcyZpcXM9JnVybD0mbT0lcyZjYXA9KyZzZWM9JXMmdD0lcw=='
-
+        self.domains = ['gowatchseries.io','gowatchseries.co']
+        self.base_link = 'https://ww2.gowatchseries.co'
+        self.search_link = '/ajax-search.html?keyword=%s&id=-1'
+        self.search_link2 = '/search.html?keyword=%s'
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
@@ -70,115 +65,71 @@ class source:
             return
 
 
-    def request(self, url, post=None, cookie=None, referer=None, output='', close=True):
-        try:
-            headers = {'Accept': '*/*'}
-            if not cookie == None: headers['Cookie'] = cookie
-            if not referer == None: headers['Referer'] = referer
-            result = client.request(url, post=post, headers=headers, output=output, close=close)
-            print(result)
-            result = result.decode('iso-8859-1').encode('utf-8')
-            result = urllib.unquote_plus(result)
-            return(result)
-        except:
-            return
-
-
-    def directdl_cache(self, url):
-        try:
-            url = urlparse.urljoin(base64.b64decode(self.b_link), url)
-            print(url)
-            result = self.request(url)
-            print(result)
-            result = re.compile('id=(\d+)>.+?href=(.+?)>').findall(result)
-            result = [(re.sub('http.+?//.+?/','/', i[1]), 'tt' + i[0]) for i in result]
-            return(result)
-        except:
-            return
-
     def sources(self, url, hostDict, hostprDict):
         try:
             sources = []
 
             if url == None: return sources
 
-            if debrid.status() == False: raise Exception()
+            if not str(url).startswith('http'):
 
-            data = urlparse.parse_qs(url)
-            data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
+                data = urlparse.parse_qs(url)
+                data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
 
-            try:
-                if not 'tvshowtitle' in data: raise Exception()
+                title = data['tvshowtitle'] if 'tvshowtitle' in data else data['title']
+                if 'season' in data: season = data['season']
+                if 'episode' in data: episode = data['episode']
+                year = data['year']
 
-                links = []
+                r = client.request(self.base_link, output='extended', timeout='10')
+                cookie = r[4] ; headers = r[3] ; result = r[0]
+                headers['Cookie'] = cookie
 
-                f = ['S%02dE%02d' % (int(data['season']), int(data['episode']))]
-                t = re.sub('(\\\|/| -|:|;|\*|\?|"|\'|<|>|\|)', '', data['tvshowtitle'])
-                t = t.replace("&", "")
+                query = urlparse.urljoin(self.base_link, self.search_link % urllib.quote_plus(cleantitle.getsearch(title)))
+                r = client.request(query, headers=headers, XHR=True)
+                r = json.loads(r)['content']
+                r = zip(client.parseDOM(r, 'a', ret='href'), client.parseDOM(r, 'a'))
                 
-                q = self.search_link + urllib.quote_plus('%s %s' % (t, f[0]))
                 
-                q = urlparse.urljoin(self.base_link, q)
-                result = client.request(q)
-                print(q)
-                result = json.loads(result)
+                if 'tvshowtitle' in data:                   
+                    cltitle = cleantitle.get(title+'season'+season)
+                    cltitle2 = cleantitle.get(title+'season%02d'%int(season))
+                    r = [i for i in r if cltitle == cleantitle.get(i[1]) or cltitle2 == cleantitle.get(i[1])]
+                    vurl = '%s%s-episode-%s'%(self.base_link, str(r[0][0]).replace('/info',''), episode)
+                    vurl2 = None
+                else:
+                    cltitle = cleantitle.getsearch(title)
+                    cltitle2 = cleantitle.getsearch('%s (%s)'%(title,year))
+                    r = [i for i in r if cltitle2 == cleantitle.getsearch(i[1]) or cltitle == cleantitle.getsearch(i[1])]
+                    vurl = '%s%s-episode-0'%(self.base_link, str(r[0][0]).replace('/info',''))
+                    vurl2 = '%s%s-episode-1'%(self.base_link, str(r[0][0]).replace('/info',''))                
 
-                result = result['results']
-            except:
-                links = result = []
-            
-            for i in result:
-                try:
-                    if not cleantitle.get(t) == cleantitle.get(i['showName']): raise Exception()
+                r = client.request(vurl, headers=headers)
+                headers['Referer'] = vurl
+                
+                slinks = client.parseDOM(r, 'div', attrs = {'class': 'anime_muti_link'})
+                slinks = client.parseDOM(slinks, 'li', ret='data-video')
+                if len(slinks) == 0 and not vurl2 == None:
+                    r = client.request(vurl2, headers=headers)
+                    headers['Referer'] = vurl2
+                    slinks = client.parseDOM(r, 'div', attrs = {'class': 'anime_muti_link'})                
+                    slinks = client.parseDOM(slinks, 'li', ret='data-video')
 
-                    y = i['release']
-                    y = re.compile('[\.|\(|\[|\s](\d{4}|S\d*E\d*)[\.|\)|\]|\s]').findall(y)[-1]
-                    y = y.upper()
-                    if not any(x == y for x in f): raise Exception()
-
-                    quality = i['quality']
-
-
-
-                    quality = quality.upper()
-
-                    size = i['size']
-                    size = float(size)/1024
-                    size = '%.2f GB' % size
-
-                    if any(x in quality for x in ['HEVC', 'X265', 'H265']): info = '%s | HEVC' % size
-                    else: info = size
-
-                    if '1080P' in quality: quality = '1080p'
-                    elif '720P' in quality: quality = 'HD'
-                    else: quality = 'SD'
-
-                    url = i['links']
-
-                    links = []
-                    
-                    for x in url.keys(): links.append({'url': url[x], 'quality': quality})
-                    
-                    for link in links:
-                        try:
-                            url = link['url']
-                            quality2 = link['quality']
-                            #url = url[1]
-                            #url = link
-                            if len(url) > 1: raise Exception()
-                            url = url[0].encode('utf-8')
-                            
-                            host = re.findall('([\w]+[.][\w]+)$', urlparse.urlparse(url.strip().lower()).netloc)[0]
-                            if not host in hostprDict: raise Exception()
-                            host = host.encode('utf-8')
-
-                            sources.append({'source': host, 'quality': quality2, 'language': 'en', 'url': url, 'info': info, 'direct': False, 'debridonly': True})
-                        except:
-                            pass
-                    
-                except:
-                    pass
-
+                for slink in slinks:
+                    try:
+                        if 'vidnode.net/streaming.php' in slink:
+                            r = client.request('https:%s'%slink, headers=headers)
+                            clinks = re.findall(r'sources:\[(.*?)\]',r)[0]
+                            clinks = re.findall(r'file:\s*\'(http[^\']+)\',label:\s*\'(\d+)', clinks)
+                            for clink in clinks:
+                                q = source_utils.label_to_quality(clink[1])
+                                sources.append({'source': 'cdn', 'quality': q, 'language': 'en', 'url': clink[0], 'direct': True, 'debridonly': False})
+                        else:
+                            valid, hoster = source_utils.is_host_valid(slink, hostDict)
+                            if valid:
+                                sources.append({'source': hoster, 'quality': 'SD', 'language': 'en', 'url': slink, 'direct': False, 'debridonly': False})
+                    except:
+                        pass
 
             return sources
         except:
@@ -186,25 +137,7 @@ class source:
 
 
     def resolve(self, url):
-        try:
-            b = urlparse.urlparse(url).netloc
-            b = re.compile('([\w]+[.][\w]+)$').findall(b)[0]
+        return url
 
-            if not b in base64.b64decode(self.b_link): return url
-            
-            u, p, h = url.split('|')
-            r = urlparse.parse_qs(h)['Referer'][0]
-
-            c = self.request(r, output='cookie', close=False)
-            result = self.request(u, post=p, referer=r, cookie=c)
-
-            url = result.split('url=')
-            url = [urllib.unquote_plus(i.strip()) for i in url]
-            url = [i for i in url if i.startswith('http')]
-            url = url[-1]
-
-            return url
-        except:
-            return
 
 

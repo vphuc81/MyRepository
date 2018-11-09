@@ -2170,7 +2170,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 	</extension>
 </addon>
 
-<addon id="script.module.fantastic" name="fantastic Module" version="3.5.1" provider-name="fantastic">
+<addon id="script.module.fantastic" name="fantastic Module" version="4.0.1" provider-name="fantastic">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
 		<import addon="script.module.requests" />

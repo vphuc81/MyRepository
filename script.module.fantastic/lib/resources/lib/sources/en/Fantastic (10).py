@@ -17,177 +17,135 @@
 
 '''
 
-import urlparse,traceback,urllib,re,json,xbmc
+import urllib,traceback,urlparse,json
 
-from resources.lib.modules import client
+from resources.lib.modules import control
 from resources.lib.modules import cleantitle
-from resources.lib.modules import directstream
 from resources.lib.modules import log_utils
-from resources.lib.modules import source_utils
 from resources.lib.modules import debrid
 
 class source:
     def __init__(self):
         self.priority = 1
-        self.language = ['en']
-        self.domains = ['123movies.ph']
-        self.base_link = 'https://123movies.ph/'
-        self.source_link = 'https://123movies.ph/'
-        self.episode_path = '/episodes/%s-%sx%s/'
-        self.movie_path0 = '/movies/%s-watch-online-free-123movies-%s/'
-        self.movie_path = '/movies/%s/'
-        self.decode_file = 'https://gomostream.com/decoding_v3.php'
-        self.grabber_file = 'https://gomostream.com/getv2.php'
+        self.language = ['en', 'de', 'fr', 'ko', 'pl', 'pt', 'ru']
+        self.domains = []
 
-        
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            url = {'title': title, 'year': year}
-            return urllib.urlencode(url)
-
-        except Exception:
+            return urllib.urlencode({'imdb': imdb, 'title': title, 'localtitle': localtitle,'year': year})
+        except:
+            failure = traceback.format_exc()
+            log_utils.log('Library - Exception: \n' + str(failure))
             return
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            data = {'tvshowtitle': tvshowtitle, 'year': year, 'imdb': imdb}
-            return urllib.urlencode(data)
-
-        except Exception:
+            return urllib.urlencode({'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'localtvshowtitle': localtvshowtitle, 'year': year})
+        except:
+            failure = traceback.format_exc()
+            log_utils.log('Library - Exception: \n' + str(failure))
             return
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
         try:
-            data = urlparse.parse_qs(url)
-            data = dict((i, data[i][0]) for i in data)
-            data.update({'season': season, 'episode': episode, 'title': title, 'premiered': premiered})
+            if url is None:
+                return
 
-            return urllib.urlencode(data)
-
-        except Exception:
+            url = urlparse.parse_qs(url)
+            url = dict([(i, url[i][0]) if url[i] else (i, '') for i in url])
+            url.update({'premiered': premiered, 'season': season, 'episode': episode})
+            return urllib.urlencode(url)
+        except:
+            failure = traceback.format_exc()
+            log_utils.log('Library - Exception: \n' + str(failure))
             return
 
     def sources(self, url, hostDict, hostprDict):
+        sources = []
+
         try:
-            sources = []
+            if url is None:
+                return sources
 
             data = urlparse.parse_qs(url)
-            data = dict((i, data[i][0]) for i in data)
+            data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
 
-            if 'episode' in data:
-                url = self.__get_episode_url(data)
-                get_body = 'type=episode&%s=%s&imd_id=%s&seasonsNo=%02d&episodesNo=%02d'
-            else:
-                url = self.__get_movie_url(data)
+            content_type = 'episode' if 'tvshowtitle' in data else 'movie'
 
-            response = client.request(url)
-            url = re.findall('<iframe .+? src="(.+?)"', response)[0]
+            years = (data['year'], str(int(data['year'])+1), str(int(data['year'])-1))
 
-            response = client.request(url)
+            if content_type == 'movie':
+                title = cleantitle.get(data['title'])
+                localtitle = cleantitle.get(data['localtitle'])
+                ids = [data['imdb']]
 
-            token = re.findall('var tc = \'(.+?)\'', response)[0]
-            
-            seeds = re.findall('_tsd_tsd_ds\(s\) .+\.slice\((.+?),(.+?)\).+ return .+? \+ \"(.+?)\"\+\"(.+?)\";', response)[0]
-            pair = re.findall('\'type\': \'.+\',\s*\'(.+?)\': \'(.+?)\'', response)[0]
-            
-            
+                r = control.jsonrpc('{"jsonrpc": "2.0", "method": "VideoLibrary.GetMovies", "params": {"filter":{"or": [{"field": "year", "operator": "is", "value": "%s"}, {"field": "year", "operator": "is", "value": "%s"}, {"field": "year", "operator": "is", "value": "%s"}]}, "properties": ["imdbnumber", "title", "originaltitle", "file"]}, "id": 1}' % years)
+                r = unicode(r, 'utf-8', errors='ignore')
+                r = json.loads(r)['result']['movies']
 
-            header_token = self.__xtoken(token, seeds)
-            body = 'tokenCode=' + token
+                r = [i for i in r if str(i['imdbnumber']) in ids or title in [cleantitle.get(i['title'].encode('utf-8')), cleantitle.get(i['originaltitle'].encode('utf-8'))]]
+                r = [i for i in r if not i['file'].encode('utf-8').endswith('.strm')][0]
 
-            headers = {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                'x-token': header_token
-            }
+                r = control.jsonrpc('{"jsonrpc": "2.0", "method": "VideoLibrary.GetMovieDetails", "params": {"properties": ["streamdetails", "file"], "movieid": %s }, "id": 1}' % str(r['movieid']))
+                r = unicode(r, 'utf-8', errors='ignore')
+                r = json.loads(r)['result']['moviedetails']
+            elif content_type == 'episode':
+                title = cleantitle.get(data['tvshowtitle'])
+                localtitle = cleantitle.get(data['localtvshowtitle'])
+                season, episode = data['season'], data['episode']
+                ids = [data['imdb'], data['tvdb']]
 
-            url = self.decode_file
-            response = client.request(url, XHR=True, post=body, headers=headers)
+                r = control.jsonrpc('{"jsonrpc": "2.0", "method": "VideoLibrary.GetTVShows", "params": {"filter":{"or": [{"field": "year", "operator": "is", "value": "%s"}, {"field": "year", "operator": "is", "value": "%s"}, {"field": "year", "operator": "is", "value": "%s"}]}, "properties": ["imdbnumber", "title"]}, "id": 1}' % years)
+                r = unicode(r, 'utf-8', errors='ignore')
+                r = json.loads(r)['result']['tvshows']
 
-            sources_dict = json.loads(response)
+                r = [i for i in r if str(i['imdbnumber']) in ids or title in [cleantitle.get(i['title'].encode('utf-8')), cleantitle.get(i['originaltitle'].encode('utf-8'))]][0]
 
-            for source in sources_dict:
-                try:
-                    if '.mp4' in source:
-                        sources.append({
-                            'source': 'CDN',
-                            'quality': 'HD',
-                            'language': 'en',
-                            'url': source,
-                            'direct': True,
-                            'debridonly': False
-                        })
-                except Exception:
-                    pass
+                r = control.jsonrpc('{"jsonrpc": "2.0", "method": "VideoLibrary.GetEpisodes", "params": {"filter":{"and": [{"field": "season", "operator": "is", "value": "%s"}, {"field": "episode", "operator": "is", "value": "%s"}]}, "properties": ["file"], "tvshowid": %s }, "id": 1}' % (str(season), str(episode), str(r['tvshowid'])))
+                r = unicode(r, 'utf-8', errors='ignore')
+                r = json.loads(r)['result']['episodes']
 
-            body = get_body % (pair[0], pair[1], data['imdb'], int(data['season']), int(data['episode']))
+                r = [i for i in r if not i['file'].encode('utf-8').endswith('.strm')][0]
 
-            url = urlparse.urljoin(self.source_link, self.grabber_file)
-            response = client.request(url, XHR=True, post=body, headers=headers)
+                r = control.jsonrpc('{"jsonrpc": "2.0", "method": "VideoLibrary.GetEpisodeDetails", "params": {"properties": ["streamdetails", "file"], "episodeid": %s }, "id": 1}' % str(r['episodeid']))
+                r = unicode(r, 'utf-8', errors='ignore')
+                r = json.loads(r)['result']['episodedetails']
 
-            sources_dict = json.loads(response)
+            url = r['file'].encode('utf-8')
 
-            for source in sources_dict:
-                try:
-                    quality = source_utils.label_to_quality(source['label'])
-                    link = source['file']
+            try: quality = int(r['streamdetails']['video'][0]['width'])
+            except: quality = -1
 
-                    if 'lh3.googleusercontent' in link:
-                        link = directstream.googleredirect(link)
+            if quality >= 2160: quality = '4K'
+            if quality >= 1440: quality = '1440p'
+            if quality >= 1080: quality = '1080p'
+            if 720 <= quality < 1080: quality = 'HD'
+            if quality < 720: quality = 'SD'
 
-                    sources.append({
-                        'source': 'gvideo',
-                        'quality': quality,
-                        'language': 'en',
-                        'url': link,
-                        'direct': True,
-                        'debridonly': False
-                    })
+            info = []
+            try:
+                f = control.openFile(url) ; s = f.size() ; f.close()
+                s = '%.2f GB' % (float(s)/1024/1024/1024)
+                info.append(s)
+            except:
+                pass
+            try:
+                e = urlparse.urlparse(url).path.split('.')[-1].upper()
+                info.append(e)
+            except:
+                pass
+            info = ' | '.join(info)
+            info = info.encode('utf-8')
 
-                except Exception:
-                    pass
-
+            sources.append({'source': '0', 'quality': quality, 'language': 'en', 'url': url, 'info': info, 'local': True, 'direct': True, 'debridonly': False})
 
             return sources
-
-        except Exception:
+        except:
+            failure = traceback.format_exc()
+            log_utils.log('Library - Exception: \n' + str(failure))
             return sources
 
     def resolve(self, url):
         return url
 
-    def __get_episode_url(self, data):
-        try:
-            clean_title = cleantitle.geturl(data['tvshowtitle'])
-            query = self.episode_path % (clean_title, data['season'], data['episode'])
 
-            url = urlparse.urljoin(self.base_link, query)
-            html = client.request(url)
-
-            token = re.findall('\/?watch-token=(.*?)\"', html)[0]
-
-            return url + ('?watch-token=%s' % token)
-
-        except Exception:
-            return
-
-    def __get_movie_url(self, data):
-            clean_title = cleantitle.geturl(data['title'])
-            
-            query0 = self.movie_path0 % (clean_title,data['year'])  
-            query = self.movie_path % clean_title                   
-            url = urlparse.urljoin(self.base_link, query)
-            html = client.request(url)
-
-            token = re.findall('\/?watch-token=(.*?)\"', html)[0]
-
-            return url + ('?watch-token=%s' % token)
-    def __xtoken(self, token, seeds):
-        try:
-            xtoken = token[int(seeds[0]):int(seeds[1])]
-            xtoken = list(xtoken)
-            xtoken.reverse()
-
-            return ''.join(xtoken) + seeds[2] + seeds[3]
-
-        except Exception:
-            return

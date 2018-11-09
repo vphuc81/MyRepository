@@ -1,46 +1,56 @@
-# -*- coding: UTF-8 -*-
-#######################################################################
- # ----------------------------------------------------------------------------
- # "THE BEER-WARE LICENSE" (Revision 42):
- # @tantrumdev wrote this file.  As long as you retain this notice you
- # can do whatever you want with this stuff. If we meet some day, and you think
- # this stuff is worth it, you can buy me a beer in return. - Muad'Dib
- # ----------------------------------------------------------------------------
-#######################################################################
+'''
+	
+    ***FSPM was here*****
 
-# Addon Name: Yoda
-# Addon id: plugin.video.Yoda
-# Addon Provider: Supremacy
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-import re,urllib,urlparse
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+'''
+
+import re,urllib,urlparse,json,base64,hashlib,time
 
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
-from resources.lib.modules import directstream
 from resources.lib.modules import source_utils
-
+from resources.lib.modules import dom_parser
+from resources.lib.modules import debrid
 
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['seehd.club', 'seehd.unblckd.bet']
-        self.base_link = 'http://www.seehd.pl/'
-        self.movie_link = '/%s-%04d-watch-online/'
-        self.tvshow_link = '/%s'
+        self.domains = ['tvbox.ag']
+        self.base_link = 'https://tvbox.ag/'
+        self.search_link = 'search?q=%s'
+        self.search_link_movie = 'https://tvbox.ag/movies'
+
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            t = cleantitle.geturl(title)
-            url = urlparse.urljoin(self.base_link, self.movie_link %(t, int(year)))
+            url = urlparse.urljoin(self.base_link, self.search_link %cleantitle.geturl(title).replace('-','+'))
+            r = client.request(url, cookie='check=2')
+            m = dom_parser.parse_dom(r, 'div', attrs={'class': 'masonry'})
+            m = dom_parser.parse_dom(m, 'a', req='href')
+            m = [(i.attrs['href']) for i in m if i.content == title]
+            url = urlparse.urljoin(self.base_link,m[0])
             return url
         except:
             return
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            t = cleantitle.geturl(tvshowtitle)
-            url = urlparse.urljoin(self.base_link, self.tvshow_link %(t))
+            url = {'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'year': year}
+            url = urllib.urlencode(url)
             return url
         except:
             return
@@ -48,7 +58,15 @@ class source:
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
         try:
             if url == None: return
-            url += '-s%02de%02d-watch-online/' % (int(season), int(episode))
+            data = urlparse.parse_qs(url)
+            data = dict((i, data[i][0]) for i in data)
+            url = urlparse.urljoin(self.base_link, self.search_link %cleantitle.geturl(data['tvshowtitle']).replace('-','+'))
+            r = client.request(url, cookie='check=2')
+            m = dom_parser.parse_dom(r, 'div', attrs={'class': 'masonry'})
+            m = dom_parser.parse_dom(m, 'a', req='href')
+            m = [(i.attrs['href']) for i in m if i.content == data['tvshowtitle']]
+            query = '%s/season-%s/episode-%s/'%(m[0],season,episode)
+            url = urlparse.urljoin(self.base_link,query)
             return url
         except:
             return
@@ -56,55 +74,15 @@ class source:
     def sources(self, url, hostDict, hostprDict):
         try:
             sources = []
-            if url == None: return sources
 
-            r = client.request(url)
-            if '<meta name="application-name" content="Unblocked">' in r: return sources
-            r = client.parseDOM(r, 'div',attrs={'class':'entry-content'})[0]
-            frames = []
-            frames += client.parseDOM(r, 'iframe', ret='src')
-            frames += client.parseDOM(r, 'a', ret='href')
-            frames += client.parseDOM(r, 'source', ret='src')
-            
-            try:
-                q = re.findall('<strong>Quality:</strong>([^<]+)', r)[0]
-                if 'high' in q.lower(): quality = '720p'
-                elif 'cam' in q.lower(): quality = 'CAM'
-                else: quality = 'SD'
-            except: quality = 'SD'
-            
-            for i in frames:
+            if url == None: return
+            r = client.request(url, cookie='check=2')
+
+            m = dom_parser.parse_dom(r, 'table', attrs={'class': 'show_links'})[0]
+            links = re.findall('k">(.*?)<.*?f="(.*?)"',m.content)
+            for link in links:
                 try:
-                    if 'facebook' in i or 'plus.google' in i: continue
-                    url = i
-                    if 'http://24hd.org' in url and url.lower().endswith(('.mp4','ts')):
-                        sources.append({'source': 'CDN', 'quality': quality, 'language': 'en', 'url': url,
-                                    'info': '', 'direct': True, 'debridonly': False})
-
-                    elif 'ok.ru' in url:
-                        print url
-                        host = 'vk'
-                        url = directstream.odnoklassniki(url)
-                        print url
-                        sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url,
-                                        'info': '', 'direct': False, 'debridonly': True})
-
-                    elif 'vk.com' in url:
-                        host = 'vk'
-                        url = directstream.vk(url)
-                        sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url,
-                                        'info': '', 'direct': False, 'debridonly': True})
-
-                    else:
-                        valid, host = source_utils.is_host_valid(url, hostDict)
-                        if valid:
-                            sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url,
-                                        'info': '', 'direct': False, 'debridonly': False})
-                        else:
-                            valid, host = source_utils.is_host_valid(url, hostprDict)
-                            if not valid: continue
-                            sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url,
-                                        'info': '', 'direct': False, 'debridonly': True})
+                    sources.append({'source': link[0], 'quality': 'SD', 'language': 'en', 'url': link[1], 'direct': False, 'debridonly': False})
                 except:
                     pass
 
@@ -113,6 +91,7 @@ class source:
             return sources
 
     def resolve(self, url):
-        return url
-
-
+        r = client.request(url)
+        r = dom_parser.parse_dom(r, 'div', {'class': 'link_under_video'})
+        r = dom_parser.parse_dom(r, 'a', req='href')
+        return r[0].attrs['href']
