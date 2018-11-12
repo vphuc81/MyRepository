@@ -170,10 +170,10 @@ def resolveUrl(url):
 	elif 'vtvplus' in url:
 		content = Get_Url(url)
 		url = re.compile('var responseText = "(.+?)";').findall(content)[0]		
-	elif 'htvonline' in url:
+	elif 'xxxhtvonline' in url:
 		content = Get_Url(url)	
 		url = re.compile('data\-source=\"([^\"]*)\"').findall(content)[0]
-	elif 'hplus' in url:
+	elif 'yyyhplus' in url:
 		content = Get_Url(url)	
 		url = re.compile('iosUrl = "(.+?)";').findall(content)[0]		
 	else:
