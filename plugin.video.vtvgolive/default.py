@@ -165,9 +165,9 @@ def III1ii1iII ( url ) :
  iI1 = {
  "User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" ,
  "Accept-Encoding" : "gzip, deflate" ,
- "Referer" : "http://vtvgo.vn/" ,
+ "Referer" : url ,
  "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" ,
- "Origin" : "http://vtvgo.vn" ,
+ "Origin" : "https://vtvgo.vn" ,
  "X-Requested-With" : "XMLHttpRequest"
  }
  i11Iiii = "|Referer=http%3A%2F%2Fvtvgo.vn%2F"
@@ -178,7 +178,7 @@ def III1ii1iII ( url ) :
   else :
    I1i1I1II = requests . Session ( )
    I1i1I1II . headers . update ( iI1 )
-   iI = I1i1I1II . get ( url , headers = iI1 )
+   iI = I1i1I1II . get ( url )
    i1IiIiiI = iI . text . encode ( "utf8" )
    I1I = {
  "type_id" : "1" ,
@@ -186,7 +186,7 @@ def III1ii1iII ( url ) :
  "time" : re . search ( "time = '(\d+)';" , i1IiIiiI ) . group ( 1 ) ,
  "token" : re . search ( "token = '(.+?)';" , i1IiIiiI ) . group ( 1 )
  }
-   iI = I1i1I1II . post ( "http://vtvgo.vn/ajax-get-stream" , data = I1I , verify = False )
+   iI = I1i1I1II . post ( "https://vtvgo.vn/ajax-get-stream" , data = I1I , verify = False )
    return iI . json ( ) [ "stream_url" ] [ 0 ] + i11Iiii
  except :
   return ""
