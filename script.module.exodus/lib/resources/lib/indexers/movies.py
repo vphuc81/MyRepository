@@ -37,9 +37,6 @@ params = dict(urlparse.parse_qsl(sys.argv[2].replace('?',''))) if len(sys.argv) 
 
 action = params.get('action')
 
-control.moderator()
-
-
 class movies:
     def __init__(self):
         self.list = []
@@ -69,7 +66,7 @@ class movies:
         self.person_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&production_status=released&role=%s&sort=year,desc&count=40&start=1'
         self.keyword_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=100,&release_date=,date[0]&keywords=%s&sort=moviemeter,asc&count=40&start=1'
         self.oscars_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&production_status=released&groups=oscar_best_picture_winners&sort=year,desc&count=40&start=1'
-        self.theaters_link = 'http://www.imdb.com/search/title?title_type=feature&num_votes=1000,&release_date=date[365],date[0]&sort=release_date_us,desc&count=40&start=1'
+        self.theaters_link = 'http://www.imdb.com/search/title?title_type=feature&num_votes=1000,&countries=us&sort=release_date,desc&count=40&start=1'
         self.year_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=100,&production_status=released&year=%s,%s&sort=moviemeter,asc&count=40&start=1'
 
         if self.hidecinema == 'true':
@@ -99,8 +96,8 @@ class movies:
         self.traktfeatured_link = 'http://api.trakt.tv/recommendations/movies?limit=40'
         self.trakthistory_link = 'http://api.trakt.tv/users/me/history/movies?limit=40&page=1'
         self.imdblists_link = 'http://www.imdb.com/user/ur%s/lists?tab=all&sort=mdfd&order=desc&filter=titles' % self.imdb_user
-        self.imdblist_link = 'http://www.imdb.com/list/%s/?view=detail&sort=alpha,asc&title_type=movie,tvMovie&start=1'
-        self.imdblist2_link = 'http://www.imdb.com/list/%s/?view=detail&sort=date_added,desc&title_type=movie,tvMovie&start=1'
+        self.imdblist_link = 'http://www.imdb.com/list/%s/?view=detail&sort=alpha,asc&title_type=movie,short,tvMovie,tvSpecial,video&start=1'
+        self.imdblist2_link = 'http://www.imdb.com/list/%s/?view=detail&sort=date_added,desc&title_type=movie,short,tvMovie,tvSpecial,video&start=1'
         self.imdbwatchlist_link = 'http://www.imdb.com/user/ur%s/watchlist?sort=alpha,asc' % self.imdb_user
         self.imdbwatchlist2_link = 'http://www.imdb.com/user/ur%s/watchlist?sort=date_added,desc' % self.imdb_user
 
@@ -167,78 +164,46 @@ class movies:
             self.get(self.featured_link)
 
     def search(self):
-
         navigator.navigator().addDirectoryItem(32603, 'movieSearchnew', 'search.png', 'DefaultMovies.png')
-        try: from sqlite3 import dbapi2 as database
-        except: from pysqlite2 import dbapi2 as database
-
-        dbcon = database.connect(control.searchFile)
-        dbcur = dbcon.cursor()
-
-        try:
-            dbcur.executescript("CREATE TABLE IF NOT EXISTS movies (ID Integer PRIMARY KEY AUTOINCREMENT, term);")
-        except:
-            pass
-
-        dbcur.execute("SELECT * FROM movies ORDER BY ID DESC")
-        lst = []
-
-        delete_option = False
-        for (id,term) in dbcur.fetchall():
-            if term not in str(lst):
-                delete_option = True
-                navigator.navigator().addDirectoryItem(term, 'movieSearchterm&name=%s' % term, 'search.png', 'DefaultMovies.png')
-                lst += [(term)]
-        dbcur.close()
-
-        if delete_option:
+        search_history = control.setting('moviesearch')
+        if search_history:
+            for term in search_history.split('\n'):
+                if term:
+                    navigator.navigator().addDirectoryItem(term, 'movieSearchterm&name=%s' % term, 'search.png', 'DefaultMovies.png')
             navigator.navigator().addDirectoryItem(32605, 'clearCacheSearch', 'tools.png', 'DefaultAddonProgram.png')
-
-        navigator.navigator().endDirectory()
-
+        navigator.navigator().endDirectory()        
+        
+        
     def search_new(self):
-            control.idle()
+        t = control.lang(32010).encode('utf-8')
+        k = control.keyboard('', t) ; k.doModal()
+        q = k.getText().strip() if k.isConfirmed() else None
+        if not q: return
 
-            t = control.lang(32010).encode('utf-8')
-            k = control.keyboard('', t) ; k.doModal()
-            q = k.getText() if k.isConfirmed() else None
 
-            if (q == None or q == ''): return
+        search_history = control.setting('moviesearch')
+        if q not in search_history.split('\n'):
+            control.setSetting('moviesearch', q + '\n' + search_history)
 
-            try: from sqlite3 import dbapi2 as database
-            except: from pysqlite2 import dbapi2 as database
 
-            dbcon = database.connect(control.searchFile)
-            dbcur = dbcon.cursor()
-            dbcur.execute("INSERT INTO movies VALUES (?,?)", (None,q))
-            dbcon.commit()
-            dbcur.close()
-            url = self.search_link + urllib.quote_plus(q)
-            url = '%s?action=moviePage&url=%s' % (sys.argv[0], urllib.quote_plus(url))
-            control.execute('Container.Update(%s)' % url)
-
+        url = self.search_link + urllib.quote_plus(q)
+        self.get(url)
+            
+            
     def search_term(self, name):
-            control.idle()
-
-            url = self.search_link + urllib.quote_plus(name)
-            url = '%s?action=moviePage&url=%s' % (sys.argv[0], urllib.quote_plus(url))
-            control.execute('Container.Update(%s)' % url)
-
+        url = self.search_link + urllib.quote_plus(name)
+        self.get(url)
+        
+        
     def person(self):
-        try:
-            control.idle()
+        t = control.lang(32010).encode('utf-8')
+        k = control.keyboard('', t) ; k.doModal()
+        q = k.getText().strip() if k.isConfirmed() else None
+        if not q: return
 
-            t = control.lang(32010).encode('utf-8')
-            k = control.keyboard('', t) ; k.doModal()
-            q = k.getText() if k.isConfirmed() else None
 
-            if (q == None or q == ''): return
-
-            url = self.persons_link + urllib.quote_plus(q)
-            url = '%s?action=moviePersons&url=%s' % (sys.argv[0], urllib.quote_plus(url))
-            control.execute('Container.Update(%s)' % url)
-        except:
-            return
+        url = self.persons_link + urllib.quote_plus(q)
+        self.persons(url)
 
 
     def genres(self):
@@ -698,7 +663,7 @@ class movies:
         self.meta = []
         total = len(self.list)
 
-        self.fanart_tv_headers = {'api-key': 'NDZkZmMyN2M1MmE0YTc3MjY3NWQ4ZTMyYjdiY2E2OGU='.decode('base64')}
+        self.fanart_tv_headers = {'api-key': 'ZDY5NTRkYTk2Yzg4ODFlMzdjY2RkMmQyNTlmYjk1MzQ='.decode('base64')}
         if not self.fanart_tv_user == '':
             self.fanart_tv_headers.update({'client-key': self.fanart_tv_user})
 
@@ -949,6 +914,10 @@ class movies:
 
                 cm = []
 
+                cm.append(('Find similar',
+                           'ActivateWindow(10025,%s?action=movies&url=https://api.trakt.tv/movies/%s/related,return)' % (
+                           sysaddon, imdb)))
+
                 cm.append((queueMenu, 'RunPlugin(%s?action=queueItem)' % sysaddon))
 
                 try:
@@ -971,7 +940,9 @@ class movies:
                     cm.append((control.lang2(19033).encode('utf-8'), 'Action(Info)'))
 
                 cm.append((addToLibrary, 'RunPlugin(%s?action=movieToLibrary&name=%s&title=%s&year=%s&imdb=%s&tmdb=%s)' % (sysaddon, sysname, systitle, year, imdb, tmdb)))
-
+                
+                cm.append(('Exodus Settings', 'RunPlugin(%s?action=openSettings&query=(0,0))' % sysaddon))
+                
                 item = control.item(label=label)
 
                 art = {}
@@ -1057,7 +1028,9 @@ class movies:
                 except: pass
 
                 cm = []
-
+                
+                cm.append(('Settings', 'RunPlugin(%s?action=openSettings&query=0.0)' % sysaddon))
+                
                 cm.append((playRandom, 'RunPlugin(%s?action=random&rtype=movie&url=%s)' % (sysaddon, urllib.quote_plus(i['url']))))
 
                 if queue == True:

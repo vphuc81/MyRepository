@@ -1,0 +1,4 @@
+Exodus Module Changelog:
+2.0.0
+- Resume fix for Kodi 18
+- Removed Channels

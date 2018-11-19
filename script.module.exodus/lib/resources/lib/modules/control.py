@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-    Exodus Add-on
+    //Exodus Add-on//
+    Updated for Exodus Add-on
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -132,6 +133,10 @@ key = "RgUkXp2s5v8x/A?D(G+KbPeShVmYq3t6"
 
 iv = "p2s5v8y/B?E(H+Mb"
 
+def autoTraktSubscription(tvshowtitle, year, imdb, tvdb):
+    from . import libtools
+    libtools.libtvshows().add(tvshowtitle, year, imdb, tvdb)
+
 def addonIcon():
     theme = appearance() ; art = artPath()
     if not (art == None and theme in ['-', '']): return os.path.join(art, 'icon.png')
@@ -221,13 +226,6 @@ def yesnoDialog(line1, line2, line3, heading=addonInfo('name'), nolabel='', yesl
 def selectDialog(list, heading=addonInfo('name')):
     return dialog.select(heading, list)
 
-
-def moderator():
-    netloc = [urlparse.urlparse(sys.argv[0]).netloc, '', 'plugin.video.live.streamspro', 'plugin.video.phstreams', 'plugin.video.cpstreams', 'plugin.video.tinklepad', 'script.tvguide.fullscreen', 'script.tvguide.assassins']
-
-    if not infoLabel('Container.PluginName') in netloc: pass
-
-
 def metaFile():
     if condVisibility('System.HasAddon(script.exodus.metadata)'):
         return os.path.join(xbmcaddon.Addon('script.exodus.metadata').getAddonInfo('path'), 'resources', 'data', 'meta.db')
@@ -243,7 +241,7 @@ def apiLanguage(ret_name=None):
     name = None
     name = setting('api.language')
     if not name: name = 'AUTO'
-
+    
     if name[-1].isupper():
         try: name = xbmc.getLanguage(xbmc.ENGLISH_NAME).split(' ')[0]
         except: pass
@@ -301,11 +299,9 @@ def openSettings(query=None, id=addonInfo('id')):
     except:
         return
 
-
 def getCurrentViewId():
     win = xbmcgui.Window(xbmcgui.getCurrentWindowId())
     return str(win.getFocusId())
-
 
 def refresh():
     return execute('Container.Refresh')
@@ -315,7 +311,6 @@ def busy():
 
 def idle():
     return execute('Dialog.Close(busydialog)')
-
 
 def queueItem():
     return execute('Action(Queue)')

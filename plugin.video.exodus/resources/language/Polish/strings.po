@@ -1,3 +1,6 @@
+# Addon Name: Exodus
+# Addon id: plugin.video.exodus
+# Addon Provider: Exodus
 # Translators:
 # Translators:
 # Translators:
@@ -272,8 +275,7 @@ msgid "CLICK HERE TO SAVE VIEW"
 msgstr "KLIKNIJ TUTAJ ABY ZAPISAĆ WIDOK"
 
 msgctxt "#32060"
-msgid ""
-"January|February|March|April|May|June|July|August|September|October|November|December"
+msgid "January|February|March|April|May|June|July|August|September|October|November|December"
 msgstr "Styczeń|Luty|Marzec|Kwiecień|Maj|Czerwiec|Lipiec|Sierpień|Wrzesień|Październik|Listopad|Grudzień"
 
 msgctxt "#32061"
@@ -572,13 +574,29 @@ msgctxt "#32360"
 msgid "Providers Language"
 msgstr "Język źródeł"
 
+msgctxt "#32363"
+msgid "HEVC"
+msgstr ""
+
+msgctxt "#32372"
+msgid "When playback ends..."
+msgstr ""
+
+msgctxt "#32373"
+msgid "Force container refresh"
+msgstr ""
+
+msgctxt "#32374"
+msgid "Enable Debug"
+msgstr ""
+
 msgctxt "#32401"
 msgid "No stream available"
 msgstr "Brak dostępnych źródeł"
 
 msgctxt "#32402"
 msgid "Playback outside Exodus is not allowed"
-msgstr "Odtwarzanie poza Exodusem zabronione"
+msgstr "Odtwarzanie poza Exodus em zabronione"
 
 msgctxt "#32403"
 msgid "Download"
@@ -697,12 +715,12 @@ msgid "DEBRID-SERVICE"
 msgstr "SERWIS-DEBRID"
 
 msgctxt "#32539"
-msgid "Configure Debrid Services in URLResolver Settings."
-msgstr "Skonfiguruj usługi Debrid w Ustawieniach URLResolver."
+msgid "Configure Debrid Services in ResolveURL Settings."
+msgstr "Skonfiguruj usługi Debrid w Ustawieniach ResolveURL."
 
 msgctxt "#32540"
-msgid "URLResolver Settings"
-msgstr "Ustawienia URLResolver"
+msgid "[B]RESOLVEURL[/B] : Settings"
+msgstr "Ustawienia [B]RESOLVEURL[/B]"
 
 msgctxt "#32541"
 msgid "Library"
@@ -921,9 +939,37 @@ msgid "Click to clear search history"
 msgstr "Naciśnij aby wyczyścić historię"
 
 msgctxt "#32606"
-msgid "Prem"
-msgstr "Prem"
+msgid "[COLOR=orange]Paid[/COLOR]"
+msgstr "[COLOR=orange]Paid[/COLOR]"
 
 msgctxt "#32607"
-msgid "Normal"
-msgstr "Normalny"
+msgid "[COLOR=orange]Free[/COLOR]"
+msgstr "[COLOR=orange]Free[/COLOR]"
+
+msgctxt "#32608"
+msgid "Auto Syncing Trakt Library"
+msgstr ""
+
+msgctxt "#32613"
+msgid "[B]EXODUS[/B] : Clear All Cache..."
+msgstr ""
+
+msgctxt "#32614"
+msgid "[B]EXODUS[/B] : Clear Meta Cache..."
+msgstr ""
+
+msgctxt "#32616"
+msgid "Debugging"
+msgstr ""
+
+msgctxt "#32617"
+msgid "Debug Log"
+msgstr ""
+
+msgctxt "#32618"
+msgid "Kodi Log"
+msgstr ""
+
+msgctxt "#32619"
+msgid "Addon Log"
+msgstr ""

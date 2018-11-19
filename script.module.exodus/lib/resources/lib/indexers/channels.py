@@ -31,9 +31,6 @@ params = dict(urlparse.parse_qsl(sys.argv[2].replace('?',''))) if len(sys.argv) 
 
 action = params.get('action')
 
-control.moderator()
-
-
 class channels:
     def __init__(self):
         self.list = [] ; self.items = []

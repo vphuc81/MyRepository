@@ -56,7 +56,7 @@ class player(xbmc.Player):
             self.ids = {'imdb': self.imdb, 'tvdb': self.tvdb}
             self.ids = dict((k,v) for k, v in self.ids.iteritems() if not v == '0')
 
-            self.offset = bookmarks().get(self.name, self.year)
+            self.offset = bookmarks().get(self.name, season, episode, imdb, self.year)
 
             poster, thumb, meta = self.getMeta(meta)
 
@@ -253,6 +253,13 @@ class player(xbmc.Player):
             control.sleep(100)
 
 
+    def onAVStarted(self):
+        control.execute('Dialog.Close(all,true)')
+        if not self.offset == '0': self.seekTime(float(self.offset))
+        subtitles().get(self.name, self.imdb, self.season, self.episode)
+        self.idleForPlayback()
+
+
     def onPlayBackStarted(self):
         control.execute('Dialog.Close(all,true)')
         if not self.offset == '0': self.seekTime(float(self.offset))
@@ -358,37 +365,83 @@ class subtitles:
 
 
 class bookmarks:
-    def get(self, name, year='0'):
-        try:
-            offset = '0'
+    def get(self, name, season, episode, imdb, year='0'):
+        offset = '0'
 
-            if not control.setting('bookmarks') == 'true': raise Exception()
+        if control.setting('bookmarks') == 'true':
+            if control.setting('bookmarks.trakt') == 'true':
+                try:
+                    from resources.lib.modules import trakt
 
-            idFile = hashlib.md5()
-            for i in name: idFile.update(str(i))
-            for i in year: idFile.update(str(i))
-            idFile = str(idFile.hexdigest())
+                    if not episode is None:
 
-            dbcon = database.connect(control.bookmarksFile)
-            dbcur = dbcon.cursor()
-            dbcur.execute("SELECT * FROM bookmark WHERE idFile = '%s'" % idFile)
-            match = dbcur.fetchone()
-            self.offset = str(match[1])
-            dbcon.commit()
+                        # Looking for a Episode progress
 
-            if self.offset == '0': raise Exception()
+                        traktInfo = trakt.getTraktAsJson('https://api.trakt.tv/sync/playback/episodes?extended=full')
+                        for i in traktInfo:
+                            if imdb == i['show']['ids']['imdb']:
+                                # Checking Episode Number
+                                if int(season) == i['episode']['season'] and int(episode) == i['episode']['number']:
+                                    # Calculating Offset to seconds
+                                    offset = (float(i['progress'] / 100) * int(i['episode']['runtime']) * 60)
+                    else:
 
-            minutes, seconds = divmod(float(self.offset), 60) ; hours, minutes = divmod(minutes, 60)
-            label = '%02d:%02d:%02d' % (hours, minutes, seconds)
-            label = (control.lang(32502) % label).encode('utf-8')
+                        # Looking for a Movie Progress
+                        traktInfo = trakt.getTraktAsJson('https://api.trakt.tv/sync/playback/episodes?extended=full')
+                        for i in traktInfo:
+                            if imdb == i['movie']['ids']['imdb']:
+                                # Calculating Offset to seconds
+                                offset = (float(i['progress'] / 100) * int(i['movie']['runtime']) * 60)
 
-            try: yes = control.dialog.contextmenu([label, control.lang(32501).encode('utf-8'), ])
-            except: yes = control.yesnoDialog(label, '', '', str(name), control.lang(32503).encode('utf-8'), control.lang(32501).encode('utf-8'))
+                    if control.setting('bookmarks.auto') == 'false':
+                        try:
+                            yes = control.dialog.contextmenu(["Resume", control.lang(32501).encode('utf-8'), ])
+                        except:
+                            yes = control.yesnoDialog("Resume", '', '', str(name), control.lang(32503).encode('utf-8'),
+                                                      control.lang(32501).encode('utf-8'))
+                        if yes: offset = '0'
 
-            if yes: self.offset = '0'
+                    return offset
 
-            return self.offset
-        except:
+                except:
+                    return '0'
+            else:
+                try:
+                    offset = '0'
+
+                    if not control.setting('bookmarks') == 'true': raise Exception()
+
+                    idFile = hashlib.md5()
+                    for i in name: idFile.update(str(i))
+                    for i in year: idFile.update(str(i))
+                    idFile = str(idFile.hexdigest())
+
+                    dbcon = database.connect(control.bookmarksFile)
+                    dbcur = dbcon.cursor()
+                    dbcur.execute("SELECT * FROM bookmark WHERE idFile = '%s'" % idFile)
+                    match = dbcur.fetchone()
+                    self.offset = str(match[1])
+                    dbcon.commit()
+                    if self.offset == '0': raise Exception()
+
+                    minutes, seconds = divmod(float(self.offset), 60);
+                    hours, minutes = divmod(minutes, 60)
+                    label = '%02d:%02d:%02d' % (hours, minutes, seconds)
+                    label = (control.lang(32502) % label).encode('utf-8')
+
+                    if control.setting('bookmarks.auto') == 'false':
+
+                        try:
+                            yes = control.dialog.contextmenu([label, control.lang(32501).encode('utf-8'), ])
+                        except:
+                            yes = control.yesnoDialog(label, '', '', str(name), control.lang(32503).encode('utf-8'),
+                                                      control.lang(32501).encode('utf-8'))
+                        if yes: self.offset = '0'
+
+                    return self.offset
+                except:
+                    return offset
+        else:
             return offset
 
 
@@ -403,7 +456,6 @@ class bookmarks:
             for i in name: idFile.update(str(i))
             for i in year: idFile.update(str(i))
             idFile = str(idFile.hexdigest())
-
             control.makeFile(control.dataPath)
             dbcon = database.connect(control.bookmarksFile)
             dbcur = dbcon.cursor()

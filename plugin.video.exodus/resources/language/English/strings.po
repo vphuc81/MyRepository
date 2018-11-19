@@ -579,6 +579,10 @@ msgctxt "#32373"
 msgid "Force container refresh"
 msgstr ""
 
+msgctxt "#32374"
+msgid "Enable Debug"
+msgstr ""
+
 msgctxt "#32401"
 msgid "No stream available"
 msgstr ""
@@ -704,11 +708,11 @@ msgid "DEBRID-SERVICE"
 msgstr ""
 
 msgctxt "#32539"
-msgid "Configure Debrid Services in URLResolver Settings."
+msgid "Configure Debrid Services in ResolveURL Settings."
 msgstr ""
 
 msgctxt "#32540"
-msgid "URLResolver Settings"
+msgid "[B]RESOLVEURL[/B] : Settings"
 msgstr ""
 
 msgctxt "#32541"
@@ -933,4 +937,32 @@ msgstr ""
 
 msgctxt "#32607"
 msgid "Normal"
+msgstr ""
+
+msgctxt "#32608"
+msgid "Auto Syncing Trakt Library"
+msgstr ""
+
+msgctxt "#32613"
+msgid "[B]EXODUS[/B] : Clear All Cache..."
+msgstr ""
+
+msgctxt "#32614"
+msgid "[B]EXODUS[/B] : Clear Meta Cache..."
+msgstr ""
+
+msgctxt "#32616"
+msgid "Debugging"
+msgstr ""
+
+msgctxt "#32617"
+msgid "Debug Log"
+msgstr ""
+
+msgctxt "#32618"
+msgid "Kodi Log"
+msgstr ""
+
+msgctxt "#32619"
+msgid "Addon Log"
 msgstr ""

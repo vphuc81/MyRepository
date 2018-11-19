@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 '''
-    Copyright (C) 2017 Exodus Add-on
-    Copyright (C) 2016 Copyright (C) 2017 Exodus
+    Exodus Add-on
+    Copyright (C) 2016 Exodus
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -184,5 +184,3 @@ class youtube(object):
             self.data[i] = result
         except:
             return
-
-

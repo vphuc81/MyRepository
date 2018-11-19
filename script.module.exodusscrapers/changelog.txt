@@ -1,0 +1,5 @@
+Exodus Scrapers Module Changelog:
+2.0.0
+- Remove nonperforming scraper from defaults
+- ExodusScrapers module as default provider
+- Scraper fixes

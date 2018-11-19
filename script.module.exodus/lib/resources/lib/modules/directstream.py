@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import re, os, urllib, urlparse, json, binascii, httplib
+import re, os, urllib, urlparse, json, binascii
 from resources.lib.modules import client
 
 
@@ -149,22 +149,21 @@ def googletag(url, append_height=False):
         return []
 
 def googlepass(url):
-    # try:
-    #     try:
-    #         headers = dict(urlparse.parse_qsl(url.rsplit('|', 1)[1]))
-    #     except:
-    #         headers = None
-    #     url = url.split('|')[0].replace('\\', '')
-    #     url = client.request(url, headers=headers, output='geturl')
-    #     if 'requiressl=yes' in url:
-    #         url = url.replace('http://', 'https://')
-    #     else:
-    #         url = url.replace('https://', 'http://')
-    #     if headers: url += '|%s' % urllib.urlencode(headers)
-    #     return url
-    # except:
-    #     return
-    return url
+    try:
+        try:
+            headers = dict(urlparse.parse_qsl(url.rsplit('|', 1)[1]))
+        except:
+            headers = None
+        url = url.split('|')[0].replace('\\', '')
+        url = client.request(url, headers=headers, output='geturl')
+        if 'requiressl=yes' in url:
+            url = url.replace('http://', 'https://')
+        else:
+            url = url.replace('https://', 'http://')
+        if headers: url += '|%s' % urllib.urlencode(headers)
+        return url
+    except:
+        return
 
 def googleproxy(url):
     path = urlparse.urlparse(url).path

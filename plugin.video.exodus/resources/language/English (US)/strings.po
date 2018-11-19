@@ -579,6 +579,10 @@ msgctxt "#32373"
 msgid "Force container refresh"
 msgstr ""
 
+msgctxt "#32374"
+msgid "Enable Debug"
+msgstr ""
+
 msgctxt "#32401"
 msgid "No stream available"
 msgstr ""
@@ -704,11 +708,11 @@ msgid "DEBRID-SERVICE"
 msgstr ""
 
 msgctxt "#32539"
-msgid "Configure Debrid Services in URLResolver Settings."
+msgid "Configure Debrid Services in ResolveURL Settings."
 msgstr ""
 
 msgctxt "#32540"
-msgid "URLResolver Settings"
+msgid "[B]RESOLVEURL[/B] : Settings"
 msgstr ""
 
 msgctxt "#32541"
@@ -819,15 +823,146 @@ msgctxt "#32571"
 msgid "Hide movies in cinema"
 msgstr ""
 
-msgctxt "#32372"
-msgid "When playback ends..."
-msgstr ""
-
-msgctxt "#32373"
-msgid "Force container refresh"
+msgctxt "#32572"
+msgid "Protected Link. Please enter account credentials in the settings."
 msgstr ""
 
 msgctxt "#32580"
 msgid "Films/TV Movies"
 msgstr ""
 
+msgctxt "#32581"
+msgid "Results Limit"
+msgstr ""
+
+msgctxt "#32582"
+msgid "Personal API keys provide quicker API responses."
+msgstr ""
+
+msgctxt "#32583"
+msgid "Become a VIP member for many benefits at: https://fanart.tv/vip"
+msgstr ""
+
+msgctxt "#32584"
+msgid "Sort order for Trakt Watched Progress"
+msgstr ""
+
+msgctxt "#32585"
+msgid "Recently aired"
+msgstr ""
+
+msgctxt "#32586"
+msgid "Recently watched"
+msgstr ""
+
+msgctxt "#32587"
+msgid "Show Extra Source Info"
+msgstr ""
+
+msgctxt "#32588"
+msgid "Premium Source Identifier Color"
+msgstr ""
+
+msgctxt "#32589"
+msgid "Blue"
+msgstr ""
+
+msgctxt "#32590"
+msgid "Red"
+msgstr ""
+
+msgctxt "#32591"
+msgid "Yellow"
+msgstr ""
+
+msgctxt "#32592"
+msgid "Deep Pink"
+msgstr ""
+
+msgctxt "#32593"
+msgid "Cyan"
+msgstr ""
+
+msgctxt "#32594"
+msgid "Lawn Green"
+msgstr ""
+
+msgctxt "#32595"
+msgid "Gold"
+msgstr ""
+
+msgctxt "#32596"
+msgid "Magenta"
+msgstr ""
+
+msgctxt "#32597"
+msgid "Yellow Green"
+msgstr ""
+
+msgctxt "#32598"
+msgid "No Color"
+msgstr ""
+
+msgctxt "#32599"
+msgid "Getting genre information from Trakt"
+msgstr ""
+
+msgctxt "#32600"
+msgid "Preparing sources"
+msgstr ""
+
+msgctxt "#32601"
+msgid "Total"
+msgstr ""
+
+msgctxt "#32602"
+msgid "Waiting for"
+msgstr ""
+
+msgctxt "#32603"
+msgid "New search..."
+msgstr ""
+
+msgctxt "#32604"
+msgid "[B]EXODUS[/B] : Clear search history..."
+msgstr ""
+
+msgctxt "#32605"
+msgid "Click to clear search history"
+msgstr ""
+
+msgctxt "#32606"
+msgid "Prem"
+msgstr ""
+
+msgctxt "#32607"
+msgid "Normal"
+msgstr ""
+
+msgctxt "#32608"
+msgid "Auto Syncing Trakt Library"
+msgstr ""
+
+msgctxt "#32613"
+msgid "[B]EXODUS[/B] : Clear All Cache..."
+msgstr ""
+
+msgctxt "#32614"
+msgid "[B]EXODUS[/B] : Clear Meta Cache..."
+msgstr ""
+
+msgctxt "#32616"
+msgid "Debugging"
+msgstr ""
+
+msgctxt "#32617"
+msgid "Debug Log"
+msgstr ""
+
+msgctxt "#32618"
+msgid "Kodi Log"
+msgstr ""
+
+msgctxt "#32619"
+msgid "Addon Log"
+msgstr ""

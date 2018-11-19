@@ -1,0 +1,2 @@
+Exodus Changelog:
+7.0.0 - Code renewal

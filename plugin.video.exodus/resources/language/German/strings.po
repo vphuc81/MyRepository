@@ -1,4 +1,4 @@
-# Translators:
+# Addon Name: Exodus
 # Addon id: plugin.video.exodus
 # Addon Provider: Exodus
 # Translators:
@@ -32,7 +32,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
+"Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 
@@ -584,6 +584,10 @@ msgctxt "#32373"
 msgid "Force container refresh"
 msgstr "Verzeichnis neu laden"
 
+msgctxt "#32374"
+msgid "Enable Debug"
+msgstr ""
+
 msgctxt "#32401"
 msgid "No stream available"
 msgstr "Keine Streams verfügbar"
@@ -709,12 +713,12 @@ msgid "DEBRID-SERVICE"
 msgstr "DEBRID-DIENSTE"
 
 msgctxt "#32539"
-msgid "Configure Debrid Services in URLResolver Settings."
-msgstr "Konfiguriere Debrid-Dienste in den URLResolver-Einstellungen."
+msgid "Configure Debrid Services in ResolveURL Settings."
+msgstr "Konfiguriere Debrid-Dienste in den ResolveURL-Einstellungen."
 
 msgctxt "#32540"
-msgid "URLResolver Settings"
-msgstr "URLResolver-Einstellungen"
+msgid "[B]RESOLVEURL[/B] : Settings"
+msgstr "[B]RESOLVEURL[/B] : Einstellungen"
 
 msgctxt "#32541"
 msgid "Library"
@@ -911,3 +915,59 @@ msgstr "Hole Genre-Info von Trakt"
 msgctxt "#32600"
 msgid "Preparing sources"
 msgstr "Quellen werden vorbereitet"
+
+msgctxt "#32601"
+msgid "Total"
+msgstr ""
+
+msgctxt "#32602"
+msgid "Waiting for"
+msgstr ""
+
+msgctxt "#32603"
+msgid "New search..."
+msgstr ""
+
+msgctxt "#32604"
+msgid "[B]EXODUS[/B] : Clear search history..."
+msgstr ""
+
+msgctxt "#32605"
+msgid "Click to clear search history"
+msgstr ""
+
+msgctxt "#32606"
+msgid "Prem"
+msgstr ""
+
+msgctxt "#32607"
+msgid "Normal"
+msgstr ""
+
+msgctxt "#32608"
+msgid "Auto Syncing Trakt Library"
+msgstr ""
+
+msgctxt "#32613"
+msgid "[B]EXODUS[/B] : Clear All Cache..."
+msgstr ""
+
+msgctxt "#32614"
+msgid "[B]EXODUS[/B] : Clear Meta Cache..."
+msgstr ""
+
+msgctxt "#32616"
+msgid "Debugging"
+msgstr ""
+
+msgctxt "#32617"
+msgid "Debug Log"
+msgstr ""
+
+msgctxt "#32618"
+msgid "Kodi Log"
+msgstr ""
+
+msgctxt "#32619"
+msgid "Addon Log"
+msgstr ""

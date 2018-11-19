@@ -27,12 +27,12 @@ def get(title):
         title = title.encode('utf-8')
     except:
         pass
-    title = re.sub('&#(\d+);', '', title)
+    title = str(title)
+    title = re.sub('&#(\d);', '', title)
     title = re.sub('(&#[0-9]+)([^;^0-9]+)', '\\1;\\2', title)
     title = title.replace('&quot;', '\"').replace('&amp;', '&')
-    title = re.sub('\n|([[].+?[]])|([(].+?[)])|\s(vs|v[.])\s|(:|;|-|–|"|,|\'|\_|\.|\?)|\s', '', title).lower()
-    return title
-
+    title = re.sub('\n|([[].+?[]])|([(].+?[)])|\s(vs|v[.])\s|(:|;|-|"|,|\'|\_|\.|\?)|\s', '', title)
+    return title.lower()
 
 def geturl(title):
     if title is None: return
@@ -80,3 +80,9 @@ def normalize(title):
         return str(''.join(c for c in unicodedata.normalize('NFKD', unicode(title.decode('utf-8'))) if unicodedata.category(c) != 'Mn'))
     except:
         return title
+
+
+def clean_search_query(url):
+    url = url.replace('-','+')
+    url = url.replace(' ', '+')
+    return url
