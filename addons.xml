@@ -1879,6 +1879,24 @@ http://www2.gostream.sc
 	</extension>
 </addon>
 
+<addon id="repository.kodibae" name="[COLOR pink]Kodi Bae Repository[/COLOR]" version="1.0.0" provider-name="kodibae">
+    <extension point="xbmc.addon.repository" name="[COLOR pink]Kodi Bae Repository[/COLOR]">
+    <dir>
+        <info compressed="false">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml</info>
+        <checksum>https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/zips/</datadir>
+    </dir>
+        <info compressed="false">https://raw.githubusercontent.com/kodibae/repository.kodibae/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/kodibae/repository.kodibae/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/kodibae/repository.kodibae/master/</datadir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Unofficial Addons for Kodi</summary>
+        <description>Would you care for some salt with that fork?</description>
+        <platform>all</platform>
+    </extension>
+</addon>
+
 <addon id="repository.kodil" name=".[COLOR blue].Kodil [/COLOR][COLOR white] Repository [/COLOR]" version="1.3" provider-name="kodil">
     <extension point="xbmc.addon.repository" name=".Kodil  Repository ">
         <info compressed="false">https://raw.githubusercontent.com/kodil/kodil/master/addons.xml</info>
