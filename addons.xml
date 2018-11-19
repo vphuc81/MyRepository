@@ -649,6 +649,26 @@ http://www2.gostream.sc
   </extension>
 </addon>
 
+<addon id="plugin.video.icdrama" version="1.9.3" name="Icdrama" provider-name="aznhusband, dumbo0001, boleanly, mugol, General-Meow, cthlo">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.html5lib" version="0.999.0"/>
+    <import addon="script.module.beautifulsoup4" version="4.3.2"/>
+    <import addon="script.module.requests" version="2.9.1"/>
+    <import addon="script.module.urlresolver" version="3.0.34"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="addon.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Dramas, shows, and movies from icdrama.se</summary>
+    <description>Provides contents from icdrama.se. "Happy wife, happy life"</description>
+    <disclaimer>This addon is not affiliated with icdrama.se</disclaimer>
+    <platform>all</platform>
+    <license>MIT License</license>
+  </extension>
+</addon>
+
 <addon id="plugin.video.itvplus"
        version="2.9.5.1"
        name="[COLOR ffff0000]*ITV*[/COLOR]Plus"
@@ -751,7 +771,7 @@ http://www2.gostream.sc
 
 <addon id="plugin.video.livetv"
        name=" ***[COLOR yellow]LIVE-TV[/COLOR]"
-       version="2.3.0"
+       version="2.3.1"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
@@ -772,7 +792,7 @@ http://www2.gostream.sc
 
 <addon id="plugin.video.livetvinternational"
        name=" **[COLOR yellow]Live TV-International[/COLOR]"
-       version="2.2.33"
+       version="2.2.34"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
