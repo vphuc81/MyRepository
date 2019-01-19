@@ -149,6 +149,7 @@ def iIo00O ( order = "viewcount" , page = "" ) :
  oO00oOo = IiII ( "%s/ytslive/%s/%s" % ( oooo , order , page ) )
  for iII11i in oO00oOo :
   iII11i [ "path" ] = iI11I1II1I1I + iII11i [ "path" ]
+  iII11i [ "info" ] = { "type" : "video" }
  if O0 . get_setting ( 'thumbview' , bool ) :
   if xbmc . getSkinDir ( ) in ( 'skin.confluence' , 'skin.eminence' ) :
    return O0 . finish ( oO00oOo , view_mode = 500 )
@@ -171,18 +172,21 @@ def Iii111II ( order , t , q = "" , page = "" ) :
  for iII11i in oO00oOo :
   if "plugin://" not in iII11i [ "path" ] :
    iII11i [ "path" ] = iI11I1II1I1I + iII11i [ "path" ]
+   if 9 - 9: o0OIiiIII111iI
  if t == "video" :
-  iiii11I = [ {
+  for iII11i in oO00oOo :
+   iII11i [ "info" ] = { "type" : "video" }
+  i11 = [ {
  "label" : "[B]Channels[/B]" ,
  "path" : "%s/yts/%s/channel/%s" % ( iI11I1II1I1I , order , q ) ,
  "thumbnail" : "http://thong.viettv24.com/kodi4vn/images/yt.png"
  } ]
-  Ooo0OO0oOO = [ {
+  O0oo0OO0oOOOo = [ {
  "label" : "[B]Playlist[/B]" ,
  "path" : "%s/yts/%s/playlist/%s" % ( iI11I1II1I1I , order , q ) ,
  "thumbnail" : "https://lh3.googleusercontent.com/184S-U4BBN7f55qcTQFUQSsBjYlJZ246A01J-n_BKa4bwe74nANMPkj58I8DSPzlxYyWocyYYYj89D-1qHXfEkVENdA6O1weJZOVZAMCAIhK8vfZ9bgKpw-eY4pwpaCzfQ0MS4wlwnjZE28jmTZejHIVRflEUcPS-SLJ6xGTAVIHXbIP1uEKugegwL9ULD0vfwD92FWzz9_abZ70VNeBTBRCjE3-gfQ-IKVUmGJlnJeEJcS1fUAo6_qvrBf9NX1n0gLp24lVdTj-ml6VmDtr5bVwQBBes-7zTKthqeLqZoo-Zr0ZDY2hhw871xrXDeUtlwVeK-EnAEgFRAWyRa9HjijEEED81GDYkCc5r0qK3xjqqPvo3aJ-urdVH2TcOkbmTgx2l7jHIMo4WuE9-d8hAMzGXJfLp4NNGty3vYLk-0RG_MjvUp4qeNcmPMHrX8fWih2z-hAXhfvjXZ1SJq_BEnFzSgVCyW44inHkLUallDmcbFyz5EuYgEAVYHMUikabDj2eLrsMbHTM94a_ljcBV9X4jS0Dz5EMjLl5veXQmCA=w175-h107-no"
  } ]
-  oO00oOo = iiii11I + Ooo0OO0oOO + oO00oOo
+  oO00oOo = i11 + O0oo0OO0oOOOo + oO00oOo
  if O0 . get_setting ( 'thumbview' , bool ) :
   if xbmc . getSkinDir ( ) in ( 'skin.confluence' , 'skin.eminence' ) :
    return O0 . finish ( oO00oOo , view_mode = 500 )
@@ -192,7 +196,7 @@ def Iii111II ( order , t , q = "" , page = "" ) :
    return O0 . finish ( oO00oOo )
  else :
   return O0 . finish ( oO00oOo )
-  if 50 - 50: iI
+  if 35 - 35: O0O0O0O00OooO % iI
 @ O0 . route ( '/dir/<url>' )
 @ O0 . route ( '/dir/<url>/<title>' )
 def dir ( url , title = "" ) :
@@ -208,17 +212,17 @@ def dir ( url , title = "" ) :
      iII11i [ "path" ] = iI11I1II1I1I + iII11i [ "path" ]
     elif "plugin://plugin.video.f4mTester" in iII11i [ "path" ] :
      iII11i [ "path" ] = iI11I1II1I1I + "/execbuiltin/" + urllib . quote_plus ( iII11i [ "path" ] )
-     if 34 - 34: iI * Iii1IIIiiI % IiIi1Iii1I1 * Ii11111i - iI
-     if 33 - 33: iiI1i1 + i1iII1I1i1i1 * o0OIiiIII111iI - Oo / O0OOo % I1Ii
-     if 21 - 21: o0OIiiIII111iI * I11i11Ii % O0OOo * oo000i1iIi11iIIi1
-     if 16 - 16: ooO0OO000o - Ooooo * I11i11Ii + IiIi1Iii1I1
-     if 50 - 50: Iii1IIIiiI - i1iIIIiI1I * ooO00oOoo / Ooooo + iiI1i1
-     if 88 - 88: I1Ii / Ooooo + IiIi1Iii1I1 - Iii1IIIiiI / i1iIIIiI1I - Ii11111i
-     if 15 - 15: ooO00oOoo + Ii11111i - O0O / i1iII1I1i1i1
-     if 58 - 58: ii1I % i1iIIII
-     if 71 - 71: i1iII1I1i1i1 + i1iIIIiI1I % ii1I + ooO00oOoo - O0O0O0O00OooO
-     if 88 - 88: Ii11111i - o0OIiiIII111iI % i1iII1I1i1i1
-     if 16 - 16: iI * O0OOo % O0O0O0O00OooO
+     if 70 - 70: IiIi1Iii1I1 * ooO00oOoo
+     if 46 - 46: i1iIIIiI1I / o0OIiiIII111iI
+     if 52 - 52: iiI1i1 - O0O + I1Ii + I1Ii - iiI1i1 / Ooooo
+     if 44 - 44: i1iIIIiI1I . oo000i1iIi11iIIi1 - ooO00oOoo . ooO0OO000o - i1iIIIiI1I
+     if 92 - 92: IiIi1Iii1I1 . i1iIIII + iiI1i1
+     if 28 - 28: oo000i1iIi11iIIi1 * Oo - iiI1i1 * O0O0O0O00OooO * I1Ii / o0OIiiIII111iI
+     if 94 - 94: Iii1IIIiiI % ooO00oOoo / Ii11111i * I11i11Ii
+     if 54 - 54: iiI1i1 - iI + O0O
+     if 70 - 70: I1Ii / i1iIIII . IiIi1Iii1I1 % Oo
+     if 67 - 67: Ii11111i * iiI1i1 . O0O0O0O00OooO - o0OIiiIII111iI * iiI1i1
+     if 46 - 46: i1iII1I1i1i1 + Ii11111i . iI * O0OOo % O0O0O0O00OooO
      if 86 - 86: iI + I1Ii % ii1I * O0OOo . i1iIIIiI1I * i1iIIII
  except :
   oo000 = xbmc . translatePath ( xbmcaddon . Addon ( ) . getAddonInfo ( 'path' ) ) . decode ( "utf-8" )
@@ -248,6 +252,7 @@ def IIII11I1I ( pid , page = "" ) :
  oO00oOo = IiII ( "%s/ytp/%s/%s" % ( oooo , pid , page ) )
  for iII11i in oO00oOo :
   iII11i [ "path" ] = iI11I1II1I1I + iII11i [ "path" ]
+  iII11i [ "info" ] = { "type" : "video" }
   O00O0oOO00O00 ( iII11i )
  if O0 . get_setting ( 'thumbview' , bool ) :
   if xbmc . getSkinDir ( ) in ( 'skin.confluence' , 'skin.eminence' ) :
@@ -282,11 +287,11 @@ def iI1iII1 ( cid , page = "" ) :
  if "@" not in cid :
   cid = requests . get ( "%s/ytc/%s" % ( oooo , cid ) ) . text
  if "@" in cid :
-  iiii11I = IiII ( "%s/ytp/%s/%s" % ( oooo , cid . split ( "@" ) [ 1 ] , page ) )
-  for iII11i in iiii11I :
+  i11 = IiII ( "%s/ytp/%s/%s" % ( oooo , cid . split ( "@" ) [ 1 ] , page ) )
+  for iII11i in i11 :
    iII11i [ "path" ] = iI11I1II1I1I + iII11i [ "path" ]
    O00O0oOO00O00 ( iII11i )
-  oO00oOo += iiii11I
+  oO00oOo += i11
  if O0 . get_setting ( 'thumbview' , bool ) :
   if xbmc . getSkinDir ( ) in ( 'skin.confluence' , 'skin.eminence' ) :
    return O0 . finish ( oO00oOo , view_mode = 500 )
@@ -308,6 +313,7 @@ def I1iiIii ( cid , page = "" ) :
   if 79 - 79: O0O / ooO0OO000o
  i1IIi11111i ( "Browse YT Playlist by Channel [%s]" % OOO0o , "/ytcp/%s/%s/%s" % ( OOO0o , cid , page ) )
  oO00oOo = IiII ( "%s/ytcp/%s/%s" % ( oooo , cid , page ) )
+ if 75 - 75: Ii11111i % iiI1i1 % iiI1i1 . Ooooo
  for iII11i in oO00oOo :
   iII11i [ "path" ] = iI11I1II1I1I + iII11i [ "path" ]
   O00O0oOO00O00 ( iII11i )
@@ -320,49 +326,49 @@ def I1iiIii ( cid , page = "" ) :
    return O0 . finish ( oO00oOo )
  else :
   return O0 . finish ( oO00oOo )
-  if 75 - 75: Ii11111i % iiI1i1 % iiI1i1 . Ooooo
+  if 5 - 5: iiI1i1 * i1iIIIiI1I + Ii11111i . i1iII1I1i1i1 + Ii11111i
 @ O0 . route ( '/play/<url>' )
 @ O0 . route ( '/play/<url>/<title>' )
-def III1iII1I1ii ( url , title = "" ) :
+def oO ( url , title = "" ) :
  i1IIi11111i ( "Play [%s]" % title , "/play/%s/%s" % ( title , url ) )
- O0 . set_resolved_url ( oOOo0 ( url ) , subtitles = "https://raw.githubusercontent.com/vinhcomp/xml/master/xml/sub1.tsv" )
- if 54 - 54: ooO0OO000o - O0O0O0O00OooO % i1iII1I1i1i1
-def oOOo0 ( url ) :
+ O0 . set_resolved_url ( iIi1IIIi1 ( url ) , subtitles = "https://raw.githubusercontent.com/vinhcomp/xml/master/xml/sub1.tsv" )
+ if 86 - 86: i1iIIII % Ii11111i / iI / Ii11111i
+def iIi1IIIi1 ( url ) :
  if "youtube" in url :
-  OOoO = re . compile ( '(youtu\.be\/|youtube-nocookie\.com\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v|user)\/))([^\?&"\'>]+)' ) . findall ( url )
-  iII = OOoO [ 0 ] [ len ( OOoO [ 0 ] ) - 1 ] . replace ( 'v/' , '' )
-  return 'plugin://plugin.video.youtube/play/?video_id=%s' % iII
+  iIIi1i1 = re . compile ( '(youtu\.be\/|youtube-nocookie\.com\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v|user)\/))([^\?&"\'>]+)' ) . findall ( url )
+  i1IIIiiII1 = iIIi1i1 [ 0 ] [ len ( iIIi1i1 [ 0 ] ) - 1 ] . replace ( 'v/' , '' )
+  return 'plugin://plugin.video.youtube/play/?video_id=%s' % i1IIIiiII1
  elif "://" not in url :
   if url . startswith ( "uno-" ) :
-   ii1ii11IIIiiI = url . strip ( ) . replace ( "uno-" , "" )
-   O00OOOoOoo0O = "NTg4N2RkZmZjMzEyYmYxMDk0ZGU0YmQ1" . decode ( "base64" )
-   O000OOo00oo = {
+   OOOOoOoo0O0O0 = url . strip ( ) . replace ( "uno-" , "" )
+   OOOo00oo0oO = "NTg4N2RkZmZjMzEyYmYxMDk0ZGU0YmQ1" . decode ( "base64" )
+   IIiIi1iI = {
  "Content-Type" : "application/x-www-form-urlencoded" ,
  "User-Agent" : "Dalvik/2.1.0" ,
  "Accept-Encoding" : "gzip"
  }
-   oo0OOo = {
- "serial_id" : O00OOOoOoo0O ,
- "query" : ii1ii11IIIiiI
+   i1IiiiI1iI = {
+ "serial_id" : OOOo00oo0oO ,
+ "query" : OOOOoOoo0O0O0
  }
-   ooOOO00Ooo = requests . post (
+   i1iIi = requests . post (
  "http://stbapi.v247tv.com/api/stb_channel2" ,
- headers = O000OOo00oo ,
- data = oo0OOo
+ headers = IIiIi1iI ,
+ data = i1IiiiI1iI
  ) . json ( ) [ "data" ]
-   oOooOoO0Oo0O = requests . get ( "http://echipstore.com:8000/uno/" + urllib . quote_plus ( ooOOO00Ooo ) )
-   IiIIIi1iIi = re . compile ( "(\{.+?\})" ) . findall ( oOooOoO0Oo0O . text . strip ( ) ) [ 0 ]
-   return json . loads ( IiIIIi1iIi ) [ "url" ]
+   oOooOoO0Oo0O = requests . get ( "http://echipstore.com:8000/uno/" + urllib . quote_plus ( i1iIi ) )
+   ooOOoooooo = re . compile ( "(\{.+?\})" ) . findall ( oOooOoO0Oo0O . text . strip ( ) ) [ 0 ]
+   return json . loads ( ooOOoooooo ) [ "url" ]
   else :
-   ooOOoooooo = requests . get ( "aHR0cDovL3d3dy52aWV0dHYyNC5jb20vbWFpbi9nZXRDaGFubmVsc0FwcEJveC5waHA=" . decode ( "base64" ) ) . json ( )
-   for II1I in ooOOoooooo [ "channels" ] :
-    if II1I [ "channel_url" ] == url :
-     O0i1II1Iiii1I11 = "aHR0cDovL3d3dy52aWV0dHYyNC5jb20vbWFpbi9nZXRTdHJlYW1pbmdTZXJ2ZXIucGhw" . decode ( "base64" )
-     ooOOO00Ooo = { 'strname' : '%s-' % II1I [ "channel_id" ] }
-     return requests . post ( O0i1II1Iiii1I11 , data = ooOOO00Ooo ) . text . strip ( )
+   II1I = requests . get ( "aHR0cDovL3d3dy52aWV0dHYyNC5jb20vbWFpbi9nZXRDaGFubmVsc0FwcEJveC5waHA=" . decode ( "base64" ) ) . json ( )
+   for O0i1II1Iiii1I11 in II1I [ "channels" ] :
+    if O0i1II1Iiii1I11 [ "channel_url" ] == url :
+     IIII = "aHR0cDovL3d3dy52aWV0dHYyNC5jb20vbWFpbi9nZXRTdHJlYW1pbmdTZXJ2ZXIucGhw" . decode ( "base64" )
+     i1iIi = { 'strname' : '%s-' % O0i1II1Iiii1I11 [ "channel_id" ] }
+     return requests . post ( IIII , data = i1iIi ) . text . strip ( )
  else :
   return url
-  if 9 - 9: ooO00oOoo / Oo - iI / O0O / I11i11Ii - iiI1i1
+  if 32 - 32: O0O / I11i11Ii - iiI1i1
 @ O0 . route ( '/execbuiltin/<url>' )
 def o00oooO0Oo ( url ) :
  xbmc . executebuiltin ( 'XBMC.RunPlugin(%s)' % urllib . unquote_plus ( url ) )

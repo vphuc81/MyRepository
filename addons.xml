@@ -724,7 +724,7 @@ http://www2.gostream.sc
 
 <addon
   id="plugin.video.kodi4vn.launcher"
-  version="2.3.8.2"
+  version="2.3.9.1"
   name="**[COLOR yellow]Kodi4VN Launcher[/COLOR]"
   provider-name="kodi4vn">
   <requires>
