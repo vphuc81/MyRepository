@@ -6,472 +6,527 @@ if 9 - 9: Ii . o0o00Oo0O - iI11I1II1I1I
 oooo = 'plugin.video.xomgiaitri'
 iIIii1IIi = xbmcaddon . Addon ( oooo )
 o0OO00 = int ( sys . argv [ 1 ] )
-if 78 - 78: i11i . oOooOoO0Oo0O
-def iI1 ( source ) :
+global redirect_url
+def oo ( source ) :
  source = source . replace ( ' ' , '' )
- if 43 - 43: I11i11Ii
+ if 27 - 27: oO0OooOoO * o0Oo
  if re . search ( 'eval\(function\(p,a,c,k,e,' , source ) : return True
  else : return False
- if 65 - 65: i1iIi11iIIi1I
-def Oo ( source ) :
- I1ii11iIi11i , I1IiI , o0OOO , iIiiiI = Iii1ii1II11i ( source )
- if 10 - 10: I1iII1iiII + I1Ii111 / OOo
- if 41 - 41: I1II1
- if iIiiiI != len ( I1IiI ) :
-  raise Ooo0OO0oOO ( 'Malformed p.a.c.k.e.r. symtab.' )
-  if 86 - 86: oO0o
+ if 5 - 5: OoO0O00
+def IIiIiII11i ( source ) :
+ o0oOOo0O0Ooo , I1ii11iIi11i , I1IiI , o0OOO = iIiiiI ( source )
+ if 23 - 23: iii1II11ii * i11iII1iiI + iI1Ii11111iIi + ii1II11I1ii1I + oO0o0ooO0 - iiIIIII1i1iI
+ if 68 - 68: o00ooo0 / Oo00O0
+ if o0OOO != len ( I1ii11iIi11i ) :
+  raise ooO0oooOoO0 ( 'Malformed p.a.c.k.e.r. symtab.' )
+  if 21 - 21: IiIii1Ii1IIi / O0Oooo00 . oo00 * I11
  try :
-  IIII = Oo0oO0oo0oO00 ( o0OOO )
+  Oo0o0000o0o0 = oOo0oooo00o ( I1IiI )
  except TypeError :
-  raise Ooo0OO0oOO ( 'Unknown p.a.c.k.e.r. encoding.' )
-  if 8 - 8: OOo00O0Oo0oO / ooO
- def IiIiI11iIi ( match ) :
-  Ii1IIii11 = match . group ( 0 )
-  if 55 - 55: i1111 - i1IIi11111i / I11i1i11i1I % oo / OOO0O / oo0ooO0oOOOOo
-  return I1IiI [ IIII ( Ii1IIii11 ) ] or Ii1IIii11
-  if 71 - 71: OOO0O
- source = re . sub ( r'\b\w+\b' , IiIiI11iIi , I1ii11iIi11i )
- return O0OoOoo00o ( source )
- if 31 - 31: I11i11Ii + I1Ii111 . OOO0O
-def Iii1ii1II11i ( source ) :
- OoOooOOOO = ( r"}\('(.*)', *(\d+), *(\d+), *'(.*?)'\.split\('\|'\)" )
- if 45 - 45: OOO0O + i1IIi11111i
- iII111ii = re . search ( OoOooOOOO , source , re . DOTALL ) . groups ( )
- if 3 - 3: I11i1i11i1I + o0o00Oo0O
+  raise ooO0oooOoO0 ( 'Unknown p.a.c.k.e.r. encoding.' )
+  if 65 - 65: O0o * i1iIIII * OoO0O00
+ def oO000OoOoo00o ( match ) :
+  iiiI11 = match . group ( 0 )
+  if 91 - 91: oO0o0ooO0 / OoO0O00 . iiIIIII1i1iI + Oo00O0
+  return I1ii11iIi11i [ Oo0o0000o0o0 ( iiiI11 ) ] or iiiI11
+  if 47 - 47: ii1II11I1ii1I / O0Oooo00 * oO0OooOoO
+ source = re . sub ( r'\b\w+\b' , oO000OoOoo00o , o0oOOo0O0Ooo )
+ return II111iiii ( source )
+ if 48 - 48: iI1Ii11111iIi . oO0OooOoO - ii1II11I1ii1I % Oo00O0 / O0Oooo00 . O0Oooo00
+def iIiiiI ( source ) :
+ i1Ii = ( r"}\('(.*)', *(\d+), *(\d+), *'(.*?)'\.split\('\|'\)" )
+ if 25 - 25: oo00 + i1iIIII % i1iIIII - o00ooo0 * oO0o0ooO0 % oo00
+ OOooO0OOoo = re . search ( i1Ii , source , re . DOTALL ) . groups ( )
+ if 29 - 29: oO0o0ooO0 / iI11I1II1I1I
  try :
-  return iII111ii [ 0 ] , iII111ii [ 3 ] . split ( '|' ) , int ( iII111ii [ 1 ] ) , int ( iII111ii [ 2 ] )
+  return OOooO0OOoo [ 0 ] , OOooO0OOoo [ 3 ] . split ( '|' ) , int ( OOooO0OOoo [ 1 ] ) , int ( OOooO0OOoo [ 2 ] )
  except ValueError :
-  raise Ooo0OO0oOO ( 'Corrupted p.a.c.k.e.r. data.' )
-  if 42 - 42: ooO / oOooOoO0Oo0O + Ii - i1IIi11111i
-def O0OoOoo00o ( source ) :
- oo0Ooo0 = re . search ( r'var *(_\w+)\=\["(.*?)"\];' , source , re . DOTALL )
- if 46 - 46: oo0ooO0oOOOOo % oo0ooO0oOOOOo - OOo00O0Oo0oO * I1II1 % I11i1i11i1I
- if 55 - 55: OOo % oOooOoO0Oo0O / i1IIi11111i - OOo00O0Oo0oO - o0o00Oo0O / I11i11Ii
- if oo0Ooo0 :
-  iii11iII , i1I111I = oo0Ooo0 . groups ( )
-  i11I1IIiiIi = len ( oo0Ooo0 . group ( 0 ) )
-  IiIiI11iIi = i1I111I . split ( '","' )
-  IiIiIi = '%s[%%d]' % iii11iII
-  for II , iI in enumerate ( IiIiI11iIi ) :
-   source = source . replace ( IiIiIi % II , '"%s"' % iI )
-  return source [ i11I1IIiiIi : ]
+  raise ooO0oooOoO0 ( 'Corrupted p.a.c.k.e.r. data.' )
+  if 24 - 24: o0o00Oo0O % oO0o0ooO0 + o0Oo + O0o + iiIIIII1i1iI
+def II111iiii ( source ) :
+ OOoO000O0OO = re . search ( r'var *(_\w+)\=\["(.*?)"\];' , source , re . DOTALL )
+ if 23 - 23: Ii + iii1II11ii
+ if 68 - 68: ii1II11I1ii1I . o00ooo0 . Ii
+ if OOoO000O0OO :
+  II , iI = OOoO000O0OO . groups ( )
+  iI11iiiI1II = len ( OOoO000O0OO . group ( 0 ) )
+  oO000OoOoo00o = iI . split ( '","' )
+  O0oooo0Oo00 = '%s[%%d]' % II
+  for Ii11iii11I , oOo00Oo00O in enumerate ( oO000OoOoo00o ) :
+   source = source . replace ( O0oooo0Oo00 % Ii11iii11I , '"%s"' % oOo00Oo00O )
+  return source [ iI11iiiI1II : ]
  return source
- if 22 - 22: I1iII1iiII % i1IIi11111i
- if 84 - 84: Ii . I1II1
-class Oo0oO0oo0oO00 ( object ) :
+ if 43 - 43: iii1II11ii - oo00 * iI11I1II1I1I
+ if 97 - 97: IiIii1Ii1IIi % IiIii1Ii1IIi + OoO0O00 * oo00
+class oOo0oooo00o ( object ) :
  ALPHABET = {
- # ooO + ooO % OOO0O % Ii / iI11I1II1I1I . ooO
- # ooO / i11i % i1111 - iI11I1II1I1I
+ # iI1Ii11111iIi + OoO0O00 % oo00 * o0o00Oo0O
+ # ii1II11I1ii1I / i11iII1iiI - I11 . o0Oo / iii1II11ii % I11
  52 : '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP' ,
  54 : '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQR' ,
  62 : '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' ,
  95 : ( ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  '[\]^_`abcdefghijklmnopqrstuvwxyz{|}~' )
  }
- if 82 - 82: Ii . ooO / I1iII1iiII * o0o00Oo0O % OOo00O0Oo0oO % iI11I1II1I1I
+ if 71 - 71: O0o . o0o00Oo0O
  def __init__ ( self , base ) :
   self . base = base
-  if 78 - 78: iI11I1II1I1I - i1IIi11111i * I1Ii111 + I1II1 + I11i1i11i1I + I11i1i11i1I
-  if 11 - 11: I11i1i11i1I - I1Ii111 % oo0ooO0oOOOOo % I11i1i11i1I / OOo - I1Ii111
+  if 73 - 73: Oo00O0 % ii1II11I1ii1I - O0Oooo00
+  if 10 - 10: iii1II11ii % iiIIIII1i1iI
   if 2 <= base <= 36 :
-   self . unbase = lambda o0o0oOOOo0oo : int ( string , base )
+   self . unbase = lambda I1i1iii : int ( string , base )
   else :
-   if 80 - 80: i1111 * Ii / OOO0O
+   if 20 - 20: oO0o0ooO0
    try :
     self . dictionary = dict ( ( cipher , index ) for
  index , cipher in enumerate ( self . ALPHABET [ base ] ) )
    except KeyError :
     raise TypeError ( 'Unsupported base encoding.' )
-    if 9 - 9: i1IIi11111i + OOo00O0Oo0oO % i1IIi11111i + oOooOoO0Oo0O . ooO
+    if 77 - 77: ii1II11I1ii1I / IiIii1Ii1IIi
    self . unbase = self . _dictunbaser
-   if 31 - 31: I1II1 + i1111 + i1111 / I11i11Ii
+   if 98 - 98: iI11I1II1I1I / o0Oo / Ii / oO0o0ooO0
  def __call__ ( self , string ) :
   return self . unbase ( string )
-  if 26 - 26: i11i
+  if 28 - 28: Oo00O0 - I11 . I11 + ii1II11I1ii1I - oO0OooOoO + o0o00Oo0O
  def _dictunbaser ( self , string ) :
-  IiiI11Iiiii = 0
-  if 18 - 18: I1II1
-  for II , I1i1I1II in enumerate ( string [ : : - 1 ] ) :
-   IiiI11Iiiii += ( self . base ** II ) * self . dictionary [ I1i1I1II ]
-  return IiiI11Iiiii
-  if 45 - 45: OOO0O . OOo
-class Ooo0OO0oOO ( Exception ) :
+  oOoOooOo0o0 = 0
+  if 61 - 61: oO0o0ooO0 / iI1Ii11111iIi + i1iIIII * o00ooo0 / o00ooo0
+  for Ii11iii11I , OoOo in enumerate ( string [ : : - 1 ] ) :
+   oOoOooOo0o0 += ( self . base ** Ii11iii11I ) * self . dictionary [ OoOo ]
+  return oOoOooOo0o0
+  if 18 - 18: Ii
+class ooO0oooOoO0 ( Exception ) :
  pass
- if 83 - 83: OOo00O0Oo0oO . iI11I1II1I1I . oO0o
- if 31 - 31: i1IIi11111i . i1IIi11111i - I1II1 / I1Ii111 + oo0ooO0oOOOOo * i1iIi11iIIi1I
- if 63 - 63: OOO0O % oOooOoO0Oo0O / i11i - i11i
-def iIii11I ( ) :
- OOO0OOO00oo ( 'Search' , 'http://www.xomphimbo.com/xem/search/%s/1.html' , 'search' , 'http://www.viettv24.com/addonicons/Search.jpg' )
- OOO0OOO00oo ( 'Phim Lẻ' , 'http://www.xomphimbo.com/xem/the-loai/phim-dien-anh' , 'index' , 'http://www.viettv24.com/addonicons/Movies.jpg' )
- OOO0OOO00oo ( 'Phim Bộ' , 'http://www.xomphimbo.com/xem/the-loai/phim-bo' , 'index' , 'http://www.viettv24.com/addonicons/Series.jpg' )
- OOO0OOO00oo ( 'Phim Bộ theo Quốc Gia' , 'http://www.xomphimbo.com/' , 'videosbyregion' , 'http://www.viettv24.com/addonicons/Regions.jpg' )
- OOO0OOO00oo ( 'Phim Lẻ theo Thể Loại' , 'http://www.xomphimbo.com/' , 'videosbycategory' , 'http://www.viettv24.com/addonicons/Categories.jpg' )
- if 31 - 31: I11i11Ii - ooO . OOO0O % OOo - o0o00Oo0O
- iii11 = xbmc . translatePath ( xbmcaddon . Addon ( ) . getAddonInfo ( 'path' ) ) . decode ( "utf-8" )
- iii11 = xbmc . translatePath ( os . path . join ( iii11 , "temp.jpg.bak" ) )
- urllib . urlretrieve ( 'http://drive.google.com/uc?export=jpg&id=0B-ygKtjD8Sc-OUxwbVR5ZzZsbFJFT3A5aS04YlJkdDJtQ3BF.bak' , iii11 )
- O0oo0OO0oOOOo = xbmcgui . ControlImage ( 0 , 0 , 1280 , 720 , iii11 )
- i1i1i11IIi = xbmcgui . WindowDialog ( )
- i1i1i11IIi . addControl ( O0oo0OO0oOOOo )
- #i1i1i11IIi . doModal ( )
- if 33 - 33: I1II1 + ooO * I1Ii111 - I1iII1iiII / OOo00O0Oo0oO % i1IIi11111i
-def II1i1IiiIIi11 ( ) :
- OOO0OOO00oo ( "Hồng Kong" , "http://www.xomphimbo.com/xem/category/1/phim-bo-hong-kong.html" , "index" , "" )
- OOO0OOO00oo ( "Hồng Kong (VNLT)" , "http://www.xomphimbo.com/xem/category/28/phim-bo-hong-kong-vnlt.html" , "index" , "" )
- OOO0OOO00oo ( "Hàn Quốc" , "http://www.xomphimbo.com/xem/category/4/phim-bo-han-quoc.html" , "index" , "" )
- OOO0OOO00oo ( "Hàn Quốc (vietsub)" , "http://www.xomphimbo.com/xem/category/29/phim-bo-han-quoc-vietsub.html" , "index" , "" )
- OOO0OOO00oo ( "Trung Quốc" , "http://www.xomphimbo.com/xem/category/2/phim-bo-trung-quoc.html" , "index" , "" )
- OOO0OOO00oo ( "Đài Loan" , "http://www.xomphimbo.com/xem/category/3/phim-bo-dai-loan.html" , "index" , "" )
- OOO0OOO00oo ( "Việt Nam" , "http://www.xomphimbo.com/xem/category/5/phim-bo-viet-nam.html" , "index" , "" )
- OOO0OOO00oo ( "Thái Lan" , "http://www.xomphimbo.com/xem/category/22/phim-bo-thai-lan.html" , "index" , "" )
- OOO0OOO00oo ( "Các Loại Khác" , "http://www.xomphimbo.com/xem/category/7/cac-loai-khac.html" , "index" , "" )
- if 47 - 47: I11i1i11i1I
-def Ii11iII1 ( ) :
- OOO0OOO00oo ( "Hành Động" , "http://www.xomphimbo.com/xem/category/8/hanh-dong.html" , "index" , "" )
- OOO0OOO00oo ( "Tình Cảm" , "http://www.xomphimbo.com/xem/category/9/tinh-cam.html" , "index" , "" )
- OOO0OOO00oo ( "Phim Hài" , "http://www.xomphimbo.com/xem/category/10/phim-hai.html" , "index" , "" )
- OOO0OOO00oo ( "Kinh Dị" , "http://www.xomphimbo.com/xem/category/11/kinh-di.html" , "index" , "" )
- OOO0OOO00oo ( "Kiếm Hiệp" , "http://www.xomphimbo.com/xem/category/12/kiem-hiep.html" , "index" , "" )
- OOO0OOO00oo ( "Việt Nam" , "http://www.xomphimbo.com/xem/category/15/viet-nam.html" , "index" , "" )
- OOO0OOO00oo ( "Hài Kịch" , "http://www.xomphimbo.com/xem/category/16/hai-kich.html" , "index" , "" )
- OOO0OOO00oo ( "Ca Nhạc" , "http://www.xomphimbo.com/xem/category/17/ca-nhac.html" , "index" , "" )
- OOO0OOO00oo ( "Cải Lương" , "http://www.xomphimbo.com/xem/category/18/cai-luong.html" , "index" , "" )
- OOO0OOO00oo ( "Phóng Sự" , "http://www.xomphimbo.com/xem/category/19/phong-su.html" , "index" , "" )
- OOO0OOO00oo ( "Các Loại Khác" , "http://www.xomphimbo.com/xem/category/20/cac-loai-khac.html" , "index" , "" )
- if 51 - 51: I11i11Ii * I1Ii111 % I1II1 * I11i11Ii % oO0o / oo0ooO0oOOOOo
-def iIIIIii1 ( url ) :
- oo000OO00Oo = O0OOO0OOoO0O ( url )
- O00Oo000ooO0 = re . compile ( '<td align="center"><a href=".(.+?)" title="(.+?)"><img src="(.+?)"[^>]*/></a>' ) . findall ( oo000OO00Oo )
- for OoO0O00 , IIiII , o0 in O00Oo000ooO0 :
-  o0 = o0 . replace ( "xomgiaitri.com" , "mythugian.net" )
-  o0 = o0 . replace ( "www." , "" )
-  o0 = "/" . join ( o0 . split ( "/" ) [ : - 1 ] ) + "/" + urllib . quote ( o0 . split ( "/" ) [ - 1 ] )
-  OOO0OOO00oo ( "[B]" + IIiII + "[/B]" , "http://www.xomphimbo.com/xem" + OoO0O00 , 'mirrors' , o0 )
- ooOooo000oOO = re . compile ( '<a class="pagelink" [^>]* href="(.+?)"[^>]*>(.+?)</a>' ) . findall ( oo000OO00Oo . replace ( "'" , '"' ) )
- for OoO0O00 , Oo0oOOo in ooOooo000oOO :
-  OOO0OOO00oo ( Oo0oOOo , OoO0O00 . replace ( "./" , "http://www.xomphimbo.com/xem/" ) , 'index' , "" )
-  if 58 - 58: I11i11Ii * ooO * oO0o / ooO
-def oO0o0OOOO ( ) :
+ if 46 - 46: o0Oo / IiIii1Ii1IIi % Oo00O0 + O0o
+ if 79 - 79: O0o - oO0o0ooO0 + O0o - oo00
+ if 8 - 8: iii1II11ii
+def Oo000 ( ) :
+ ooii11I ( 'Search' , 'http://www.xomvnonline.com/search/%s/1.html' , 'search' , 'http://www.viettv24.com/addonicons/Search.jpg' )
+ ooii11I ( 'Phim Lẻ' , 'http://www.xomvnonline.com/the-loai/phim-dien-anh' , 'index' , 'http://www.viettv24.com/addonicons/Movies.jpg' )
+ ooii11I ( 'Phim Bộ' , 'http://www.xomvnonline.com/the-loai/phim-bo' , 'index' , 'http://www.viettv24.com/addonicons/Series.jpg' )
+ ooii11I ( 'Phim Bộ theo Quốc Gia' , 'http://www.xomvnonline.com/' , 'videosbyregion' , 'http://www.viettv24.com/addonicons/Regions.jpg' )
+ ooii11I ( 'Phim Lẻ theo Thể Loại' , 'http://www.xomvnonline.com/' , 'videosbycategory' , 'http://www.viettv24.com/addonicons/Categories.jpg' )
+ if 96 - 96: OoO0O00 % O0Oooo00 . Oo00O0 + oO0OooOoO * o00ooo0 - ii1II11I1ii1I
+ if 10 - 10: Oo00O0 / iii1II11ii * Oo00O0
+ if 29 - 29: iiIIIII1i1iI % iii1II11ii + i1iIIII / oO0o0ooO0 + Oo00O0 * oO0o0ooO0
+ if 42 - 42: O0Oooo00 + o00ooo0
+ if 76 - 76: O0o - iI1Ii11111iIi
+ if 70 - 70: i1iIIII
+ if 61 - 61: iiIIIII1i1iI . iiIIIII1i1iI
+ if 10 - 10: ii1II11I1ii1I * oo00 . IiIii1Ii1IIi + OoO0O00 - i1iIIII * o0Oo
+ if 56 - 56: oO0o0ooO0 * I11 * OoO0O00
+def oO0ooO0OoOOOO ( ) :
+ ooii11I ( "Hồng Kong" , "http://www.xomvnonline.com/category/1/phim-bo-hong-kong.html" , "index" , "" )
+ ooii11I ( "Hồng Kong (VNLT)" , "http://www.xomvnonline.com/category/28/phim-bo-hong-kong-vnlt.html" , "index" , "" )
+ ooii11I ( "Hàn Quốc" , "http://www.xomvnonline.com/category/4/phim-bo-han-quoc.html" , "index" , "" )
+ ooii11I ( "Hàn Quốc (vietsub)" , "http://www.xomvnonline.com/category/29/phim-bo-han-quoc-vietsub.html" , "index" , "" )
+ ooii11I ( "Trung Quốc" , "http://www.xomvnonline.com/category/2/phim-bo-trung-quoc.html" , "index" , "" )
+ ooii11I ( "Đài Loan" , "http://www.xomvnonline.com/category/3/phim-bo-dai-loan.html" , "index" , "" )
+ ooii11I ( "Việt Nam" , "http://www.xomvnonline.com/category/5/phim-bo-viet-nam.html" , "index" , "" )
+ ooii11I ( "Thái Lan" , "http://www.xomvnonline.com/category/22/phim-bo-thai-lan.html" , "index" , "" )
+ ooii11I ( "Các Loại Khác" , "http://www.xomvnonline.com/category/7/cac-loai-khac.html" , "index" , "" )
+ if 46 - 46: Oo00O0 / iiIIIII1i1iI
+def I1 ( ) :
+ ooii11I ( "Hành Động" , "http://www.xomvnonline.com/category/8/hanh-dong.html" , "index" , "" )
+ ooii11I ( "Tình Cảm" , "http://www.xomvnonline.com/category/9/tinh-cam.html" , "index" , "" )
+ ooii11I ( "Phim Hài" , "http://www.xomvnonline.com/category/10/phim-hai.html" , "index" , "" )
+ ooii11I ( "Kinh Dị" , "http://www.xomvnonline.com/category/11/kinh-di.html" , "index" , "" )
+ ooii11I ( "Kiếm Hiệp" , "http://www.xomvnonline.com/category/12/kiem-hiep.html" , "index" , "" )
+ ooii11I ( "Việt Nam" , "http://www.xomvnonline.com/category/15/viet-nam.html" , "index" , "" )
+ ooii11I ( "Hài Kịch" , "http://www.xomvnonline.com/category/16/hai-kich.html" , "index" , "" )
+ ooii11I ( "Ca Nhạc" , "http://www.xomvnonline.com/category/17/ca-nhac.html" , "index" , "" )
+ ooii11I ( "Cải Lương" , "http://www.xomvnonline.com/category/18/cai-luong.html" , "index" , "" )
+ ooii11I ( "Phóng Sự" , "http://www.xomvnonline.com/category/19/phong-su.html" , "index" , "" )
+ ooii11I ( "Các Loại Khác" , "http://www.xomvnonline.com/category/20/cac-loai-khac.html" , "index" , "" )
+ if 71 - 71: Oo00O0 + i1iIIII % Ii + iiIIIII1i1iI - I11
+def oO0OOoO0 ( url ) :
+ I111Ii111 = i111IiI1I ( url )
+ O0 = re . compile ( '<td align="center"><a href=".(.+?)" title="(.+?)"><img src="(.+?)"[^>]*/></a>' ) . findall ( I111Ii111 )
+ for iII , o0 , ooOooo000oOO in O0 :
+  ooOooo000oOO = ooOooo000oOO . replace ( "xomgiaitri.com" , "mythugian.net" )
+  ooOooo000oOO = ooOooo000oOO . replace ( "www." , "" )
+  ooOooo000oOO = "/" . join ( ooOooo000oOO . split ( "/" ) [ : - 1 ] ) + "/" + urllib . quote ( ooOooo000oOO . split ( "/" ) [ - 1 ] )
+  ooii11I ( "[B]" + o0 + "[/B]" , "http://www.xomvnonline.com/xem" + iII , 'mirrors' , ooOooo000oOO )
+ Oo0oOOo = re . compile ( '<a class="pagelink" [^>]* href="(.+?)"[^>]*>(.+?)</a>' ) . findall ( I111Ii111 . replace ( "'" , '"' ) )
+ for iII , Oo0OoO00oOO0o in Oo0oOOo :
+  ooii11I ( Oo0OoO00oOO0o , iII . replace ( "./" , "http://www.xomvnonline.com/" ) , 'index' , "" )
+  if 80 - 80: o00ooo0 + Oo00O0 - Oo00O0 % oo00
+def OoOO0oo0o ( ) :
  try :
-  O0O0OoOO0 = xbmc . Keyboard ( '' , 'Enter search text' )
-  O0O0OoOO0 . doModal ( )
-  if 10 - 10: i11i % iI11I1II1I1I
-  if ( O0O0OoOO0 . isConfirmed ( ) ) :
-   O00o0O00 = urllib . quote_plus ( O0O0OoOO0 . getText ( ) )
-  iIIIIii1 ( ii111111I1iII % O00o0O00 )
+  II11i1I11Ii1i = xbmc . Keyboard ( '' , 'Enter search text' )
+  II11i1I11Ii1i . doModal ( )
+  if 97 - 97: i1iIIII % oo00 * O0Oooo00 + oO0o0ooO0 . Oo00O0 + Oo00O0
+  if ( II11i1I11Ii1i . isConfirmed ( ) ) :
+   Oooo0O0oo00oO = urllib . quote_plus ( II11i1I11Ii1i . getText ( ) )
+  oO0OOoO0 ( IIi1i % Oooo0O0oo00oO )
  except : pass
- if 68 - 68: I11i1i11i1I - iI11I1II1I1I * Ii / oO0o * OOO0O
-def i1iIi1iIi1i ( url ) :
- I1I1iIiII1 = i11i1I1 ( url )
- oo000OO00Oo = O0OOO0OOoO0O ( I1I1iIiII1 )
- ii1I = re . compile ( '<span class="name"[^>]*>(.+?)</span>' ) . findall ( oo000OO00Oo )
- if 67 - 67: Ii - oOooOoO0Oo0O % oO0o . o0o00Oo0O
- if "VIP A : " in ii1I :
-  ii1I . insert ( 0 , ii1I . pop ( ii1I . index ( "VIP A : " ) ) )
- if "VIP D : " in ii1I :
-  ii1I . insert ( 0 , ii1I . pop ( ii1I . index ( "VIP D : " ) ) )
- if "VIP B : " in ii1I :
-  ii1I . insert ( 0 , ii1I . pop ( ii1I . index ( "VIP B : " ) ) )
- if "VIP M : " in ii1I :
-  ii1I . insert ( 0 , ii1I . pop ( ii1I . index ( "VIP M : " ) ) )
- if "VIP G : " in ii1I :
-  ii1I . insert ( 0 , ii1I . pop ( ii1I . index ( "VIP G : " ) ) )
- if "VIP Ama : " in ii1I :
-  ii1I . insert ( 0 , ii1I . pop ( ii1I . index ( "VIP Ama : " ) ) )
- if "VIP OK : " in ii1I :
-  ii1I . insert ( 0 , ii1I . pop ( ii1I . index ( "VIP OK : " ) ) )
- for o0oo in range ( len ( ii1I ) ) :
-  oooooOoo0ooo = [ "Flv :" ]
-  if not any ( x in ii1I [ o0oo ] for x in oooooOoo0ooo ) :
-   OOO0OOO00oo ( "[%d] - %s" % ( o0oo + 1 , ii1I [ o0oo ] ) , I1I1iIiII1 . encode ( "utf-8" ) , 'episodes' , "" )
-   if 6 - 6: i1111 - i1IIi11111i + iI11I1II1I1I - OOO0O - Ii
-def OO0oOO0O ( url , name ) :
- oo000OO00Oo = O0OOO0OOoO0O ( url )
- if 91 - 91: o0o00Oo0O
+ if 46 - 46: O0o % IiIii1Ii1IIi + iI1Ii11111iIi . ii1II11I1ii1I . iI1Ii11111iIi
+def oO00o0 ( url ) :
+ OOoo0O = Oo0ooOo0o ( url )
+ I111Ii111 = i111IiI1I ( OOoo0O )
+ Ii1i1 = re . compile ( '<span class="name"[^>]*>(.+?)</span>' ) . findall ( I111Ii111 )
+ if 15 - 15: OoO0O00
+ if "VIP Ama : " in Ii1i1 :
+  Ii1i1 . insert ( 0 , Ii1i1 . pop ( Ii1i1 . index ( "VIP Ama : " ) ) )
+ if "VIP A : " in Ii1i1 :
+  Ii1i1 . insert ( 0 , Ii1i1 . pop ( Ii1i1 . index ( "VIP A : " ) ) )
+ if "VIP D : " in Ii1i1 :
+  Ii1i1 . insert ( 0 , Ii1i1 . pop ( Ii1i1 . index ( "VIP D : " ) ) )
+ if "VIP C : " in Ii1i1 :
+  Ii1i1 . insert ( 0 , Ii1i1 . pop ( Ii1i1 . index ( "VIP C : " ) ) )
+ if "VIP B : " in Ii1i1 :
+  Ii1i1 . insert ( 0 , Ii1i1 . pop ( Ii1i1 . index ( "VIP B : " ) ) )
+ if "VIP M : " in Ii1i1 :
+  Ii1i1 . insert ( 0 , Ii1i1 . pop ( Ii1i1 . index ( "VIP M : " ) ) )
+ if "VIP G : " in Ii1i1 :
+  Ii1i1 . insert ( 0 , Ii1i1 . pop ( Ii1i1 . index ( "VIP G : " ) ) )
+ if "VIP OK : " in Ii1i1 :
+  Ii1i1 . insert ( 0 , Ii1i1 . pop ( Ii1i1 . index ( "VIP OK : " ) ) )
+ for Iiooo0O in range ( len ( Ii1i1 ) ) :
+  oOoO0o00OO0 = [ "Flv :" ]
+  if not any ( x in Ii1i1 [ Iiooo0O ] for x in oOoO0o00OO0 ) :
+   ooii11I ( "[%d] - %s" % ( Iiooo0O + 1 , Ii1i1 [ Iiooo0O ] ) , OOoo0O . encode ( "utf-8" ) , 'episodes' , "" )
+   if 7 - 7: Oo00O0 + O0o + o0o00Oo0O
+def IiO0OOO ( url , name ) :
+ I111Ii111 = i111IiI1I ( url )
+ if 10 - 10: Oo00O0 * IiIii1Ii1IIi % ii1II11I1ii1I / iii1II11ii / ii1II11I1ii1I
  name = name . split ( "] - " ) [ 1 ]
- oOOo0 = re . compile ( '<div class="listserver"><span class="name"[^>]*>%s</span>(.+?)</div>' % name ) . findall ( oo000OO00Oo )
- oo00O00oO = re . compile ( '<a href="(.+?)"><font[^>]*><b>(.+?)</b></font></a>' ) . findall ( oOOo0 [ 0 ] )
- if ( "episode_bg_2" in oOOo0 [ 0 ] ) :
-  iIiIIIi = re . compile ( '<font class="episode_bg_2">(.+?)</font>' ) . findall ( oOOo0 [ 0 ] )
-  ooo00OOOooO ( "Part - " + iIiIIIi [ 0 ] . replace ( "&nbsp;" , "" ) . strip ( ) . encode ( "utf8" ) , url , 'loadvideo' , '' , name )
- for O00OOOoOoo0O , O000OOo00oo in oo00O00oO :
-  ooo00OOOooO ( "Part - " + O000OOo00oo . replace ( "&nbsp;" , "" ) . strip ( ) , "http://www.xomphimbo.com/xem/" + O00OOOoOoo0O , 'loadvideo' , '' , name )
-  if 71 - 71: Ii + oo
-def i11i1I1 ( url ) :
- oOo = O0OOO0OOoO0O ( url )
- return re . compile ( '<p class="w_now"><a href="(.+?)" title="Xem phim trực tuyến">' ) . findall ( oOo ) [ 0 ]
- if 75 - 75: i1iIi11iIIi1I + I1iII1iiII
-def OoooO0oO ( url , name ) :
- i1iIi = xbmcgui . ListItem ( name )
- oo000OO00Oo = O0OOO0OOoO0O ( url )
- if "proxy.link" in oo000OO00Oo :
-  oo0Ooo0 = re . compile ( "'proxy.link', '(.+?)'" ) . findall ( oo000OO00Oo )
-  oo000OO00Oo = O0OOO0OOoO0O ( oo0Ooo0 [ 0 ] )
- oo0Ooo0 = re . compile ( '<source src="(.+?)" type="video/mp4">' ) . findall ( oo000OO00Oo )
- if ( len ( oo0Ooo0 ) == 0 ) :
-  ooOOoooooo = None
-  II1I = re . compile ( 'file\: "(.+?)"' ) . findall ( oo000OO00Oo )
-  if 'iframe src="http://play.mythugian.net/' in oo000OO00Oo :
-   oo0Ooo0 = re . compile ( 'iframe src="(http://play.mythugian.net/.+?)"' ) . findall ( oo000OO00Oo )
-   oo000OO00Oo = O0OOO0OOoO0O ( oo0Ooo0 [ 0 ] )
-   oo0Ooo0 = re . compile ( '(\[\{"label".+?\}\])' ) . findall ( oo000OO00Oo )
+ iIIi1i1 = re . compile ( '<div class="listserver"><span class="name"[^>]*>%s</span>(.+?)</div>' % name ) . findall ( I111Ii111 )
+ i1IIIiiII1 = re . compile ( '<a href="(.+?)"><font[^>]*><b>(.+?)</b></font></a>' ) . findall ( iIIi1i1 [ 0 ] )
+ if ( "episode_bg_2" in iIIi1i1 [ 0 ] ) :
+  OOOOoOoo0O0O0 = re . compile ( '<font class="episode_bg_2">(.+?)</font>' ) . findall ( iIIi1i1 [ 0 ] )
+  OOOo00oo0oO ( "Part - " + OOOOoOoo0O0O0 [ 0 ] . replace ( "&nbsp;" , "" ) . strip ( ) . encode ( "utf8" ) , url , 'loadvideo' , '' , name )
+ for IIiIi1iI , i1IiiiI1iI in i1IIIiiII1 :
+  OOOo00oo0oO ( "Part - " + i1IiiiI1iI . replace ( "&nbsp;" , "" ) . strip ( ) , "http://www.xomvnonline.com/" + IIiIi1iI , 'loadvideo' , '' , name )
+  if 49 - 49: O0Oooo00 / iI1Ii11111iIi . OoO0O00
+def Oo0ooOo0o ( url ) :
+ url = url . replace ( "/xem/" , "/" )
+ ooOOoooooo = i111IiI1I ( url )
+ xbmc . log ( url , 7 )
+ xbmc . log ( ooOOoooooo , 7 )
+ return re . compile ( '</p><p><a href="(.+?)" title="Xem phim truc tuyen">' ) . findall ( ooOOoooooo ) [ 0 ]
+ if 1 - 1: i11iII1iiI / oO0o0ooO0 % oo00 * I11 . Ii
+def III1Iiii1I11 ( url ) :
+ xbmc . log ( "========= %s =========" % oooo )
+ xbmc . log ( "Start resolving url %s" % url )
+ if 9 - 9: iiIIIII1i1iI / i11iII1iiI - iii1II11ii / oO0OooOoO / iI11I1II1I1I - oO0o0ooO0
+ def o00oooO0Oo ( url ) :
+  o0O0OOO0Ooo = re . search ( "ok.ru/videoembed/(\d+)" , url ) . group ( 1 )
+  iiIiI = "https://m.ok.ru/video/%s" % o0O0OOO0Ooo
+  I111Ii111 = i111IiI1I ( iiIiI )
+  return ( oo000 . unescape ( re . search ( "(https://m.ok.ru/dk\?st.+?)\&" , I111Ii111 ) . group ( 1 ) ) ) . decode ( 'unicode_escape' )
+  if 6 - 6: I11 . o00ooo0 * ii1II11I1ii1I - O0Oooo00 - I11
+ I111Ii111 = i111IiI1I ( url )
+ if "proxy.link" in I111Ii111 :
+  OOoO000O0OO = re . compile ( "'proxy.link', '(.+?)'" ) . findall ( I111Ii111 )
+  xbmc . log ( "Proxy link detected: %s" % OOoO000O0OO [ 0 ] )
+  I111Ii111 = i111IiI1I ( OOoO000O0OO [ 0 ] )
+ OOoO000O0OO = re . compile ( '<source src="(.+?)" type="video/mp4">' ) . findall ( I111Ii111 )
+ if 45 - 45: iii1II11ii - oO0OooOoO + iI11I1II1I1I . iii1II11ii * IiIii1Ii1IIi
+ if ( len ( OOoO000O0OO ) == 0 ) :
+  oOOO = None
+  iIII1 = re . compile ( 'file\: "(.+?)"' ) . findall ( I111Ii111 )
+  try :
+   return o00oooO0Oo ( I111Ii111 )
+  except : pass
+  if 65 - 65: o0o00Oo0O
+  try :
+   OOoO000O0OO = re . search ( 'iframe src="(http://play.mythugian.net/.+?)"' , I111Ii111 ) . group ( 1 )
+   xbmc . log ( "iframe detected: %s" % OOoO000O0OO [ 0 ] )
+   I111Ii111 = i111IiI1I ( OOoO000O0OO [ 0 ] )
+   OOoO000O0OO = re . compile ( '(\[\{"label".+?\}\])' ) . findall ( I111Ii111 )
    try :
-    ooOOoooooo = json . loads ( oo0Ooo0 [ 0 ] ) [ - 1 ] [ "file" ]
+    return json . loads ( OOoO000O0OO [ 0 ] ) [ - 1 ] [ "file" ]
    except :
-    ooOOoooooo = json . loads ( oo0Ooo0 [ 0 ] ) [ - 1 ] [ "src" ]
-  elif 'ok.ru/videoembed/' in oo000OO00Oo :
-   O0 = re . search ( "ok.ru/videoembed/(\d+)" , oo000OO00Oo ) . group ( 1 )
-   i1II1Iiii1I11 = "https://m.ok.ru/video/%s" % O0
-   oo000OO00Oo = O0OOO0OOoO0O ( i1II1Iiii1I11 )
-   ooOOoooooo = ( oo000 . unescape ( re . search ( "(https://m.ok.ru/dk\?st.+?)\&" , oo000OO00Oo ) . group ( 1 ) ) ) . decode ( 'unicode_escape' )
-  elif 'iframe src="http://img.mythugian.net/stream' in oo000OO00Oo :
+    return json . loads ( OOoO000O0OO [ 0 ] ) [ - 1 ] [ "src" ]
+  except : pass
+  if 68 - 68: Oo00O0 % O0o
+  try :
+   ooO00OO0 = re . search ( 'iframe[^>]*src="(http://webplay.mythugian.net/.+?)"' , I111Ii111 ) . group ( 1 )
+   xbmc . log ( "iframe detected: %s" % ooO00OO0 )
+   I111Ii111 = i11111IIIII ( ooO00OO0 )
    try :
-    oo0Ooo0 = re . search ( 'iframe[^>]*src="(http://img.mythugian.net/stream.+?)"' , oo000OO00Oo ) . group ( 1 )
-    oo000OO00Oo = O0OOO0OOoO0O ( oo0Ooo0 )
-    ooOOoooooo = re . search ( '"*file"*:"(.+?)"' , oo000OO00Oo ) . group ( 1 )
+    OOoO000O0OO = re . search ( '<script[^>]*>(eval.+?)</script>' , I111Ii111 ) . group ( 1 ) . strip ( )
+    if oo ( OOoO000O0OO ) :
+     I111Ii111 = IIiIiII11i ( OOoO000O0OO ) . replace ( "\\\\/" , "/" )
+     return re . search ( '"*file"*:"(.+?)"' , I111Ii111 ) . group ( 1 )
+   except : pass
+   try :
+    return re . search ( '"*file"*:"(.+?)"' , I111Ii111 ) . group ( 1 )
+   except : pass
+   try :
+    OOoO000O0OO = re . search ( 'iframe[^>]*src="(http://www.xomvnonline.com/play/open.+?)"' , I111Ii111 ) . group ( 1 )
+    I111Ii111 = i111IiI1I ( OOoO000O0OO )
+    return re . search ( 'data-stream-link="(.+?)"' , I111Ii111 ) . group ( 1 )
+   except : pass
+   try :
+    iIiii1i111iI1 = requests . head ( ooO00OO0 ) . headers [ 'location' ]
+    xbmc . log ( "Stream Dectected: %s" % iIiii1i111iI1 , 7 )
+    OOoO000O0OO = re . search ( "http\://(.+?)/.+?id=(.+?)$" , iIiii1i111iI1 )
+    return "http://%s/hls/%s/%s.playlist.m3u8" % ( OOoO000O0OO . group ( 1 ) , OOoO000O0OO . group ( 2 ) , OOoO000O0OO . group ( 2 ) )
+   except : pass
+   try :
+    o00oooO0Oo ( I111Ii111 )
+   except : pass
+  except : pass
+  if 14 - 14: oo00 . oo00 % oO0OooOoO
+  if False : pass
+  elif 'iframe src="http://img.mythugian.net/stream' in I111Ii111 :
+   try :
+    OOoO000O0OO = re . search ( 'iframe[^>]*src="(http://img.mythugian.net/stream.+?)"' , I111Ii111 ) . group ( 1 )
+    I111Ii111 = i111IiI1I ( OOoO000O0OO )
+    oOOO = re . search ( '"*file"*:"(.+?)"' , I111Ii111 ) . group ( 1 )
    except :
     try :
-     oo0Ooo0 = re . search ( 'iframe[^>]*src="(http://img.mythugian.net/stream.+?)"' , oo000OO00Oo ) . group ( 1 )
-     IIIIiiIiI = requests . head ( oo0Ooo0 ) . headers [ 'location' ]
-     oo0Ooo0 = re . search ( "http\://(.+?)/.+?id=(.+?)$" , IIIIiiIiI )
-     ooOOoooooo = "http://%s/hls/%s/%s.m3u8" % ( oo0Ooo0 . group ( 1 ) , oo0Ooo0 . group ( 2 ) , oo0Ooo0 . group ( 2 ) )
+     OOoO000O0OO = re . search ( 'iframe[^>]*src="(http://img.mythugian.net/stream.+?)"' , I111Ii111 ) . group ( 1 )
+     iIiii1i111iI1 = requests . head ( OOoO000O0OO ) . headers [ 'location' ]
+     OOoO000O0OO = re . search ( "http\://(.+?)/.+?id=(.+?)$" , iIiii1i111iI1 )
+     oOOO = "http://%s/hls/%s/%s.m3u8" % ( OOoO000O0OO . group ( 1 ) , OOoO000O0OO . group ( 2 ) , OOoO000O0OO . group ( 2 ) )
     except : pass
-  elif 'iframe src="http://www.xomvnonline.com/play/mediafire/mediafire.php' in oo000OO00Oo :
+  elif 'iframe src="http://www.xomvnonline.com/play/mediafire/mediafire.php' in I111Ii111 :
    try :
-    oo0Ooo0 = re . search ( 'iframe[^>]*src="(http://www.xomvnonline.com/play/mediafire.+?)"' , oo000OO00Oo ) . group ( 1 )
-    oo000OO00Oo = O0OOO0OOoO0O ( oo0Ooo0 )
-    ooOOoooooo = re . search ( '"*file"*:"(.+?)"' , oo000OO00Oo ) . group ( 1 )
+    OOoO000O0OO = re . search ( 'iframe[^>]*src="(http://www.xomvnonline.com/play/mediafire.+?)"' , I111Ii111 ) . group ( 1 )
+    I111Ii111 = i111IiI1I ( OOoO000O0OO )
+    oOOO = re . search ( '"*file"*:"(.+?)"' , I111Ii111 ) . group ( 1 )
    except : pass
-  elif 'iframe src="http://www.xomvnonline.com/play/open' in oo000OO00Oo :
+  elif 'iframe src="http://www.xomvnonline.com/play/open' in I111Ii111 :
    try :
-    oo0Ooo0 = re . search ( 'iframe[^>]*src="(http://www.xomvnonline.com/play/open.+?)"' , oo000OO00Oo ) . group ( 1 )
-    oo000OO00Oo = O0OOO0OOoO0O ( oo0Ooo0 )
-    ooOOoooooo = re . search ( 'data-stream-link="(.+?)"' , oo000OO00Oo ) . group ( 1 )
+    OOoO000O0OO = re . search ( 'iframe[^>]*src="(http://www.xomvnonline.com/play/open.+?)"' , I111Ii111 ) . group ( 1 )
+    I111Ii111 = i111IiI1I ( OOoO000O0OO )
+    oOOO = re . search ( 'data-stream-link="(.+?)"' , I111Ii111 ) . group ( 1 )
    except : pass
-  elif 'iframe src="http://img.mythugian.net/you/api' in oo000OO00Oo :
+  elif 'iframe src="http://img.mythugian.net/you/api' in I111Ii111 :
    try :
-    oo0Ooo0 = re . search ( 'iframe[^>]*src="(http://img.mythugian.net/you/api.+?)"' , oo000OO00Oo ) . group ( 1 )
-    oo000OO00Oo = o00oooO0Oo ( oo0Ooo0 )
-    oo0Ooo0 = re . search ( '<script[^>]*>(eval.+?)</script>' , oo000OO00Oo ) . group ( 1 ) . strip ( )
-    if iI1 ( oo0Ooo0 ) :
-     oo000OO00Oo = Oo ( oo0Ooo0 ) . replace ( "\\\\/" , "/" )
-     ooOOoooooo = re . search ( '"*file"*:"(.+?)"' , oo000OO00Oo ) . group ( 1 )
+    OOoO000O0OO = re . search ( 'iframe[^>]*src="(http://img.mythugian.net/you/api.+?)"' , I111Ii111 ) . group ( 1 )
+    I111Ii111 = i11111IIIII ( OOoO000O0OO )
+    OOoO000O0OO = re . search ( '<script[^>]*>(eval.+?)</script>' , I111Ii111 ) . group ( 1 ) . strip ( )
+    if oo ( OOoO000O0OO ) :
+     I111Ii111 = IIiIiII11i ( OOoO000O0OO ) . replace ( "\\\\/" , "/" )
+     oOOO = re . search ( '"*file"*:"(.+?)"' , I111Ii111 ) . group ( 1 )
    except : pass
-  elif 'iframe src="http://img.mythugian.net/' in oo000OO00Oo :
+  elif 'iframe src="http://img.mythugian.net/' in I111Ii111 :
    try :
-    oo0Ooo0 = re . search ( 'iframe[^>]*src="(http://img.mythugian.net/.+?)"' , oo000OO00Oo ) . group ( 1 )
+    OOoO000O0OO = re . search ( 'iframe[^>]*src="(http://img.mythugian.net/.+?)"' , I111Ii111 ) . group ( 1 )
     try :
-     ooOOoooooo = re . search ( 'link=(.+?)$' , oo0Ooo0 ) . group ( 1 ) . decode ( "base64" )
-     ooOOoooooo = o0O0OOO0Ooo ( ooOOoooooo )
+     oOOO = re . search ( 'link=(.+?)$' , OOoO000O0OO ) . group ( 1 ) . decode ( "base64" )
+     oOOO = iiIi1IIi1I ( oOOO )
     except :
-     oo000OO00Oo = O0OOO0OOoO0O ( oo0Ooo0 )
+     I111Ii111 = i111IiI1I ( OOoO000O0OO )
      try :
-      def iiIiI ( url ) :
-       I1 = requests . get ( url )
-       OOO00O0O = re . search ( ",'(\|*http.+?)'" , I1 . text ) . group ( 1 ) . split ( "|" )
-       iii = re . compile ( '"(0\://.+?)"' ) . findall ( I1 . text )
-       return OOO00O0O , iii
-       if 90 - 90: I1II1 % oOooOoO0Oo0O / I1Ii111
-      def IIi ( enc_url , words ) :
-       i1Iii1i1I = "0123456789abcdefghijklmnopqrstuvwxyz"
-       OOoO00 = ""
-       for o0oo in range ( 0 , len ( enc_url ) ) :
-        if o0oo != 12 and enc_url [ o0oo ] in i1Iii1i1I :
-         OOoO00 += words [ i1Iii1i1I . index ( enc_url [ o0oo ] ) ]
+      def o0OoOO000ooO0 ( url ) :
+       o0o0o0oO0oOO = requests . get ( url )
+       ii1Ii11I = re . search ( ",'(\|*http.+?)'" , o0o0o0oO0oOO . text ) . group ( 1 ) . split ( "|" )
+       o00o0 = re . compile ( '"(0\://.+?)"' ) . findall ( o0o0o0oO0oOO . text )
+       return ii1Ii11I , o00o0
+       if 45 - 45: o0o00Oo0O
+      def I1IiiiiI ( enc_url , words ) :
+       o0O = "0123456789abcdefghijklmnopqrstuvwxyz"
+       IiII = ""
+       for Iiooo0O in range ( 0 , len ( enc_url ) ) :
+        if Iiooo0O != 12 and enc_url [ Iiooo0O ] in o0O :
+         IiII += words [ o0O . index ( enc_url [ Iiooo0O ] ) ]
         else :
-         OOoO00 += enc_url [ o0oo ]
-       return OOoO00
-       if 40 - 40: i1iIi11iIIi1I * i1IIi11111i + ooO % I11i1i11i1I
-      OOO00O0O , iii = iiIiI ( oo0Ooo0 )
-      ooOOoooooo = IIi ( iii [ 0 ] , OOO00O0O )
-      xbmc . log ( ooOOoooooo )
+         IiII += enc_url [ Iiooo0O ]
+       return IiII
+       if 25 - 25: o0o00Oo0O - o0o00Oo0O * oO0o0ooO0
+      ii1Ii11I , o00o0 = o0OoOO000ooO0 ( OOoO000O0OO )
+      oOOO = I1IiiiiI ( o00o0 [ 0 ] , ii1Ii11I )
+      xbmc . log ( oOOO )
      except :
       try :
-       OOOOOoo0 = [ ]
-       OOOOOoo0 += [ re . search ( 'start\|primary\|(.+?)\|' . decode ( "base64" ) , oo000OO00Oo ) . group ( 1 ) ]
+       OOOO0oo0 = [ ]
+       OOOO0oo0 += [ re . search ( 'start\|primary\|(.+?)\|' . decode ( "base64" ) , I111Ii111 ) . group ( 1 ) ]
        try :
-        OOOOOoo0 += [ re . search ( '\|google\|(\w+)\|color\|' . decode ( "base64" ) , oo000OO00Oo ) . group ( 1 ) ]
+        OOOO0oo0 += [ re . search ( '\|google\|(\w+)\|color\|' . decode ( "base64" ) , I111Ii111 ) . group ( 1 ) ]
        except : pass
-       ooOOoooooo = o0O0OOO0Ooo ( "https://drive.google.com/file/d/%s/view" . decode ( "base64" ) % ( "-" . join ( OOOOOoo0 ) ) )
+       oOOO = iiIi1IIi1I ( "https://drive.google.com/file/d/%s/view" . decode ( "base64" ) % ( "-" . join ( OOOO0oo0 ) ) )
       except :
        try :
-        OOOOOoo0 = [ ]
-        OOOOOoo0 += [ re . search ( 'start\|(\w+)\|setup' . decode ( "base64" ) , oo000OO00Oo ) . group ( 1 ) ]
-        OOOOOoo0 += [ re . search ( '\|google\|(\w+)\|color\|' . decode ( "base64" ) , oo000OO00Oo ) . group ( 1 ) ]
-        OOOOOoo0 += [ re . search ( 'primary\|(\w+)\|startparam' . decode ( "base64" ) , oo000OO00Oo ) . group ( 1 ) ]
-        ooOOoooooo = o0O0OOO0Ooo ( "https://drive.google.com/file/d/%s/view" . decode ( "base64" ) % ( "-" . join ( OOOOOoo0 ) ) )
+        OOOO0oo0 = [ ]
+        OOOO0oo0 += [ re . search ( 'start\|(\w+)\|setup' . decode ( "base64" ) , I111Ii111 ) . group ( 1 ) ]
+        OOOO0oo0 += [ re . search ( '\|google\|(\w+)\|color\|' . decode ( "base64" ) , I111Ii111 ) . group ( 1 ) ]
+        OOOO0oo0 += [ re . search ( 'primary\|(\w+)\|startparam' . decode ( "base64" ) , I111Ii111 ) . group ( 1 ) ]
+        oOOO = iiIi1IIi1I ( "https://drive.google.com/file/d/%s/view" . decode ( "base64" ) % ( "-" . join ( OOOO0oo0 ) ) )
        except :
         try :
-         oo0Ooo0 = re . search ( 'sources = (\[.+?\]);' , oo000OO00Oo )
-         ooOOoooooo = json . loads ( oo0Ooo0 . group ( 1 ) ) [ - 1 ] [ "file" ]
+         OOoO000O0OO = re . search ( 'sources = (\[.+?\]);' , I111Ii111 )
+         oOOO = json . loads ( OOoO000O0OO . group ( 1 ) ) [ - 1 ] [ "file" ]
         except :
          try :
-          oo0Ooo0 = re . search ( '"(https://drive.google.com/file/.+?)"' , oo000OO00Oo ) . group ( 1 )
-          ooOOoooooo = o0O0OOO0Ooo ( oo0Ooo0 . replace ( "preview" , "view" ) )
+          OOoO000O0OO = re . search ( '"(https://drive.google.com/file/.+?)"' , I111Ii111 ) . group ( 1 )
+          oOOO = iiIi1IIi1I ( OOoO000O0OO . replace ( "preview" , "view" ) )
          except :
-          ooOOoooooo = re . search ( '"(http\://.+?\.mediafire\.com/.+?)"' , oo000OO00Oo ) . group ( 1 )
+          oOOO = re . search ( '"(http\://.+?\.mediafire\.com/.+?)"' , I111Ii111 ) . group ( 1 )
    except : pass
-  elif "drive.google.com/file" in oo000OO00Oo :
-   oo0Ooo0 = re . search ( '"(https://drive.google.com/file.+?)"' , oo000OO00Oo )
-   ooOOoooooo = o0O0OOO0Ooo ( oo0Ooo0 . group ( 1 ) . replace ( "preview" , "view" ) )
-  elif II1I is not None :
-   if "http://" not in II1I [ 0 ] :
-    II1I [ 0 ] = "http://www.xomphimbo.com/xem/" + II1I [ 0 ]
-   ooOOoooooo = II1I [ 0 ]
-  elif "app.box.com" in oo000OO00Oo :
-   ii1 = re . compile ( 'https://app.box.com/embed_widget/s/(.+?)\?' ) . findall ( oo000OO00Oo ) [ 0 ]
-   I1iI1iIi111i = O0OOO0OOoO0O ( "https://app.box.com/index.php?rm=preview_embed&sharedName=%s" % ii1 )
-   iiIi1IIi1I = json . loads ( I1iI1iIi111i ) [ "file" ] [ "versionId" ]
-   ooOOoooooo = "https://app.box.com/representation/file_version_%s/video_480.mp4?shared_name=%s" % ( iiIi1IIi1I , ii1 )
-  elif "openload" in oo000OO00Oo :
+  elif "drive.google.com/file" in I111Ii111 :
+   OOoO000O0OO = re . search ( '"(https://drive.google.com/file.+?)"' , I111Ii111 )
+   oOOO = iiIi1IIi1I ( OOoO000O0OO . group ( 1 ) . replace ( "preview" , "view" ) )
+  elif len ( iIII1 ) != 0 :
    try :
-    ooOOoooooo = re . compile ( '"(https://openload.+?)"' ) . findall ( oo000OO00Oo ) [ 0 ]
-    ooOOoooooo = urlresolver . resolve ( ooOOoooooo )
-   except :
-    pass
+    if "http://" not in iIII1 [ 0 ] :
+     iIII1 [ 0 ] = "http://www.xomvnonline.com/" + iIII1 [ 0 ]
+    oOOO = iIII1 [ 0 ]
+   except : pass
+  elif "app.box.com" in I111Ii111 :
+   I11iiI1i1 = re . compile ( 'https://app.box.com/embed_widget/s/(.+?)\?' ) . findall ( I111Ii111 ) [ 0 ]
+   I1i1Iiiii = i111IiI1I ( "https://app.box.com/index.php?rm=preview_embed&sharedName=%s" % I11iiI1i1 )
+   OOo0oO00ooO00 = json . loads ( I1i1Iiiii ) [ "file" ] [ "versionId" ]
+   oOOO = "https://app.box.com/representation/file_version_%s/video_480.mp4?shared_name=%s" % ( OOo0oO00ooO00 , I11iiI1i1 )
+  elif "openload" in I111Ii111 :
+   try :
+    oOOO = re . compile ( '"(https://openload.+?)"' ) . findall ( I111Ii111 ) [ 0 ]
+    oOOO = urlresolver . resolve ( oOOO )
+   except : pass
   else :
-   oo0Ooo0 = re . compile ( "file: '.+?'" ) . findall ( oo000OO00Oo )
-   if "http://" not in oo0Ooo0 [ 0 ] :
-    ooOOoooooo = "http://www.xomphimbo.com/xem/" + oo0Ooo0 [ 0 ]
-   else :
-    ooOOoooooo = oo0Ooo0 [ 0 ]
-  i1iIi . setPath ( ooOOoooooo )
+   try :
+    OOoO000O0OO = re . compile ( "file: '.+?'" ) . findall ( I111Ii111 )
+    if "http://" not in OOoO000O0OO [ 0 ] :
+     oOOO = "http://www.xomvnonline.com/" + OOoO000O0OO [ 0 ]
+    else :
+     oOOO = OOoO000O0OO [ 0 ]
+   except : pass
+  return oOOO
  else :
-  if "http://" not in oo0Ooo0 [ 0 ] :
-   oo0Ooo0 [ 0 ] = "http://www.xomphimbo.com/xem/" + oo0Ooo0 [ 0 ]
-  i1iIi . setPath ( oo0Ooo0 [ 0 ] )
- i1iIi . setProperty ( "IsPlayable" , "true" )
- xbmcplugin . setResolvedUrl ( int ( sys . argv [ 1 ] ) , True , i1iIi )
- xbmcplugin . setResolvedUrl ( int ( sys . argv [ 1 ] ) , True , i1iIi )
- if 84 - 84: oo0ooO0oOOOOo * I11i11Ii + I1iII1iiII
-def o0O0OOO0Ooo ( url , hq = True ) :
- O0ooO0Oo00o = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)"
- ooO0oOOooOo0 = {
- 'User-Agent' : O0ooO0Oo00o ,
+  if "http://" not in OOoO000O0OO [ 0 ] :
+   OOoO000O0OO [ 0 ] = "http://www.xomvnonline.com/" + OOoO000O0OO [ 0 ]
+  xbmc . log ( "Embed direct url detected: %s" % OOoO000O0OO [ 0 ] )
+  return OOoO000O0OO [ 0 ]
+  if 90 - 90: ii1II11I1ii1I * O0o + oO0o0ooO0
+def OO ( url , name ) :
+ OoOoO = xbmcgui . ListItem ( name )
+ OoOoO . setPath ( III1Iiii1I11 ( url ) )
+ OoOoO . setProperty ( "IsPlayable" , "true" )
+ xbmcplugin . setResolvedUrl ( int ( sys . argv [ 1 ] ) , True , OoOoO )
+ xbmcplugin . setResolvedUrl ( int ( sys . argv [ 1 ] ) , True , OoOoO )
+ if 43 - 43: Ii + i11iII1iiI * OoO0O00 * O0o * o0o00Oo0O
+def iiIi1IIi1I ( url , hq = True ) :
+ o00oO0oo0OO = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)"
+ O0O0OOOOoo = {
+ 'User-Agent' : o00oO0oo0OO ,
  'Accept-Encoding' : 'gzip, deflate, sdch' ,
  }
- I1iI1iIi111i = requests . get ( url , headers = ooO0oOOooOo0 )
- i1I1ii11i1Iii = I1iI1iIi111i . text
+ I1i1Iiiii = requests . get ( url , headers = O0O0OOOOoo )
+ oOooO0 = I1i1Iiiii . text
  try :
-  oo0Ooo0 = re . compile ( '(\["fmt_stream_map".+?\])' ) . findall ( i1I1ii11i1Iii ) [ 0 ]
-  I1IiiiiI = [ "38" , "37" , "46" , "22" , "45" , "18" , "43" ]
-  if not hq : I1IiiiiI . reverse ( )
-  o0O = json . loads ( oo0Ooo0 ) [ 1 ] . split ( "," )
-  for IiII in I1IiiiiI :
-   for ii1iII1II in o0O :
-    if ii1iII1II . startswith ( IiII + "|" ) :
-     url = ii1iII1II . split ( "|" ) [ 1 ]
-     Iii1I1I11iiI1 = "|User-Agent=%s&Cookie=%s" % ( urllib . quote_plus ( O0ooO0Oo00o ) , urllib . quote_plus ( I1iI1iIi111i . headers [ 'set-cookie' ] ) )
-     return url + Iii1I1I11iiI1
+  OOoO000O0OO = re . compile ( '(\["fmt_stream_map".+?\])' ) . findall ( oOooO0 ) [ 0 ]
+  Ii1I1Ii = [ "38" , "37" , "46" , "22" , "45" , "18" , "43" ]
+  if not hq : Ii1I1Ii . reverse ( )
+  OOoO0 = json . loads ( OOoO000O0OO ) [ 1 ] . split ( "," )
+  for OO0Oooo0oOO0O in Ii1I1Ii :
+   for o00O0 in OOoO0 :
+    if o00O0 . startswith ( OO0Oooo0oOO0O + "|" ) :
+     url = o00O0 . split ( "|" ) [ 1 ]
+     oOO0O00Oo0O0o = "|User-Agent=%s&Cookie=%s" % ( urllib . quote_plus ( o00oO0oo0OO ) , urllib . quote_plus ( I1i1Iiiii . headers [ 'set-cookie' ] ) )
+     return url + oOO0O00Oo0O0o
  except :
   try :
-   return re . search ( "fmt_stream_map\=18\|(.+?)(\||$)" , i1I1ii11i1Iii ) . group ( 1 )
+   return re . search ( "fmt_stream_map\=18\|(.+?)(\||$)" , oOooO0 ) . group ( 1 )
   except : pass
-  if 18 - 18: ooO + I11i1i11i1I - i1IIi11111i . I11i11Ii + Ii
-def iI1Ii1iI11iiI ( url ) :
- OO0OO0O00oO0 = ""
- oO = urllib2 . Request ( url )
- oO . add_header ( 'User-Agent' , 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)' )
- oO . add_header ( 'Accept' , 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' )
- I1Ii1I1 = urllib2 . urlopen ( oO )
- url = I1Ii1I1 . geturl ( )
+  if 13 - 13: oO0OooOoO
+def I111iI ( url ) :
+ oOOo0 = ""
+ II1I1iiIII = urllib2 . Request ( url )
+ II1I1iiIII . add_header ( 'User-Agent' , 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)' )
+ II1I1iiIII . add_header ( 'Accept' , 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' )
+ oOOo0O00o = urllib2 . urlopen ( II1I1iiIII )
+ url = oOOo0O00o . geturl ( )
  try :
-  OO0OO0O00oO0 = re . compile ( '"https://drive.google.com/file/d/(.+?)/.+?"' ) . findall ( url ) [ 0 ]
+  oOOo0 = re . compile ( '"https://drive.google.com/file/d/(.+?)/.+?"' ) . findall ( url ) [ 0 ]
  except :
   pass
- I1Ii1I1 . close ( )
- return OO0OO0O00oO0
- if 28 - 28: o0o00Oo0O * I1iII1iiII - ooO % iI11I1II1I1I * i1IIi11111i - Ii
-def O0OOO0OOoO0O ( url ) :
- oO = urllib2 . Request ( url )
- oO . add_header ( 'User-Agent' , 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)' )
- oO . add_header ( 'Accept' , 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' )
- I1Ii1I1 = urllib2 . urlopen ( oO )
- oo000OO00Oo = I1Ii1I1 . read ( )
- I1Ii1I1 . close ( )
- oo000OO00Oo = '' . join ( oo000OO00Oo . splitlines ( ) ) . replace ( '\'' , '"' )
- oo000OO00Oo = oo000OO00Oo . replace ( '\n' , '' )
- oo000OO00Oo = oo000OO00Oo . replace ( '\t' , '' )
- oo000OO00Oo = re . sub ( '  +' , ' ' , oo000OO00Oo )
- oo000OO00Oo = oo000OO00Oo . replace ( '> <' , '><' )
- return oo000OO00Oo
- if 7 - 7: I1iII1iiII + OOo00O0Oo0oO - OOO0O % i1IIi11111i + oO0o
-def o00oooO0Oo ( url ) :
- oO = urllib2 . Request ( url )
- oO . add_header ( 'User-Agent' , 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)' )
- oO . add_header ( 'Accept' , 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' )
- I1Ii1I1 = urllib2 . urlopen ( oO )
- oo000OO00Oo = I1Ii1I1 . read ( )
- I1Ii1I1 . close ( )
- if 53 - 53: oOooOoO0Oo0O - i1111 . OOo
- oo000OO00Oo = oo000OO00Oo . replace ( '\n' , '' )
- oo000OO00Oo = oo000OO00Oo . replace ( '\t' , '' )
- oo000OO00Oo = re . sub ( '  +' , ' ' , oo000OO00Oo )
- oo000OO00Oo = oo000OO00Oo . replace ( '> <' , '><' )
- return oo000OO00Oo
- if 39 - 39: I11i11Ii / oo0ooO0oOOOOo + OOO0O / OOo
-def ooo00OOOooO ( name , url , mode , iconimage , mirrorname ) :
- I1Ii11i = sys . argv [ 0 ] + "?url=" + urllib . quote_plus ( url ) + "&mode=" + str ( mode ) + "&name=" + urllib . quote_plus ( name ) + "&mirrorname=" + urllib . quote_plus ( mirrorname )
- i1111I1I = True
- i1i = xbmcgui . ListItem ( name , iconImage = "DefaultVideo.png" , thumbnailImage = iconimage )
- i1i . setInfo ( type = "Video" , infoLabels = { "Title" : name } )
- i1i . setProperty ( "IsPlayable" , "true" )
- i1111I1I = xbmcplugin . addDirectoryItem ( handle = int ( sys . argv [ 1 ] ) , url = I1Ii11i , listitem = i1i )
- return i1111I1I
- if 56 - 56: oO0o % o0o00Oo0O - i1iIi11iIIi1I
-def OOO0OOO00oo ( name , url , mode , iconimage ) :
- I1Ii11i = sys . argv [ 0 ] + "?url=" + urllib . quote_plus ( url ) + "&mode=" + str ( mode ) + "&name=" + urllib . quote_plus ( name )
- i1111I1I = True
- i1i = xbmcgui . ListItem ( name , iconImage = "DefaultFolder.png" , thumbnailImage = iconimage )
- i1i . setInfo ( type = "Video" , infoLabels = { "Title" : name } )
- i1111I1I = xbmcplugin . addDirectoryItem ( handle = int ( sys . argv [ 1 ] ) , url = I1Ii11i , listitem = i1i , isFolder = True )
- return i1111I1I
- if 100 - 100: i1IIi11111i - o0o00Oo0O % OOo00O0Oo0oO * ooO + i1iIi11iIIi1I
-def Oo0O0oooo ( k , e ) :
- I111iI = [ ]
+ oOOo0O00o . close ( )
+ return oOOo0
+ if 8 - 8: iI1Ii11111iIi
+def i111IiI1I ( url ) :
+ II1I1iiIII = urllib2 . Request ( url )
+ II1I1iiIII . add_header ( 'User-Agent' , 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)' )
+ II1I1iiIII . add_header ( 'Accept' , 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' )
+ oOOo0O00o = urllib2 . urlopen ( II1I1iiIII )
+ I111Ii111 = oOOo0O00o . read ( )
+ oOOo0O00o . close ( )
+ I111Ii111 = '' . join ( I111Ii111 . splitlines ( ) ) . replace ( '\'' , '"' )
+ I111Ii111 = I111Ii111 . replace ( '\n' , '' )
+ I111Ii111 = I111Ii111 . replace ( '\t' , '' )
+ I111Ii111 = re . sub ( '  +' , ' ' , I111Ii111 )
+ I111Ii111 = I111Ii111 . replace ( '> <' , '><' )
+ return I111Ii111
+ if 49 - 49: iii1II11ii - IiIii1Ii1IIi
+def i11111IIIII ( url ) :
+ II1I1iiIII = urllib2 . Request ( url )
+ II1I1iiIII . add_header ( 'User-Agent' , 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)' )
+ II1I1iiIII . add_header ( 'Accept' , 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' )
+ oOOo0O00o = urllib2 . urlopen ( II1I1iiIII )
+ I111Ii111 = oOOo0O00o . read ( )
+ oOOo0O00o . close ( )
+ if 74 - 74: iI11I1II1I1I * iiIIIII1i1iI + ii1II11I1ii1I / o0Oo / OoO0O00 . i11iII1iiI
+ I111Ii111 = I111Ii111 . replace ( '\n' , '' )
+ I111Ii111 = I111Ii111 . replace ( '\t' , '' )
+ I111Ii111 = re . sub ( '  +' , ' ' , I111Ii111 )
+ I111Ii111 = I111Ii111 . replace ( '> <' , '><' )
+ return I111Ii111
+ if 62 - 62: oO0OooOoO * iii1II11ii
+def OOOo00oo0oO ( name , url , mode , iconimage , mirrorname ) :
+ oOOOoo0O0oO = sys . argv [ 0 ] + "?url=" + urllib . quote_plus ( url ) + "&mode=" + str ( mode ) + "&name=" + urllib . quote_plus ( name ) + "&mirrorname=" + urllib . quote_plus ( mirrorname )
+ iIII1I111III = True
+ IIo0o0O0O00oOOo = xbmcgui . ListItem ( name , iconImage = "DefaultVideo.png" , thumbnailImage = iconimage )
+ IIo0o0O0O00oOOo . setInfo ( type = "Video" , infoLabels = { "Title" : name } )
+ IIo0o0O0O00oOOo . setProperty ( "IsPlayable" , "true" )
+ iIII1I111III = xbmcplugin . addDirectoryItem ( handle = int ( sys . argv [ 1 ] ) , url = oOOOoo0O0oO , listitem = IIo0o0O0O00oOOo )
+ return iIII1I111III
+ if 14 - 14: ii1II11I1ii1I + o00ooo0
+def ooii11I ( name , url , mode , iconimage ) :
+ oOOOoo0O0oO = sys . argv [ 0 ] + "?url=" + urllib . quote_plus ( url ) + "&mode=" + str ( mode ) + "&name=" + urllib . quote_plus ( name )
+ iIII1I111III = True
+ IIo0o0O0O00oOOo = xbmcgui . ListItem ( name , iconImage = "DefaultFolder.png" , thumbnailImage = iconimage )
+ IIo0o0O0O00oOOo . setInfo ( type = "Video" , infoLabels = { "Title" : name } )
+ iIII1I111III = xbmcplugin . addDirectoryItem ( handle = int ( sys . argv [ 1 ] ) , url = oOOOoo0O0oO , listitem = IIo0o0O0O00oOOo , isFolder = True )
+ return iIII1I111III
+ if 52 - 52: oO0OooOoO - i1iIIII
+def o0O0o0 ( k , e ) :
+ II111iI111I1I = [ ]
  e = base64 . urlsafe_b64decode ( e )
- for o0oo in range ( len ( e ) ) :
-  oOOo0II1I1iiIII = k [ o0oo % len ( k ) ]
-  oOOo0O00o = chr ( ( 256 + ord ( e [ o0oo ] ) - ord ( oOOo0II1I1iiIII ) ) % 256 )
-  I111iI . append ( oOOo0O00o )
- return "" . join ( I111iI )
- if 8 - 8: I1Ii111
-def ii1111iII ( parameters ) :
- iiiiI = { }
- if 62 - 62: i11i * i1iIi11iIIi1I
+ for Iiooo0O in range ( len ( e ) ) :
+  I1i1i1iii = k [ Iiooo0O % len ( k ) ]
+  I1111i = chr ( ( 256 + ord ( e [ Iiooo0O ] ) - ord ( I1i1i1iii ) ) % 256 )
+  II111iI111I1I . append ( I1111i )
+ return "" . join ( II111iI111I1I )
+ if 14 - 14: Oo00O0 / oO0o0ooO0
+def iII11I1IiiIi ( parameters ) :
+ oo0oO = { }
+ if 94 - 94: iI11I1II1I1I / i11iII1iiI % oo00 * oo00 * OoO0O00
  if parameters :
-  oOOOoo0O0oO = parameters [ 1 : ] . split ( "&" )
-  for iIII1I111III in oOOOoo0O0oO :
-   IIo0o0O0O00oOOo = iIII1I111III . split ( '=' )
-   if ( len ( IIo0o0O0O00oOOo ) ) == 2 :
-    iiiiI [ IIo0o0O0O00oOOo [ 0 ] ] = IIo0o0O0O00oOOo [ 1 ]
- return iiiiI
- if 14 - 14: OOo + OOo00O0Oo0oO
-oo00oO0O0 = xbmc . translatePath ( iIIii1IIi . getAddonInfo ( 'profile' ) )
-if 30 - 30: ooO + oO0o * i1111 % Ii % OOo
-if os . path . exists ( oo00oO0O0 ) == False :
- os . mkdir ( oo00oO0O0 )
-OO0OoOO0o0o = os . path . join ( oo00oO0O0 , 'visitor' )
-if 95 - 95: Ii
-if os . path . exists ( OO0OoOO0o0o ) == False :
+  IIiIiI = parameters [ 1 : ] . split ( "&" )
+  for OOO in IIiIiI :
+   IIiI1i1i = OOO . split ( '=' )
+   if ( len ( IIiI1i1i ) ) == 2 :
+    oo0oO [ IIiI1i1i [ 0 ] ] = IIiI1i1i [ 1 ]
+ return oo0oO
+ if 56 - 56: O0o + ii1II11I1ii1I * i1iIIII / o00ooo0 / o0o00Oo0O * iiIIIII1i1iI
+O0o0o00OO0000 = xbmc . translatePath ( iIIii1IIi . getAddonInfo ( 'profile' ) )
+if 1 - 1: i1iIIII . i1iIIII / ii1II11I1ii1I - O0o
+if os . path . exists ( O0o0o00OO0000 ) == False :
+ os . mkdir ( O0o0o00OO0000 )
+oooO = os . path . join ( O0o0o00OO0000 , 'visitor' )
+if 26 - 26: O0Oooo00 % iiIIIII1i1iI
+if os . path . exists ( oooO ) == False :
  from random import randint
- iI1111iiii = open ( OO0OoOO0o0o , "w" )
- iI1111iiii . write ( str ( randint ( 0 , 0x7fffffff ) ) )
- iI1111iiii . close ( )
- if 67 - 67: i11i / i1iIi11iIIi1I * i1IIi11111i + i1111
-def OooOo0ooo ( utm_url ) :
- o00oo0 = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'
+ o00Oo0oooooo = open ( oooO , "w" )
+ o00Oo0oooooo . write ( str ( randint ( 0 , 0x7fffffff ) ) )
+ o00Oo0oooooo . close ( )
+ if 76 - 76: IiIii1Ii1IIi / Oo00O0 . o0o00Oo0O % iii1II11ii . oO0o0ooO0 + I11
+def o0o ( utm_url ) :
+ oo0 = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'
  import urllib2
  try :
-  oO = urllib2 . Request ( utm_url , None ,
- { 'User-Agent' : o00oo0 }
+  II1I1iiIII = urllib2 . Request ( utm_url , None ,
+ { 'User-Agent' : oo0 }
  )
-  I1Ii1I1 = urllib2 . urlopen ( oO ) . read ( )
+  oOOo0O00o = urllib2 . urlopen ( II1I1iiIII ) . read ( )
  except :
   print ( "GA fail: %s" % utm_url )
- return I1Ii1I1
- if 38 - 38: oo0ooO0oOOOOo % I11i11Ii % i1111 / I1Ii111 + OOo / oOooOoO0Oo0O
-def OoOOo0OOoO ( group , name ) :
+ return oOOo0O00o
+ if 61 - 61: ii1II11I1ii1I - Oo00O0 - o0Oo
+def IiI1iIiIIIii ( group , name ) :
  try :
   try :
    from hashlib import md5
@@ -482,93 +537,94 @@ def OoOOo0OOoO ( group , name ) :
   from urllib import unquote , quote
   from os import environ
   from hashlib import sha1
-  ooO0O00Oo0o = "1.0"
-  OOO = open ( OO0OoOO0o0o ) . read ( )
-  Oo0o00OO0000 = "XomGiaiTri"
-  I1i = "UA-52209804-2"
-  O00Oooo = "www.viettv24.com"
-  i11I = "http://www.google-analytics.com/__utm.gif"
+  oOoO = "1.0"
+  oOoO00O0 = open ( oooO ) . read ( )
+  OOIi1iI111II1I1 = "XomGiaiTri"
+  oOOOOoOO0o = "UA-52209804-2"
+  i1II1 = "www.viettv24.com"
+  i11i1 = "http://www.google-analytics.com/__utm.gif"
   if name == "None" :
-   o00Oo0oooooo = i11I + "?" + "utmwv=" + ooO0O00Oo0o + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmp=" + quote ( Oo0o00OO0000 ) + "&utmac=" + I1i + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , OOO , "1" , "1" , "2" ] )
-   if 76 - 76: i1111 / ooO . o0o00Oo0O % i1iIi11iIIi1I . I1II1 + oo
-   if 71 - 71: OOO0O . I11i11Ii
-   if 62 - 62: i11i . i1111
-   if 61 - 61: OOo - ooO - oOooOoO0Oo0O
-   if 25 - 25: o0o00Oo0O * i1111 + oO0o . I1II1 . I1II1
+   IiiiiI1i1Iii = i11i1 + "?" + "utmwv=" + oOoO + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmp=" + quote ( OOIi1iI111II1I1 ) + "&utmac=" + oOOOOoOO0o + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , oOoO00O0 , "1" , "1" , "2" ] )
+   if 87 - 87: oO0o0ooO0
+   if 29 - 29: iii1II11ii % Oo00O0 - iii1II11ii / Oo00O0 . o0Oo
+   if 31 - 31: O0o
+   if 88 - 88: iI1Ii11111iIi - i1iIIII + Oo00O0 * iii1II11ii % iI11I1II1I1I + i11iII1iiI
+   if 76 - 76: iii1II11ii * oo00 % O0o
   else :
    if group == "None" :
-    o00Oo0oooooo = i11I + "?" + "utmwv=" + ooO0O00Oo0o + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmp=" + quote ( Oo0o00OO0000 + "/" + name ) + "&utmac=" + I1i + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , OOO , "1" , "1" , "2" ] )
-    if 58 - 58: i1iIi11iIIi1I
-    if 53 - 53: oOooOoO0Oo0O
-    if 59 - 59: I1II1
-    if 81 - 81: OOo - OOo . I11i1i11i1I
-    if 73 - 73: i1111 % Ii - i1iIi11iIIi1I
+    IiiiiI1i1Iii = i11i1 + "?" + "utmwv=" + oOoO + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmp=" + quote ( OOIi1iI111II1I1 + "/" + name ) + "&utmac=" + oOOOOoOO0o + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , oOoO00O0 , "1" , "1" , "2" ] )
+    if 57 - 57: iI11I1II1I1I - o0Oo / O0o - o0o00Oo0O * oO0OooOoO % OoO0O00
+    if 68 - 68: oO0OooOoO * IiIii1Ii1IIi % ii1II11I1ii1I - I11
+    if 34 - 34: O0o . iI11I1II1I1I * ii1II11I1ii1I * o00ooo0 / O0o / iiIIIII1i1iI
+    if 78 - 78: i11iII1iiI - oO0o0ooO0 / ii1II11I1ii1I
+    if 10 - 10: oo00 + i11iII1iiI * iiIIIII1i1iI + iI11I1II1I1I / O0o / iiIIIII1i1iI
    else :
-    o00Oo0oooooo = i11I + "?" + "utmwv=" + ooO0O00Oo0o + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmp=" + quote ( Oo0o00OO0000 + "/" + group + "/" + name ) + "&utmac=" + I1i + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , OOO , "1" , "1" , "2" ] )
-    if 7 - 7: o0o00Oo0O * Ii * i1IIi11111i + oo0ooO0oOOOOo % I1Ii111 - oo0ooO0oOOOOo
-    if 39 - 39: I1iII1iiII * ooO % ooO - i11i + I1II1 - i1111
-    if 23 - 23: Ii
-    if 30 - 30: I1II1 - oOooOoO0Oo0O % I11i11Ii + i1111 * iI11I1II1I1I
-    if 81 - 81: oo % oOooOoO0Oo0O . iI11I1II1I1I
-    if 4 - 4: Ii % I1Ii111 % oOooOoO0Oo0O / oo
+    IiiiiI1i1Iii = i11i1 + "?" + "utmwv=" + oOoO + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmp=" + quote ( OOIi1iI111II1I1 + "/" + group + "/" + name ) + "&utmac=" + oOOOOoOO0o + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , oOoO00O0 , "1" , "1" , "2" ] )
+    if 42 - 42: iii1II11ii
+    if 38 - 38: Oo00O0 + OoO0O00 % i1iIIII % ii1II11I1ii1I - O0Oooo00 / oO0OooOoO
+    if 73 - 73: oO0o0ooO0 * o0o00Oo0O - Ii
+    if 85 - 85: O0Oooo00 % oo00 + IiIii1Ii1IIi / oO0o0ooO0 . o00ooo0 + Oo00O0
+    if 62 - 62: Ii + Ii - oO0o0ooO0
+    if 28 - 28: oo00 . oo00 % iI11I1II1I1I * iI11I1II1I1I . oO0o0ooO0 / oo00
   print "============================ POSTING ANALYTICS ============================"
-  OooOo0ooo ( o00Oo0oooooo )
-  if 6 - 6: I11i1i11i1I / i1iIi11iIIi1I % ooO - i1iIi11iIIi1I
+  o0o ( IiiiiI1i1Iii )
+  if 27 - 27: iI1Ii11111iIi + i1iIIII - o0Oo
   if not group == "None" :
-   iiii111II = i11I + "?" + "utmwv=" + ooO0O00Oo0o + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmhn=" + quote ( O00Oooo ) + "&utmt=" + "events" + "&utme=" + quote ( "5(" + Oo0o00OO0000 + "*" + group + "*" + name + ")" ) + "&utmp=" + quote ( Oo0o00OO0000 ) + "&utmac=" + I1i + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , "1" , OOO , "1" , "2" ] )
-   if 50 - 50: ooO * i1iIi11iIIi1I % iI11I1II1I1I + i1IIi11111i + I11i1i11i1I + i1iIi11iIIi1I
-   if 71 - 71: oO0o * oO0o * oOooOoO0Oo0O . OOo00O0Oo0oO / OOO0O
-   if 85 - 85: i1111
-   if 20 - 20: OOo00O0Oo0oO % oo
-   if 19 - 19: oO0o % oo + oo0ooO0oOOOOo / OOO0O . oo0ooO0oOOOOo
-   if 12 - 12: oOooOoO0Oo0O + oOooOoO0Oo0O - oO0o * I1iII1iiII % I1iII1iiII - I11i11Ii
-   if 52 - 52: oo0ooO0oOOOOo . I11i1i11i1I + OOO0O
-   if 38 - 38: oOooOoO0Oo0O - I11i11Ii . OOO0O
+   O00oOOooo = i11i1 + "?" + "utmwv=" + oOoO + "&utmn=" + str ( randint ( 0 , 0x7fffffff ) ) + "&utmhn=" + quote ( i1II1 ) + "&utmt=" + "events" + "&utme=" + quote ( "5(" + OOIi1iI111II1I1 + "*" + group + "*" + name + ")" ) + "&utmp=" + quote ( OOIi1iI111II1I1 ) + "&utmac=" + oOOOOoOO0o + "&utmcc=__utma=%s" % "." . join ( [ "1" , "1" , "1" , oOoO00O0 , "1" , "2" ] )
+   if 50 - 50: iiIIIII1i1iI % o0o00Oo0O * oO0o0ooO0
+   if 5 - 5: I11 * ii1II11I1ii1I
+   if 5 - 5: O0o
+   if 90 - 90: O0o . i1iIIII / O0Oooo00 - IiIii1Ii1IIi
+   if 40 - 40: oO0OooOoO
+   if 25 - 25: I11 + O0Oooo00 / i1iIIII . oO0o0ooO0 % o0o00Oo0O * iI1Ii11111iIi
+   if 84 - 84: i1iIIII % O0Oooo00 + Ii
+   if 28 - 28: i11iII1iiI + iI1Ii11111iIi * Oo00O0 % o00ooo0 . IiIii1Ii1IIi % o0o00Oo0O
    try :
     print "============================ POSTING TRACK EVENT ============================"
-    OooOo0ooo ( iiii111II )
+    o0o ( O00oOOooo )
    except :
     print "============================  CANNOT POST TRACK EVENT ============================"
-    if 58 - 58: i1iIi11iIIi1I . I11i1i11i1I + OOo
+    if 16 - 16: IiIii1Ii1IIi - iI11I1II1I1I / iii1II11ii . OoO0O00 + iI11I1II1I1I
  except :
   print "================  CANNOT POST TO ANALYTICS  ================"
-  if 66 - 66: I11i1i11i1I / OOo00O0Oo0oO * i11i + i11i % i1111
-IIii1111 = ii1111iII ( sys . argv [ 2 ] )
-I1iI = IIii1111 . get ( 'mode' )
-ii111111I1iII = IIii1111 . get ( 'url' )
-IIIIiIiIi1 = IIii1111 . get ( 'name' )
-if type ( ii111111I1iII ) == type ( str ( ) ) :
- ii111111I1iII = urllib . unquote_plus ( ii111111I1iII )
-if type ( IIIIiIiIi1 ) == type ( str ( ) ) :
- IIIIiIiIi1 = urllib . unquote_plus ( IIIIiIiIi1 )
- if 2 - 2: I11i1i11i1I % iI11I1II1I1I * iI11I1II1I1I . I1II1 / I11i1i11i1I
-iII1i1 = str ( sys . argv [ 1 ] )
-if I1iI == 'index' :
- OoOOo0OOoO ( "Browse" , IIIIiIiIi1 )
- iIIIIii1 ( ii111111I1iII )
-elif I1iI == 'search' :
- OoOOo0OOoO ( "None" , "Search" )
- oO0o0OOOO ( )
-elif I1iI == 'videosbyregion' :
- OoOOo0OOoO ( "Browse" , IIIIiIiIi1 )
- II1i1IiiIIi11 ( )
-elif I1iI == 'videosbycategory' :
- OoOOo0OOoO ( "Browse" , IIIIiIiIi1 )
- Ii11iII1 ( )
-elif I1iI == 'mirrors' :
- OoOOo0OOoO ( "Browse" , IIIIiIiIi1 )
- i1iIi1iIi1i ( ii111111I1iII )
-elif I1iI == 'episodes' :
- OoOOo0OOoO ( "Browse" , IIIIiIiIi1 )
- OO0oOO0O ( ii111111I1iII , IIIIiIiIi1 )
-elif I1iI == 'loadvideo' :
- OoOOo0OOoO ( "Play" , IIIIiIiIi1 + "/" + ii111111I1iII )
- O0oOOoooOO0O = xbmcgui . DialogProgress ( )
- O0oOOoooOO0O . create ( 'xomgiaitri.com' , 'Loading video. Please wait...' )
- OoooO0oO ( ii111111I1iII , IIIIiIiIi1 )
- O0oOOoooOO0O . close ( )
- del O0oOOoooOO0O
+  if 19 - 19: iI1Ii11111iIi - i11iII1iiI . o0o00Oo0O
+ooOo00 = iII11I1IiiIi ( sys . argv [ 2 ] )
+OOoo = ooOo00 . get ( 'mode' )
+IIi1i = ooOo00 . get ( 'url' )
+iIIiiiI = ooOo00 . get ( 'name' )
+if type ( IIi1i ) == type ( str ( ) ) :
+ IIi1i = urllib . unquote_plus ( IIi1i )
+if type ( iIIiiiI ) == type ( str ( ) ) :
+ iIIiiiI = urllib . unquote_plus ( iIIiiiI )
+ if 60 - 60: iii1II11ii . O0o
+IiI111ii1ii = str ( sys . argv [ 1 ] )
+if OOoo == 'index' :
+ IiI1iIiIIIii ( "Browse" , iIIiiiI )
+ oO0OOoO0 ( IIi1i )
+elif OOoo == 'search' :
+ IiI1iIiIIIii ( "None" , "Search" )
+ OoOO0oo0o ( )
+elif OOoo == 'videosbyregion' :
+ IiI1iIiIIIii ( "Browse" , iIIiiiI )
+ oO0ooO0OoOOOO ( )
+elif OOoo == 'videosbycategory' :
+ IiI1iIiIIIii ( "Browse" , iIIiiiI )
+ I1 ( )
+elif OOoo == 'mirrors' :
+ IiI1iIiIIIii ( "Browse" , iIIiiiI )
+ oO00o0 ( IIi1i )
+elif OOoo == 'episodes' :
+ IiI1iIiIIIii ( "Browse" , iIIiiiI )
+ IiO0OOO ( IIi1i , iIIiiiI )
+elif OOoo == 'loadvideo' :
+ IiI1iIiIIIii ( "Play" , iIIiiiI + "/" + IIi1i )
+ O0OOo = xbmcgui . DialogProgress ( )
+ O0OOo . create ( 'xomgiaitri.com' , 'Loading video. Please wait...' )
+ OO ( IIi1i , iIIiiiI )
+ O0OOo . close ( )
+ del O0OOo
 else :
- OoOOo0OOoO ( "None" , "None" )
- iIii11I ( )
-xbmcplugin . endOfDirectory ( int ( iII1i1 ) ) # dd678faae9ac167bc83abf78e5cb2f3f0688d3a3
+ IiI1iIiIIIii ( "None" , "None" )
+ Oo000 ( )
+xbmcplugin . endOfDirectory ( int ( IiI111ii1ii ) )
+# dd678faae9ac167bc83abf78e5cb2f3f0688d3a3
