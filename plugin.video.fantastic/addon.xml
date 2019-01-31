@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.fantastic" version="3.2.2" name="Fantastic" provider-name="Firestickplusman">
+<addon id="plugin.video.fantastic" version="4.1.1" name="Fantastic" provider-name="Firestickplusman">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="script.module.fantastic" />

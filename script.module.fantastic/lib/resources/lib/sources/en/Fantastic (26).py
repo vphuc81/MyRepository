@@ -1,227 +1,177 @@
-'''
-	
-    ***FSPM was here*****
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-'''
 import re
-import requests
-from bs4 import BeautifulSoup
-from datetime import datetime
-try:
-    from urllib import quote
-except ImportError:
-    from urllib.parse import quote
+import traceback
+import urllib
+import urlparse
 
-import xbmc
-from resources.lib.modules import debrid
-from resources.lib.modules.client import randomagent
+from resources.lib.modules import cleantitle, client, directstream, log_utils
 
 
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['vidics.ch, vidics.to']
+        self.domains = ['seriesonline8.co']
+        self.base_link = 'https://www1.seriesonline8.co/'
+        self.search_link = '/movie/search/%s'
 
-        self.BASE_URL = 'https://www.vidics.to'
-        self.QUICK_SEARCH_URL = self.BASE_URL + '/searchSuggest/{category}/{query}'
-        self.SLOW_SEARCH_URL = self.BASE_URL + '/Category-{category}/Genre-Any/{year}-{year}/Letter-Any/ByPopularity/1/Search-{query}.htm'
-        self.EPISODE_PATH = '-Season-{season}-Episode-{episode}'
-
+    def matchAlias(self, title, aliases):
+        try:
+            for alias in aliases:
+                if cleantitle.get(title) == cleantitle.get(alias['title']):
+                    return True
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SeriesOnline - Exception: \n' + str(failure))
+            return
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            return self._getSearchData(title, aliases, year, self._createSession(), season=None, episode=None)
-        except:
-            self._logException()
-            return None
-
+            aliases.append({'country': 'us', 'title': title})
+            url = {'imdb': imdb, 'title': title, 'year': year, 'aliases': aliases}
+            url = urllib.urlencode(url)
+            return url
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SeriesOnline - Exception: \n' + str(failure))
+            return
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            return tvshowtitle, aliases, year
-        except:
-            self._logException()
-            return None
+            aliases.append({'country': 'us', 'title': tvshowtitle})
+            url = {'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'year': year, 'aliases': aliases}
+            url = urllib.urlencode(url)
+            return url
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SeriesOnline - Exception: \n' + str(failure))
+            return
 
-
-    def episode(self, data, imdb, tvdb, title, premiered, season, episode):
+    def episode(self, url, imdb, tvdb, title, premiered, season, episode):
         try:
-            tvshowtitle, aliases, year = data
-            return self._getSearchData(tvshowtitle, aliases, year, self._createSession(), int(season), int(episode))
-        except:
-            self._logException()
-            return None
+            if url is None:
+                return
+            url = urlparse.parse_qs(url)
+            url = dict([(i, url[i][0]) if url[i] else (i, '') for i in url])
+            url['title'], url['premiered'], url['season'], url['episode'] = title, premiered, season, episode
+            url = urllib.urlencode(url)
+            return url
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SeriesOnline - Exception: \n' + str(failure))
+            return
 
-
-    def sources(self, data, hostDict, hostprDict):
+    def searchShow(self, title, season, aliases, headers):
         try:
-            session = self._createSession({'UA': data['UA']})
-            r = self._sessionRequest(data['pageURL'], session, 1500)
-            if not r.ok:
-                self._logException('Sources page request failed: ' + pageURL)
-                return None
-            
-            soup = BeautifulSoup(r.content, 'html.parser')
-            for langDIV in soup.findAll('div', class_='lang'):
-                # Find the DIV with English-dubbed hosts.
-                if next(langDIV.strings, None).strip().lower() == 'english':
-                    userAgent = data['UA']
-                    pageURL = data['pageURL']
-                    sources = [
-                        {
-                            'source': a.text.strip().lower(),
-                            'quality': 'SD',
-                            'language': 'en',
-                            'url': {
-                                'pageURL': self.BASE_URL + a['href'],
-                                'UA': userAgent,
-                                'referer': pageURL
-                            },
-                            'direct': False,
-                            'debridonly': False
-                        }
-                        for a in langDIV.findAll('a', href=True)
-                    ]
-                    return sources
-            return None
-        except:
-            self._logException()
-            return None
+            title = cleantitle.normalize(title)
+            search = '%s Season %01d' % (title, int(season))
+            url = urlparse.urljoin(self.base_link, self.search_link % cleantitle.geturl(search))
+            r = client.request(url, headers=headers, timeout='15')
+            r = client.parseDOM(r, 'div', attrs={'class': 'ml-item'})
+            r = zip(client.parseDOM(r, 'a', ret='href'), client.parseDOM(r, 'a', ret='title'))
+            r = [(i[0], i[1], re.findall('(.*?)\s+-\s+Season\s+(\d)', i[1])) for i in r]
+            r = [(i[0], i[1], i[2][0]) for i in r if len(i[2]) > 0]
+            url = [i[0] for i in r if self.matchAlias(i[2][0], aliases) and i[2][1] == season][0]
+            url = urlparse.urljoin(self.base_link, '%s/watching.html' % url)
+            return url
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SeriesOnline - Exception: \n' + str(failure))
+            return
 
-
-    def resolve(self, data):
-        session = self._createSession({'UA': data['UA'], 'referer': data['referer']})
-
-        r = self._sessionRequest(data['pageURL'], session, 1500)
-        if not r.ok:
-            self._logException('Resolve request failed' + data['pageURL'])
-            return None
-        
-        match = re.search('movie_link1.*?<a.*?href=\"(.*?)\"', r.text, re.DOTALL)
-        if match:
-            return match.group(1)
-        else:
-            return None
-
-
-    def _sessionRequest(self, url, session, delayAmount, data=None):
+    def searchMovie(self, title, year, aliases, headers):
         try:
-            startTime = datetime.now() if delayAmount else None
-            if data:
-                r = session.post(url, data=data, timeout=8)
+            title = cleantitle.normalize(title)
+            url = urlparse.urljoin(self.base_link, self.search_link % cleantitle.geturl(title))
+            r = client.request(url, headers=headers, timeout='15')
+            r = client.parseDOM(r, 'div', attrs={'class': 'ml-item'})
+            r = zip(client.parseDOM(r, 'a', ret='href'), client.parseDOM(r, 'a', ret='title'))
+            results = [(i[0], i[1], re.findall('\((\d{4})', i[1])) for i in r]
+            try:
+                r = [(i[0], i[1], i[2][0]) for i in results if len(i[2]) > 0]
+                url = [i[0] for i in r if self.matchAlias(i[1], aliases) and (year == i[2])][0]
+            except Exception:
+                url = None
+                pass
+
+            if (url is None):
+                url = [i[0] for i in results if self.matchAlias(i[1], aliases)][0]
+
+            url = urlparse.urljoin(self.base_link, '%s/watching.html' % url)
+            return url
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SeriesOnline - Exception: \n' + str(failure))
+            return
+
+    def sources(self, url, hostDict, hostprDict):
+        try:
+            sources = []
+
+            if url is None:
+                return sources
+
+            data = urlparse.parse_qs(url)
+            data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
+            aliases = eval(data['aliases'])
+            headers = {}
+
+            if 'tvshowtitle' in data:
+                ep = data['episode']
+                url = '%s/film/%s-season-%01d/watching.html?ep=%s' % (
+                    self.base_link, cleantitle.geturl(data['tvshowtitle']), int(data['season']), ep)
+                r = client.request(url, headers=headers, timeout='10', output='geturl')
+
+                if url is None:
+                    url = self.searchShow(data['tvshowtitle'], data['season'], aliases, headers)
+
             else:
-                r = session.get(url, timeout=8)
+                url = self.searchMovie(data['title'], data['year'], aliases, headers)
 
-            if delayAmount:
-                elapsed = int((datetime.now() - startTime).total_seconds() * 1000)
-                if elapsed < delayAmount and elapsed > 100:
-                    xbmc.sleep(delayAmount - elapsed)
-            return r
-        except:
-            return type('FailedResponse', (object,), {'ok': False})
+            if url is None:
+                raise Exception()
 
-
-    def _createSession(self, customHeaders={}):
-        # Create a 'requests.Session' and try to spoof a header from a web browser.
-        session = requests.Session()
-        session.headers.update(
-            {
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'User-Agent': customHeaders.get('UA', randomagent()),
-                'Accept-Language': 'en-US,en;q=0.5',
-                'Referer': customHeaders.get('referer', self.BASE_URL + '/'),
-                'DNT': '1'
-            }
-        )
-        return session
-
-
-    def _getSearchData(self, title, aliases, year, session, season, episode):
-        try:
-            query = quote(title.lower())
-
-            # Prepare the session and make the search request.
-            oldAccept = session.headers['Accept']
-            session.headers.update({'Accept': '*/*', 'X-Requested-With': 'XMLHttpRequest'})
-            searchURL = self.QUICK_SEARCH_URL.format(
-                category='TvShows' if episode else 'Movies', query=query
-            )
-            r = self._sessionRequest(searchURL, session, 1000, {'ajax': '1'})
-            if not r.ok:
-                return None
-                
-            # Restore the session headers.
-            session.headers['Accept'] = oldAccept
-            del session.headers['X-Requested-With']
-
-            possibleTitles = set(
-                (title.lower(),) + tuple((alias['title'].lower() for alias in aliases) if aliases else ())
-            )
-            
-            # Using the pop-up search results uses way less bandwidth from them, like 1 KB (instead of 43 KB with
-            # the traditional search page).
-            # But when the search results have multiple entries with the same title (like the TV show "The Flash"
-            # or the movie "The Dark Knight"), need to use an extra search with the year to differentiate them.
-            
-            bestURL = None
-            
-            soup = BeautifulSoup(r.content, 'html.parser')
-            for a in soup.findAll('a', href=True):
-                if a.text.lower() in possibleTitles:
-                    if not bestURL:
-                        bestURL = self.BASE_URL + a['href']
-                    else:
-                        bestURL = self._extraSearch(query, year, (episode == None), session, bestURL)
-                        break
-
-            if bestURL:
-                if episode:
-                    bestURL += self.EPISODE_PATH.format(season=season, episode=episode)
-                return {'pageURL': bestURL, 'UA': session.headers['User-Agent']}
+            r = client.request(url, headers=headers, timeout='10')
+            r = client.parseDOM(r, 'div', attrs={'class': 'les-content'})
+            if 'tvshowtitle' in data:
+                ep = data['episode']
+                links = client.parseDOM(r, 'a', attrs={'episode-data': ep}, ret='player-data')
             else:
-                return None # No results found.
-        except:
-            self._logException()
-            return None
-            
-            
-    def _extraSearch(self, query, year, isMovie, session, bestURL):
-        searchURL = self.SLOW_SEARCH_URL.format(category='Movies' if isMovie else 'TvShows', year=year, query=query)
-        r = self._sessionRequest(searchURL, session, 1500)
-        if not r.ok:
-            return bestURL
-            
-        soup = BeautifulSoup(r.content, 'html.parser')
-        resultsTD = soup.find('td', id='searchResults')
-        if resultsTD:
-            a = resultsTD.find('a', itemprop=True)
-            if a:
-                return self.BASE_URL + a['href']            
-        return bestURL        
+                links = client.parseDOM(r, 'a', ret='player-data')
 
+            for link in links:
+                if '123movieshd' in link or 'seriesonline' in link:
+                    r = client.request(link, headers=headers, timeout='10')
+                    r = re.findall('(https:.*?redirector.*?)[\'\"]', r)
 
-    def _debug(self, name, val=None):
-        xbmc.log('VIDICS Debug > ' + name + (' %s' % repr(val) if val else ''), xbmc.LOGWARNING)
+                    for i in r:
+                        try:
+                            sources.append({'source': 'gvideo', 'quality': directstream.googletag(
+                                i)[0]['quality'], 'language': 'en', 'url': i, 'direct': True, 'debridonly': False})
+                        except Exception:
+                            pass
+                else:
+                    try:
+                        host = re.findall('([\w]+[.][\w]+)$', urlparse.urlparse(link.strip().lower()).netloc)[0]
+                        if host not in hostDict:
+                            raise Exception()
+                        host = client.replaceHTMLCodes(host)
+                        host = host.encode('utf-8')
 
+                        sources.append({'source': host, 'quality': 'SD', 'language': 'en',
+                                        'url': link, 'direct': False, 'debridonly': False})
+                    except Exception:
+                        pass
 
-    def _logException(self, text=None):
-        return # Comment this return statement to output errors to the Kodi log, useful for debugging this script.
-        if text:
-            xbmc.log('VIDICS Error >' + text, xbmc.LOGERROR)
+            return sources
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SeriesOnline - Exception: \n' + str(failure))
+            return sources
+
+    def resolve(self, url):
+        if "google" in url:
+            return directstream.googlepass(url)
         else:
-            import traceback
-            xbmc.log(traceback.format_exc(), xbmc.LOGERROR)
+            return url

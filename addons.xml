@@ -363,7 +363,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
     </extension>
 </addon>
 
-<addon id="plugin.video.fantastic" version="3.2.2" name="Fantastic" provider-name="Firestickplusman">
+<addon id="plugin.video.fantastic" version="4.1.1" name="Fantastic" provider-name="Firestickplusman">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="script.module.fantastic" />
@@ -535,7 +535,7 @@ http://www2.gostream.sc
     </extension>
 </addon>
 
-<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.28" provider-name="MetalKettle">
+<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.29" provider-name="MetalKettle">
 
   <requires>
 
@@ -2220,7 +2220,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 		</extension>
 </addon>
 
-<addon id="script.module.fantastic" name="fantastic Module" version="4.0.1" provider-name="fantastic">
+<addon id="script.module.fantastic" name="fantastic Module" version="5.1.1" provider-name="fantastic">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
 		<import addon="script.module.requests" />

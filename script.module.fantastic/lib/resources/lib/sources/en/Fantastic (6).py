@@ -1,109 +1,158 @@
-'''
-	
-    ***FSPM was here*****
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+import base64
+import re
+import sys
+import traceback
 
-'''
+import requests
 
-import re,urllib,urlparse,json,base64,time
+from bs4 import BeautifulSoup
+from resources.lib.modules import jsunpack, log_utils
 
-from resources.lib.modules import cleantitle
-from resources.lib.modules import dom_parser2
-from resources.lib.modules import client
-from resources.lib.modules import debrid
+
+def streamdor(html, src, olod):
+    source = ''
+    try:
+        with requests.Session() as s:
+            episodeId = re.findall('.*streamdor.co/video/(\d+)', html)[0]
+            p = s.get('https://embed.streamdor.co/video/' + episodeId, headers={'referer': src})
+            p = re.findall(r'JuicyCodes.Run\(([^\)]+)', p.text, re.IGNORECASE)[0]
+            p = re.sub(r'\"\s*\+\s*\"', '', p)
+            p = re.sub(r'[^A-Za-z0-9+\\/=]', '', p)
+            p = base64.b64decode(p)
+            p = jsunpack.unpack(p.decode('utf-8'))
+            qual = 'SD'
+            try:
+                qual = re.findall(r'label:"(.*?)"', p)[0]
+            except Exception:
+                pass
+            try:
+                url = re.findall(r'(https://streamango.com/embed/.*?)"', p, re.IGNORECASE)[0]
+                source = "streamango.com"
+                details = {'source': source, 'quality': qual, 'language': "en", 'url': url, 'info': '',
+                           'direct': False, 'debridonly': False}
+            except Exception:
+                if olod is True:
+                    url = ''
+                    source = 'openload.co'
+                    details = {'source': source, 'quality': qual, 'language': "en", 'url': url, 'info': '',
+                               'direct': False, 'debridonly': False}
+                else:
+                    return ''
+
+        return details
+    except Exception:
+        print("Unexpected error in CMOVIES STREAMDOR Script:")
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        print(exc_type, exc_tb.tb_lineno)
+        return details
+
 
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['fmovies.sc']
-        self.base_link = 'http://fmovies.sc'
-        self.search_link = '/watch/%s-%s-online.html' 
-        
+        self.domains = ['cmovieshd.io']
+        self.base_link = 'https://www3.cmovies.io/'
+        self.tv_link = 'https://www3.cmovies.io/tv-series/'
+        self.movie_link = 'https://www3.cmovies.io/movie/'
+        self.search_link = 'https://www3.cmovies.io/search/?q='
+
     def movie(self, imdb, title, localtitle, aliases, year):
-        try:
-            clean_title = cleantitle.geturl(title)
-            url = urlparse.urljoin(self.base_link, (self.search_link %(clean_title,year)))
-            return url
-        except:
-            return
+        sources = []
+        with requests.Session() as s:
+            p = s.get(self.search_link + title + "+" + year)
+            soup = BeautifulSoup(p.text, 'html.parser').find_all('div', {'class': 'movies-list'})[0]
+            soup = soup.find_all('a', {'class': 'ml-mask'})
+            movie_link = ''
+            for i in soup:
+                if i['title'].lower() == title.lower() or i['title'].lower() == title.lower() + " " + year:
+                    movie_link = i['href']
+            p = s.get(movie_link + "watch")
+            soup = BeautifulSoup(p.text, 'html.parser').find_all('a', {'class': 'btn-eps'})
+            movie_links = []
+            for i in soup:
+                movie_links.append(i['href'])
+            for i in movie_links:
+                p = s.get(i)
+                if re.findall(r'http.+://openload.co/embed/.+\"', p.text):
+                    openload_link = re.findall(r'http.+://openload.co/embed/.+\"', p.text)[0].strip('"')
+                    olo_source = streamdor(p.text, i, True)
+                    olo_source['url'] = openload_link
+                    sources.append(olo_source)
+
+                else:
+                    sources.append(streamdor(p.text, i, False))
+            return sources
+
+        return sources
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            aliases.append({'country': 'us', 'title': tvshowtitle})
-            url = {'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'year': year, 'aliases': aliases}
-            url = urllib.urlencode(url)
+            url = {'tvshowtitle': tvshowtitle, 'aliases': aliases}
             return url
-        except:
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('CMovies - Exception: \n' + str(failure))
             return
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
-        try:
-            if url == None: return
-            url = urlparse.parse_qs(url)
-            url = dict([(i, url[i][0]) if url[i] else (i, '') for i in url])
-            clean_title = cleantitle.geturl(url['tvshowtitle'])+'-s%02d' % int(season)
-            url = urlparse.urljoin(self.base_link, (self.search_link %(clean_title,url['year'])))
-            r = client.request(url)
-            r = dom_parser2.parse_dom(r, 'div', {'id': 'ip_episode'})
-            r = [dom_parser2.parse_dom(i, 'a', req=['href']) for i in r if i]
-            for i in r[0]:
-                if i.content == 'Episode %s'%episode:
-                    url = i.attrs['href']
+        if not url:
             return url
-        except:
+        try:
+
+            aliases = url['aliases']
+            aliases.append({'title': url['tvshowtitle']})
+            sources = []
+            if len(episode) == 1:
+                episode = "0" + episode
+            with requests.Session() as s:
+                for i in aliases:
+                    search_text = i['title'] + ' season ' + season
+                    p = s.get(self.search_link + search_text)
+                    soup = BeautifulSoup(p.text, 'html.parser')
+                    soup = soup.find_all('div', {'class': 'ml-item'})[0].find_all('a', href=True)[0]
+                    if re.sub(r'\W+', '', soup['title'].lower()) \
+                            == re.sub(r'\W+', '', ((i['title'] + " - season " + season).lower())):
+                        break
+                    else:
+                        soup = None
+                        pass
+                if soup is None:
+                    return sources
+            p = s.get(soup['href'] + 'watch')
+            soup = BeautifulSoup(p.text, 'html.parser').find_all('a', {'class': 'btn-eps'})
+            episode_links = []
+            for i in soup:
+                if re.sub(r'\W+', '', title.lower()) in re.sub(r'\W+', '', i.text.lower()):
+                    episode_links.append(i['href'])
+            for i in episode_links:
+                p = s.get(i)
+                if re.findall(r'http.+://openload.co/embed/.+\"', p.text):
+                    openload_link = re.findall(r'http.+://openload.co/embed/.+\"', p.text)[0].strip('"')
+                    olo_source = streamdor(p.text, i, True)
+                    olo_source['url'] = openload_link
+                    sources.append(olo_source)
+
+                else:
+                    sources.append(streamdor(p.text, i, False))
+            return sources
+
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('CMovies - Exception: \n' + str(failure))
             return
 
     def sources(self, url, hostDict, hostprDict):
-        try:
-            sources = []
-            if url == None: return sources
-            
-            r = client.request(url)
-            quality = re.findall(">(\w+)<\/p",r)
-            if quality[0] == "HD":
-                quality = "720p"
-            else:
-                quality = "SD"
-            r = dom_parser2.parse_dom(r, 'div', {'id': 'servers-list'})
-            r = [dom_parser2.parse_dom(i, 'a', req=['href']) for i in r if i]
-
-            for i in r[0]:
-                url = {'url': i.attrs['href'], 'data-film': i.attrs['data-film'], 'data-server': i.attrs['data-server'], 'data-name' : i.attrs['data-name']}
-                url = urllib.urlencode(url)
-                sources.append({'source': i.content, 'quality': quality, 'language': 'en', 'url': url, 'direct': False, 'debridonly': False})
-            return sources
-        except:
-            return sources
+        url = filter(None, url)
+        sources = url
+        return sources
 
     def resolve(self, url):
-        try:
-            urldata = urlparse.parse_qs(url)
-            urldata = dict((i, urldata[i][0]) for i in urldata)
-            post = {'ipplugins': 1,'ip_film': urldata['data-film'], 'ip_server': urldata['data-server'], 'ip_name': urldata['data-name'],'fix': "0"}
-            p1 = client.request('http://fmovies.sc/ip.file/swf/plugins/ipplugins.php', post=post, referer=urldata['url'], XHR=True)
-            p1 = json.loads(p1)
-            p2 = client.request('http://fmovies.sc/ip.file/swf/ipplayer/ipplayer.php?u=%s&s=%s&n=0' %(p1['s'],urldata['data-server']))
-            p2 = json.loads(p2)
-            p3 = client.request('http://fmovies.sc/ip.file/swf/ipplayer/api.php?hash=%s' %(p2['hash']))
-            p3 = json.loads(p3)
-            n = p3['status']
-            if n == False:
-                p2 = client.request('http://fmovies.sc/ip.file/swf/ipplayer/ipplayer.php?u=%s&s=%s&n=1' %(p1['s'],urldata['data-server']))
-                p2 = json.loads(p2)
-            url =  "https:%s" %p2["data"].replace("\/","/")
-            return url
-        except:
-            return
+        return url
+
+# url = source.tvshow(source(), '', '', 'Vikings','',[],'2016')
+# url = source.episode(source(),url,'', '', 'A Good Treason', '', '4', '1')
+# url = source.sources(source(),url,'','')

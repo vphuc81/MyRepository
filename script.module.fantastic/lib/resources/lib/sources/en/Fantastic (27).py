@@ -1,243 +1,339 @@
-'''
-	
-    ***FSPM was here*****
+﻿
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+import base64
+import json
+import re
+import time
+import traceback
+import urllib
+import urlparse
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+from resources.lib.modules import (cfscrape, cleantitle, client, directstream,
+                                   jsunfuck, log_utils, source_utils)
 
-'''
+CODE = '''def retA():
+    class Infix:
+        def __init__(self, function):
+            self.function = function
+        def __ror__(self, other):
+            return Infix(lambda x, self=self, other=other: self.function(other, x))
+        def __or__(self, other):
+            return self.function(other)
+        def __rlshift__(self, other):
+            return Infix(lambda x, self=self, other=other: self.function(other, x))
+        def __rshift__(self, other):
+            return self.function(other)
+        def __call__(self, value1, value2):
+            return self.function(value1, value2)
+    def my_add(x, y):
+        try: return x + y
+        except Exception: return str(x) + str(y)
+    x = Infix(my_add)
+    return %s
+param = retA()'''
 
-import re,urllib,urlparse,json,base64, random
-
-from resources.lib.modules import cleantitle
-from resources.lib.modules import client
-from resources.lib.modules import source_utils
-from resources.lib.modules import dom_parser
-from resources.lib.modules import debrid
-from resources.lib.modules import log_utils
-
-# Working: https://seriesfree.to/episode/dawsons_creek_s6_e23.html
 
 class source:
-	def __init__(self):
-		self.priority = 1
-		self.language = ['en']
-		self.domains = ['watchseriesfree.to','seriesfree.to']
-		self.base_link = 'https://seriesfree.to/'
-		self.search_link = 'https://seriesfree.to/search/%s'
-		self.max_conns = 10 #set to 10 bc that = how many the prev scraper might hit
-		self.min_srcs = 3
+    def __init__(self):
+        self.priority = 1
+        self.language = ['en']
+        self.domains = ['solarmoviez.ru']
+        self.base_link = 'https://solarmoviez.ru'
+        self.search_link = '/movie/search/%s.html'
+        self.info_link = '/ajax/movie_get_info/%s.html'
+        self.server_link = '/ajax/v4_movie_episodes/%s'
+        self.embed_link = '/ajax/movie_embed/%s'
+        self.token_link = '/ajax/movie_token?eid=%s&mid=%s&_=%s'
+        self.source_link = '/ajax/movie_sources/%s?x=%s&y=%s'
 
-	def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
-		try:
-			query = self.search_link % urllib.quote_plus(cleantitle.query(tvshowtitle))
+    def matchAlias(self, title, aliases):
+        try:
+            for alias in aliases:
+                if cleantitle.get(title) == cleantitle.get(alias['title']):
+                    return True
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SolarMoviez - Exception: \n' + str(failure))
+            return
 
-			# req page 3 times to workaround their BS random 404's
-			# responses (legit & BS 404s) are actually very fast: timeout prob not important
-			for i in range(4):
-				result = client.request(query, timeout=3)
-				if not result == None: break
-			
+    def movie(self, imdb, title, localtitle, aliases, year):
+        try:
+            aliases.append({'country': 'us', 'title': title})
+            url = {'imdb': imdb, 'title': title, 'year': year, 'aliases': aliases}
+            url = urllib.urlencode(url)
+            return url
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SolarMoviez - Exception: \n' + str(failure))
+            return
 
-			t = [tvshowtitle] + source_utils.aliases_to_array(aliases)
-			t = [cleantitle.get(i) for i in set(t) if i]
-			result = re.compile('itemprop="url"\s+href="([^"]+).*?itemprop="name"\s+class="serie-title">([^<]+)', re.DOTALL).findall(result)
-			for i in result:
-				if cleantitle.get(cleantitle.normalize(i[1])) in t and year in i[1]: url = i[0]
+    def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
+        try:
+            aliases.append({'country': 'us', 'title': tvshowtitle})
+            url = {'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'year': year, 'aliases': aliases}
+            url = urllib.urlencode(url)
+            return url
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SolarMoviez - Exception: \n' + str(failure))
+            return
 
-			url = url.encode('utf-8')
-			
-			#log_utils.log('\n\n~~~ outgoing tvshow() url')
-			#log_utils.log(url)
-			
-			# returned 'url' format like: /serie/x_files 
-			return url
-		except:
-			return
+    def episode(self, url, imdb, tvdb, title, premiered, season, episode):
+        try:
+            if url is None:
+                return
+            url = urlparse.parse_qs(url)
+            url = dict([(i, url[i][0]) if url[i] else (i, '') for i in url])
+            url['title'], url['premiered'], url['season'], url['episode'] = title, premiered, season, episode
+            url = urllib.urlencode(url)
+            return url
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SolarMoviez - Exception: \n' + str(failure))
+            return
 
+    def searchShow(self, title, season, aliases, headers):
+        try:
+            title = cleantitle.normalize(title)
+            search = '%s Season %01d' % (title, int(season))
+            url = urlparse.urljoin(self.base_link, self.search_link % urllib.quote_plus(cleantitle.getsearch(search)))
+            r = self.s.get(url, headers=headers).content
+            r = client.parseDOM(r, 'div', attrs={'class': 'ml-item'})
+            r = zip(client.parseDOM(r, 'a', ret='href'), client.parseDOM(r, 'a', ret='title'))
+            r = [(i[0], i[1], re.findall('(.*?)\s+-\s+Season\s+(\d)', i[1])) for i in r]
+            r = [(i[0], i[1], i[2][0]) for i in r if len(i[2]) > 0]
+            url = [i[0] for i in r if self.matchAlias(i[2][0], aliases) and i[2][1] == season][0]
+            return url
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SolarMoviez - Exception: \n' + str(failure))
+            return
 
-	def episode(self, url, imdb, tvdb, title, premiered, season, episode):
-		try:
-			if url == None: return
-			#log_utils.log('\n\n~~~ incomingish episode() url')
-			#log_utils.log(url)
+    def searchMovie(self, title, year, aliases, headers):
+        try:
+            title = cleantitle.normalize(title)
+            url = urlparse.urljoin(self.base_link, self.search_link % urllib.quote_plus(cleantitle.getsearch(title)))
+            r = self.s.get(url, headers=headers).content
+            r = client.parseDOM(r, 'div', attrs={'class': 'ml-item'})
+            r = zip(client.parseDOM(r, 'a', ret='href'), client.parseDOM(r, 'a', ret='title'))
+            r = [(i[0], i[1], re.findall('(\d+)', i[0])[0]) for i in r]
+            results = []
+            for i in r:
+                try:
+                    info = client.request(urlparse.urljoin(self.base_link, self.info_link %
+                                                           i[2]), headers=headers, timeout='15')
+                    y = re.findall('<div\s+class="jt-info">(\d{4})', info)[0]
+                    if self.matchAlias(i[1], aliases) and (year == y):
+                        url = i[0]
+                        break
+                    # results.append([i[0], i[1], re.findall('<div\s+class="jt-info">(\d{4})', info)[0]])
+                except Exception:
+                    url = None
+                    pass
 
-			url = urlparse.urljoin(self.base_link, url)
-			#log_utils.log('\n\n~~~ baselink-joined url')
-			#log_utils.log(url)
-			
-			
-			# req page 3 times to workaround their BS random 404's
-			# responses (legit & BS both) are actually very fast: timeout not that important
-			for i in range(4):
-				result = client.request(url, timeout=3)
-				if not result == None: break
-			
-				
+            # try:
+            #    r = [(i[0], i[1], i[2][0]) for i in results if len(i[2]) > 0]
+            #    url = [i[0] for i in r if self.matchAlias(i[1], aliases) and (year == i[2])][0]
+            # except Exception:
+            #    url = None
+            #    pass
 
-			# grab all 'a' that are staged with ep-links formating
-			items = dom_parser.parse_dom(result, 'a', attrs={'itemprop':'url'})
-			#
-			## <a itemprop="url" href="/episode/the_middle_s9_e16.html" title="Watch The Middle Season 9 Episode 16 Online For Free">
-			##  <span class="sinfo fl-l">
-			##   <span><span>9</span>
-			##   </span>×<span itemprop="episodeNumber">16</span>
-			##  </span>
-			##  <em class="date fl-r" itemprop="datePublished">2018-03-13</em>
-			##  <span class="txt-ell" title="Watch The Middle Season 9 Episode 16 Online For Free">
-			##   <span class="W title txt-ell ">
-			##    <span><span>The Middle</span></span>
-			##    <em> - <span itemprop="name">The Crying Game</span></em>
-			##   </span>
-			##  </span></a>
-			#
-			
-			
-			# firstly, try to match YYYY-MM-DD listed in ep listing
-			#  (this should (?) be more reliable than season/ep)
-			try:	
-				#log_utils.log('\n\n~~~ Attempting: find ep by air-date')
-				
-				# iterate through all 'a', from 'items' above...
-				# grab all links that contain matching season/ep...
-				# assign the first one's href to url
-				url = [i.attrs['href'] for i in items if bool(re.compile('"datePublished">%s' % premiered).search(i.content))][0]
-			except:
-				url = None
-				pass  
-			
-			
-			# if no url match by date, continue to try by season/ep#
-			if url == None:
-				#log_utils.log('\n\n~~~ Attempting: (url==None) match by season/ep')
-			
-				# iterate through all 'a', from 'items' above...
-				# grab all links that contain matching season/ep...
-				# assign the first one's href to url
-				url = [i.attrs['href'] for i in items if bool(re.compile('<span\s*>%s<.*?itemprop="episodeNumber">%s<\/span>' % (season,episode)).search(i.content))][0]
-			
-			
-			url = url.encode('utf-8')
-			#log_utils.log('\n\n~~~ outgoing episode() url')
-			#log_utils.log(url)
-			
-			# returned 'url' format like: /episode/x_files_s4_e1.html
-			return url
-		except:
-			return
+            if (url is None):
+                if i is None:
+                    return
+                url = [i[0] for i in results if self.matchAlias(i[1], aliases)][0]
+            return url
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SolarMoviez - Exception: \n' + str(failure))
+            return
 
+    def sources(self, url, hostDict, hostprDict):
+        try:
+            sources = []
 
-	def sources(self, url, hostDict, hostprDict):
-	
-		#log_utils.log('\n\n~~~ incoming sources() url')
-		#log_utils.log(url)
-	
-		try:
-			sources = []
-			if url == None: return sources
+            if url is None:
+                return sources
 
-			req = urlparse.urljoin(self.base_link, url)
-			
-			# three attempts to pull up the episode-page, then bail
-			for i in range(4):
-				result = client.request(req, timeout=3)
-				if not result == None: break
-				
-				
-			# get the key div's contents
-			# then get all the links along with preceding text hinting at host
-			# ep pages sort links by hoster which is bad if the top hosters
-			#	are unavailable for debrid OR if they're ONLY avail for debrid
-			#	(for non-debrid peeps) so shuffle the list
-			dom = dom_parser.parse_dom(result, 'div', attrs={'class':'links', 'id': 'noSubs'})
-			result = dom[0].content		
-			links = re.compile('<i class="fa fa-youtube link-logo"></i>([^<]+).*?href="([^"]+)"\s+class="watch',re.DOTALL).findall(result)
-			random.shuffle(links)
-			
-			
-			# Here we stack the deck for debrid users by copying
-			#  all debrid hosts to the top of the list
-			# This is ugly but it works. Someone else please make it cleaner?
-			if debrid.status() == True:
-				debrid_links = []
-				for pair in links:
-					for r in debrid.debrid_resolvers:
-						if r.valid_url('', pair[0].strip()): debrid_links.append(pair)
-				links = debrid_links + links
+            data = urlparse.parse_qs(url)
+            data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
+            aliases = eval(data['aliases'])
+            mozhdr = {
+                'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'}
+            headers = mozhdr
+            headers['X-Requested-With'] = 'XMLHttpRequest'
 
+            self.s = cfscrape.create_scraper()
+            if 'tvshowtitle' in data:
+                episode = int(data['episode'])
+                url = self.searchShow(data['tvshowtitle'], data['season'], aliases, headers)
+            else:
+                episode = 0
+                url = self.searchMovie(data['title'], data['year'], aliases, headers)
 
-			# master list of hosts ResolveURL and placenta itself can resolve
-			# we'll check against this list to not waste connections on unsupported hosts
-			hostDict = hostDict + hostprDict
-			
-			conns = 0 
-			for pair in links:
-			
-				# try to be a little polite, and limit connections 
-				#  (unless we're not getting sources)
-				if conns > self.max_conns and len(sources) > self.min_srcs: break	 
+            headers['Referer'] = url
+            mid = re.findall('-(\d*)\.', url)[0]
+            data = {'id': mid}
+            r = self.s.post(url, headers=headers)
+            try:
+                u = urlparse.urljoin(self.base_link, self.server_link % mid)
+                r = self.s.get(u, headers=mozhdr).content
+                r = json.loads(r)['html']
+                rl = client.parseDOM(r, 'div', attrs={'class': 'pas-list'})
+                rh = client.parseDOM(r, 'div', attrs={'class': 'pas-header'})
+                ids = client.parseDOM(rl, 'li', ret='data-id')
+                servers = client.parseDOM(rl, 'li', ret='data-server')
+                labels = client.parseDOM(rl, 'a', ret='title')
+                r = zip(ids, servers, labels)
+                rrr = zip(client.parseDOM(rh, 'li', ret='data-id'), client.parseDOM(rh, 'li', ret='class'))
+                types = {}
+                for rr in rrr:
+                    types[rr[0]] = rr[1]
 
-				
-				# the 2 groups from the link search = hoster name, episode page url
-				host = pair[0].strip()	  
-				link = pair[1]
-				
-				
-				# check for valid hosts and jump to next loop if not valid
-				valid, host = source_utils.is_host_valid(host, hostDict)
-				#log_utils.log("\n\n** conn #%s: %s (valid:%s) %s" % (conns,host,valid,link)) #######
-				if not valid: continue
-				
-				
-				# two attempts per source link, then bail
-				# NB: n sources could potentially cost n*range connections!!! 
-				link = urlparse.urljoin(self.base_link, link)
-				for i in range(2):
-					result = client.request(link, timeout=3)
-					conns += 1
-					if not result == None: break	 
-				
-				
-				# if both attempts failed, using the result will too, so bail to next loop
-				try:
-					link = re.compile('href="([^"]+)"\s+class="action-btn').findall(result)[0]
-				except: 
-					continue
-					
-					
-				# I don't think this scraper EVER has direct links, but...
-				#  (if nothing else, it sets the quality)
-				try:
-					u_q, host, direct = source_utils.check_directstreams(link, host)
-				except:
-					continue
-					
-				# check_directstreams strangely returns a list instead of a single 2-tuple
-				link, quality = u_q[0]['url'], u_q[0]['quality']
-				#log_utils.log('	checked host: %s' % host)
-				#log_utils.log('	checked direct: %s' % direct)
-				#log_utils.log('	quality, link: %s, %s' % (quality,link))
-				#log_utils.log('	# of urls: %s' % len(u_q))
+                for eid in r:
+                    try:
+                        try:
+                            ep = re.findall('episode.*?(\d+).*?', eid[2].lower())[0]
+                        except Exception:
+                            ep = 0
+                        if (episode == 0) or (int(ep) == episode):
+                            t = str(int(time.time()*1000))
+                            quali = source_utils.get_release_quality(eid[2])[0]
+                            if 'embed' in types[eid[1]]:
+                                url = urlparse.urljoin(self.base_link, self.embed_link % (eid[0]))
+                                xml = self.s.get(url, headers=headers).content
+                                url = json.loads(xml)['src']
+                                valid, hoster = source_utils.is_host_valid(url, hostDict)
+                                if not valid:
+                                    continue
+                                q = source_utils.check_sd_url(url)
+                                q = q if q != 'SD' else quali
+                                sources.append({'source': hoster, 'quality': q, 'language': 'en',
+                                                'url': url, 'direct': False, 'debridonly': False})
+                                continue
+                            else:
+                                url = urlparse.urljoin(self.base_link, self.token_link % (eid[0], mid, t))
+                            script = self.s.get(url, headers=headers).content
+                            if '$_$' in script:
+                                params = self.uncensored1(script)
+                            elif script.startswith('[]') and script.endswith('()'):
+                                params = self.uncensored2(script)
+                            elif '_x=' in script:
+                                x = re.search('''_x=['"]([^"']+)''', script).group(1)
+                                y = re.search('''_y=['"]([^"']+)''', script).group(1)
+                                params = {'x': x, 'y': y}
+                            else:
+                                raise Exception()
+                            u = urlparse.urljoin(self.base_link, self.source_link % (eid[0], params['x'], params['y']))
+                            length = 0
+                            count = 0
+                            while length == 0 and count < 11:
+                                r = self.s.get(u, headers=headers).text
+                                length = len(r)
+                                if length == 0:
+                                    count += 1
+                            uri = None
+                            uri = json.loads(r)['playlist'][0]['sources']
+                            try:
+                                uri = [i['file'] for i in uri if 'file' in i]
+                            except Exception:
+                                try:
+                                    uri = [uri['file']]
+                                except Exception:
+                                    continue
 
-				
-				sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': link, 'direct': direct, 'debridonly': False})
-					
-			return sources
-		except:
-			failure = traceback.format_exc()
-			log_utils.log('WATCHSERIES - Exception: \n' + str(failure))
-			return sources
+                            for url in uri:
+                                if 'googleapis' in url:
+                                    q = source_utils.check_sd_url(url)
+                                    sources.append({'source': 'gvideo', 'quality': q, 'language': 'en',
+                                                    'url': url, 'direct': True, 'debridonly': False})
+                                    continue
 
+                                valid, hoster = source_utils.is_host_valid(url, hostDict)
+                                # urls, host, direct = source_utils.check_directstreams(url, hoster)
+                                q = quali
+                                if valid:
+                                    # for z in urls:
+                                    if hoster == 'gvideo':
+                                        direct = True
+                                        try:
+                                            q = directstream.googletag(url)[0]['quality']
+                                        except Exception:
+                                            pass
+                                        url = directstream.google(url)
+                                    else:
+                                        direct = False
+                                    sources.append({'source': hoster, 'quality': q, 'language': 'en',
+                                                    'url': url, 'direct': direct, 'debridonly': False})
+                                else:
+                                    sources.append({'source': 'CDN', 'quality': q, 'language': 'en',
+                                                    'url': url, 'direct': True, 'debridonly': False})
+                    except Exception:
+                        pass
+            except Exception:
+                pass
 
-	def resolve(self, url):
-		return url
+            return sources
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SolarMoviez - Exception: \n' + str(failure))
+            return sources
+
+    def resolve(self, url):
+        try:
+            if not url.startswith('http'):
+                url = 'http:' + url
+            for i in range(3):
+                if 'google' in url and 'googleapis' not in url:
+                    url = directstream.googlepass(url)
+                if url:
+                    break
+            return url
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SolarMoviez - Exception: \n' + str(failure))
+            return
+
+    def uncensored(self, a, b):
+        x = ''
+        i = 0
+        for i, y in enumerate(a):
+            z = b[i % len(b) - 1]
+            y = int(ord(str(y)[0])) + int(ord(str(z)[0]))
+            x += chr(y)
+        x = base64.b64encode(x)
+        return x
+
+    def uncensored1(self, script):
+        try:
+            script = '(' + script.split("(_$$)) ('_');")[0].split("/* `$$` */")[-1].strip()
+            script = script.replace('(__$)[$$$]', '\'"\'')
+            script = script.replace('(__$)[_$]', '"\\\\"')
+            script = script.replace('(o^_^o)', '3')
+            script = script.replace('(c^_^o)', '0')
+            script = script.replace('(_$$)', '1')
+            script = script.replace('($$_)', '4')
+
+            vGlobals = {"__builtins__": None, '__name__': __name__, 'str': str, 'Exception': Exception}
+            vLocals = {'param': None}
+            exec (CODE % script.replace('+', '|x|'), vGlobals, vLocals)
+            data = vLocals['param'].decode('string_escape')
+            x = re.search('''_x=['"]([^"']+)''', data).group(1)
+            y = re.search('''_y=['"]([^"']+)''', data).group(1)
+            return {'x': x, 'y': y}
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SolarMoviez - Exception: \n' + str(failure))
+            return
+
+    def uncensored2(self, script):
+        try:
+            js = jsunfuck.JSUnfuck(script).decode()
+            x = re.search('''_x=['"]([^"']+)''', js).group(1)
+            y = re.search('''_y=['"]([^"']+)''', js).group(1)
+            return {'x': x, 'y': y}
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('SolarMoviez - Exception: \n' + str(failure))
+            return

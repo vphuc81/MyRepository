@@ -1,151 +1,122 @@
-'''
-	
-    ***FSPM was here*****
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+import json
+import re
+import traceback
+import urllib
+import urlparse
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+from resources.lib.modules import cleantitle, client, dom_parser2, log_utils
 
-'''
-
-import urllib,traceback,urlparse,json
-
-from resources.lib.modules import control
-from resources.lib.modules import cleantitle
-from resources.lib.modules import log_utils
-from resources.lib.modules import debrid
 
 class source:
     def __init__(self):
         self.priority = 1
-        self.language = ['en', 'de', 'fr', 'ko', 'pl', 'pt', 'ru']
-        self.domains = []
+        self.language = ['en']
+        self.domains = ['freefmovies.net']
+        self.base_link = 'http://freefmovies.net'
+        self.search_link = '/watch/%s-%s-online-fmovies.html'
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            return urllib.urlencode({'imdb': imdb, 'title': title, 'localtitle': localtitle,'year': year})
-        except:
+            clean_title = cleantitle.geturl(title)
+            url = urlparse.urljoin(self.base_link, (self.search_link % (clean_title, year)))
+            return url
+        except Exception:
             failure = traceback.format_exc()
-            log_utils.log('Library - Exception: \n' + str(failure))
+            log_utils.log('FreeFMovies - Exception: \n' + str(failure))
             return
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            return urllib.urlencode({'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'localtvshowtitle': localtvshowtitle, 'year': year})
-        except:
+            aliases.append({'country': 'uk', 'title': tvshowtitle})
+            url = {'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'year': year, 'aliases': aliases}
+            url = urllib.urlencode(url)
+            return url
+        except Exception:
             failure = traceback.format_exc()
-            log_utils.log('Library - Exception: \n' + str(failure))
+            log_utils.log('FreeFMovies - Exception: \n' + str(failure))
             return
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
         try:
             if url is None:
                 return
-
             url = urlparse.parse_qs(url)
             url = dict([(i, url[i][0]) if url[i] else (i, '') for i in url])
-            url.update({'premiered': premiered, 'season': season, 'episode': episode})
-            return urllib.urlencode(url)
-        except:
+            clean_title = cleantitle.geturl(url['tvshowtitle'])+'-s%02d' % int(season)
+            url = urlparse.urljoin(self.base_link, (self.search_link % (clean_title, url['year'])))
+            r = client.request(url)
+            r = dom_parser2.parse_dom(r, 'div', {'id': 'ip_episode'})
+            r = [dom_parser2.parse_dom(i, 'a', req=['href']) for i in r if i]
+            for i in r[0]:
+                if i.content == 'Episode %s' % episode:
+                    url = i.attrs['href']
+            return url
+        except Exception:
             failure = traceback.format_exc()
-            log_utils.log('Library - Exception: \n' + str(failure))
+            log_utils.log('FreeFMovies - Exception: \n' + str(failure))
             return
 
     def sources(self, url, hostDict, hostprDict):
-        sources = []
-
         try:
+            sources = []
             if url is None:
                 return sources
 
-            data = urlparse.parse_qs(url)
-            data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
+            r = client.request(url)
+            quality = re.findall(">(\w+)<\/p", r)
+            if quality[0] == "HD":
+                quality = "720p"
+            else:
+                quality = "SD"
+            r = dom_parser2.parse_dom(r, 'div', {'id': 'servers-list'})
+            r = [dom_parser2.parse_dom(i, 'a', req=['href']) for i in r if i]
 
-            content_type = 'episode' if 'tvshowtitle' in data else 'movie'
-
-            years = (data['year'], str(int(data['year'])+1), str(int(data['year'])-1))
-
-            if content_type == 'movie':
-                title = cleantitle.get(data['title'])
-                localtitle = cleantitle.get(data['localtitle'])
-                ids = [data['imdb']]
-
-                r = control.jsonrpc('{"jsonrpc": "2.0", "method": "VideoLibrary.GetMovies", "params": {"filter":{"or": [{"field": "year", "operator": "is", "value": "%s"}, {"field": "year", "operator": "is", "value": "%s"}, {"field": "year", "operator": "is", "value": "%s"}]}, "properties": ["imdbnumber", "title", "originaltitle", "file"]}, "id": 1}' % years)
-                r = unicode(r, 'utf-8', errors='ignore')
-                r = json.loads(r)['result']['movies']
-
-                r = [i for i in r if str(i['imdbnumber']) in ids or title in [cleantitle.get(i['title'].encode('utf-8')), cleantitle.get(i['originaltitle'].encode('utf-8'))]]
-                r = [i for i in r if not i['file'].encode('utf-8').endswith('.strm')][0]
-
-                r = control.jsonrpc('{"jsonrpc": "2.0", "method": "VideoLibrary.GetMovieDetails", "params": {"properties": ["streamdetails", "file"], "movieid": %s }, "id": 1}' % str(r['movieid']))
-                r = unicode(r, 'utf-8', errors='ignore')
-                r = json.loads(r)['result']['moviedetails']
-            elif content_type == 'episode':
-                title = cleantitle.get(data['tvshowtitle'])
-                localtitle = cleantitle.get(data['localtvshowtitle'])
-                season, episode = data['season'], data['episode']
-                ids = [data['imdb'], data['tvdb']]
-
-                r = control.jsonrpc('{"jsonrpc": "2.0", "method": "VideoLibrary.GetTVShows", "params": {"filter":{"or": [{"field": "year", "operator": "is", "value": "%s"}, {"field": "year", "operator": "is", "value": "%s"}, {"field": "year", "operator": "is", "value": "%s"}]}, "properties": ["imdbnumber", "title"]}, "id": 1}' % years)
-                r = unicode(r, 'utf-8', errors='ignore')
-                r = json.loads(r)['result']['tvshows']
-
-                r = [i for i in r if str(i['imdbnumber']) in ids or title in [cleantitle.get(i['title'].encode('utf-8')), cleantitle.get(i['originaltitle'].encode('utf-8'))]][0]
-
-                r = control.jsonrpc('{"jsonrpc": "2.0", "method": "VideoLibrary.GetEpisodes", "params": {"filter":{"and": [{"field": "season", "operator": "is", "value": "%s"}, {"field": "episode", "operator": "is", "value": "%s"}]}, "properties": ["file"], "tvshowid": %s }, "id": 1}' % (str(season), str(episode), str(r['tvshowid'])))
-                r = unicode(r, 'utf-8', errors='ignore')
-                r = json.loads(r)['result']['episodes']
-
-                r = [i for i in r if not i['file'].encode('utf-8').endswith('.strm')][0]
-
-                r = control.jsonrpc('{"jsonrpc": "2.0", "method": "VideoLibrary.GetEpisodeDetails", "params": {"properties": ["streamdetails", "file"], "episodeid": %s }, "id": 1}' % str(r['episodeid']))
-                r = unicode(r, 'utf-8', errors='ignore')
-                r = json.loads(r)['result']['episodedetails']
-
-            url = r['file'].encode('utf-8')
-
-            try: quality = int(r['streamdetails']['video'][0]['width'])
-            except: quality = -1
-
-            if quality >= 2160: quality = '4K'
-            if quality >= 1440: quality = '1440p'
-            if quality >= 1080: quality = '1080p'
-            if 720 <= quality < 1080: quality = 'HD'
-            if quality < 720: quality = 'SD'
-
-            info = []
-            try:
-                f = control.openFile(url) ; s = f.size() ; f.close()
-                s = '%.2f GB' % (float(s)/1024/1024/1024)
-                info.append(s)
-            except:
-                pass
-            try:
-                e = urlparse.urlparse(url).path.split('.')[-1].upper()
-                info.append(e)
-            except:
-                pass
-            info = ' | '.join(info)
-            info = info.encode('utf-8')
-
-            sources.append({'source': '0', 'quality': quality, 'language': 'en', 'url': url, 'info': info, 'local': True, 'direct': True, 'debridonly': False})
-
+            for i in r[0]:
+                url = {
+                    'url': i.attrs['href'],
+                    'data-film': i.attrs['data-film'],
+                    'data-server': i.attrs['data-server'],
+                    'data-name': i.attrs['data-name']}
+                url = urllib.urlencode(url)
+                sources.append({'source': i.content, 'quality': quality, 'language': 'en',
+                                'url': url, 'direct': False, 'debridonly': False})
             return sources
-        except:
+        except Exception:
             failure = traceback.format_exc()
-            log_utils.log('Library - Exception: \n' + str(failure))
+            log_utils.log('FreeFMovies - Exception: \n' + str(failure))
             return sources
 
     def resolve(self, url):
-        return url
-
-
+        try:
+            urldata = urlparse.parse_qs(url)
+            urldata = dict((i, urldata[i][0]) for i in urldata)
+            post = {
+                'ipplugins': 1, 'ip_film': urldata['data-film'],
+                'ip_server': urldata['data-server'],
+                'ip_name': urldata['data-name'],
+                'fix': "0"}
+            p1 = client.request('http://freefmovies.net/ip.file/swf/plugins/ipplugins.php',
+                                post=post, referer=urldata['url'], XHR=True)
+            p1 = json.loads(p1)
+            p2 = client.request(
+                'http://freefmovies.net/ip.file/swf/ipplayer/ipplayer.php?u=%s&s=%s&n=0' %
+                (p1['s'],
+                 urldata['data-server']))
+            p2 = json.loads(p2)
+            p3 = client.request('http://freefmovies.net/ip.file/swf/ipplayer/api.php?hash=%s' % (p2['hash']))
+            p3 = json.loads(p3)
+            n = p3['status']
+            if n is False:
+                p2 = client.request(
+                    'http://freefmovies.net/ip.file/swf/ipplayer/ipplayer.php?u=%s&s=%s&n=1' %
+                    (p1['s'],
+                     urldata['data-server']))
+                p2 = json.loads(p2)
+            url = "https:%s" % p2["data"].replace("\/", "/")
+            return url
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('FreeFMovies - Exception: \n' + str(failure))
+            return

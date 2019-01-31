@@ -1,109 +1,214 @@
-'''
-	
-    ***FSPM was here*****
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+import base64
+import json
+import re
+import traceback
+import urllib
+import urlparse
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+from resources.lib.modules import cleantitle, client, debrid, log_utils
 
-'''
-
-import re,urllib,urlparse,json,base64,time
-
-from resources.lib.modules import cleantitle
-from resources.lib.modules import dom_parser2
-from resources.lib.modules import client
-from resources.lib.modules import debrid
 
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['freeputlockers.org']
-        self.base_link = 'http://freeputlockers.org'
-        self.search_link = '/watch/%s-%s-online-putlockers.html' 
-        
+        self.domains = ['directdownload.tv']
+        self.base_link = 'https://directdownload.tv'
+        self.search_link = base64.b64decode('L2FwaT9rZXk9NEIwQkI4NjJGMjRDOEEyOSZrZXl3b3JkPQ==')
+        self.b_link = 'aHR0cDovL2lwdjYuaWNlZmlsbXMuaW5mbw=='
+        self.u_link = 'aHR0cDovL2lwdjYuaWNlZmlsbXMuaW5mby9tZW1iZXJzb25seS9jb21wb25lbnRzL2NvbV9pY2VwbGF5ZXIvdmlkZW8ucGhwP2g9Mzc0Jnc9NjMxJnZpZD0lcyZpbWc9'
+        self.r_link = 'aHR0cDovL2lwdjYuaWNlZmlsbXMuaW5mby9pcC5waHA/dj0lcyY='
+        self.j_link = 'aHR0cDovL2lwdjYuaWNlZmlsbXMuaW5mby9tZW1iZXJzb25seS9jb21wb25lbnRzL2NvbV9pY2VwbGF5ZXIvdmlkZW8ucGhwQWpheFJlc3AucGhwP3M9JXMmdD0lcw=='
+        self.p_link = 'aWQ9JXMmcz0lcyZpcXM9JnVybD0mbT0lcyZjYXA9KyZzZWM9JXMmdD0lcw=='
+
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            clean_title = cleantitle.geturl(title)
-            url = urlparse.urljoin(self.base_link, (self.search_link %(clean_title,year)))
+            url = {'imdb': imdb, 'title': title, 'year': year}
+            url = urllib.urlencode(url)
             return url
-        except:
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('DirectDL - Exception: \n' + str(failure))
             return
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            aliases.append({'country': 'us', 'title': tvshowtitle})
-            url = {'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'year': year, 'aliases': aliases}
+            url = {'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'year': year}
             url = urllib.urlencode(url)
             return url
-        except:
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('DirectDL - Exception: \n' + str(failure))
             return
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
         try:
-            if url == None: return
+            if url is None:
+                return
+
             url = urlparse.parse_qs(url)
             url = dict([(i, url[i][0]) if url[i] else (i, '') for i in url])
-            clean_title = cleantitle.geturl(url['tvshowtitle'])+'-s%02d' % int(season)
-            url = urlparse.urljoin(self.base_link, (self.search_link %(clean_title,url['year'])))
-            r = client.request(url)
-            r = dom_parser2.parse_dom(r, 'div', {'id': 'ip_episode'})
-            r = [dom_parser2.parse_dom(i, 'a', req=['href']) for i in r if i]
-            for i in r[0]:
-                if i.content == 'Episode %s'%episode:
-                    url = i.attrs['href']
+            url['title'], url['premiered'], url['season'], url['episode'] = title, premiered, season, episode
+            url = urllib.urlencode(url)
             return url
-        except:
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('DirectDL - Exception: \n' + str(failure))
+            return
+
+    def request(self, url, post=None, cookie=None, referer=None, output='', close=True):
+        try:
+            headers = {'Accept': '*/*'}
+            if cookie is not None:
+                headers['Cookie'] = cookie
+            if referer is not None:
+                headers['Referer'] = referer
+            result = client.request(url, post=post, headers=headers, output=output, close=close)
+            print(result)
+            result = result.decode('iso-8859-1').encode('utf-8')
+            result = urllib.unquote_plus(result)
+            return(result)
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('DirectDL - Exception: \n' + str(failure))
+            return
+
+    def directdl_cache(self, url):
+        try:
+            url = urlparse.urljoin(base64.b64decode(self.b_link), url)
+            print(url)
+            result = self.request(url)
+            print(result)
+            result = re.compile('id=(\d+)>.+?href=(.+?)>').findall(result)
+            result = [(re.sub('http.+?//.+?/', '/', i[1]), 'tt' + i[0]) for i in result]
+            return(result)
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('DirectDL - Exception: \n' + str(failure))
             return
 
     def sources(self, url, hostDict, hostprDict):
         try:
             sources = []
-            if url == None: return sources
-            
-            r = client.request(url)
-            quality = re.findall(">(\w+)<\/p",r)
-            if quality[0] == "HD":
-                quality = "720p"
-            else:
-                quality = "SD"
-            r = dom_parser2.parse_dom(r, 'div', {'id': 'servers-list'})
-            r = [dom_parser2.parse_dom(i, 'a', req=['href']) for i in r if i]
 
-            for i in r[0]:
-                url = {'url': i.attrs['href'], 'data-film': i.attrs['data-film'], 'data-server': i.attrs['data-server'], 'data-name' : i.attrs['data-name']}
-                url = urllib.urlencode(url)
-                sources.append({'source': i.content, 'quality': quality, 'language': 'en', 'url': url, 'direct': False, 'debridonly': False})
+            if url is None:
+                return sources
+
+            data = urlparse.parse_qs(url)
+            data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
+
+            try:
+                if 'tvshowtitle' not in data:
+                    raise Exception()
+
+                links = []
+
+                f = ['S%02dE%02d' % (int(data['season']), int(data['episode']))]
+                t = re.sub('(\\\|/| -|:|;|\*|\?|"|\'|<|>|\|)', '', data['tvshowtitle'])
+                t = t.replace("&", "")
+
+                q = self.search_link + urllib.quote_plus('%s %s' % (t, f[0]))
+
+                q = urlparse.urljoin(self.base_link, q)
+                result = client.request(q)
+                print(q)
+                result = json.loads(result)
+
+                result = result['results']
+            except Exception:
+                links = result = []
+
+            for i in result:
+                try:
+                    if not cleantitle.get(t) == cleantitle.get(i['showName']):
+                        raise Exception()
+
+                    y = i['release']
+                    y = re.compile('[\.|\(|\[|\s](\d{4}|S\d*E\d*)[\.|\)|\]|\s]').findall(y)[-1]
+                    y = y.upper()
+                    if not any(x == y for x in f):
+                        raise Exception()
+
+                    quality = i['quality']
+
+                    quality = quality.upper()
+
+                    size = i['size']
+                    size = float(size)/1024
+                    size = '%.2f GB' % size
+
+                    if any(x in quality for x in ['HEVC', 'X265', 'H265']):
+                        info = '%s | HEVC' % size
+                    else:
+                        info = size
+
+                    if '1080P' in quality:
+                        quality = '1080p'
+                    elif '720P' in quality:
+                        quality = 'HD'
+                    else:
+                        quality = 'SD'
+
+                    url = i['links']
+                    # for x in url.keys(): links.append({'url': url[x], 'quality': quality, 'info': info})
+
+                    links = []
+
+                    for x in url.keys():
+                        links.append({'url': url[x], 'quality': quality})
+
+                    for link in links:
+                        try:
+                            url = link['url']
+                            quality2 = link['quality']
+                            # url = url[1]
+                            # url = link
+                            if len(url) > 1:
+                                raise Exception()
+                            url = url[0].encode('utf-8')
+
+                            host = re.findall('([\w]+[.][\w]+)$', urlparse.urlparse(url.strip().lower()).netloc)[0]
+                            if host not in hostprDict:
+                                raise Exception()
+                            host = host.encode('utf-8')
+
+                            sources.append({'source': host, 'quality': quality2, 'language': 'en',
+                                            'url': url, 'info': info, 'direct': False, 'debridonly': debrid.status()})
+                        except Exception:
+                            pass
+
+                except Exception:
+                    pass
+
             return sources
-        except:
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('DirectDL - Exception: \n' + str(failure))
             return sources
 
     def resolve(self, url):
         try:
-            urldata = urlparse.parse_qs(url)
-            urldata = dict((i, urldata[i][0]) for i in urldata)
-            post = {'ipplugins': 1,'ip_film': urldata['data-film'], 'ip_server': urldata['data-server'], 'ip_name': urldata['data-name'],'fix': "0"}
-            p1 = client.request('http://freeputlockers.org/ip.file/swf/plugins/ipplugins.php', post=post, referer=urldata['url'], XHR=True)
-            p1 = json.loads(p1)
-            p2 = client.request('http://freeputlockers.org/ip.file/swf/ipplayer/ipplayer.php?u=%s&s=%s&n=0' %(p1['s'],urldata['data-server']))
-            p2 = json.loads(p2)
-            p3 = client.request('http://freeputlockers.org/ip.file/swf/ipplayer/api.php?hash=%s' %(p2['hash']))
-            p3 = json.loads(p3)
-            n = p3['status']
-            if n == False:
-                p2 = client.request('http://freeputlockers.org/ip.file/swf/ipplayer/ipplayer.php?u=%s&s=%s&n=1' %(p1['s'],urldata['data-server']))
-                p2 = json.loads(p2)
-            url =  "https:%s" %p2["data"].replace("\/","/")
+            b = urlparse.urlparse(url).netloc
+            b = re.compile('([\w]+[.][\w]+)$').findall(b)[0]
+
+            if b not in base64.b64decode(self.b_link):
+                return url
+
+            u, p, h = url.split('|')
+            r = urlparse.parse_qs(h)['Referer'][0]
+
+            c = self.request(r, output='cookie', close=False)
+            result = self.request(u, post=p, referer=r, cookie=c)
+
+            url = result.split('url=')
+            url = [urllib.unquote_plus(i.strip()) for i in url]
+            url = [i for i in url if i.startswith('http')]
+            url = url[-1]
+
             return url
-        except:
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('DirectDL - Exception: \n' + str(failure))
             return
