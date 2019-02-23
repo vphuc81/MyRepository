@@ -1508,7 +1508,7 @@ http://www2.gostream.sc
 
 <addon
   id="plugin.video.xomgiaitri"
-  version="2.0.52"
+  version="2.0.53"
   name="*[COLOR yellow]XomGiaiTri.com[/COLOR]"
   provider-name="thongld">
   <requires>
