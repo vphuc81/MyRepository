@@ -84,8 +84,7 @@ def get_release_quality(release_name, release_link=None):
                 release_link = release_link.lower()
                 try: release_link = release_link.encode('utf-8')
                 except: pass
-                if '2160' in fmt: quality = '4k'
-                elif '1080' in release_link: quality = '1080p'
+                if '1080' in release_link: quality = '1080p'
                 elif '720' in release_link: quality = '720p'
                 elif '.hd' in release_link: quality = 'SD'
                 else: 

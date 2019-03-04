@@ -1,22 +1,16 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
+#######################################################################
+ # ----------------------------------------------------------------------------
+ # "THE BEER-WARE LICENSE" (Revision 42):
+ # @Daddy_Blamo wrote this file.  As long as you retain this notice you
+ # can do whatever you want with this stuff. If we meet some day, and you think
+ # this stuff is worth it, you can buy me a beer in return. - Muad'Dib
+ # ----------------------------------------------------------------------------
+#######################################################################
 
-'''
-    Exodus Add-on
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
-
+# Addon Name: Exodus
+# Addon id: plugin.video.exodus
+# Addon Provider: Exodus
 
 import re,urllib,urlparse,json,random,base64
 
@@ -78,10 +72,10 @@ class source:
             if not cookie == None: headers['Cookie'] = cookie
             if not referer == None: headers['Referer'] = referer
             result = client.request(url, post=post, headers=headers, output=output, close=close)
-            print result
+            print(result)
             result = result.decode('iso-8859-1').encode('utf-8')
             result = urllib.unquote_plus(result)
-            return result
+            return(result)
         except:
             return
 
@@ -89,15 +83,14 @@ class source:
     def directdl_cache(self, url):
         try:
             url = urlparse.urljoin(base64.b64decode(self.b_link), url)
-            print url
+            print(url)
             result = self.request(url)
-            print result
+            print(result)
             result = re.compile('id=(\d+)>.+?href=(.+?)>').findall(result)
             result = [(re.sub('http.+?//.+?/','/', i[1]), 'tt' + i[0]) for i in result]
-            return result
+            return(result)
         except:
             return
-
 
     def sources(self, url, hostDict, hostprDict):
         try:
@@ -123,7 +116,7 @@ class source:
                 
                 q = urlparse.urljoin(self.base_link, q)
                 result = client.request(q)
-                print q
+                print(q)
                 result = json.loads(result)
 
                 result = result['results']
@@ -140,15 +133,15 @@ class source:
                     if not any(x == y for x in f): raise Exception()
 
                     quality = i['quality']
-                    
-                    
-                    
+
+
+
                     quality = quality.upper()
 
                     size = i['size']
                     size = float(size)/1024
                     size = '%.2f GB' % size
-   
+
                     if any(x in quality for x in ['HEVC', 'X265', 'H265']): info = '%s | HEVC' % size
                     else: info = size
 
@@ -158,7 +151,7 @@ class source:
 
                     url = i['links']
                     #for x in url.keys(): links.append({'url': url[x], 'quality': quality, 'info': info})
-                    
+
                     links = []
                     
                     for x in url.keys(): links.append({'url': url[x], 'quality': quality})

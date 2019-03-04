@@ -1,28 +1,16 @@
-# -*- coding: utf-8 -*-
-
+# -*- coding: UTF-8 -*-
 '''
-    Exodus Add-on
+    library scraper for Exodus.
+    Nov 9 2018 - Checked
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    Updated and refactored by someone.
+    Originally created by others.
 '''
-
-
-import urllib,urlparse,json
+import urllib,traceback,urlparse,json
 
 from resources.lib.modules import control
 from resources.lib.modules import cleantitle
-
+from resources.lib.modules import log_utils
 
 class source:
     def __init__(self):
@@ -34,12 +22,16 @@ class source:
         try:
             return urllib.urlencode({'imdb': imdb, 'title': title, 'localtitle': localtitle,'year': year})
         except:
+            failure = traceback.format_exc()
+            log_utils.log('Library - Exception: \n' + str(failure))
             return
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
             return urllib.urlencode({'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'localtvshowtitle': localtvshowtitle, 'year': year})
         except:
+            failure = traceback.format_exc()
+            log_utils.log('Library - Exception: \n' + str(failure))
             return
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
@@ -52,6 +44,8 @@ class source:
             url.update({'premiered': premiered, 'season': season, 'episode': episode})
             return urllib.urlencode(url)
         except:
+            failure = traceback.format_exc()
+            log_utils.log('Library - Exception: \n' + str(failure))
             return
 
     def sources(self, url, hostDict, hostprDict):
@@ -135,6 +129,8 @@ class source:
 
             return sources
         except:
+            failure = traceback.format_exc()
+            log_utils.log('Library - Exception: \n' + str(failure))
             return sources
 
     def resolve(self, url):

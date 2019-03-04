@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-'''
+"""
     Exodus Add-on
 
     This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+"""
 
 import re,urllib,urlparse
 
@@ -25,25 +25,25 @@ from resources.lib.modules import debrid
 from resources.lib.modules import cfscrape
 from resources.lib.modules import dom_parser2
 
+
 class source:
     def __init__(self):
-        self.priority = 0
+        self.priority = 1
         self.language = ['en']
         self.domains = ['ddlvalley.me']
         self.base_link = 'http://www.ddlvalley.me'
         self.search_link = 'search/%s/'
-
+        self.scraper = cfscrape.create_scraper()
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            clean_title = cleantitle.geturl(title).replace('-','+')
-            url = urlparse.urljoin(self.base_link, self.search_link % clean_title)
+            clean_title = cleantitle.geturl(title).replace('-','+').replace(': ', '+')
+            url = urlparse.urljoin(self.base_link, self.search_link % clean_title).lower()
             url = {'url': url, 'title': title, 'year': year}
             url = urllib.urlencode(url)
             return url
         except:
             return
-
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
@@ -52,7 +52,6 @@ class source:
             return url
         except:
             return
-
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
         try:
@@ -66,58 +65,49 @@ class source:
         except:
             return
 
-
     def sources(self, url, hostDict, hostprDict):
         try:    
             sources = []
             
             if url == None: return sources
-      
+     
+            if debrid.status() == False: raise Exception()
+ 
             data = urlparse.parse_qs(url)
 
             data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
 
             title = data['tvshowtitle'] if 'tvshowtitle' in data else data['title']
-            show  = True if 'tvshowtitle' in data else False
+
             hdlr = 'S%02dE%02d' % (int(data['season']), int(data['episode'])) if 'tvshowtitle' in data else data['year']
-            query = '%s' % (data['tvshowtitle']) if\
+
+            query = '%s S%02dE%02d' % (data['tvshowtitle'], int(data['season']), int(data['episode'])) if\
                 'tvshowtitle' in data else '%s %s' % (data['title'], data['year'])
-            query = re.sub('(\\\|/| -|:|;|\*|\?|"|\'|<|>|\|)', ' ', query)
-            
-            url = self.search_link % urllib.quote_plus(query)
+
+            url = self.search_link % urllib.quote_plus(query).lower()
             url = urlparse.urljoin(self.base_link, url)
-            scraper = cfscrape.create_scraper()
-            r = scraper.get(url).content
-            u = r
-            
-            next_page = True
-            num = 1
-            while next_page:
-                try:
-                    np = re.findall('<link rel="next" href="([^"]+)', u)[0]
-                    # Client Requests is causing a timeout on links for ddl valley, falling back on cfscrape
-                    #u = client.request(np, headers=headers, cookie=cookie, timeout=5)  
-                    u = scraper.get(np).content
-                    r += u
-                except: next_page = False
+
+            headers = {'Referer': url, 'User-Agent': 'Mozilla/5.0'}
+            r = self.scraper.get(url, headers=headers).content
 
             items = dom_parser2.parse_dom(r, 'h2')
-            items = [dom_parser2.parse_dom(i.content, 'a', req=['href','rel','title','data-wpel-link']) for i in items]
+            items = [dom_parser2.parse_dom(i.content, 'a', req=['href','rel','data-wpel-link']) for i in items]
             items = [(i[0].content, i[0].attrs['href']) for i in items]
-            items = [(i[0], i[1]) for i in items if cleantitle.get_simple(title.lower()) in cleantitle.get_simple(i[0].lower())]
-            
+
+            hostDict = hostprDict + hostDict
+
             for item in items:
                 try:
                     name = item[0]
                     name = client.replaceHTMLCodes(name)
-                    # Client Requests is causing a timeout on links for ddl valley, falling back on cfscrape
-                    #r = client.request(item[1], headers=headers, cookie=cookie,  timeout=15)  
-                    r = scraper.get(item[1]).content
-                    links = dom_parser2.parse_dom(r, 'a', req=['href','rel','data-wpel-link','target'])
+                    query = query.lower().replace(' ', '-')
+                    if not query in item[1]:
+                        continue
+                    url = item[1]
+                    headers = {'Referer': url, 'User-Agent': 'Mozilla/5.0'}
+                    r = self.scraper.get(url, headers=headers).content
+                    links = dom_parser2.parse_dom(r, 'a', req=['href','rel','data-wpel-link'])
                     links = [i.attrs['href'] for i in links]
-                    if show:
-                        links = [i for i in links if hdlr.lower() in i.lower()]
-                        
                     for url in links:
                         try:
                             if hdlr in name:
@@ -128,7 +118,8 @@ class source:
                                 if any(i.endswith(('subs', 'sub', 'dubbed', 'dub')) for i in fmt): raise Exception()
                                 if any(i in ['extras'] for i in fmt): raise Exception()
 
-                                if '1080p' in fmt: quality = '1080p'
+                                if '2160p' in fmt: quality = '4K'
+                                elif '1080p' in fmt: quality = '1080p'
                                 elif '720p' in fmt: quality = '720p'
                                 else: quality = 'SD'
                                 if any(i in ['dvdscr', 'r5', 'r6'] for i in fmt): quality = 'SCR'
@@ -156,11 +147,10 @@ class source:
                                     url = url.encode('utf-8')
 
                                     host = re.findall('([\w]+[.][\w]+)$', urlparse.urlparse(url.strip().lower()).netloc)[0]
-                                    host = client.replaceHTMLCodes(host)
-                                    host = host.encode('utf-8')
-                                    if host in hostDict:
-                                        sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url, 'info': info, 'direct': False, 'debridonly': False})
-                                    elif host in hostprDict: 
+                                    if host in hostDict: 
+                                        host = client.replaceHTMLCodes(host)
+                                        host = host.encode('utf-8')
+
                                         sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url, 'info': info, 'direct': False, 'debridonly': True})
                         except:
                             pass
@@ -171,7 +161,7 @@ class source:
 
             return sources
         except:
-            return sources
+            return
 
     def resolve(self, url):
         return url

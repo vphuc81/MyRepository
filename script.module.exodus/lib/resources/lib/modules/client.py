@@ -522,5 +522,5 @@ def _get_keyboard( default="", heading="", hidden=False ):
         return unicode( keyboard.getText(), "utf-8" )
     return default
 
-def removeNonAscii(s):
+def removeNonAscii(s): 
     return "".join(i for i in s if ord(i)<128)

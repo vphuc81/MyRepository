@@ -111,7 +111,6 @@ def google(url):
 def googletag(url, append_height=False):
     quality = re.compile('itag=(\d*)').findall(url)
     quality += re.compile('=m(\d*)$').findall(url)
-    quality += re.compile('\/m(\d+?)\/').findall(url)
     try:
         quality = quality[0]
     except:
@@ -165,21 +164,6 @@ def googlepass(url):
     except:
         return
 
-def googleproxy(url):
-    path = urlparse.urlparse(url).path
-    netloc = urlparse.urlparse(url).netloc
-
-    request = httplib.HTTPSConnection(netloc)
-    request.request('GET', path)
-
-    response = request.getresponse()
-    headers = dict(response.getheaders())
-
-    location = headers['location']
-    cookie = headers['set-cookie'].split(';')[0]
-    url = '%s|Cookie=%s' % (location, cookie)
-
-    return url
 
 def vk(url):
     try:
@@ -294,3 +278,5 @@ def yandex(url):
         return url
     except:
         return
+
+

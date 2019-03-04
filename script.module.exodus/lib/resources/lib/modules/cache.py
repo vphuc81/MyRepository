@@ -29,6 +29,7 @@ except ImportError:
 """
 This module is used to get/set cache for every action done in the system
 """
+
 cache_table = 'cache'
 
 def get(function, duration, *args):
@@ -270,7 +271,6 @@ def _hash_function(function_instance, *args):
 
 
 def _get_function_name(function_instance):
-    function_name = re.sub('.+\smethod\s|.+function\s|\sat\s.+|\sof\s.+', '', repr(function_instance))
     return re.sub('.+\smethod\s|.+function\s|\sat\s.+|\sof\s.+', '', repr(function_instance))
 
 

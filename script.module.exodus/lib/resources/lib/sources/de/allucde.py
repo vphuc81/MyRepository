@@ -1,23 +1,16 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
+#######################################################################
+ # ----------------------------------------------------------------------------
+ # "THE BEER-WARE LICENSE" (Revision 42):
+ # @Daddy_Blamo wrote this file.  As long as you retain this notice you
+ # can do whatever you want with this stuff. If we meet some day, and you think
+ # this stuff is worth it, you can buy me a beer in return. - Muad'Dib
+ # ----------------------------------------------------------------------------
+#######################################################################
 
-'''
-    Exodus Add-on
-    Bubbles Add-on
-    Copyright (C) 2016 Bubbles
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+# Addon Name: Exodus
+# Addon id: plugin.video.exodus
+# Addon Provider: Exodus
 
 
 import re,urllib,urlparse,json
@@ -29,16 +22,16 @@ class source:
     def __init__(self):
         self.priority = 0
         self.language = ['de']
-        self.domains = ['alluc.ee']
-        self.base_link = 'https://www.alluc.ee'
+        self.domains = ['pron.ee']
+        self.base_link = 'https://www.pron.ee'
         self.search_link = '/api/search/%s/?apikey=%s&getmeta=0&query=%s&count=%d&from=%d'
         self.types = ['stream']
-        self.streamLimit = control.setting('alluc.limit')
+        self.streamLimit = control.setting('pron.limit')
         if self.streamLimit == '': self.streamLimit = 100
         self.streamLimit = int(self.streamLimit)
         self.streamIncrease = 100
-        self.api = control.setting('alluc.api')
-        self.debrid = control.setting('alluc.download')
+        self.api = control.setting('pron.api')
+        self.debrid = control.setting('pron.download')
         if self.debrid == 'true': self.types = ['stream', 'download']
         self.extensions = ['mp4', 'mpg', 'mpeg', 'mp2', 'm4v', 'm2v', 'mkv', 'avi', 'flv', 'asf', '3gp', '3g2', 'wmv', 'mov', 'qt', 'webm', 'vob', '']
 

@@ -24,15 +24,16 @@ import re,urllib,urlparse
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import debrid
+from resources.lib.modules import cfscrape
 
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
         self.domains = ['wrzcraft.net']
-        self.base_link = 'http://wrzcraft.net'
+        self.base_link = 'http://wrzcraft.life'
         self.search_link = '/search/%s/feed/rss2/'
-
+        self.scraper = cfscrape.create_scraper()
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
@@ -42,7 +43,6 @@ class source:
         except:
             return
 
-
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
             url = {'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'year': year}
@@ -50,7 +50,6 @@ class source:
             return url
         except:
             return
-
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
         try:
@@ -63,7 +62,6 @@ class source:
             return url
         except:
             return
-
 
     def sources(self, url, hostDict, hostprDict):
         try:
@@ -86,7 +84,7 @@ class source:
             url = self.search_link % urllib.quote_plus(query)
             url = urlparse.urljoin(self.base_link, url)
 
-            r = client.request(url)
+            r = self.scraper.get(url).content
 
             posts = client.parseDOM(r, 'item')
 
@@ -176,7 +174,6 @@ class source:
             return sources
         except:
             return sources
-
 
     def resolve(self, url):
         return url

@@ -1,199 +1,248 @@
-# -*- coding: utf-8 -*-
-
+# -*- coding: UTF-8 -*-
 '''
-    Exodus Add-on
+    Primewire-variant scraper for Exodus.
+    Nov 9 2018 - Checked
+    Sep 23 2018 - Cleaned and Checked.
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    Updated and refactored by someone.
+    Originally created by others.
 '''
+import re
+import requests
+import traceback
+from datetime import datetime
+from bs4 import BeautifulSoup, NavigableString
+try:
+    from urllib import urlencode
+except ImportError:
+    from urllib.parse import urlencode
 
+import xbmc
 
-import re,urllib,urlparse,base64,xbmc
-
+from resources.lib.modules.client import randomagent
 from resources.lib.modules import cleantitle
-from resources.lib.modules import client
-from resources.lib.modules import proxy
-from resources.lib.modules import source_utils
+from resources.lib.modules import jsunpack
+
 
 class source:
     def __init__(self):
-        self.priority = 0
+        self.priority = 1
         self.language = ['en']
-        self.domains = ['primewire.is']
-        self.base_link = 'http://www.primewire.is'
-        self.key_link = '/index.php?search'
-        self.moviesearch_link = '/index.php?search_keywords=%s&key=%s&search_section=1'
-        self.tvsearch_link = '/index.php?search_keywords=%s&key=%s&search_section=2'
+        self.domains = ['primewire.gr']
+        self.base_link = 'http://m.primewire.gr'        
+
+        # Use the **mobile** version of the website, a bit less traffic needed from them.
+        self.BASE_URL = 'http://m.primewire.gr'
 
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            key = urlparse.urljoin(self.base_link, self.key_link)
-            key = proxy.request(key, 'main_body')
-            key = client.parseDOM(key, 'input', ret='value', attrs = {'name': 'key'})[0]
-
-            query = self.moviesearch_link % (urllib.quote_plus(cleantitle.query(title)), key)
-            query = urlparse.urljoin(self.base_link, query)
-
-            result = str(proxy.request(query, 'main_body'))
-            if 'page=2' in result or 'page%3D2' in result: result += str(proxy.request(query + '&page=2', 'main_body'))
-
-            result = client.parseDOM(result, 'div', attrs = {'class': 'index_item.+?'})
-
-            title = 'watch' + cleantitle.get(title)
-            years = ['(%s)' % str(year), '(%s)' % str(int(year)+1), '(%s)' % str(int(year)-1)]
-
-            result = [(client.parseDOM(i, 'a', ret='href'), client.parseDOM(i, 'a', ret='title')) for i in result]
-            result = [(i[0][0], i[1][0]) for i in result if len(i[0]) > 0 and len(i[1]) > 0]
-            result = [i for i in result if any(x in i[1] for x in years)]
-
-            r = [(proxy.parse(i[0]), i[1]) for i in result]
-
-            match = [i[0] for i in r if title == cleantitle.get(i[1]) and '(%s)' % str(year) in i[1]]
-
-            match2 = [i[0] for i in r]
-            match2 = [x for y,x in enumerate(match2) if x not in match2[:y]]
-            if match2 == []: return
-
-            for i in match2[:5]:
-                try:
-                    if len(match) > 0: url = match[0] ; break
-                    r = proxy.request(urlparse.urljoin(self.base_link, i), 'main_body')
-                    r = re.findall('(tt\d+)', r)
-                    if imdb in r: url = i ; break
-                except:
-                    pass
-
-            url = re.findall('(?://.+?|)(/.+)', url)[0]
-            url = client.replaceHTMLCodes(url)
-            url = url.encode('utf-8')
-            return url
+            lowerTitle = title.lower()
+            possibleTitles = set(
+                (lowerTitle, cleantitle.getsearch(lowerTitle))
+                + tuple((alias['title'].lower() for alias in aliases) if aliases else ())
+            )
+            return self._getSearchData(lowerTitle, possibleTitles, year, self._createSession(), isMovie=True)
         except:
-            return
+            self._logException()
+            return None
 
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            key = urlparse.urljoin(self.base_link, self.key_link)
-            key = proxy.request(key, 'main_body')
-            key = client.parseDOM(key, 'input', ret='value', attrs = {'name': 'key'})[0]
-
-            query = self.tvsearch_link % (urllib.quote_plus(cleantitle.query(tvshowtitle)), key)
-            query = urlparse.urljoin(self.base_link, query)
-
-            result = str(proxy.request(query, 'main_body'))
-            if 'page=2' in result or 'page%3D2' in result: result += str(proxy.request(query + '&page=2', 'main_body'))
-
-            result = client.parseDOM(result, 'div', attrs = {'class': 'index_item.+?'})
-
-            tvshowtitle = 'watch' + cleantitle.get(tvshowtitle)
-            years = ['(%s)' % str(year), '(%s)' % str(int(year)+1), '(%s)' % str(int(year)-1)]
-
-            result = [(client.parseDOM(i, 'a', ret='href'), client.parseDOM(i, 'a', ret='title')) for i in result]
-            result = [(i[0][0], i[1][0]) for i in result if len(i[0]) > 0 and len(i[1]) > 0]
-            result = [i for i in result if any(x in i[1] for x in years)]
-
-            r = [(proxy.parse(i[0]), i[1]) for i in result]
-
-            match = [i[0] for i in r if tvshowtitle == cleantitle.get(i[1]) and '(%s)' % str(year) in i[1]]
-
-            match2 = [i[0] for i in r]
-            match2 = [x for y,x in enumerate(match2) if x not in match2[:y]]
-            if match2 == []: return
-
-            for i in match2[:5]:
-                try:
-                    if len(match) > 0: url = match[0] ; break
-                    r = proxy.request(urlparse.urljoin(self.base_link, i), 'main_body')
-                    r = re.findall('(tt\d+)', r)
-                    if imdb in r: url = i ; break
-                except:
-                    pass
-
-            url = re.findall('(?://.+?|)(/.+)', url)[0]
-            url = client.replaceHTMLCodes(url)
-            url = url.encode('utf-8')
-            return url
+            lowerTitle = tvshowtitle.lower()
+            possibleTitles = set(
+                (lowerTitle, cleantitle.getsearch(lowerTitle))
+                + tuple((alias['title'].lower() for alias in aliases) if aliases else ())
+            )
+            return self._getSearchData(lowerTitle, possibleTitles, year, self._createSession(), isMovie=False)
         except:
-            return
+            self._logException()
+            return None
 
 
-    def episode(self, url, imdb, tvdb, title, premiered, season, episode):
+    def episode(self, data, imdb, tvdb, title, premiered, season, episode):
         try:
-            if url == None: return
+            seasonsPageURL = data['pageURL']
 
-            url = urlparse.urljoin(self.base_link, url)
+            # An extra step needed before sources() can be called. Get the episode page.
+            # This code will crash if they change the website structure in the future.
 
-            result = proxy.request(url, 'main_body')
-            result = client.parseDOM(result, 'div', attrs = {'class': 'tv_episode_item'})
-
-            title = cleantitle.get(title)
-
-            result = [(client.parseDOM(i, 'a', ret='href'), client.parseDOM(i, 'span', attrs = {'class': 'tv_episode_name'}), re.compile('(\d{4}-\d{2}-\d{2})').findall(i)) for i in result]
-            result = [(i[0], i[1][0], i[2]) for i in result if len(i[1]) > 0] + [(i[0], None, i[2]) for i in result if len(i[1]) == 0]
-            result = [(i[0], i[1], i[2][0]) for i in result if len(i[2]) > 0] + [(i[0], i[1], None) for i in result if len(i[2]) == 0]
-            result = [(i[0][0], i[1], i[2]) for i in result if len(i[0]) > 0]
-
-            url = [i for i in result if title == cleantitle.get(i[1]) and premiered == i[2]][:1]
-            if len(url) == 0: url = [i for i in result if premiered == i[2]]
-            if len(url) == 0 or len(url) > 1: url = [i for i in result if 'season-%01d-episode-%01d' % (int(season), int(episode)) in i[0]]
-
-            url = client.replaceHTMLCodes(url[0][0])
-            url = proxy.parse(url)
-            url = re.findall('(?://.+?|)(/.+)', url)[0]
-            url = client.replaceHTMLCodes(url)
-            url = url.encode('utf-8')
-            return url
+            session = self._createSession(data['UA'], data['cookies'], data['referer'])
+            xbmc.sleep(1000)
+            r = self._sessionGET(seasonsPageURL, session)
+            if r.ok:
+                soup = BeautifulSoup(r.content, 'html.parser')
+                mainDIV = soup.find('div', {'class': 'tv_container'})
+                firstEpisodeDIV = mainDIV.find('div', {'class': 'show_season', 'data-id': season})
+                # Filter the episode HTML entries to find the one that represents the episode we're after.
+                episodeDIV = next(
+                    (
+                        element for element in firstEpisodeDIV.next_siblings
+                        if not isinstance(element, NavigableString) and next(element.a.strings, '').strip('E ') == episode
+                    ),
+                    None
+                )
+                if episodeDIV:
+                    return {
+                        'pageURL': self.BASE_URL + episodeDIV.a['href'],
+                        'UA': session.headers['User-Agent'],
+                        'referer': seasonsPageURL,
+                        'cookies': session.cookies.get_dict()
+                    }
+            return None
         except:
-            return
+            self._logException()
+            return None
 
 
-    def sources(self, url, hostDict, hostprDict):
+    def sources(self, data, hostDict, hostprDict):
         try:
-            sources = []
+            session = self._createSession(data['UA'], data['cookies'], data['referer'])
+            pageURL = data['pageURL']
 
-            if url == None: return sources
+            xbmc.sleep(1000)
+            r = self._sessionGET(pageURL, session)
+            if not r.ok:
+                self._logException('PRIMEWIRE > Sources page request failed: ' + data['pageURL'])
+                return None
 
-            url = urlparse.urljoin(self.base_link, url)
+            sources = [ ]
 
-            result = proxy.request(url, 'main_body')
+            soup = BeautifulSoup(r.content, 'html.parser')
+            mainDIV = soup.find('div', class_='actual_tab')
+            for hostBlock in mainDIV.findAll('tbody'):
 
-            links = client.parseDOM(result, 'tbody')
+                # All valid host links always have an 'onclick' attribute.
+                if 'onclick' in hostBlock.a.attrs:
+                    onClick = hostBlock.a['onclick']
+                    if 'Promo' in onClick:
+                        continue # Ignore ad links.
 
-            for i in links:
-                try:
-                    url = client.parseDOM(i, 'a', ret='href')[0]
-                    url = proxy.parse(url)
-                    url = urlparse.parse_qs(urlparse.urlparse(url).query)['url'][0]
-                    url = base64.b64decode(url)
-                    url = client.replaceHTMLCodes(url)
-                    url = url.encode('utf-8')
+                    hostName = re.search('''['"](.*?)['"]''', onClick).group(1)
+                    qualityClass = hostBlock.span['class']
+                    quality = 'SD' if ('cam' not in qualityClass and 'ts' not in qualityClass) else 'CAM'
 
-                    host = re.findall('([\w]+[.][\w]+)$', urlparse.urlparse(url.strip().lower()).netloc)[0]
-                    if not host in hostDict: raise Exception()
-                    host = host.encode('utf-8')
-
-                    quality = client.parseDOM(i, 'span', ret='class')[0]
-                    quality,info = source_utils.get_release_quality(quality, url)
-
-                    sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url, 'direct': False, 'debridonly': False})
-                except:
-                    pass
-
+                    # Send data for the resolve() function below to use later, when the user plays an item.
+                    unresolvedData = {
+                        'pageURL': self.BASE_URL + hostBlock.a['href'], # Not yet usable, see resolve().
+                        'UA': data['UA'],
+                        'cookies': session.cookies.get_dict(),
+                        'referer': pageURL
+                    }
+                    sources.append(
+                        {
+                            'source': hostName,
+                            'quality': quality,
+                            'language': 'en',
+                            'url': unresolvedData,
+                            'direct': False,
+                            'debridonly': False
+                        }
+                    )
             return sources
         except:
-            return sources
+            self._logException()
+            return None
 
 
-    def resolve(self, url):
-        return url
+    def resolve(self, data):
+        try:
+            hostURL = None
+            DELAY_PER_REQUEST = 1000 # In milliseconds.
+
+            startTime = datetime.now()
+            session = self._createSession(data['UA'], data['cookies'], data['referer'])
+            r = self._sessionGET(data['pageURL'], session, allowRedirects=False)
+            if r.ok:
+                if 'Location' in r.headers:
+                    hostURL = r.headers['Location'] # For most hosts they redirect.
+                else:
+                    # On rare cases they JS-pack the host link in the page source.
+                    try:
+                        hostURL = re.search(r'''go\(\\['"](.*?)\\['"]\);''', jsunpack.unpack(r.text)).group(1)
+                    except:
+                        pass # Or sometimes their page is just broken.
+
+            # Do a little delay, if necessary, between resolve() calls.
+            elapsed = int((datetime.now() - startTime).total_seconds() * 1000)
+            if elapsed < DELAY_PER_REQUEST:
+                xbmc.sleep(max(DELAY_PER_REQUEST - elapsed, 100))
+
+            return hostURL
+        except:
+            self._logException()
+            return None
+
+
+    def _getSearchData(self, query, possibleTitles, year, session, isMovie):
+        try:
+            searchURL = self.BASE_URL + ('/?' if isMovie else '/?tv=&') + urlencode({'search_keywords': query})
+            r = self._sessionGET(searchURL, session)
+            if not r.ok:
+                return None
+
+            bestGuessesURLs = [ ]
+
+            soup = BeautifulSoup(r.content, 'html.parser')
+            mainDIV = soup.find('div', role='main')
+            for resultDIV in mainDIV.findAll('div', {'class': 'index_item'}, recursive=False):
+                # Search result titles in Primewire.gr are usually "[Name of Movie/TVShow] (yyyy)".
+                # Example: 'Star Wars Legends: Legacy of the Force (2015)'
+                match = re.search(r'(.*?)(?:\s\((\d{4})\))?$', resultDIV.a['title'].lower().strip())
+                resultTitle, resultYear = match.groups()
+                if resultTitle in possibleTitles:
+                    if resultYear == year: # 'resultYear' = '(yyyy)', with parenthesis.
+                        bestGuessesURLs.insert(0, resultDIV.a['href']) # Use year to make better guesses.
+                    else:
+                        bestGuessesURLs.append(resultDIV.a['href'])
+
+            if bestGuessesURLs:
+                return {
+                    'pageURL': self.BASE_URL + bestGuessesURLs[0],
+                    'UA': session.headers['User-Agent'],
+                    'referer': searchURL,
+                    'cookies': session.cookies.get_dict(),
+                }
+            else:
+                return None
+        except:
+            self._logException()
+            return None
+
+
+    def _sessionGET(self, url, session, allowRedirects=True):
+        try:
+            return session.get(url, allow_redirects=allowRedirects, timeout=8)
+        except:
+            return type('FailedResponse', (object,), {'ok': False})
+
+
+    def _createSession(self, userAgent=None, cookies=None, referer=None):
+        # Try to spoof a header from a web browser.
+        session = requests.Session()
+        session.headers.update(
+            {
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'User-Agent': userAgent if userAgent else randomagent(),
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Referer': referer if referer else self.BASE_URL + '/',
+                'Upgrade-Insecure-Requests': '1',
+                'DNT': '1'
+            }
+        )
+        if cookies:
+            session.cookies.update(cookies)
+        return session
+
+
+    def _debug(self, name, val=None):
+        xbmc.log('PRIMEWIRE Debug > ' + name + (' %s' % repr(val) if val else ''), xbmc.LOGWARNING)
+
+
+    def _logException(self, text=None):
+        return # Comment this line to output errors to the Kodi log, useful for debugging this script.
+        if text:
+            xbmc.log(text, xbmc.LOGERROR)
+        else:
+            xbmc.log(traceback.format_exc(), xbmc.LOGERROR)

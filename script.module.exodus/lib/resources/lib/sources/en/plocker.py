@@ -1,393 +1,407 @@
+# -*- coding: UTF-8 -*-
 '''
-    Exodus Add-on
-    Copyright (C) 2017 Exodus
+    plocker scraper for Exodus.
+    Nov 9 2018 - Checked
+    Nov 06 2018 - Cleaned and Checked
+    Sep 22 2018 - Cleaned and Checked
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+    Updated and refactored by someone.
+    Originally created by others.
 '''
 import re
-import urllib
-import urlparse
-import json
+import requests
+import traceback
+from bs4 import BeautifulSoup, SoupStrainer
+try:
+    from urllib import urlencode, quote_plus # Python 2
+except ImportError:
+    from urllib.parse import urlencode, quote_plus # Python 3
+
 import xbmc
 
-from resources.lib.modules import client, cleantitle, directstream
-from resources.lib.modules import source_utils
+from resources.lib.modules.client import randomagent
+
 
 class source:
     def __init__(self):
-        '''
-        Constructor defines instances variables
-
-        '''
-        self.priority = 0
+        self.priority = 1
         self.language = ['en']
-        self.domains = ['putlocker.rs', 'putlockertv.to', 'putlockertv.se']
-        self.base_link = 'https://putlockertv.se'
-        self.movie_search_path = ('/search?keyword=%s')
-        self.episode_search_path = ('/filter?keyword=%s&sort=post_date:Adesc'
-                                    '&type[]=series')
-        self.film_path = '/watch/%s'
-        self.info_path = '/ajax/episode/info?ts=%s&_=%s&id=%s&update=0'
-        self.grabber_path = '/grabber-api/?ts=%s&id=%s&token=%s&mobile=0'
+        self.domains = ['putlocker.se', 'putlockertv.to']
+        self.base_link = 'https://www6.putlockertv.to'
+
+        self.ALL_JS_PATTERN = '<script src=\"(/assets/min/public/all.js?.*?)\"'
+        self.DEFAULT_ACCEPT = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+
+        self.BASE_URL = 'https://www5.putlockertv.to'
+
+        # Path to search for either a film or season from a tvshow.
+        self.SEARCH_PATH = '/ajax/film/search?ts=%s&_=%i&keyword=%s&sort=year%%3Adesc'
+
+        # Paths to retrieve a list of host names and internal URLs.
+        self.UPDATE_PATH = 'ajax/film/update-views?ts=%s&_=%i&id=%s&random=1'
+        self.SERVERS_PATH = '/ajax/film/servers/%s?ts=%s&_=%i'
+
+        # Path to retrieve an unresolved host, to be sent to the ResolveURL plugin.
+        self.INFO_PATH = '/ajax/episode/info?ts=%s&_=%i&id=%s&server=%s&update=0'
+
+        # Used in sources() to map lowercase host names to debrid-friendly host names.
+        self.DEBRID_HOSTS = {
+            'openload': 'openload.co',
+            'rapidvideo': 'rapidvideo.com',
+            'streamango': 'streamango.com'
+        }
+
 
     def movie(self, imdb, title, localtitle, aliases, year):
-        '''
-        Takes movie information and returns a set name value pairs, encoded as
-        url params. These params include ts
-        (a unqiue identifier, used to grab sources) and list of source ids
-
-        Keyword arguments:
-
-        imdb -- string - imdb movie id
-        title -- string - name of the movie
-        localtitle -- string - regional title of the movie
-        year -- string - year the movie was released
-
-        Returns:
-
-        url -- string - url encoded params
-
-        '''
         try:
-            clean_title = cleantitle.geturl(title)
-            query = (self.movie_search_path % (clean_title))
-            url = urlparse.urljoin(self.base_link, query)
+            session = self._createSession(randomagent())
 
-            search_response = client.request(url)
+            lowerTitle = title.lower()
+            stringConstant, searchHTML = self._getSearch(lowerTitle, session)
 
-            results_list = client.parseDOM(
-                search_response, 'div', attrs={'class': 'item'})[0]
-            film_id = re.findall('(\/watch\/)([^\"]*)', results_list)[0][1]
+            possibleTitles = set(
+                (lowerTitle,) + tuple((alias['title'].lower() for alias in aliases) if aliases else ())
+            )
+            soup = BeautifulSoup(searchHTML, 'html.parser', parse_only=SoupStrainer('div', recursive=False))
+            for div in soup:
+                if div.span and (year in div.span.text) and (div.a.text.lower() in possibleTitles):
+                    return {
+                        'type': 'movie',
+                        'pageURL': self.BASE_URL + div.a['href'],
+                        'sConstant': stringConstant,
+                        'UA': session.headers['User-Agent'],
+                        'cookies': session.cookies.get_dict()
+                    }
+            return None # No results found.
+        except:
+            self._logException()
+            return None
 
-            query = (self.film_path % film_id)
-            url = urlparse.urljoin(self.base_link, query)
-
-            film_response = client.request(url)
-
-            ts = re.findall('(data-ts=\")(.*?)(\">)', film_response)[0][1]
-
-            sources_dom_list = client.parseDOM(
-                film_response, 'ul', attrs={'class': 'episodes range active'})
-            sources_list = []
-
-            for i in sources_dom_list:
-                source_id = re.findall('([\/])(.{0,6})(\">)', i)[0][1]
-                sources_list.append(source_id)
-
-            data = {
-                'imdb': imdb,
-                'title': title,
-                'localtitle': localtitle,
-                'year': year,
-                'ts': ts,
-                'sources': sources_list
-            }
-            url = urllib.urlencode(data)
-
-            return url
-
-        except Exception:
-            return
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
-        '''
-        Takes TV show information, encodes it as name value pairs, and returns
-        a string of url params
-
-        Keyword arguments:
-
-        imdb -- string - imdb tv show id
-        tvdb -- string - tvdb tv show id
-        tvshowtitle -- string - name of the tv show
-        localtvshowtitle -- string - regional title of the tv show
-        year -- string - year the movie was released
-
-        Returns:
-
-        url -- string - url encoded params
-
-        '''
         try:
-            data = {
-                'imdb': imdb,
-                'tvdb': tvdb,
-                'tvshowtitle': tvshowtitle,
-                'year': year
-            }
-            url = urllib.urlencode(data)
+            return tvshowtitle.lower()
+        except:
+            self._logException()
+            return None
 
-            return url
 
-        except Exception:
-            return
-
-    def episode(self, url, imdb, tvdb, title, premiered, season, episode):
-        '''
-        Takes episode information, finds the ts and list sources, encodes it as
-        name value pairs, and returns a string of url params
-
-        Keyword arguments:
-
-        url -- string - url params
-        imdb -- string - imdb tv show id
-        tvdb -- string - tvdb tv show id
-        title -- string - episode title
-        premiered -- string - date the episode aired (format: year-month-day)
-        season -- string - the episodes season
-        episode -- string - the episode number
-
-        Returns:
-
-        url -- string - url encoded params
-
-        '''
+    def episode(self, data, imdb, tvdb, title, premiered, season, episode):
         try:
-            data = urlparse.parse_qs(url)
-            data = dict((i, data[i][0]) for i in data)
+            session = self._createSession(randomagent())
 
-            clean_title = cleantitle.geturl(data['tvshowtitle'])
-            query = (self.movie_search_path % clean_title)
-            url = urlparse.urljoin(self.base_link, query)
+            # Search with the TV show name and season number string.
+            lowerTitle = data
+            stringConstant, searchHTML = self._getSearch(lowerTitle + ' ' + season, session)
 
-            search_response = client.request(url)
+            soup = BeautifulSoup(searchHTML, 'html.parser')
+            for div in soup.findAll('div', recursive=False):
+                resultName = div.a.text.lower()
+                if lowerTitle in resultName and season in resultName:
+                    return {
+                        'type': 'episode',
+                        'episode': episode,
+                        'pageURL': self.BASE_URL + div.a['href'],
+                        'sConstant': stringConstant,
+                        'UA': session.headers['User-Agent'],
+                        'cookies': session.cookies.get_dict()
+                    }
+            return None # No results found.
+        except:
+            self._logException()
+            return None
 
-            results_list = client.parseDOM(
-                search_response, 'div', attrs={'class': 'items'})[0]
 
-            film_id = []
-
-            film_tries = [
-             '\/' + (clean_title + '-0' + season) + '[^-0-9](.+?)\"',
-             '\/' + (clean_title + '-' + season) + '[^-0-9](.+?)\"',
-             '\/' + clean_title + '[^-0-9](.+?)\"'
-             ]
-
-            for i in range(len(film_tries)):
-                if not film_id:
-                    film_id = re.findall(film_tries[i], results_list)
-                else:
-                    break
-
-            film_id = film_id[0]
-
-            query = (self.film_path % film_id)
-            url = urlparse.urljoin(self.base_link, query)
-
-            film_response = client.request(url)
-
-            ts = re.findall('(data-ts=\")(.*?)(\">)', film_response)[0][1]
-
-            sources_dom_list = client.parseDOM(
-                film_response, 'ul', attrs={'class': 'episodes range active'})
-
-            if not re.findall(
-             '([^\/]*)\">' + episode + '[^0-9]', sources_dom_list[0]):
-                episode = '%02d' % int(episode)
-
-            sources_list = []
-
-            for i in sources_dom_list:
-                source_id = re.findall(
-                    ('([^\/]*)\">' + episode + '[^0-9]'), i)[0]
-                sources_list.append(source_id)
-
-            data.update({
-                'title': title,
-                'premiered': premiered,
-                'season': season,
-                'episode': episode,
-                'ts': ts,
-                'sources': sources_list
-            })
-
-            url = urllib.urlencode(data)
-
-            return url
-
-        except Exception:
-            return
-
-    def sources(self, url, hostDict, hostprDict):
-        '''
-        Loops over site sources and returns a dictionary with corresponding
-        file locker sources and information
-
-        Keyword arguments:
-
-        url -- string - url params
-
-        Returns:
-
-        sources -- string - a dictionary of source information
-
-        '''
-
-        sources = []
-
+    def sources(self, data, hostDict, hostprDict):
         try:
-            data = urlparse.parse_qs(url)
-            data = dict((i, data[i][0]) for i in data)
-            data['sources'] = re.findall("[^', u\]\[]+", data['sources'])
+            isMovie = (data['type'] == 'movie')
+            episode = data.get('episode', '')
+            pageURL = data['pageURL']
+            stringConstant = data['sConstant']
 
-            for i in data['sources']:
-                token = str(self.__token(
-                    {'id': i, 'update': 0, 'ts': data['ts']}))
-                query = (self.info_path % (data['ts'], token, i))
-                url = urlparse.urljoin(self.base_link, query)
-                info_response = client.request(url, XHR=True)
-                grabber_dict = json.loads(info_response)
+            session = self._createSession(data['UA'], data['cookies'])
 
-                try:
-                    if grabber_dict['type'] == 'direct':
-                        token64 = grabber_dict['params']['token']
-                        query = (self.grabber_path % (data['ts'], i, token64))
-                        url = urlparse.urljoin(self.base_link, query)
+            xbmc.sleep(1200)
+            r = self._sessionGET(pageURL, session)
+            if not r.ok:
+                self._logException('%s Sources page request failed' % data['type'].capitalize())
+                return None
+            pageHTML = r.text
+            timeStamp = self._getTimeStamp(pageHTML)
 
-                        response = client.request(url, XHR=True)
+            # Get a HTML block with a list of host names and internal links to them.
 
-                        sources_list = json.loads(response)['data']
+            session.headers['Referer'] = pageURL # Refer to this page that "we're on" right now to avoid suspicion.
+            pageID = pageURL.rsplit('.', 1)[1]
+            token = self._makeToken({'ts': timeStamp}, stringConstant)
+            xbmc.sleep(200)
+            serversHTML = self._getServers(pageID, timeStamp, token, session)
 
-                        for j in sources_list:
+            # Go through the list of hosts and create a source entry for each.
 
-                            quality = j['label'] if not j['label'] == '' else 'SD'
-                            quality = source_utils.label_to_quality(quality)
+            sources = [ ]
+            tempTokenData = {'ts': timeStamp, 'id': None, 'server': None, 'update': '0'}
+            baseInfoURL = self.BASE_URL + self.INFO_PATH
 
-                            if 'googleapis' in j['file']:
-                                sources.append({'source': 'GVIDEO', 'quality': quality, 'language': 'en', 'url': j['file'], 'direct': True, 'debridonly': False})
-                                continue
+            soup = BeautifulSoup(
+                serversHTML,
+                'html.parser',
+                parse_only=SoupStrainer('div', {'class': 'server row', 'data-id': True}, recursive=False)
+            )
+            for serverDIV in soup:
+                tempTokenData['server'] = serverDIV['data-id']
+                hostName = serverDIV.label.text.strip().lower()
+                hostName = self.DEBRID_HOSTS.get(hostName, hostName)
 
-                            valid, hoster = source_utils.is_host_valid(j['file'], hostDict)
-                            urls, host, direct = source_utils.check_directstreams(j['file'], hoster)
-                            for x in urls:
-                                sources.append({
-                                    'source': 'gvideo',
-                                    'quality': quality,
-                                    'language': 'en',
-                                    'url': x['url'],
-                                    'direct': True,
-                                    'debridonly': False
-                                })
+                for a in serverDIV.findAll('a', {'data-id': True}):
+                    # The text in the <a> tag can be the movie quality ("HDRip", "CAM" etc.) or for TV shows
+                    # it's the episode number with a one-zero-padding, like "09", for each episode in the season.
+                    label = a.text.lower().strip()
+                    hostID = a['data-id'] # A string identifying a host embed to be retrieved from putlocker's servers.
 
-                    elif not grabber_dict['target'] == '':
-                        url = 'https:' + grabber_dict['target'] if not grabber_dict['target'].startswith('http') else grabber_dict['target']
-                        valid, hoster = source_utils.is_host_valid(url, hostDict)
-                        if not valid: continue
-                        urls, host, direct = source_utils.check_directstreams(url, hoster)
-                        url = urls[0]['url']
+                    if isMovie or episode == str(int(label)):
+                        if isMovie:
+                            if 'hd' in label:
+                                quality = 'HD'
+                            else:
+                                quality = 'SD' if ('ts' not in label and 'cam' not in label) else 'CAM'
+                        else:
+                            quality = 'SD'
 
-                        if 'cloud.to' in host:
-                            headers = {
-                                'Referer': self.base_link
+                        tempTokenData['id'] = hostID
+                        tempToken = self._makeToken(tempTokenData, stringConstant)
+
+                        # Send data for the resolve() function below to use later, when the user plays an item.
+                        # We send the CF cookies from the session (instead of reusing them from data['cfCookies'])
+                        # because they might've changed.
+                        unresolvedData = {
+                            'url': baseInfoURL % (timeStamp, tempToken, hostID, tempTokenData['server']),
+                            'UA': data['UA'],
+                            'cookies': session.cookies.get_dict(),
+                            'referer': pageURL + '/' + hostID
+                        }
+                        sources.append(
+                            {
+                                'source': hostName,
+                                'quality': quality,
+                                'language': 'en',
+                                'url': unresolvedData, # Doesn't need to be a string, just repr()-able.
+                                'direct': False,
+                                'debridonly': False
                             }
-                            url = url + source_utils.append_headers(headers)
-
-                        sources.append({
-                            'source': hoster,
-                            'quality': urls[0]['quality'],
-                            'language': 'en',
-                            'url': url,
-                            'direct': False,
-                            'debridonly': False
-                        })
-                except: pass
-
+                        )
             return sources
+        except:
+            self._logException()
+            return None
 
-        except Exception:
-            return sources
 
-    def resolve(self, url):
-        '''
-        Takes a scraped url and returns a properly formatted url
-
-        Keyword arguments:
-
-        url -- string - source scraped url
-
-        Returns:
-
-        url -- string - a properly formatted url
-
-        '''
+    def resolve(self, data):
+        # The 'data' parameter is the 'unresolvedData' dictionary sent from sources().
         try:
-            if not url.startswith('http'):
-                url = 'http:' + url
+            session = self._createSession(data['UA'], data['cookies'], data['referer'])
+            xbmc.sleep(500) # Give some room between requests (_getHost() -> _requestJSON() will also sleep some more).
+            return self._getHost(data['url'], session) # Return a host URL for use with ResolveURL and play.
+        except:
+            self._logException()
+            return None
 
-            for i in range(3):
-                if 'google' in url and not 'googleapis' in url:
-                    url = directstream.googlepass(url)
 
-                if url:
-                    break
-
-            return url
-
-        except Exception:
-            return
-
-    def __token(self, d):
-        '''
-        Takes a dictionary containing id, update, and ts, then returns a
-        token which is used by info_path to retrieve grabber api
-        information
-
-        Keyword arguments:
-
-        d -- dictionary - containing id, update, ts
-
-        Returns:
-
-        token -- integer - a unique integer
-
-        '''
+    def _sessionGET(self, url, session):
         try:
-            token = 0
+            return session.get(url, timeout=10)
+        except:
+            return type('FailedResponse', (object,), {'ok': False})
 
-            for s in d:
 
-                o = 0
-                r = 0
-                i = [i for i in range(0, 256)]
-                n = 0
-                a = 0
-                j = s
-                e = str(d[s])
+    def _requestJSON(self, url, session):
+        try:
+            oldAccept = session.headers['Accept']
+            session.headers.update(
+                {
+                    'Accept': 'application/json, text/javascript, */*; q=0.01',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            )
+            xbmc.sleep(1500)
+            r = self._sessionGET(url, session)
+            session.headers['Accept'] = oldAccept
+            del session.headers['X-Requested-With']
+            return r.json() if r.ok and r.content else None
+        except:
+            self._logException()
+            return None
 
-                for t in range(0, 256):
-                    n = (n + i[t] + ord(j[t % len(j)])) % 256
 
-                    r = i[t]
-                    i[t] = i[n]
-                    i[n] = r
+    def _getHost(self, url, session):
+        jsonData = self._requestJSON(url, session)
+        if jsonData:
+            return jsonData['target']
+        else:
+            self._logException('_getHost JSON request failed')
+            return ''
 
-                s = 0
-                n = 0
 
-                for o in range(len(e)):
-                    s = (s + 1) % 256
-                    n = (n + i[s]) % 256
+    def _getServers(self, pageID, timeStamp, token, session):
+        jsonData = self._requestJSON(
+            self.BASE_URL + (self.SERVERS_PATH % (pageID, timeStamp, token)), session
+        )
+        if jsonData:
+            return jsonData['html']
+        else:
+            self._logException('_getServers JSON request failed')
+            return ''
 
-                    r = i[s]
-                    i[s] = i[n]
-                    i[n] = r
 
-                    a += ord(e[o]) ^ i[(i[s] + i[n]) % 256] * o + o
+    def _getSearch(self, lowerTitle, session):
+        '''
+        All the code in here assumes a certain website structure.
+        If they change it in the future, it'll crash.
+        '''
+        # Get the homepage HTML.
+        r = self._sessionGET(self.BASE_URL, session)
+        if not r.ok:
+            self._logException('Homepage request failed')
+            return ''
+        homepageHTML = r.text
+        timeStamp = self._getTimeStamp(homepageHTML)
 
-                token += a
+        # Get the minified main javascript file.
+        jsPath = re.search(self.ALL_JS_PATTERN, homepageHTML, re.DOTALL).group(1)
+        session.headers['Accept'] = '*/*' # Use the same 'Accept' for JS files as web browsers do.
+        xbmc.sleep(200)
+        allJS = self._sessionGET(self.BASE_URL + jsPath, session).text
+        session.headers['Accept'] = self.DEFAULT_ACCEPT
 
-            return token
+        # Some unknown cookie flag that they use, set after 'all.js' is loaded.
+        # Doesn't seem to make a difference, but it might help with staying unnoticed.
+        session.cookies.set('', '__test')
 
-        except Exception:
-            return 0
+        # Get the underscore token used to verify all requests. It's calculated from all parameters on JSON requests.
+        # The value for 'keyword' is the search query, it should have normal spaces (like a movie title).
+        data = {'ts': timeStamp, 'keyword': lowerTitle, 'sort': 'year:desc'}
+        stringConstant = self._makeStringConstant(allJS)
+        token = self._makeToken(data, stringConstant)
+
+        # We use their JSON api as it's much less data needed from their servers. Easier on them, faster for us too.
+        jsonData = self._requestJSON(
+            self.BASE_URL + (self.SEARCH_PATH % (timeStamp, token, quote_plus(lowerTitle))), session
+        )
+        if jsonData:
+            return stringConstant, jsonData['html']
+        else:
+            self._logException('_getSearch JSON request failed')
+            return ''
+
+
+    def _createSession(self, userAgent=None, cookies=None, referer=None):
+        # Try to spoof a header from a web browser.
+        session = requests.Session()
+        session.headers.update(
+            {
+                'Accept': self.DEFAULT_ACCEPT,
+                'User-Agent': userAgent if userAgent else randomagent(),
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Referer': referer if referer else self.BASE_URL + '/',
+                'DNT': '1'
+            }
+        )
+        if cookies:
+            session.cookies.update(cookies)
+            session.cookies[''] = '__test' # See _getSearch() for more info on this.
+        return session
+
+
+    def _debug(self, name, val=None):
+        xbmc.log('PLOCKER Debug > %s %s' % (name, repr(val) if val else ''), xbmc.LOGWARNING)
+
+
+    def _logException(self, text=None):
+        return # Comment this line to output errors to the Kodi log, useful for debugging this script.
+        # ------------------
+        if text:
+            xbmc.log('PLOCKER ERROR > %s' % text, xbmc.LOGERROR)
+        else:
+            xbmc.log(traceback.format_exc(), xbmc.LOGERROR)
+
+
+    # Token algorithm, present in "all.js".
+    # ----------------------------------------------------------
+    # You can get to it more quickly by searching for "Number(" in that JS file, one of
+    # the occurrences will be in that section.
+    # The references in the functions below were beautified with https://beautifier.io.
+    #
+    # To actually find it in the future in case they change it, you need to use the
+    # Javascript debugger of your browser (like Firefox etc.), setting a breakpoint
+    # at a specific query handler of an ajax request. It's called every time you type
+    # something in the search field.
+    # From then on you go step by step with the debugger, using Step-Overs mostly, and
+    # then start to Step-In when you reach a part with "encode URI", as it's getting close.
+    # Keep stepping until your reach some functions that use the Math and Number classes.
+
+    def _getTimeStamp(self, html):
+        return re.search(r'<html data-ts="(.*?)"', html, re.DOTALL).group(1)
+
+
+    def _makeStringConstant(self, allJS):
+        '''
+        Reference:
+        function r() {
+            return Tv + k_ + Pm + k_ + pf + k_ + Zu
+        }
+        '''
+        rSum = re.search('strict";function r\(\)\{return(.*?)\}', allJS, re.DOTALL).group(1)
+        rSum = rSum.strip().replace(' ', '').split('+')
+        rConstants = {
+            key: re.search(',?' + key + '=\"(.*?)\"[,;]', allJS, re.DOTALL).group(1)
+            for key in set(rSum)
+        }
+        return ''.join(rConstants.get(key, '') for key in rSum)
+
+
+    def _e(self, t):
+        '''
+        Reference:
+        function e(t) {
+            var i, n = 0;
+            for (i = 0; i < t[ik]; i++) n += t[Do + k_ + gm + k_ + au](i) + i;
+            return n
+        }
+        '''
+        return sum(ord(t[i]) + i for i in xrange(len(t)))
+
+
+    def _makeToken(self, params, stringConstant):
+        '''
+        :returns: An integer token.
+
+        Reference:
+        i[u](function(t) {
+            var n = function(t) {
+                var n, o, s = e(r()),
+                    u = {},
+                    f = {};
+                f[c] = k_ + a,
+                    o = i[Sk](!0, {}, t, f);
+                for (n in o) Object[ld][Ym + k_ + Ul + k_ + _h][eo](o, n) && (s += e(function(t, i) {
+                    var n,
+                        r = 0;
+                    for (n = 0; n < Math[Mx](t[ik], i[ik]); n++) r += n < i[ik] ? i[Do + k_ + gm + k_ + au](n) : 0,
+                        r += n < t[ik] ? t[Do + k_ + gm + k_ + au](n) : 0;
+                    return Number(r)[St + k_ + Px](16)
+                }(r() + n, o[n])));
+                return u[c] = a, u[h] = s, u
+        '''
+        def __convolute(t, i):
+            iLen = len(i)
+            tLen = len(t)
+            r = 0
+            for n in xrange(max(tLen, iLen)):
+                r += ord(i[n]) if n < iLen else 0
+                r += ord(t[n]) if n < tLen else 0
+            return self._e(hex(r)[2:]) # Skip two characters to ignore the '0x' from the Python hex string.
+
+        s = self._e(stringConstant)
+        for key in params.keys():
+            s += __convolute(stringConstant + key, params[key])
+        return s

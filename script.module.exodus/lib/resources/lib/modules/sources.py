@@ -35,7 +35,7 @@ from resources.lib.modules import thexem
 try: from sqlite3 import dbapi2 as database
 except: from pysqlite2 import dbapi2 as database
 
-try: import resolveurl
+try: import urlresolver
 except: pass
 
 try: import xbmc
@@ -296,7 +296,7 @@ class sources:
 
     def getSources(self, title, year, imdb, tvdb, season, episode, tvshowtitle, premiered, quality='HD', timeout=30):
         progressDialog = control.progressDialog if control.setting('progress.dialog') == '0' else control.progressDialogBG
-        progressDialog.create("{0} ({1} Module)".format(control.addonInfo('name'), self.module_name), '')
+        progressDialog.create(control.addonInfo('name'), '')
         progressDialog.update(0)
 
         self.prepareSources()
@@ -311,15 +311,17 @@ class sources:
         else:
             sourceDict = [(i[0], i[1], getattr(i[1], 'tvshow', None)) for i in sourceDict]
             genres = trakt.getGenre('show', 'tvdb', tvdb)
+        
         sourceDict = [(i[0], i[1], i[2]) for i in sourceDict if not hasattr(i[1], 'genre_filter') or not i[1].genre_filter or any(x in i[1].genre_filter for x in genres)]
         sourceDict = [(i[0], i[1]) for i in sourceDict if not i[2] == None]
 
         language = self.getLanguage()
         sourceDict = [(i[0], i[1], i[1].language) for i in sourceDict]
         sourceDict = [(i[0], i[1]) for i in sourceDict if any(x in i[2] for x in language)]
-        # try: sourceDict = [(i[0], i[1], control.setting('provider.' + i[0].split('_')[0])) for i in sourceDict]
-        # except: sourceDict = [(i[0], i[1], 'true') for i in sourceDict]
-        # sourceDict = [(i[0], i[1]) for i in sourceDict if not i[2] == 'false']
+
+        try: sourceDict = [(i[0], i[1], control.setting('provider.' + i[0])) for i in sourceDict]
+        except: sourceDict = [(i[0], i[1], 'true') for i in sourceDict]
+        sourceDict = [(i[0], i[1]) for i in sourceDict if not i[2] == 'false']
 
         sourceDict = [(i[0], i[1], i[1].priority) for i in sourceDict]
 
@@ -950,7 +952,7 @@ class sources:
                         part = debrid.resolver(part, d)
 
                     elif not direct == True:
-                        hmf = resolveurl.HostedMediaFile(url=u, include_disabled=True, include_universal=False)
+                        hmf = urlresolver.HostedMediaFile(url=u, include_disabled=True, include_universal=False)
                         if hmf.valid_url() == True: part = hmf.resolve()
                     urls.append(part)
 
@@ -1167,23 +1169,13 @@ class sources:
         self.itemProperty = 'plugin.video.exodus.container.items'
 
         self.metaProperty = 'plugin.video.exodus.container.meta'
-        
-        scraperSetting = control.setting('module.provider')
+
+        from resources.lib.sources import sources
+
+        self.sourceDict = sources()
 
         try:
-            if xbmc.getCondVisibility('System.HasAddon(%s)' % 'script.module.exodusscrapers') and not scraperSetting == 'Default':
-                from exodusscrapers import sources
-                self.sourceDict = sources()
-                self.module_name = control.addon('script.module.exodusscrapers').getSetting('module.provider')                 
-            else:
-                from resources.lib.sources import sources
-                self.sourceDict = sources()
-                self.module_name = 'Default'
-                control.setSetting('module.provider', 'Default')
-        except: return
-
-        try:
-            self.hostDict = resolveurl.relevant_resolvers(order_matters=True)
+            self.hostDict = urlresolver.relevant_resolvers(order_matters=True)
             self.hostDict = [i.domains for i in self.hostDict if not '*' in i.domains]
             self.hostDict = [i.lower() for i in reduce(lambda x, y: x+y, self.hostDict)]
             self.hostDict = [x for y,x in enumerate(self.hostDict) if x not in self.hostDict[:y]]
@@ -1197,24 +1189,6 @@ class sources:
         self.hosthqDict = ['gvideo', 'google.com', 'openload.io', 'openload.co', 'oload.tv', 'thevideo.me', 'rapidvideo.com', 'raptu.com', 'filez.tv', 'uptobox.com', 'uptobox.com', 'uptostream.com', 'xvidstage.com', 'streamango.com']
 
         self.hostblockDict = []
-
-    def enableAll(self):
-        try:
-            sourceDict = self.sourceDict
-            for i in sourceDict:
-                source_setting = 'provider.' + i[0].split('_')[0]
-                control.setSetting(source_setting, 'true')
-        except: pass
-        control.openSettings('3.3')
-
-    def disableAll(self):
-        try:
-            sourceDict = self.sourceDict
-            for i in sourceDict:
-                source_setting = 'provider.' + i[0].split('_')[0]
-                control.setSetting(source_setting, 'false')
-        except: pass
-        control.openSettings('3.4')
 
     def getPremColor(self, n):
         if n == '0': n = 'blue'

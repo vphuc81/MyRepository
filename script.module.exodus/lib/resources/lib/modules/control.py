@@ -299,6 +299,7 @@ def openSettings(query=None, id=addonInfo('id')):
     except:
         return
 
+
 def getCurrentViewId():
     win = xbmcgui.Window(xbmcgui.getCurrentWindowId())
     return str(win.getFocusId())
@@ -312,5 +313,7 @@ def busy():
 def idle():
     return execute('Dialog.Close(busydialog)')
 
+
 def queueItem():
     return execute('Action(Queue)')
+

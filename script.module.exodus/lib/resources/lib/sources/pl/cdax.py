@@ -1,22 +1,16 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
+#######################################################################
+ # ----------------------------------------------------------------------------
+ # "THE BEER-WARE LICENSE" (Revision 42):
+ # @Daddy_Blamo wrote this file.  As long as you retain this notice you
+ # can do whatever you want with this stuff. If we meet some day, and you think
+ # this stuff is worth it, you can buy me a beer in return. - Muad'Dib
+ # ----------------------------------------------------------------------------
+#######################################################################
 
-'''
-    Exodus Add-on
-    Copyright (C) 2017 homik
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+# Addon Name: Exodus
+# Addon id: plugin.video.exodus
+# Addon Provider: Mr.blamo
 
 
 import urllib, urlparse
@@ -29,9 +23,9 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['pl']
-        self.domains = ['cda-x.pl']
+        self.domains = ['cdax.online']
         
-        self.base_link = 'http://cda-x.pl'
+        self.base_link = 'http://cdax.online/'
         self.search_link = '/?s=%s'
         
     def movie(self, imdb, title, localtitle, aliases, year):

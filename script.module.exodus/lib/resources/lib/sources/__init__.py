@@ -25,10 +25,10 @@ from resources.lib.modules import log_utils
 
 __all__ = [x[1] for x in os.walk(os.path.dirname(__file__))][0]
 
+
 def sources():
     try:
         sourceDict = []
-        test = []
         for i in __all__:
             for loader, module_name, is_pkg in pkgutil.walk_packages([os.path.join(os.path.dirname(__file__), i)]):
                 if is_pkg:
@@ -42,3 +42,5 @@ def sources():
         return sourceDict
     except:
         return []
+
+

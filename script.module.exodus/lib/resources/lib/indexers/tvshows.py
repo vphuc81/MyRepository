@@ -142,51 +142,70 @@ class tvshows:
             pass
 
     def search(self):
+
         navigator.navigator().addDirectoryItem(32603, 'tvSearchnew', 'search.png', 'DefaultTVShows.png')
-        search_history = control.setting('tvsearch')
-        if search_history:
-            for term in search_history.split('\n'):
-                if term:
-                    navigator.navigator().addDirectoryItem(term, 'tvSearchterm&name=%s' % term, 'search.png', 'DefaultTVShows.png')
+        try: from sqlite3 import dbapi2 as database
+        except: from pysqlite2 import dbapi2 as database
+
+        dbcon = database.connect(control.searchFile)
+        dbcur = dbcon.cursor()
+
+        try:
+            dbcur.executescript("CREATE TABLE IF NOT EXISTS tvshow (ID Integer PRIMARY KEY AUTOINCREMENT, term);")
+        except:
+            pass
+
+        dbcur.execute("SELECT * FROM tvshow ORDER BY ID DESC")
+
+        lst = []
+
+        delete_option = False
+        for (id,term) in dbcur.fetchall():
+            if term not in str(lst):
+                delete_option = True
+                navigator.navigator().addDirectoryItem(term, 'tvSearchterm&name=%s' % term, 'search.png', 'DefaultTVShows.png')
+                lst += [(term)]
+        dbcur.close()
+
+        if delete_option:
             navigator.navigator().addDirectoryItem(32605, 'clearCacheSearch', 'tools.png', 'DefaultAddonProgram.png')
+
         navigator.navigator().endDirectory()
 
-
-
-
     def search_new(self):
-        t = control.lang(32010).encode('utf-8')
-        k = control.keyboard('', t) ; k.doModal()
-        q = k.getText().strip() if k.isConfirmed() else None
-        if not q: return
+            t = control.lang(32010).encode('utf-8')
+            k = control.keyboard('', t) ; k.doModal()
+            q = k.getText().strip() if k.isConfirmed() else None
+            if not q: return
+            if (q == None or q == ''): return
 
+            try: from sqlite3 import dbapi2 as database
+            except: from pysqlite2 import dbapi2 as database
 
-        search_history = control.setting('tvsearch')
-        if q not in search_history.split('\n'):
-            control.setSetting('tvsearch', q + '\n' + search_history)
-            
-        url = self.search_link + urllib.quote_plus(q)
-        self.get(url)
-
-
-
+            dbcon = database.connect(control.searchFile)
+            dbcur = dbcon.cursor()
+            dbcur.execute("INSERT INTO tvshow VALUES (?,?)", (None,q))
+            dbcon.commit()
+            dbcur.close()
+            url = self.search_link + urllib.quote_plus(q)
+            self.get(url)
 
     def search_term(self, name):
-        url = self.search_link + urllib.quote_plus(name)
-        self.get(url)
-
-
-
+            url = self.search_link + urllib.quote_plus(name)
+            self.get(url)
 
     def person(self):
-        t = control.lang(32010).encode('utf-8')
-        k = control.keyboard('', t) ; k.doModal()
-        q = k.getText().strip() if k.isConfirmed() else None
-        if not q: return
+        try:
+            t = control.lang(32010).encode('utf-8')
+            k = control.keyboard('', t) ; k.doModal()
+            q = k.getText().strip() if k.isConfirmed() else None
+            if not q: return
+            if (q == None or q == ''): return
 
-
-        url = self.persons_link + urllib.quote_plus(q)
-        self.persons(url)
+            url = self.persons_link + urllib.quote_plus(q)
+            self.persons(url)
+        except:
+            return
 
     def genres(self):
         genres = [
@@ -1070,7 +1089,6 @@ class tvshows:
                 meta.update({'code': imdb, 'imdbnumber': imdb, 'imdb_id': imdb})
                 meta.update({'tvdb_id': tvdb})
                 meta.update({'mediatype': 'tvshow'})
-                meta.update({'tvshowtitle': systitle})
                 meta.update({'trailer': '%s?action=trailer&name=%s' % (sysaddon, urllib.quote_plus(label))})
                 if not 'duration' in i: meta.update({'duration': '60'})
                 elif i['duration'] == '0': meta.update({'duration': '60'})
@@ -1114,8 +1132,6 @@ class tvshows:
                     cm.append((control.lang2(19033).encode('utf-8'), 'Action(Info)'))
 
                 cm.append((addToLibrary, 'RunPlugin(%s?action=tvshowToLibrary&tvshowtitle=%s&year=%s&imdb=%s&tvdb=%s)' % (sysaddon, systitle, year, imdb, tvdb)))
-
-                cm.append(('Exodus Settings', 'RunPlugin(%s?action=openSettings&query=(0,0))' % sysaddon))
 
                 item = control.item(label=label)
 

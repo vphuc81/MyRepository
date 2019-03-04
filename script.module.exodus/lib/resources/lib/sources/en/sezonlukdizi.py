@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""
+'''
     Exodus Add-on
 
     This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
+'''
 
 import re
 import urlparse
@@ -32,8 +32,8 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['sezonlukdizi.net', 'sezonlukdizi.com']
-        self.base_link = 'http://sezonlukdizi.net'
+        self.domains = ['sezonlukdizi.org/']
+        self.base_link = 'https://sezonlukdizi.org/'
         self.search_link = '/js/series1.js'
         self.video_link = '/ajax/dataEmbed.asp'
 
