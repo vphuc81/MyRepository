@@ -1,3 +1,68 @@
+2.3.8 [20190306]
+ - Fix for video playback
+ 
+2.3.7 [20190205] 
+ - Fix for playing Live Video
+ - Add support for limiting quality of Live Streams
+ - Support New Qualities such as 4K and QuadHD
+ 
+2.3.6 [20180914] 
+ - Fix for Download Progress not showing properly
+ - Fix for Video durations incorrect
+
+2.3.5 [20171024]
+- Add Hebrew Language
+- Add Trending, Featured Categories
+- Add Search by Live, User
+
+2.3.4 [20171023]
+- Upload to Kodi Official repository
+
+2.3.3
+- Correct some French strings
+
+2.3.2
+- Remove unsupported languages
+
+2.3.1
+- Fix for m3u8 playback for non live streams
+- Add all supported languages
+- Add Family Filter setting to Settings 
+
+2.3.0
+- Fix for 1080@60 and sort the qualities 
+
+2.2.9
+- Remove deprecated options from User menu
+
+2.2.8
+- List What to Watch section
+
+2.2.7
+- Only display active streams in Live menu
+- Remove 3D menu item as it has been deprecated by Dailymotion
+
+2.2.6
+- New logo and French translation by bubuleur
+- Info text cleanup
+
+2.2.5
+- code changes to handle adult flag
+- code changes to play in Krypton
+
+2.2.4
+- Changes Fileopening
+- pyo Files for Language
+- Killed Groups, because it was droped in the Api
+2.2.3
+- Changes for kodi.tv
+2.2.2
+- Fix
+- Up to Know Mainainer was until 2.2 AddonscriptorDE,new Maintainer L0RE
+2.2
+ - Fixe video quality and max video quality
+2.1.6
+- default.py from Boscorelly (http://forum.kodi.tv/showthread.php?tid=142626&pid=2177681#pid2177681)
 2.1.5
 - Fixed Regexp for video with a ")" in the title
 2.1.4
