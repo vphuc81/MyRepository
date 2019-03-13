@@ -4,7 +4,6 @@ import os, httplib2, xbmc, xbmcgui, xbmcaddon
 # Dev Channel
 url   = 'https://raw.githubusercontent.com/hieuhienvn/hieuhien.vn/master/HieuHienVNPlaylist.py'
 #url   = 'http://www.hieuhien.vn/XBMC/HIEUHIENPLAYLIST/hieuhienvn.txt'
-#url   = 'http://textuploader.com/d5pru/raw'
 path  = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('path') ).decode("utf-8")
 cache = xbmc.translatePath(os.path.join(path,".cache"))
 http  = httplib2.Http(cache, disable_ssl_certificate_validation=True)

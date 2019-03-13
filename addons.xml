@@ -619,26 +619,25 @@ http://www2.gostream.sc
   </extension>
 </addon>
 
-<addon
-  id="plugin.video.HieuHien.vn"
-  version="1.0.2"
-  name="[B][COLOR red]Hieuhien.vn[/COLOR] [COLOR lime]Trung tâm giải trí[/COLOR][/B]"
-  provider-name="thongld">
+<addon id="plugin.video.HieuHien.vn" version="2.0.1" name="[B][COLOR lime]Trung tam giai tri[/COLOR][/B]" provider-name="thongld">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.xbmcswift2" version="0.0.7" />
+    <import addon="script.module.kodiswift" version="0.0.7" />
+    <import addon="script.module.kodi4vn" version="0.0.7" />
     <import addon="plugin.video.youtube" version="4.4.1" />
     <import addon="script.module.httplib2" version="0.1" />
-    <import addon="script.rawmaintenance" version="0.1" />
-	<import addon="repository.hieuhien.vn" />
+    <import addon="service.kodi4vn.iptvproxy" version="0.1" />
+    <import addon="service.kodi4vn.maintenance" version="0.1" />
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>Hieuhien.vn Media Center cho người Việt</summary>
-    <description>Trung tâm giải trí - tất cả trong 1 cho người Việt - Addon này được chỉnh sửa nội dung từ addon [COLOR yellow]VN Open Playlist[/COLOR] của tác giả [COLOR blue]thongld[/COLOR] - Xin cảm ơn tác giả đã cho phép [COLOR red]HieuHien.vn[/COLOR] chỉnh sửa để sử dụng theo cách riêng của mình!</description>
-    <platform>all</platform>
+    <summary lang="en">Hieuhien.vn Media Center - Trung tam giai tri danh cho nguoi Viet</summary>
+	 <description lang="en">
+	Chung toi tong hop cac nguon giai tri duoc chia se tren mang Internet. Chung toi khong quan ly va chiu trach nhiem ve nhung noi dung nay.
+	</description>
+	<platform>all</platform>
   </extension>
 </addon>
 
@@ -2207,6 +2206,18 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 		<platform>all</platform>
 	</extension>
 </addon>
+
+	<addon id="script.module.cachecontrol" version="0.1" name="CacheControl" provider-name="thongld">
+		<requires>
+			<import addon="xbmc.python" version="2.1.0" />
+		</requires>
+		<extension point="xbmc.python.module" library="lib" />
+		<extension point="xbmc.addon.metadata">
+			<summary>Kodi4VN Modules</summary>
+			<description>Kodi4VN Modules</description>
+			<platform>all</platform>
+		</extension>
+	</addon>
 
 <addon id="script.module.exodus" name="Exodus Module" version="3.1.4.1" provider-name="Exodus">
 	<requires>
