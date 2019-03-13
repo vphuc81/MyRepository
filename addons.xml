@@ -2250,6 +2250,23 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 	</extension>
 </addon>
 
+	<addon id="script.module.kodi4vn" version="1.0.3" name="Kodi4VN Modules" provider-name="thongld">
+		<requires>
+			<import addon="xbmc.python" version="2.1.0" />
+			<import addon="script.module.requests" />
+			<import addon="script.module.kodi-six" />
+			<import addon="script.module.cachecontrol" />
+			<import addon="script.module.urlresolver" />
+			<import addon="script.module.future" />
+		</requires>
+		<extension point="xbmc.python.module" library="lib" />
+		<extension point="xbmc.addon.metadata">
+			<summary>Kodi4VN Modules</summary>
+			<description>Kodi4VN Modules</description>
+			<platform>all</platform>
+		</extension>
+	</addon>
+
 <addon id="script.module.metahandler"
      name="metahandler"
      version="3.0.3"
