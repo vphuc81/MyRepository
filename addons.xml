@@ -1862,10 +1862,9 @@ http://www2.gostream.sc
 	</extension>
 </addon>
 
-
 <addon id="repository.itvplus"
-		name="ITV Repository"
-		version="1.0.0"
+		name="[COLOR ffff0000]ITVPLUS[/COLOR] Repository"
+		version="1.1.0"
 		provider-name="ITV member">
   <requires>
     <import addon="xbmc.addon" version="12.0.0"/>
@@ -1875,20 +1874,53 @@ http://www2.gostream.sc
 		<info compressed="true">http://xbmc.itvplus.net/REPO/addons.xml</info>
 		<checksum>http://xbmc.itvplus.net/REPO/addons.xml.md5</checksum>
 		<datadir zip="true">http://xbmc.itvplus.net/REPO</datadir>
-		<hashes>true</hashes>
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en">Entertainment</summary>
 		<description lang="en">Download and install addons from ITV Repository</description>
+		<language>en</language>
 		<platform>all</platform>
+		<email>kodi.itvplus@gmail.com</email>
 	</extension>
 </addon>
 
-<addon id="repository.kodi4vn" name="Kodi4VN's REPO" version="1.3" provider-name="ThongLD">
+<addon id="repository.kodi4vn" name="Kodi4VN's REPO" version="1.3.12.2" provider-name="ThongLD">
 	<extension point="xbmc.addon.repository" name="ThongLD's Addon Repository">
-		<info compressed="false">http://thong.viettv24.com/kodi4vn/addons.xml</info>
-		<checksum>http://thong.viettv24.com/kodi4vn/addons.xml.md5</checksum>
-		<datadir zip="true">http://thong.viettv24.com/kodi4vn/</datadir>
+		<dir>
+			<info compressed="false">http://thong.viettv24.com/kodi4vn/addons.xml</info>
+			<checksum>http://thong.viettv24.com/kodi4vn/addons.xml.md5</checksum>
+			<datadir zip="true">http://thong.viettv24.com/kodi4vn/</datadir>
+		</dir>
+		<dir>
+			<info compressed="false">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml</info>
+			<checksum>https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/zips/</datadir>
+		</dir>
+    <dir>
+			<info compressed="false">https://github.com/tvaddonsco/tva-release-repo/raw/master/addons.xml</info>
+			<checksum>https://github.com/tvaddonsco/tva-release-repo/raw/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://github.com/tvaddonsco/tva-release-repo/raw/master/</datadir>
+    </dir>
+		<dir>
+			<info compressed="true">https://raw.github.com/hieuhienvn/hieuhien.vn/master/addons.xml</info>
+			<checksum>https://raw.github.com/hieuhienvn/hieuhien.vn/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://github.com/hieuhienvn/hieuhien.vn/raw/master/zips/</datadir>
+		</dir>
+		<dir>
+			<info compressed="true">http://repo.kodi.vn/00-VMFrepo/addons.xml</info>
+			<checksum>http://repo.kodi.vn/00-VMFrepo/addons.xml.md5</checksum>
+			<datadir zip="true">http://repo.kodi.vn/00-VMFrepo/</datadir>
+		</dir>
+		<dir>
+			<info compressed="true">https://raw.githubusercontent.com/thaitni/xbmc.repo.xshare/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/thaitni/xbmc.repo.xshare/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/thaitni/xbmc.repo.xshare/master</datadir>
+		</dir>
+		<dir>
+			<info compressed="false">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/</datadir>
+		</dir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>Install Kodi4VN Addons</summary>
