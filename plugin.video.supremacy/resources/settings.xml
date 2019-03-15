@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+		<category label="Supremacy">
+		<setting type="lsep" label="" />
+		<setting id="startupd" type="enum" label="Startup Notification" lvalues="None|Dialog|Notification" default="2" />
+
+	</category>
+	<category label="32330">
+		<setting id="hosts.mode" type="enum" label="32331" lvalues="32332|32333|32334" default="1" />
+		<setting id="progress.dialog" type="enum" label="32335" lvalues="32336|32337" default="0" />
+		<setting type="lsep" label="32338" />
+		<setting id="hosts.quality" type="enum" label="32339" values="4K|1440p|1080p|720p|480p" default="0" />
+		<setting id="autoplay.sd" type="bool" label="32340" default="false" />
+		<setting id="hosts.captcha" type="bool" label="32341" default="true" />
+		<setting id="hosts.sort.provider" type="bool" label="32342" default="false" />
+		<setting type="lsep" label="32343" />
+		<setting id="bookmarks" type="bool" label="32344" default="true" />
+	</category>
+	<category label="32345">
+		<setting id="scrapers.timeout.1" type="slider" label="32312" default="10" range="04,60" option="int" />
+		<setting id="trakt.user" type="text" default="" visible="false" />
+		<setting id="indicators.alt" type="enum" label="32313" lvalues="32314|32315" default="1" visible="!eq(-1,)" />
+		<setting id="indicators" type="enum" label="32313" lvalues="32314" default="0" visible="eq(-2,)" />
+		<setting id="provider.Supremacy 1" type="bool" label="Supremacy 1" default="true" />
+		<setting id="provider.Supremacy 2" type="bool" label="Supremacy 2" default="true" />
+		<setting id="provider.Supremacy 3" type="bool" label="Supremacy 3" default="true" />
+		<setting id="provider.Supremacy 4" type="bool" label="Supremacy 4" default="true" />
+		<setting id="provider.Supremacy 5" type="bool" label="Supremacy 5" default="true" />
+		<setting id="provider.Supremacy 6" type="bool" label="Supremacy 6" default="true" />
+		<setting id="provider.Supremacy 7" type="bool" label="Supremacy 7" default="true" />
+		<setting id="provider.Supremacy 8" type="bool" label="Supremacy 8" default="true" />
+		<setting id="provider.Supremacy 9" type="bool" label="Supremacy 9" default="true" />
+		<setting id="provider.Supremacy 10" type="bool" label="Supremacym 10" default="true" />
+		<setting id="provider.Supremacy 11" type="bool" label="Supremacy 11" default="true" />
+		<setting id="provider.Supremacy 12" type="bool" label="Supremacy 12" default="true" />
+		<setting id="provider.Supremacy 13" type="bool" label="Supremacy 13" default="true" />
+		<setting id="provider.Supremacy 14" type="bool" label="Supremacy 14" default="true" />
+		<setting id="provider.Supremacy 15" type="bool" label="Supremacy 15" default="true" />
+		<setting id="provider.Supremacy 16" type="bool" label="Supremacy 16" default="true" />
+		<setting id="provider.Supremacy 17" type="bool" label="Supremacy 17" default="true" />
+		<setting id="provider.Supremacy 18" type="bool" label="Supremacy 18" default="true" />
+		<setting id="provider.Supremacy 19" type="bool" label="Supremacy 19" default="true" />
+		<setting id="provider.Supremacy 20" type="bool" label="Supremacy 20" default="true" />
+		<setting id="provider.Supremacy 21" type="bool" label="Supremacy 21" default="true" />
+		<setting id="provider.Supremacy 22" type="bool" label="Supremacy 22" default="true" />
+		<setting id="provider.Supremacy 23" type="bool" label="Supremacy 23" default="true" />
+		<setting id="provider.Supremacy 24" type="bool" label="Supremacy 24" default="true" />
+		<setting id="provider.Supremacy 25" type="bool" label="Supremacy 25" default="true" />
+		<setting id="provider.Supremacy 26" type="bool" label="Supremacy 26" default="true" />
+		<setting id="provider.Supremacy 27" type="bool" label="Supremacy 27" default="true" />
+		<setting id="provider.Supremacy 28" type="bool" label="Supremacy 28" default="true" />
+		<setting id="provider.Supremacy 29" type="bool" label="Supremacy 29" default="true" />
+		<setting id="provider.Supremacy 30" type="bool" label="Supremacy 30" default="true" />
+		<setting id="provider.Supremacy 31" type="bool" label="Supremacy 31" default="true" />
+		<setting id="provider.Supremacy 32" type="bool" label="Supremacy 32" default="true" />
+		<setting id="provider.Supremacy 33" type="bool" label="Supremacy 33" default="true" />
+		<setting id="provider.Supremacy 34" type="bool" label="Supremacy 34" default="true" />
+		<setting id="provider.Supremacy 35" type="bool" label="Supremacy 35" default="true" />
+		<setting id="provider.Supremacy 36" type="bool" label="Supremacy 36" default="true" />
+		<setting id="provider.Supremacy 37" type="bool" label="Supremacy 37" default="true" />
+		<setting id="provider.Supremacy 38" type="bool" label="Supremacy 38" default="true" />
+		<setting id="provider.Supremacy 39" type="bool" label="Supremacy 39" default="true" />
+		<setting id="provider.Supremacy 40" type="bool" label="Supremacy 40" default="true" />
+		<setting id="provider.Supremacy 41" type="bool" label="Supremacy 41" default="true" />
+		<setting id="provider.Supremacy 42" type="bool" label="Supremacy 42" default="true" />
+		<setting id="provider.Supremacy 43" type="bool" label="Supremacy 43" default="true" />
+		<setting id="provider.Supremacy 44" type="bool" label="Supremacy 44" default="true" />
+		<setting id="provider.Supremacy 45" type="bool" label="Supremacy 45" default="true" />
+		<setting id="provider.Supremacy 46" type="bool" label="Supremacy 46" default="true" />
+		<setting id="provider.Supremacy 47" type="bool" label="Supremacy 47" default="true" />
+		<setting id="provider.Supremacy 48" type="bool" label="Supremacy 48" default="true" />
+		<setting id="provider.Supremacy 49" type="bool" label="Supremacy 49" default="true" />
+		<setting id="provider.Supremacy 50" type="bool" label="Supremacy 50" default="true" />
+		<setting id="provider.Supremacy 51" type="bool" label="Supremacy 51" default="true" />
+		<setting id="provider.Supremacy 52" type="bool" label="Supremacy 52" default="true" />
+		<setting id="provider.Supremacy 53" type="bool" label="Supremacy 53" default="true" />
+		<setting id="provider.Supremacy 54" type="bool" label="Supremacy 54" default="true" />
+		<setting id="provider.Supremacy 55" type="bool" label="Supremacy 55" default="true" />
+		<setting id="provider.Supremacy 56" type="bool" label="Supremacy 56" default="true" />
+		<setting id="provider.Supremacy 57" type="bool" label="Supremacy 57" default="true" />
+		<setting id="provider.Supremacy 58" type="bool" label="Supremacy 58" default="true" />
+		<setting id="provider.Supremacy 59" type="bool" label="Supremacy 59" default="true" />
+		<setting id="provider.Supremacy 60" type="bool" label="Supremacy 60" default="true" />
+		<setting id="provider.Supremacy 61" type="bool" label="Supremacy 61" default="true" />
+		<setting id="provider.Supremacy 62" type="bool" label="Supremacy 62" default="true" />
+		<setting id="provider.Supremacy 63" type="bool" label="Supremacy 63" default="true" />
+		<setting id="provider.Supremacy 64" type="bool" label="Supremacy 64" default="true" />
+		<setting id="provider.Supremacy 65" type="bool" label="Supremacy 65" default="true" />
+		<setting id="provider.Supremacy 66" type="bool" label="Supremacy 66" default="true" />
+		<setting id="provider.Supremacy 67" type="bool" label="Supremacy 67" default="true" />
+		<setting id="provider.Supremacy 68" type="bool" label="Supremacy 68" default="true" />
+		<setting id="provider.Supremacy 69" type="bool" label="Supremacy 69" default="true" />
+		<setting label="German" type="lsep" />
+		<setting id="provider.Supremacy 70" type="bool" label="Supremacy 70" default="true" />
+		<setting id="provider.Supremacy 71" type="bool" label="Supremacy 71" default="true" />
+		<setting id="provider.Supremacy 72" type="bool" label="Supremacy 72" default="true" />
+		<setting id="provider.Supremacy 73" type="bool" label="Supremacy 73" default="true" />
+		<setting id="provider.Supremacy 74" type="bool" label="Supremacy 74" default="true" />
+		<setting id="provider.Supremacy 75" type="bool" label="Supremacy 75" default="true" />
+		<setting id="provider.Supremacy 76" type="bool" label="Supremacy 76" default="true" />
+		<setting id="provider.Supremacy 77" type="bool" label="Supremacy 77" default="true" />
+		<setting id="provider.Supremacy 78" type="bool" label="Supremacy 78" default="true" />
+		<setting id="provider.Supremacy 79" type="bool" label="Supremacy 79" default="true" />
+		<setting id="provider.Supremacy 80" type="bool" label="Supremacy 80" default="true" />
+		<setting id="provider.Supremacy 81" type="bool" label="Supremacy 81" default="true" />
+		<setting id="provider.Supremacy 82" type="bool" label="Supremacy 82" default="true" />
+		<setting id="provider.Supremacy 83" type="bool" label="Supremacy 83" default="true" />
+		<setting id="provider.Supremacy 84" type="bool" label="Supremacy 84" default="true" />
+		<setting id="provider.Supremacy 85" type="bool" label="Supremacy 85" default="true" />
+		<setting id="provider.Supremacy 86" type="bool" label="Supremacy 86" default="true" />
+		<setting id="provider.Supremacy 87" type="bool" label="Supremacy 87" default="true" />
+		<setting id="provider.Supremacy 89" type="bool" label="Supremacy 89" default="true" />
+		<setting id="provider.Supremacy 90" type="bool" label="Supremacy 90" default="true" />
+		<setting id="provider.streamdream" type="bool" label="STREAMDREAM" default="true" />
+		<setting id="provider.streamflix" type="bool" label="STREAMFLIX" default="true" />
+		<setting id="provider.streamit" type="bool" label="STREAMIT" default="true" />
+		<setting id="provider.streamkiste" type="bool" label="STREAMKISTE" default="true" />
+		<setting id="provider.tata" type="bool" label="TATA" default="true" />
+		<setting id="provider.video4k" type="bool" label="VIDEO4K" default="true" />
+		<setting label="French" type="lsep" />
+		<setting id="provider.cinemay" type="bool" label="CINEMAY" default="true" />
+		<setting id="provider.dpstreaming" type="bool" label="DPSTREAMING" default="true" />
+        <setting id="provider.filmenstreaminghd" type="bool" label="FILMENSTREAMINGHD" default="true" />
+		<setting id="provider.fullmoviz" type="bool" label="FULLMOVIZ" default="true" />
+		<setting id="provider.fullstream" type="bool" label="FULLSTREAM" default="true" />
+		<setting id="provider.skstream" type="bool" label="SKSTREAM" default="true" />
+		<setting id="provider.streamay" type="bool" label="STREAMAY" default="true" />
+		<setting id="provider.streamingseries" type="bool" label="STREAMINGSERIES" default="true" />
+		<setting label="Polish" type="lsep" />
+        <setting id="provider.alltube" type="bool" label="ALLTUBE" default="true" />
+        <setting id="provider.filmyto" type="bool" label="FILMYTO" default="true" />
+        <setting id="provider.filister" type="bool" label="FILISTER" default="true" />
+        <setting id="provider.cdahd" type="bool" label="CDAHD" default="true" />
+        <setting id="provider.szukajkatv" type="bool" label="SZUKAJKATV" default="true" />
+		<setting label="Korean" type="lsep" />
+		<setting id="provider.drama4u" type="bool" label="DRAMA4U" default="true" />
+		<setting id="provider.dramabus" type="bool" label="DRAMABUS" default="true" />
+		<setting id="provider.dramacool" type="bool" label="DRAMACOOL" default="true" />
+		<setting id="provider.dramafire" type="bool" label="DRAMAFIRE" default="true" />
+		<setting id="provider.iheartdrama" type="bool" label="IHEARTDRAMA" default="true" />
+		<setting id="provider.ikshow" type="bool" label="IKSHOW" default="true" />
+		<setting id="provider.kdramacool" type="bool" label="KDRAMACOOL" default="true" />
+		<setting id="provider.myasiantv" type="bool" label="MYASIANTV" default="true" />
+	</category>
+	<category label="32346">
+		<setting type="lsep" label="Trakt" />
+		<setting id="trakt.user" type="action" label="32306" option="close" action="RunPlugin(plugin://plugin.video.supremacy/?action=authTrakt)" />
+		<setting id="trakt.token" type="text" option="hidden" visible="false" label="" default="" />
+		<setting id="trakt.refresh" type="text" option="hidden" visible="false" label="" default="" />
+		<setting type="lsep" label="Alluc" />
+        <setting id="alluc.api" type="text" label="Alluc API" default="" />
+        <setting id="alluc.limit" type="labelenum" label="Limit Alluc Results" default="100" values="10|20|30|40|50|60|70|80|90|100|150|200" />
+        <setting id="alluc.download" visible="false" type="bool" label="32009" default="false" />       
+		<setting type="sep" />
+		<setting type="lsep" label="More Accounts Can Be Configured in URL Resolver" />
+		<setting id="open_smu_settings" type="action" label="32540" enable="true" option="close" action="RunPlugin(plugin://plugin.video.supremacy/?action=smuSettings)" />
+	</category>
+	<category label="32347">
+		<setting id="downloads" type="bool" label="32348" default="false" />
+		<setting type="sep" />
+		<setting id="movie.download.path" type="folder" label="32349" enable="!eq(-2,false)" default="" />
+		<setting id="tv.download.path" type="folder" label="32350" enable="!eq(-3,false)" default="" />
+		<setting type="lsep" label="[CR]" />
+		<setting type="lsep" label="32351" />
+		<setting type="lsep" label="32352" />
+	</category>
+	<category label="32353">
+		<setting id="subtitles" type="bool" label="32354" default="false" />
+		<setting type="sep" />
+		<setting id="subtitles.utf" type="bool" label="32355" enable="!eq(-2,false)" default="false" />
+		<setting type="sep" />
+		<setting id="subtitles.lang.1" type="select" label="32356" values="Afrikaans|Albanian|Arabic|Armenian|Basque|Bengali|Bosnian|Breton|Bulgarian|Burmese|Catalan|Chinese|Croatian|Czech|Danish|Dutch|English|Esperanto|Estonian|Finnish|French|Galician|Georgian|German|Greek|Hebrew|Hindi|Hungarian|Icelandic|Indonesian|Italian|Japanese|Kazakh|Khmer|Korean|Latvian|Lithuanian|Luxembourgish|Macedonian|Malay|Malayalam|Manipuri|Mongolian|Montenegrin|Norwegian|Occitan|Persian|Polish|Portuguese|Portuguese(Brazil)|Romanian|Russian|Serbian|Sinhalese|Slovak|Slovenian|Spanish|Swahili|Swedish|Syriac|Tagalog|Tamil|Telugu|Thai|Turkish|Ukrainian|Urdu" enable="!eq(-4,false)" default="English" />
+		<setting id="subtitles.lang.2" type="select" label="32357" values="Afrikaans|Albanian|Arabic|Armenian|Basque|Bengali|Bosnian|Breton|Bulgarian|Burmese|Catalan|Chinese|Croatian|Czech|Danish|Dutch|English|Esperanto|Estonian|Finnish|French|Galician|Georgian|German|Greek|Hebrew|Hindi|Hungarian|Icelandic|Indonesian|Italian|Japanese|Kazakh|Khmer|Korean|Latvian|Lithuanian|Luxembourgish|Macedonian|Malay|Malayalam|Manipuri|Mongolian|Montenegrin|Norwegian|Occitan|Persian|Polish|Portuguese|Portuguese(Brazil)|Romanian|Russian|Serbian|Sinhalese|Slovak|Slovenian|Spanish|Swahili|Swedish|Syriac|Tagalog|Tamil|Telugu|Thai|Turkish|Ukrainian|Urdu" enable="!eq(-5,false)" default="English" />
+		<setting type="lsep" label="[CR]" />
+		<setting type="lsep" label="32358" />
+		<setting type="lsep" label="32359" />
+	</category>
+	
+</settings>

@@ -781,7 +781,7 @@ http://www2.gostream.sc
 
 <addon id="plugin.video.livetv"
        name=" ***[COLOR yellow]LIVE-TV[/COLOR]"
-       version="2.3.1"
+       version="2.3.2"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
@@ -802,7 +802,7 @@ http://www2.gostream.sc
 
 <addon id="plugin.video.livetvinternational"
        name=" **[COLOR yellow]Live TV-International[/COLOR]"
-       version="2.2.34"
+       version="2.2.35"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
@@ -1286,6 +1286,70 @@ http://www2.gostream.sc
 		</assets>
 		<news></news>
 	</extension>
+</addon>
+
+<addon id="plugin.video.supremacy" name="[COLOR yellow][B]supremacy[/COLOR][/B]" version="1.7.0.1" provider-name="Supremacy">
+	<requires>
+		<import addon="xbmc.python" version="2.1.0" />
+		<import addon="repository.mancaverepo"/>
+		<import addon="script.module.pyxbmct" version="1.1.4" />
+		<import addon="script.module.resolveurl" version="5.0.0" />
+		<import addon="script.module.metahandler" version="1.0.0" />
+		<import addon="script.video.F4mProxy"/>
+		<import addon="script.module.supremacy"/>
+		<import addon="script.module.Supremacy.Tv"/>
+		</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Supremacy</summary>
+		<description lang="en">[COLOR aqua]Supremacy Movies and TV. This addon does not form part of the Kodi Media Centre. Please do not seek assistance with this addon from any of the Official Kodi Support Channels. The author does not host any of the content in this addon and takes no responsibility for content found[/COLOR]</description>
+		<disclaimer lang="en">The author of this addon do not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
+		<platform>all</platform>
+		<forum></forum>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+			<screenshot>resources/screenshots/screenshot-01.png</screenshot>
+			<screenshot>resources/screenshots/screenshot-02.png</screenshot>
+			<screenshot>resources/screenshots/screenshot-03.png</screenshot>
+		</assets>
+		<news></news>
+	</extension>
+</addon>
+
+<addon id="plugin.video.Supremacy.Sports" name="[COLOR darkmagenta]Supremacy Sports[/COLOR]" version="2.4.1" provider-name="Supremacy">
+    <requires>
+        <import addon="xbmc.python" version="2.19.0" />
+		<import addon="repository.mancaverepo"/>
+        <import addon="script.module.universalscrapers" version="1.0.0" />
+        <import addon="script.module.python.koding.aio" version="0.9.6.6" />
+        <import addon="script.module.beautifulsoup" version="3.2.1" />
+        <import addon="script.module.requests" version="2.9.1" />
+        <import addon="script.module.addon.common" version="2.0.0" />
+        <import addon="script.module.xmltodict" version="0.9.0" />
+		<import addon="script.module.dateutil" />
+        <!--<import addon="script.module.web-pdb" version="1.0"/>-->
+        <import addon="script.module.resolveurl" />
+		<import addon="script.module.Supremacy.sportsHD" />
+		<import addon="script.module.Supremacyhd" version="" />
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>audio video</provides>
+    </extension>
+	<extension point="xbmc.addon.metadata">
+    <reuselanguageinvoker>false</reuselanguageinvoker>
+    </extension>
+    <extension point="xbmc.service" library="service.py" start="[login|startup]" />
+    <extension point="xbmc.addon.metadata">
+      <summary lang="en">Supremacy Sports</summary>
+      <description lang="en">Sports</description>
+      <disclaimer lang="en">The author of this addon do not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
+      <platform>all</platform>
+        <website></website>
+        <video_guide></video_guide>
+    </extension>
 </addon>
 
 <addon id="plugin.video.sureshot" name="Sure Shot" version="1.1.2" provider-name="Doc Shadrach">
@@ -1977,6 +2041,49 @@ http://www2.gostream.sc
     </extension>
 </addon>
 
+    <addon id="repository.mancaverepo" name="Man Cave Repo" version="3.0.3" provider-name="Man Cave Team">
+        <requires>
+            <import addon="xbmc.addon" version="12.0.0"/>
+        </requires>
+        <extension point="xbmc.addon.repository" name="Man Cave Repo">
+			<info compressed="false">https://raw.githubusercontent.com/TVKINGS/ManCaveRepo/master/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/TVKINGS/ManCaveRepo/master/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/TVKINGS/ManCaveRepo/master/zips/</datadir>
+		<dir>
+            <info compressed="false">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/</datadir>
+        </dir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/jenaddon/repository.jenrepo/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jenaddon/repository.jenrepo/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/jenaddon/repository.jenrepo/master/zips/</datadir>
+            <hashes>false</hashes>
+        </dir>
+		<dir>
+			<info compressed="false">https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
+        </dir>
+	    <dir>
+             <info compressed="false">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml</info>
+             <checksum>https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml.md5</checksum>
+              <datadir zip="true">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/</datadir>
+        </dir>
+		<dir>
+			<info compressed="false">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/</datadir>
+		</dir>
+        </extension>
+        <extension point="xbmc.addon.metadata">
+            <summary>Man Cave Repo</summary>
+            <description>All your entertainment needs</description>
+            <platform>all</platform>
+            <genre></genre>
+        </extension>
+    </addon>
+
 <addon id="repository.mdrepo" name="Mucky Ducks Repo" version="1.0.2" provider-name="Mucky Duck">
 	<extension point="xbmc.addon.repository" name="Mucky Ducks Repo">
 		<info compressed="false">https://raw.githubusercontent.com/mucky-duck/mdrepo/master/addons.xml</info>
@@ -2178,17 +2285,18 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 	</extension>
 </addon>
 
-<addon id="repository.xunitytalk" name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk Repository" version="1.0.6" provider-name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
+<addon id="repository.xunitytalk" name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk Repository" version="1.1.6" provider-name=".[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk">
 	<extension point="xbmc.addon.repository" name="Mikey1234 Addon Repository">
-		<info compressed="false">http://xty.me/xunitytalk/addons/addons.xml</info>
-		<checksum>http://xty.me/xunitytalk/addons/addons.xml.md5</checksum>
-		<datadir zip="true">http://xty.me/xunitytalk/addons</datadir>
+		<info compressed="false">http://xtyrepo.me/xunitytalk/addons/addons.xml</info>
+		<checksum>http://xtyrepo.me/xunitytalk/addons/addons.xml.md5</checksum>
+		<datadir zip="true">http://xtyrepo.me/xunitytalk/addons</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>The Best Third Party Addons for XBMC, .[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk</summary>
 		<description>The Best Third Party Addons for XBMC, .[COLOR blue]X[/COLOR]unity[COLOR blue]T[/COLOR]alk</description>
 		<platform>all</platform>
 	</extension>
+<extension point="xbmc.service" library="service.py" start="login" />
 </addon>
 
 <addon id="script.exodus.artwork" version="2.0.0" name="Exodus Artwork" provider-name="Exodus">
