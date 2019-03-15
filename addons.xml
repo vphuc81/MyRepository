@@ -619,7 +619,7 @@ http://www2.gostream.sc
   </extension>
 </addon>
 
-<addon id="plugin.video.HieuHien.vn" version="2.0.1.1" name="[B][COLOR lime]Trung tam giai tri[/COLOR][/B]" provider-name="thongld">
+<addon id="plugin.video.HieuHien.vn" version="2.0.1.2" name="[B][COLOR lime]Trung tam giai tri[/COLOR][/B]" provider-name="thongld">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.kodiswift" version="0.0.7" />
@@ -628,7 +628,6 @@ http://www2.gostream.sc
     <import addon="script.module.httplib2" version="0.1" />
     <import addon="service.kodi4vn.iptvproxy" version="0.1" />
     <import addon="service.kodi4vn.maintenance" version="0.1" />
-	<import addon="plugin.video.bimozie" version="0.1.8" />
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
