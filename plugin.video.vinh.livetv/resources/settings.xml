@@ -1,0 +1,12 @@
+<settings>
+	<category label="Thông tin Account">
+		<setting id="usernamefshare" type="text" label="Username [COLOR gold]FShare[/COLOR]"/>
+		<setting id="passwordfshare" type="text" option="hidden" label="Password [COLOR gold]FShare[/COLOR]"/>
+		<setting id="cred" type="text" visible="False"/>
+		<setting id="hash" type="text" visible="False"/>
+	</category>
+	<category label="Misc">
+	<setting id="GSheetURL" type="text" label="Google Spreadsheet URL" default="https://docs.google.com"/>
+	<setting id="thumbview" type="bool" label="Auto use thumbnail view (for future use)" default="false"/>
+	</category>
+</settings>
