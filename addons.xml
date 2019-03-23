@@ -553,23 +553,18 @@ http://www2.gostream.sc
     </extension>
 </addon>
 
-<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.32" provider-name="MetalKettle">
+<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.33" provider-name="MetalKettle">
 
   <requires>
 
     <import addon="script.module.simplejson" version="3.3.0"/>
-
     <import addon="xbmc.python" version="2.1.0"/>
-
     <import addon="script.module.t0mm0.common" version="2.0.0"/>
-
     <import addon="plugin.video.youtube" version="3.0.0"/>
-
     <import addon="script.module.urlresolver"  version="2.1.2"/>
-
     <import addon="script.common.plugin.cache" version="2.5.2"/>
-
     <import addon="script.module.metahandler" version="2.5.1"/>
+	<import addon="repository.maverickrepo" />
 
   </requires>
 
@@ -817,42 +812,6 @@ http://www2.gostream.sc
     <summary>Modified Addon</summary>
     <description>[COLOR lime][B]Watch a top selection of International TV channels[/B][/COLOR]</description>
 	<disclaimer lang="en">This add-on is streamming video from the Internet.  This is not responsible for the accuracy, compliance, copyright, legality, decency, or any other aspect of the content of the sites. If you have any legal issues please contact appropriate media file owners / hosters</disclaimer>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.MaverickTV" name="[COLORlime]Maverick TV[/COLOR]" version="9.1.5.8.1" provider-name="Maverick">
-    <requires>
-        <import addon="xbmc.python" version="2.19.0" />
-        <import addon="script.module.universalscrapers" version="1.0.0" />
-        <import addon="script.module.python.koding.aio" version="0.9.6.6" />
-        <import addon="script.module.beautifulsoup" version="3.2.1" />
-        <import addon="script.module.requests" version="2.9.1" />
-        <import addon="script.module.addon.common" version="2.0.0" />
-        <import addon="script.module.xmltodict" version="0.9.0" />
-		<import addon="plugin.video.youtube" version="3.0.0"/>
-		<import addon="script.module.dateutil" />
-        <!--<import addon="script.module.web-pdb" version="1.0"/>-->
-        <import addon="script.module.resolveurl" />
-		<import addon="script.module.MaverickLive" />
-		<import addon="script.module.ATFmobdro" />
-		<import addon="script.module.ATFTV" />
-		<import addon="repository.maverickrepo" />
-
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>audio video</provides>
-    </extension>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>audio video</provides>
-    </extension>
-	<extension point="xbmc.addon.metadata">
-    <reuselanguageinvoker>false</reuselanguageinvoker>
-    </extension>
-    <extension point="xbmc.service" library="service.py" start="[login|startup]" />
-    <extension point="xbmc.addon.metadata">
-       <summary lang="en">Maverick TV</summary>
-    <description lang="en">Maverick TV</description>
     <platform>all</platform>
   </extension>
 </addon>
@@ -2438,30 +2397,6 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 		<description>Metadata for fantastic are maintained separately to make distribution of the the addon itself easier/faster.</description>
 		<platform>all</platform>
 	</extension>
-</addon>
-
-<addon id="script.module.ATFTV" name="[COLORred]ATF Live[/COLOR]" version="1.5" provider-name="Maverick">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.livestreamer" />
-    <import addon="script.module.requests" />
-    <import addon="script.module.routing" />
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="addon.py">
-    <provides>all</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en_gb">Maverick</summary>
-    <description lang="en_gb">Maverick</description>
-    <disclaimer lang="en_gb"></disclaimer>
-    <language></language>
-    <platform>all</platform>
-    <license></license>
-    <forum></forum>
-    <website></website>
-    <email></email>
-    <source></source>
-  </extension>
 </addon>
 
 	<addon id="script.module.cachecontrol" version="0.1" name="CacheControl" provider-name="thongld">
