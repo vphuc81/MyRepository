@@ -776,6 +776,26 @@ http://www2.gostream.sc
   </extension>
 </addon>
 
+<addon id="plugin.video.livestream" name="Livestream" version="2017.4.3.1" provider-name="eracknaphobia">
+  <requires>
+   <import addon="xbmc.python" version="2.19.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="main.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary lang="en">Livestream.com Videos</summary>
+    <description lang="en">Livestream, formerly known as Mogulus, is a live streaming video platform that allows users to view and broadcast video content using a camera and a computer through the internet.</description>
+    <language>en</language>
+    <platform>all</platform>
+    <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+    <forum>http://forum.kodi.tv/showthread.php?tid=230355</forum>
+    <website>https://livestream.com/</website>
+    <source>https://github.com/eracknaphobia/plugin.video.livestream</source>
+  </extension>
+</addon>
+
 <addon id="plugin.video.livetv"
        name=" ***[COLOR yellow]LIVE-TV[/COLOR]"
        version="2.3.2"
