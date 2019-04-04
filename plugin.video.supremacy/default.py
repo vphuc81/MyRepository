@@ -49,7 +49,7 @@ if action == None:
     except:
      pass
     from resources.lib.modules import check4update
-    check4update.check4update()
+    #check4update.check4update()
     supremacy.indexer().root()
 
 elif action == 'directory':

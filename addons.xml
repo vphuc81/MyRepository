@@ -1285,7 +1285,7 @@ http://www2.gostream.sc
 	</extension>
 </addon>
 
-<addon id="plugin.video.supremacy" name="[COLOR yellow][B]supremacy[/COLOR][/B]" version="1.7.0.1" provider-name="Supremacy">
+<addon id="plugin.video.supremacy" name="[COLOR yellow][B]supremacy[/COLOR][/B]" version="1.7.0.2" provider-name="Supremacy">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
 		<import addon="repository.mancaverepo"/>

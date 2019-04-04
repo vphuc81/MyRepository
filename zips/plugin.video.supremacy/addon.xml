@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.supremacy" name="[COLOR yellow][B]supremacy[/COLOR][/B]" version="1.7.0.1" provider-name="Supremacy">
+<addon id="plugin.video.supremacy" name="[COLOR yellow][B]supremacy[/COLOR][/B]" version="1.7.0.2" provider-name="Supremacy">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
 		<import addon="repository.mancaverepo"/>
