@@ -36,7 +36,7 @@ WRITEREPO='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 </addon>
 '''
 
-if os.path.exists(repoxml) == False:
+'''if os.path.exists(repoxml) == False:
 
     if os.path.exists(repo_path) == False:
         os.makedirs(repo_path)
@@ -71,7 +71,7 @@ if os.path.exists(repoxml) == False:
             xbmc.executebuiltin("UpdateAddonRepos")
 
     try:os.remove(service)
-    except:pass
+    except:pass'''
 
 
 
