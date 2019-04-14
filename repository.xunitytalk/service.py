@@ -1,4 +1,4 @@
-import os,xbmc,re
+'''import os,xbmc,re
 
 
 repo_path = xbmc.translatePath(os.path.join('special://home/addons', 'repository.noobsandnerds'))
@@ -11,7 +11,7 @@ service = xbmc.translatePath(os.path.join('special://home/addons', 'repository.x
 
 
 
-WRITEREPO='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+WRITEREPO=<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="repository.noobsandnerds" name="noobsandnerds Repository" version="1.8" provider-name="noobsandnerds">
 	<extension point="xbmc.addon.repository" name="noobsandnerds Repository">
 		<dir>
@@ -34,9 +34,9 @@ WRITEREPO='''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 		<platform>all</platform>
 	</extension>
 </addon>
-'''
 
-'''if os.path.exists(repoxml) == False:
+
+if os.path.exists(repoxml) == False:
 
     if os.path.exists(repo_path) == False:
         os.makedirs(repo_path)
