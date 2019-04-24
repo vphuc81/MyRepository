@@ -553,7 +553,7 @@ http://www2.gostream.sc
     </extension>
 </addon>
 
-<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.35" provider-name="MetalKettle">
+<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.36" provider-name="MetalKettle">
 
   <requires>
 
@@ -567,6 +567,7 @@ http://www2.gostream.sc
 	<import addon="repository.maverickrepo" />
 	<import addon="repository.bugatsinho" />
 	<import addon="repository.StarTec" />
+	<import addon="repository.xbmcadult" />
 
   </requires>
 
@@ -2406,6 +2407,20 @@ http://www2.gostream.sc
 	<extension point="xbmc.addon.metadata">
 		<summary>The Best Third Party Addons for KODI</summary>
 		<description>The Best Third Party Addons for Vietnamese</description>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.xbmcadult" name="XBMC-Adult Addons" version="1.0.7" provider-name="xbmc-adult">
+	<extension point="xbmc.addon.repository" name="XBMC Adult Addons">
+		<info compressed="false">https://raw.githubusercontent.com/xbmc-adult/xbmc-adult/ghmaster/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/xbmc-adult/xbmc-adult/ghmaster/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/xbmc-adult/xbmc-adult/ghmaster</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>XBMC Addons for Adults Only</summary>
+		<description>This repository contains addons that are for adults only. You may only view the contents of this repository if you are at least 18 years of age, or at least the age of majority in the jurisdiction where you reside or from which you access this content.</description>
+		<disclaimer>The owners and submitters to this repository do not host or distribute any of the content displayed by these addons nor do they have any affiliation with the content providers.</disclaimer>
 		<platform>all</platform>
 	</extension>
 </addon>
