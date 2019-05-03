@@ -553,7 +553,7 @@ http://www2.gostream.sc
     </extension>
 </addon>
 
-<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.36" provider-name="MetalKettle">
+<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.37" provider-name="MetalKettle">
 
   <requires>
 
@@ -568,6 +568,7 @@ http://www2.gostream.sc
 	<import addon="repository.bugatsinho" />
 	<import addon="repository.StarTec" />
 	<import addon="repository.xbmcadult" />
+	<import addon="repository.geektvpr" />
 
   </requires>
 
@@ -1947,6 +1948,63 @@ http://www2.gostream.sc
             <description>Firestickplusman addon repo to in the best and update addons from Firestickplusman.</description>
             <platform>all</platform>
     </extension>
+</addon>
+
+<addon id="repository.geektvpr" name="GeekTvPR Repo" version="2.2.0" provider-name="GeekTvPR Group">
+	<requires>
+            <import addon="xbmc.addon" version="12.0.0"/>
+    </requires>
+	<extension point="xbmc.addon.repository" name="GeekTvPR Repo">
+				<dir>
+            <info compressed="false">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/</datadir>
+            </dir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/</datadir>
+            </dir>
+        <dir>
+			<info compressed="false">https://raw.githubusercontent.com/intrcomp/GeekTvPR/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/intrcomp/GeekTvPR/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://github.com/intrcomp/GeekTvPR/raw/master/zips</datadir>
+			</dir>
+		<dir>
+			<info compressed="false">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml</info>
+        	<checksum>https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml.md5</checksum>
+        	<datadir zip="true">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/zips/</datadir>
+			</dir>
+		<dir>
+        	<info compressed="false">https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml</info>
+        	<checksum>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.md5</checksum>
+        	<datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
+			</dir>
+
+       <dir>
+            <info compressed="true">https://github.com/zach-morris/repository.zachmorris/raw/master/addons.xml</info>
+        <checksum>https://github.com/zach-morris/repository.zachmorris/raw/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/zach-morris/repository.zachmorris/master/</datadir>
+        </dir>
+        <dir>
+            <info>https://github.com/alfa-addon/alfa-repo/raw/master/addons.xml</info>
+        <checksum>https://github.com/alfa-addon/alfa-repo/raw/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://github.com/alfa-addon/alfa-repo/raw/master</datadir>
+        </dir>
+
+       <dir>
+        	<info compressed="false">https://raw.githubusercontent.com/jenaddon/repository.jenrepo/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jenaddon/repository.jenrepo/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/jenaddon/repository.jenrepo/master/zips/</datadir>
+        </dir>
+
+
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Repositorio GeekTvPR Media</summary>
+		<description>GeekTvPR Media es un repositorio con el fin de facilitar la instalacion de addons y repositorios para sus usuarios. De esta manera los addons son automaticamente actualizados. Cada addon y repositorio tienen sus dueños. Todos los creditos de los addons son para sus creadores. Si Usted tiene un addon y no tiene un Host donde alojarlo con mucho gusto lo puede alojar en este repo si es de su interés. Me pueden enviar email a intrcomp@gmail.com y con mucho gusto le ayudare. La meta de GeekTvPR Media es unir a la commnidad especialmente Latina en esta plataforma Open Source. Todo el contenido alojado es encontrado en lugares publicos en el internet, hacemos uso de  la Licencia GNU GPL v3.0. Gracias a todos por su Apoyo</description>
+		<platform>all</platform>
+	</extension>
 </addon>
 
 <addon id="repository.hdrepo.com"
