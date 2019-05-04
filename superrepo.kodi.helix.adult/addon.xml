@@ -1,15 +1,15 @@
-<addon id="superrepo.kodi.helix.adult" name="SuperRepo Genre Adult [Helix][v7]" version="0.7.04" provider-name="Bart Otten">
+<addon id="superrepo.kodi.helix.adult" name="SuperRepo Genre Adult [Helix][v7] Not Working" version="0.7.04.1" provider-name="Bart Otten">
                 <requires>
                 <import addon="xbmc.addon" version="12.0.0"/>
                 </requires>
                 <extension point="xbmc.addon.repository" name="SuperRepo Genre Adult [Helix][v7]">
                 <info compressed="false">
-                http://xml.superrepo.org/v7/.xml/helix/genres/adult/addons.xml
+                http://xml.superrepo.org/v7/.xml/helix/genres/adult/addons.bak.xml
                 </info>
                 <checksum>
-                http://md5.superrepo.org/v7/.md5/helix/genres/adult/addons.xml.md5
+                http://md5.superrepo.org/v7/.md5/helix/genres/adult/addons.bak.xml.md5
                 </checksum>
-                <datadir zip="true">http://redirect.superrepo.org/v7/addons/</datadir>
+                <datadir zip="true">http://redirect.superrepo.org/v7/addons/bak</datadir>
                 <hashes>true</hashes>
                 </extension>
                 <extension point="xbmc.addon.metadata">

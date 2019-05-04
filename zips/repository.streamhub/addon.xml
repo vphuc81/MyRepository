@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon 	id="repository.streamhub" 
 		name="[COLOR red]StreamHub Repository[/COLOR]" 
-		version="1.2" 
+		version="1.2.0.1" 
 		provider-name="sClarke">
 	<extension point="xbmc.addon.repository" name="[COLOR red]StreamHub Repository[/COLOR]">
 		<info compressed="false">https://raw.githubusercontent.com/sClarkeIsBack/StreamHub/master/Repo_Files/addons.xml</info>

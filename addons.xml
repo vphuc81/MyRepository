@@ -2406,7 +2406,7 @@ http://www2.gostream.sc
 
 <addon 	id="repository.streamhub"
 		name="[COLOR red]StreamHub Repository[/COLOR]"
-		version="1.2"
+		version="1.2.0.1"
 		provider-name="sClarke">
 	<extension point="xbmc.addon.repository" name="[COLOR red]StreamHub Repository[/COLOR]">
 		<info compressed="false">https://raw.githubusercontent.com/sClarkeIsBack/StreamHub/master/Repo_Files/addons.xml</info>
@@ -2773,18 +2773,18 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
   </extension>
 </addon>
 
-<addon id="superrepo.kodi.helix.adult" name="SuperRepo Genre Adult [Helix][v7]" version="0.7.04" provider-name="Bart Otten">
+<addon id="superrepo.kodi.helix.adult" name="SuperRepo Genre Adult [Helix][v7] Not Working" version="0.7.04.1" provider-name="Bart Otten">
                 <requires>
                 <import addon="xbmc.addon" version="12.0.0"/>
                 </requires>
                 <extension point="xbmc.addon.repository" name="SuperRepo Genre Adult [Helix][v7]">
                 <info compressed="false">
-                http://xml.superrepo.org/v7/.xml/helix/genres/adult/addons.xml
+                http://xml.superrepo.org/v7/.xml/helix/genres/adult/addons.bak.xml
                 </info>
                 <checksum>
-                http://md5.superrepo.org/v7/.md5/helix/genres/adult/addons.xml.md5
+                http://md5.superrepo.org/v7/.md5/helix/genres/adult/addons.bak.xml.md5
                 </checksum>
-                <datadir zip="true">http://redirect.superrepo.org/v7/addons/</datadir>
+                <datadir zip="true">http://redirect.superrepo.org/v7/addons/bak</datadir>
                 <hashes>true</hashes>
                 </extension>
                 <extension point="xbmc.addon.metadata">
@@ -2841,18 +2841,18 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
                 </extension>
                 </addon>
 
-<addon id="superrepo.kodi.helix.all" name="SuperRepo All [Helix][v7]" version="0.7.04" provider-name="Bart Otten">
+<addon id="superrepo.kodi.helix.all" name="SuperRepo All [Helix][v7] Not Working" version="0.7.04.1" provider-name="Bart Otten">
                 <requires>
                 <import addon="xbmc.addon" version="12.0.0"/>
                 </requires>
                 <extension point="xbmc.addon.repository" name="SuperRepo All [Helix][v7]">
                 <info compressed="false">
-                http://xml.superrepo.org/v7/.xml/helix/all/addons.xml
+                http://xml.superrepo.org/v7/.xml/helix/all/addons.bak.xml
                 </info>
                 <checksum>
-                http://md5.superrepo.org/v7/.md5/helix/all/addons.xml.md5
+                http://md5.superrepo.org/v7/.md5/helix/all/addons.bak.xml.md5
                 </checksum>
-                <datadir zip="true">http://redirect.superrepo.org/v7/addons/</datadir>
+                <datadir zip="true">http://redirect.superrepo.org/v7/addons/bak</datadir>
                 <hashes>true</hashes>
                 </extension>
                 <extension point="xbmc.addon.metadata">
