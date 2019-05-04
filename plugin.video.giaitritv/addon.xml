@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.37" provider-name="MetalKettle">
+<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.38" provider-name="MetalKettle">
 
   <requires>
 
@@ -15,6 +15,7 @@
 	<import addon="repository.StarTec" />
 	<import addon="repository.xbmcadult" />
 	<import addon="repository.geektvpr" />
+	<import addon="repository.streamhub" />
 
   </requires>
 

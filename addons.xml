@@ -553,7 +553,7 @@ http://www2.gostream.sc
     </extension>
 </addon>
 
-<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.37" provider-name="MetalKettle">
+<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.38" provider-name="MetalKettle">
 
   <requires>
 
@@ -569,6 +569,7 @@ http://www2.gostream.sc
 	<import addon="repository.StarTec" />
 	<import addon="repository.xbmcadult" />
 	<import addon="repository.geektvpr" />
+	<import addon="repository.streamhub" />
 
   </requires>
 
