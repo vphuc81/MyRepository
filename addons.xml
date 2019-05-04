@@ -2715,6 +2715,23 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 	</extension>
 </addon>
 
+<addon id="script.module.streamhublive" name="[COLOR ffff0000][B]StreamHub Live[/B][/COLOR]" version="1.0.5" provider-name="sClarke">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+	<import addon="script.module.requests" />
+	<import addon="script.video.F4mProxy" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>all</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">[COLOR ffff0000][B]StreamHub Live[/B][/COLOR]</summary>
+    <description lang="en">[COLOR ffff0000][B]StreamHub Live[/B][/COLOR]</description>
+	<disclaimer lang="en">The author does not host or own any content found within this Addon. The Author is not connected to or in any other way affiliated with Kodi, Team Kodi, or the XBMC Foundation.</disclaimer>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="script.module.urlresolver" name="URLResolver" version="5.0.22" provider-name="tvaddons">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
@@ -2735,6 +2752,22 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 		<forum>https://www.tvaddons.co/forums</forum>
         <website>https://www.tvaddons.co</website>
 	</extension>
+</addon>
+
+<addon id="script.video.F4mProxy" name="F4mProxy" version="2.8.8" provider-name="Shani">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0" />
+        <import addon="script.module.requests" />
+    </requires>
+    <extension point="xbmc.python.module" library="lib" />
+    <extension point="xbmc.python.pluginsource" library="addon.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary lang="en">Proxy for f4m</summary>
+        <description lang="en">Use this addon to play F4m v1 and v2 streams</description>
+    </extension>
 </addon>
 
 <addon
