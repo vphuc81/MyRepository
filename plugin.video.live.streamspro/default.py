@@ -55,7 +55,7 @@ REV = os.path.join(profile, 'list_revision')
 icon = os.path.join(home, 'icon.png')
 FANART = os.path.join(home, 'fanart.jpg')
 #source_file = os.path.join(profile, 'source_file')
-source_file = os.path.join(home, 'xml_file')
+source_file = os.path.join(home, 'source_file')
 functions_dir = profile
 
 communityfiles = os.path.join(profile, 'LivewebTV')
