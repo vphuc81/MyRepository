@@ -20,6 +20,32 @@ O00O0OO000 = 'L3Jlc291cmNlcy9wbGF5bGlzdHMvdngueG1s'
 
 dict = {'&amp;':'&', '&acirc;':'â', '&Aacute;':'Á', '&agrave;':'à', '&aacute;':'á', '&atilde;':'ã', '&igrave;':'ì', '&iacute;':'í', '&uacute;':'ú', '&ugrave;':'ù', '&oacute;':'ó', '&ouml;':'ö', '&ograve;':'ò', '&otilde;':'õ', '&ocirc;':'ô', '&Ocirc;':'Ô', '&eacute;':'é', '&egrave;':'è', '&ecirc;':'ê', '&Yacute;':'Ý', '&yacute;':'ý', "&rsquo;":"'", '&quot;':'"','m34':'m22', 'm35':'m22', 'http://4.bp.blogspot.com':'https://lh3.googleusercontent.com', 'http://3.bp.blogspot.com':'https://lh3.googleusercontent.com', 'http://2.bp.blogspot.com':'https://lh3.googleusercontent.com', 'http://1.bp.blogspot.com':'https://lh3.googleusercontent.com', 'http://www.youtube.com/watch?v=':'plugin://plugin.video.youtube/play/?video_id=', 'https://www.youtube.com/watch?v=':'plugin://plugin.video.youtube/play/?video_id='}
 
+#Open youtubbe settings to enable MPEG-Dash to play youtube live
+'''vinh_addon = xbmcaddon.Addon('plugin.video.vinh.livetv')
+yt_addon = xbmcaddon.Addon('plugin.video.youtube')
+if yt_addon.getSetting('kodion.video.quality.mpd') != 'true':
+    dialog = xbmcgui.Dialog()
+    yes = dialog.yesno(
+        'This Channel Need to Enable MPEG-DASH to Play!\n',
+        '[COLOR yellow]Please Click OK, Choose MPEG-DASH -> Select Use MPEG-DASH -> Click OK[/COLOR]',
+        yeslabel='OK',
+        nolabel='CANCEL'
+        )
+    if yes:
+        #yt_settings = xbmcaddon.Addon('plugin.video.youtube').openSettings()
+        #xbmc.executebuiltin('yt_settings')
+        #vinh_addonopen = xbmcaddon.Addon('plugin.video.vinh.livetv').RunAddon()
+        #vinh_addonopen = xbmcaddon.Addon('plugin.video.vinh.livetv').runAddon()
+        #xbmc.executebuiltin('vinh_addonopen')
+        #yt_settings = xbmcaddon.Addon('plugin.video.youtube').RunPlugin()
+        #xbmc.executebuiltin('yt_settings')
+        #xbmc.executebuiltin('RunPlugin("yt_addon")')
+        #xbmc.RunPlugin('plugin://plugin.video.vinh.livetv')
+        xbmc.executebuiltin('XBMC.RunPlugin(plugin.video.vinh.livetv)')
+else: 
+    #addon = xbmcaddon.Addon("plugin.video.vinh.livetv")
+    xbmc.executebuiltin('XBMC.RunPlugin(plugin.video.vinh.livetv)')'''
+
 def replace_all(text, dict):
 	try:
 		for a, b in dict.iteritems():
@@ -138,7 +164,13 @@ def TVChannel(url):
                ("togridiron" in link) or ("tosupremacymovie" in link) or ("toyoda" in link) or ("tobimozie" in link) or ("tovinhlivetv" in link):
                 link = re.compile('<link>(.+?)</link>').findall(item)[0]            
             add_Link(title, link, thumb)
-        xbmc.executebuiltin('Container.SetViewMode(52)')		
+        xbmc.executebuiltin('Container.SetViewMode(52)')
+        
+		
+
+    #elif "tosport365" in url:
+        #xbmc.executebuiltin('plugin://plugin.video.sport365.live')
+
     else:
         for name in names:
             addDir('' + name + '', url+"?n="+name, 'index', '')
@@ -149,7 +181,7 @@ def Channel():
     match=re.compile("<title>([^<]*)<\/title>\s*<link>([^<]+)<\/link>\s*<thumbnail>(.+?)</thumbnail>").findall(content)	
     for title,url,thumbnail in match:
 		addDir(title,url,'tvchannel',thumbnail)	
-    xbmc.executebuiltin('Container.SetViewMode(%d)' % 500)	
+    xbmc.executebuiltin('Container.SetViewMode(%d)' % 500)
 
 def iI11IIiiIII(file):
     try:
@@ -323,7 +355,7 @@ def add_Link(name,url,iconimage):
     liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
     liz.setInfo( type="Video", infoLabels={ "Title": name } )
     liz.setProperty('IsPlayable', 'true')
-    if 'viettv24free' in url:
+    '''if 'viettv24free' in url:
         u = 'plugin://plugin.video.viettv24'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
@@ -762,8 +794,12 @@ def add_Link(name,url,iconimage):
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     if 'tovinhlivetv' in url:
-        u = 'plugin://plugin.video.vinh.livetv'  
+        u = 'plugin://plugin.video.vinh.livetv'
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok'''
+    if 'plugin://plugin' in url:
+        u = url
+        ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)  
 
@@ -813,6 +849,14 @@ def addDir(name,url,mode,iconimage):
     '''elif ('plugin://plugin.video.youtube/play/' in url):
         u = 'plugin://plugin.video.youtube/play/?video_id=EI8oVmdK6r8'
         #ok = PlayVideo(url,name)'''
+    if 'tovinhlivetv' in url:
+        u = 'plugin://plugin.video.vinh.livetv'
+        ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
+    if 'plugin://plugin' in url:
+        u = url
+        ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
     return ok
     '''if ('plugin://plugin.video.youtube/play/' in url):

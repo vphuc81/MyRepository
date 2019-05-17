@@ -288,7 +288,7 @@
 
 <addon id="plugin.video.earthcam"
 	name="EarthCam"
-	version="3.2.1"
+	version="3.2.2"
 	provider-name="tvaddons.ag,idleloop">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -847,7 +847,7 @@ http://www2.gostream.sc
 
 <addon id="plugin.video.livetv"
        name=" ***[COLOR yellow]LIVE-TV[/COLOR]"
-       version="2.3.2"
+       version="2.4.0"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />
