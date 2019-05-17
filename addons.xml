@@ -254,7 +254,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.docuhub" version="3.1.1" name="Docu-Hub" provider-name="[COLOR red]Blazetamer[/COLOR]">
+<addon id="plugin.video.docuhub" version="3.2.1" name="Docu-Hub" provider-name="[COLOR red]Blazetamer[/COLOR]">
 <requires>
 <import addon="xbmc.python" version="2.1.0"/>
 <import addon="script.module.urlresolver"  version="2.0.9"/>
@@ -868,7 +868,7 @@ http://www2.gostream.sc
 
 <addon id="plugin.video.livetvinternational"
        name=" **[COLOR yellow]Live TV-International[/COLOR]"
-       version="2.2.35"
+       version="2.4.0"
        provider-name="Vinh Computer Repair">
   <requires>
     <import addon="xbmc.python" version="2.1.0" optional="true" />

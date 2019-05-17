@@ -714,6 +714,10 @@ def add_Link(name,url,iconimage):
         u = 'plugin://plugin.video.vinh.livetv'  
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
         return ok
+    if 'plugin://plugin' in url:
+        u = url
+        ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz)   
 
 def addLink(name,url,mode,iconimage):
@@ -756,7 +760,11 @@ def addDir(name,url,mode,iconimage):
     if ('www.youtube.com/user/' in url) or ('www.youtube.com/channel/' in url):
         u = 'plugin://plugin.video.youtube/%s/%s/' % (url.split( '/' )[-2], url.split( '/' )[-1])
         ok = xbmcplugin.addDirectoryItem(handle = int(sys.argv[1]), url = u, listitem = liz, isFolder = True)
-        return ok   
+        return ok
+    if 'plugin://plugin' in url:
+        u = url
+        ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+        return ok
     ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
     return ok	
 	

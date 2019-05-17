@@ -3,107 +3,65 @@
 <channel>
 <items>
 
+<item>
+<title>[COLOR yellow][B]U.S.A - TV[/B][/COLOR]</title>
+<link>plugin://plugin.video.vinh.livetv/</link>
+<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/vinhlivetv.png</thumbnail>
+</item>
+
+<item>
+<title>[COLOR yellow][B]TV - U.S.A[/B][/COLOR]</title>
+<link>plugin://plugin.video.vinh.livetv/section/1588493991@18oBXoKaL64nx7tdKe0yqEdnRHabdfZS4iHfRT44Fnwg/%5BB%5D%5BCOLOR+red%5D%5BLIVE%5D+%5B%2FCOLOR%5D%5BCOLOR+yellow%5DTV+-+USA%5B%2FCOLOR%5D%5B%2FB%5D&quot</link>
+<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/tvusa.png</thumbnail>
+</item>
 
 <item>
 <title>[COLOR yellow][B]Movies[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/movies.xml</link>
+<link>plugin://plugin.video.vinh.livetv/section/1690708616@18oBXoKaL64nx7tdKe0yqEdnRHabdfZS4iHfRT44Fnwg/%5BB%5D%5BCOLOR+aqua%5D%5BMOVIES%5D%5B%2FCOLOR%5D%5B%2FB%5D+-+English&quot</link>
 <thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/phimle.png</thumbnail>
 </item>
 
 <item>
 <title>[COLOR yellow][B]SPORTS - TV[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/kenhthethao.xml</link>
+<link>plugin://plugin.video.vinh.livetv/section/2025498656@18oBXoKaL64nx7tdKe0yqEdnRHabdfZS4iHfRT44Fnwg/%5BB%5D%5BCOLOR+lime%5D%5BSPORTS%5D%5B%2FCOLOR%5D+-+%5BCOLOR+yellow%5DTh%E1%BB%83+Thao%5B%2FCOLOR%5D%5B%2FB%5D&quot</link>
 <thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/kenhthethao.png</thumbnail>
 </item>
 
 <item>
 <title>[COLOR yellow][B]Youtube - Dailymotion[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/search.xml</link>
+<link>plugin://plugin.video.youtube/kodion/search/list</link>
 <thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/search.png</thumbnail>
 </item>
 
 <item>
-<title>[COLOR yellow][B]World - TV[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/tvworld.xml</link>
-<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/worldtv.png</thumbnail>
+<title>[COLOR yellow][B]KIDS PLACE[/B][/COLOR]</title>
+<link>plugin://plugin.video.vinh.livetv/section/150647079@18oBXoKaL64nx7tdKe0yqEdnRHabdfZS4iHfRT44Fnwg/%5BB%5D%5BCOLOR+lime%5D%5BKIDS%5D%5B%2FCOLOR%5D+-+%5BCOLOR+yellow%5DThi%E1%BA%BFu+Nhi%5B%2FCOLOR%5D%5B%2FB%5D&quot</link>
+<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/kenhthieunhi.png</thumbnail>
 </item>
 
-<item>
-<title>[COLOR yellow][B]U.S.A - TV[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/tvusa.xml</link>
-<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/tvusa.png</thumbnail>
-</item>
 
 <item>
 <title>[COLOR yellow][B]Arabic - TV[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/arabic.xml</link>
+<link>plugin://plugin.video.vinh.livetv/section/908632923@18oBXoKaL64nx7tdKe0yqEdnRHabdfZS4iHfRT44Fnwg/%5BB%5D%5BCOLOR+red%5D%5BLIVE%5D+%5B%2FCOLOR%5D%5BCOLOR+yellow%5DTV+-+Arabic%5B%2FCOLOR%5D%5B%2FB%5D&quot</link>
 <thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/arabic.png</thumbnail>
 </item>
 
 <item>
 <title>[COLOR yellow][B]Africa - TV[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/africatv.xml</link>
+<link>plugin://plugin.video.vinh.livetv/section/1127579947@18oBXoKaL64nx7tdKe0yqEdnRHabdfZS4iHfRT44Fnwg/%5BB%5D%5BCOLOR+red%5D%5BLIVE%5D+%5B%2FCOLOR%5D%5BCOLOR+yellow%5DTV+-+Africa%5B%2FCOLOR%5D%5B%2FB%5D&quot</link>
 <thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/africatv2.png</thumbnail>
 </item>
 
 <item>
-<title>[COLOR yellow][B]India - TV[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/indiatv.xml</link>
-<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/indiatv.png</thumbnail>
-</item>
-
-<item>
-<title>[COLOR yellow][B]China - TV[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/tvchina.xml</link>
-<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/tvchina.png</thumbnail>
-</item>
-
-<item>
 <title>[COLOR yellow][B]Khmer - TV[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/khmertv.xml</link>
+<link>plugin://plugin.video.vinh.livetv/section/1747344562@18oBXoKaL64nx7tdKe0yqEdnRHabdfZS4iHfRT44Fnwg/%5BB%5D%5BCOLOR+red%5D%5BLIVE%5D+%5B%2FCOLOR%5D%5BCOLOR+yellow%5DTV+-+Khmer%5B%2FCOLOR%5D%5B%2FB%5D&quot</link>
 <thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/khmertv2.png</thumbnail>
 </item>
 
 <item>
-<title>[COLOR yellow][B]Thailand - TV[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/thailandtv.xml</link>
-<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/thailandtv.png</thumbnail>
-</item>
-
-<item>
 <title>[COLOR yellow][B]Spanish - TV[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/spanishtv.xml</link>
+<link>plugin://plugin.video.vinh.livetv/section/1450864735@18oBXoKaL64nx7tdKe0yqEdnRHabdfZS4iHfRT44Fnwg/%5BB%5D%5BCOLOR+red%5D%5BLIVE%5D+%5B%2FCOLOR%5D%5BCOLOR+yellow%5DTV+-+Mexico+-+Spain%5B%2FCOLOR%5D%5B%2FB%5D&quot</link>
 <thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/spanish.png</thumbnail>
-</item>
-
-<item>
-<title>[COLOR yellow][B]Indonesia - TV[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/indonesiatv.xml</link>
-<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/indonesia.png</thumbnail>
-</item>
-
-<item>
-<title>[COLOR yellow][B]Iran - TV[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/irantv.xml</link>
-<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/iran.png</thumbnail>
-</item>
-
-<item>
-<title>[COLOR yellow][B]MUSIC - TV[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/kenhamnhac.xml</link>
-<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/kenhamnhac.png</thumbnail>
-</item>
-
-<item>
-<title>[COLOR yellow][B]KIDS PLACE[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/kenhthieunhi.xml</link>
-<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/kenhthieunhi.png</thumbnail>
-</item>
-
-<item>
-<title>[COLOR yellow][B]International - Entertainment[/B][/COLOR]</title>
-<link>https://raw.githubusercontent.com/vinhcomp/xml/master/xml/entertainment.xml</link>
-<thumbnail>https://raw.githubusercontent.com/vinhcomp/xml/master/repository.vinh/tvshow1.png</thumbnail>
 </item>
 
 <item>
