@@ -1,3 +1,373 @@
+6.5.1
+[add] get_live to youtube_requests module to retrieve live stream info for a channel
+[fix] live stream playback
+
+6.5.0
+[add] Video quality selection to Settings - MPEG-DASH
+[add] Limit to 30fps to Settings - MPEG-DASH
+[add] Uploads playlist to channel playlists
+[chg] Use search for channel videos instead of the Uploads playlist
+[fix] Signature cipher, some videos unplayable (ie. music videos)
+[fix] Playback monitoring using Python 3
+[fix] unescape html entities in title and plot
+[fix] handling of invalid grant when refreshing access token
+[fix] adding suggested videos when played from some widgets
+[fix] http server /client_ip using Python 3 |contrib: t6|
+[upd] refactor youtube_resolver.resolve
+[lang] el_gr strings |contrib: twilight0|
+[lang] es_es strings |contrib: roliverosc|
+[lang] ko_kr strings |contrib: parkmino|
+
+6.4.1
+[upd] Use the activation url provided by the authentication request
+[add] add Settings - MPEG-DASH - Default to WEBM adaptation set
+        - required for 4k stream automatic selection
+[add] add Settings - MPEG-DASH - Include VP9.2
+        - includes HDR content in the manifest
+[add] add support for &hide_folders=true parameter in search query urls
+        - when added to the url it will hide the Playlists, Channels, and Live folders
+[add] &seek=<time_in_seconds> to play urls
+[fix] fix playback of Purchases
+[fix] fixed saved playlists that don't belong to a channel
+[fix] mpeg-dash frame rate representation
+[fix] datetime parsing if no datetime string is available
+[chg] handle playback monitoring in threads
+[lang] nl_nl strings |contrib: MB1968|
+[lang] el_gr strings |contrib: twilight0|
+
+6.4.0
+[add] 4K videos with InputStream Adaptive >= v2.3.14
+        - Thanks to @peak3d
+[fix] some videos not playing when logged in
+[fix] reset function cache at restart/update to resolve issues persisting due to cached results
+[fix] service potentially not shutting down http server
+[fix] added to playlist/subscriptions notifications
+[fix] only generate mpeg-dash file if adaptive formats are available
+[fix] map frame rates to more common representation to lessen the chance of double refresh rate changes (only applies to generated mpeg-dash files)
+[fix] currently playing file check when playing file is a plugin:// url
+[chg] Settings - General - Autoplay suggested videos
+        - limit playlist size to 1000 videos
+        - request less relevant videos at one time
+        - old behavior: add 50 most relevant videos for each video played, repeats allowed
+            - result: a lot of barely relevant videos in groups of 50
+        - new behavior: add single most relevant video, no repeats
+            - result: next video is always the most relevant video to the last video played
+[upd] player javascript retrieval
+
+6.3.1
+[fix] ensure playback monitoring is monitoring the correct item
+[fix] check for abortRequested while processing purchased collections
+[upd] Use setArt instead of iconImage, thumbnailImage and setProperty('fanart_image')
+
+6.3.0
+[add] support for keymapping of some endpoints, wiki: https://kodi.wiki/view/Add-on:YouTube#Keymaps
+[add] 'Rate videos in playlists' setting to 'Settings - General - Rate after watching'
+[add] Support for purchased collections |contrib: MisterD81|
+[fix] Playback of some videos (e.g. music videos)
+[fix] Live stream playback
+[fix] post play add to watch history
+[fix] fix add-ons playback history not saving
+[fix] playback monitoring/post play events triggering for the wrong videos in some cases
+[fix] call setResolvedUrl(False) if get_video_streams fails
+[upd] code cosmetics and resolve inspections
+[upd] improve watch history tracking, actively report watch times and state during playback
+[upd] sign in/out, switch user, and settings ListItems to isFolder=False and isPlayable=False
+[upd] improve watch later playlist id retrieval and feedback
+[upd] Use SPDX license identifier
+[lang] de_de strings |contrib: tobhor|
+[lang] el_gr strings |contrib: twilight0|
+[lang] es_es strings |contrib: roliverosc|
+[lang] ko_kr strings |contrib: parkmino|
+[lang] nl_nl strings |contrib: Markman-B|
+
+6.2.3
+[add] Next Page to 'More...' -> 'Add to...' context menu
+[add] icon and description to playlists in 'More...' -> 'Add to...' context menu on Kodi 17+
+[add] 'Play audio only' context menu item
+[fix] generated dash with no supported video streams(audio only) being played when Audio only not enabled
+[fix] potential RuntimeError when retrieving total time of playing content if player is stopped immediately
+[lang] nl_nl strings |contrib: Markman-B|
+[lang] pl_pl strings |contrib: xulek|
+[lang] pl_pl strings |contrib: drrak|
+[lang] sk_sk strings |contrib: jose1711|
+[lang] el_gr strings |contrib: twilight0|
+[lang] es_es strings |contrib: roliverosc|
+
+6.2.2
+[fix] signature function not found on some videos
+
+6.2.1
+[fix] some streams reporting as Unavailable
+[fix] utf-8 file paths
+[fix] settings, and switch user causing perpetual busy dialog on Kodi 18
+
+6.2.0
+[add] Context menu -> 'Play with subtitles' |contrib: solarus|
+[add] Option to download subtitles before playback in Settings -> General -> Configure subtitles
+[add] Refresh context menu to all videos/live streams
+[add] &strm=true parameter for strm files in Kodi 18 |contrib: vlmaksime|
+    - use description from library and set watched status
+[add] 'Settings -> Advanced -> Use YouTube website urls' for external/alternative players
+            eg. Player: MPC-BE, URL: https://www.youtube.com/watch?v=C0NyvxTJGcQ
+            eg. playercorefactory.xml
+                <?xml version="1.0" encoding="UTF-8"?>
+                <playercorefactory>
+                    <players>
+                        <player name="MPC-BE" type="ExternalPlayer" audio="false" video="true">
+                            <filename>C:\Program Files\MPC-BE x64\mpc-be64.exe</filename>
+                            <args>"{1}" /fullscreen /close</args>
+                            <hidexbmc>true</hidexbmc>
+                            <hideconsole>true</hideconsole>
+                            <warpcursor>none</warpcursor>
+                        </player>
+                    </players>
+                    <rules action="prepend">
+                       <rule filename="(?:http)*s*:*[/]{0,2}(?:www\.)*youtu(?:\.be/|be\.com/(?:embed/|watch/|v/|.*?[?&/]v=))[a-zA-Z0-9_\-]{11}.*" player="MPC-BE" />
+                    </rules>
+                </playercorefactory>
+[fix] Reported background progress dialog percentage
+[fix] Playlist items, use video_items instead of playback_items
+[fix] search history size
+[fix] remove Spanish (Latin America)|es-419 from the setup wizard, causing invalidLanguage and invalidRelevanceLanguage errors
+[upd] Improve speed of playback starting and resolver
+            before: min: 1.5s max: 2.6s median: 1.7s
+            after:  min: 0.9s max: 2.6s median: 1.2s
+[chg] refactor logging and system version
+[chg] Localize confirmation
+[lang] el_gr strings |contrib: twilight0|
+[lang] es_es strings |contrib: roliverosc|
+[lang] es_mx strings |contrib: Intel11|
+[lang] it_it strings |contrib: SebastianoPistore|
+[lang] nl_nl strings |contrib: Markman-B|
+[lang] ru_ru strings |contrib: vlmaksime|
+
+6.1.4
+[fix] Signature function not found
+
+6.1.3
+[fix] timedelta.total_seconds python 2.6 compat.
+
+6.1.2
+[fix] dash settings check and defaults
+[fix] addon-check raised warning for services complex entry point
+[fix] codacy raised issue in http server (https://app.codacy.com/app/Kodi/repo-plugins/pullRequest?prid=2080401)
+[chg] move seek to onPlayBackStarted, onAVStarted only in K18
+[chg] geolocation provider changed from ipstack to ip-api
+[del] frodo listitem art compatibility
+[lang] ru_ru strings |contrib: Burgaduk|
+[lang] zh_tw strings |contrib: Zankio|
+
+6.1.1
+[fix] http proxy using incorrect setting id causing 403 errors
+
+6.1.0
+[add] Multi-user support
+    - Switch User folder (default: on) Settings -> Folders
+    - User management (Add, Remove, Rename, Switch) Settings - Users
+    - Signed in users are green, Current user has an *
+[add/upd] add data cache and optimize caching
+    - add Settings -> Maintenance -> Clear data cache/Delete data cache
+    - increase allowed cache size
+    - database accesses per 50 videos: before: 70~100 after: 4~6
+    - load time of 50 videos w/ no cached videos: before: ~11.6 secs, after: ~3 secs
+    - load time of 50 videos w/ all cached videos: before: ~0.8 secs, after: ~0.7 secs
+    - cached size per 50 videos: before ~1MB, after ~550KB
+[add] Refresh after watching (default: off) Settings -> General
+[add] Completed Live folder (default: on) Settings -> Folders
+[add] Upcoming Live folder (default: on) Settings -> Folders
+[add] My Location folder (default: on) Settings -> Advanced -> Enable setup-wizard
+[add] Play count minimum percent (default: 85%) Settings -> General -> Play count minimum percent
+[add] Playback history (default: off) Settings -> Advanced -> Use playback history
+[add] Time since published for videos as item properties Property(PublishedSince), Property(PublishedLocal) |contrib: pannal|
+[add] Check My IP, Settings -> HTTP Server
+[add] Developer authentication, allowing add-ons to use their own access tokens
+    - see youtube_authentication.py, youtube_registration.py, youtube_requests.py, and youtube_resolver.py
+[upd] YouTube UTC datetimes to local timezone |contrib: pannal|
+[upd] Localize API key errors, provide a more descriptive notification
+[fix] Add to YouTube watch history
+[fix] My Channel videos (Error 403)
+[fix] allow fallback to dash, when using Audio only
+[fix] Signature function not found error for some users
+[fix] Context Menu -> More -> Related Videos w/ Kodi 18
+[fix] Sign In/Sign Out causing crash with Kodi 18 nightlies
+[fix] Channel 'mine' caching
+[fix] Time changing when playing generated dash
+[lang] es_es strings |contrib: roliverosc|
+[lang] el_gr strings |contrib: twilight0|
+[lang] nl_nl strings |contrib: Markman-B|
+
+6.0.2
+[fix] incorrectly raised 'Proxy is not running' error
+
+6.0.1
+[fix] notification encoding
+
+6.0.0
+[add] Python 3 compat.
+[add] Settings -> Maintenance -> Delete temporary files
+[add] Settings -> General -> Rate video after watching
+[add] Settings -> API -> Enable API configuration page
+    - when enabled, visit http://<ipaddress>:<port>/api to configure API keys from a web browser
+    - port is configured in Settings - HTTP Server - Port
+[chg] Storing personal api keys in api_keys.json
+[chg] Storing login tokens in access_manager.json
+[add] youtube_registration module, register developer keys and use them by appending an addon_id=<addon_id> parameter to youtube add-on plugin urls
+[add] screensaver=true parameter to /play route - no suggested videos, no post play events, don't ask for quality
+[add] play route for channel live streams
+    - plugin://plugin.video.youtube/play/?channel_id=UCLA_DiR1FfKNvjuUpBHmylQ&live=1
+[add] Purchases
+    - requires Kodi 18
+    - requires inputstream.adaptive >= 2.2.12
+    - if a purchase fails after 10 seconds
+        - provide a debug log
+        - set InputStream Adaptive -> Settings -> Stream selection -> manual
+        - change video stream during playback to preferred working resolution
+    - huge thanks to peak3d
+[add] relevanceLanguage to search requests
+[add] Refresh to My Subscriptions (Filtered)
+[fix] mpeg-dash proxy with multi-profiles
+[fix] search input, now works with Yatse
+[fix] Signature deciphering
+[fix] context menu after playback
+[fix] alternative player, do not append headers
+[fix] My Subscriptions (Filtered) channel matching
+[fix] Audio only, failover to video if no audio only streams available
+[fix] My Subscriptions missing page 3
+[fix/upd] function cache, update max rows and resolve hang on some requests
+[fix/upd] post play events happen post play
+[fix/upd] set title from metadata on play
+[chg] only automatically remove temp folder at start-up
+[upd] Dutch strings [MB1968]
+[upd] French strings [bubuleur]
+[upd] Greek strings [twilight0]
+[upd] Spanish strings [roliverosc]
+
+5.5.0
+[add] Saved Playlists
+[add] allow developers to use their own api key
+    - xbmcgui.Window(10000).setProperty('plugin.video.youtube-configs', json.dumps({"origin": ADDON_ID, "main": {"system": SYSTEM_NAME, "key": API_KEY[, "id": CLIENT_ID, "secret": CLIENT_SECRET]}}))
+[add] Audio only: Settings -> General
+[add] Age gate enforcement: Settings -> General
+[add] Quick search and Quick search (Incognito)
+    - Settings -> Folders
+    - incognito doesn't add to search history or run post play events (add to watch history)
+[add] Quick search to channels (no history)
+[add] Live folder to channels
+[fix] My Channel videos incl. private
+[fix] mpeg-dash vods, proxy required
+    - Settings - MPEG-DASH
+    - Thanks to Schtek for generating the needed mpd file
+[fix/upd] use select dialog for subtitle settings
+    - [add] Configure subtitles: Settings -> General
+    - [add] Current language with No auto-generated subtitles option
+[upd] language/translation paths * Isengard (15.x)+ required
+[upd] youtube_resolver: allow resolve by url
+[fix/upd] do not use distutils.version.LooseVersion for version compare [stefansaraev]
+[fix/upd] add check to api key stripping
+[fix/upd] subtitles default to non asr track when possible
+[fix/upd] login client logging and endpoints
+[fix/upd] Watch Later
+    - Clear: Settings - Folders - Custom Watch Later playlist id
+    - Settings - Folders - Retrieve Watch Later playlist id
+[fix/upd] History
+    - cannot add to history from add-on
+    - Clear: Settings - Folders - Custom History playlist id
+[fix] /api/update route logging
+[rem] SPMC mpeg-dash support
+[upd] Hebrew strings [Eng2Heb]
+[upd] Polish strings [Etharr]
+[upd] Italian strings [DjDiabolik]
+[upd] Hungarian strings [lacesz-sh]
+
+5.4.5
+[fix] tighten regex for routing, resolving incorrect routing
+
+5.4.4
+[fix] overlapping regex causing no playlist videos
+
+5.4.3
+[add] mpeg-dash support for live content (requires inputstream.adaptive >= 2.0.12)
+[add] add route to update api keys
+    plugin://plugin.video.youtube/api/update/?enable=true&client_id=<client_id>&client_secret=<client_secret>&api_key=<api_key>
+[fix/upd] refactor subtitles ** subtitles setting will be reset
+[fix/upd] add My Subscriptions (Filtered) to dual login requirements
+[fix/upd] only show Browse Channels when logged in
+[upd] Greek strings [Twilight0]
+[upd] Polish strings [Etharr]
+
+5.4.2
+[fix/upd] My Subscriptions
+
+5.4.1
+[fix/upd] dash working for vevo/etc
+[upd] rework of auto subtitles
+[fix] leia nightly login issues
+[fix] 403 error on 'My Channel'/uploaded videos
+
+5.4.0
+[upd] Greek strings [Twilight0]
+[upd] Polish strings [Etharr]
+[upd] Finnish strings [teemue]
+[upd] Spanish strings [roliverosc]
+[fix/upd] resolve "Error Contents: 'q'" error [horstepipe]
+[fix/upd] resolve Play All/Play from here not starting playback
+[fix/upd] resolve playlists starting on second item
+[fix/upd] allow dash in quality choices
+[fix/upd] set content to files for menus, resolves mouse/scrolling
+[fix/upd] fix cipher
+[fix/upd] increase search history limit to 200
+[fix/upd] storage db
+[add] Safe Search to Settings -> General
+[add] Thumbnail size to Settings -> General
+[add] Auto-play suggested [mehdilauters]
+[add] Automatic subtitles [Uukrull]
+[add] My Subscriptions (Filtered) - whitelist/blacklist version of My Subscriptions [chhe]
+[add] module extension point:
+        add-ons can now add plugin.video.youtube dependency and resolve youtube video id's or make v3 api requests using the youtube plugin,
+        """ <addon.xml>
+        <import addon="plugin.video.youtube"/>
+        """
+        """ <example.py>
+        import youtube_resolver
+        streams = youtube_resolver.resolve(<video_id>)
+        import youtube_requests
+        videos = youtube_requests.get_videos([<video_id_1>, <video_id_2>, <video_id_3>])
+        """
+
+5.3.11
+[fix/upd] replace custom simple_requests with script.module.requests to resolve ssl and cross-platform issues
+[add] 'Reset access manager' added to Maintenance section, sign out process(available when logged out)  to clean up tokens in settings.xml
+[upd] set default for SSL certificate verification to 'true'
+
+5.3.10
+[fix/upd] resolve 'No video streams found' for age-gated content and other minor.
+[fix/upd] unescaping HTML entities in subtitles [mdmdmdmdmd]
+[upd] Polish strings [Etharr]
+
+5.3.6-9
+[fix/upd] resolve 'No video streams found'
+[fix/upd] SPMC dash support guidosarducci
+[upd] Italian strings [iz8mbw]
+[upd] Spanish strings [roliverosc]
+[upd] Dutch strings [Sjord]
+[fix/upd] Frodo backwards compat. setArt [lulol]
+
+5.3.5
+[add] MPEG-DASH support for Kodi 17 w/ inputstream.adaptive Add-on
+[add] optional History and Watch Later custom playlist to Settings -> Folders, or (My)Playlists context menu to set/remove
+[add] Maintenance section to Settings
+[add] 'Subtitle language(s) to download' selection to Settings -> General
+[add] 'Force SSL Certificate verification' to Settings -> Advanced
+[upd] API key set switching from Settings -> API (this will log you out)
+[upd] Dual login only required if My Subscriptions folder is enabled at sign-in
+[upd] setting content type from episodes, now videos
+[del] override view options
+[upd] Norwegian strings [torstehu]
+[upd] Greek strings [twilight0]
+[upd] Portuguese strings [Wanilton]
+[upd] Dutch strings [flemlion]
+[fix/upd] API tweaking and various other updates
+
 5.2.2 (2016-05-28)
 [upd] Insert old API-Keys from Bromix because of Quota-Exceed-Error
 [add] Dutch strings (thanks to Guilouz)
