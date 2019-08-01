@@ -1616,7 +1616,7 @@ http://www2.gostream.sc
 
 <addon
   id="plugin.video.vinh.movies"
-  version="0.0.1"
+  version="0.0.2"
   name=" [COLOR lime]➡ [/COLOR][COLOR yellow]Vinh-Movies[/COLOR]"
   provider-name="Vinh">
   <requires>
@@ -1631,6 +1631,7 @@ http://www2.gostream.sc
 	<import addon="script.module.requests" />
 	<import addon="script.module.simplejson" />
 	<import addon="script.module.beautifulsoup" />
+	<import addon="script.module.resolveurl" />
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py"/>
   <extension point="xbmc.addon.metadata">
