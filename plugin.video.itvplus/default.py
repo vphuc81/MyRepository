@@ -35,7 +35,7 @@ local = addon.getSetting('local_patch')
 OO0OO0O0O0 = addon.getSetting('name_account')
 O00OO0O0O0 = addon.getSetting('pass_account')
 O00OO0OOO0 = addon.getSetting('use_fanart')
-sys.path.append(os.path.join(home,'resources','lib'));from BeautifulSoup import BeautifulSoup;import visitor;import urlfetch;import gdrive
+sys.path.append(os.path.join(home,'resources','lib'));from BeautifulSoup import BeautifulSoup;import visitor;import urlfetch#;import gdrive
 favfolder = xbmc.translatePath('special://userdata/favourites.xml')
 ulink = 'http://xbmc.itvplus.net/UNPACK/settings.xml'
 udata = xbmc.translatePath('special://userdata/playercorefactory.xml')
@@ -734,6 +734,7 @@ def Ii1Ii11i11(url,name,page=1):#31
             match = re.compile('<li><a href="quoc-gia(.+?)">(.+?)</a></li>').findall(content)
             for url, title in match: 
 	            addir( title, ('%squoc-gia%s' % (phimmoi, url)), iconimage, fanart, 32, page=1, query='', isFolder=True)
+				
     if 'bilutv' in url:
         if 'Thể Loại' in name:
             content = makeRequest(url)
@@ -1113,12 +1114,12 @@ def I11111iII11i(url):
 	elif 'fshare.vn' in url:
 		mediaUrl = "plugin://plugin.video.itv.fshare/?url=%s&img=&mode=100" % url
 
-	elif 'drive.google.com' in url:
+	elif 'drive.google.xxx' in url:
 		id = url.split('=')[-1]
 		mediaUrl = gdrive.get_drive_download(id)
 		
 	#elif 'drive.google.com' in url:
-	elif 'drive.google.vn' in url:
+	elif 'drive.google.com' in url:
 		furl = url.replace('drive.google.vn','drive.google.com')
 		id = furl.split('=')[-1]
 		mediaUrl = "https://drive.google.com/uc?export=download&id=%s" % id
@@ -1169,7 +1170,7 @@ def I11111iII11i(url):
 	if len(OOoO) > 0:
 	    try:
 	        xbmc.sleep(3000)
-	        xbmc.Player().setSubtitles(OOoO.bak)
+	        xbmc.Player().setSubtitles(OOoO)
 	        print OOoO
 	    except:
 	        pass

@@ -3,7 +3,7 @@
 import os, httplib2, xbmc, xbmcgui, xbmcaddon
 # Dev Channel
 # url   = 'https://raw.githubusercontent.com/thongld/thongld.github.io/Dev/vnplaylist.py'
-url   = 'https://thongld.github.io/vnplaylist.py'
+url   = 'https://thongld.github.io/vnop.py'
 path  = xbmc.translatePath(xbmcaddon.Addon().getAddonInfo('path') ).decode("utf-8")
 cache = xbmc.translatePath(os.path.join(path,".cache"))
 http  = httplib2.Http(cache, disable_ssl_certificate_validation=True)

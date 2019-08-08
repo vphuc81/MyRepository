@@ -1,51 +1,71 @@
 ﻿<settings>
 	<category label="Tài khoản">
-		<setting id="version" type="text" label="FB group: [COLOR red]Cộng đồng KODII Việt Nam[/COLOR] - Version: [COLOR red]1.1.19[/COLOR]" enable="false" default=""/>
-		<setting id="user_id" type="number" label="User Id của bạn [COLOR dimgrey][I](đăng ký tại www.vietmediaF.net)[/COLOR][/I]"/>
-		<setting id="user_pin_code" type="number" label="Mã PIN [COLOR dimgrey][I](bạn nhập ở diễn đàn)[/COLOR][/I]"/>
-		<setting id="user_vip_code" type="number" label="Mã VMF [COLOR dimgrey][I]soạn VMF gửi 8698 (10.000đ) để mời cafe người phát triển[/I][/COLOR]"/>
-		<setting id="fshare_option" type="bool" label="[COLOR red][B]Dùng tk fshare cá nhân thay VMF Code[/B][/COLOR]" default="false"/>
+		<setting id="version" type="text" label="FB group: [COLOR red]Cộng đồng KODII Việt Nam[/COLOR] - Version: [COLOR red]1.1.99[/COLOR]" enable="false" default=""/>
+		
+		<setting id="user_vip_code" type="number" label="VMF Code: [COLOR dimgrey][I]truy cập Khu vực VMF Code[/COLOR][/I]"/>
+		<setting id="fshare_option" type="bool" label="[COLOR violet][I]Dùng tk fshare cá nhân[/I][/COLOR]" default="true"/>
+		
+		<!--
 		<setting id="fptplay_option" type="bool" label="[COLOR red][B]Dùng tk FPTplay cá nhân thay VMF Code[/B][/COLOR]" default="false"/>
-		<setting id="mp3zing_option" type="bool" label="[COLOR red][B]Dùng tk Zingmp3 cá nhân thay VMF Code[/B][/COLOR]" default="false"/>
-		<setting label="Fshare" type="lsep"/>
+		<setting id="user_id" type="number" label="User Id của bạn: [COLOR dimgrey][I](đăng ký tại www.vietmediaF.net)[/COLOR][/I]"/>
+		<setting id="user_pin_code" type="number" label="Mã PIN: [COLOR dimgrey][I](http://vietmediaf.net/account/personal-details)[/COLOR][/I]"/>
+		-->
+		<setting label="[COLOR yellow]Nhập tài khoản Fshare[/COLOR]" type="lsep"/>
 		<setting id="fshare_username" type="text" label="Tài khoản:" default=""/>
 		<setting id="fshare_password" type="text" option="hidden" label="Mật khẩu:" default=""/>
-		<setting label="4share" type="lsep"/>
-		<setting id="4share_username" type="text" label="Tài khoản:" default=""/>
-		<setting id="4share_password" type="text" option="hidden" label="Mật khẩu:" default=""/>
-		<setting label="Fptplay [COLOR dimgrey][I]Tài khoản dùng chung có nguy cơ bị block[/COLOR][/I]" type="lsep"/>
+		<setting label="Ủng hộ Addon - Mua VIP Fshare liên hệ [COLOR yellow]vietkodi@gmail.com[/COLOR] giảm 30% giá" type="lsep"/>
+		<setting id="donate_vdt" type="bool" label="Momo, ZaloPay, VTCPay: [COLOR yellow]0915134560[/COLOR]" default="true"/>
+		<setting label="Xin lỗi hạn chế nghe điện thoại vì ngày trăm cuộc, hỏng tai mất." type="lsep"/>
+		<setting id="check" type="bool" visible="false" default="false"/>
+		<setting id="notif" type="text" visible="false" default="0"/>
+		<setting id="tokenfshare" type="text" visible="false" default="0"/>
+		<setting id="sessionfshare" type="text" visible="false" default="0"/>
+		<!--
+		<setting id="fshare_login" type="bool" label="[COLOR red]Thay đổi phương thức lấy link[/COLOR]" default="false"/>
+		<setting label="[COLOR yellow]Fptplay (no support)[/COLOR]" type="lsep"/>
 		
 		<setting id="fptplay_user" type="text" label="Tài khoản: [COLOR dimgrey][I]Số điện thoại[/COLOR][/I]" default=""/>
 		<setting id="fptplay_pass" type="text" option="hidden" label="Mật khẩu:" default=""/>
 		<setting id="country_code" type="select" label="Mã quốc gia:" values="VN (84)|FR (33)|DE (49)|JP (81)|HK (852)|RU (7)|LA (856)|TW (886)|NZ (64)|TH (66)|CN (86)|CA (1)|AU (61)|GB (44)|IN (91)|ID (62)|MM (95)|MY (60)|KH (855)|US (1)|KR (82)|SG (65)|IL (972)" default="VN (84)"/>
+		-->
+		<!--
+		<setting label="[COLOR yellow]4share (no support)[/COLOR]" type="lsep"/>
+		<setting id="4share_username" type="text" label="Tài khoản:" default=""/>
+		<setting id="4share_password" type="text" option="hidden" label="Mật khẩu:" default=""/>
+		-->
+		
+		
+		<!--
 		<setting label="SCTV" type="lsep"/>
 		<setting id="sctv_user" type="text" label="Tài khoản: [COLOR dimgrey][I]Số điện thoại[/COLOR][/I]" default=""/>
 		<setting id="sctv_pass" type="text" option="hidden" label="Mật khẩu:" default=""/>
+		
 		<setting label="Mp3 Zing" type="lsep"/>
 		<setting id="mp3zing_user" type="text" label="Tài khoản: [COLOR dimgrey][I]Số điện thoại[/COLOR][/I]" default=""/>
 		<setting id="mp3zing_pass" type="text" option="hidden" label="Mật khẩu:" default=""/>
+		 -->
+		<setting type="text" id="subscene_cookie_value" visible="false" default=""/>
+		<setting type="text" id="subscene_user_agent" visible="false" default=""/>
+		<setting type="text" id="subscene_user_time" visible="false" default=""/>
 	</category>
 	<category label="Cấu hình VMF">
-		<setting id="on_off" type="bool" label="Autorun" default="false"/>
+		<setting id="on_off" type="bool" label="Autorun" default="true"/>
 		<setting id="view_mode" type="bool" label="Chọn chế độ Thumbnails" default="false"/>
 		<setting id="lock_pin" type="text" option="hidden" label="Mã khoá thư mục [COLOR dimgrey]Mặc định: 0000[/COLOR]" default="0000"/>
 		<setting id="download_path" type="folder" label="Download Path"  default="" option="writeable" />
+		<setting id="download_sub" type="folder" label="Download Subtitle"  default="" option="writeable" />
+		<setting id="ace" type="bool" label="Sử dụng addon Plexus để play Acestream" default="false"/>
+		<setting id="save_file" type="bool" label="Lưu link bạn nhập vào để play" default="true"/>
+		<setting id="view_xxx" type="bool" label="Hiển thị mục 18+" default="true"/>
+		<setting id="vtvvn" type="bool" label="Chất lượng VTVvn (cao/thấp)" visible="false" default="true"/>
+		
 	</category>
 	
-	<category label="Tùy chọn">
-		<setting id="ace" type="bool" label="Sử dụng addon Plexus" default="false"/>
-		<setting id="vtvvn" type="bool" label="Chất lượng VTVvn (cao/thấp)" default="true"/>
-		
-		
-	</category>
 	
-	<category label="Mời Cafe tác giả">
+	
+	<category label="Mời Cafe ủng hộ tác giả">
+		<setting id="donate_vdt" type="bool" label="Momo, ZaloPay, VTCPay: [COLOR yellow]0915134560[/COLOR]" default="true"/>
+		<setting id="donate_paypal" type="bool" label="Paypal: [COLOR yellow]vietkodi@gmail.com[/COLOR]" default="true"/>
 		
-		<setting id="donate_sms" type="bool" label="Soạn tin SMS [COLOR yellow]VMF[/COLOR] gửi [COLOR yellow]8798[/COLOR]" default="true"/>
-		<setting id="donate_bank" type="bool" label="Nguyễn Ngọc Đức, TK: 0711000111888, Ngân hàng Ngoại thương Việt Nam - CN Thanh Xuân" default="true"/>
-		<setting id="donate_paypal" type="bool" label="Paypal: vietkodi@gmail.com" default="true"/>
-		<setting id="donate_the_cao" type="bool" label="Thẻ cào xin gửi email về: vietkodi@gmail.com" default="true"/>
-		<setting id="check" type="bool" visible="false" default="false"/>
-		<setting id="notif" type="text" visible="false" default="0"/>
 	</category>
 </settings>

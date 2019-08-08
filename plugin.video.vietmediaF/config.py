@@ -1,1 +1,1 @@
-VIETMEDIA_HOST = "http://vietmediaf.net/kodi.php"
+VIETMEDIA_HOST = "http://vietmediaf.net/kodi1.php"

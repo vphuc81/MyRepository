@@ -621,7 +621,7 @@ http://www2.gostream.sc
   </extension>
 </addon>
 
-<addon id="plugin.video.HieuHien.vn" version="2.0.1.2" name="[B][COLOR lime]Trung tam giai tri[/COLOR][/B]" provider-name="thongld">
+<addon id="plugin.video.HieuHien.vn" version="2.0.1.2.1" name="[B][COLOR lime]Trung tam giai tri[/COLOR][/B]" provider-name="thongld">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.kodiswift" version="0.0.7" />
@@ -631,9 +631,7 @@ http://www2.gostream.sc
     <import addon="service.kodi4vn.iptvproxy" version="0.1" />
     <import addon="service.kodi4vn.maintenance" version="0.1" />
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
+  <extension point="xbmc.python.pluginsource" library="default.py" />
   <extension point="xbmc.addon.metadata">
     <summary lang="en">Hieuhien.vn Media Center - Trung tam giai tri danh cho nguoi Viet</summary>
 	 <description lang="en">
@@ -682,7 +680,7 @@ http://www2.gostream.sc
 </addon>
 
 <addon id="plugin.video.itvplus"
-       version="2.9.5.1"
+       version="2.9.6.1"
        name="[COLOR ffff0000]*ITV*[/COLOR]Plus"
        provider-name="itv member">
     <requires>
@@ -690,9 +688,7 @@ http://www2.gostream.sc
 		<import addon="script.module.requests" version="1.0" />
 		<import addon="script.module.httplib2" version="0.8.0" />
     </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-    </extension>
+    <extension point="xbmc.python.pluginsource" library="default.py" />
     <extension point="xbmc.service" library="autorun.py" start="startup">
     </extension>
     <extension point="xbmc.addon.metadata">
@@ -1435,19 +1431,19 @@ http://www2.gostream.sc
 
 <addon
   id="plugin.video.thongld.vnplaylist"
-  version="1.1"
+  version="2.0.1.1"
   name="**[COLOR yellow]VN Open Playlist[/COLOR]"
   provider-name="thongld">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.xbmcswift2" version="0.0.7" />
+    <import addon="script.module.kodiswift" version="0.0.7" />
+    <import addon="script.module.kodi4vn" version="0.0.7" />
     <import addon="plugin.video.youtube" version="4.4.1" />
     <import addon="script.module.httplib2" version="0.1" />
     <import addon="service.kodi4vn.iptvproxy" version="0.1" />
+    <import addon="service.kodi4vn.maintenance" version="0.1" />
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
+  <extension point="xbmc.python.pluginsource" library="default.py" />
   <extension point="xbmc.addon.metadata">
     <summary>AIO Media Center cho người Việt</summary>
     <description>Cổng giải trí mở, miễn phí, tất cả trong một cho người Việt</description>
@@ -1544,21 +1540,16 @@ http://www2.gostream.sc
 
 <addon id="plugin.video.vietmediaF"
        name="[B]VietMediaF[/B]"
-       version="1.1.19.1"
+       version="1.1.99.1"
        provider-name="VietMedia">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
 		<import addon="plugin.video.youtube" version="5.4.5" />
-		<import addon="script.module.requests" version="1.0" />
+		<import addon="script.module.requests"/>
+		<import addon="script.module.urlresolver" />
 		<import addon="script.module.simple.downloader" version="1.9.5" />
-		<import addon="script.module.pyxbmct" />
-
-
- 	</requires>
-    <extension point="xbmc.python.pluginsource"
-               library="default.py">
-        <provides>video</provides>
-    </extension>
+	</requires>
+    <extension point="xbmc.python.pluginsource" library="default.py" />
 	<extension point="xbmc.service" library="autorun.py" start="startup">
 	</extension>
     <extension point="xbmc.addon.metadata">
@@ -1566,13 +1557,9 @@ http://www2.gostream.sc
         <language>en</language>
 		<summary lang="en">VietMediaF Video Online</summary>
 		<description lang="en">Trung tâm giải trí trực tuyến, xem phim, shows, tivi, ca nhạc, karaoke của người Việt.
-		Các nguồn nội dung được lấy từ các cá nhân và tổ chức cung cấp và chia sẻ miễn phí trên mạng Internet. Add-on hoạt động như một trình duyệt media, không lưu trữ hay sở hữu bất cứ nguồn nội dung nào. Người dùng chịu trách nhiệm hoàn toàn về việc xem các nguồn nội dung này.</description>
-    <disclaimer>Các nguồn nội dung được lấy từ các cá nhân và tổ chức cung cấp miễn phí trên mạng Internet. Add-on không lưu trữ hay sở hữu bất cứ nguồn nội dung nào. Người dùng chịu trách nhiệm hoàn toàn về việc xem các nguồn nội dung này.
-- http://vietmediaf.net
-- https://www.facebook.com/groups/vietkodi/
-- Không được sử dụng mã nguồn mà không xin phép tác giả.
-- Không được thay đổi tên, hoặc các thông tin liên quan đến các add-on trong group.
-</disclaimer>
+		Các nguồn nội dung được lấy từ sự chia sẻ miễn phí trên mạng Internet. Add-on hoạt động như một trình duyệt media, không lưu trữ hay sở hữu bất cứ nguồn nội dung nào. Người dùng chịu trách nhiệm hoàn toàn về việc xem các nguồn nội dung này.</description>
+    <disclaimer>Add-on không lưu trữ hay sở hữu bất cứ nguồn nội dung nào. Người dùng chịu trách nhiệm hoàn toàn về việc xem các nguồn nội dung này.
+	</disclaimer>
     </extension>
 </addon>
 

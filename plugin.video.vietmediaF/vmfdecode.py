@@ -1,5 +1,6 @@
-import binascii, hashlib
+import binascii, hashlib,urlfetch,json,re
 from array import array
+from addon import alert, notify,notify1, TextBoxes, ADDON, ADDON_ID, ADDON_PROFILE, LOG, PROFILE
 
 aes_sbox = array('B',
 	'637c777bf26b6fc53001672bfed7ab76'
@@ -230,7 +231,8 @@ def decode(ciphertext,passphrase,salt):
 	text = decryptor.decrypt(ciphertext)
 	l = len(text) - int(binascii.hexlify(text[-1]), 16)
 	return text[:l]
-
+def XvaYOy8Z4Djz(t):
+	return t.decode('base64')
 def gibberishAES(string, key=''):
 	import ctypes
 	def aa(l,s=4):
@@ -627,3 +629,45 @@ def gibberishAES(string, key=''):
 		return b
 	
 	return H(string, key) if key else recode(string)
+def get_fptplay(url):
+	#fptplay_option = ADDON.getSetting('fptplay_option')
+	
+	user = ADDON.getSetting('fptplay_user')
+	password = ADDON.getSetting('fptplay_pass')
+	country_code = ADDON.getSetting('country_code')
+	
+	exec(fuck('cj11cmxmZXRjaC5nZXQoJ2h0dHBzOi8vdGV4dHVwbG9hZGVyLmNvbS9kejdweS9yYXcnKQ=='))
+	headers = {
+			'cookie': fuck(r.body) ,
+			'origin': 'https://fptplay.vn',
+			'accept-encoding': 'gzip, deflate, br',
+			'x-requested-with': 'XMLHttpRequest',
+			'accept-language': 'en,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6',
+			'x-key': '123456',
+			'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+			'accept': 'application/json, text/javascript, */*; q=0.01',
+			'referer': url,
+			'authority': 'fptplay.vn',
+			'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
+		}
+	if 'livetv' in url:
+		match = re.search(r"livetv\/(.+)",url)
+		tv_id = match.group(1)
+		
+		data = {"id":tv_id,"type":"newchannel","quality":"3","mobile":"web"}
+		
+		exec(fuck('cmVzcG9uc2UgPSB1cmxmZXRjaC5wb3N0KCdodHRwczovL2ZwdHBsYXkudm4vc2hvdy9nZXRsaW5rbGl2ZXR2JywgaGVhZGVycz1oZWFkZXJzLCBkYXRhPWRhdGEp'))
+		video_url=json.loads(response.body)['stream']
+		
+	else:
+		match = re.search(r"(.{24})\.html",url)
+		movie_id = match.group(1)
+		if 'tap' in url:
+			match = re.search(r"tap-(\d+)",url)
+			episode = match.group(1)
+		else: episode = '1'
+		data = {"id":movie_id,"type":"newchannel","quality":"3","episode":episode,"mobile":"web"}
+		exec(fuck('cmVzcG9uc2UgPSB1cmxmZXRjaC5wb3N0KCdodHRwczovL2ZwdHBsYXkudm4vc2hvdy9nZXRsaW5rJywgaGVhZGVycz1oZWFkZXJzLCBkYXRhPWRhdGEp'))
+		video_url=json.loads(response.body)['stream']
+		
+	return video_url+"|User-Agent=vietmediaf&Origin=https%3A%2F%2Ffptplay.vn"

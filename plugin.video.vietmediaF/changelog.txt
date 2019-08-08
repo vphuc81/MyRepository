@@ -1,4 +1,44 @@
-﻿Version 1.1.16:
+﻿Version 1.1.99:
+-Fix fshare, Play number
+Version 1.1.97:
+-Fix fshare, VMFtube
+Version 1.1.81:
+-Fix fshare
+Version 1.1.59:
+- Add searching subtitle
+Version 1.1.54:
+- Fix PBH
+Version 1.1.53:
+- Fix CSN,HDO
+Version 1.1.48:
+- Fix phimbathu,bilutv,thvl
+Version 1.1.47:
+- Fix 4share,
+Version 1.1.45:
+- Fix phimmoi
+Version 1.1.44:
+- Fix VTVGo, Add Daikynguyen
+Version 1.1.43:
+- Add VTCnow, THVL, fix dailymotion
+Version 1.1.42:
+- Fix vtv16
+Version 1.1.40:
+- Add reset acc funtion, last movies you watched.
+Version 1.1.39:
+- Fix FPTPlay.
+Version 1.1.38:
+- Fix opendload and youtube.
+Version 1.1.36:
+- Fix Fshare.
+Version 1.1.33:
+- add more funtions.
+Version 1.1.31:
+- Fix some bugs.
+Version 1.1.30:
+- Fix server Fshare
+Version 1.1.20:
+- Fix server online
+Version 1.1.16:
 - Fix some bugs
 Version 1.1.16:
 - Fix fshare
