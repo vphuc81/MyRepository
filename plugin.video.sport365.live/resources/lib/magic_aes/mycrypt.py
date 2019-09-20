@@ -41,10 +41,7 @@ import re
 import hashlib
 import sys
 from getpass import getpass
-try:
-    from Crypto.Cipher import AES
-except ImportError:
-    import pyaes as AES
+import pyaes as MAGIC_AES
 
 
 VERSION='1.1'
@@ -120,7 +117,7 @@ def encrypt(password, plaintext, chunkit=True, msgdgst='md5'):
     padded_plaintext = plaintext + (chr(padding_len) * padding_len)
 
     # Encrypt
-    cipher = AES.new(key, AES.MODE_CBC, iv)
+    cipher = MAGIC_AES.new(key, MAGIC_AES.MODE_CBC, iv)
     ciphertext = cipher.encrypt(padded_plaintext)
 
     # Make openssl compatible.
@@ -179,7 +176,7 @@ def decrypt(password, ciphertext, msgdgst='md5'):
     ciphertext = raw[16:]
     
     # Decrypt
-    cipher = AES.new(key, AES.MODE_CBC, iv)
+    cipher = MAGIC_AES.new(key, MAGIC_AES.MODE_CBC, iv)
     padded_plaintext = cipher.decrypt(ciphertext)
 
     padding_len = ord(padded_plaintext[-1])

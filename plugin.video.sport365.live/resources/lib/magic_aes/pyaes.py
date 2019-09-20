@@ -61,18 +61,18 @@ key_size = None
 
 def new(key, mode, IV=None):
     if mode == MODE_ECB:
-        return ECBMode(AES(key))
+        return ECBMode(MAGIC_AES(key))
     elif mode == MODE_CBC:
         if IV is None:
             raise ValueError, "CBC mode needs an IV value!"
 
-        return CBCMode(AES(key), IV)
+        return CBCMode(MAGIC_AES(key), IV)
     else:
         raise NotImplementedError
 
 #### AES cipher implementation
 
-class AES(object):
+class MAGIC_AES(object):
     block_size = 16
 
     def __init__(self, key):

