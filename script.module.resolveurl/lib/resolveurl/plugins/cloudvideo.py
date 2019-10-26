@@ -3,7 +3,7 @@
         t0mm0, Eldorado, VOINAGE, BSTRDMKR, tknorris, smokdpi, TheHighway
 
     resolveurl XBMC Addon
-    Copyright (C) 2011 t0mm0
+    Copyright (C) 2018 jsergio
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,14 +18,9 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-
 from __resolve_generic__ import ResolveGeneric
 
 
 class CloudVideoResolver(ResolveGeneric):
-    name = "cloudvideo"
+    name = 'cloudvideo'
     domains = ['cloudvideo.tv']
-    pattern = '(?:\/\/|\.)(cloudvideo\.tv)\/(?:embed-)?([0-9a-zA-Z_-]+)'
-
-    def get_url(self, host, media_id):
-        return self._default_get_url(host, media_id, 'http://{host}/embed-{media_id}.html')

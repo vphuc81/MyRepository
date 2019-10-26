@@ -17,6 +17,7 @@
 """
 
 import re
+from lib import helpers
 from resolveurl import common
 from resolveurl.resolver import ResolveUrl, ResolverError
 from lib import jsunpack, helpers
@@ -35,7 +36,7 @@ class SibnetResolver(ResolveUrl):
                    'Referer': web_url}
         html = self.net.http_GET(web_url, headers=headers).content
         video = re.findall("""(https:\/\/video\.sibnet\.ru\/v\/.*.mp4)""", html)[0]
-        return video
+        return video + helpers.append_headers(headers)
 
     def get_url(self, host, media_id):
         return self._default_get_url(host, media_id, template='http://video.{host}/video{media_id}')

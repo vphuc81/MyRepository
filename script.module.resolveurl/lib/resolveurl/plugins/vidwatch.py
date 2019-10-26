@@ -20,7 +20,8 @@
 """
 from __resolve_generic__ import ResolveGeneric
 
+
 class VidwatchResolver(ResolveGeneric):
     name = "vidwatch.me"
-    domains = ['vidwatch3.me', 'vidwatch.me']
-    pattern = '(?://|\.)(vidwatch3?\.me)/(?:embed-)?([a-zA-Z0-9]+)'
+    domains = ['vidwatch3.me', 'vidwatch4.me', 'vidwatch.me']
+    pattern = '(?://|\.)(vidwatch\d?\.me)/(?:embed-)?([a-zA-Z0-9]+)'
