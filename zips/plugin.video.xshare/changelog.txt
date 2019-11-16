@@ -1,3 +1,9 @@
+[B]Version 3.5.8.25[/B] <15/08/2018>:
+fix free servers
+
+[B]Version 3.5.8.24[/B] <29/04/2018>:
+fix Fshare and free servers
+
 [B]Version 3.5.8.23[/B] <07/02/2018>:
 fix Fshare Favourite
 

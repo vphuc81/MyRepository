@@ -29,6 +29,7 @@ for hd in ['xshare','4share','dangcaphd','downsub','favorite','fptplay','fshare'
 
 hd = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/600.1.4 Gecko/20100101 Firefox/41.0'}
 
+
 def log(s):
 	if isinstance(s, basestring) : s = u2s(s)
 	else                         : s = str(s)
@@ -184,7 +185,7 @@ def servers_list(name,url,img,fanart,mode,page,query):#88
 			ico=joinpath(iconpath,domain.split('.')[0]+'.png')
 			addir_info(title,domain,ico,'',mode,1,domain,True,menu=menu)
 	
-	from resources.lib.servers import serversList
+	from servers import serversList
 	srvs = serversList()
 	
 	menu={'servers_list':{'action':'Up-Down'}}
@@ -1500,141 +1501,6 @@ def logouttenlua(cookie):
 	if response:mess(u'Logout thành công','tenlua.vn')
 	else:mess(u'Logout không thành công!','tenlua.vn')
 
-def google_search1(url,query,mode,page,items=[]):
-	srv = url.split('.')[0]
-	if page == 0:
-		make_mySearch('',url,'','',mode,'get')
-		return
-	
-	elif page == 1:
-		query = make_mySearch('',url,'','','','Input')
-		page = 2
-		
-		if query is None or not query.strip():
-			return 'no'
-	
-	query = no_accent(query)
-	
-	def getData(cx, query, page):
-		if '&start=' not in query:
-			page = 1
-			query = urllib.quote_plus('"%s"' % ' '.join(query.split()) )
-			
-			
-		
-		from resources.lib.servers import searchGG
-		items = searchGG (
-							'AIzaSyCszeAJOH1e3zrTtHmGFypth8M1adU1sEI', 
-							'009789051051551375973:' + cx,
-							query
-						)
-		
-		return items, query, page
-	
-	def pageNext(title, href, page, query):
-		page += 1
-		title = re.sub('Page next.+', 'Page next ... %s[/COLOR]'%page, title)
-		
-		if '&start=' not in query:
-			query = query + '&start=' + href
-			addir_info(title,url,icon['fshare'],'',mode,page,query,True)
-		
-		else:
-			query = re.sub('&start=.+','&start=' + href, query)
-			addir_info(title,url,icon['xshare'],'',mode,page,query,True)
-		
-	if url in ('fshare.vn','vaphim.com'):
-		items, query, page = getData('xekpkwarjri', query, page)
-		
-		for title,href,img in items:
-			if 'Page next ...' in title:
-				pageNext(title, href, page, query)
-			
-			elif 'fcine.net' in href:
-				menu = {'fcine':{'name':title,'action':'fcinefshare','mode':mode}}
-				title = '[COLOR orangered]fcine[/COLOR] ' + title
-				addir_info(title,href,img,'',25,1,'fshare',True,menu=menu)
-				
-			elif 'taiphimhd.net' in href:
-				title = '[COLOR FF1E90FF]taiphimhd[/COLOR] ' + title
-				addir_info(title,href,img,img,34,1,'link',True)
-			
-			elif 'fsharefilm.com' in href:
-				title = '[COLOR FFF08080]fsharefilm[/COLOR] ' + title
-				addir_info(title,href,img,img,60,1,'eps',True)
-				
-			elif 'fshare.vn' in href or 'vaphim.com' in href:
-				if 'fshare.vn' in href:
-					img=icon['fshare']
-				addir_info(title,href,img,'',1,1,'vp_getsubpage')
-			
-			else:mess('Xshare chưa nhận diện được:%s'%href)
-	
-	elif url in ('4share.vn','ifile.tv'):
-		items, query, page = getData('a1qafjesmlc', query, page)
-		
-		for title,href,img in items:
-			if 'Page next ...' in title:
-				pageNext(title, href, page, query)
-			
-			else:addir_info(title,href,icon['4share'])
-	
-	elif url=='tenlua.vn':
-		items, query, page = getData('sg3wi6kqhay', query, page)
-		
-		for title,href,img in items:
-			if 'Page next ...' in title:
-				pageNext(title, href, page, query)
-			
-			else:addir_info(title,href,icon['tenlua'])
-	
-	elif url=='hdvietnam.com':
-		items, query, page = getData('hzgiaiqusl0', query, page)
-		
-		for title,href,img in items:
-			if 'Page next ...' in title:
-				pageNext(title, href, page, query)
-			
-			else:
-				if 'taiphimhd.com' in href:
-					q = 'page'
-					m = 53
-					title = namecolor('TPHD '+remove_tag(title),'blue')
-					
-				elif 'i-max.vn' in href:
-					m = 49
-					title = namecolor('i-max '+remove_tag(title),'chartreuse')
-					
-					if xsearch('t=(\d+)', href):
-						href = 'http://i-max.vn/forum/showthread.php?t=' + xsearch('t=(\d+)',href)
-						q = 'thread'
-						
-					elif xsearch('f=(\d+)', href):
-						href = 'http://i-max.vn/forum/forumdisplay.php?f='+xsearch('f=(\d+)',href)
-						q = 'category'
-					
-					elif xsearch('p=(\d+)',href):
-						href = 'http://i-max.vn/forum/showthread.php?p='+xsearch('p=(\d+)',href)
-						q = 'thread'
-						
-					else:
-						log('i-max link other------------------'+href)
-						continue
-				
-				else:
-					if '/threads/' in href or 'showthread.php' in href:
-						q = 'threads'
-						m = 1
-						
-					else:
-						q = 'forums'
-						m = 1
-				
-				addir_info(title,href,icon['hdvietnam'],'',m,1,q,True)
-	
-	else:
-		log ( url )
-
 def google_search(url,query,mode,page,items=[]):
 	srv=url.split('.')[0]
 	if page==0:make_mySearch('',url,'','',mode,'get');return
@@ -1683,7 +1549,7 @@ def google_search(url,query,mode,page,items=[]):
 				mess('Xshare chưa nhận diện được:%s'%href)
 	
 	elif url in ('4share.vn','ifile.tv'):
-		for title,href,img in ggs.content('009789051051551375973:a1qafjesmlc',start,query):
+		for title,href,img in ggs.content('009789051051551375973:a1qafjesmlc',start,query,'4share'):
 			if 'Page next:' in title:
 				page = img
 				start = href
@@ -1694,7 +1560,7 @@ def google_search(url,query,mode,page,items=[]):
 				addir_info(title,href,icon['4share'])
 	
 	elif url=='hdvietnam.com':
-		for title,href,img in ggs.content('009789051051551375973:hzgiaiqusl0',start,query):
+		for title,href,img in ggs.content('009789051051551375973:hzgiaiqusl0',start,query,'hdvietnam'):
 			if 'Page next:' in title:
 				page = img
 				start = href
@@ -2086,6 +1952,53 @@ def tenlua_getlink(href):
 		for item in response['content']:
 			tenlua_getlink(item['link'])
 
+def fshareFolder(url):
+	if "api/v3/files/folder" not in url:
+		id = xsearch('(\w{10,})', url)
+		url = "https://www.fshare.vn/api/v3/files/folder?linkcode=%s&page=%s" % (id, page)
+	
+	if '&sort=' not in url and query == 'sort':
+		url += '&sort=type%2C-modified'
+	elif '&sort=' not in url:
+		url += '&sort=type%2Cname'
+	
+	b = xread(url)
+	
+	
+	try:
+		items = json.loads(b)
+	except:
+		items = {}
+	
+	def sizes(i):
+		if i > 1073741824:
+			i = format(i/1073741824.0, '0,.2f') + ' GB'
+		elif i > 1048576:
+			i = format(i/1048576.0, '0,.2f') + ' MB'
+		elif i > 1024:
+			i = format(i/1024.0, '0,.2f') + ' KB'
+		else:
+			i = format(i, '0,') + 'Bytes'
+		
+		return i.replace('.', ';').replace(',', '.').replace(';', ',')
+	
+	for item in items.get('items', []):
+		title = item.get('name', '')
+		title = title + ' ' + sizes(item.get('size', 0))
+		
+		if item.get('type', 0) == 1:
+			href = "https://www.fshare.vn/file/" + item.get('linkcode', '')
+		else:
+			href = "https://www.fshare.vn/folder/" + item.get('linkcode', '')
+		
+		addir_info(title,href,img)
+	
+	pn = items.get('_links',{}).get('next')
+	if pn:
+		href = "https://www.fshare.vn/api" + pn
+		pn = xsearch('page=(\d+)', pn)
+		addir_info('[COLOR lime]Trang %s[/COLOR]'%pn,href,img,fanart,mode,page+1,query,True)
+
 def fsharePage(name,url,img,fanart,query=''):
 	from resources.lib.servers import fshare
 	fs = fshare()
@@ -2100,26 +2013,35 @@ def fsharePage(name,url,img,fanart,query=''):
 		if not query.strip():
 			return
 		
-		#elif 'Page next:' not in name:
-		#	page = 1
-		
+		p = 1 if 'Trang tiếp theo ...' not in name else page
 		fs.login(fs.user,fs.passwd)
 		if not fs.logged:
 			fs.login("xshare@thanhthai.net","thaitni@")
-			if not fs.logged:return 'no'
-		q='+'.join(query.split())
-		for title,href in fs.searchFollow(q):addir_info(title,href,img,'',mode,1,'')
+			if not fs.logged:
+				return 'no'
+		
+		q = '+'.join(query.replace('+', ' ').split())
+		for title,href in fs.searchFollow(q, p):
+			if 'Trang tiếp theo ...' in title:
+				addir_info(title%(p+1),url,img,'',mode,p+1,query, True)
+			else:
+				addir_info(title,href,img,'',mode,1,'')
 		fs.logout()
 	
 	elif query=='searchFollow':
-		title=namecolor('Search trên Fshare Following','lime')
-		title+=namecolor(' (Có thể dùng dấu "." giữa các từ)','cyan')
+		title = namecolor('Search trên Fshare Following','lime')
+		title += namecolor(' (Có thể dùng dấu "." giữa các từ)','cyan')
 		addir_info(title,'',img,'',mode,1,'searchFollow',True)
+		
 		fs.login(fs.user,fs.passwd)
 		if not fs.logged:
-			fs=fshare("xshare@thanhthai.net","thaitni@")
-			if not fs.logged:return 'no'
-		for title,href in fs.searchFollow(''):addir_info(title,href,img,'',mode,1,'')
+			fs = fshare("xshare@thanhthai.net", "thaitni@")
+			if not fs.logged:
+				return 'no'
+		
+		for title,href in fs.searchFollow('hot'):
+			addir_info(title,href,img,'',mode,1,'sort')
+		
 		fs.logout()
 	
 	elif query=='myFavourites':
@@ -2155,58 +2077,40 @@ def fsharePage(name,url,img,fanart,query=''):
 			u,p = u[0].split('=')[1],u[1].split('=')[1]
 		else:
 			u,p = fs.user,fs.passwd
-		fs.login(u,p)
-		hd = {'User-Agent':'Mozilla/5.0', 'Cookie':fs.hd['Cookie']}
 		
-		b = xread('https://www.fshare.vn/file/'+query.replace('ing',''), hd)
+		href = 'https://www.fshare.vn/file/%s?page=%s&per-page=50&sort=-modified'
+		href = href % (query.replace('ing',''), page)
+		
+		if page == 1:
+			fs.login(u,p)
+			hd = {'User-Agent':'Mozilla/5.0', 'Cookie':fs.hd['Cookie']}
+			#b = xread('https://www.fshare.vn/file/'+query.replace('ing',''), hd)
+			b = xread(href, hd)
+			cookie = fs.hd['Cookie']
+		else:
+			cookie = text
+			hd = {'User-Agent':'Mozilla/5.0', 'Cookie':cookie}
+			#href = 'https://www.fshare.vn/file/%s?page=%s&amp;per-page=50'%(query.replace('ing',''), page)
+			#b = xread('https://www.fshare.vn/file/'+query.replace('ing',''), hd)
+			b = xread(href, hd)
+			
 		s = xsearch('(<tbody.+?/tbody>)', b, 1, re.S)
 		for s in re.findall('(<tr id.+?/tr>)', s, re.S):
 			title = ' '.join(re.sub('<.+?>', '', xsearch('(<a.+?/a>)', s, 1, re.S)).split())
 			href = 'https://www.fshare.vn' + xsearch('href="(.+?)"', s)
 			addir_info(title,href,img)
 		
-	elif 'https://www.fshare.vn/folder/' in url or "api/v3/files/folder" in url:
-		if "api/v3/files/folder" not in url:
-			id = xsearch('(\w{10,})', url)
-			url = "https://www.fshare.vn/api/v3/files/folder?linkcode=%s&page=%s" % (id, page)
-		
-		url += '&sort=type%2Cname'
-		b = xread(url)
-		
-		
-		try:
-			items = json.loads(b)
-		except:
-			items = {}
-		
-		def sizes(i):
-			if i > 1073741824:
-				i = format(i/1073741824.0, '0,.2f') + ' GB'
-			elif i > 1048576:
-				i = format(i/1048576.0, '0,.2f') + ' MB'
-			elif i > 1024:
-				i = format(i/1024.0, '0,.2f') + ' KB'
-			else:
-				i = format(i, '0,') + 'Bytes'
-			
-			return i.replace('.', ';').replace(',', '.').replace(';', ',')
-		
-		for item in items.get('items', []):
-			title = item.get('name', '')
-			title = title + sizes(item.get('size', 0))
-			
-			if item.get('type', 0) == 1:
-				href = "https://www.fshare.vn/file/" + item.get('linkcode', '')
-			else:
-				href = "https://www.fshare.vn/folder/" + item.get('linkcode', '')
-			
-			addir_info(title,href,img)
-		
-		pn = items.get('_links',{}).get('next')
+		pn = xsearch('(<ul class="pagination".+?/ul>)', b, 1, re.S)
+		pn = xsearch('(<li class="next".+?/li>)', pn, 1, re.S)
+		pn = xsearch('href="(.+?)"', pn, 1, re.S).strip()
 		if pn:
-			href = "https://www.fshare.vn/api" + pn
-			pn = xsearch('page=(\d+)', pn)
-			addir_info('[COLOR lime]Trang %s[/COLOR]'%pn,href,img,fanart,mode,page+1,query,True)
+			title = '[COLOR lime]Trang tiếp ...[/COLOR]'
+			addir_info(title,url,img,'',mode,page+1,query,True, text=cookie)
+			
+		
+		
+	elif 'https://www.fshare.vn/folder/' in url or "api/v3/files/folder" in url:
+		fshareFolder(url)
 	
 	else:
 		if 'https://www.fshare.vn/files/' in url:
@@ -2247,11 +2151,15 @@ def id_2url(name,url,img,mode,page,query):
 			return result
 		
 		mess('link/ID %s Checking ...'%link)
-		id=xsearch('(\w{10,20})',''.join(s for s in link.split()).upper())
-		l=link.lower();result='',''
-		if 'fshare.vn/file' in l:result=checker('https://www.fshare.vn/file/%s'%id)
+		id = xsearch('(\w{10,20})',''.join(s for s in link.split()).upper())
+		l = link.lower()
+		result = '',''
+		
+		if 'fshare.vn/file' in l:
+			result = checker('https://www.fshare.vn/file/%s'%id)
+		
 		elif 'fshare.vn/folder' in l:
-			b=xread('https://www.fshare.vn/folder/%s'%id)
+			b = xread('https://www.fshare.vn/folder/%s'%id)
 			if 'class="filename"' in b:
 				title=xsearch('<title>(.+?)</title>',b).replace('Fshare - ','')
 			if title:result=title,'https://www.fshare.vn/folder/%s'%id
@@ -2497,10 +2405,15 @@ def driveGoogle(name,url,img,fanart,mode,page,query):#64
 		else:
 			href = 'https://drive.google.com/'
 			b = xread('%suc?id=%s'%(href,url), data = 'X-Json-Requested=true')
-			try    : j = json.loads(xsearch('(\{.+\})',b))
-			except : j = {}
-			#log(j.get("downloadUrl",""))
+			try:
+				j = json.loads(xsearch('(\{.+\})',b))
+			except:
+				j = {}
 			link = j.get("downloadUrl","")
+			
+			if not link:
+				from resources.lib.utils import googleDriveLink
+				link = googleDriveLink(url)
 		
 		xbmcsetResolvedUrl(link)
 
@@ -3321,7 +3234,7 @@ def fptplay(name,url,img,fanart,mode,page,query,text=''):
 	def fptVOD(url):
 		data = 'id=%s&stream_id=bitrate_1000'%url
 		b = xread('https://fptplay.vn/show/timeshift',data=data)
-		log ('b = xread("https://fptplay.vn/show/timeshift",data="%s")' % data)
+		#log ('b = xread("https://fptplay.vn/show/timeshift",data="%s")' % data)
 		try:
 			j = json.loads(b)
 		except:
@@ -4419,9 +4332,11 @@ def hdviet(name,url,img,mode,page,query):
 				sub = t.get('source', '')
 				if "VIE" in sub:
 					break
-		
 		if link:
-			xbmcsetResolvedUrl(link.replace('playlist.m3u8','playlist_h.m3u8'),sub=sub)
+			b = xread(link)
+			link = re.sub('\w+\.m3u8', xsearch('(.+?m3u8)', b.split('#')[-1]).strip(), link)
+			link += '|User-Agent=Mozilla%2F5.0'
+			xbmcsetResolvedUrl(link,sub=sub)
 		
 	elif query=='hdv_play':
 		href = 'https://api-v2.hdviet.com/movie/play?movieid='+url.replace('_e','&ep=')
@@ -4489,7 +4404,7 @@ def hdviet(name,url,img,mode,page,query):
 			mess(u'Get link thất bại!','hdviet.com')
 
 def hayhaytv(name,url,img,fanart,mode,page,query):
-	ico=os.path.join(iconpath,'hayhaytv.png');c='tomato';urlhome='http://www.hayhaytv.vn/'
+	ico=os.path.join(iconpath,'hayhaytv.png');c='tomato';urlhome='http://www.hayhaytv.com/'
 	api='http://api.hayhaytv.vn/'
 	hd={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) Chrome/54.0.2840.99 Safari/537.36',
 		'Cookie':xrw('hayhaytv.cookie')}
@@ -4752,12 +4667,14 @@ def phimmoi(name,url,img,mode,page,query):
 		else:
 			if cungchude:
 				addir_info(namecolor(chude,'gold'),cungchude,ico,'',mode,1,'cungchude',True)
+			
 			servers=re.findall('(<h3.+?/ul>)',servers,re.S)
 			for s in servers:
 				if len(servers)>1:
 					server=xsearch('(<h3.+?/h3>)',s,1,re.S)
 					server=' '.join(re.sub('<.+?>','',server).split())
 					add_sep_item(server)
+				
 				for href,title in re.findall('href="(.+?)">(.+?)</a>',s.replace('\n','')):
 					title='%s %s'%(title.strip(),name)
 					addir_info(title,fixUrl(href),img,fanart,mode,1,'play')
@@ -4772,7 +4689,16 @@ def phimmoi(name,url,img,mode,page,query):
 			from resources.lib.servers import phimoinet
 			pm = phimoinet()
 			link = pm.getLink(url)
+			
 		
+		if 'openload.co' in link:
+			href = link
+			from resources.lib.opl import openload
+			link = openload(href)
+			if not link:
+				from resources.lib.utils import getOpenloadLink
+				link = getOpenloadLink(xsearch('([\w|_|-]{10,})', href))
+
 		if link:
 			xbmcsetResolvedUrl(link)
 
@@ -5065,9 +4991,11 @@ def kenh88(name,url,img,fanart,mode,page,query,text=''):
 				addir_info(namecolor(title.strip(),c),href,urlhome+img,urlhome+img,mode,1,"episode",True)
 	
 	elif query=='k88_play':
-		link=k88.getLink(url)
-		if link:xbmcsetResolvedUrl(link)
-		#else:mess('File invalid or deleted!','Kenh88.com')
+		link = k88.getLink(url)
+		if link:
+			xbmcsetResolvedUrl(link)
+		else:
+			mess('Get link that bai!', 'Kenh88.com')
 
 def phimdata(name,url,img,mode,page,query):
 	ico=os.path.join(iconpath,'phimdata.png');urlhome='http://www.phimdata.com/';c='FFDB4BDA'
@@ -5646,7 +5574,7 @@ def hdonline(name,url,img,fanart,mode,page,query):
 	if query == 'hdonline.vn':
 		href  = 'http://m.hdonline.vn/danh-sach/phim-moi.html'
 		body  = xrw('hdonline.html', xread(href, hd))
-		xrw('xoa.html',body);log(hd)
+		xrw('xoa.html',body)#;log(hd)
 		title = namecolor("Search trên hdonline.vn", "lime")
 		addir_info(title,'hdonline.vn',ico,'',mode,1,'search',True)
 		
@@ -5743,7 +5671,8 @@ def hdonline(name,url,img,fanart,mode,page,query):
 		link,sub = hdo.getLink(url, epi)
 		if link:
 			HD = urllib.urlencode({'User-Agent':'Mozilla/5.0', 'Cookie':xrw('hdonline.cookie')})
-			xbmcsetResolvedUrl(link+'|'+HD, sub=sub)
+			#xbmcsetResolvedUrl(link+'|'+HD, sub=sub)
+			xbmcsetResolvedUrl(link, sub=sub)
 		
 		else:mess('File invalid or deleted!','hdonline.vn') 
 
@@ -6071,28 +6000,46 @@ def htvonline(name,url,img,fanart,mode,page,query):
 					pass
 		
 		elif query == 'eps':
-			id = url.split('/')[-1]
+			id = xsearch('([\w|-]{36})', url)
 			try:
+				j = json.loads(xread(api + 'cm/detail/' + id))
+			except:
+				j = {}
+			
+			seasons = j.get('seasons', [])
+			try:
+				id = seasons[page - 1]['id']
 				j = json.loads(xread(api + 'cm/season_by_id/' + id))
 			except:
 				j = {}
+			
 			
 			for i in j.get("episodes", {}):
 				try:
 					title = i["title"].encode("utf-8")
 					id = i["id"].encode("utf-8")
-					href = i["share_urls"].encode("utf-8")
-					img = i["images"]["thumbnail"].encode("utf-8")
-					addir_info(title,'http://thvli.vn/'+id,img,'',mode,1,'play')
+					thumbnail = i["images"]["thumbnail"].encode("utf-8")
+					addir_info(title,'http://thvli.vn/'+id,thumbnail,'',mode,1,'play')
 				
 				except:
 					pass
 			
+			if len(seasons) > page:
+				addir_info('[COLOR lime]Trang tiếp[/COLOR]',url,img,'',mode,page+1,query,True)
+			
+			
 			
 		elif query == 'play':
-			"""b=xread('http://api.thvli.vn/backend/cm/detail/bff059ea-a00c-40d6-a83c-0b36a9b33c15/')
-			http://thvli.vn/detail/tuyet-dinh-song-ca
-			b = xread("http://api.thvli.vn/backend/cm/detail/tuyet-dinh-song-ca", {"Authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZXMiOltdLCJqdGkiOiI5MjQyMjYyOTIzMzQ0YWVjOTE2YjZjYzI3YWMyNDgyYyIsInN1YiI6ImZmZDQwYjk0NzUwMzRjMjlhYjEzZWFhODE3NDM1N2FlIiwiZXhwIjoxNTA5NTQzOTkxLCJpc3MiOiJ2aW1haSIsImlhdCI6MTUwNjk1MTk5MSwiYXZhdGFyIjoiZGVmYXVsdC5qcGciLCJuYW1lIjoieHNoYXJlICJ9.iyqZNSZqmoillUpoHokuAxhrAsGo6x25fT_b1erUKAw"})"""
+			id = xsearch('([\w|-]{36})', url)
+			try:
+				link = json.loads(xread(api + 'cm/detail/' + id))['play_info']['data']['hls_link_play']
+			except:
+				link = ""
+			
+			if link:
+				xbmcsetResolvedUrl(link)
+		
+		elif query == 'play1':
 			href = url.replace("thvli.vn", "api.thvli.vn/backend/cm/detail")
 			b = xread(href)
 			try:
@@ -6113,7 +6060,7 @@ def htvonline(name,url,img,fanart,mode,page,query):
 		elif query == '21h':
 			makeItems(thvl.chuongtrinh21h(url))
 		
-		elif query == 'phim':
+		elif 'phim' in query:
 			makeItems(thvl.phim(url))
 		
 		elif "thvli.vn" in url and query == 'live':
@@ -6121,32 +6068,48 @@ def htvonline(name,url,img,fanart,mode,page,query):
 		
 		elif "thvl.vn" in url and query == 'live':
 			def gl(href, token):
-				b = xread(href, {'Authorization' : token})
-				try:
-					j = json.loads(b)
-					error = j['play_info']['error']
-					
-					if error > 0:
-						link = 'Retry'
-					else:
-						link = j['link_play']
+				if href == 'HTV7':
+					from resources.lib.utils import cliptv_cookie
+					b = xread('https://cliptv.vn/truyen-hinh/htv7-hd', {'Cookie':cliptv_cookie()})
+					link = xsearch('"src\W+(.+?)"', b)
 				
-				except:
-					link = ""
+				else:
+					b = xread(href, {'Authorization' : token})
+					try:
+						j = json.loads(b)
+						error = j['play_info']['error']
+						
+						if error > 0:
+							link = 'Retry'
+						else:
+							link = j['link_play']
+					
+					except:
+						link = ""
 				
 				return link
 			
 			if "THVL 1" in name:
 				href = 'http://api.thvli.vn/backend/cm/detail/thvl1-hd/'
+				a = 'thvl1hd.m3u8'
+				b = 'thvl1hd_2160000/index.m3u8'
+			
+			elif 'HTV7' in name:
+				href = 'HTV7'
+				a = 'playlist'
+				b = 'chunklist_b2320000'
+			
 			else:
 				href = 'http://api.thvli.vn/backend/cm/detail/thvl2-hd/'
+				a = 'thvl2hd.m3u8'
+				b = 'thvl2hd_2160000/index.m3u8'
 			
 			link = gl(href, token)
 			
 			if link == 'Retry':
 				link = gl(href, login())
 			
-			xbmcsetResolvedUrl(link)
+			xbmcsetResolvedUrl(link.split('?')[0].replace(a, b))
 		
 	elif query == 'Home':
 		b = xrw('htvonline.html', xread('http://htvonline.com.vn/'))
@@ -7195,7 +7158,7 @@ def chiasenhac(name,url,img,fanart,mode,page,query):
 					pass
 		
 		if not link:
-			s = xsearch('sources\W+(\[.+?\]),', body, 1, re.S);log(s)
+			s = xsearch('sources\W+(\[.+?\]),', body, 1, re.S)
 			links = re.findall('file\W+"(.+?)".+?label\W+"(\d+)\w*"', s)
 			if links:
 				links = sorted(links, key=lambda k: int(k[1]) if k[1] else 0,reverse=True)
@@ -7460,7 +7423,7 @@ def bilutv(name,url,img,mode,page,query):
 		
 	elif query=='play':
 		from resources.lib.servers import gibberishAES
-		from resources.lib.utils import getGDLink
+		from resources.lib.utils import getGDLink, xread0
 		keyAES='bilutv.com4590481877'
 		
 		if '/xem-phim/' not in url:
@@ -7527,15 +7490,58 @@ def bilutv(name,url,img,mode,page,query):
 			
 			else:
 				link = abc(href)
+				#log('999 ' + href + '000 ' + keyAES+modelId)
 				if  'api.bilutv.com' in link:
-					continue
+					try:
+						link1 = link.split('=')
+						link = link1[0] + '=' +  urllib.quote(link1[1])
+					except:
+						continue
+					
+					def getLocation(link):
+						cookie = urllib2.HTTPCookieProcessor()
+						from servers import NoRedirection
+						opener = urllib2.build_opener(NoRedirection, cookie)
+						urllib2.install_opener(opener)
+						hd = {'User-Agent':'Mozilla/5.0'}
+						opener.addheaders = hd.items()
+						o = opener.open(link)
+						
+						if o.getcode() == 302:
+							result = o.headers.get('location', "")
+						else:
+							result = 'No code'
+						
+						return result
+
+					#link = getLocation(link)
+					o = xread0(link)
+					if o and o.getcode() == 301:
+						o = xread0(o.headers.get('location', ""))
+					
+					if o and o.getcode() == 302:
+						link = o.headers.get('location', "")
+					else:
+						link = ""
+					
 				elif 'drive.google.com' in link:
 					link = getGDLink(link)
-				else:
-					link = test_link(link)
-			
+				
+				elif 'openload.co' in link:
+					href = link
+					from resources.lib.opl import openload
+					link = openload(href)
+					if not link:
+						from resources.lib.utils import getOpenloadLink
+						link = getOpenloadLink(xsearch('([\w|_|-]{10,})', href))
+				
 			if link:
-				break
+				o = xread0(link)
+				if not o or o.getcode() != 200:
+					link = ""
+					
+				else:
+					break
 			
 			tested.append(href)
 	
@@ -7556,10 +7562,7 @@ def anime47(name,url,img,mode,page,query):
 		href='https://drive.google.com/uc?id=0B5y3DO2sHt1LTjFqVVI0Y2QzU0E&export=download'
 		xrw(ico, xread(href), 'wb')
 	
-	try   :	hd = json.loads(getTextFile("HpnvbZdu", "d5oqv"))
-	except: hd = {
-		"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0",
-		"Cookie": "__cfduid=d8113cfc65ff4228520cdfd148766053b1489591183"}
+	hd = {'User-Agent':'xshare', "Cookie":"cf_clearance=" + xrw('anime47.cookie')}
 	
 	def urlFix(url):
 		if not url.startswith('http'):
@@ -7597,7 +7600,17 @@ def anime47(name,url,img,mode,page,query):
 	
 	
 	if query=='anime47.com':
-		b = xrw('anime47.html',xread(urlhome,hd))
+		b = xread(urlhome, hd)
+		if not b or "Checking your browser before accessing" in b:
+			import cfscrape
+			scraper = cfscrape.create_scraper()
+			cookie, user_agent = cfscrape.get_tokens("http://anime47.com", user_agent='xshare')
+			if cookie.has_key('cf_clearance'):
+				hd["Cookie"] = "cf_clearance=" + xrw('anime47.cookie', cookie.get('cf_clearance'))
+				b = xread(urlhome, hd)
+		
+		if b and "Checking your browser before accessing" not in b:
+			b = xrw('anime47.html', b)
 		
 		title = color['search']+"Search trên anime47.com[/COLOR]"
 		addir_info(title,'anime47.com',ico,'',mode,1,'search',True)
@@ -7663,11 +7676,12 @@ def anime47(name,url,img,mode,page,query):
 			addir_info(title,urlFix(href),ico,'',mode,page+1,query,True)
 	
 	elif query=='episodes':
-		b = xread(url,hd)
+		b = xread(url, hd)
 		#log('b = xread("%s",%s)'%(url,hd))
 		href = xsearch('class="btn btn-red".+?href="(.+?)"',b).replace(' ','%20')
-		#b = xread(urlFix(href), hd)
+		b = xread(urlFix(href), hd)
 		s = xsearch('(<div class="server".+)',b)
+		
 		for s in [i for i in s.split('<div class="name">') if '<li>' in i]:
 			server = re.sub('<.+?>','',xsearch('(<span>(.+?)</span>)',s,1,re.S)).strip()
 			if server:
@@ -7686,16 +7700,18 @@ def anime47(name,url,img,mode,page,query):
 				addir_info(title,urlFix(href),img,'',mode,1,'play')
 	
 	elif query=='play':
-		b    = xread(url,hd)
-		try:
-			passphrase = xsearch('var _\w+\W+(\[.+?\])',b).decode('string_escape')
-			passphrase = json.loads(passphrase)[5].encode('utf-8')
-		except:
-			passphrase = xsearch("passphrase=(.+)", hd.get("Cookie", ""))
-		
+		from utils import xcheck
+		b    = xread(url, hd)
 		link = ""
-		href = xsearch('link: *"(.+?)"',b)
-		if href:
+		
+		if xsearch("file:'(.+?)'", b):
+			link = xcheck(xsearch("file:'(.+?)'", b))
+		
+		if not link and xsearch('"file":"(.+?)"', b):
+			link = xcheck(xsearch('"file":"(.+?)"', b))
+			
+		if not link and xsearch('link: *"(.+?)"', b):
+			href = xsearch('link: *"(.+?)"', b)
 			def getLink47(passphrase):
 				try:
 					j     = json.loads(b.decode('base64'))
@@ -7706,6 +7722,12 @@ def anime47(name,url,img,mode,page,query):
 				except : link  = ""
 				return link
 			
+			try:
+				passphrase = xsearch('var _\w+\W+(\[.+?\])',b).decode('string_escape')
+				passphrase = json.loads(passphrase)[5].encode('utf-8')
+			except:
+				passphrase = xsearch("passphrase=(.+)", hd.get("Cookie", ""))
+			
 			from resources.lib import jscrypto
 			b = xread('http://anime47.com/player/player.php',hd,'link='+href)
 			#log("xread('http://anime47.com/player/player.php',%s,'link=%s')"%(hd,href))
@@ -7715,7 +7737,7 @@ def anime47(name,url,img,mode,page,query):
 				if pp != passphrase:
 					link = getLink47(pp)
 		
-		elif re.findall('if(\(x[^{]+?\{.+?\})', b) or xsearch('iframe src="(.+?)"',b):
+		if not link and (re.findall('if(\(x[^{]+?\{.+?\})', b) or xsearch('iframe src="(.+?)"',b)):
 			if re.findall('if(\(x[^{]+?\{.+?\})', b):
 				items = [
 					(
@@ -7754,12 +7776,14 @@ def anime47(name,url,img,mode,page,query):
 					link = getOpenloadLink(xsearch('([\w|_|-]{10,})', href))
 			
 			else:
-				tk   = xsearch('\|(\w{32})\|',xread(urlFix(href),hd))
-				try    : href = href.split('/token/')[0] + '/hop/' + tk
-				except : href = ""
-				b = xget(urlFix(href), hd)
-				if b : link = b.geturl()
-
+				tk = xsearch('\|(\w{32})\|',xread(urlFix(href),hd))
+				try:
+					href = href.split('/token/')[0] + '/hop/' + tk
+				except:
+					href = ""
+				link = xcheck(urlFix(href), hd)
+				
+		
 		if link:
 			xbmcsetResolvedUrl(link)
 		else:
@@ -7855,7 +7879,7 @@ def phimmedia(name,url,img,mode,page,query):
 	elif url == "phim.media":
 		search_string = urllib.quote_plus(query)
 		url = 'http://www.phim.media/index.php?keyword=%s&do=phim&act=search'%search_string
-		log(url)
+		#log(url)
 		return phimmedia(name,url,img,mode,page,'page')
 			
 	elif query == 'page':
@@ -8062,7 +8086,7 @@ def phimbathu(name,url,img,fanart,mode,page,query):
 	
 	elif query=='play':
 		from resources.lib.servers import gibberishAES
-		from resources.lib.utils import getGDLink
+		from resources.lib.utils import getGDLink, xread0
 		b = xread(url)
 		
 		j = json.loads(xsearch('playerSetting[^{]+({.+?});',b))
@@ -8070,27 +8094,19 @@ def phimbathu(name,url,img,fanart,mode,page,query):
 		key = "phimbathu.com4590481877" + modelId
 		
 		def abc(i):
-			return urllib.unquote(gibberishAES(i.get('file',''), key))
+			result = urllib.unquote(gibberishAES(i.get('file',''), key))
+			#log(result)
+			return result
 			
 		L=[]
-		#log(j)
+		#log(['111',j])
 		sources = j.get('sourceLinksBk')
 		if not sources:
 			sources = j.get('sourceLinks')
+		
 		for l in sources:
 			#log(l['links'])
 			L += [(abc(i),i.get('label','')) for i in l['links']]
-		#log(L)
-		
-		#for l in j.get('sourcesTm'):
-			#log(l['links'])
-		#	L += [(abc(i),i.get('label','')) for i in l['links']]
-			
-		#if not L:
-		#	for l in j.get('sourcesVs'):
-				#log(l['links'])
-		#		L += [(abc(i),i.get('label','')) for i in l['links']]
-		#log(L)
 	
 		L = sorted(L, key=lambda k: int(rsl(k[1])),reverse=True if max else False)
 
@@ -8105,9 +8121,46 @@ def phimbathu(name,url,img,fanart,mode,page,query):
 				if not link:
 					link = googleDriveLink(xsearch('([\w|-]{28,})', href))
 			
+			elif "api.phimbathu.com" in href:
+				b = xread0(href, {'Referer': 'http://phimbathu.com'})
+				if b:
+					link = b.info().dict.get('location',"")
+				
+				if "api.phimbathu.com" in link:
+					if "=" in link:
+						href = link.split("=")
+						link = href[0] + "=" + urllib.quote_plus(href[1])
+					
+					b = xread0(link)
+					if b:
+						link = b.info().dict.get('location',"")
+					else:
+						link = ""
+				
+				if link:
+					b = xread0(link)
+					
+					try:
+						s = int(b.info().dict.get('content-length', '0'))
+						if s < 10000:
+							link = ""
+					except:
+						link = ""
+							
 			else:
 				link = test_link(href)
 		
+			if 'ok.ru' in link:
+				from utils import ok_ru
+				link = ok_ru(link)
+				
+			elif 'openload.co' in link:
+				from opl import openload
+				link = openload(link)
+				if not link:
+					from utils import getOpenloadLink
+					link = getOpenloadLink(xsearch('([\w|_|-]{10,})', link))
+			
 		if link:
 			xbmcsetResolvedUrl(link)
 			
@@ -8453,6 +8506,7 @@ def tvhay(name,url,img,mode,page,query):
 		addir_info(namecolor(title,c),href,img,'',mode,1,'eps',True)
 	
 	def eps_server(s):
+		#mess('a');log(s)
 		title='Server '+xsearch('<div class="label">(.+?)</div>',s).replace(':','')
 		add_sep_item('List of Server %s -------------------------'%title)
 		label=xsearch('<title>(.+?)</title>',s)
@@ -8579,12 +8633,27 @@ def tvhay(name,url,img,mode,page,query):
 		s = xsearch('(<ul class="list tab phim-bo-full.+?/ul>)',b,1,re.S)
 		for s in re.findall('(<li.+?/li>)',s,re.S):itemDIR(s)
 	
-	elif query=='eps_server':eps_server(url)
-	elif query=='tvh_page':tvh_page(url)
-	elif query=="search":make_mySearch('',url,'','',mode,'get')
+	elif query=='eps_server':
+		try:
+			s = json.loads(xrw("tvhay.eps"))[url].encode('utf-8')
+		except:
+			s = ""
+		
+		eps_server(s)
+	
+	elif query=='tvh_page':
+		tvh_page(url)
+	
+	elif query=="search":
+		make_mySearch('',url,'','',mode,'get')
+	
 	elif query=="INP" or url=="tvhay.org":
-		if query=="INP":query = make_mySearch('',url,'','','','Input')
-		if not query.strip():return
+		if query=="INP":
+			query = make_mySearch('',url,'','','','Input')
+		
+		if not query.strip():
+			return
+		
 		page = 1
 		tvh_page('http://tvhay.org/search/%s/'%urllib.quote_plus(query))
 
@@ -8613,7 +8682,8 @@ def tvhay(name,url,img,mode,page,query):
 		img = xsearch('src=".+?url=(.+?)"',s,result = img)
 		
 		if '/xem-phim' not in url:
-			b = xread(xsearch('href="([^<]+?)" class="btn-watch"',b),hd)
+			b = xread(xsearch('href="([^<]+?)" class="btn-watch"',b), hd)
+		
 		s = xsearch('(<div id="servers".+?id="comment">)',b,1,re.S)
 		lenEPS = s.count('data-episode-id')
 		
@@ -8623,12 +8693,28 @@ def tvhay(name,url,img,mode,page,query):
 			
 		if lenEPS > 25:
 			default = s[0]
+			ss = {'%s'%i:s[i] for i in range(len(s))}
+			xrw("tvhay.eps", json.dumps(ss))
+			
+			for i in range(len(s)):
+				title = 'Server '+xsearch('<div class="label">(.+?)</div>',s[i]).replace(':','')
+				if 'Thuyết Minh' in title:
+					default = s[i]
+				
+				elif SRVS:
+					addir_info(namecolor(title,'gold'),"%s"%i,img,'',mode,1,'eps_server',True)
+			"""
 			for s in s:
 				title = 'Server '+xsearch('<div class="label">(.+?)</div>',s).replace(':','')
-				if 'Thuyết Minh' in title:default = s
-				elif SRVS:addir_info(namecolor(title,'gold'),s,img,'',mode,1,'eps_server',True)
+				if 'Thuyết Minh' in title:
+					default = s
+				elif SRVS:
+					addir_info(namecolor(title,'gold'),s,img,'',mode,1,'eps_server',True)
+			"""
 			eps_server(default)
-		else:[eps_server(s) for s in s]
+		
+		else:
+			[eps_server(s) for s in s]
 	
 	elif query=='play':
 		link = ""
@@ -8639,123 +8725,42 @@ def tvhay(name,url,img,mode,page,query):
 			src = xsearch('src="(.+?)"', media)
 			
 			if 'ok.ru' in src:
-				from resources.lib.utils import ok_ru
+				from utils import ok_ru
 				link = ok_ru(src)
+				if not link:
+					link = ok_ru(xsearch('link=(.+)',src))
+				
+				
 				
 			elif 'openload.co' in src:
-				from resources.lib.opl import openload
+				from opl import openload
 				link = openload(src)
 				if not link:
-					from resources.lib.utils import getOpenloadLink
+					from utils import getOpenloadLink
 					link = getOpenloadLink(xsearch('([\w|_|-]{10,})', src))
 		
 			if link:
 				xbmcsetResolvedUrl(link)
 				return
 		
-		elif 'server VIP.D' in title or 'server F.PRO' in title:
-
-			z = xsearch('(eval\(.+?);<', b)
+		elif 'M.PRO' in title:
+			import unwise
+			b = xsearch('(<div id="media".+?/div>)', unwise.unwise_process(b), 1, re.S)
+			href = xsearch('link=(.+?)"', b)
+			if 'mp4upload.com' in href:
+				from utils import packer
+				b = packer(xread(href))
+				link = xsearch('"file":"(.+?)"', b)
 			
-			from resources.lib import unwise
-			linkData = xsearch('link:"(.+?)"',unwise.unwise_process(z))
-			
-			def getData(loop):
-				tvhaytk = myaddon.getSetting('tvhaytk')
-				if loop < 2:
-					if len(tvhaytk) < 50 :
-						if 'fshare.vn' not in tvhaytk:
-							tvhaytk = 'https://www.fshare.vn/folder/'+tvhaytk
-						tvhaytk = xread(tvhaytk)
-						tvhaytk = xsearch('<title>Fshare - (.+?)</title>', tvhaytk)
-						tvhaytk = tvhaytk.replace('amp;','')
-			
-				if not tvhaytk or loop > 1:
-					from resources.lib.utils import getXshareData
-					try:
-						tvhaytk = getXshareData().get('versions', {}).get('tvhtk','')
-					except:
-						pass
-				
-				return 'link=%s&%s' % (linkData, tvhaytk)
-			
-			link  = ''
-			loop  = 0
-			from resources.lib.utils import googleLinks
-			while loop < 3 and not link:
-				data = getData(loop)
-				hd['Referer'] = url
-				hd['Content-Length'] = '%s'%len(data)
-				
-				ua = xrw("tvhay.ua")
-				if ua:
-					hd['User-Agent'] = ua
-				
-				player = 'http://tvhay.org/playergk/plugins/gkpluginsphp.php'
-				#log("b=xread('%s',%s,'%s')"%(player,str(hd),data))
-				b = xread(player, hd, data)
-				if b:
-					xrw("tvhay.ua", hd.get('User-Agent',''))
-					link = googleLinks(xsearch('\[(.+?)\]', b, result=b))
-					if not link:
-						try:
-							j = json.loads(b)
-							#if 'youtube.com' in j.get("link",""):
-							link = j.get("link","")
-						except:pass
-					
-				loop += 1
-			if not isinstance(link,str):
-				link = ''
-			
-			if not link:
-				b = getTextFile("3YYSSAfT")
-				#log('hd = '+b)
-				if b:
-					for ua in b.splitlines():
-						hd['User-Agent'] = ua
-						b = xread(player, hd, data)
-						#log("b=xread('%s',%s,'%s')"%(player,str(hd),data))
-						if b:
-							xrw("tvhay.ua", ua)
-							link = googleLinks(xsearch('\[(.+?)\]',b,result = b))
-							break
-			else:log(link)
-
 			if link:
 				xbmcsetResolvedUrl(link)
 				return
 			
-	elif query=='play1':
-		link = ""
-		b = xread(url)
-		
-		
-		z = xsearch('z=(.+?);', b)
-		if z:
-			from resources.lib.opl import oDict
-			j = oDict()
-			l = [(k,j[k],len(k)) for k in j]
-			m = sorted(l, key=lambda k: k[2], reverse=True)
+		#elif 'server VIP.D' in title or 'server F.PRO' in title or 'P.PRO' in title:
+		else:
 
-			for i in m:
-				z = z.replace(i[0],i[1])
-			
-			cons1 = '([][filter][constructor](return new Date(200000000))()[])4'
-			cons2 = '([][filter][constructor](return new Date(24000000000))()[])4'
-			z = z.replace('+', '').replace(cons1, 'J').replace(cons2, 'O')
-			
-			href = xsearch('src="(.+?)"', z)
-			#log(href)
-			from resources.lib.utils import googleDriveLink
-			link = googleDriveLink(xsearch('([\w|-]{20,})', href))
-
-		elif xsearch('(eval\(.+?);<', b):
-			z = xsearch('(eval\(.+?);<', b)
-			
-			from resources.lib import unwise
-			linkData = xsearch('link:"(.+?)"',unwise.unwise_process(z))
-			
+			import unwise
+			linkData = xsearch('link:"(.+?)"',unwise.unwise_process(b))
 			def getData(loop):
 				tvhaytk = myaddon.getSetting('tvhaytk')
 				if loop < 2:
@@ -8764,107 +8769,70 @@ def tvhay(name,url,img,mode,page,query):
 							tvhaytk = 'https://www.fshare.vn/folder/'+tvhaytk
 						tvhaytk = xread(tvhaytk)
 						tvhaytk = xsearch('<title>Fshare - (.+?)</title>', tvhaytk)
-						tvhaytk = tvhaytk.replace('amp;','')
+						tvhaytk = tvhaytk.replace('Fshare - ','').replace(' - Fshare','').replace('amp;','')
 			
 				if not tvhaytk or loop > 1:
-					from resources.lib.utils import getXshareData
+					from utils import getXshareData
 					try:
 						tvhaytk = getXshareData().get('versions', {}).get('tvhtk','')
 					except:
 						pass
-				
 				return 'link=%s&%s' % (linkData, tvhaytk)
 			
 			link  = ''
 			loop  = 0
-			from resources.lib.utils import googleLinks
+			from utils import googleLinks
 			while loop < 3 and not link:
 				data = getData(loop)
-				hd['Referer'] = url
-				hd['Content-Length'] = '%s'%len(data)
+				#hd['Referer'] = url
+				#hd['Content-Length'] = '%s'%len(data)
 				
 				ua = xrw("tvhay.ua")
 				if ua:
-					hd['User-Agent'] = ua
+					hd = {'User-Agent':ua}
 				
 				player = 'http://tvhay.org/playergk/plugins/gkpluginsphp.php'
 				#log("b=xread('%s',%s,'%s')"%(player,str(hd),data))
 				b = xread(player, hd, data)
-				if b:
-					xrw("tvhay.ua", hd.get('User-Agent',''))
-					link = googleLinks(xsearch('\[(.+?)\]', b, result=b))
-					if not link:
-						try:
-							j = json.loads(b)
-							#if 'youtube.com' in j.get("link",""):
-							link = j.get("link","")
-						except:pass
-					
+				
+				try:
+					j = json.loads(b)
+					link = j.get('link')
+				except:
+					link = ""
+				
+				
 				loop += 1
+			
+			
 			
 			if not link:
 				b = getTextFile("3YYSSAfT")
-				#log('hd = '+b)
-				if b:
-					for ua in b.splitlines():
-						hd['User-Agent'] = ua
-						b = xread(player, hd, data)
-						#log("b=xread('%s',%s,'%s')"%(player,str(hd),data))
-						if b:
-							xrw("tvhay.ua", ua)
-							link = googleLinks(xsearch('\[(.+?)\]',b,result = b))
-							break
-			else:log('Found link = '+link)
-
-		elif xsearch('(<div id="media".+?/div>)', b, 1, re.S):
-			media = xsearch('(<div id="media".+?/div>)', b, 1, re.S)
-			href = xsearch('src="(.+?)"', media)
-			#log([media, openload])
-			if 'openload.' in href:
-				from resources.lib.opl import openload
-				link = openload(href)
-				if not link:
-					from resources.lib.utils import getOpenloadLink
-					link = getOpenloadLink(xsearch('([\w|_|-]{10,})', href))
-			
-			elif 'ok.ru' in href:
-				from resources.lib.utils import ok_ru
-				link = ok_ru(href)
-
-
-		else:
-			link = get_Link(url, hd)
-			
-		if link:xbmcsetResolvedUrl(link)
-		
-	
-	elif query=='play':
-		link = get_Link(url, hd)
-		if link:xbmcsetResolvedUrl(link)
-		else:mess(u'Sorry. Chưa get được link. Hãy thử lại nhé ...', 'tvhay.org')
-		
-	elif query=='play':
-		try : xshareData = json.loads(xrw('tvhay.dat'))
-		except : xshareData = {}
-		link = '';loop = 0
-		while not link and loop < 3:
-			link = get_Link(url, hd, xshareData)
-			loop += 1
-			if loop == 2:
 				try:
-					from resources.lib.utils import getXshareData
-					xshareData = getXshareData().get('versions', {})
-					xrw('tvhay.dat', json.dumps(xshareData))
-					xshareData['loop'] = 1
-				except:xshareData = {}
-		
-		if not link:
-			from resources.lib.fshare import getLinkTVhay
-			link = getLinkTVhay(url)
-		
-		if link:xbmcsetResolvedUrl(link)
-		else:mess(u'Sorry. Chưa get được link. Hãy thử lại nhé ...', 'tvhay.org')
+					j = json.loads(b)
+					b = xread(player, {'User-Agent': j['ua']}, 'link=%s&%s' % (linkData, j['data']))
+					#j = json.loads(b)
+					link = json.loads(b).get("link","")
+				
+				except:
+					j = ""
+				
+				if link:
+					xrw("tvhay.ua", j['ua'])
 
+			if isinstance(link, dict):
+				link = link.get("link","")
+			
+			elif isinstance(link, list):
+				link = googleItems(link)
+			
+			elif not isinstance(link, basestring):
+				link = ''
+			
+			if link:
+				xbmcsetResolvedUrl(link)
+				return
+			
 def television(name,url,img,fanart,mode,page,query,text):
 	fptlive_ico = icon['fptplay']
 	c           = 'orange'
@@ -9199,7 +9167,8 @@ def television(name,url,img,fanart,mode,page,query,text):
 				elif 'rtmp' in href or 'udp:' in href:addir_info(u2s(title),href,img,'',mode,1,'fptiptvPlay')
 			except:pass
 		
-	elif query=='fptiptvPlay':xbmcsetResolvedUrl(url)
+	elif query=='fptiptvPlay':
+		xbmcsetResolvedUrl(url)
 	
 	elif 'SCTV' in query:
 		def login(user,passwd):
@@ -9213,16 +9182,21 @@ def television(name,url,img,fanart,mode,page,query,text):
 			return cookie
 		
 		def loadMenu(b,name):
-			s=[i for i in b.split('<div id="') if '>%s</a></div>'%namecolor(name)in i]
-			if s:s=s[0]
-			else:s=''
+			s = [
+				i for i in b.split('<div class="title-category">') 
+				if '>%s</font></a></h2>'%namecolor(name)in i
+			]
 			
-			for s in re.findall('(<div class="item-channel".+?</div>)',s,re.S):
-				href=xhref(s)
-				try:title=href.rsplit('/',1)[1]
-				except:continue
-				href='http://tv24.vn'+href.replace(' ','%20')
-				img=ximg(s)
+			s = s[0] if s else ""
+			
+			for s in re.findall('(<a.+?/a>)', s, re.S):
+				href = xhref(s)
+				try:
+					title = href.rsplit('/',1)[1]
+				except:
+					continue
+				href = 'https://tv24.vn'+href.replace(' ','%20')
+				img = ximg(s)
 				addir_info(title,href,img,'',mode,1,'SCTVplay')
 		
 		def string_encrypt(key, str):
@@ -9247,11 +9221,15 @@ def television(name,url,img,fanart,mode,page,query,text):
 			user=myaddon.getSetting('sctv_user')
 			passwd=myaddon.getSetting('sctv_pass')
 			hd['Cookie']=xrw('sctv.ck',login(user,passwd))
-		if url=='SCTV':
-			b=xrw('sctv.html',xread('http://tv24.vn/kenh-truyen-hinh',hd,None,10))
-			for title in re.findall('>([^>]+?)</a></div>',b):
-				addir_info(namecolor(title,'tomato'),'menu',img,'',mode,1,'SCTV',True)
-			loadMenu(b,'Kênh Phim')
+		
+		if url == 'SCTV':
+			b = xrw('sctv.html',xread('https://tv24.vn/kenh-truyen-hinh',hd,None,10))
+			channels = re.findall('>([^>]+?)</font></a></h2>', b)
+			if channels:
+				for title in channels:
+					addir_info(namecolor(title,'tomato'),'menu',img,'',mode,1,'SCTV',True)
+				
+				loadMenu(b,channels[0])
 		
 		elif url=='menu':loadMenu(xrw('sctv.html'),name)
 		elif query=='SCTVplay':
@@ -11043,6 +11021,31 @@ def fcine(name,url,img,fanart,mode,page,query):
 			delete_folder(subsfolder)
 		
 		try:
+			b  = xread(url)
+			if b:
+				fn = query.replace('download.','')+'.srt'
+				
+				fn = os.path.join(subsfolder,'Vie.'+fn)
+				if os.path.isfile(fn):
+					os.remove(fn)
+				#log([tempfn,fn])
+				xrw(fn, b, 'wb')
+				mess('Đã download sub vào xshare subfolder')
+			
+			else:
+				mess('Download sub thất bại!')
+		
+		except:
+			mess('Downloaded sub thất bại!')
+		
+		return 'no'
+	
+	elif 'download1' in query:
+		mess('Initializing Downloader ...')
+		if myaddon.getSetting('autodel_sub')=='true':
+			delete_folder(subsfolder)
+		
+		try:
 			tempfn = os.path.join(tempfolder,'sub.tmp')
 			if 'http://fcine.net' in url:
 				b  = urllib.urlretrieve(url,tempfn)[1]
@@ -11073,7 +11076,8 @@ def fcine(name,url,img,fanart,mode,page,query):
 
 def taiphimhdnet(name,url,img,fanart,mode,page,query):
 	c       = 'FF1E90FF'
-	urlhome = 'http://taiphimhd.net'
+	#urlhome = 'http://taiphimhd.net'
+	urlhome = 'http://taiphimhd.com'
 	ico     = os.path.join(iconpath,'taiphimhdnet.png')
 	if not os.path.isfile(ico):
 		b = xread('http://taiphimhd.net/sites/all/themes/taiphimhd/logo/200x200.png')
@@ -11103,9 +11107,10 @@ def taiphimhdnet(name,url,img,fanart,mode,page,query):
 		addir_info(title,'taiphimhd.net',ico,'',mode,1,'search',True)
 		
 		cat=re.findall('<h2 class="megamenu-parent-title"><a href="(.+?)"',b)
-		addir_info(namecolor('Phim lẻ',c),cat[0],ico,'',mode,1,'phimle',True)
-		addir_info(namecolor('Phim bộ',c),cat[1],ico,'',mode,1,'phimbo',True)
-		add_sep_item('Đề cử ------------------------')
+		if cat:
+			addir_info(namecolor('Phim lẻ',c),cat[0],ico,'',mode,1,'phimle',True)
+			addir_info(namecolor('Phim bộ',c),cat[1],ico,'',mode,1,'phimbo',True)
+			add_sep_item('Đề cử ------------------------')
 		for s in re.findall('(<div class="views-rotator-item".+?/div>)',b,re.S):makedir(s)
 		
 		for s in re.findall('(<div class="defaultblock">.+?<div class="more-link">)',b,re.S):
@@ -11551,7 +11556,7 @@ def banhtv(name,url,img,fanart,mode,page,query,text):
 			
 	elif query=='play':
 		if '/phim/' in url:
-			url=url.replace('/phim/','/xem-phim/')
+			url = url.replace('/phim/','/xem-phim/')
 		
 		reverse = True if myaddon.getSetting('resolut') == 'Max' else False
 		b = xread(url)
@@ -11560,7 +11565,7 @@ def banhtv(name,url,img,fanart,mode,page,query,text):
 		keyAES = 'banhtv.com4590481877'+id
 		#bplayer.js decodeLink
 		from resources.lib.servers import gibberishAES
-		from resources.lib.utils import getGDLink
+		from resources.lib.utils import getGDLink, xread0
 		
 		
 		link = ""
@@ -11582,6 +11587,7 @@ def banhtv(name,url,img,fanart,mode,page,query,text):
 			try:
 				#j = sorted(j, key=lambda k: int(k[1]),reverse=reverse)
 				for href, label in j:
+					#log(href)
 					if 'akamaized.net' in href:
 						href = href.replace('*/','%2A%2F')
 						href = xget(href)
@@ -11590,13 +11596,39 @@ def banhtv(name,url,img,fanart,mode,page,query,text):
 					
 					elif 'drive.google.com' in href:
 						link = getGDLink(href)
+						if link:
+							o = xread0(link)
+							if not o or o.getcode() != 200:
+								link = ""
 				
 					elif '/videoplayback' in href:
 						href = xget(href)
 						if href:
 							link = href.geturl()
+					
+					elif 'api.banhtv.com' in href:
+						o = xread0(href)
+						if o and o.getcode() == 301:
+							href = o.headers.get('location', "")
+							o = xread0(href)
+						
+						if o and o.getcode() == 302:
+							link = o.headers.get('location', "")
+						
+						if link:
+							o = xread0(link)
+							if not o or o.getcode() != 200:
+								link = ""
+					
+					elif '.mp4' in href:
+						o = xread0(href)
+						if o and o.getcode() == 200:
+							link = href
+							
+							
 			except:
 				pass
+			
 			return link
 		
 		def jj(d):
@@ -11634,8 +11666,10 @@ def banhtv(name,url,img,fanart,mode,page,query,text):
 				j += jt
 		
 		d = data.get("sourceLinks", [])
+		
 		if d:
 			jt = jj(d)
+			
 			if jt:
 				j += jt
 		
@@ -11647,107 +11681,12 @@ def banhtv(name,url,img,fanart,mode,page,query,text):
 				if link:
 					break
 		
-		if not link and False:
-			for d in data:
-				try:
-					try:
-						j = [(dc(m.get('file')), rsl(m.get('label'))) for m in data.get(d,{}) if kc(m)]
-					except:
-						j=[]
-					
-					if not j:
-						j = []
-						try:
-							for m in data.get(d,{}):
-								#log(m.get('label'))
-								for n in m.get('links'):
-									j.append((dc(n.get('file')), rsl(n.get('label'))))
-						except:pass
-						
-						if j:link = gl(j)
-						if link:
-							break
-					
-				except:
-					continue
-
-				if link:
-					break
-		
 	
 		if link:
 			xbmcsetResolvedUrl(link)
 		else:
 			mess('File invalid or deleted!','banhtv.com') 
-		
-	elif query=='play1':
-		if '/phim/' in url:
-			url=url.replace('/phim/','/xem-phim/')
-		
-		b = xread(url)
-		if not text:
-			servers = re.findall('data-link="(.+?)">(.+?)</a>',b)
-			if len(servers)>1:
-				label = 'Chọn Server bạn muốn xem'
-				choices = [i[1] for i in servers]
-				choice = xselect(label,choices)
-				text = choices[choice] if choice >= 0 else choices[0]
-		
-		id = xsearch('"modelId":"(.+?)"',b,
-			result=xsearch('<input id="film_id".+?value="(.+?)">',b))
-		
-		keyAES = 'banhtv.com4590481877'+id
-		#bplayer.js decodeLink
-		from resources.lib.servers import gibberishAES
-		#log(keyAES)
-		
-		link = ''
-		j = []
-		dataLink = re.findall('data-link="(.+?)">(.+?)</a>',b)
-		
-		if dataLink:
-			for link,label in dataLink:
-				#log([text,label])
-				try:
-					if (text and label in text) or not text:
-						link = gibberishAES(link,keyAES)
-						#log(link)
-						j = json.loads(xread('http://banhtv.com'+link))
-						j = [j[i] for i in j.keys() if isinstance(j[i],list) and j[i]]
-				except:
-					j = []
-			
-			items=[]
-			for m in j:
-				items += [{'link':i.get('file'),'label':i.get('label','')} 
-							for i in m if i.get('file')]
-			
-			link = googleItems(items)
-			
-		else:
-			try:
-				dataLink = json.loads(xsearch('"sources":(\[.+?\])', b))
-				dataLink = [(i.get('file'), i.get('label')) for i in dataLink]
-			except:
-				dataLink = []
-			
-			#log(str(dataLink))
-			if dataLink:
-				for link,label in dataLink:
-					#log([text,label])
-					try:
-						if (text and label in text) or not text:
-							link = gibberishAES(link,keyAES)
-							link = xget(link).geturl()
-							if link:
-								break
-					except:
-						pass
-				
-		
-		if link:xbmcsetResolvedUrl(link)
-		else:mess('File invalid or deleted!','banhtv.com')
-		
+
 def kenhphimbo(name,url,img,fanart,mode,page,query):
 	urlHome='http://kenhphimbo.net/';c='yellow'
 	ico=os.path.join(iconpath,'kenhphimbo.png')
@@ -12233,7 +12172,7 @@ def ffilm(name,url,img,fanart,mode,page,query):
 		
 	def getLINKS(url):
 		b = xread(url)
-		s = re.findall('(<a class="link_a".+?id=".+?">)', b)
+		s = re.findall('(<tr.+?/tr>)', xsearch('(<tbody.+?tbody>)', b))
 		
 		if not s:
 			href = xsearch('href="(.+?)"', xsearch('(<a[^>]+?>Download</a>)', b))
@@ -12241,24 +12180,33 @@ def ffilm(name,url,img,fanart,mode,page,query):
 			s = re.findall('(<a class="link_a".+?id=".+?">)', b)
 		
 		for i in s:
-			title = ' '.join(
-				i.strip() for i in re.sub('<.+?>', ' ', i).split()
-				).replace('Download ','')
 			href = xsearch('href="(.+?)"', i)
+			title = ' '.join(
+					[
+						re.sub('<.+?>', '', i).replace('Download', '').strip() 
+						for i in re.findall('(<td.+?/td>)', i)
+					]
+			)
 			addir_info(title,href,img,'',mode,1,'link',True)
 		
 	def getEPS(url):
-		b = xread(url)
-		href = xsearch('href="(.+?)"', xsearch('(<a[^>]+?>Download</a>)', b))
-		b = xread(href)
-		s = xsearch('(<ul class="episodios".+?/ul>)', b)
-		for i in re.findall('(<li.+?/li>)', s):
-			title = ' '.join(
-				i.strip() for i in re.sub('<.+?>', ' ', i).split()
-				).replace('Download ','')
-			href = xsearch('href="(.+?)"', i).split('?')[0]
-			img = xsearch('src="(.+?)"', i)
-			addir_info(title,href,img,'',mode,1,'links',True)
+		if 'www.fshare.vn' in url:
+			fshareFolder(url)
+		else:
+			b = xread(url)
+			href = xsearch('href="(.+?)"', xsearch('(<a[^>]+?>Download</a>)', b))
+			if 'www.fshare.vn' in href:
+				fshareFolder(href)
+			else:
+				b = xread(href)
+				s = xsearch('(<ul class="episodios".+?/ul>)', b)
+				for i in re.findall('(<li.+?/li>)', s):
+					title = ' '.join(
+						i.strip() for i in re.sub('<.+?>', ' ', i).split()
+						).replace('Download ','')
+					href = xsearch('href="(.+?)"', i).split('?')[0]
+					img = xsearch('src="(.+?)"', i)
+					addir_info(title,href,img,'',mode,1,'links',True)
 			
 		
 	def getEPS1(url):
@@ -12472,6 +12420,28 @@ def getTextFile(pastebin, textuploader = ""):
 		b = xread("http://textuploader.com/%s/raw" % textuploader)
 	return b.replace('\r\n', '\n')
 
+def asiad_2018(name,url,img,fanart,mode,page,query):
+	ico=os.path.join(iconpath,'xshare.png')
+	if query=='Home':
+		addir_info(namecolor("Link 1",'FFAC070D'),'',ico,'',mode,1,'livefootball1')
+		addir_info(namecolor("Link 2",'FFAC070D'),'',ico,'',mode,1,'beinsports4')
+		addir_info(namecolor("Link 3",'FFAC070D'),'',ico,'',mode,1,'beinsports5')
+		addir_info(namecolor("Link 4",'FFAC070D'),'',ico,'',mode,1,'beinsports6')
+		addir_info(namecolor("Link dự phòng",'FFAC070D'),'',ico,'',mode,1,'duphong')
+	
+	elif query=='duphong':
+		b=xread('https://drive.google.com/uc?id=1bencS1CzzSBWhZkbZI8rAH6fcPiI2zY2&export=download')
+		exec(b.replace('\r\n', '\n'))
+		link = asiad2018()
+		xbmcsetResolvedUrl(link, "Asiad 2018 " + namecolor(name))
+		
+	else:
+		b=xread('https://drive.google.com/uc?id=1arVGPZMowjXTyS6wzOPSxEc-RypjUbtV&export=download')
+		exec(b.replace('\r\n', '\n'))
+		link = asiad2018(query)
+		xbmcsetResolvedUrl(link, "Asiad 2018 " + namecolor(name))
+		
+
 try:#Container.SetViewMode(num) addir:name,link,img,fanart,mode,page,query,isFolder
 	myfolder = s2u(myaddon.getSetting('thumuccucbo'))
 	if not os.path.exists(myfolder):
@@ -12616,6 +12586,7 @@ elif mode == 61 : end=kenhphimbo(name,url,img,fanart,mode,page,query)
 elif mode == 62 : anivn(name,url,img,fanart,mode,page,query)
 elif mode == 63 : animetvn(name,url,img,fanart,mode,page,query)
 elif mode == 64 : driveGoogle(name,url,img,fanart,mode,page,query)
+elif mode == 65 : asiad_2018(name,url,img,fanart,mode,page,query)
 elif mode == 87 : freeServers(name,url,img,fanart,mode,page,query)
 elif mode == 88 : servers_list(name,url,img,fanart,mode,page,query)
 elif mode == 89 : television(name,url,img,fanart,mode,page,query,text)

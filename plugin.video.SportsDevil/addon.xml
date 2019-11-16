@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="plugin.video.SportsDevil"
-  version="2018.02.02"
+  version="2019.11.15"
   name="SportsDevil"
   provider-name="SportsDevil">
   <requires>
@@ -19,9 +19,7 @@
   </requires>
   <extension 
     point="xbmc.python.pluginsource"
-    library="default.py">
-   <provides>video</provides>
-  </extension>
+    library="default.py"/>
   <!-- <extension point="xbmc.service" library="service/proxy_service.py" start="startup"/> *Changed-2-StreamLink* -->
   <extension point="xbmc.service" library="service/streamlink_proxy.py" start="startup" />
   <extension point="xbmc.addon.metadata">

@@ -596,12 +596,14 @@ def getOpenloadLink(id):
 	except:
 		j = {}
 	
+	link = ""
 	if j.get("status",0) == 200:
 		link = j.get('result',{}).get('url','')
 	
 	elif j.get("status",0) == 403:
 		link = ""
-		mess('Hãy vào trang https://openload.co/pair để mở IP của bạn trên openload.co')
+		mess('Hãy pair ip tại https://olpair.com để play được link trên openload')
+	
 	return link
 
 def getGDLink(href):
@@ -706,3 +708,24 @@ def toBase36(value):
 		value,mod=divmod(value, 36)
 		result.append("0123456789abcdefghijklmnopqrstuvwxyz"[mod])
 	return sign+"".join(reversed(result))
+
+def cliptv_cookie():
+	path = xbmc.translatePath(addon.getAddonInfo('path'))
+	return xrw(os.path.join(path,'resources','lib','cliptv.cookie'))
+
+class NoRedirection(urllib2.HTTPErrorProcessor):
+	def http_response(self, request, response):
+		return response
+	https_response = http_response
+
+def xread0(url, hd = {'User-Agent':'Mozilla/5.0'}):
+	opener = urllib2.build_opener(NoRedirection)
+	urllib2.install_opener(opener)
+	opener.addheaders = hd.items()
+	try:
+		o = opener.open(url)
+	except:
+		o = ""
+	
+	return o
+

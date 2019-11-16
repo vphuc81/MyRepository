@@ -481,7 +481,7 @@ class serversList:
 			('anime47.com','37','deepskyblue'), ('tvhay.org','41','gold'), 
 			('hdviet.com','22','darkorange'), ('fcine.net','25','gold'), 
 			('fptplay.net','07','orangered'), ('fsharefilm.com','60','FFF08080'),
-			('hayhaytv.vn','23','tomato'), ('bilutv.com','36','hotpink'), 
+			('bilutv.com','36','hotpink'), 
 			('phimmoi.net','24','ghostwhite'), ('hdonline.vn','30','turquoise'), 
 			('phim14.net','39','chartreuse'), ('kenh88.com','26','cyan'), 
 			('phimbathu.com','43','lightgray'), ('kphim.tv','33','lightgreen'), 
@@ -494,7 +494,7 @@ class serversList:
 			('animetvn.com','63','FFD0C101')]
 		
 		'''
-		('biphim.com','58','FFBA55D3'), ('phimsot.com','29','orangered')
+		(('hayhaytv.vn','23','tomato'), 'biphim.com','58','FFBA55D3'), ('phimsot.com','29','orangered')
 		('megabox.vn','17','orangered') ('phim47.com','28','springgreen'), 
 		('phim3s.net','32','lightgray'), ('phimdata.com','27','FFDB4BDA')
 		, ('mphim.net','55','deepskyblue')
@@ -536,10 +536,14 @@ class serversList:
 		temp=self.ordinal[ol+1];self.ordinal[ol+1]=sl;self.ordinal[ol]=temp
 		xrw('free_servers.dat',','.join(str(i) for i in self.ordinal))
 
+		
+		
+		
 	def search(self, startIndex, string):
 		key = 'AIzaSyCszeAJOH1e3zrTtHmGFypth8M1adU1sEI'
 		cx = '009789051051551375973:rgvcpqg3uqw'
 		href = 'https://www.googleapis.com/customsearch/v1?startIndex=%s&key=%s&cx=%s&q=%s'
+		#href = 'https://www.googleapis.com/customsearch/v1element?start=%s&key=%s&rsz=filtered_cse&num=20&hl=vi&cx=%s&q=%s&cse_tok=ABPF6HiugIFMmWGlRClukRwD6XTiNVW3qg:1528296358942'
 		b = xread(href % (startIndex, key, cx, string))
 		
 		try:
@@ -548,7 +552,6 @@ class serversList:
 			j = {}
 		
 		items = []
-		log('aaa')
 		
 		for item in j.get('items', []):
 			url = title = img = ''
@@ -602,61 +605,7 @@ class serversList:
 			items.append((title,str(startIndex),""))
 		
 		return items
-
-	def search1(self,start,string):
-		# key new: AIzaSyCszeAJOH1e3zrTtHmGFypth8M1adU1sEI
-		#b=xread('https://www.googleapis.com/customsearch/v1?key=AIzaSyCszeAJOH1e3zrTtHmGFypth8M1adU1sEI&cx=009789051051551375973:rgvcpqg3uqw&&q=' + string)
-		#href='https://www.googleapis.com/customsearch/v1element?key=AIzaSyCVAXiUzRYsML1Pv6RwSG1gunmMikTzQqY&rsz=filtered_cse&num=20&hl=vi&prettyPrint=false&source=gcsc&gss=.com&cx=009789051051551375973:rgvcpqg3uqw&googlehost=www.google.com&callback=google.search.Search.apiary19044&q='+string
-		
-		#href='https://www.googleapis.com/customsearch/v1element?key=AIzaSyCVAXiUzRYsML1Pv6RwSG1gunmMikTzQqY&rsz=filtered_cse&num=20&hl=vi&prettyPrint=false&source=gcsc&gss=.vn&sig=01d3e4019d02927b30f1da06094837dc&cx=009789051051551375973:rgvcpqg3uqw&cse_tok=AHKYotWVmvV1wohA3g8oNFAm_6cK:1495660148313&sort=&googlehost=www.google.com&oq=thien&&callback=google.search.Search.apiary6141&q=' + string
-		
-		if not start:
-			#href = xread('https://drive.google.com/uc?id=0B5y3DO2sHt1LOFlmVFk1ZHlOb0U')
-			href = xread('https://drive.google.com/uc?id=1BJIRq76n8tTNI1s5KwN3wsgdNTFdKX61')
-			xrw('ggsearch.txt', href)
-		else:
-			href = xrw('ggsearch.txt')
-		
-		href = href % ('009789051051551375973:rgvcpqg3uqw', start, string)
-		if not start:
-			href=href.replace('&start=0','')
-		log(href)
-		try:j=json.loads(xsearch('(\{.+\})',xread(href)))
-		#try:j=json.loads(xsearch('(\{.+\})',xread(uh)))
-		except:j={}
-		if not j.get('results',{}):
-			mess(u'Tìm gần đúng')
-			try:j=json.loads(xsearch('\((\{.+?\})\)',xread(url.replace('%22',''))))
-			except:j={}
-			if not j:return []
-		
-		def detail(l):
-			title=l.get('titleNoFormatting','').encode('utf-8')
-			href=l.get('unescapedUrl','').encode('utf-8')
-			try:img=l['richSnippet']['cseImage']['src'].encode('utf-8')
-			except:img=''
-			return title,href,img
-		
-		def dk(i):return i.get('titleNoFormatting') and i.get('unescapedUrl')
-		m=[detail(i) for i in j.get('results',{}) if dk(i)]
-		
-		items=[];n=[];p=[]
-		for i in m:
-			s0=' '.join(re.sub('Xem|xem|Phim|phim|Tập \d+|tập \d+','',i[0]).split())
-			s1=i[1].strip()
-			if s0 not in n and s1 not in p:n.append(s0);p.append(s1);items.append((s0,s1,i[2]))
-		items=sorted(items,key=lambda k:k[0])
-		for i in items:print i[0]
-		
-		cursor=j.get('cursor',{})
-		currentPage=cursor.get('currentPageIndex',1000)
-		pages=cursor.get('pages',{})
-		start=''.join(i.get('start','') for i in pages if i.get('label',0)==currentPage+2)
-		if start:
-			title='[COLOR lime]Page next: %d[/COLOR]'%(currentPage+2)
-			items.append((title,start,''))
-		return items
-
+	
 class googlesearch:
 	def __init__(self):
 		self.url = ''
@@ -686,32 +635,67 @@ class googlesearch:
 		
 		return title,href,img
 	
-	def content(self,cx,start,string,srv=''):
-		if not start and not srv:
-			self.url = xread('https://drive.google.com/uc?id=1xVMqHoyCWP1gNFDbpoFdZy1GgdLXV9bF')
-			xrw('ggsearch.txt', self.url)
-		elif not start and srv=='fshare':
-			self.url = xread('https://drive.google.com/uc?id=1QAEpBAnxWu5qcVUcLXhxKZUya8tu3PWF')
-			xrw('ggsearch.txt', self.url)
+	def content(self, cx, start, string, srv=''):
+		self.url = 'https://www.googleapis.com/customsearch/v1element?key={key}&cx=009789051051551375973:{cx}&rsz=filtered_cse&num=20&hl=vi&prettyPrint=false&source=gcsc&gss=.vn&sig={sig}&cse_tok={cse_tok}&sort=&googlehost=www.google.com&callback=google.search.Search.apiary{apiary}&start={start}&q={string}'
+		
+		key = 'AIzaSyCVAXiUzRYsML1Pv6RwSG1gunmMikTzQqY'
+		sig = 'f9d319213db9a87438e3102cff9a2ec9'
+		
+		if srv == 'free':
+			cx = 'rgvcpqg3uqw'
+			cse_tok = cse_tok = 'ABPF6HiWVOlPQFntoQCGcmOw2cELhIHkMQ:1525783598959'
+			apiary = '18391'
+		
+		elif srv == 'fshare':
+			cx = 'xekpkwarjri'
+			cse_tok = 'ABPF6HivEgeKnkCt69qrGXKoyb8shyygSA:1525787872211'
+			apiary = '13645'
+		
+		elif srv == '4share':
+			cx = 'a1qafjesmlc'
+			cse_tok = 'ABPF6HivEgeKnkCt69qrGXKoyb8shyygSA:1525787872211'
+			apiary = '13645'
+		
+		elif srv == 'tenlua':
+			cx = 'sg3wi6kqhay'
+			cse_tok = 'ABPF6HivEgeKnkCt69qrGXKoyb8shyygSA:1525787872211'
+			apiary = '13645'
+		
+		elif srv == 'hdvietnam':
+			cx = 'hzgiaiqusl0'
+			cse_tok = 'ABPF6HgMmSRj0ZKOG9uHks-g3ouLZW5sgw:1525789602977'
+			apiary = '3677'
+		
 		else:
-			self.url = xrw('ggsearch.txt')
+			cx = 'xekpkwarjri'
+			cse_tok = 'ABPF6HgMmSRj0ZKOG9uHks-g3ouLZW5sgw:1525789602977'
+			apiary = '3677'
+			
+		href = self.url.format(
+			key = key,
+			cx = cx,
+			sig = sig,
+			cse_tok = cse_tok,
+			apiary = apiary,
+			start = start,
+			string = '%22' + '+'.join(string.split()) + '%22'
+		)
 		
-		self.url = self.url.replace('apiary6829','apiary6499')
-		
-		string='+'.join(string.split())
-
-		href = self.url % (cx,start,'%22'+string+'%22')
+		b = xread(href)
 		try:
-			d = json.loads(xsearch('\((\{.+?\})\)',xread(href)))
+			d = json.loads(xsearch('\((\{.+?\})\)', b))
 		except:
-			d = {}
+			try:
+				d = json.loads(b)
+			except:
+				d = {}
+		
 		log(href)
 		
 		if not d.get('results',{}):
 			mess(u'Tìm gần đúng ...','xshare')
-			href = self.url % (cx,start,'%22'+string+'%22')
 			try:
-				d = json.loads(xsearch('\((\{.+?\})\)',xread(href)))
+				d = json.loads(xsearch('\((\{.+?\})\)',xread(href.replace("%22", ""))))
 			except:
 				d = {}
 			
@@ -732,7 +716,7 @@ class googlesearch:
 class fshare:#https://www.fshare.vn/home/Mục chia sẻ của thaitni/abc?pageIndex=1
 	def __init__(self, username='', password='', id=''):
 		self.url_id = id
-		self.hd = {'User-Agent':'Mozilla/5.0','x-requested-with':'XMLHttpRequest'}
+		self.hd = {'User-Agent':'Mozilla/5.0','x-requested-with':'XMLHttpRequest', 'Cookie':''}
 		self.logged = self.token = ''
 		if username and password:
 			self.user,self.passwd = username,password
@@ -755,7 +739,8 @@ class fshare:#https://www.fshare.vn/home/Mục chia sẻ của thaitni/abc?pageI
 		try:
 			b = urllib2.urlopen(urllib2.Request('https://www.fshare.vn/site/contact'))
 			cookie = b.headers.getheader('set-cookie')
-			fs_csrf = xsearch('"_csrf-app" value="(.+?)"',b.read())
+			fs_csrf = xsearch('"csrf-token" content="(.+?)"',b.read())
+			#fs_csrf = xsearch('"_csrf-app" value="(.+?)"',b.read())
 		except:
 			cookie = fs_csrf = ''
 
@@ -769,11 +754,15 @@ class fshare:#https://www.fshare.vn/home/Mục chia sẻ của thaitni/abc?pageI
 			o = opener.open('https://www.fshare.vn/site/login', urllib.urlencode(data))
 			
 			if o.getcode() == 302:
-				self.hd['Cookie'] = xsearch('(fshare-app=.+?)\W', o.headers.get('Set-Cookie'))
+				cookie = xsearch('(fshare-app=.+?)\W', o.headers.get('Set-Cookie'))
+				self.hd['Cookie'] = cookie
+				#self.hd['Authorization'] = 'Bearer ' + xsearch('=(.+)', cookie)
 				mess('Login thành công','Fshare.vn')
 				self.logged = 'success'
 			else:
 				mess(u'Login không thành công!','Fshare.vn')
+		else:
+			mess(u'Login kthất bại!','Fshare.vn')
 		
 		return self.logged
 		
@@ -1206,26 +1195,44 @@ class fshare:#https://www.fshare.vn/home/Mục chia sẻ của thaitni/abc?pageI
 			if not self.remove_folder(id):result=False
 		return result
 	
-	def searchFollow(self,q):
-		b = xread('https://www.fshare.vn/files/searchFollow?key=%s'%q,self.hd)
-		items=[]
-		for s in refas('(<li.+?/li>)',b):
-			title=xsearch('title="(.+?)"',s)
-			href=xsearch('href="(.+?)"',s)
-			if not title or not href:continue
-			href='https://www.fshare.vn'+href
-			t=xsearch('list_item">(\d+)</div>',s)
-			if t:title='%s [COLOR blue]%s (files)[/COLOR]'%(title,t)
-			t=xsearch('data-int="\d+">(.+?)</div>',s)
-			if t:title='%s [COLOR green]%s[/COLOR]'%(title,t)
-			t=xsearch('data-int="">(\d+)</div>',s).strip()
-			if t:t=int(t);title='%s [COLOR cyan]%d (follow)[/COLOR]'%(title,t)
-			else:t=0
-			followed='"hidden pull-right btn btn-danger following follow"' in s
-			if followed:title='[COLOR orange]%s[/COLOR]'%title
-			items.append((title,href,t))
-		def abc(s):return not re.search('photoshop|.hần .ềm',s)
-		items=[(i[0],i[1]) for i in sorted(items, key=lambda k:k[2],reverse=True) if abc(i[0])]
+	def searchFollow(self, q, p=1):
+		#b = xread('https://www.fshare.vn/files/searchFollow?key=%s'%q,self.hd)
+		if q == 'hot':
+			href = 'https://www.fshare.vn/file/follow'
+		else:
+			href = 'https://www.fshare.vn/file/follow-search?keyword=%s&page=%s'%(q, p)
+		
+		b = xread(href, self.hd)
+		next = xsearch('<li class="next"><[^>]+?href="(.+?)"', b)
+		
+		b = [i for i in re.findall('(<tbody.+?/tbody>)', b, re.S) if 'onclick' in i]
+		b = b[0] if b else ""
+		items = re.findall('onclick="window.open\(\' (.+?)\'\)">(.+?)</a>', b)
+		items = [(i[1], 'https://www.fshare.vn'+i[0]) for i in items]
+		
+		if next:
+			items.append(('[COLOR lime]Trang tiếp theo ... %s[/COLOR]', next))
+		'''
+		else:
+			b = xread('https://www.fshare.vn/file/follow-search?keyword=%s'%q,self.hd)
+			for s in refas('(<li.+?/li>)',b):
+				title=xsearch('title="(.+?)"',s)
+				href=xsearch('href="(.+?)"',s)
+				if not title or not href:continue
+				href='https://www.fshare.vn'+href
+				t=xsearch('list_item">(\d+)</div>',s)
+				if t:title='%s [COLOR blue]%s (files)[/COLOR]'%(title,t)
+				t=xsearch('data-int="\d+">(.+?)</div>',s)
+				if t:title='%s [COLOR green]%s[/COLOR]'%(title,t)
+				t=xsearch('data-int="">(\d+)</div>',s).strip()
+				if t:t=int(t);title='%s [COLOR cyan]%d (follow)[/COLOR]'%(title,t)
+				else:t=0
+				followed='"hidden pull-right btn btn-danger following follow"' in s
+				if followed:title='[COLOR orange]%s[/COLOR]'%title
+				items.append((title,href,t))
+			def abc(s):return not re.search('photoshop|.hần .ềm',s)
+			items=[(i[0],i[1]) for i in sorted(items, key=lambda k:k[2],reverse=True) if abc(i[0])]
+		'''
 		return items
 
 class fptPlay:#from resources.lib.servers import fptPlay;fpt=fptPlay(c)
@@ -1242,9 +1249,8 @@ class fptPlay:#from resources.lib.servers import fptPlay;fpt=fptPlay(c)
 			if cookie:
 				self.hd['Cookie'] = cookie
 		
-		#self.hd={'Cookie':'laravel_id=1d71b90671c22a022178d16b69b342ce0e75dc15; token=eyJpdiI6InBxOHNPZFo5SlNOXC9uN2FoMUNyakZBPT0iLCJ2YWx1ZSI6IlZVTVlEcWJLbmdjMGdjR2JoNlwvVGRBendvWkNHTW1aOW5kMVFNSFRXOU1JUyszb3lGVUVYXC9pVXhyR1NRZnF4bzkydk5PaStXd1pEYk1pZGF2XC8rcjVRPT0iLCJtYWMiOiIwYThlMTdiODFhZDA2NmQzM2JiMTMyMzdkZjU3MzFiOGFjMTBjMzg5ZGMyNzZjMDRhNDA1ZTI3OTA4NzhkNDQ1In0%3D; laravel_session=eyJpdiI6IktEUnFcL1VOelQ2a0lrdHRjUnpOV0lBPT0iLCJ2YWx1ZSI6IlFvbjAxaWRLK3JZVFd1b2tSSEVuKzJrMjJFNEtOV3QzRDYxYzdUTmxPTzFYRHA3YjJSeGd0MTB3OGR4a1c2QmxSZVROUUgxY2J1RmcwclwvSjBVaWk3Zz09IiwibWFjIjoiZjk3Y2Y2OTY4MGUzYzk3MDUyMmY0NzMxMDc5YjAzNjNkN2Q0NTIwMzVhYjRjNDE5MTRlMzQwZWFmMDUwYWVkOCJ9','User-Agent':'Mozilla/5.0','Referer':'https://fptplay.vn/livetv','X-Requested-With':'XMLHttpRequest'}
-		
-		
+		self.hd = {'Cookie':'laravel_id=1d71b90671c22a022178d16b69b342ce0e75dc15; token=eyJpdiI6ImpQeHNpSldaZ1BEdUlOQjBpaDB2OVE9PSIsInZhbHVlIjoiclpBTGR5UEtpSnRsd1FiQlwvSlJQczV2WkNLNHErcHdCTHVhcGFXWld2UmdISHJvTFZWMndJdEQ4SzJqUFdQWW1GdTBEZkpkQmpJUnJOTGJ1U3N4NzdRPT0iLCJtYWMiOiIwMzU1NTUzNzM5NjQ0YjQxOGNmMDlhNjQ3YjY2N2YwMDVmOTYwZGRlZmEzZDdhZWY4Zjk2ODA3ZGUxNDIzNDQ0In0%3D; laravel_session=eyJpdiI6IlV1NU9YNXFUY21Zck1sbmVQdU5SNGc9PSIsInZhbHVlIjoidTRBZTQ3K3ZncmMwU0w5cjBUXC9BVHdLVFA1ZnpleERYSVRwK0ppRGdaN3Y0ZDFxUG05MWZSYTZ0azFcL0pVRGptenVMVmpNdmkrY0U4bzgyQmFwYmliZz09IiwibWFjIjoiZjhkY2I1YTIyMzM4M2Y0MDNhNjZiMDI2ZTdlYjM3YjNjMWNhOWQ1ODM0OTYzMGNiMmU0NjhhMmUzNjI2ZTJiOCJ9','User-Agent':'Mozilla/5.0','Referer':'https://fptplay.vn/livetv','X-Requested-With':'XMLHttpRequest'}
+
 	def login(self):
 		phone   = get_setting('phone_fptplay')
 		passwd  = get_setting('pass_fptplay')
@@ -1252,7 +1258,7 @@ class fptPlay:#from resources.lib.servers import fptPlay;fpt=fptPlay(c)
 		#log([phone, passwd, country])
 		data    = urllib.urlencode({'phone':phone,'password':passwd,'country_code':country})
 		
-		log(data)
+		#log(data)
 		b       = urlfetch.post('https://fptplay.vn/user/login', data=data)
 		if b.status == 302:
 			cookie = b.cookiestring
@@ -1262,7 +1268,7 @@ class fptPlay:#from resources.lib.servers import fptPlay;fpt=fptPlay(c)
 		else:
 			cookie = ''
 			mess(u'Login không thành công!','fptplay.net')
-		log(cookie)
+		#log(cookie)
 		return cookie
 			
 		
@@ -1358,10 +1364,19 @@ class fptPlay:#from resources.lib.servers import fptPlay;fpt=fptPlay(c)
 		#log("b = xread('https://fptplay.vn/show/getlinklivetv',%s,'%s')" % (self.hd,data))
 		#log(b)
 		
-		try:
-			link = json.loads(b).get('stream')
+		#try:
+		link = json.loads(b).get('stream')
+		if not link or "ttlogin" in link:
+			#cliptv_cookie = xrw(os.path.join(home,'resources','lib','cliptv.cookie'))
+			b = xread('https://cliptv.vn/truyen-hinh/'+id, {'Cookie':cliptv_cookie()})
+			link = xsearch('"src\W+(.+?)"', b)
+		
+		else:
 			link += '|User-Agent=Mozilla/5.0 AppleWebKit/537.36'
-		except: link = ''
+		
+		#except:
+		#	link = ''
+		
 		return link
 	
 	def playLink(self,url):
@@ -1527,7 +1542,7 @@ class phimoinet:
 		
 		alert = xsearch('<div class="alert-heading">(.+?)</div>',b)
 		href = xsearch('src="([^<]*?episodeinfo.+?)"',b).replace('javascript','json')
-		log(href)
+		#log(href)
 		
 		b = xread(href,self.hd)
 		if not b:
@@ -1537,7 +1552,7 @@ class phimoinet:
 			j = json.loads(b)
 		except:
 			j = {}
-		log(j)
+		#log(j)
 		
 		#links = j.get('medias',[]) + j.get('mediasBk5',[])
 		links = j.get('medias',[])
@@ -1554,12 +1569,13 @@ class phimoinet:
 			mess(alert)
 		
 		link=''
+		#log(['a',links])
 		if links:
-			items=ls([(i.get('url'),rsl(i.get('resolution'))) for i in links])
-			log(items)
-			
+			items = ls([(i.get('url'),rsl(i.get('resolution'))) for i in links if type(i) == dict])
+			#log(items)
+			#[(u'https://video.fhan3-3.fna.fbcdn.net/v/t42.9040-2/10000000_227083678011841_1575236353103233024_n.mp4?_nc_cat=0&efg=eyJybHIiOjE1MDAsInJsYSI6NDA5NiwidmVuY29kZV90YWciOiJzdmVfaGQifQ%3D%3D&rl=1500&vabr=781&oh=2e1b412685df51d9633d27d27afc3206&oe=5B644C50', '720')]
 			link = googleLinks(items)
-					
+			
 			if not link:
 				for href,label in items:
 					#link=xcheck(gibberishAES(href,'PhimMoi.Net://%s'%j.get('requestId')))
@@ -1601,6 +1617,11 @@ class phimoinet:
 					if link:
 						break
 		
+			if not link:
+				links = j.get('embedUrls', '')
+				if links:
+					link = links[0]
+				
 		return link
 
 class kPhim:
@@ -1680,8 +1701,10 @@ class kPhim:
 		
 		from resources.lib.fshare import kphim
 		b = kphim(b, url, server_id, video_id)
+		log([b, url, server_id, video_id])
 		href = xsearch('src="(.+?)"', b)
-
+		
+		
 		if not href:
 			items = re.findall("file\W+'(.+?)'.+?label\W+'(.+?)'", b, re.S)
 			if items:
@@ -1879,7 +1902,7 @@ class hdVietnamn:#from resources.lib.servers import hdvn;hdvn=hdvn()
 						self.hd,
 						'_xfToken=%s&_xfResponseType=json'%_xfToken
 						)
-					log("b=xread('http://www.hdvietnam.com/%s',%s,'_xfToken=%s&_xfResponseType=json')"%(likeHref,self.hd,_xfToken))
+					#log("b=xread('http://www.hdvietnam.com/%s',%s,'_xfToken=%s&_xfResponseType=json')"%(likeHref,self.hd,_xfToken))
 				content = xread(url,self.hd)
 				posts = re.findall('(<li id="post-.+?/li>)', content, re.S)
 				posts = [i for i in posts if dataAuthor == xsearch('data-author="(.+?)"', i)]
@@ -3261,7 +3284,7 @@ class hdonline:
 		try:m=json.loads(b).get('msg');mess(u'%s'%m[:m.find('.')])
 		except:pass
 	
-	def getLink(self,url,ep='1'):
+	def getLink1(self,url,ep='1'):
 		b     = xread(url,self.hd)
 		
 		if not xsearch('"file":"(.+?)"',b).replace('\\',''):
@@ -3330,10 +3353,11 @@ class hdonline:
 			if link and mes:
 				mess('subtitles %s của HDO' % mes[:-3])
 		
-			
+		if not link:
+			link,sub = self.getLink1(url,ep)
 		return link,sub
 
-	def getLink1(self,url,ep='1'):
+	def getLink(self,url,ep='1'):
 		#xbmc.log(str(self.hd))
 		id    = xsearch('-(\d+)\.',url)
 		b     = xread(url,self.hd)
@@ -3342,6 +3366,8 @@ class hdonline:
 		
 		href  = 'http://hdonline.vn/frontend/episode/xmlplay?ep=%s&fid=%s&token=%s-%s&format=json'
 		href  = href%(ep,id,token,rand)
+		
+		log(href)
 		try    : j = json.loads(xread(href+'&format=json',self.hd))
 		except : j = {}
 		
@@ -3355,7 +3381,7 @@ class hdonline:
 			except:
 				j = {}
 		
-		#xbmc.log(str(j))
+		log(j)
 		link = ""
 		sub  = []
 		
@@ -4028,9 +4054,10 @@ class k88com:
 				href = xsearch('iframe src="(.+?)"',b).replace('amp;','')
 				if href in hrefs:
 					return ''
+				
 				hrefs.append(href)
+				
 				if 'openload.co' in href:
-					#link=self.openload(href)#;mess('openload')
 					from resources.lib.opl import openload
 					link = openload(href)
 					if not link:
@@ -4082,15 +4109,31 @@ class k88com:
 					for href,r in ls([(i[0],rsl(i[1])) for i in l]):
 						link=xcheck(href.replace('amp;',''))
 						if link:break
+			
+			elif re.search('\{"file":".+?"\}', b):
+				href = xsearch('(\{"file":".+?"\})', b)
+				try:
+					link = json.loads(href).get('link', '')
+					if not link:
+						link = json.loads(href).get('file', '')
+				except:
+					link = ''
+			
 			return link
 		
-		response=xsearch('(<div class="play".+?class="button">)',xread(url),1,re.S)
-		hrefs=[]
-		link=getlink(response)
+		response = xsearch('(<div class="play".+?class="clear">)', xread(url), 1, re.S)
+		hrefs = []
+		#log(response)
+		link = getlink(response)
+		
 		if not link:
-			try:response=re.sub('<!--.+?-->','',response,flags=re.S)
-			except:pass
-			link=getlink(response)
+			try:
+				response = re.sub('<!--.+?-->', '', response, flags=re.S)
+			except:
+				response = ""
+			
+			link = getlink(response)
+		
 		return link
 
 class fcinenet:
@@ -4205,7 +4248,7 @@ class fcinenet:
 		
 		s = j.get('html','').encode('utf-8')
 		items = re.findall('href="(.+?)"[^<]*?>.+?>(.+?)</',s)
-		log(items)
+		#log(items)
 		items = [i for i in items if ('fshare.vn' in i[0] and i[1]) or 'phụ đề' in i[1]]
 		items = [(i[0],' '.join(re.sub('<.+?>','',i[1]).split())) for i in items ]
 

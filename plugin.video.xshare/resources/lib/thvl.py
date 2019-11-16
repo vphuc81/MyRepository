@@ -9,8 +9,6 @@ def fixLink(url):
 		url = 'http://thvl.vn' + url
 	return url
 
-
-
 def getLink(url):
 	if 'http://thvl.vn/jwplayer/' not in url:
 		b   = xread(url, {"Referer":"http://thvl.vn/"})
@@ -21,8 +19,8 @@ def getLink(url):
 		
 	b    = xread(fixLink(url), {"Referer":"http://thvl.vn/"})
 	link = xsearch('file: *"(.+?)"',b)
-	return link
-
+	
+	return link.split('?')[0].replace('thvl1hd.m3u8','thvl1hd_720000/index.m3u8')
 
 def home():
 	try:
@@ -67,6 +65,7 @@ def home():
 				
 				if i['slug']=='truyen-hinh':
 					items.append((namecolor("Lịch phát sóng THVL",c), 'http://thvli.vn/THVL1', img, "schedule", True))
+					items.append((namecolor("Kênh HTV7",c), 'http://thvl.vn/', img, "live", False))
 					items.append((namecolor("Kênh THVL 1",c), 'http://thvl.vn/', img, "live", False))
 					items.append((namecolor("Kênh THVL 2",c), 'http://thvl.vn/', img, "live", False))
 				
@@ -85,7 +84,6 @@ def home():
 			(namecolor("Phim mới cập nhật",c),"http://thvl.vn/?cat=8753","","phim",True)
 		]
 	return items
-
 
 def schedule(url):
 	if "THVL1" in url:
@@ -125,7 +123,6 @@ def schedule1(url):
 	
 	return [(i,href,"","live",False) for i in s if i]
 		
-
 def tonghop(url):
 	b     = xread(url)
 	items = []
@@ -141,7 +138,6 @@ def tonghop(url):
 		
 	return items
 
-
 def pageNext(b, items, query):
 	s    = xsearch("(<div class='wp-pagenavi'.+?/div>)",b,1,re.S)
 	href = xsearch("<span class='current'>\d+</span><a href='([^']+?)'",s).replace('#038;','')
@@ -155,7 +151,6 @@ def pageNext(b, items, query):
 		
 		title = "Trang kế: %s/%s"%(next, last)
 		items.append((namecolor(title,'lime'), fixLink(href), "", query, True))
-
 
 def episode(name, url, img):
 	b     = xread(url)
@@ -212,9 +207,32 @@ def chuongtrinh21h(url):
 	
 	return items
 
-
-
 def phim(url):
+	b = xread('http://api.thvli.vn/backend/cm/page/' + xsearch('([\w|-]{36})', url))
+	try:
+		j = json.loads(b)
+	except:
+		j = {}
+	
+	items = []
+	for rib in j.get("ribbons", []):
+		if not isinstance(rib, dict):
+			continue
+		
+		if rib.get("items"):
+			for i in rib.get("items"):
+				title = i['title'].encode('utf-8')
+				href = 'http://thvli.vn/' + i['id'].encode('utf-8')
+				img = i['images']['thumbnail'].encode('utf-8')
+				log(i['type'])
+				if i['type'] > 1:
+					items.append((namecolor(title, c), fixLink(href), img, 'eps', True))
+				else:
+					items.append((title, fixLink(href), img, 'play', False))
+	
+	return items
+
+def phim1(url):
 	b     = xread(url)
 	b = b[b.find('<div id="main-content">'):]
 	
