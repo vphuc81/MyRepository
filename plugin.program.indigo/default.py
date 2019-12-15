@@ -246,7 +246,8 @@ def toggle_notify():
     else:
         #option = 'OPT-in'
         option = 'OPT-out'
-        sub = ''
+        #sub = ''
+        sub = 'Un-'
         #status = 'Enabled'
         status = 'Disabled'
     confirm = xbmcgui.Dialog()
