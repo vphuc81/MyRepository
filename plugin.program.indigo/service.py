@@ -80,9 +80,9 @@ if kodi.get_var(run_once_path, 'hasran') == 'false':
     kodi.set_setting('sevicehasran', 'false')
 
 # Start of notifications
-if kodi.get_setting('sevicehasran') == 'true':
-    TypeOfMessage = "t"
-    notification.check_news2(TypeOfMessage, override_service=False)
+#if kodi.get_setting('sevicehasran') == 'true':
+    #TypeOfMessage = "t"
+    #notification.check_news2(TypeOfMessage, override_service=False)
 # ################################################## ##
 
 
