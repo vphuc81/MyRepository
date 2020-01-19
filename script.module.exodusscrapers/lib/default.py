@@ -1,89 +1,186 @@
+# -*- coding: utf-8 -*-
+
 import urlparse
-from exodusscrapers.modules import control
-from exodusscrapers import providerSources, providerNames
+
+from exoscrapers import sources_exoscrapers
+from exoscrapers.modules import control
 
 params = dict(urlparse.parse_qsl(sys.argv[2].replace('?', '')))
+action = params.get('action')
 mode = params.get('mode')
+query = params.get('query')
+
 
 def ScraperChoice():
-    from exodusscrapers import providerSources
-    sourceList = sorted(providerSources())
-    control.idle()
-    select = control.selectDialog([i for i in sourceList])
-    if select == -1: return
-    module_choice = sourceList[select]
-    control.setSetting('module.provider', module_choice)
-    control.openSettings('0.1')
-
-def ToggleProviderAll(enable):
-    from exodusscrapers import providerNames
-    sourceList = providerNames()
-    (setting, open_id) = ('true', '0.3') if enable else ('false', '0.2')
-    for i in sourceList:
-        source_setting = 'provider.' + i
-        control.setSetting(source_setting, setting)
-    control.openSettings(open_id)
-
-def toggleAll(setting, open_id=None, sourceList=None):
-    from exodusscrapers import getAllHosters
-    sourceList = getAllHosters() if not sourceList else sourceList
-    for i in sourceList:
-        source_setting = 'provider.' + i
-        control.setSetting(source_setting, setting)
-    control.openSettings(open_id)
+	from exoscrapers import providerSources
+	sourceList = sorted(providerSources())
+	control.idle()
+	select = control.selectDialog([i for i in sourceList])
+	if select == -1: return
+	module_choice = sourceList[select]
+	control.setSetting('module.provider', module_choice)
+	control.openSettings('0.1')
 
 
+if action == "ExoscrapersSettings":
+	control.openSettings('0.0', 'script.module.exoscrapers')
 
-if mode == "LambdaSettings":
-    control.openSettings('0.0', 'script.module.exodusscrapers')
+elif mode == "ExoscrapersSettings":
+	control.openSettings('0.0', 'script.module.exoscrapers')
 
-if mode == "ScraperChoice":
-    ScraperChoice()
 
-if mode == "ToggleProviderAll":
-    ToggleProviderAll(False if params['action'] == "DisableModuleAll" else True)
+elif action == "ScraperChoice":
+	ScraperChoice()
 
-if mode == "toggleAll":
-    open_id = params['open_id'] if 'open_id' in params else '0.0'
-    sourcelist = params['sourcelist'] if 'sourcelist' in params else None
-    toggleAll(params['setting'], open_id, sourceList=sourcelist)
 
-if mode == "toggleAllDebrid":
-    sourcelist = ['2ddl','300mbfilms','bestmoviez','ddls','ddlvalley','directdl','gomovies','hevcfilm',
-    'moviesonline','myvideolink','phazeddl','power','releasebb','RLSB','rlsbb','rlsmovies','rlsscn',
-    'scenerls','sceper','seriescr','tvbmoviez','tvrelease','ultrahd','ultrahdindir','wrzcraft']
-    toggleAll(params['setting'], params['open_id'], sourcelist)
+elif action == "toggleAll":
+	sourceList = []
+	sourceList = sources_exoscrapers.all_providers
+	for i in sourceList:
+		source_setting = 'provider.' + i
+		control.setSetting(source_setting, params['setting'])
+	#    xbmc.log('All providers = %s' % sourceList,2)
+	control.openSettings(query, "script.module.exoscrapers")
 
-if mode == "toggleAllGerman":
-    sourcelist = ['allucde','animebase','animeloads','bs','cine','cinenator','ddl',
-    'filmpalast','foxx','hdfilme','hdstreams','horrorkino','iload','kinodogs','kinoking',
-    'kinow','kinox','lichtspielhaus','movie2k-ac','movie2k-ag','movie2z','movie4k','moviesever',
-    'movietown','netzkino','proxer','pureanime','serienstream','seriesever','stream-to',
-    'streamdream','streamflix','streamit','tata','video4k','view4u']
-    toggleAll(params['setting'], params['open_id'], sourcelist)
 
-if mode == "toggleAllPolish":
-    sourcelist = ['alltube','boxfilm','cdahd','cdax','ekinomaniak','ekinotv','filiser',
-    'filmwebbooster','iitv','movieneo','openkatalog','paczamy','segos','szukajkatv','trt']
-    toggleAll(params['setting'], params['open_id'], sourcelist)
+elif action == "toggleAllHosters":
+	sourceList = []
+	sourceList = sources_exoscrapers.hoster_providers
+	for i in sourceList:
+		source_setting = 'provider.' + i
+		control.setSetting(source_setting, params['setting'])
+	#    xbmc.log('All Hoster providers = %s' % sourceList,2)
+	control.openSettings(query, "script.module.exoscrapers")
 
-if mode == "toggleAllForeign":
-    sourcelist = ['allucde','animebase','animeloads','bs','cine','cinenator','ddl',
-    'filmpalast','foxx','hdfilme','hdstreams','horrorkino','iload','kinodogs','kinoking',
-    'kinow','kinox','lichtspielhaus','movie2k-ac','movie2k-ag','movie2z','movie4k','moviesever',
-    'movietown','netzkino','proxer','pureanime','serienstream','seriesever','stream-to',
-    'streamdream','streamflix','streamit','tata','video4k','view4u',
-    'alltube','boxfilm','cdahd','cdax','ekinomaniak','ekinotv','filiser',
-    'filmwebbooster','iitv','movieneo','openkatalog','paczamy','segos','szukajkatv','trt']
-    toggleAll(params['setting'], params['open_id'], sourcelist)
 
-if mode == "Defaults":
-    sourcelist = ['4kmovieto','Hdmto','bnwmovies',
-    'cartoonhd','coolmoviezone','darewatch','divxcrawler',
-    'fmovies','freefmovies','freeputlockers','furk',
-    'gowatchseries','hdpopcorns','kattv','library',
-    'moviesplanet','odb','openloadmovie','ororo',
-    'plocker','primewire','putlocker','reddit','seehd','series9','seriesfree',
-    'seriesonline','streamlord','tvbox','videoscraper','vidics',
-    'watchonline','watchseries','xmovies','xwatchseries','ymovies']
-    toggleAll(params['setting'], params['open_id'], sourcelist)
+elif action == "toggleAllForeign":
+	sourceList = []
+	sourceList = sources_exoscrapers.all_foreign_providers
+	for i in sourceList:
+		source_setting = 'provider.' + i
+		control.setSetting(source_setting, params['setting'])
+	#    xbmc.log('All Foregin providers = %s' % sourceList,2)
+	control.openSettings(query, "script.module.exoscrapers")
+
+
+elif action == "toggleAllGerman":
+	sourceList = []
+	sourceList = sources_exoscrapers.german_providers
+	for i in sourceList:
+		source_setting = 'provider.' + i
+		control.setSetting(source_setting, params['setting'])
+	#    xbmc.log('All German providers = %s' % sourceList,2)
+	control.openSettings(query, "script.module.exoscrapers")
+
+
+elif action == "toggleAllSpanish":
+	sourceList = []
+	sourceList = sources_exoscrapers.spanish_providers
+	for i in sourceList:
+		source_setting = 'provider.' + i
+		control.setSetting(source_setting, params['setting'])
+	#    xbmc.log('All Spanish providers = %s' % sourceList,2)
+	control.openSettings(query, "script.module.exoscrapers")
+
+
+
+elif action == "toggleAllFrench":
+	sourceList = []
+	sourceList = sources_exoscrapers.french_providers
+	for i in sourceList:
+		source_setting = 'provider.' + i
+		control.setSetting(source_setting, params['setting'])
+	#    xbmc.log('All Spanish providers = %s' % sourceList,2)
+	control.openSettings(query, "script.module.exoscrapers")
+
+
+elif action == "toggleAllGreek":
+	sourceList = []
+	sourceList = sources_exoscrapers.greek_providers
+	for i in sourceList:
+		source_setting = 'provider.' + i
+		control.setSetting(source_setting, params['setting'])
+	#    xbmc.log('All Greek providers = %s' % sourceList,2)
+	control.openSettings(query, "script.module.exoscrapers")
+
+
+elif action == "toggleAllKorean":
+	sourceList = []
+	sourceList = sources_exoscrapers.korean_providers
+	for i in sourceList:
+		source_setting = 'provider.' + i
+		control.setSetting(source_setting, params['setting'])
+	#    xbmc.log('All Spanish providers = %s' % sourceList,2)
+	control.openSettings(query, "script.module.exoscrapers")
+
+
+elif action == "toggleAllPolish":
+	sourceList = []
+	sourceList = sources_exoscrapers.polish_providers
+	for i in sourceList:
+		source_setting = 'provider.' + i
+		control.setSetting(source_setting, params['setting'])
+	#    xbmc.log('All Polish providers = %s' % sourceList,2)
+	control.openSettings(query, "script.module.exoscrapers")
+
+
+elif action == "toggleAllRussian":
+	sourceList = []
+	sourceList = sources_exoscrapers.russian_providers
+	for i in sourceList:
+		source_setting = 'provider.' + i
+		control.setSetting(source_setting, params['setting'])
+	#    xbmc.log('All Polish providers = %s' % sourceList,2)
+	control.openSettings(query, "script.module.exoscrapers")
+
+
+elif action == "toggleAllPaid":
+	sourceList = []
+	sourceList = sources_exoscrapers.all_paid_providers
+	for i in sourceList:
+		source_setting = 'provider.' + i
+		control.setSetting(source_setting, params['setting'])
+	#    xbmc.log('All Paid providers = %s' % sourceList,2)
+	control.openSettings(query, "script.module.exoscrapers")
+
+
+elif action == "toggleAllDebrid":
+	sourceList = []
+	sourceList = sources_exoscrapers.debrid_providers
+	for i in sourceList:
+		source_setting = 'provider.' + i
+		control.setSetting(source_setting, params['setting'])
+	#    xbmc.log('All Debrid providers = %s' % sourceList,2)
+	control.openSettings(query, "script.module.exoscrapers")
+
+
+elif action == "toggleAllTorrent":
+	sourceList = []
+	sourceList = sources_exoscrapers.torrent_providers
+	for i in sourceList:
+		source_setting = 'provider.' + i
+		control.setSetting(source_setting, params['setting'])
+	#    xbmc.log('All Torrent providers = %s' % sourceList,2)
+	control.openSettings(query, "script.module.exoscrapers")
+
+if action == "Defaults":
+	sourceList = ['1putlocker', '5movies', '123movieshubz', 'alucxyz', 'animetoon', 'azmovie', 'bnwmovies',
+	              'cartoonhd', 'cartoonhdto', 'cmovieshd', 'coolmoviezone', 'divxcrawler', 'extramovies', 'filmxy',
+	              'fmovies',
+	              'freefmovies', 'ganoolcam', 'gomo', 'gomoviesink', 'gowatchseries', 'hdmto', 'hdpopcorneu',
+	              'hubmovie', 'iwaatch', 'iwannawatch',
+	              'movie4kis', 'myhdpopcorn', 'primewire', 'projectfreetv', 'putlockerfree', 'putlockeronl',
+	              'putlockeronline', 'seehd', 'series9',
+	              'seriesonline', 'sharemovies', 'solarmoviefree', 'streamdreams', 'timewatch', 'toonget',
+	              'tvbox', 'tvmovieflix', 'watchepisodes', 'watchserieshd', 'xwatchseries', 'yesmoviesgg',
+	              '300mbdownload', '300mbfilms', 'ddlspot', 'ganool', 'ganool2',
+	              'maxrls', 'mkvhub', 'mvrls', 'myvideolink', 'onlineseries', 'rapidmoviez', 'rlsbb',
+	              'sceneddl', 'scenerls',
+	              'ultrahdindir', '1337x', 'btdb', 'btscene', 'doublr', 'eztv', 'glodls', 'kickass2',
+	              'limetorrents', 'magnetdl', 'mkvccage', 'piratebay', 'torrentapi', 'torrentdownloads',
+	              'torrentgalaxy',
+	              'torrentquest', 'yifyddl', 'yts', 'zoogle']
+	for i in sourceList:
+		source_setting = 'provider.' + i
+		control.setSetting(source_setting, params['setting'])
+	control.openSettings(query, "script.module.exoscrapers")
