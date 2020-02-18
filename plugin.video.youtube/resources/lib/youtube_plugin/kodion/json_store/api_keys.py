@@ -8,7 +8,11 @@
 """
 
 from . import JSONStore
+import base64
 
+key = base64.b64decode('QUl6YVN5RExCM0NtV0dOOEpqV0k0U0xMdEdMZVhGaWl1cldJWHRz')
+cid = base64.b64decode('ODc0NzQ5OTE4OC03NTFyZmw4ZXA3b2VtOWZxaTgyaTUycG82dTlwNzdmYg==')
+csc = base64.b64decode('X1RoNjdpRXdKQnNGN0Q0Q1F2SWlBSmEt')
 
 class APIKeyStore(JSONStore):
     def __init__(self):
@@ -16,9 +20,11 @@ class APIKeyStore(JSONStore):
 
     def set_defaults(self):
         data = self.get_data()
-        #if 'keys' not in data:
+        if 'keys' not in data:
+            #data = {'keys': {'personal': {'api_key': '', 'client_id': '', 'client_secret': ''}, 'developer': {}}}
+            data = {'keys': {'personal': {'api_key': key, 'client_id': cid, 'client_secret': csc}, 'developer': {}}}
         if 'keys' in data:
-            data = {'keys': {'personal': {'api_key': 'AIzaSyDLB3CmWGN8JjWI4SLLtGLeXFiiurWIXts', 'client_id': '8747499188-751rfl8ep7oem9fqi82i52po6u9p77fb', 'client_secret': '_Th67iEwJBsF7D4CQvIiAJa-'}, 'developer': {}}}
+            data = {'keys': {'personal': {'api_key': key, 'client_id': cid, 'client_secret': csc}, 'developer': {}}}
         if 'personal' not in data['keys']:
             data['keys']['personal'] = {'api_key': '', 'client_id': '', 'client_secret': ''}
         if 'developer' not in data['keys']:
