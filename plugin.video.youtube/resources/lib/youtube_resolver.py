@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 
-    Copyright (C) 2017-2018 plugin.video.youtube
+    Copyright (C) 2017-2019 plugin.video.youtube
 
     SPDX-License-Identifier: GPL-2.0-only
     See LICENSES/GPL-2.0-only for more information.
@@ -111,9 +111,9 @@ def resolve(video_id, sort=True, addon_id=None):
     matched_id = None
     streams = None
 
-    patterns = [r'(?P<video_id>[a-zA-Z0-9_\-]{11})',
-                r'(?:http)*s*:*[/]{0,2}(?:www\.)*youtu(?:\.be/|be\.com/'
-                r'(?:embed/|watch/|v/|.*?[?&/]v=))(?P<video_id>[a-zA-Z0-9_\-]{11}).*']
+    patterns = [r'(?P<video_id>[\w-]{11})',
+                r'(?:http)*s*:*[/]{0,2}(?:w{3}\.|m\.)*youtu(?:\.be/|be\.com/'
+                r'(?:embed/|watch/|v/|.*?[?&/]v=))(?P<video_id>[\w-]{11}).*']
 
     for pattern in patterns:
         v_id = re.search(pattern, video_id)

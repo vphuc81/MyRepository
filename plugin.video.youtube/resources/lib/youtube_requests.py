@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 
-    Copyright (C) 2017-2018 plugin.video.youtube
+    Copyright (C) 2017-2019 plugin.video.youtube
 
     SPDX-License-Identifier: GPL-2.0-only
     See LICENSES/GPL-2.0-only for more information.
@@ -414,7 +414,7 @@ def get_live(channel_id=None, user=None, url=None, addon_id=None):
         matched_type = 'user'
 
     elif url:
-        patterns = [r'^(?:http)*s*:*[/]{0,2}(?:www\.)*youtu(?:\.be|be\.com)/'
+        patterns = [r'^(?:http)*s*:*[/]{0,2}(?:w{3}\.|m\.)*youtu(?:\.be|be\.com)/'
                     r'(?P<type>channel|user)/(?P<channel_id>[^/]+)(?:/live)*$']
 
         for pattern in patterns:
