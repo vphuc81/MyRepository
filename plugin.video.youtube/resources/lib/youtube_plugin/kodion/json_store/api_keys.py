@@ -10,9 +10,15 @@
 from . import JSONStore
 import base64
 
-key = base64.b64decode('QUl6YVN5RExCM0NtV0dOOEpqV0k0U0xMdEdMZVhGaWl1cldJWHRz')
-cid = base64.b64decode('ODc0NzQ5OTE4OC03NTFyZmw4ZXA3b2VtOWZxaTgyaTUycG82dTlwNzdmYg==')
-csc = base64.b64decode('X1RoNjdpRXdKQnNGN0Q0Q1F2SWlBSmEt')
+#home = xbmc.translatePath(addon.getAddonInfo('path').decode('utf-8'))
+#api_keys.json = os.path.join(home, 'api_keys.json')
+
+#key = base64.b64decode('QUl6YVN5RExCM0NtV0dOOEpqV0k0U0xMdEdMZVhGaWl1cldJWHRz')
+key = base64.b64decode('QUl6YVN5QzQzSVFBTDJ0Y1h2U2pfZlhBcGlHTHBqbFNTemxDOEpv')
+#cid = base64.b64decode('ODc0NzQ5OTE4OC03NTFyZmw4ZXA3b2VtOWZxaTgyaTUycG82dTlwNzdmYg==')
+cid = base64.b64decode('OTkyMjE2NjE2NTcwLTVvN2Y1cmdwM2RmcXY5ODRpM3Npb3NqYWozZ2szdDVnLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29t')
+#csc = base64.b64decode('X1RoNjdpRXdKQnNGN0Q0Q1F2SWlBSmEt')
+csc = base64.b64decode('Mm9ZOG92VmFZakV4TEtXQlNLT3Q3T01m')
 
 class APIKeyStore(JSONStore):
     def __init__(self):
