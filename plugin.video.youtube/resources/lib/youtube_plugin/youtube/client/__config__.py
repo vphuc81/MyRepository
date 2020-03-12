@@ -40,13 +40,9 @@ class APICheck(object):
         j_id = self._json_api['keys']['personal'].get('client_id', '')
         j_secret = self._json_api['keys']['personal'].get('client_secret', '')
 
-        #Disable it get keys in file settings.xml in addon_data, then it will get codes in api_keys.py
-        #original_key = self._settings.get_string('youtube.api.key')
-        #original_id = self._settings.get_string('youtube.api.id')
-        #original_secret = self._settings.get_string('youtube.api.secret')
-        original_key = '' #get emty
-        original_id = ''
-        original_secret = ''
+        original_key = self._settings.get_string('youtube.api.key')
+        original_id = self._settings.get_string('youtube.api.id')
+        original_secret = self._settings.get_string('youtube.api.secret')
         if original_key and original_id and original_secret:
             own_key, own_id, own_secret = self._strip_api_keys(original_key, original_id, original_secret)
             if own_key and own_id and own_secret:
