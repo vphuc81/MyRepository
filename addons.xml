@@ -799,7 +799,7 @@ http://www2.gostream.sc
 
 <addon id="plugin.video.live.streamspro"
        name="LiveStreamsPro"
-       version="2.8.3.3"
+       version="2.8.3.4"
        provider-name="Shani">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -815,9 +815,7 @@ http://www2.gostream.sc
     <import addon="script.module.livestreamer" optional="true"/>
     <import addon="script.module.pyamf" optional="true"/>
   </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>video</provides>
-  </extension>
+  <extension point="xbmc.python.pluginsource" library="default.py"/>
 
 
   <extension point="xbmc.addon.metadata">
@@ -2813,6 +2811,28 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 			<platform>all</platform>
 		</extension>
 	</addon>
+
+<addon id="script.module.cloudscraper" name="CloudScraper2" version="1.2.24.01" provider-name="venomous">
+  <requires>
+    <import addon="xbmc.python" version="2.25.0"/>
+    <import addon="script.module.requests" />
+
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.python.pluginsource" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_gb">cloudscraper</summary>
+    <description lang="en_gb">cloudscraper</description>
+    <disclaimer lang="en_gb"></disclaimer>
+    <language></language>
+    <platform>all</platform>
+    <license></license>
+    <forum></forum>
+    <website></website>
+    <email></email>
+    <source></source>
+  </extension>
+</addon>
 
 <addon id="script.module.exodus" name="Exodus Module" version="3.1.4.1" provider-name="Exodus">
 	<requires>
