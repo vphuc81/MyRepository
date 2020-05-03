@@ -1623,11 +1623,11 @@ http://www2.gostream.sc
 
 <addon
   id="plugin.video.vinh.movies"
-  version="0.0.2"
+  version="0.0.3"
   name=" [COLOR lime]➡ [/COLOR][COLOR yellow]Vinh-Movies[/COLOR]"
   provider-name="Vinh">
   <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="xbmc.python" version="2.1.0" />
     <import addon="script.module.kodiswift" version="0.0.7" />
     <import addon="script.module.kodi4vn" version="0.0.7" />
     <import addon="plugin.video.youtube" version="4.4.1" />
@@ -1639,6 +1639,7 @@ http://www2.gostream.sc
 	<import addon="script.module.simplejson" />
 	<import addon="script.module.beautifulsoup" />
 	<import addon="script.module.resolveurl" />
+	<import addon="script.module.js2py" />
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py"/>
   <extension point="xbmc.addon.metadata">
@@ -2956,6 +2957,27 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
         <source>https://github.com/httplib2/httplib2</source>
         <language></language>
    </extension>
+</addon>
+
+<addon id="script.module.js2py" name="js2py" version="0.6.6a" provider-name="Addons4Kodi">
+  <requires>
+    <import addon="xbmc.python" version="2.25.0"/>
+    <import addon="script.module.six" version="1.11.0"/>
+    <import addon="script.module.pyjsparser" version="2.7.1"/>
+    <import addon="script.module.tzlocal" version="1.5.1"/>
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary>Pure Python JavaScript Translator/Interpreter</summary>
+    <description>Packed for Kodi from https://github.com/PiotrDabkowski/Js2Py</description>
+    <platform>all</platform>
+    <language></language>
+    <license>MIT</license>
+    <forum></forum>
+    <website>https://github.com/PiotrDabkowski/Js2Py</website>
+    <source>https://github.com/PiotrDabkowski/Js2Py</source>
+    <email></email>
+  </extension>
 </addon>
 
 	<addon id="script.module.kodi4vn" version="1.0.3" name="Kodi4VN Modules" provider-name="thongld">
