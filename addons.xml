@@ -2723,35 +2723,6 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 <extension point="xbmc.service" library="service.py" start="login" />
 </addon>
 
-<addon id="repository.xvbmc"
-        name=" [COLOR lime][B]X[/B][/COLOR]vBMC (Add-ons) REPOsitory"
-        version="5.7"
-        provider-name="none">
-  <requires>
-    <import addon="xbmc.addon" version="12.0.0"/>
-  </requires>
-    <extension point="xbmc.addon.repository">
-        <dir>
-            <info compressed="false"></info>
-            <checksum></checksum>
-            <datadir zip="true"></datadir>
-            <hashes>false</hashes>
-        </dir>
-        <dir>
-            <info compressed="false"></info>
-            <checksum></checksum>
-            <datadir zip="true"></datadir>
-            <hashes>false</hashes>
-        </dir>
-        <dir>
-            <info compressed="false"></info>
-            <checksum></checksum>
-            <datadir zip="true"></datadir>
-            <hashes>false</hashes>
-        </dir>
-    </extension>
-</addon>
-
 <addon id="script.exodus.artwork" version="2.0.0" name="Exodus Artwork" provider-name="Exodus">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0"/>
