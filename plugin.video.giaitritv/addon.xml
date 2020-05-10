@@ -1,25 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.42" provider-name="MetalKettle">
+<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.43" provider-name="MetalKettle">
 
   <requires>
-
-    <import addon="script.module.simplejson" version="3.3.0"/>
-    <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.t0mm0.common" version="2.0.0"/>
-    <import addon="plugin.video.youtube" version="3.0.0"/>
-    <import addon="script.module.urlresolver"  version="2.1.2"/>
-    <import addon="script.common.plugin.cache" version="2.5.2"/>
-    <import addon="script.module.metahandler" version="2.5.1"/>
-	<import addon="script.module.flask" />
-	<import addon="repository.maverickrepo" />
-	<import addon="repository.bugatsinho" />
-	<import addon="repository.StarTec" />
+    
+    <import addon="xbmc.python" version="2.1.0" />
+    <import addon="plugin.video.youtube" version="3.0.0" />
+    <import addon="script.module.urlresolver" />
 	<import addon="repository.xbmcadult" />
-	<import addon="repository.geektvpr" />
-	<import addon="repository.streamhub" />
 	<import addon="plugin.video.SportsDevil" />
 	<import addon="plugin.video.live.streamspro" />
-	<import addon="repository.Diamond-Wizard-Repo" />
 	<import addon="repository.bimozie" />
 
   </requires>
