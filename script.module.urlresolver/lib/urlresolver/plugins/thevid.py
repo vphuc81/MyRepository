@@ -14,20 +14,20 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-import os, thevid_gmu,re
+import os, thevid_gmu
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
-from lib import jsunpack
 
 logger = common.log_utils.Logger.get_logger(__name__)
 logger.disable()
-VID_SOURCE = 'https://raw.githubusercontent.com/tvaddonsco/script.module.urlresolver/master/lib/urlresolver/plugins/thevid_gmu.py'
+VID_SOURCE = 'https://raw.githubusercontent.com/jsergio123/script.module.urlresolver/master/lib/urlresolver/plugins/thevid_gmu.py'
 VID_PATH = os.path.join(common.plugins_path, 'thevid_gmu.py')
+
 
 class TheVidResolver(UrlResolver):
     name = "TheVid"
-    domains = ["thevid.net"]
-    pattern = '(?://|\.)(thevid\.net)/(?:video|e|v)/([A-Za-z0-9]+)'
+    domains = ["thevid.net", "thevid.tv", "thevid.live"]
+    pattern = '(?://|\.)(thevid\.(?:net|tv|live))/(?:video|e|v)/([A-Za-z0-9]+)'
     
     def __init__(self):
         self.net = common.Net()
