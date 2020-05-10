@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.43" provider-name="MetalKettle">
+<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.44" provider-name="MetalKettle">
 
   <requires>
     
     <import addon="xbmc.python" version="2.1.0" />
-    <import addon="plugin.video.youtube" version="3.0.0" />
-    <import addon="script.module.urlresolver" />
 	<import addon="repository.xbmcadult" />
+	<import addon="repository.kodibae" />
+	<import addon="repository.bimozie" />
+    <import addon="plugin.video.youtube" version="3.0.0" />
 	<import addon="plugin.video.SportsDevil" />
 	<import addon="plugin.video.live.streamspro" />
-	<import addon="repository.bimozie" />
+	<import addon="script.module.urlresolver" />
+	<import addon="script.module.flask" />	
 
   </requires>
 
