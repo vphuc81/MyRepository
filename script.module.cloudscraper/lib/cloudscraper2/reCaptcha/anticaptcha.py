@@ -1,16 +1,24 @@
 from __future__ import absolute_import
-
-import sys
-import reCaptcha_exceptions
+from ..exceptions import (
+    reCaptchaParameter,
+    reCaptchaTimeout,
+    reCaptchaAPIError
+)
 
 try:
-    from python_anticaptcha import AnticaptchaClient, NoCaptchaTaskProxylessTask
-except ImportError:
-    sys.tracebacklimit = 0
-    raise reCaptcha_exceptions.reCaptcha_Import_Error(
-        "Please install the python module 'python_anticaptcha' via pip or download it from "
-        "https://github.com/ad-m/python-anticaptcha"
+    from python_anticaptcha import (
+        AnticaptchaClient,
+        NoCaptchaTaskProxylessTask,
+        HCaptchaTaskProxyless,
+        AnticaptchaException
     )
+except ImportError:
+    raise ImportError(
+        "Please install/upgrade the python module 'python_anticaptcha' via "
+        "pip install python-anticaptcha or https://github.com/ad-m/python-anticaptcha/"
+    )
+
+import sys
 
 from . import reCaptcha
 
@@ -18,29 +26,48 @@ from . import reCaptcha
 class captchaSolver(reCaptcha):
 
     def __init__(self):
+        if sys.modules['python_anticaptcha'].__version__ < '0.6':
+            raise ImportError(
+                "Please upgrade the python module 'python_anticaptcha' via "
+                "pip install -U python-anticaptcha or https://github.com/ad-m/python-anticaptcha/"
+            )
         super(captchaSolver, self).__init__('anticaptcha')
 
     # ------------------------------------------------------------------------------- #
 
-    def getCaptchaAnswer(self, site_url, site_key, reCaptchaParams):
+    def getCaptchaAnswer(self, captchaType, url, siteKey, reCaptchaParams):
         if not reCaptchaParams.get('api_key'):
-            raise reCaptcha_exceptions.reCaptcha_Bad_Parameter("anticaptcha: Missing api_key parameter.")
+            raise reCaptchaParameter("anticaptcha: Missing api_key parameter.")
 
         client = AnticaptchaClient(reCaptchaParams.get('api_key'))
 
         if reCaptchaParams.get('proxy'):
             client.session.proxies = reCaptchaParams.get('proxies')
 
-        task = NoCaptchaTaskProxylessTask(site_url, site_key)
+        captchaMap = {
+            'reCaptcha': NoCaptchaTaskProxylessTask,
+            'hCaptcha': HCaptchaTaskProxyless
+        }
+
+        task = captchaMap[captchaType](url, siteKey)
 
         if not hasattr(client, 'createTaskSmee'):
-            sys.tracebacklimit = 0
-            raise reCaptcha_exceptions.reCaptcha_Import_Error(
-                "Please upgrade 'python_anticaptcha' via pip or download it from https://github.com/ad-m/python-anticaptcha"
+            raise NotImplementedError(
+                "Please upgrade 'python_anticaptcha' via pip or download it from "
+                "https://github.com/ad-m/python-anticaptcha/tree/hcaptcha"
             )
 
-        job = client.createTaskSmee(task)
-        return job.get_solution_response()
+        job = client.createTaskSmee(task, timeout=180)
+
+        try:
+            job.join(maximum_time=180)
+        except (AnticaptchaException) as e:
+            raise reCaptchaTimeout('{}'.format(getattr(e, 'message', e)))
+
+        if 'solution' in job._last_result:
+            return job.get_solution_response()
+        else:
+            raise reCaptchaAPIError('Job did not return `solution` key in payload.')
 
 
 # ------------------------------------------------------------------------------- #
