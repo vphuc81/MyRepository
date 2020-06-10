@@ -18,7 +18,7 @@ import json
 import random
 
 import requests
-from ...kodion.utils import is_httpd_live, make_dirs
+from ...kodion.utils import is_httpd_live, make_dirs, DataCache
 from ..youtube_exceptions import YouTubeException
 from .signature.cipher import Cipher
 from .subtitles import Subtitles
@@ -485,6 +485,7 @@ class VideoInfo(object):
 
     def __init__(self, context, access_token='', language='en-US'):
         self._context = context
+        self._data_cache = self._context.get_data_cache()
         self._verify = context.get_settings().verify_ssl()
         self._language = language.replace('-', '_')
         self.language = context.get_settings().get_string('youtube.language', 'en_US').replace('-', '_')
@@ -547,18 +548,25 @@ class VideoInfo(object):
         result = requests.get(url, params=params, headers=headers, verify=self._verify, allow_redirects=True)
         return {'html': result.text, 'cookies': result.cookies}
 
-    @staticmethod
-    def get_player_config(html):
-        _player_config = '{}'
-
+    def get_player_config(self, html):
+        _player_config = {}
         lead = 'ytplayer.config = '
-        tail = ';ytplayer.load'
-        pos = html.find(lead)
-        if pos >= 0:
-            html2 = html[pos + len(lead):]
-            pos = html2.find(tail)
+        tails = ['ytplayer.load', 'ytplayer.web_player_context_config']
+
+        for tail in tails:
+            pos = html.find(lead)
             if pos >= 0:
-                _player_config = html2[:pos]
+                html2 = html[pos + len(lead):]
+                pos = html2.find(tail)
+                if pos >= 0:
+                    _player_config = html2[:pos].rstrip().rstrip(';').rstrip()
+                    try:
+                        _player_config = json.loads(_player_config)
+                        break
+                    except (TypeError, ValueError):
+                        _player_config = {}
+
+        self._context.log_debug('Found valid player config |%s|' % str(_player_config != {}))
 
         blank_config = re.search(r'var blankSwfConfig\s*=\s*(?P<player_config>{.+?});\s*var fillerData', html)
         if not blank_config:
@@ -569,10 +577,7 @@ class VideoInfo(object):
             except TypeError:
                 player_config = dict()
 
-        try:
-            player_config.update(json.loads(_player_config))
-        except TypeError:
-            pass
+        player_config.update(_player_config)
 
         if 'args' not in player_config:
             player_config['args'] = dict()
@@ -598,38 +603,50 @@ class VideoInfo(object):
         return player_config
 
     def get_player_js(self, video_id, js=''):
-        if not js:
-            page_result = self.get_embed_page(video_id)
-            html = page_result.get('html')
+        def _normalize(javascript_url):
+            if javascript_url and not javascript_url.startswith('http'):
+                javascript_url = 'https://www.youtube.com/%s' % \
+                                 javascript_url.lstrip('/').replace('www.youtube.com/', '')
+            if javascript_url:
+                self._data_cache.set('player_javascript', json.dumps({'url': javascript_url}))
+            self._context.log_debug('Player JavaScript: |%s|' % javascript_url)
+            return javascript_url
 
-            if not html:
-                return ''
+        cached_js = self._data_cache.get_item(DataCache.ONE_HOUR * 4, 'player_javascript')
+        if cached_js and cached_js.get('player_javascript', {}).get('url'):
+            return cached_js.get('player_javascript', {}).get('url')
 
-            _player_config = '{}'
-            player_config = dict()
+        if js:
+            return _normalize(js)
 
-            lead = 'yt.setConfig({\'PLAYER_CONFIG\': '
-            tail = ',\'EXPERIMENT_FLAGS\':'
-            if html.find(tail) == -1:
-                tail = '});'
-            pos = html.find(lead)
+        page_result = self.get_embed_page(video_id)
+        html = page_result.get('html')
+
+        if not html:
+            return ''
+
+        _player_config = '{}'
+        player_config = dict()
+
+        lead = 'yt.setConfig({\'PLAYER_CONFIG\': '
+        tail = ',\'EXPERIMENT_FLAGS\':'
+        if html.find(tail) == -1:
+            tail = '});'
+        pos = html.find(lead)
+        if pos >= 0:
+            html2 = html[pos + len(lead):]
+            pos = html2.find(tail)
             if pos >= 0:
-                html2 = html[pos + len(lead):]
-                pos = html2.find(tail)
-                if pos >= 0:
-                    _player_config = html2[:pos]
+                _player_config = html2[:pos]
 
-            try:
-                player_config.update(json.loads(_player_config))
-            except TypeError:
-                pass
-            finally:
-                js = player_config.get('assets', {}).get('js', '')
+        try:
+            player_config.update(json.loads(_player_config))
+        except TypeError:
+            pass
+        finally:
+            js = player_config.get('assets', {}).get('js', '')
 
-        if js and not js.startswith('http'):
-            js = 'https://www.youtube.com/%s' % js.lstrip('/').replace('www.youtube.com/', '')
-        self._context.log_debug('Player JavaScript: |%s|' % js)
-        return js
+        return _normalize(js)
 
     def _load_manifest(self, url, video_id, meta_info=None, curl_headers='', playback_stats=None):
         headers = {'Host': 'manifest.googlevideo.com',
@@ -684,7 +701,7 @@ class VideoInfo(object):
             fl = []
             if len(_fmts) > 0:
                 try:
-                    fl = _fmts[0].get('cipher').split(',')
+                    fl = _fmts[0].get('signatureCipher',  _fmts[0].get('cipher')).split(',')
                 except AttributeError:
                     fl = _fmts[0].get('url', '').split('&')
             return (len(fl) > 0) and ('s' in dict(urllib.parse.parse_qsl(fl[0])))
@@ -806,6 +823,15 @@ class VideoInfo(object):
                     image_url = image_url.replace('.jpg', '_live.jpg')
                 meta_info['images'][image_data['to']] = image_url
 
+        microformat = player_response.get('microformat', {}).get('playerMicroformatRenderer', {})
+        meta_info['video']['status'] = {
+            'unlisted': microformat.get('isUnlisted', False),
+            'private': video_details.get('isPrivate', False),
+            'crawlable': video_details.get('isCrawlable', False),
+            'family_safe': microformat.get('isFamilySafe', False),
+            'live': is_live,
+        }
+
         if (params.get('status', '') == 'fail') or (playability_status.get('status', 'ok').lower() != 'ok'):
             if not ((playability_status.get('desktopLegacyAgeGateReason', 0) == 1) and not self._context.get_settings().age_gate()):
                 reason = None
@@ -840,6 +866,11 @@ class VideoInfo(object):
                 if not reason:
                     reason = 'UNKNOWN'
 
+                try:
+                    reason = reason.encode('raw_unicode_escape').decode('utf-8')
+                except:
+                    pass
+
                 raise YouTubeException(reason)
 
         meta_info['subtitles'] = Subtitles(self._context, video_id, captions).get_subtitles()
@@ -867,7 +898,7 @@ class VideoInfo(object):
                 '&st={st}&et={et}&state={state}'
             ])
 
-        if is_live:
+        if live_url:
             stream_list = self._load_manifest(live_url, video_id,
                                               meta_info=meta_info,
                                               curl_headers=curl_headers,
@@ -972,7 +1003,7 @@ class VideoInfo(object):
         def parse_to_stream_list(streams):
             for item in streams:
                 stream_map = item
-                stream_map.update(dict(urllib.parse.parse_qsl(item.get('cipher', ''))))
+                stream_map.update(dict(urllib.parse.parse_qsl(item.get('signatureCipher', item.get('cipher', '')))))
 
                 url = stream_map.get('url', None)
                 conn = stream_map.get('conn', None)
@@ -1171,7 +1202,7 @@ class VideoInfo(object):
         data = dict()
         for item in adaptive_fmts:
             stream_map = item
-            stream_map.update(dict(urllib.parse.parse_qsl(item.get('cipher', ''))))
+            stream_map.update(dict(urllib.parse.parse_qsl(item.get('signatureCipher', item.get('cipher', '')))))
             stream_map['itag'] = str(stream_map.get('itag'))
 
             t = stream_map.get('mimeType')
@@ -1191,7 +1222,7 @@ class VideoInfo(object):
 
             data[mime][i]['quality_label'] = str(stream_map.get('qualityLabel'))
 
-            data[mime][i]['bandwidth'] = stream_map.get('bitrate')
+            data[mime][i]['bandwidth'] = stream_map.get('bitrate', 0)
 
             # map frame rates to a more common representation to lessen the chance of double refresh changes
             # sometimes 30 fps is 30 fps, more commonly it is 29.97 fps (same for all mapped frame rates)
@@ -1234,7 +1265,8 @@ class VideoInfo(object):
                 if mime.startswith('video'):
                     discarded_streams.append(get_discarded_video(mime, i, data[mime][i], 'no init or index'))
                 else:
-                    discarded_streams.append(get_discarded_audio(mime, i, data[mime][i], 'no init or index'))
+                    stream_format = self.FORMAT.get(i, {})
+                    discarded_streams.append(get_discarded_audio(stream_format, mime, i, data[mime][i], 'no init or index'))
                 del data[mime][i]
 
         if not data.get('video/mp4') and not data.get('video/webm'):

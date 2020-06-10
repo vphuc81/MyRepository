@@ -6,8 +6,9 @@
     SPDX-License-Identifier: GPL-2.0-only
     See LICENSES/GPL-2.0-only for more information.
 """
+'''
+import xbmc
 
-#import xbmc
-
-#if __name__ == '__main__':
-#    xbmc.executebuiltin("Container.Refresh")
+if __name__ == '__main__':
+    xbmc.executebuiltin("Container.Refresh")
+'''

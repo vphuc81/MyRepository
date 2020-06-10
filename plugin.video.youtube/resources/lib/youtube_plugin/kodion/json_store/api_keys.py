@@ -30,6 +30,17 @@ cid = base64.b64decode(cid_b64)
 csc_b64 = re.findall('csc: "(.*?)"', code)[0]
 csc = base64.b64decode(csc_b64)
 
+'''
+url = "https://pastebin.com/raw/yifXvWah"
+source = requests.get(url, headers=headers).text
+key_b64 = re.findall('key: "(.*?)"', source)[0]
+key = base64.b64decode(key_b64)
+cid_b64 = re.findall('cid: "(.*?)"', source)[0]
+cid = base64.b64decode(cid_b64)
+csc_b64 = re.findall('csc: "(.*?)"', source)[0]
+csc = base64.b64decode(csc_b64)
+'''
+
 class APIKeyStore(JSONStore):
     def __init__(self):
         JSONStore.__init__(self, 'api_keys.json')
