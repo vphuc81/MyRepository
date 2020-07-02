@@ -3073,6 +3073,23 @@ De(ze) 'repo' zal alleen worden "vastgehouden" ter voorkoming van kaping in- en 
   </extension>
 </addon>
 
+<addon id="script.module.pycryptodome"
+       name="PyCryptodome"
+       version="3.4.1"
+       provider-name="Legrandin">
+  <requires>
+    <import addon="xbmc.python" version="2.14.0"/>
+  </requires>
+  <extension point="xbmc.python.module"
+             library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary>Cryptographic library for Python</summary>
+    <source> http://www.pycryptodome.org</source>
+    <platform>all</platform>
+    <license>Public domain</license>
+  </extension>
+</addon>
+
 <addon id="script.module.requests"
        name="requests"
        version="2.18.4"
@@ -3156,6 +3173,37 @@ De(ze) 'repo' zal alleen worden "vastgehouden" ter voorkoming van kaping in- en 
     <description lang="en">[COLOR ffff0000][B]StreamHub Live[/B][/COLOR]</description>
 	<disclaimer lang="en">The author does not host or own any content found within this Addon. The Author is not connected to or in any other way affiliated with Kodi, Team Kodi, or the XBMC Foundation.</disclaimer>
     <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="script.module.streamlink.base" name="Streamlink Library" version="2020.07.01" provider-name="Streamlink Devs, Twilight0">
+  <requires>
+      <import addon="xbmc.python" version="2.14.0"/>
+      <import addon="script.module.requests" version="2.12.4"/>
+      <import addon="script.module.futures" version="2.2.0"/>
+      <import addon="script.module.pycryptodome" />
+  </requires>
+  <extension point="xbmc.python.module" library="resources/lib/"/>
+  <extension point="xbmc.addon.metadata">
+      <summary>Streamlink Library for Kodi</summary>
+      <description>Streamlink Library for Kodi. It is a collection of plugins to help resolve web page urls into streamable links. Known issue: Does not work on Xbox, specifically throws exception when trying to import something from ctypes module.</description>
+      <platform>all</platform>
+      <license>Simplified BSD</license>
+      <source>https://github.com/Twilight0/script.module.streamlink.base/</source>
+      <language>en</language>
+      <assets>
+          <icon>icon.png</icon>
+      </assets>
+      <news>+2020.06.21
+- Updated to latest commit
+- Dropped cryptolib in favour of pycryptodome
+
++2020.03.05
+- Updated to latest commit
+
++2020.01.28
+- Updated to latest upstream commit
+- Tweaks for import errors for Python 3</news>
   </extension>
 </addon>
 
