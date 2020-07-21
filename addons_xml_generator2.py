@@ -180,4 +180,5 @@ if ( __name__ == "__main__" ):
         print('Cannot create or move the needed files\n%s' %e)
     print('Done')
     i = True
-    while i : raw_input('Press enter key to exit '); i = False
+    #while i : raw_input('Press enter key to exit '); i = False #python 2
+    while i : input('Press enter key to exit '); i = False #python 3
