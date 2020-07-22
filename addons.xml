@@ -37,6 +37,148 @@
   </extension>
 </addon>
 
+<addon id="plugin.video.HieuHien.vn" version="2.0.1.2.1" name="[B][COLOR lime]Trung tam giai tri[/COLOR][/B]" provider-name="thongld">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.kodiswift" version="0.0.7" />
+    <import addon="script.module.kodi4vn" version="0.0.7" />
+    <import addon="plugin.video.youtube" version="4.4.1" />
+    <import addon="script.module.httplib2" version="0.1" />
+    <import addon="service.kodi4vn.iptvproxy" version="0.1" />
+    <import addon="service.kodi4vn.maintenance" version="0.1" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Hieuhien.vn Media Center - Trung tam giai tri danh cho nguoi Viet</summary>
+	 <description lang="en">
+	Chung toi tong hop cac nguon giai tri duoc chia se tren mang Internet. Chung toi khong quan ly va chiu trach nhiem ve nhung noi dung nay.
+	</description>
+	<platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.MoneySports"
+       name="MoneySports"
+       version="4.0.3"
+       provider-name="SOME FINE FELLOW">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" />
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary></summary>
+    <description>
+
+    </description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.Pac-12" version="1.3.15" name="*Pac-12 Pro" provider-name="LongHong">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.simplejson" />
+        <import addon="script.module.six" />
+        <import addon="script.module.requests" />
+        <import addon="script.module.livestreamer" />
+        <import addon="script.module.pydevd" version="4.4.0" optional="true"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+	<extension point="xbmc.service" library="resources/lib/proxy_server.py" start="startup" />
+    <extension point="xbmc.addon.metadata">
+        <summary>Pac-12 Network and various (USA) Live TV channels. Last updated by LongHong 08.31.2017 @ 12:27AM.</summary>
+        <description>Pac-12 Pro for Home Media Entertainments.</description>
+        <platform>all</platform>
+    </extension>
+</addon>
+
+<addon
+  id="plugin.video.SportsDevil"
+  version="2019.11.15"
+  name="SportsDevil"
+  provider-name="SportsDevil">
+  <requires>
+   <import addon="xbmc.python" version="2.14.0"/>
+   <import addon="repository.xvbmc" version="4.2"/>
+   <import addon="script.module.dateutil" />
+   <import addon="script.module.simplejson" />
+   <import addon="script.module.six" />
+   <import addon="script.module.requests" />
+   <import addon="script.module.streamlink.base" />
+   <import addon="script.video.F4mProxy" />
+   <import addon="plugin.video.f4mTester" />
+   <!-- <import addon="script.module.livestreamer" />  *Changed-2-StreamLink* -->
+   <!-- *broken* <import addon="repository.unofficialsportsdevil" version="1.0.0" optional="true"/> *broken* -->
+  </requires>
+  <extension
+    point="xbmc.python.pluginsource"
+    library="default.py"/>
+  <!-- <extension point="xbmc.service" library="service/proxy_service.py" start="startup"/> *Changed-2-StreamLink* -->
+  <extension point="xbmc.service" library="service/streamlink_proxy.py" start="startup" />
+  <extension point="xbmc.addon.metadata">
+    <summary>Play videos of different ad-financed sports streaming sites (XvBMC-NL acts only as a mirror for SportsDevil).</summary>
+    <description>Play videos of different ad-financed sports streaming sites (XvBMC-NL acts only as a mirror for SportsDevil).</description>
+    <disclaimer>SportsDevil does not provide any streams of its own; stream quality, content and copyright are responsibility of the ad-financed source web site. For updates - check the readme (XvBMC-NL acts only as a mirror for SportsDevil).</disclaimer>
+    <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+    <platform>all</platform>
+    <forum>http://forums.koditips.com/index.php?topic=11.0</forum>
+    <website>http://forums.koditips.com/index.php?topic=11.0</website>
+    <source>http://forums.koditips.com/index.php?topic=11.0</source>
+    <news>version="2018.01.19x" (mirror@xvbmc)</news>
+  <assets>
+    <icon>icon.png</icon>
+    <fanart>fanart.jpg</fanart>
+  </assets>
+  </extension>
+</addon>
+
+<addon id="plugin.video.Supremacy.Sports" name="[COLOR darkmagenta]Supremacy Sports[/COLOR]" version="2.4.1" provider-name="Supremacy">
+    <requires>
+        <import addon="xbmc.python" version="2.19.0" />
+		<import addon="repository.mancaverepo"/>
+        <import addon="script.module.universalscrapers" version="1.0.0" />
+        <import addon="script.module.python.koding.aio" version="0.9.6.6" />
+        <import addon="script.module.beautifulsoup" version="3.2.1" />
+        <import addon="script.module.requests" version="2.9.1" />
+        <import addon="script.module.addon.common" version="2.0.0" />
+        <import addon="script.module.xmltodict" version="0.9.0" />
+		<import addon="script.module.dateutil" />
+        <!--<import addon="script.module.web-pdb" version="1.0"/>-->
+        <import addon="script.module.resolveurl" />
+		<import addon="script.module.Supremacy.sportsHD" />
+		<import addon="script.module.Supremacyhd" version="" />
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>audio video</provides>
+    </extension>
+	<extension point="xbmc.addon.metadata">
+    <reuselanguageinvoker>false</reuselanguageinvoker>
+    </extension>
+    <extension point="xbmc.service" library="service.py" start="[login|startup]" />
+    <extension point="xbmc.addon.metadata">
+      <summary lang="en">Supremacy Sports</summary>
+      <description lang="en">Sports</description>
+      <disclaimer lang="en">The author of this addon do not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
+      <platform>all</platform>
+        <website></website>
+        <video_guide></video_guide>
+    </extension>
+</addon>
+
 <addon id="plugin.video.accessasiatv" name="*[COLOR yellow]Phim Hot[/COLOR]" version="2.2" provider-name="Vinh Computer Repair">
 <requires>
 	<import addon="xbmc.python" version="2.1.0"/>
@@ -230,6 +372,47 @@
   </extension>
 </addon>
 
+<addon id="plugin.video.dailymotion_com" name="DailyMotion.com" version="2.3.8" provider-name="gujal">
+    <requires>
+        <import addon="xbmc.python" version="2.24.0"/>
+        <import addon="script.module.requests" version="2.4.3"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+
+        <summary lang="en">Movies, TV, Music, User-Clips, and Livestreams</summary>
+		<summary lang="fr">Films, Séries TV, Musique, Clips, et Live</summary>
+        <summary lang="he">סרטים, טלוויזיה, מוסיקה, סירטונים של המשתמש, תלת מימד והזרמה חיה</summary>
+
+		<description lang="en">Dailymotion attracts 300 million users from around the world, who watch 3.5 billion videos on its player each month.</description>
+		<description lang="fr">Dailymotion attire 300 millions d’utilisateurs qui regardent 3,5 milliards de vidéos sur son player chaque mois, à travers le monde.</description>
+		<description lang="he">Dailymotion מושך 300 מיליון משתמשים מרחבי העולם שצופים ב -3.5 מיליארד סרטונים מדי חודש.</description>
+
+		<disclaimer lang="en">Some parts of this addon may not be legal in your country of residence - please check with your local laws before installing.</disclaimer>
+		<disclaimer lang="fr">Certaines parties de cet addon peuvent ne pas être légales dans votre pays de résidence - s’il vous plaît vérifier avec vos lois locales avant d’installer.</disclaimer>
+		<disclaimer lang="he">ייתכן שחלק מהתוספות האלו אינן חוקיות בארץ המגורים שלך - אנא בדוק את החוקים המקומיים שלך לפני ההתקנה.</disclaimer>
+
+        <news>
+[B]Version 2.3.8 - 06 Mar 2019[/B]
+ - Fix for video playback
+		</news>
+		<website>https://www.dailymotion.com</website>
+        <source>https://github.com/Gujal00/plugin.video.dailymotion_com</source>
+        <forum>https://forum.kodi.tv/showthread.php?tid=142626</forum>
+        <email>gujal at protonmail dot com</email>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+			<screenshot>resources/images/screenshot-01.jpg</screenshot>
+			<screenshot>resources/images/screenshot-02.jpg</screenshot>
+			<screenshot>resources/images/screenshot-03.jpg</screenshot>
+		</assets>
+    </extension>
+</addon>
+
 <addon id="plugin.video.docuhub" version="3.2.1" name="Docu-Hub" provider-name="[COLOR red]Blazetamer[/COLOR]">
 <requires>
 <import addon="xbmc.python" version="2.1.0"/>
@@ -244,6 +427,22 @@
 
 <platform>all</platform>
 </extension>
+</addon>
+
+<addon id="plugin.video.donggiao" name="*[COLOR yellow]Đồng-Giao TV[/COLOR]" provider-name="Vinh Computer Repair" version="1.6">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0" />
+    <import addon="script.module.xbmcswift2" version="1.3.1" />
+    <import addon="plugin.video.youtube" version="4.4.1" />
+  </requires>
+  <extension library="default.py" point="xbmc.python.pluginsource">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary>Watch free movies from phim14.net</summary>
+    <description>Watch free movies from phim14.net</description>
+  </extension>
 </addon>
 
 <addon id="plugin.video.earthcam"
@@ -311,7 +510,7 @@ and basketball events. NOT SUPPORTED BY ESPN OR DISNEY OR ANYONE ELSE
 	<extension point="xbmc.service" library="service.py" start="startup" />
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en">Exodus</summary>
-		<description lang="en">Please visit [COLOR blue]www.tvaddons.co[/COLOR] for Exodus support and assistance! Kindly note that Exodus is not an official part of the media player you are running, and therefore not to be mentioned within official support channels, this addon has nothing to do with the media player itself, nor itâ€™s intended use, it is simply a third party plugin which has been added to your system.</description>
+		<description lang="en">Please visit [COLOR blue]www.tvaddons.co[/COLOR] for Exodus support and assistance! Kindly note that Exodus is not an official part of the media player you are running, and therefore not to be mentioned within official support channels, this addon has nothing to do with the media player itself, nor it’s intended use, it is simply a third party plugin which has been added to your system.</description>
 		<disclaimer lang="en">The author of this addon do not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
 		<platform>all</platform>
 		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
@@ -567,28 +766,8 @@ http://www2.gostream.sc
   <extension point="xbmc.python.module" library="default.py" />
   <extension point="xbmc.addon.metadata">
     <summary>hdonline.vn</summary>
-    <description>Xem phim HD Lá»“ng tiáº¿ng vÃ  Thuyáº¿t minh tiáº¿ng Viá»‡t táº¡i HDonline</description>
+    <description>Xem phim HD Lồng tiếng và Thuyết minh tiếng Việt tại HDonline</description>
     <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.HieuHien.vn" version="2.0.1.2.1" name="[B][COLOR lime]Trung tam giai tri[/COLOR][/B]" provider-name="thongld">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.kodiswift" version="0.0.7" />
-    <import addon="script.module.kodi4vn" version="0.0.7" />
-    <import addon="plugin.video.youtube" version="4.4.1" />
-    <import addon="script.module.httplib2" version="0.1" />
-    <import addon="service.kodi4vn.iptvproxy" version="0.1" />
-    <import addon="service.kodi4vn.maintenance" version="0.1" />
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py" />
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en">Hieuhien.vn Media Center - Trung tam giai tri danh cho nguoi Viet</summary>
-	 <description lang="en">
-	Chung toi tong hop cac nguon giai tri duoc chia se tren mang Internet. Chung toi khong quan ly va chiu trach nhiem ve nhung noi dung nay.
-	</description>
-	<platform>all</platform>
   </extension>
 </addon>
 
@@ -628,6 +807,31 @@ http://www2.gostream.sc
     <platform>all</platform>
     <license>MIT License</license>
   </extension>
+</addon>
+
+<addon id="plugin.video.itvplus"
+       version="2.9.6.1"
+       name="[COLOR ffff0000]*ITV*[/COLOR]Plus"
+       provider-name="itv member">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0" optional="true" />
+		<import addon="script.module.requests" version="1.0" />
+		<import addon="script.module.httplib2" version="0.8.0" />
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py" />
+    <extension point="xbmc.service" library="autorun.py" start="startup">
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>ITV Entertainment</summary>
+        <description>
+* Addon được ITVPlus xây dựng dựa vào nguồn dữ liệu trên internet.
+* Với mục đích phục vụ nhu cầu giải trí cho cộng đồng Kodi. Chúng tôi đã tốn nhiều thời gian và công sức để tạo ra sản phẩm, vì vậy mong các tổ chức và cá nhân tuân thủ các quy định sau:
+- Không tự ý sử dụng mã nguồn của addon khi chưa có sự đồng ý của nhóm lập trình viên ITVPlus.
+- Không tự ý chỉnh sửa lại addon và chia sẻ, quảng cáo phục vụ cho nhu cầu lợi ích của một cá nhân hay tập thể nào đó.
+	    </description>
+	    <disclaimer lang="en">[COLOR ffff0000]Data được chia sẻ trên internet. Chúng tôi không chịu mọi trách nhiệm pháp lý.[/COLOR]</disclaimer>
+        <platform>all</platform>
+    </extension>
 </addon>
 
 <addon id="plugin.video.kenh108.com" name="*[COLOR yellow]kenh-108.com[/COLOR]" provider-name="th" version="1.5.1">
@@ -944,35 +1148,6 @@ http://www2.gostream.sc
   </extension>
 </addon>
 
-<addon id="plugin.video.MoneySports"
-       name="MoneySports"
-       version="4.0.3"
-       provider-name="SOME FINE FELLOW">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.beautifulsoup" version="3.2.1"/>
-    <import addon="script.module.simple.downloader" version="0.9.4"/>
-    <import addon="script.module.beautifulsoup4" />
-    <import addon="script.module.simple.downloader" version="0.9.4"/>
-    <import addon="script.module.requests" />
-    <import addon="script.module.httplib2" />
-    <import addon="script.module.youtube.dl" optional="true"/>
-    <import addon="plugin.video.youtube" />
-    <import addon="script.module.urlresolver" optional="true"/>
-    <import addon="script.module.simplejson" />
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary></summary>
-    <description>
-
-    </description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
 <addon id="plugin.video.moviebox" name="*[COLOR yellow]Movie-Box[/COLOR]" provider-name="Vinh Computer Repair" version="1.6.1">
   <requires>
     <import addon="xbmc.python" version="2.1.0" />
@@ -1026,26 +1201,6 @@ http://www2.gostream.sc
   </extension>
 </addon>
 
-<addon id="plugin.video.Pac-12" version="1.3.15" name="*Pac-12 Pro" provider-name="LongHong">
-    <requires>
-        <import addon="xbmc.python" version="2.1.0"/>
-		<import addon="script.module.simplejson" />
-        <import addon="script.module.six" />
-        <import addon="script.module.requests" />
-        <import addon="script.module.livestreamer" />
-        <import addon="script.module.pydevd" version="4.4.0" optional="true"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-    </extension>
-	<extension point="xbmc.service" library="resources/lib/proxy_server.py" start="startup" />
-    <extension point="xbmc.addon.metadata">
-        <summary>Pac-12 Network and various (USA) Live TV channels. Last updated by LongHong 08.31.2017 @ 12:27AM.</summary>
-        <description>Pac-12 Pro for Home Media Entertainments.</description>
-        <platform>all</platform>
-    </extension>
-</addon>
-
 <addon
   id="plugin.video.phim.xixam.com"
   version="1.9"
@@ -1072,8 +1227,8 @@ http://www2.gostream.sc
   <extension library="default.py" point="xbmc.python.pluginsource"/>
   <extension point="xbmc.addon.metadata">
     <platform>all</platform>
-    <summary>Watch free movies from phim14.net (phim lá»“ng tiáº¿ng, thuyáº¿t minh tiáº¿ng Viá»‡t)</summary>
-    <description>Watch free movies from phim14.net (phim lá»“ng tiáº¿ng, thuyáº¿t minh tiáº¿ng Viá»‡t)</description>
+    <summary>Watch free movies from phim14.net (phim lồng tiếng, thuyết minh tiếng Việt)</summary>
+    <description>Watch free movies from phim14.net (phim lồng tiếng, thuyết minh tiếng Việt)</description>
   </extension>
 </addon>
 
@@ -1090,7 +1245,7 @@ http://www2.gostream.sc
 	<extension point="xbmc.python.pluginsource" library="default.py"/>
 	<extension point="xbmc.addon.metadata">
 		<summary>Movies</summary>
-		<description>[COLOR lime][B]Xem phim tá»« website phim3s.net[/B][/COLOR]</description>
+		<description>[COLOR lime][B]Xem phim từ website phim3s.net[/B][/COLOR]</description>
 		<disclaimer lang="en">
 			[COLOR lime]The streaming media are pulled from online provider(s).
 			[COLOR red]These streams do not represent my views or opinions in any way.[/COLOR]</disclaimer>
@@ -1166,7 +1321,7 @@ http://www2.gostream.sc
     </extension>
   <extension point="xbmc.addon.metadata">
     <summary lang="en">Sport365 originally made by GalAnonim</summary>
-    <description lang="en">Fork version 1.0 by GalAnonim!Kindly note that Sport365 Live is not an official part of the media player you are running, and therefore not to be mentioned within official support channels, this addon has nothing to do with the media player itself, nor itâ€™s intended use, it is simply a third party plugin which has been added to your system.</description>
+    <description lang="en">Fork version 1.0 by GalAnonim!Kindly note that Sport365 Live is not an official part of the media player you are running, and therefore not to be mentioned within official support channels, this addon has nothing to do with the media player itself, nor it’s intended use, it is simply a third party plugin which has been added to your system.</description>
     <disclaimer lang="en">Sport365 Live does not provide any streams of its own. Stream quality, content and copyright are responsibility of the ad-financed source web site.</disclaimer>
     <language>en</language>
     <platform>all</platform>
@@ -1181,46 +1336,6 @@ http://www2.gostream.sc
 - Add new Alternative source
 - Default playback method INPUTSTREAM and F4M for older kodi versions
 - Auto enable-install inputstream addons</news>
-  </extension>
-</addon>
-
-<addon
-  id="plugin.video.SportsDevil"
-  version="2019.11.15"
-  name="SportsDevil"
-  provider-name="SportsDevil">
-  <requires>
-   <import addon="xbmc.python" version="2.14.0"/>
-   <import addon="repository.xvbmc" version="4.2"/>
-   <import addon="script.module.dateutil" />
-   <import addon="script.module.simplejson" />
-   <import addon="script.module.six" />
-   <import addon="script.module.requests" />
-   <import addon="script.module.streamlink.base" />
-   <import addon="script.video.F4mProxy" />
-   <import addon="plugin.video.f4mTester" />
-   <!-- <import addon="script.module.livestreamer" />  *Changed-2-StreamLink* -->
-   <!-- *broken* <import addon="repository.unofficialsportsdevil" version="1.0.0" optional="true"/> *broken* -->
-  </requires>
-  <extension
-    point="xbmc.python.pluginsource"
-    library="default.py"/>
-  <!-- <extension point="xbmc.service" library="service/proxy_service.py" start="startup"/> *Changed-2-StreamLink* -->
-  <extension point="xbmc.service" library="service/streamlink_proxy.py" start="startup" />
-  <extension point="xbmc.addon.metadata">
-    <summary>Play videos of different ad-financed sports streaming sites (XvBMC-NL acts only as a mirror for SportsDevil).</summary>
-    <description>Play videos of different ad-financed sports streaming sites (XvBMC-NL acts only as a mirror for SportsDevil).</description>
-    <disclaimer>SportsDevil does not provide any streams of its own; stream quality, content and copyright are responsibility of the ad-financed source web site. For updates - check the readme (XvBMC-NL acts only as a mirror for SportsDevil).</disclaimer>
-    <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-    <platform>all</platform>
-    <forum>http://forums.koditips.com/index.php?topic=11.0</forum>
-    <website>http://forums.koditips.com/index.php?topic=11.0</website>
-    <source>http://forums.koditips.com/index.php?topic=11.0</source>
-    <news>version="2018.01.19x" (mirror@xvbmc)</news>
-  <assets>
-    <icon>icon.png</icon>
-    <fanart>fanart.jpg</fanart>
-  </assets>
   </extension>
 </addon>
 
@@ -1260,7 +1375,7 @@ http://www2.gostream.sc
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en">StreamHub</summary>
-		<description lang="en">[COLOR ffff0000][B]StreamHub[/B][/COLOR] - Bringing Media Content To Your Devices. Including Movies, TV Shows and More![CR][CR]Get Access To The Premium Section Inlcuding HD - 1080p Streams Of Your Favourite Channels And More From As Little As Â£4 Per Month![CR][CR]Visit facebook.com/groups/streamh For More Info!</description>
+		<description lang="en">[COLOR ffff0000][B]StreamHub[/B][/COLOR] - Bringing Media Content To Your Devices. Including Movies, TV Shows and More![CR][CR]Get Access To The Premium Section Inlcuding HD - 1080p Streams Of Your Favourite Channels And More From As Little As £4 Per Month![CR][CR]Visit facebook.com/groups/streamh For More Info!</description>
 		<disclaimer lang="en">[COLOR ffff0000][B]The author does not own or host any content found within this Addon. The Author is not connected to or in any other way affiliated with Kodi, Team Kodi, or the XBMC Foundation.[/B][/COLOR]</disclaimer>
 		<platform>all</platform>
 		<forum>Facebook:   [COLOR ffff0000][B]facebook.com/groups/streamh[/COLOR]</forum>
@@ -1306,39 +1421,6 @@ http://www2.gostream.sc
 	</extension>
 </addon>
 
-<addon id="plugin.video.Supremacy.Sports" name="[COLOR darkmagenta]Supremacy Sports[/COLOR]" version="2.4.1" provider-name="Supremacy">
-    <requires>
-        <import addon="xbmc.python" version="2.19.0" />
-		<import addon="repository.mancaverepo"/>
-        <import addon="script.module.universalscrapers" version="1.0.0" />
-        <import addon="script.module.python.koding.aio" version="0.9.6.6" />
-        <import addon="script.module.beautifulsoup" version="3.2.1" />
-        <import addon="script.module.requests" version="2.9.1" />
-        <import addon="script.module.addon.common" version="2.0.0" />
-        <import addon="script.module.xmltodict" version="0.9.0" />
-		<import addon="script.module.dateutil" />
-        <!--<import addon="script.module.web-pdb" version="1.0"/>-->
-        <import addon="script.module.resolveurl" />
-		<import addon="script.module.Supremacy.sportsHD" />
-		<import addon="script.module.Supremacyhd" version="" />
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>audio video</provides>
-    </extension>
-	<extension point="xbmc.addon.metadata">
-    <reuselanguageinvoker>false</reuselanguageinvoker>
-    </extension>
-    <extension point="xbmc.service" library="service.py" start="[login|startup]" />
-    <extension point="xbmc.addon.metadata">
-      <summary lang="en">Supremacy Sports</summary>
-      <description lang="en">Sports</description>
-      <disclaimer lang="en">The author of this addon do not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
-      <platform>all</platform>
-        <website></website>
-        <video_guide></video_guide>
-    </extension>
-</addon>
-
 <addon id="plugin.video.sureshot" name="Sure Shot" version="1.1.2" provider-name="Doc Shadrach">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0"/>
@@ -1352,6 +1434,28 @@ http://www2.gostream.sc
 		<description>Latest releases with the greatest ratings in IMDb.</description>
 		<platform>all</platform>
 	</extension>
+</addon>
+
+<addon
+  id="plugin.video.thongld.vnplaylist"
+  version="2.0.1.1"
+  name="**[COLOR yellow]VN Open Playlist[/COLOR]"
+  provider-name="thongld">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.kodiswift" version="0.0.7" />
+    <import addon="script.module.kodi4vn" version="0.0.7" />
+    <import addon="plugin.video.youtube" version="4.4.1" />
+    <import addon="script.module.httplib2" version="0.1" />
+    <import addon="service.kodi4vn.iptvproxy" version="0.1" />
+    <import addon="service.kodi4vn.maintenance" version="0.1" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py" />
+  <extension point="xbmc.addon.metadata">
+    <summary>AIO Media Center cho người Việt</summary>
+    <description>Cổng giải trí mở, miễn phí, tất cả trong một cho người Việt</description>
+    <platform>all</platform>
+  </extension>
 </addon>
 
 <addon id="plugin.video.ufc-finest" name="Planet MMA" version="3.7" provider-name="DK">
@@ -1441,6 +1545,31 @@ http://www2.gostream.sc
 		</extension>
 	</addon>
 
+<addon id="plugin.video.vietmediaF"
+       name="[B]VietMediaF[/B]"
+       version="1.1.99.1"
+       provider-name="VietMedia">
+	<requires>
+		<import addon="xbmc.python" version="2.1.0" />
+		<import addon="plugin.video.youtube" version="5.4.5" />
+		<import addon="script.module.requests"/>
+		<import addon="script.module.urlresolver" />
+		<import addon="script.module.simple.downloader" version="1.9.5" />
+	</requires>
+    <extension point="xbmc.python.pluginsource" library="default.py" />
+	<extension point="xbmc.service" library="autorun.py" start="startup">
+	</extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <language>en</language>
+		<summary lang="en">VietMediaF Video Online</summary>
+		<description lang="en">Trung tâm giải trí trực tuyến, xem phim, shows, tivi, ca nhạc, karaoke của người Việt.
+		Các nguồn nội dung được lấy từ sự chia sẻ miễn phí trên mạng Internet. Add-on hoạt động như một trình duyệt media, không lưu trữ hay sở hữu bất cứ nguồn nội dung nào. Người dùng chịu trách nhiệm hoàn toàn về việc xem các nguồn nội dung này.</description>
+    <disclaimer>Add-on không lưu trữ hay sở hữu bất cứ nguồn nội dung nào. Người dùng chịu trách nhiệm hoàn toàn về việc xem các nguồn nội dung này.
+	</disclaimer>
+    </extension>
+</addon>
+
 <addon id="plugin.video.viettv24" version="1.9.17" name="Viet Hai Ngoai 2" provider-name="thaitni">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
@@ -1454,6 +1583,57 @@ http://www2.gostream.sc
 		<license>GNU General Public License - v2</license>
 		<email>thai@thanhthai.net</email>
     </extension>
+</addon>
+
+<addon
+  id="plugin.video.vinh.livetv"
+  version="2.0.1"
+  name=" [COLOR lime]***[/COLOR][COLOR yellow]Vinh-Live TV[/COLOR]"
+  provider-name="thongld">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.kodiswift" version="0.0.7" />
+    <import addon="script.module.kodi4vn" version="0.0.7" />
+    <import addon="plugin.video.youtube" version="4.4.1" />
+    <import addon="script.module.httplib2" version="0.1" />
+    <import addon="service.kodi4vn.iptvproxy" version="0.1" />
+    <import addon="service.kodi4vn.maintenance" version="0.1" />
+	<import addon="plugin.video.videodevil" version="1.7.172" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py"/>
+  <extension point="xbmc.addon.metadata">
+    <summary>Media Center cho người Việt</summary>
+    <description>Addon này được chỉnh sửa nội dung từ addon [COLOR yellow]VN Open Playlist[/COLOR] của tác giả [COLOR blue]thongld[/COLOR] - Xin cảm ơn tác giả [COLOR blue]thongld[/COLOR]</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon
+  id="plugin.video.vinh.movies"
+  version="0.0.3"
+  name=" [COLOR lime]➡ [/COLOR][COLOR yellow]Vinh-Movies[/COLOR]"
+  provider-name="Vinh">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0" />
+    <import addon="script.module.kodiswift" version="0.0.7" />
+    <import addon="script.module.kodi4vn" version="0.0.7" />
+    <import addon="plugin.video.youtube" version="4.4.1" />
+    <import addon="script.module.httplib2" version="0.1" />
+    <import addon="service.kodi4vn.iptvproxy" version="0.1" />
+    <import addon="service.kodi4vn.maintenance" version="0.1" />
+	<import addon="plugin.video.videodevil" version="1.7.172" />
+	<import addon="script.module.requests" />
+	<import addon="script.module.simplejson" />
+	<import addon="script.module.beautifulsoup" />
+	<import addon="script.module.resolveurl" />
+	<import addon="script.module.js2py" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py"/>
+  <extension point="xbmc.addon.metadata">
+    <summary>Media Center cho người Việt</summary>
+    <description>Addon này được chỉnh sửa nội dung từ addon [COLOR yellow]VN Open Playlist[/COLOR] của tác giả [COLOR blue]thongld[/COLOR] - Xin cảm ơn tác giả [COLOR blue]thongld[/COLOR]</description>
+    <platform>all</platform>
+  </extension>
 </addon>
 
 <addon id="plugin.video.vod.kenh88" name="Kenh88" version="1.3.7" provider-name="">
@@ -1548,7 +1728,7 @@ http://www2.gostream.sc
     <extension point="xbmc.python.pluginsource" library="xshare.py"/>
     <extension point="xbmc.addon.metadata">
         <summary>Xshare - XBMC HD Video</summary>
-		<description lang="en">TÃ¬m vÃ  Xem HD Video trÃªn XBMC tá»«: fshare.vn, 4share.vn, vaphim.com, ifile.tv, phimfshare.com, fptplay.net, hdvietnam.com, megabox.vn, dangcaphd.com, hayhaytv.vn, hdviet.com, pubvn.net, vuahd.tv, phimmoi.net, hdonline.vn, phim3s.net, kenh88.com, phimdata.com, phimsot.com, phim47.com</description>
+		<description lang="en">Tìm và Xem HD Video trên XBMC từ: fshare.vn, 4share.vn, vaphim.com, ifile.tv, phimfshare.com, fptplay.net, hdvietnam.com, megabox.vn, dangcaphd.com, hayhaytv.vn, hdviet.com, pubvn.net, vuahd.tv, phimmoi.net, hdonline.vn, phim3s.net, kenh88.com, phimdata.com, phimsot.com, phim47.com</description>
 		<platform>all</platform>
 		<language>en</language>
 		<license>GNU General Public License - v2</license>
@@ -1571,6 +1751,76 @@ http://www2.gostream.sc
     <description></description>
     <platform>all</platform>
   </extension>
+</addon>
+
+<addon id="plugin.video.youtube" name="YouTube" version="6.8.3~alpha1.2" provider-name="anxdpanic, bromix">
+    <requires>
+        <import addon="xbmc.python" version="2.20.0"/>
+        <import addon="script.module.six" version="1.11.0"/>
+        <import addon="script.module.requests" version="2.12.4"/>
+        <import addon="script.module.inputstreamhelper" version="0.2.2" optional="true"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="resources/lib/default.py"/>
+    <extension point="xbmc.service" library="resources/lib/startup.py" start="login"/>
+    <extension point="xbmc.python.module" library="resources/lib/"/>
+    <extension point="xbmc.addon.metadata">
+        <news>
+[fix] fix rating videos causing and error even though it succeeded
+[upd] cache javascript player url for 4 hours, reduces http requests per play by 1
+        </news>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+        <summary lang="en_GB">Plugin for YouTube</summary>
+        <description lang="en_GB">YouTube is one of the biggest video-sharing websites of the world.</description>
+        <disclaimer lang="en_GB">This plugin is not endorsed by Google</disclaimer>
+        <summary lang="he_IL">תוסף עבור YouTube</summary>
+        <description lang="he_IL">YouTube הוא אחד מאתרי שיתוף הווידאו הגדולים בעולם.</description>
+        <summary lang="de_DE">Plugin für YouTube</summary>
+        <description lang="de_DE">YouTube ist eines der größten Video-Sharing-Websites der Welt.</description>
+        <summary lang="pl_PL">Wtyczka YouTube</summary>
+        <description lang="pl_PL">YouTube jest jednym z największych na świecie serwisów udostępniania wideo.</description>
+        <summary lang="hu_HU">YouTube kiegészítő</summary>
+        <description lang="hu_HU">A YouTube világ egyik legnagyobb videómegosztó weboldala.</description>
+        <summary lang="es_ES">Plugin para YouTube</summary>
+        <description lang="es_ES">YouTube es uno de los sitios web más grande del mundo para compartir vídeos.</description>
+        <disclaimer lang="es_ES">Este add-on no está respaldado por Google</disclaimer>
+        <summary lang="es_MX">Plugin para YouTube</summary>
+        <description lang="es_MX">YouTube es uno de los más grandes sitios web de intercambio de videos del mundo.</description>
+        <disclaimer lang="es_MX">Este add-on no está respaldado por Google</disclaimer>
+        <summary lang="ru_RU">Видеодополнение YouTube</summary>
+        <description lang="ru_RU">YouTube - популярнейший видеохостинговый сайт, предоставляющий пользователям услуги хранения, доставки и показа видео.</description>
+        <summary lang="fr_FR">Plugin pour YouTube</summary>
+        <description lang="fr_FR">YouTube est l'un des plus grands sites de partage vidéos du monde.</description>
+        <summary lang="zh_CN">YouTube附加元件</summary>
+        <description lang="zh_CN">「Youtube」是全世界最大的影片分享網站</description>
+        <summary lang="zh_TW">YouTube附加元件</summary>
+        <description lang="zh_TW">「Youtube」是全世界最大的影片分享網站</description>
+        <disclaimer lang="zh_TW">此附加元件未由Google支持</disclaimer>
+        <summary lang="bg_BG">Добавка за YouTube</summary>
+        <description lang="bg_BG">YouTube е един от най-големите уеб сайтове за споделяне на видео в целия свят.</description>
+        <summary lang="el_GR">Πρόσθετο YouTube</summary>
+        <description lang="el_GR">Το YouTube είναι μία από τις μεγαλύτερες ιστοσελίδες διαμοιρασμού βίντεο στον κόσμο.</description>
+        <disclaimer lang="el_GR">Η παρούσα μικροεφαρμογή δεν έχει υϊοθετηθεί από την Google</disclaimer>
+        <summary lang="nb_NO">Tillegg for YouTube</summary>
+        <description lang="nb_NO">YouTube er en av verdens største nettsider for videodeling.</description>
+        <summary lang="ko_KR">유튜브 플러그인</summary>
+        <description lang="ko_KR">유튜브는 세상에서 가장 큰 동영상 공유 사이트 중의 하나입니다.</description>
+        <summary lang="cs_CZ">Plugin pro YouTube</summary>
+        <description lang="cs_CZ">YouTube je jedna z největších webových stránek světa sdílející video.</description>
+        <disclaimer lang="cs_CZ">Tento plugin není schválen společností Google</disclaimer>
+        <summary lang="tr_TR">YouTube için eklenti</summary>
+        <description lang="tr_TR">YouTube, dünya üzerindeki en büyük video paylaşma platformlarından birisidir</description>
+        <disclaimer lang="tr_TR">Bu eklenti Google tarafından üretilmemiştir</disclaimer>
+        <platform>all</platform>
+        <license>GPL-2.0-only</license>
+        <forum>https://ytaddon.page.link/forum</forum>
+        <website>https://www.youtube.com</website>
+        <email>ytplugin at datanet dot ws</email>
+        <source>https://github.com/jdf76/plugin.video.youtube</source>
+        <reuselanguageinvoker>true</reuselanguageinvoker>
+    </extension>
 </addon>
 
 <addon id="plugin.video.youtube.playlists" name="*[COLOR yellow]VIP-Playlists[/COLOR]" version="1.4.1" provider-name="Vinh Modded from Thong">
@@ -1617,7 +1867,7 @@ http://www2.gostream.sc
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en">Zen Movies/TV Shows</summary>
-		<description lang="en">Watch Movies and TV Shows in High quality! Please note that this addon is not an official part of the Kodi media player , and therefore not to be mentioned within official support channels, this addon has nothing to do with the media player itself, nor itâ€™s intended use, it is simply a third party plugin which has been added to your system.</description>
+		<description lang="en">Watch Movies and TV Shows in High quality! Please note that this addon is not an official part of the Kodi media player , and therefore not to be mentioned within official support channels, this addon has nothing to do with the media player itself, nor it’s intended use, it is simply a third party plugin which has been added to your system.</description>
 		<disclaimer lang="en">The Author does not host or share any content, nor is affiliated with the content providers.</disclaimer>
 		<platform>all</platform>
 
@@ -1672,6 +1922,137 @@ http://www2.gostream.sc
     <description>Watch Zing TV (Vietnamese) Videos</description>
     <platform>all</platform>
   </extension>
+</addon>
+
+<addon id="repository.Diamond-Wizard-Repo" name=".[COLORwhite]***[/COLOR][COLOR crimson]D[/COLOR][COLOR silver]iamond Build Repo (Primary Server, Main Repo)[/COLOR][COLORwhite]***[/COLOR]" version="3.9.8" provider-name="Diamond Build">
+<extension point="xbmc.addon.repository" name="Diamond Wizard Repo - Primary Server">
+<!-- Diamond Repository -->
+
+<dir>
+<info compressed="false">https://raw.githubusercontent.com/bobbybark/diamond-build-repo/master/addons.xml</info>
+<checksum>https://raw.githubusercontent.com/bobbybark/diamond-build-repo/master/addons.xml.md5</checksum>
+<datadir zip="true">https://raw.githubusercontent.com/bobbybark/diamond-build-repo/master/</datadir>
+</dir>
+
+<dir>
+<info compressed="false">https://raw.githubusercontent.com/bobbybark/diamond-7of9-addon-repo/master/addons.xml</info>
+<checksum>https://raw.githubusercontent.com/bobbybark/diamond-7of9-addon-repo/master/addons.xml.md5</checksum>
+<datadir zip="true">https://raw.githubusercontent.com/bobbybark/diamond-7of9-addon-repo/master/</datadir>
+</dir>
+
+<dir>
+<info compressed="false">https://raw.githubusercontent.com/bobbybark/diamond-7of9-dependency-repo/master/addons.xml</info>
+<checksum>https://raw.githubusercontent.com/bobbybark/diamond-7of9-dependency-repo/master/addons.xml.md5</checksum>
+<datadir zip="true">https://raw.githubusercontent.com/bobbybark/diamond-7of9-dependency-repo/master/</datadir>
+</dir>
+
+<dir>
+<info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml</info>
+<checksum>https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml.md5</checksum>
+<datadir zip="true">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/</datadir>
+</dir>
+
+<dir>
+<info compressed="false">https://raw.githubusercontent.com/jenaddon/repository.jenrepo/master/zips/addons.xml</info>
+<checksum>https://raw.githubusercontent.com/jenaddon/repository.jenrepo/master/zips/addons.xml.md5</checksum>
+<datadir zip="true">https://raw.githubusercontent.com/jenaddon/repository.jenrepo/master/zips/</datadir>
+</dir>
+
+<dir>
+<info compressed="false">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml</info>
+<checksum>https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml.md5</checksum>
+<datadir zip="true">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/</datadir>
+</dir>
+
+<dir>
+<info compressed="false">https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml</info>
+<checksum>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.md5</checksum>
+<datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
+</dir>
+
+<dir>
+<info compressed="false">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml</info>
+<checksum>https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml.md5</checksum>
+<datadir zip="true">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/</datadir>
+</dir>
+
+<dir>
+<info compressed="false">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml</info>
+<checksum>https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml.md5</checksum>
+<datadir zip="true">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/</datadir>
+</dir>
+</extension>
+<extension point="xbmc.addon.metadata">
+<summary lang="en">Diamond Addons / Primary Server, Main Repo</summary>
+<description lang="en">Repo For Diamond Build, Bought to you by Diamond Build</description>
+<disclaimer>The owners and submitters to this repository do not host or distribute any of the content displayed by these addons nor do they have any affiliation with the content providers.</disclaimer>
+<platform>all</platform>
+</extension>
+</addon>
+
+    <addon id="repository.Firestickplusman" name="Firestickplusman Addons" version="4.0" provider-name="Firestickplusman">
+        <requires>
+            <import addon="xbmc.addon" version="12.0.0"/>
+        </requires>
+        <extension point="xbmc.addon.repository" name="Firestickplusman Addons">
+            <info compressed="false">http://fspmkodi.com/_repo/addons.xml</info>
+            <checksum>http://fspmkodi.com/_repo/addons.xml.md5</checksum>
+            <datadir zip="true">http://fspmkodi.com/_repo/</datadir>
+            <hashes>false</hashes>
+        </extension>
+        <extension point="xbmc.addon.metadata">
+            <summary>Firestickplusman addon repo</summary>
+            <description>Firestickplusman addon repo to in the best and update addons from Firestickplusman.</description>
+            <platform>all</platform>
+    </extension>
+</addon>
+
+    <addon id="repository.StarTec" name="[COLOR yellow]Star-Tec Repository[/COLOR]" version="1.3.0" provider-name="Star-Tec">
+        <requires>
+            <import addon="xbmc.addon" version="12.0.0"/>
+        </requires>
+	<extension point="xbmc.addon.repository" name="StarTec">
+	<dir>
+		<info compressed="false">https://raw.githubusercontent.com/gentec1/oTTtv/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/gentec1/oTTtv/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.github.com/gentec1/oTTtv/master/</datadir>
+	</dir>
+	<dir>
+            <info compressed="false">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/</datadir>
+    </dir>
+	<dir>
+		<info compressed="false">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml</info>
+		<checksum>https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/zips/</datadir>
+	</dir>
+	<dir>
+			<info compressed="false">https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
+    </dir>
+	<dir>
+			<info compressed="false">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/</datadir>
+    </dir>
+	<dir>
+		<info compressed="false">http://gen-tec.co/gentecwiz/NEW%20REPO%20FOR%20GENTEC%20WIZARD/Repo/addons.xml</info>
+		<checksum>http://gen-tec.co/gentecwiz/NEW%20REPO%20FOR%20GENTEC%20WIZARD/Repo/addons.xml.md5</checksum>
+		<datadir zip="true">http://gen-tec.co/gentecwiz/NEW%20REPO%20FOR%20GENTEC%20WIZARD/Repo/</datadir>
+	</dir>
+	<dir>
+		<info compressed="false">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/</datadir>
+	</dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>StarTec Repo</summary>
+		<description>Download and install addons StarTec Builds</description>
+		<platform>all</platform>
+	</extension>
 </addon>
 
 <addon id="repository.bimozie" version="1.0" name="Bimozie repository" provider-name="billy.nguyen">
@@ -1751,72 +2132,6 @@ http://www2.gostream.sc
     </extension>
 </addon>
 
-<addon id="repository.Diamond-Wizard-Repo" name=".[COLORwhite]***[/COLOR][COLOR crimson]D[/COLOR][COLOR silver]iamond Build Repo (Primary Server, Main Repo)[/COLOR][COLORwhite]***[/COLOR]" version="3.9.8" provider-name="Diamond Build">
-<extension point="xbmc.addon.repository" name="Diamond Wizard Repo - Primary Server">
-<!-- Diamond Repository -->
-
-<dir>
-<info compressed="false">https://raw.githubusercontent.com/bobbybark/diamond-build-repo/master/addons.xml</info>
-<checksum>https://raw.githubusercontent.com/bobbybark/diamond-build-repo/master/addons.xml.md5</checksum>
-<datadir zip="true">https://raw.githubusercontent.com/bobbybark/diamond-build-repo/master/</datadir>
-</dir>
-
-<dir>
-<info compressed="false">https://raw.githubusercontent.com/bobbybark/diamond-7of9-addon-repo/master/addons.xml</info>
-<checksum>https://raw.githubusercontent.com/bobbybark/diamond-7of9-addon-repo/master/addons.xml.md5</checksum>
-<datadir zip="true">https://raw.githubusercontent.com/bobbybark/diamond-7of9-addon-repo/master/</datadir>
-</dir>
-
-<dir>
-<info compressed="false">https://raw.githubusercontent.com/bobbybark/diamond-7of9-dependency-repo/master/addons.xml</info>
-<checksum>https://raw.githubusercontent.com/bobbybark/diamond-7of9-dependency-repo/master/addons.xml.md5</checksum>
-<datadir zip="true">https://raw.githubusercontent.com/bobbybark/diamond-7of9-dependency-repo/master/</datadir>
-</dir>
-
-<dir>
-<info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml</info>
-<checksum>https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml.md5</checksum>
-<datadir zip="true">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/</datadir>
-</dir>
-
-<dir>
-<info compressed="false">https://raw.githubusercontent.com/jenaddon/repository.jenrepo/master/zips/addons.xml</info>
-<checksum>https://raw.githubusercontent.com/jenaddon/repository.jenrepo/master/zips/addons.xml.md5</checksum>
-<datadir zip="true">https://raw.githubusercontent.com/jenaddon/repository.jenrepo/master/zips/</datadir>
-</dir>
-
-<dir>
-<info compressed="false">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml</info>
-<checksum>https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml.md5</checksum>
-<datadir zip="true">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/</datadir>
-</dir>
-
-<dir>
-<info compressed="false">https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml</info>
-<checksum>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.md5</checksum>
-<datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
-</dir>
-
-<dir>
-<info compressed="false">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml</info>
-<checksum>https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml.md5</checksum>
-<datadir zip="true">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/</datadir>
-</dir>
-
-<dir>
-<info compressed="false">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml</info>
-<checksum>https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml.md5</checksum>
-<datadir zip="true">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/</datadir>
-</dir>
-</extension>
-<extension point="xbmc.addon.metadata">
-<summary lang="en">Diamond Addons / Primary Server, Main Repo</summary>
-<description lang="en">Repo For Diamond Build, Bought to you by Diamond Build</description>
-<disclaimer>The owners and submitters to this repository do not host or distribute any of the content displayed by these addons nor do they have any affiliation with the content providers.</disclaimer>
-<platform>all</platform>
-</extension>
-</addon>
-
 <addon id="repository.dk-xbmc-repaddon" name="dk-xbmc-repaddon Add-on Repository" version="1.0.3" provider-name="dk-xbmc-repaddon">
 	<extension point="xbmc.addon.repository" name="dk-xbmc-repaddon Add-on Repository">
 		<info compressed="false">http://dk-xbmc-repaddon-rep.googlecode.com/svn/trunk/addons.xml</info>
@@ -1877,23 +2192,6 @@ http://www2.gostream.sc
 	</extension>
 </addon>
 
-    <addon id="repository.Firestickplusman" name="Firestickplusman Addons" version="4.0" provider-name="Firestickplusman">
-        <requires>
-            <import addon="xbmc.addon" version="12.0.0"/>
-        </requires>
-        <extension point="xbmc.addon.repository" name="Firestickplusman Addons">
-            <info compressed="false">http://fspmkodi.com/_repo/addons.xml</info>
-            <checksum>http://fspmkodi.com/_repo/addons.xml.md5</checksum>
-            <datadir zip="true">http://fspmkodi.com/_repo/</datadir>
-            <hashes>false</hashes>
-        </extension>
-        <extension point="xbmc.addon.metadata">
-            <summary>Firestickplusman addon repo</summary>
-            <description>Firestickplusman addon repo to in the best and update addons from Firestickplusman.</description>
-            <platform>all</platform>
-    </extension>
-</addon>
-
 <addon id="repository.geektvpr" name="GeekTvPR Repo" version="2.2.0" provider-name="GeekTvPR Group">
 	<requires>
             <import addon="xbmc.addon" version="12.0.0"/>
@@ -1946,7 +2244,7 @@ http://www2.gostream.sc
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>Repositorio GeekTvPR Media</summary>
-		<description>GeekTvPR Media es un repositorio con el fin de facilitar la instalacion de addons y repositorios para sus usuarios. De esta manera los addons son automaticamente actualizados. Cada addon y repositorio tienen sus dueÃ±os. Todos los creditos de los addons son para sus creadores. Si Usted tiene un addon y no tiene un Host donde alojarlo con mucho gusto lo puede alojar en este repo si es de su interÃ©s. Me pueden enviar email a intrcomp@gmail.com y con mucho gusto le ayudare. La meta de GeekTvPR Media es unir a la commnidad especialmente Latina en esta plataforma Open Source. Todo el contenido alojado es encontrado en lugares publicos en el internet, hacemos uso de  la Licencia GNU GPL v3.0. Gracias a todos por su Apoyo</description>
+		<description>GeekTvPR Media es un repositorio con el fin de facilitar la instalacion de addons y repositorios para sus usuarios. De esta manera los addons son automaticamente actualizados. Cada addon y repositorio tienen sus dueños. Todos los creditos de los addons son para sus creadores. Si Usted tiene un addon y no tiene un Host donde alojarlo con mucho gusto lo puede alojar en este repo si es de su interés. Me pueden enviar email a intrcomp@gmail.com y con mucho gusto le ayudare. La meta de GeekTvPR Media es unir a la commnidad especialmente Latina en esta plataforma Open Source. Todo el contenido alojado es encontrado en lugares publicos en el internet, hacemos uso de  la Licencia GNU GPL v3.0. Gracias a todos por su Apoyo</description>
 		<platform>all</platform>
 	</extension>
 </addon>
@@ -1969,6 +2267,30 @@ http://www2.gostream.sc
 		<summary lang="en">4share and Fshare</summary>
 		<description lang="en"></description>
 		<disclaimer lang="en"></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+
+<addon
+	id="repository.hieuhien.vn"
+	version="1.0.0"
+	name="[COLOR lime][B]Hieuhien.vn Repository[/B][/COLOR]"
+	provider-name="Hieuhien.vn">
+	<requires>
+		<import addon="xbmc.addon" version="12.0.0"/>
+	</requires>
+	<extension point="xbmc.addon.repository"
+		name="[COLOR lime][B]Hieuhien.vn Repository[/B][/COLOR]">
+		<info compressed="true">https://raw.github.com/hieuhienvn/hieuhien.vn/master/addons.xml</info>
+		<checksum>https://raw.github.com/hieuhienvn/hieuhien.vn/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://github.com/hieuhienvn/hieuhien.vn/raw/master/zips/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Install addon from Hieuhien.vn's repository</summary>
+		<description lang="en">[COLOR red][B]Hieuhien.vn[/COLOR]-[COLOR lime]Repository tập hợp các addon và repository giải trí online trên XBMC - Kodi[/B][/COLOR]</description>
+		<disclaimer lang="en">Mọi nội dung được lấy từ Internet vì vậy chúng tôi không chịu trách nhiệm về chất lượng cũng như sự ổn định</disclaimer>
+		<email>contact@hieuhien.vn</email>
 		<platform>all</platform>
 	</extension>
 </addon>
@@ -2112,6 +2434,20 @@ http://www2.gostream.sc
     <extension point="xbmc.addon.metadata">
         <summary>Unofficial Addons for Kodi</summary>
         <description>Would you care for some salt with that fork?</description>
+        <platform>all</platform>
+    </extension>
+</addon>
+
+<addon id="repository.kodil" name=".[COLOR blue].Kodil [/COLOR][COLOR white] Repository [/COLOR]" version="1.3" provider-name="kodil">
+    <extension point="xbmc.addon.repository" name=".Kodil  Repository ">
+        <info compressed="false">https://raw.githubusercontent.com/kodil/kodil/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/kodil/kodil/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/kodil/kodil/master/repo</datadir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>kodisrael repository</summary>
+        <description>kodil repository - the most extensive repository in isrl </description>
+        <description>הריפו של קודישראל - מאגר ההרחבות הגדול והאיכותי בישראל  </description>
         <platform>all</platform>
     </extension>
 </addon>
@@ -2315,54 +2651,6 @@ http://www2.gostream.sc
 
 		</description>
 
-		<platform>all</platform>
-	</extension>
-</addon>
-
-    <addon id="repository.StarTec" name="[COLOR yellow]Star-Tec Repository[/COLOR]" version="1.3.0" provider-name="Star-Tec">
-        <requires>
-            <import addon="xbmc.addon" version="12.0.0"/>
-        </requires>
-	<extension point="xbmc.addon.repository" name="StarTec">
-	<dir>
-		<info compressed="false">https://raw.githubusercontent.com/gentec1/oTTtv/master/addons.xml</info>
-        <checksum>https://raw.githubusercontent.com/gentec1/oTTtv/master/addons.xml.md5</checksum>
-        <datadir zip="true">https://raw.github.com/gentec1/oTTtv/master/</datadir>
-	</dir>
-	<dir>
-            <info compressed="false">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/</datadir>
-    </dir>
-	<dir>
-		<info compressed="false">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml</info>
-		<checksum>https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml.md5</checksum>
-		<datadir zip="true">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/zips/</datadir>
-	</dir>
-	<dir>
-			<info compressed="false">https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
-    </dir>
-	<dir>
-			<info compressed="false">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/</datadir>
-    </dir>
-	<dir>
-		<info compressed="false">http://gen-tec.co/gentecwiz/NEW%20REPO%20FOR%20GENTEC%20WIZARD/Repo/addons.xml</info>
-		<checksum>http://gen-tec.co/gentecwiz/NEW%20REPO%20FOR%20GENTEC%20WIZARD/Repo/addons.xml.md5</checksum>
-		<datadir zip="true">http://gen-tec.co/gentecwiz/NEW%20REPO%20FOR%20GENTEC%20WIZARD/Repo/</datadir>
-	</dir>
-	<dir>
-		<info compressed="false">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml</info>
-		<checksum>https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml.md5</checksum>
-		<datadir zip="true">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/</datadir>
-	</dir>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>StarTec Repo</summary>
-		<description>Download and install addons StarTec Builds</description>
 		<platform>all</platform>
 	</extension>
 </addon>
@@ -2911,6 +3199,28 @@ De(ze) 'repo' zal alleen worden "vastgehouden" ter voorkoming van kaping in- en 
   </extension>
 </addon>
 
+<addon id="script.module.resolveurl" name="ResolveURL" version="6.4.74" provider-name="jsergio">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0" />
+        <import addon="plugin.video.youtube" optional="true" />
+        <import addon="script.module.python.twitch" optional="true" />
+        <import addon="script.module.cryptopy" version="1.2.6" optional="true" />
+        <import addon="plugin.video.gdrive" optional="true" />
+        <import addon="script.module.requests"/>
+    </requires>
+    <extension point="xbmc.python.module" library="lib" />
+    <extension point="xbmc.python.pluginsource" library="lib/default.py" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary lang="en">Resolve common video host URL's to be playable in XBMC/Kodi.</summary>
+        <summary lang="es">Resolver enlaces a videos de sitios populares para poder reproducirlos en XBMC/Kodi.</summary>
+        <summary lang="hr">Prilagodi najčešće URL-ove video izvora kako bi radili u XBMC/Kodiju.</summary>
+        <summary lang="el">Επίλυση συνδέσμων κοινών εξυπηρετητών σε μορφή βίντεο ικανό για αναπαραγωγή στο XBMC/Kodi.</summary>
+        <description lang="en">Resolve common video host URL's to be playable in XBMC/Kodi, simplify addon development of video plugins requiring multi video hosts.</description>
+        <description lang="hr">Prilagodi najčešće URL-ove video izvora kako bi radili u XBMC/Kodiju, pojednostavnjuje razvoj priključaka za video dodatke koji zahtjevaju višestruke video izvore.</description>
+    </extension>
+</addon>
+
 <addon id="script.module.simplejson"
        name="simplejson"
        version="3.16.1"
@@ -2980,6 +3290,29 @@ De(ze) 'repo' zal alleen worden "vastgehouden" ter voorkoming van kaping in- en 
   </extension>
 </addon>
 
+<addon id="script.module.urlresolver" name="URLResolver" version="5.0.65.1" provider-name="tvaddons">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0" />
+        <import addon="plugin.video.youtube" optional="true" />
+        <import addon="script.module.python.twitch" optional="true" />
+        <import addon="script.module.cryptopy" version="1.2.6" optional="true" />
+        <import addon="plugin.video.gdrive" optional="true" />
+    </requires>
+    <extension point="xbmc.python.module" library="lib" />
+    <extension point="xbmc.python.pluginsource" library="lib/default.py" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary lang="en">Resolve common video host URL's to be playable in XBMC/Kodi.</summary>
+        <summary lang="es">Resolver enlaces a videos de sitios populares para poder reproducirlos en XBMC/Kodi.</summary>
+        <summary lang="hr">Prilagodi najčešće URL-ove video izvora kako bi radili u XBMC/Kodiju.</summary>
+        <summary lang="el">Επίλυση συνδέσμων κοινών εξυπηρετητών σε μορφή βίντεο ικανό για αναπαραγωγή στο XBMC/Kodi.</summary>
+        <description lang="en">Resolve common video host URL's to be playable in XBMC/Kodi, simplify addon development of video plugins requiring multi video hosts.</description>
+        <description lang="hr">Prilagodi najčešće URL-ove video izvora kako bi radili u XBMC/Kodiju, pojednostavnjuje razvoj priključaka za video dodatke koji zahtjevaju višestruke video izvore.</description>
+        <forum>https://www.tvaddons.co/forums</forum>
+        <website>https://www.tvaddons.co</website>
+    </extension>
+</addon>
+
 <addon id="script.video.F4mProxy" name="F4mProxy" version="2.8.8" provider-name="Shani">
     <requires>
         <import addon="xbmc.python" version="2.1.0" />
@@ -3018,7 +3351,7 @@ De(ze) 'repo' zal alleen worden "vastgehouden" ter voorkoming van kaping in- en 
 <addon
   id="service.kodi4vn.maintenance"
   version="1.1.1"
-  name="**[COLOR yellow]Báº£o trÃ¬ Kodi4VN Launcher[/COLOR]"
+  name="**[COLOR yellow]Bảo trì Kodi4VN Launcher[/COLOR]"
   provider-name="kodi4vn">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -3031,6 +3364,292 @@ De(ze) 'repo' zal alleen worden "vastgehouden" ter voorkoming van kaping in- en 
     <platform>all</platform>
   </extension>
 </addon>
+
+<addon id="skin.confluence" version="3.1.45" name="Confluence" provider-name="Jezz_X, Team Kodi">
+	<requires>
+		<import addon="xbmc.gui" version="5.12.0"/>
+	</requires>
+	<extension point="xbmc.gui.skin" debugging="false" effectslowdown="1.0">
+		<res width="1280" height="720" aspect="16:9" default="true" folder="720p" />
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="af_ZA">Confluence oortreksel deur Jezz_X. (Kodi se standaard tema)</summary>
+		<summary lang="ar_SA">جلد "كونفليونس" من صنع Jezz_x. (الجلد المبدأى لبرنامج إكس بى إم سى)</summary>
+		<summary lang="be_BY">Confluence skin by Jezz_X. (Kodi's default skin)</summary>
+		<summary lang="bg_BG">Confluence облик от Jezz_X. (стандартния облик за Kodi)</summary>
+		<summary lang="ca_ES">Pell Confluence, per Jezz_X. (Pell per defecte del Kodi)</summary>
+		<summary lang="cs_CZ">Vzhled Confluence od Jezz_X. (výchozí vzhled Kodi)</summary>
+		<summary lang="cy_GB">Croen Confluence gan Jezz_X. (Croen rhagosodedig Kodi)</summary>
+		<summary lang="da_DK">Confluence-tema af Jezz_X. (Kodis standardtema)</summary>
+		<summary lang="de_DE">Confluence Skin von Jezz_X. (Standard-Skin von Kodi)</summary>
+		<summary lang="el_GR">Το κέλυφος Confluence από τον Jezz_X (προεπιλεγμένο κέλυφος του Kodi).</summary>
+		<summary lang="en_AU">Confluence skin by Jezz_X. (Kodi's default skin)</summary>
+		<summary lang="en_GB">Confluence skin by Jezz_X.</summary>
+		<summary lang="en_NZ">Confluence skin by Jezz_X. (Kodi's default skin)</summary>
+		<summary lang="en_US">Confluence skin by Jezz_X. (Kodi's default skin)</summary>
+		<summary lang="es_AR">Confluence skin por Jezz_X. (skin por defecto de Kodi)</summary>
+		<summary lang="es_ES">Confluence skin por Jezz_X. (skin por defecto)</summary>
+		<summary lang="es_MX">Skin confluende por Jezz_X. (skin por defecto de Kodi)</summary>
+		<summary lang="et_EE">Confluence rüü autorilt Jezz_X. (Kodi vaikerüü)</summary>
+		<summary lang="eu_ES">Confluence azala Jezz_X-ek egina.</summary>
+		<summary lang="fa_IR">پوسته Confluence تهیه شده بوسیله Jezz_X. (پوسته پیش فرض Kodi) </summary>
+		<summary lang="fi_FI">Confluence-ulkoasu. Tekijä Jezz_X.</summary>
+		<summary lang="fo_FO">Confluence útsjónd av Jezz_X. (Kodi's vanliga útsjónd)</summary>
+		<summary lang="fr_CA">Habillage Confluence par Jezz_X.</summary>
+		<summary lang="fr_FR">Confluence par Jezz_X. (Habillage d'origine de Kodi)</summary>
+		<summary lang="gl_ES">Pel Confluence por Jezz_Z. (Pel predefinida do Kodi)</summary>
+		<summary lang="he_IL">המעטפת Confluence של Jezz_X. (ברירת המחדל של Kodi)</summary>
+		<summary lang="hr_HR">Confluence presvlaka autora Jezz_X. (uobičajena Kodi presvlaka)</summary>
+		<summary lang="hu_HU">Confluence felszín. Készítő: Jezz_X (Kodi alapértelmezett felszín)</summary>
+		<summary lang="hy_AM">''Confluence'' - տեսք՝ Jezz_X. կողմից (Kodi - հիմնական տեսք)</summary>
+		<summary lang="id_ID">Skin Confluence oleh Jezz_X. (Skin bawaan Kodi)</summary>
+		<summary lang="is_IS">Confluence eftir Jezz_X. (Sjálfgefið útlit Kodi)</summary>
+		<summary lang="it_IT">Skin Confluence da Jezz_X. (Skin predefinita di Kodi)</summary>
+		<summary lang="ja_JP">Confluence スキン by Jezz_X. (Kodi デフォルトスキン)</summary>
+		<summary lang="ko_KR">Confluence 스킨 Jezz_X 만듦 (Kodi 기본 스킨)</summary>
+		<summary lang="lt_LT">Confluence teminė išvaizda, kurią sukūrė Jezz_X. (Kodi numatytoji teminė išvaizda)</summary>
+		<summary lang="lv_LV">Confluence apvalks no Jeez_X. (Kodi noklusētais apvalks)</summary>
+		<summary lang="mk_MK">Confluence skin by Jezz_X. (Kodi's default skin)</summary>
+		<summary lang="ms_MY">Penyatuan, kulit daripada Jezz_X. (Kulit lalai Kodi)</summary>
+		<summary lang="mt_MT">Dehra Confluence magħmula minn Jezz_X. (Id-dehra normali ta' Kodi)</summary>
+		<summary lang="nb_NO">Confluence-skall av Jezz_X. (Kodis standardskall)</summary>
+		<summary lang="nl_NL">Confluence skin door Jezz_X. (Kodi's standaard skin)</summary>
+		<summary lang="pl_PL">Skóra Confluence autorstwa Jezz_X</summary>
+		<summary lang="pt_BR">Skin Confluence por Jezz_X. (Skin padrão do Kodi)</summary>
+		<summary lang="pt_PT">Tema Confluence por Jezz_X (tema padrão do Kodi)</summary>
+		<summary lang="ro_RO">Costum Confluence de Jezz_X. (costum implicit pentru Kodi)</summary>
+		<summary lang="ru_RU">Обложка Confluence (стандартная обложка Kodi). Автор: Jezz_X.</summary>
+		<summary lang="sk_SK">Confluence skin od Jezz_X. (predvolený skin Kodi)</summary>
+		<summary lang="sl_SI">Preobleka Confluence avtorja Jezz_X. (Privzeta preobleka za Kodi)</summary>
+		<summary lang="sq_AL">Maska Confluence nga Jazz_X (maska kryesore së Kodi)</summary>
+		<summary lang="sr_RS">Confluence маска аутора Jezz_X.</summary>
+		<summary lang="sr_RS@latin">Confluence maska autora Jezz_X.</summary>
+		<summary lang="sv_SE">Confluence, ett skal av Jezz_X. (Kodi:s standardskal)</summary>
+		<summary lang="szl">Skōra Confluence zrychtowanŏ ôd Jeez_X. (wychodnŏ skōra we Kodi)</summary>
+		<summary lang="tg_TJ">Пӯсти ҳамҷараёнӣ аз ҷониби Jezz_X. (Пӯсти пешфарзи Kodi)</summary>
+		<summary lang="th_TH">ชุดตกแต่ง Confluence โดย  Jezz_X (สกินเริ่มต้นของ Kodi)</summary>
+		<summary lang="tr_TR">Confluence dış görünümü. Jezz_X (Kodi'nin varsayılan dış görünümü)</summary>
+		<summary lang="uk_UA">Обкладинка Confluence (стандартна обкладинка Kodi). Автор: Jezz_X.</summary>
+		<summary lang="vi_VN">Giao diện Confluence bởi Jezz_X. (Giao diện mặc định của Kodi)</summary>
+		<summary lang="zh_CN">Jezz_X 开发的 Confluence 皮肤。</summary>
+		<summary lang="zh_TW">Jezz_X 製作的佈景主題（Kodi的預設佈景主題）</summary>
+		<description lang="af_ZA">Confluence is die standaard oortreksel vir Kodi 9.11 en op. Dit is 'n kombinasie van konsepte van 'n klomp gewilde oortreksels, en 'n poging om hulle goeie idees te omvat en te integreer in 'n oortreksel wat maklik behoort te wees vir eerste keer Kodi gebruikers om te verstaan en te gebruik.</description>
+		<description lang="ar_SA">"كونفليونس" هو الجلد المبدأى لبرنامج إكس بى إم سى اﻹصدار 9.11 وما فوق. هو خلط بين اشهر اﻷجلده الاخرى معاً ومحاوله لتبنى ودمج افكارهم للخروج بِنِتَاج يُفترض به ان يكون سهل اﻹستيعاب بمجرد النظر لمستخدمى إكس بى إم سى المبتدئين.</description>
+		<description lang="be_BY">Confluence is the default skin for Kodi 9.11 and above. It is a combination of concepts from many popular skins, and attempts to embrace and integrate their good ideas into a skin that should be easy for first time Kodi users to understand and use.</description>
+		<description lang="bg_BG">Confluence е стандартният облик на Kodi 9.11 и по-новите версии. Представлява смесица от концепциите на много от популярните облици. Целта е да се интегрират тези добри идеи в подходящ и удобен вид за хора, които се сблъскват за първи път с Kodi.</description>
+		<description lang="ca_ES">Confluence és la pell per defecte del Kodi 14.0 i superiors. És una combinació de conceptes de moltes pells populars que intenta adoptar i integrar les seves bones idees en una aparença que sigui senzilla d'entendre i utilitzar per els nous usuaris de Kodi.</description>
+		<description lang="cs_CZ">Confluence je výchozí vzhled pro Kodi 9.11 a novější. Jedná se o kombinaci konceptů z mnoha jiných populárních vzhledů, která se pokouší uchopit a integrovat jejich dobré nápady do vzhledu, který by měl být pro nového uživatele Kodi jednoduchý na pochopení a používání.</description>
+		<description lang="cy_GB">Confluence yw croen rhagosodedig Kodi 9.11 ac uwch. Mae'n gyfuniad o gysyniadau o nifer o grwyn poblogaidd ac mae'n ymdrechu i gyfuno eu syniadau da hwy i groen ddylai fod yn hawdd i ddefnyddiwr cyntaf Kodi ei deall a'i ddefnyddio.</description>
+		<description lang="da_DK">Confluence er standardskin'et til Kodi 9.11 og senere versioner. Det er en kombination af koncepter fra mange populære skins, og det forsøger at omfavne og integrere de gode ideer i et skin, der er let for førstegangsbrugere af Kodi at forstå og bruge.</description>
+		<description lang="de_DE">Confluence ist der Standardskin ab Kodi 14.0. Er ist eine Kombination mehrerer unterschiedlicher Skin-Konzepte und versucht dabei, die besten Ideen zu kombinieren, um einen einfachen Einstieg für neue Kodi-Nutzer zu ermöglichen.</description>
+		<description lang="el_GR">Το Confluence είναι η προεπιλεγμένη αμφίεση για τις εκδόσεις Kodi 14.0 και άνω. Είναι ένας συνδυασμός από πολλές δημοφιλής αμφιέσεις, και επιχειρεί να παρέχει τις καλύτερες ιδέες τους σε μία αμφίεση, το οποίο είναι εύκολο για τους αρχάριους χρήστες του Kodi να κατανοήσουν και να χρησιμοποιήσουν.</description>
+		<description lang="en_AU">Confluence is the default skin for Kodi 9.11 and above. It is a combination of concepts from many popular skins, and attempts to embrace and integrate their good ideas into a skin that should be easy for first time Kodi users to understand and use.</description>
+		<description lang="en_GB">Confluence is a combination of concepts from many popular skins, and attempts to embrace and integrate their good ideas into a skin that should be easy for first time Kodi users to understand and use.</description>
+		<description lang="en_NZ">Confluence is the default skin for Kodi 9.11 and above. It is a combination of concepts from many popular skins, and attempts to embrace and integrate their good ideas into a skin that should be easy for first time Kodi users to understand and use.</description>
+		<description lang="en_US">Confluence is the default skin for Kodi 9.11 and above. It is a combination of concepts from many popular skins, and attempts to embrace and integrate their good ideas into a skin that should be easy for first time Kodi users to understand and use.</description>
+		<description lang="es_AR">Confluence es el skin por defecto de Kodi 14.0 y posteriores. Es una combinación de conceptos de muchos skins populares, e intenta abarcar e integrar lo mejor de ellos en un skin que sea sencillo de entender y utilizar para los nuevos usuarios de Kodi.</description>
+		<description lang="es_ES">Confluence es la skin por defecto de Kodi 9.11 y posteriores. Es una combinación de conceptos de muchas skins populares, e intenta abarcar e integrar lo mejor de ellas en una skin que sea sencilla de entender y utilizar para los nuevos usuarios de Kodi.</description>
+		<description lang="es_MX">Confluence es el skin por defecto para Kodi 9.11 en adelante. Es una combinación de conceptos de varias skins populares, e intenta adoptar e integrar sus buenas ideas en un skin que debería ser fá de entender y usar para quienes usen Kodi por primera vez.</description>
+		<description lang="et_EE">Confluence on Kodi vaikerüü alates versioonist 9.11. Confluence on paljude populaarsete rüüde kombinatsioon, üritades omavahel siduda nende parimaid lahendusi, et saavutada esmakasutajale selget ja kergelt kasutatavat tulemust.</description>
+		<description lang="eu_ES">Confluence hainbat azal ospetsutatik hartutako kontzeptuen konbinaketa da. Horietatik ideia onak hartu eta integratzen saiatzen da, Kodi lehen aldiz erabiltzen dutenentzat ulertzeko eta erabiltzeko erraza izango den azal batean.</description>
+		<description lang="fa_IR">Confluence پوسته پیش فرض Kodi در ویرایش 14 و بالاتر است. این پوسته ترکیبی از چند پوسته محبوب دیگر است و تلاش دارد بهترین ایده ها را با هم ترکیب کند، تا شروعی ساده و آسان را برای کاربران جدید Kodi امکان پذیر سازد.</description>
+		<description lang="fi_FI">Confluence on yhdistelmä useiden suosittujen ulkoasujen konsepteista, ja yritys omaksua ja integroida heidän hyvät ideat ulkoasuun, jonka pitäisi olla helppokäyttöinen ja -tajuinen kaikille Kodin käyttäjille.</description>
+		<description lang="fo_FO">Confluence er vanliga útsjóndin, sum er brúkt í Kodi síðan útg. 9.11. Hetta er ein samansjóðan av fleiri hugtøkum. Ætlanin er at útsjóndin skal lætta um móttøku og nýtslu av Kodi fyri nýggjar brúkarar.</description>
+		<description lang="fr_CA">Confluence est une combinaison de concepts provenant de plusieurs habillages populaires. Il tente d'inclure et d'intégrer leurs bonnes idées en un habillage qui devrait être facile à comprendre et à utiliser pour les utilisateurs débutants de Kodi.</description>
+		<description lang="fr_FR">Confluence est l'habillage d'origine depuis Kodi 14.0. Reprenant les concepts issus de plusieurs habillages populaires, il est une tentative d'inclusion et d'intégration des meilleures idées afin de créer un habillage d'interface qui soit facile à comprendre et à utiliser pour les personnes découvrant Kodi.</description>
+		<description lang="gl_ES">Confluence é a pel predeterminada para Kodi 9.11 e posteriores. É unha combinación de conceptos de algunhas peles populares, e tenta abranguer e integrar  as súas mellores ideas nunha pel que sexa fácil de entender e utilizar para as usuarias que utilizan por primeira vez Kodi.</description>
+		<description lang="he_IL">המעטפת Confluence היא מעטפת ברירת המחדל של Kodi. המעטפת הינה תוצר של אימוץ מאפיינים ממעטפות פופולריות רבות תוך רצון לשלב מאפיינים אלה למעטפת פשוטה לשימוש ולהכרה ראשונית ע"י משתמשי Kodi חדשים.</description>
+		<description lang="hr_HR">Confluence je uobičajena presvlaka za Kodi 14.0 naviše. To je mješavina koncepta iz mnogih drugih popularnih presvlaka, pokušaj da se objedine njihove dobre osobine u presvlaku i da budu lagane za upotrebu i razumljive novim Kodi korisnicima.</description>
+		<description lang="hu_HU">A Confluence az alapértelmezett felszín a Kodihoz a 9.11-es verziótól kezdődően. Merít sok sok népszerű felszín elképzeléséből, megpróbálva vegyíteni a jó ötleteket úgy, hogy az könnyen kezelhető legyen a Kodival először találkozóknak is.</description>
+		<description lang="id_ID">Confluence merupakan skin bawaan untuk Kodi 9.11 dan selanjutnya. Merupakan kombinasi konsep dari beberapa skin populer, dan berusaha untuk merangkul dan menyatukan ide bagus mereka ke sebuah skin yang mudah dipakai dan dipahami oleh pengguna Kodi pertama kali.</description>
+		<description lang="is_IS">Confluence er sjálfgefið útlit Kodi 14.0 og nýrra. Það er samsetning hugmynda frá mörgum vinsælum útlitum og er tilraun til að fanga og innlima þær góðu hugmyndir í útlit sem sé einfalt fyrir fyrir nýja Kodi notendur að skilja og nota</description>
+		<description lang="it_IT">Confluence è la skin predefinita di Kodi dalla versione 14.0 in poi. È una combinazione di elementi provenienti da altre skin popolari e cerca di integrare e coinvolgere tutte le loro grandi idee in una skin facile da usare e comprendere per l'utente inesperto di Kodi.</description>
+		<description lang="ja_JP">Confluence は Kodi 9.11 およびそれ以上のバージョンで標準のスキンです。さまざまな人気のスキンのコンセプトを組み合わせ、ユーザが初めて Kodi に触れる際に便利に使えるようにしてあります。</description>
+		<description lang="ko_KR">Confluence 는 Kodi 14.0 이상을 위한 기본 스킨입니다. 많은 인기 스킨의 컨셉과 좋은 아이디어를 모아서 하나의 스킨으로 만들었으며 초보자도 사용하기 쉽습니다.</description>
+		<description lang="lt_LT">Confluence yra numatytoji teminė išvaizda pradedant Kodi 9.11 versija. Tai daugelio populiarių teminų išvaizdų derinys. Bandymas priimti ir integruoti vartotojų idėjas į teminę išvaizdą katra turėtų būti lengvai suprantama  pirmą kartą naudojantiems Kodi</description>
+		<description lang="lv_LV">Confluence ir Kodi 9.11 un jaunāku versiju noklusētais apvalks. Tajā apvienota daudzu populāru apvalku koncepcija un centieni pieņemt un integrēt labākās idejas, lai jaunajiem Kodi ietotājiem to būtu viegli izprast un lietot.</description>
+		<description lang="mk_MK">Confluence е основниот изглед на Kodi 14.0 и нагоре. Тој е комбинација на концепти од повеќе популарни изгледи, и настојува да ги обедини и истакне нивните добри идеи во еден изглед разбирлив за почетници.</description>
+		<description lang="ms_MY">Penyatuan ialah kulit lalai untuk Kodi 9.11 dan ke atas. Ia merupakan gabungan konsep dari pelbagai kulit terkenal, dan berusaha untuk merangkumkan dan menyepadukan idea baik kulit-kulit tersebut menjadi satu kulit yang mudah difahami dan digunakan oleh pengguna baru Kodi .</description>
+		<description lang="mt_MT">Confluence hija d-dehra normali ta' Kodi 14.0 il-fuq.  Hija taħlita ta' kunċetti minn ħafna dehriet popolari, u tipporva tgħaqqad u tintegra l-aqwa ideat tagħhom f'dehra li għandha tkun faċli biex jifmuha u jużawha dawk l-utenti li qed jużaw Kodi għall-ewwel darba.</description>
+		<description lang="nb_NO">Confluence er standardskallet for Kodi 9.11 og oppover. Det er en kombinasjon av konseptene fra mange populære skall, og prøver å omfavne og integrere de gode idéene i et skall som bør være lett å forstå og benytte seg av for nye Kodi-brukere.</description>
+		<description lang="nl_NL">Confluence is de standaard skin voor Kodi 15.0 en hoger. Het combineert de concepten van andere populaire skins, waarbij het tracht hun goede ideeën te integreren in een skin die gemakkelijk in gebruik is.</description>
+		<description lang="pl_PL">Confluence jest kombinacją koncepcji  wielu popularnych skór i próbą zawarcia tego, co w nich najlepsze w skórze, która będzie łatwa do opanowania dla początkującego użytkownika.</description>
+		<description lang="pt_BR">Confluence é a skin padrão do Kodi 9.11 e acima. É uma combinação de conceitos das mais populares skins, visando abraçar e integrar as boas ideias em uma skin  que seja fácil de entender e usar, destinada  aos usuários iniciantes do Kodi. </description>
+		<description lang="pt_PT">O tema "Confluence" é o tema padrão do Kodi 14.0 e superior. É uma combinação de conceitos a partir de muitos temas populares e tenta integrar as boas ideias dos mesmos, num tema que deverá ser fácil de entender e utilizar pelos novos utilizadores do Kodi.</description>
+		<description lang="ro_RO">Confluence este costumul implicit pentru Kodi 9.11 și versiunile ulterioare. Este o combinație de concepte împrumutate de la mai multe costume populare, care încearcă să îmbrățișeze și să integreze ideile lor bune într-un costum care să fie ușor de înțeles și folosit de către utilizatorii Kodi începători.</description>
+		<description lang="ru_RU">Confluence — это стандартная обложка Kodi, начиная с версии 9.11. Она представляет собой сочетание концепций, взятых из многих популярных обложек, в попытке интегрировать их удачные идеи в обложке, которая была бы простой для использования и понимания новыми пользователями Kodi.</description>
+		<description lang="sk_SK">Confluence je predvolený pre Kodi 9.11 a vyššie. Je kombináciou konceptov z mnoho populárnych skinov a pokusom integrovať ich dobré nápady do skinu, ktorý by bol ľahko zrozumiteľný a použiteľný pre nových používateľov Kodi.</description>
+		<description lang="sl_SI">Confluence je privzeta preobleka za Kodi 14.0 in novejše. Je kombinacija konceptov mnogih priljubljenih preoblek in poskuša zaobjeti in integrirati njihove dobre ideje v preobleko, ki bi bila preprosta za uporabo in razumevanje tudi novim uporabnikom.</description>
+		<description lang="sq_AL">Confluence është maska kryesore për Kodi 9.11 dhe verzionet më të lartë. Është nje kombinim nga shumë maska e popullarizuar dhe përpjeket për të përqafuar dhe integruar idetë më të mira në një maskë që të jetë sa më lehtë në përdorim dhe kuptim për përdoruasit duke e përdorur Kodi për herë të parë.</description>
+		<description lang="sr_RS">Confluence је мешавина концепата из многих других популарних маски, и покушај да се обједине њихове добре идеје у маску која би трабала да буде лака за разумевање и употребу новим корисницима Kodi-а.</description>
+		<description lang="sr_RS@latin">Confluence je mešavina koncepata iz mnogih drugih popularnih maski, i pokušaj da se objedine njihove dobre ideje u masku koja bi trabala da bude laka za razumevanje i upotrebu novim korisnicima Kodi-a.</description>
+		<description lang="sv_SE">Confluence är standardskal för Kodi 14.0 och senare. Det kombinerar koncept från många populära skal och försöker återanvända och integrera goda idéer för att skapa ett skal som är enkelt att förstå och använda för nya Kode-användare.</description>
+		<description lang="szl">Confluence to je wychodnŏ skōra dlŏ Kodi 14.0 i nowszych. To je miszōng kōnceptōw ze mocki popularnych skōr i prōbuje te nŏjlepsze wkludzić do skōry, kerŏ winnŏ być prostŏ we użyciu i spokopiyniu dlŏ nowych używŏczōw Kodi.</description>
+		<description lang="tg_TJ">Пӯсти ҳамҷараёнӣ ҳамчун пӯсти пешфарз барои Kodi 9.11 ё версияи навтар истифода мешавад. Ин пӯст аз унсурҳои пӯстҳои машҳури дигар сохта шудааст ва ва ҳамаи фикрҳои беҳтарин дар як пӯст ҷамъ мекунад, то ки корбарони навомад тавонанд Kodi-ро ба осонӣ фаҳманд ва истифода баранд.</description>
+		<description lang="th_TH">Confluenceเป็นสกินเริ่มต้นสำหรับ Kodi 9.11 หรือสูงกว่า มันเป็นส่วนผสมของแนวคิดจากสกินที่ได้รับความนิยมและพยายามที่จะยอมรับและบูรณาการส่วนที่ดีของมันเข้าไปในสกิน ซึ่งน่าจะง่ายสำหรับผู้ใช้ Kodiใหม่ ที่จะเข้าใจและใช้งานได้ดี</description>
+		<description lang="tr_TR">Confluence Kodi 14.0 ve yukarısı için varsayılan dış görünümdür. Birçok popüler dış görünümün kavramlarını bir araya getirip ilk kez Kodi kullananlar için anlaşılması ve kullanımı kolaydır.</description>
+		<description lang="uk_UA">Confluence — це стандартна обкладинка Kodi, починаючи з версії 9.11. Концепції багатьох популярних обкладинок поєднано у спробі використати та інтегрувати їхні вдалі ідеї в обкладинці, що стала б зрозумілою та простою в застосуванні для нових користувачів Kodi.</description>
+		<description lang="vi_VN">Confluence là giao diện mặc định cho Kodi 9.11 and các phiên bản trở về trước. Đây là sự kết hợp các khái niệm đến từ các giao diện khác nhau nhằm hướng người dùng đến sự đơn giản và dễ sử dụng.</description>
+		<description lang="zh_CN">Confluence 集合了许多流行皮肤的创意，力求把这些优点融合到一个皮肤中，使得首次使用 Kodi 的用户能更容易上手。</description>
+		<description lang="zh_TW">Confluence 是從 Kodi 9.11 開始預設的佈景主題。它結合了許多受歡迎的佈景主題的概念，且試圖包含並整合它們的優點，使第一次使用 Kodi 的使用者可以簡單地上手。</description>
+		<platform>all</platform>
+		<license>GNU General Public License version 2</license>
+		<forum>http://forum.kodi.tv/forumdisplay.php?fid=125</forum>
+		<website/>
+		<email/>
+		<source>https://github.com/xbmc/skin.confluence</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+			<screenshot>resources/screenshot-01.jpg</screenshot>
+			<screenshot>resources/screenshot-02.jpg</screenshot>
+			<screenshot>resources/screenshot-03.jpg</screenshot>
+			<screenshot>resources/screenshot-04.jpg</screenshot>
+			<screenshot>resources/screenshot-05.jpg</screenshot>
+			<screenshot>resources/screenshot-06.jpg</screenshot>
+			<screenshot>resources/screenshot-07.jpg</screenshot>
+			<screenshot>resources/screenshot-08.jpg</screenshot>
+			<screenshot>resources/screenshot-09.jpg</screenshot>
+		</assets>
+		<news>Updated language files</news>
+	</extension>
+</addon>
+
+<addon id="superrepo.kodi.helix.adult" name="SuperRepo Genre Adult [Helix][v7] Not Working" version="0.7.04.1" provider-name="Bart Otten">
+                <requires>
+                <import addon="xbmc.addon" version="12.0.0"/>
+                </requires>
+                <extension point="xbmc.addon.repository" name="SuperRepo Genre Adult [Helix][v7]">
+                <info compressed="false">
+                http://xml.superrepo.org/v7/.xml/helix/genres/adult/addons.bak.xml
+                </info>
+                <checksum>
+                http://md5.superrepo.org/v7/.md5/helix/genres/adult/addons.bak.xml.md5
+                </checksum>
+                <datadir zip="true">http://redirect.superrepo.org/v7/addons/bak</datadir>
+                <hashes>true</hashes>
+                </extension>
+                <extension point="xbmc.addon.metadata">
+                <summary>
+                Install add-ons from the SuperRepo Genre Adult Repository
+                </summary>
+                <summary lang="nl">
+                Installeer add-ons uit de SuperRepo Genre Adult Repository
+                </summary>
+                <summary lang="cz">Inštalácia add-ons zo SuperRepo Genre Adult Repozitár</summary>
+                <summary lang="de">
+                Installation von Addons aus dem SuperRepo Genre Adult Repository
+                </summary>
+                <summary lang="pt">Instale add-ons do SuperRepo Genre Adult Repositório</summary>
+                <summary lang="br">Instale add-ons do SuperRepo Genre Adult Repositório</summary>
+                <description>
+                Download and install add-ons for Kodi in the category "Adult" using SuperRepo.[CR][CR]By using SuperRepo repositories you will be able to take advantage of our serverside dependency checking, extensive file mirror service and many more.[CR]Visit our website at https://superrepo.org/ to browse the add-ons, create personal addon bundles and install whole bundles at once![CR][CR]
+                </description>
+                <description lang="nl">
+                Download and installeer add-ons voor Kodi in de categorie "Adult" via SuperRepo.[CR]Door SuperRepo te installeren kunt u profiteren van onze controle van add-ons en ons uitgebreide server netwerk. Bezoek onze website op https://superrepo.org om door de add-ons te bladeren, persoonlijke add-on bundels te maken en complete bundels in 1 keer te installeren![CR][CR]
+                </description>
+                <description lang="cz">
+                Preber a inštaluj add-ons do kategórie "Adult" z SuperRepo.org add-on repozitár.[CR][CR]Ak si našiel add-on ktorý je poškodený alebo nefunkčný, alebo chceš pridať nový add-on, potom prosím pozri na https://superrepo.org/[CR][CR]Repozitár je udržiavaný komunitou Kodi a za pomoci SuperRepo Wiki, a tento preberá add-ons z rôznych zdrojov. Vzhľadom na to, SuperRepo nenesie žiadnu zodpovednosť za služby poskytované týmito add-ons.[CR][CR]Rozšírený repozitár vyvinul Bart Otten[CR][CR]
+                </description>
+                <description lang="de">
+                Lade und installiere Addons der Kategorie "Adult" aus dem SuperRepo.org Addon Repository.[CR][CR]Möchtest du ein fehlerhaftes Addon melden oder ein neues Addon vorschlagen, kannst du dies über unsere Webseite http://superrepo.org tun.[CR][CR]Das Repository wird mit Hilfe des SuperRepo Wiki durch die Kodi Community gepflegt und durch unseren Generator aus mehreren Quellen zusammengestellt. Daher übernimmt SuperRepo keinerlei Verantwortung für diesen Service.[CR][CR]Der"eXtended Reposity Generator" wird durch Bart Otten entwickelt.[CR][CR]
+                </description>
+                <description lang="pt">
+                Baixe e instale o add-ons na categoria "Adult" do Repositório SuperRepo.org. [CR] [CR] Se você encontrar um add-on quebrado ou não funcionando, ou você gostaria de incluir um outro, por favor visite https://superrepo.org/ [CR] [CR]O repositório é mantida pela comunidade do Kodi usando o Wiki do SuperRepo e o nosso gerador de busca de add-ons múltiplas fontes. Portanto SuperRepo não aceita qualquer responsabilidade por esse serviço.[CR][CR]O Gerador Reposity eXtended é desenvolvido por Bart Otten[CR][CR]
+                </description>
+                <description lang="br">
+                Baixe e instale o add-ons na categoria "Adult" do Repositório SuperRepo.org. [CR] [CR] Se você encontrar um add-on quebrado ou não funcionando, ou você gostaria de incluir um outro, por favor visite https://superrepo.org/ [CR][CR]O repositório é mantida pela comunidade do Kodi usando o Wiki do SuperRepo e o nosso gerador de busca de add-ons múltiplas fontes. Portanto SuperRepo não aceita qualquer responsabilidade por esse serviço.[CR][CR]O Gerador Reposity eXtended é desenvolvido por Bart Otten[CR][CR]
+                </description>
+                <disclaimer>
+                The SuperRepo generator fetches addons from multiple sources. Therefore SuperRepo accepts no responsibility for included addons.[CR]
+                </disclaimer>
+                <disclaimer lang="nl">
+                De SuperRepo generator verzamelt addons van verschillende bronnen. Daarom accepteert SuperRepo geen enkele verantwoordelijkheid voor de ingevoegde addons.[CR]
+                </disclaimer>
+                <disclaimer lang="cz">
+                Repozitár je udržiavaný komunitou Kodi a za pomoci SuperRepo Wiki, a tento preberá addons z rôznych zdrojov. Vzhľadom na to, SuperRepo nenesie žiadnu zodpovednosť za služby poskytované týmito addons.[CR]
+                </disclaimer>
+                <disclaimer lang="de">
+                Das Repository wird durch die Kodi Community gepflegt und durch unseren Generator aus mehreren Quellen zusammengestellt. Daher übernimmt SuperRepo keinerlei Verantwortung für die enthaltenen Addons.[CR]
+                </disclaimer>
+                <disclaimer lang="pt">
+                O repositório é mantido pela comunidade comunidade do Kodi e o nosso gerador de busca de addons de múltiplas fontes. Portanto SuperRepo aceita não se responsabiliza por addons incluídos.[CR]
+                </disclaimer>
+                <disclaimer lang="br">
+                O repositório é mantido pela comunidade comunidade do Kodi e o nosso gerador de busca de addons de múltiplas fontes. Portanto SuperRepo aceita não se responsabiliza por addons incluídos.[CR]
+                </disclaimer>
+                <platform>all</platform>
+                <website>https://superrepo.org/</website>
+                </extension>
+                </addon>
+
+<addon id="superrepo.kodi.helix.all" name="SuperRepo All [Helix][v7] Not Working" version="0.7.04.1" provider-name="Bart Otten">
+                <requires>
+                <import addon="xbmc.addon" version="12.0.0"/>
+                </requires>
+                <extension point="xbmc.addon.repository" name="SuperRepo All [Helix][v7]">
+                <info compressed="false">
+                http://xml.superrepo.org/v7/.xml/helix/all/addons.bak.xml
+                </info>
+                <checksum>
+                http://md5.superrepo.org/v7/.md5/helix/all/addons.bak.xml.md5
+                </checksum>
+                <datadir zip="true">http://redirect.superrepo.org/v7/addons/bak</datadir>
+                <hashes>true</hashes>
+                </extension>
+                <extension point="xbmc.addon.metadata">
+                <summary>
+                Install add-ons from the SuperRepo All Repository
+                </summary>
+                <summary lang="nl">
+                Installeer add-ons uit de SuperRepo All Repository
+                </summary>
+                <summary lang="cz">Inštalácia add-ons zo SuperRepo All Repozitár</summary>
+                <summary lang="de">
+                Installation von Addons aus dem SuperRepo All Repository
+                </summary>
+                <summary lang="pt">Instale add-ons do SuperRepo All Repositório</summary>
+                <summary lang="br">Instale add-ons do SuperRepo All Repositório</summary>
+                <description>
+                Download and install add-ons for Kodi in the category "All" using SuperRepo.[CR][CR]By using SuperRepo repositories you will be able to take advantage of our serverside dependency checking, extensive file mirror service and many more.[CR]Visit our website at https://superrepo.org/ to browse the add-ons, create personal addon bundles and install whole bundles at once![CR][CR]
+                </description>
+                <description lang="nl">
+                Download and installeer add-ons voor Kodi in de categorie "All" via SuperRepo.[CR]Door SuperRepo te installeren kunt u profiteren van onze controle van add-ons en ons uitgebreide server netwerk. Bezoek onze website op https://superrepo.org om door de add-ons te bladeren, persoonlijke add-on bundels te maken en complete bundels in 1 keer te installeren![CR][CR]
+                </description>
+                <description lang="cz">
+                Preber a inštaluj add-ons do kategórie "All" z SuperRepo.org add-on repozitár.[CR][CR]Ak si našiel add-on ktorý je poškodený alebo nefunkčný, alebo chceš pridať nový add-on, potom prosím pozri na https://superrepo.org/[CR][CR]Repozitár je udržiavaný komunitou Kodi a za pomoci SuperRepo Wiki, a tento preberá add-ons z rôznych zdrojov. Vzhľadom na to, SuperRepo nenesie žiadnu zodpovednosť za služby poskytované týmito add-ons.[CR][CR]Rozšírený repozitár vyvinul Bart Otten[CR][CR]
+                </description>
+                <description lang="de">
+                Lade und installiere Addons der Kategorie "All" aus dem SuperRepo.org Addon Repository.[CR][CR]Möchtest du ein fehlerhaftes Addon melden oder ein neues Addon vorschlagen, kannst du dies über unsere Webseite http://superrepo.org tun.[CR][CR]Das Repository wird mit Hilfe des SuperRepo Wiki durch die Kodi Community gepflegt und durch unseren Generator aus mehreren Quellen zusammengestellt. Daher übernimmt SuperRepo keinerlei Verantwortung für diesen Service.[CR][CR]Der"eXtended Reposity Generator" wird durch Bart Otten entwickelt.[CR][CR]
+                </description>
+                <description lang="pt">
+                Baixe e instale o add-ons na categoria "All" do Repositório SuperRepo.org. [CR] [CR] Se você encontrar um add-on quebrado ou não funcionando, ou você gostaria de incluir um outro, por favor visite https://superrepo.org/ [CR] [CR]O repositório é mantida pela comunidade do Kodi usando o Wiki do SuperRepo e o nosso gerador de busca de add-ons múltiplas fontes. Portanto SuperRepo não aceita qualquer responsabilidade por esse serviço.[CR][CR]O Gerador Reposity eXtended é desenvolvido por Bart Otten[CR][CR]
+                </description>
+                <description lang="br">
+                Baixe e instale o add-ons na categoria "All" do Repositório SuperRepo.org. [CR] [CR] Se você encontrar um add-on quebrado ou não funcionando, ou você gostaria de incluir um outro, por favor visite https://superrepo.org/ [CR][CR]O repositório é mantida pela comunidade do Kodi usando o Wiki do SuperRepo e o nosso gerador de busca de add-ons múltiplas fontes. Portanto SuperRepo não aceita qualquer responsabilidade por esse serviço.[CR][CR]O Gerador Reposity eXtended é desenvolvido por Bart Otten[CR][CR]
+                </description>
+                <disclaimer>
+                The SuperRepo generator fetches addons from multiple sources. Therefore SuperRepo accepts no responsibility for included addons.[CR]
+                </disclaimer>
+                <disclaimer lang="nl">
+                De SuperRepo generator verzamelt addons van verschillende bronnen. Daarom accepteert SuperRepo geen enkele verantwoordelijkheid voor de ingevoegde addons.[CR]
+                </disclaimer>
+                <disclaimer lang="cz">
+                Repozitár je udržiavaný komunitou Kodi a za pomoci SuperRepo Wiki, a tento preberá addons z rôznych zdrojov. Vzhľadom na to, SuperRepo nenesie žiadnu zodpovednosť za služby poskytované týmito addons.[CR]
+                </disclaimer>
+                <disclaimer lang="de">
+                Das Repository wird durch die Kodi Community gepflegt und durch unseren Generator aus mehreren Quellen zusammengestellt. Daher übernimmt SuperRepo keinerlei Verantwortung für die enthaltenen Addons.[CR]
+                </disclaimer>
+                <disclaimer lang="pt">
+                O repositório é mantido pela comunidade comunidade do Kodi e o nosso gerador de busca de addons de múltiplas fontes. Portanto SuperRepo aceita não se responsabiliza por addons incluídos.[CR]
+                </disclaimer>
+                <disclaimer lang="br">
+                O repositório é mantido pela comunidade comunidade do Kodi e o nosso gerador de busca de addons de múltiplas fontes. Portanto SuperRepo aceita não se responsabiliza por addons incluídos.[CR]
+                </disclaimer>
+                <platform>all</platform>
+                <website>https://superrepo.org/</website>
+                </extension>
+                </addon>
 
 <addon id="xbmc.repo.xshare" name="[COLOR red][B]Xshare[/COLOR] [COLOR blue]Repository[/B][/COLOR]" version="1.0.0" provider-name="thaitni">
 	<extension point="xbmc.addon.repository" name="Official XBMC.org Add-on Repository">
