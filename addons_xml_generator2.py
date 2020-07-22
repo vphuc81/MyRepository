@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # *
 # *  Copyright (C) 2012-2013 Garrett Brown
 # *  Copyright (C) 2010      j48antialias
@@ -68,7 +70,8 @@ class Generator:
                 # create path
                 _path = os.path.join( addon, "addon.xml" )
                 # split lines for stripping
-                xml_lines = open( _path, "r" ).read().splitlines()
+                #xml_lines = open( _path, "r" ).read().splitlines() #python 2
+                xml_lines = open( _path, "r", encoding="utf-8" ).read().splitlines() #python 3 add special char
                 # new addon
                 addon_xml = ""
                 # loop thru cleaning each line
