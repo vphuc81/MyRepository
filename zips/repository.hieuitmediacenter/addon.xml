@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.hieuitmediacenter"
+		name="[COLOR red][B]HieuIT[/B][/COLOR] [COLOR yellow][B]Repository[/B][/COLOR]"
+		version="1.0.6"
+		provider-name="HieuIT">
+  <extension point="xbmc.addon.repository"
+		name="HieuITMC Add-on Repository">
+		<info compressed="true">https://raw.githubusercontent.com/tremocoivo/repo.kongnghe.net/master/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/tremocoivo/repo.kongnghe.net/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://github.com/tremocoivo/repo.kongnghe.net/raw/master/zips/</datadir>
+		<dir>
+			<info>https://raw.githubusercontent.com/cguZZman/repository.plugins/master/addons-info.xml</info>
+			<checksum>https://raw.githubusercontent.com/cguZZman/repository.plugins/master/addons-info.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/cguZZman/repository.plugins/master/</datadir>
+		</dir>
+		<dir>
+			<info compressed="false">https://raw.github.com/ddurdle/repository.ddurdle/master/addons.xml</info>
+			<checksum>https://raw.github.com/ddurdle/repository.ddurdle/master/addons.xml.md5</checksum>
+			<datadir zip="true">http://dmdsoftware.net/repository.ddurdle/</datadir>
+		</dir>
+		<dir>
+			<info compressed="false">https://github.com/taifxx/xxtrep/raw/master/addons.xml</info>
+			<checksum>https://github.com/taifxx/xxtrep/raw/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://github.com/taifxx/xxtrep/raw/master/</datadir>
+		</dir>
+		<dir>
+			<info compressed="true">http://repo.kodi.vn/00-VMFrepo/addons.xml</info>
+			<checksum>http://repo.kodi.vn/00-VMFrepo/addons.xml.md5</checksum>
+			<datadir zip="true">http://repo.kodi.vn/00-VMFrepo/</datadir>
+		</dir>
+		<dir>
+			<info compressed="false">http://thong.viettv24.com/kodi4vn/addons.xml</info>
+			<checksum>http://thong.viettv24.com/kodi4vn/addons.xml.md5</checksum>
+			<datadir zip="true">http://thong.viettv24.com/kodi4vn/</datadir>
+		</dir>
+		<dir>
+			<info compressed="true">https://raw.githubusercontent.com/thaitni/xbmc.repo.xshare/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/thaitni/xbmc.repo.xshare/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/thaitni/xbmc.repo.xshare/master</datadir>
+		</dir>
+		<dir>
+                <info compressed="false">https://raw.github.com/billythekids/kodi.repository/master/addons.xml</info>
+                <checksum>https://raw.github.com/billythekids/kodi.repository/master/addons.xml.md5</checksum>
+                <datadir zip="true">https://github.com/billythekids/kodi.repository/raw/master/zips/</datadir>
+            </dir>
+		<dir>
+			<info>https://github.com/CastagnaIT/repository.castagnait/raw/master/addons.xml</info>
+			<checksum>https://github.com/CastagnaIT/repository.castagnait/raw/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://github.com/CastagnaIT/repository.castagnait/raw/master/zip</datadir>
+		</dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">HieuIT Media Center</summary>
+		<description lang="en">Install Kodi with full Addon and more</description>
+		<disclaimer lang="en"></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>

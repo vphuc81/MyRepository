@@ -1,59 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.googledrive" name="Google Drive" version="1.3.6" provider-name="Carlos Guzman (cguZZman)">
-	<requires>
-		<import addon="xbmc.python" version="2.25.0" />
-		<import addon="script.module.clouddrive.common" version="1.2.15"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="addon.py">
-		<provides>image audio video</provides>
-	</extension>
-	<extension point="xbmc.service" library="service.py" start="login" />
-	<extension point="xbmc.addon.metadata">
-		<platform>all</platform>
-		<summary lang="en_GB">Google Drive for KODI</summary>
-		<description lang="en_GB">
-Play all your media from Google Drive including Videos, Music and Pictures (including Google Photos).
- - Unlimited number of accounts.
- - Team Drives support
- - Google Photos support
- - Search over your drive.
- - Auto-Refreshed slideshow.
- - Export your videos to your library (.strm files)
- - Use Google Drive as a source
- - This program is not affiliated with or sponsored by Google.
-		</description>
-		<summary lang="he_IL">×›×•× ×Ÿ Google Drive ×©×œ ×ž×™×§×¨×•×¡×•×¤×˜ ×¢×‘×•×¨ ×§×•×“×™</summary>
-		<description lang="he_IL">
-		</description>
-		<license>GPL-3.0-or-later</license>
-		<source>https://github.com/cguZZman/plugin.googledrive</source>
-		<forum>https://github.com/cguZZman/plugin.googledrive/issues</forum>
-		<website>https://addons.kodi.tv/show/plugin.googledrive</website>
-		<assets>
-			<icon>icon.png</icon>
-			<fanart>fanart.jpg</fanart>
-		</assets>
-		<news>
-v1.3.6 released Apr 23, 2020:
-- Export fix
-		</news>
-		<disclaimer lang="en_GB">
-This cloud drive addon uses a third-party authentication mechanism commonly known as OAuth 2.0.
-If you want to know more about OAuth 2.0 you can visit the following pages:
-- https://oauth.net/2/
-- https://developers.google.com/identity/protocols/OAuth2
-- https://docs.microsoft.com/en-us/onedrive/developer/rest-api/getting-started/msa-oauth
-
-Kodi and myself take no responsibility or liability.
-
-The authentication server URL is specified in Settings / Advanced / Sign-in Server. The Sign-in Server implements the OAuth 2.0 protocol.
-The complete source code of the Sign-in Server can be download here: https://github.com/cguZZman/drive-login
-You can clone the project and host it in your own server.
-		</disclaimer>
-	</extension>
-</addon>
-
 <addon id="plugin.program.indigo" version="5.0.18.1" name="Indigo" provider-name="tvaddons">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0"/>
@@ -563,7 +509,7 @@ http://www2.gostream.sc
     </extension>
 </addon>
 
-<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.44" provider-name="MetalKettle">
+<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.45" provider-name="MetalKettle">
 
   <requires>
 
@@ -571,6 +517,7 @@ http://www2.gostream.sc
 	<import addon="repository.xbmcadult" />
 	<import addon="repository.kodibae" />
 	<import addon="repository.bimozie" />
+	<import addon="repository.hieuitmediacenter" />
     <import addon="plugin.video.youtube" version="3.0.0" />
 	<import addon="plugin.video.SportsDevil" />
 	<import addon="plugin.video.live.streamspro" />
@@ -2021,6 +1968,64 @@ http://www2.gostream.sc
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en">4share and Fshare</summary>
 		<description lang="en"></description>
+		<disclaimer lang="en"></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.hieuitmediacenter"
+		name="[COLOR red][B]HieuIT[/B][/COLOR] [COLOR yellow][B]Repository[/B][/COLOR]"
+		version="1.0.6"
+		provider-name="HieuIT">
+  <extension point="xbmc.addon.repository"
+		name="HieuITMC Add-on Repository">
+		<info compressed="true">https://raw.githubusercontent.com/tremocoivo/repo.kongnghe.net/master/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/tremocoivo/repo.kongnghe.net/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://github.com/tremocoivo/repo.kongnghe.net/raw/master/zips/</datadir>
+		<dir>
+			<info>https://raw.githubusercontent.com/cguZZman/repository.plugins/master/addons-info.xml</info>
+			<checksum>https://raw.githubusercontent.com/cguZZman/repository.plugins/master/addons-info.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/cguZZman/repository.plugins/master/</datadir>
+		</dir>
+		<dir>
+			<info compressed="false">https://raw.github.com/ddurdle/repository.ddurdle/master/addons.xml</info>
+			<checksum>https://raw.github.com/ddurdle/repository.ddurdle/master/addons.xml.md5</checksum>
+			<datadir zip="true">http://dmdsoftware.net/repository.ddurdle/</datadir>
+		</dir>
+		<dir>
+			<info compressed="false">https://github.com/taifxx/xxtrep/raw/master/addons.xml</info>
+			<checksum>https://github.com/taifxx/xxtrep/raw/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://github.com/taifxx/xxtrep/raw/master/</datadir>
+		</dir>
+		<dir>
+			<info compressed="true">http://repo.kodi.vn/00-VMFrepo/addons.xml</info>
+			<checksum>http://repo.kodi.vn/00-VMFrepo/addons.xml.md5</checksum>
+			<datadir zip="true">http://repo.kodi.vn/00-VMFrepo/</datadir>
+		</dir>
+		<dir>
+			<info compressed="false">http://thong.viettv24.com/kodi4vn/addons.xml</info>
+			<checksum>http://thong.viettv24.com/kodi4vn/addons.xml.md5</checksum>
+			<datadir zip="true">http://thong.viettv24.com/kodi4vn/</datadir>
+		</dir>
+		<dir>
+			<info compressed="true">https://raw.githubusercontent.com/thaitni/xbmc.repo.xshare/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/thaitni/xbmc.repo.xshare/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/thaitni/xbmc.repo.xshare/master</datadir>
+		</dir>
+		<dir>
+                <info compressed="false">https://raw.github.com/billythekids/kodi.repository/master/addons.xml</info>
+                <checksum>https://raw.github.com/billythekids/kodi.repository/master/addons.xml.md5</checksum>
+                <datadir zip="true">https://github.com/billythekids/kodi.repository/raw/master/zips/</datadir>
+            </dir>
+		<dir>
+			<info>https://github.com/CastagnaIT/repository.castagnait/raw/master/addons.xml</info>
+			<checksum>https://github.com/CastagnaIT/repository.castagnait/raw/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://github.com/CastagnaIT/repository.castagnait/raw/master/zip</datadir>
+		</dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">HieuIT Media Center</summary>
+		<description lang="en">Install Kodi with full Addon and more</description>
 		<disclaimer lang="en"></disclaimer>
 		<platform>all</platform>
 	</extension>
