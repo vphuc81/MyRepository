@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon
   id="plugin.video.vinh.movies"
-  version="0.1.0"
+  version="0.0.3"
   name=" [COLOR lime]➡ [/COLOR][COLOR yellow]Vinh-Movies[/COLOR]"
-  provider-name="VinhComp">
+  provider-name="Vinh">
   <requires>
     <import addon="xbmc.python" version="2.1.0" />
     <import addon="script.module.kodiswift" version="0.0.7" />
