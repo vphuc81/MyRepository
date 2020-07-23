@@ -1669,9 +1669,9 @@ http://www2.gostream.sc
 
 <addon
   id="plugin.video.vinh.movies"
-  version="0.0.3"
+  version="0.1.0"
   name=" [COLOR lime]➡ [/COLOR][COLOR yellow]Vinh-Movies[/COLOR]"
-  provider-name="Vinh">
+  provider-name="VinhComp">
   <requires>
     <import addon="xbmc.python" version="2.1.0" />
     <import addon="script.module.kodiswift" version="0.0.7" />
