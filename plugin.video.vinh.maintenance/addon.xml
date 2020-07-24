@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon
   id="plugin.video.vinh.maintenance"
-  version="0.0.3"
+  version="0.0.4"
   name=" [COLOR lime][/COLOR][COLOR yellow]Vinh-Maintenance[/COLOR]"
   provider-name="VinhComp">
   <requires>

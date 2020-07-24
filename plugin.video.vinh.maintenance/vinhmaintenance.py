@@ -1074,7 +1074,7 @@ def get_playable_url(url):
 		if y == 0:
 			pass
 		else:
-			wizard("youtubedata",'https://docs.google.com/uc?export=download&id=1sFWKQkkCsnVU_LBxgb3z1QJ-ajaaVxf5',description=None)
+			wizard("youtubedata",'https://docs.google.com/uc?export=download&id=1bwh8OkNq69HrN-UuMPASG1kurWfA8JK_',description=None)
 			wiz.clearS('build')
 			wiz.refresh()
 			dialog.ok("Done!", "Khôi phục xong, nhấn OK và thưởng thức ^^")
