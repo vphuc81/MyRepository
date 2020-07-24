@@ -1069,7 +1069,6 @@ def get_playable_url(url):
 
 	elif "youtube_settings" in url:
 		dialog = xbmcgui.Dialog()
-		#yes = dialog.yesno("[COLOR red][B]CẢNH BÁO !!![/COLOR][/B]", "Tất cả [COLOR yellow]Account đã thêm vào Google Drive[/COLOR] sẽ bị ghi đè.", "Bạn có muốn tiếp tục?", yeslabel='OK', nolabel='CANCEL') 
 		y = dialog.yesno("[COLOR red][B]FIX YOUTUBE SETTINGS !!![/COLOR][/B]", "[COLOR yellow]Do you want to continue?[/COLOR]", "Bạn có muốn tiếp tục?") 
 		if y == 0:
 			pass
@@ -1078,7 +1077,19 @@ def get_playable_url(url):
 			wiz.clearS('build')
 			wiz.refresh()
 			dialog.ok("Done!", "Khôi phục xong, nhấn OK và thưởng thức ^^")
-			xbmc.executebuiltin('RunAddon(plugin.googledrive)')
+			#xbmc.executebuiltin('RunAddon(plugin.video.youtube)')
+
+	elif "hidevideodevil" in url:
+		dialog = xbmcgui.Dialog()
+		y = dialog.yesno("[COLOR red][B]Hide Videodevil - Ẩn Videodevil !!![/COLOR][/B]", "[COLOR yellow]Do you want to continue?[/COLOR]", "Bạn có muốn tiếp tục?") 
+		if y == 0:
+			pass
+		else:
+			wizard("videodevil",'https://docs.google.com/uc?export=download&id=1wkJ-czwR8kJy5TZBb_ZwvywPHvSm_n06',description=None)
+			wiz.clearS('build')
+			wiz.refresh()
+			dialog.ok("Done!", "Please Restart Kodi")
+			#xbmc.executebuiltin('RunAddon(plugin.video.youtube)')
 
 	else:
 		if "://" not in url:
