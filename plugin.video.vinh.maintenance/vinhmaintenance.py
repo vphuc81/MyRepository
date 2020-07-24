@@ -1049,7 +1049,7 @@ def get_playable_url(url):
 	elif "ggdrivedata" in url:
 		dialog = xbmcgui.Dialog()
 		#yes = dialog.yesno("[COLOR red][B]CẢNH BÁO !!![/COLOR][/B]", "Tất cả [COLOR yellow]Account đã thêm vào Google Drive[/COLOR] sẽ bị ghi đè.", "Bạn có muốn tiếp tục?", yeslabel='OK', nolabel='CANCEL') 
-		y = dialog.yesno("[COLOR red][B]CẢNH BÁO !!![/COLOR][/B]", "Tất cả [COLOR yellow]Account đã thêm vào Google Drive[/COLOR] sẽ bị ghi đè.", "Bạn có muốn tiếp tục?") 
+		y = dialog.yesno("[COLOR red][B]FIX GDrive !!![/COLOR][/B]", "[COLOR yellow]Do you want to continue?[/COLOR]", "Bạn có muốn tiếp tục?") 
 		if y == 0:
 			pass
 		else:
@@ -1066,6 +1066,19 @@ def get_playable_url(url):
 		#	xbmc.executebuiltin('RunAddon(plugin.googledrive)')
 		#else:
 		#	pass
+
+	elif "youtube_settings" in url:
+		dialog = xbmcgui.Dialog()
+		#yes = dialog.yesno("[COLOR red][B]CẢNH BÁO !!![/COLOR][/B]", "Tất cả [COLOR yellow]Account đã thêm vào Google Drive[/COLOR] sẽ bị ghi đè.", "Bạn có muốn tiếp tục?", yeslabel='OK', nolabel='CANCEL') 
+		y = dialog.yesno("[COLOR red][B]FIX YOUTUBE SETTINGS !!![/COLOR][/B]", "[COLOR yellow]Do you want to continue?[/COLOR]", "Bạn có muốn tiếp tục?") 
+		if y == 0:
+			pass
+		else:
+			wizard("youtubedata",'https://docs.google.com/uc?export=download&id=1sFWKQkkCsnVU_LBxgb3z1QJ-ajaaVxf5',description=None)
+			wiz.clearS('build')
+			wiz.refresh()
+			dialog.ok("Done!", "Khôi phục xong, nhấn OK và thưởng thức ^^")
+			xbmc.executebuiltin('RunAddon(plugin.googledrive)')
 
 	else:
 		if "://" not in url:

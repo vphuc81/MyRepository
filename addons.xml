@@ -1669,7 +1669,7 @@ http://www2.gostream.sc
 
 <addon
   id="plugin.video.vinh.maintenance"
-  version="0.0.2"
+  version="0.0.3"
   name=" [COLOR lime][/COLOR][COLOR yellow]Vinh-Maintenance[/COLOR]"
   provider-name="VinhComp">
   <requires>
