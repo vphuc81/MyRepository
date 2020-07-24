@@ -38,8 +38,8 @@ reload(sys);
 sys.setdefaultencoding("utf8")
 
 ADDON_ID       = xbmcaddon.Addon().getAddonInfo('id')
-ADDONTITLE     = '[COLOR red][B]HieuIT[/B][/COLOR] [COLOR yellow][B]Media Center[/B][/COLOR]'
-ADDON          = xbmcaddon.Addon(id='plugin.program.hieuitwizard')
+ADDONTITLE     = '[COLOR red][B]VINH[/B][/COLOR] [COLOR yellow][B]Maintenance[/B][/COLOR]'
+ADDON          = xbmcaddon.Addon(id='plugin.video.vinh.maintenance')
 VERSION        = ADDON.getAddonInfo('version')
 USER_AGENT     = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36 SE 2.X MetaSr 1.0'
 DIALOG         = xbmcgui.Dialog()
@@ -814,7 +814,7 @@ def backUpOptions(type, name=""):
 					 os.path.join(HOME, 'cache', 'commoncache.db'),
 					 os.path.join(ADDOND, 'script.module.dudehere.routines', 'access.log'),
 					 os.path.join(ADDOND, 'script.module.dudehere.routines', 'trakt.db'),
-					 os.path.join(ADDOND, 'plugin.program.hieuitwizard', 'settings.xml'),
+					 os.path.join(ADDOND, 'plugin.video.vinh.maintenance', 'settings.xml'),
 					 os.path.join(ADDOND, 'script.module.metahandler', 'meta_cache', 'video_cache.db')]
 	
 	backup   = xbmc.translatePath(BACKUPLOCATION)
