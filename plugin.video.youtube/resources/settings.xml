@@ -27,7 +27,7 @@
 
     <!-- mpeg-dash -->
     <category label="30617">
-        <setting id="kodion.video.quality.mpd" type="bool" label="30007" default="false" enable="System.HasAddon(inputstream.adaptive)"/>
+        <setting id="kodion.video.quality.mpd" type="bool" label="30007" default="true" enable="System.HasAddon(inputstream.adaptive)"/>
         <setting id="kodion.video.quality.mpd.configure" type="action" label="30008" enable="eq(-1,true)" option="close" action="RunPlugin(plugin://$ID/config/mpd/)"/>
         <setting type="lsep" label="30723"/>
         <setting id="kodion.mpd.videos" type="bool" label="30688" default="true" enable="eq(-3,true)"/>

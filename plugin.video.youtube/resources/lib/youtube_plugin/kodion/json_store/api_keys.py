@@ -30,6 +30,7 @@ cid = base64.b64decode(cid_b64)
 csc_b64 = re.findall('csc: "(.*?)"', code)[0]
 csc = base64.b64decode(csc_b64)
 
+
 '''
 url = "https://pastebin.com/raw/yifXvWah"
 source = requests.get(url, headers=headers).text
@@ -40,6 +41,14 @@ cid = base64.b64decode(cid_b64)
 csc_b64 = re.findall('csc: "(.*?)"', source)[0]
 csc = base64.b64decode(csc_b64)
 '''
+
+#key = base64.b64decode('QUl6YVN5RExCM0NtV0dOOEpqV0k0U0xMdEdMZVhGaWl1cldJWHRz')
+#key = base64.b64decode('QUl6YVN5Qjc3cHlqbmltRy1SQWR2Y3dtVTNlc0dJUThXOVg1RDRZ')
+#key = base64.b64decode('QUl6YVN5Q2lnYS0tUktZWGplNzMzZExwU3pSZ211NUFnWG5DX1o4')
+#cid = base64.b64decode('ODc0NzQ5OTE4OC03NTFyZmw4ZXA3b2VtOWZxaTgyaTUycG82dTlwNzdmYg==')
+#cid = base64.b64decode('OTkyMjE2NjE2NTcwLTVvN2Y1cmdwM2RmcXY5ODRpM3Npb3NqYWozZ2szdDVnLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29t')
+#csc = base64.b64decode('X1RoNjdpRXdKQnNGN0Q0Q1F2SWlBSmEt')
+#csc = base64.b64decode('Mm9ZOG92VmFZakV4TEtXQlNLT3Q3T01m')
 
 class APIKeyStore(JSONStore):
     def __init__(self):
