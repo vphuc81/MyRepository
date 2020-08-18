@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import print_function
 
 import json
@@ -16,9 +17,8 @@ log = logging.getLogger(__name__)
 
 
 class WWENetwork(Plugin):
-
     url_re = re.compile(r"https?://watch.wwe.com/(channel)?")
-    site_config_re = re.compile(r'''">window.__data = ({.*?\})</script>''')
+    site_config_re = re.compile(r'''">window.__data = (\{.*?\})</script>''')
     stream_url = "https://dce-frontoffice.imggaming.com/api/v2/stream/{id}"
     live_url = "https://dce-frontoffice.imggaming.com/api/v2/event/live"
     login_url = "https://dce-frontoffice.imggaming.com/api/v2/login"
@@ -75,7 +75,11 @@ class WWENetwork(Plugin):
         data = self.session.http.json(res)
 
         if "status" in data and data["status"] != 200:
-            log.debug("API request failed: {0}:{1} ({2})".format(data["status"], data.get("code"), "; ".join(data.get("messages", []))))
+            log.debug("API request failed: {0}:{1} ({2})".format(
+                data["status"],
+                data.get("code"),
+                "; ".join(data.get("messages", []))
+            ))
         return data
 
     def login(self, email, password):
@@ -152,7 +156,11 @@ class WWENetwork(Plugin):
             self.logger.debug("Found content ID: {0}", content_id)
             info = self._get_media_info(content_id)
             if info.get("hlsUrl"):
-                for s in HLSStream.parse_variant_playlist(self.session, info["hlsUrl"], start_offset=start_point).items():
+                for s in HLSStream.parse_variant_playlist(
+                    self.session,
+                    info["hlsUrl"],
+                    start_offset=start_point
+                ).items():
                     yield s
             else:
                 log.error("Could not find the HLS URL")

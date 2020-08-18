@@ -13,7 +13,11 @@ CHANNEL_RESULT_OK = 1
 
 QUALITYS = ["original", "hd", "sd"]
 
-QUALITY_WEIGHTS = {"original": 1080, "hd": 720, "sd": 480}
+QUALITY_WEIGHTS = {
+    "original": 1080,
+    "hd": 720,
+    "sd": 480
+}
 
 _url_re = re.compile(r"https?://play\.afreecatv\.com/(?P<username>\w+)(?:/\d+)?")
 

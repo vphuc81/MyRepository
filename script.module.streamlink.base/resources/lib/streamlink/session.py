@@ -3,6 +3,7 @@ import logging
 import pkgutil
 import sys
 import traceback
+import warnings
 
 import requests
 
@@ -40,11 +41,23 @@ def print_small_exception(start_after):
     sys.stderr.write("\n")
 
 
+class PythonDeprecatedWarning(UserWarning):
+    pass
+
+
 class Streamlink(object):
     """A Streamlink session is used to keep track of plugins,
        options and log settings."""
 
     def __init__(self, options=None):
+        if sys.version_info[0] == 2:
+            warnings.warn(
+                "Python 2.7 has reached the end of its life.  A future version of streamlink will drop "
+                "support for Python 2.7. Please upgrade your Python to at least 3.5.",
+                category=PythonDeprecatedWarning,
+                stacklevel=2
+            )
+
         self.http = api.HTTPSession()
         self.options = Options({
             "hds-live-edge": 10.0,
@@ -59,6 +72,7 @@ class Streamlink(object):
             "hls-segment-stream-data": False,
             "hls-timeout": 60.0,
             "hls-playlist-reload-attempts": 3,
+            "hls-playlist-reload-time": "default",
             "hls-start-offset": 0,
             "hls-duration": None,
             "http-stream-timeout": 60.0,

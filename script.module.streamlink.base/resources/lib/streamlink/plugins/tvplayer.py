@@ -11,7 +11,6 @@ log = logging.getLogger(__name__)
 
 
 class TVPlayer(Plugin):
-
     api_url = "https://v1-streams-elb.tvplayer-cdn.com/api/live/stream/"
     stream_url = "https://live.tvplayer.com/stream-live.php"
     login_url = "https://v1-auth.tvplayer-cdn.com/login?responseType=redirect&redirectUri=https://tvplayer.com/login&lang=en"

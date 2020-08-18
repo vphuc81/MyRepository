@@ -11,7 +11,6 @@ log = logging.getLogger(__name__)
 
 
 class Mitele(Plugin):
-
     _url_re = re.compile(r"https?://(?:www\.)?mitele\.es/directo/(?P<channel>[\w-]+)")
 
     pdata_url = "https://indalo.mediaset.es/mmc-player/api/mmc/v1/{channel}/live/html5.json"
@@ -67,10 +66,7 @@ class Mitele(Plugin):
             log.error("{0} - {1}".format(pdata["code"], pdata["message"]))
             return
 
-        gdata = self.session.http.post(self.gate_url,
-                                       acceptable_status=(200, 403, 404),
-                                       data=pdata,
-                                       schema=self.gate_schema)
+        gdata = self.session.http.post(self.gate_url, acceptable_status=(200, 403, 404), data=pdata, schema=self.gate_schema)
         log.trace("{0!r}".format(gdata))
         if gdata.get("code"):
             log.error("{0} - {1}".format(gdata["code"], gdata["message"]))

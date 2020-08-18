@@ -40,7 +40,8 @@ class Turkuvaz(Plugin):
         domain = url_m.group(1) or url_m.group(2) or url_m.group(3)
         # remap the domain to channel
         channel = {
-            "atv": "atvhd", "ahaber": "ahaberhd", "apara": "aparahd", "aspor": "asporhd", "anews": "anewshd", "minikacocuk": "minikagococuk"
+            "atv": "atvhd", "ahaber": "ahaberhd", "apara": "aparahd", "aspor": "asporhd", "anews": "anewshd",
+            "minikacocuk": "minikagococuk"
         }.get(domain, domain)
         hls_url = self._hls_url.format(channel=channel)
         # get the secure HLS URL
@@ -51,7 +52,6 @@ class Turkuvaz(Plugin):
         secure_hls_url = self.session.http.json(res, schema=self._token_schema)
 
         self.logger.debug("Found HLS URL: {0}".format(secure_hls_url))
-
         return HLSStream.parse_variant_playlist(self.session, secure_hls_url)
 
 

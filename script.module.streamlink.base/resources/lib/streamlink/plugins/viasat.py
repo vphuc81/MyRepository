@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import re
 
 from streamlink import NoStreamsError
@@ -35,8 +36,6 @@ class Viasat(Plugin):
     _url_re = re.compile(r"""https?://(?:www\.)?
         (?:
             juicyplay\.dk
-            |
-            play\.nova\.bg
             |
             (?:tvplay\.)?
                 skaties\.lv

@@ -18,22 +18,29 @@ class Vidio(Plugin):
 
     csrf_tokens_url = "https://www.vidio.com/csrf_tokens"
     tokens_url = "https://www.vidio.com/live/{id}/tokens"
-    token_schema = validate.Schema(validate.transform(parse_json), {"token": validate.text}, validate.get("token"))
+    token_schema = validate.Schema(
+        validate.transform(parse_json), {"token": validate.text}, validate.get("token")
+    )
 
     @classmethod
     def can_handle_url(cls, url):
         return cls._url_re.match(url)
 
     def get_csrf_tokens(self):
+
         return self.session.http.get(self.csrf_tokens_url, schema=self.token_schema)
 
     def get_url_tokens(self, stream_id):
         self.logger.debug("Getting stream tokens")
         csrf_token = self.get_csrf_tokens()
-
         return self.session.http.post(
-            self.tokens_url.format(id=stream_id), files={"authenticity_token": (None, csrf_token)},
-            headers={"User-Agent": useragents.CHROME, "Referer": self.url}, schema=self.token_schema
+            self.tokens_url.format(id=stream_id),
+            files={"authenticity_token": (None, csrf_token)},
+            headers={
+                "User-Agent": useragents.CHROME,
+                "Referer": self.url
+            },
+            schema=self.token_schema
         )
 
     def _get_streams(self):
@@ -48,10 +55,12 @@ class Vidio(Plugin):
         tokens = self.get_url_tokens(stream_id)
 
         if hls_url:
+
             self.logger.debug("HLS URL: {0}".format(hls_url))
             self.logger.debug("Tokens: {0}".format(tokens))
+
             return HLSStream.parse_variant_playlist(
-                self.session, hls_url+"?"+tokens, headers={"User-Agent": useragents.CHROME, "Referer": self.url}
+                self.session, hls_url + "?" + tokens, headers={"User-Agent": useragents.CHROME, "Referer": self.url}
             )
 
 

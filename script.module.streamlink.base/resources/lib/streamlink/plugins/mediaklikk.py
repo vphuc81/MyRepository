@@ -34,7 +34,6 @@ class Mediaklikk(Plugin):
         }
         res = self.session.http.get(self.PLAYER_URL, params=params)
         m = self._file_re.search(res.text)
-
         if m:
             url = update_scheme("https://", m.group(1).replace("\\/", "/"))
 

@@ -3373,11 +3373,11 @@ You can clone the project and host it in your own server.
   </extension>
 </addon>
 
-<addon id="script.module.streamlink.base" name="Streamlink Library" version="2020.07.01" provider-name="Streamlink Devs, Twilight0">
+<addon id="script.module.streamlink.base" name="Streamlink Library" version="2020.08.18" provider-name="Streamlink Devs, Twilight0">
   <requires>
       <import addon="xbmc.python" version="2.14.0"/>
       <import addon="script.module.requests" version="2.12.4"/>
-      <import addon="script.module.futures" version="2.2.0"/>
+      <import addon="script.module.futures" version="2.2.0" optional="true"/>
       <import addon="script.module.pycryptodome" />
   </requires>
   <extension point="xbmc.python.module" library="resources/lib/"/>
@@ -3391,7 +3391,11 @@ You can clone the project and host it in your own server.
       <assets>
           <icon>icon.png</icon>
       </assets>
-      <news>+2020.06.21
+      <news>+2020.08.09
+- Update to latest upstream commit
+- Futures module is not set to optional (on Kodi 19 it is not imported)
+
++2020.06.21
 - Updated to latest commit
 - Dropped cryptolib in favour of pycryptodome
 

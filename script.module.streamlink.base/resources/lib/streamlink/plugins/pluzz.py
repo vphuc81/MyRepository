@@ -15,7 +15,10 @@ class Pluzz(Plugin):
     GEO_URL = 'http://geo.francetv.fr/ws/edgescape.json'
     API_URL = 'http://sivideo.webservices.francetelevisions.fr/tools/getInfosOeuvre/v2/?idDiffusion={0}'
     TOKEN_URL = 'http://hdfauthftv-a.akamaihd.net/esi/TA?url={0}'
-    SWF_PLAYER_URL = 'https://staticftv-a.akamaihd.net/player/bower_components/player_flash/dist/FranceTVNVPVFlashPlayer.akamai-7301b6035a43c4e29b7935c9c36771d2.swf'
+    SWF_PLAYER_URL = (
+        'https://staticftv-a.akamaihd.net/player/bower_components/player_flash/dist/'
+        'FranceTVNVPVFlashPlayer.akamai-7301b6035a43c4e29b7935c9c36771d2.swf'
+    )
 
     _url_re = re.compile(r'''
         https?://(
@@ -23,7 +26,7 @@ class Pluzz(Plugin):
             www\.(ludo|zouzous)\.fr/heros/[\w-]+ |
             (.+\.)?francetvinfo\.fr)
     ''', re.VERBOSE)
-    _pluzz_video_id_re = re.compile(r'''videoId:\s*["'](?P<video_id>[^"']+)["']''')
+    _pluzz_video_id_re = re.compile(r'''(?P<q>["']*)videoId(?P=q):\s*["'](?P<video_id>[^"']+)["']''')
     _jeunesse_video_id_re = re.compile(r'playlist: \[{.*?,"identity":"(?P<video_id>.+?)@(?P<catalogue>Ludo|Zouzous)"')
     _sport_video_id_re = re.compile(r'data-video="(?P<video_id>.+?)"')
     _embed_video_id_re = re.compile(r'href="http://videos\.francetv\.fr/video/(?P<video_id>.+?)(?:@.+?)?"')

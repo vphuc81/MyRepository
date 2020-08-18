@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging
 import re
 
@@ -7,11 +8,11 @@ from streamlink.plugin.api import useragents
 from streamlink.stream import HLSStream
 
 
-
 log = logging.getLogger(__name__)
 
 
 class YuppTV(Plugin):
+
     _url_re = re.compile(r"""https?://(?:www\.)?yupptv\.com""", re.VERBOSE)
     _m3u8_re = re.compile(r'''['"](http.+\.m3u8.*?)['"]''')
     _login_url = "https://www.yupptv.com/auth/validateSignin"
@@ -43,14 +44,18 @@ class YuppTV(Plugin):
             log.error("Failed to login to YuppTV")
             raise PluginError("cannot login")
 
-        res = self.session.http.post(self._login_url, data=dict(user=username, password=password, isMobile=0), headers={"Referer": self._signin_url})
+        res = self.session.http.post(
+            self._login_url,
+            data=dict(user=username, password=password, isMobile=0),
+            headers={"Referer": self._signin_url}
+        )
         data = self.session.http.json(res)
         resp = data['Response']
         if resp["tempBoxid"]:
             # log out on other device
             log.info("Logging out on other device: {0}".format(resp["tempBoxid"]))
             _ = self.session.http.get(self._box_logout, params=dict(boxId=resp["tempBoxid"]))
-            return self.login(username, password, depth-1)
+            return self.login(username, password, depth - 1)
         return resp['errorCode'], resp['statusmsg']
 
     def _get_streams(self):

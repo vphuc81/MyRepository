@@ -68,6 +68,7 @@ class Schoolism(Plugin):
             metavar="PART",
             help="""
         Play part number PART of the lesson, or assignment feedback video.
+
         Defaults is 1.
         """
         )
@@ -122,10 +123,10 @@ class Schoolism(Plugin):
                                                      headers={"User-Agent": useragents.SAFARI_8,
                                                               "Referer": self.url})
                         elif source['type'] == "application/x-mpegurl":
-                            for s in HLSStream.parse_variant_playlist(self.session,
-                                                                      source["src"],
-                                                                      headers={"User-Agent": useragents.SAFARI_8,
-                                                                               "Referer": self.url}).items():
+                            for s in HLSStream.parse_variant_playlist(
+                                    self.session, source["src"],
+                                    headers={"User-Agent": useragents.SAFARI_8, "Referer": self.url}
+                            ).items():
                                 yield s
 
             if not found:

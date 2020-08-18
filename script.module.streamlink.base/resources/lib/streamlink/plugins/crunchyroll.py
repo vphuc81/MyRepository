@@ -27,9 +27,9 @@ STREAM_NAMES = {
 def parse_timestamp(ts):
     """Takes ISO 8601 format(string) and converts into a utc datetime(naive)"""
     return (
-        datetime.datetime.strptime(ts[:-7], "%Y-%m-%dT%H:%M:%S") +
-        datetime.timedelta(hours=int(ts[-5:-3]), minutes=int(ts[-2:])) *
-        int(ts[-6:-5] + "1")
+        datetime.datetime.strptime(ts[:-7], "%Y-%m-%dT%H:%M:%S")
+        + datetime.timedelta(hours=int(ts[-5:-3]), minutes=int(ts[-2:]))
+        * int(ts[-6:-5] + "1")
     )
 
 
@@ -355,7 +355,10 @@ class Crunchyroll(Plugin):
 
         # use the crunchyroll locale as an override, for backwards compatibility
         locale = self.get_option("locale") or self.session.localization.language_code
-        api = CrunchyrollAPI(self.cache, self.session, session_id=self.get_option("session_id"), locale=locale)
+        api = CrunchyrollAPI(self.cache,
+                             self.session,
+                             session_id=self.get_option("session_id"),
+                             locale=locale)
 
         if not self.get_option("session_id"):
             self.logger.debug("Creating session with locale: {0}", locale)

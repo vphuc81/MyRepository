@@ -32,7 +32,9 @@ class Latina(Plugin):
 
         if stream_url:
             log.debug("URL={0}".format(stream_url))
-            return HLSStream.parse_variant_playlist(self.session, stream_url, name_fmt="{pixels}_{bitrate}")
+            return HLSStream.parse_variant_playlist(self.session,
+                                                    stream_url,
+                                                    name_fmt="{pixels}_{bitrate}")
 
 
 __plugin__ = Latina
