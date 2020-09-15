@@ -13,9 +13,6 @@ Full documentation is available at https://streamlink.github.io.
 import xbmcaddon, xbmc
 addon = xbmcaddon.Addon
 
-if addon('xbmc.python').getAddonInfo('version') == '2.26.0' and not xbmc.getCondVisibility('System.HasAddon(script.module.futures)'):
-    xbmc.executebuiltin('InstallAddon(script.module.futures)')
-
 __title__ = "streamlink"
 __license__ = "Simplified BSD"
 __author__ = "Streamlink"

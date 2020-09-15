@@ -1,66 +1,198 @@
-import base64
+import hashlib
+import logging
 import re
 import time
-import uuid
-import random
-import json
 
+from streamlink.compat import bytes
+from streamlink.exceptions import PluginError
 from streamlink.plugin import Plugin
 from streamlink.plugin.api import validate
-from streamlink.plugin.api.useragents import CHROME as USER_AGENT
-from streamlink.stream import (HTTPStream, HLSStream)
+from streamlink.stream import HLSStream
+from streamlink.utils import parse_json
 
-HUAJIAO_URL = "http://www.huajiao.com/l/{}"
-LAPI_URL = (
-    "http://g2.live.360.cn/liveplay?stype=flv&channel={}&bid=huajiao&sn={}&sid={}&_rate=xd&ts={}&r={}&_ostype=flash"
-    "&_delay=0&_sign=null&_ver=13"
-)
+log = logging.getLogger(__name__)
 
-_url_re = re.compile(r"""
-        http(s)?://(www\.)?huajiao.com
-        /l/(?P<channel>[^/]+)
-""", re.VERBOSE)
 
-_feed_json_re = re.compile(r'^\s*var\s*feed\s*=\s*(?P<feed>{.*})\s*;', re.MULTILINE)
+class Huomao(Plugin):
+    magic_val = '6FE26D855E1AEAE090E243EB1AF73685'
+    mobile_url = 'https://m.huomao.com/mobile/mob_live/{0}'
+    live_data_url = 'https://m.huomao.com/swf/live_data'
+    vod_url = 'https://www.huomao.com/video/vreplay/{0}'
 
-_feed_json_schema = validate.Schema(
-    validate.all(
-        validate.transform(_feed_json_re.search),
-        validate.any(
-            None,
-            validate.all(
-                validate.get('feed'),
-                validate.transform(json.loads)
-            )
-        )
+    author = None
+    category = None
+    title = None
+
+    url_re = re.compile(r'''
+        (?:https?://)?(?:www\.)?huomao(?:\.tv|\.com)
+        (?P<path>/|/video/v/)
+        (?P<room_id>\d+)
+    ''', re.VERBOSE)
+
+    author_re = re.compile(
+        r'<p class="nickname_live">\s*<span>\s*(.*?)\s*</span>',
+        re.DOTALL,
     )
-)
 
+    title_re = re.compile(
+        r'<p class="title-name">\s*(.*?)\s*</p>',
+        re.DOTALL,
+    )
 
-class Huajiao(Plugin):
+    video_id_re = re.compile(r'var stream = "([^"]+)"')
+    video_res_re = re.compile(r'_([\d]+p?)\.m3u8')
+    vod_data_re = re.compile(r'var video = ({.*});')
+
+    _live_data_schema = validate.Schema({
+        'roomStatus': validate.transform(lambda x: int(x)),
+        'streamList': [{'list_hls': [{
+            'url': validate.url(),
+        }]}],
+    })
+
+    _vod_data_schema = validate.Schema({
+        'title': validate.text,
+        'username': validate.text,
+        'vaddress': validate.all(
+            validate.text,
+            validate.transform(parse_json),
+            [{
+                'url': validate.url(),
+                'vheight': int,
+            }],
+        ),
+    })
+
     @classmethod
-    def can_handle_url(self, url):
-        return _url_re.match(url)
+    def can_handle_url(cls, url):
+        return cls.url_re.match(url) is not None
+
+    def _get_live_streams_data(self, video_id):
+        client_type = 'huomaomobileh5'
+        time_now = str(int(time.time()))
+
+        token_data = "{0}{1}{2}{3}".format(
+            video_id,
+            client_type,
+            time_now,
+            self.magic_val,
+        )
+
+        token = hashlib.md5(bytes(token_data, 'utf-8')).hexdigest()
+        log.debug("Token={0}".format(token))
+
+        post_data = {
+            'cdns': 1,
+            'streamtype': 'live',
+            'VideoIDS': video_id,
+            'from': client_type,
+            'time': time_now,
+            'token': token,
+        }
+        video_data = self.session.http.post(self.live_data_url, data=post_data)
+
+        return self.session.http.json(
+            video_data,
+            schema=self._live_data_schema,
+        )
+
+    def _get_vod_streams(self, vod_id):
+        res = self.session.http.get(self.vod_url.format(vod_id))
+        m = self.vod_data_re.search(res.text)
+        vod_json = m and m.group(1)
+
+        if vod_json is None:
+            raise PluginError("Failed to get VOD data")
+
+        vod_data = parse_json(vod_json, schema=self._vod_data_schema)
+
+        self.author = vod_data['username']
+        self.category = 'VOD'
+        self.title = vod_data['title']
+
+        vod_data = vod_data['vaddress']
+
+        streams = {}
+        for stream in vod_data:
+            video_res = stream['vheight']
+
+            if 'p' not in str(video_res):
+                video_res = "{0}p".format(video_res)
+
+            if video_res in streams:
+                video_res = "{0}_alt".format(video_res)
+
+            streams[video_res] = HLSStream(self.session, stream['url'])
+
+        return streams
+
+    def _get_live_streams(self, room_id):
+        res = self.session.http.get(self.mobile_url.format(room_id))
+
+        m = self.author_re.search(res.text)
+        if m:
+            self.author = m.group(1)
+
+        self.category = 'Live'
+
+        m = self.title_re.search(res.text)
+        if m:
+            self.title = m.group(1)
+
+        m = self.video_id_re.search(res.text)
+        video_id = m and m.group(1)
+
+        if video_id is None:
+            raise PluginError("Failed to get video ID")
+        else:
+            log.debug("Video ID={0}".format(video_id))
+
+        streams_data = self._get_live_streams_data(video_id)
+
+        if streams_data['roomStatus'] == 0:
+            log.info("This room is currently inactive: {0}".format(room_id))
+            return
+
+        streams_data = streams_data['streamList'][0]['list_hls']
+
+        streams = {}
+        for stream in streams_data:
+            m = self.video_res_re.search(stream['url'])
+            video_res = m and m.group(1)
+            if video_res is None:
+                continue
+
+            if 'p' not in video_res:
+                video_res = "{0}p".format(video_res)
+
+            if video_res in streams:
+                video_res = "{0}_alt".format(video_res)
+
+            streams[video_res] = HLSStream(self.session, stream['url'])
+
+        return streams
+
+    def get_author(self):
+        if self.author is not None:
+            return self.author
+
+    def get_category(self):
+        if self.category is not None:
+            return self.category
+
+    def get_title(self):
+        if self.title is not None:
+            return self.title
 
     def _get_streams(self):
-        match = _url_re.match(self.url)
-        channel = match.group("channel")
+        path, url_id = self.url_re.search(self.url).groups()
+        log.debug("Path={0}".format(path))
+        log.debug("URL ID={0}".format(url_id))
 
-        self.session.http.headers.update({"User-Agent": USER_AGENT})
-        self.session.http.verify = False
-
-        feed_json = self.session.http.get(HUAJIAO_URL.format(channel), schema=_feed_json_schema)
-        if feed_json['feed']['m3u8']:
-            stream = HLSStream(self.session, feed_json['feed']['m3u8'])
+        if path != '/':
+            return self._get_vod_streams(url_id)
         else:
-            sn = feed_json['feed']['sn']
-            channel_sid = feed_json['relay']['channel']
-            sid = uuid.uuid4().hex.upper()
-            encoded_json = self.session.http.get(LAPI_URL.format(channel_sid, sn, sid, time.time(), random.random())).content
-            decoded_json = base64.decodestring(encoded_json[0:3] + encoded_json[6:]).decode('utf-8')
-            video_data = json.loads(decoded_json)
-            stream = HTTPStream(self.session, video_data['main'])
-        yield "live", stream
+            return self._get_live_streams(url_id)
 
 
-__plugin__ = Huajiao
+__plugin__ = Huomao
