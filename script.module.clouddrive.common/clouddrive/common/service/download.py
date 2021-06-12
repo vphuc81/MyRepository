@@ -17,8 +17,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #-------------------------------------------------------------------------------
 
-from urllib2 import HTTPError
-
 from clouddrive.common.account import AccountManager
 from clouddrive.common.exception import ExceptionUtils
 from clouddrive.common.remote.errorreport import ErrorReport
@@ -26,6 +24,7 @@ from clouddrive.common.service.base import BaseServerService, BaseHandler
 from clouddrive.common.ui.logger import Logger
 from clouddrive.common.ui.utils import KodiUtils
 from clouddrive.common.utils import Utils
+from urllib.error import HTTPError
 
 
 class DownloadService(BaseServerService):
@@ -68,9 +67,12 @@ class Download(BaseHandler):
 class DownloadServiceUtil(object):
     @staticmethod
     def build_download_url(driveid, item_driveid, item_id, name, addonid=None):
-        return 'http://%s:%s/%s/%s/%s/%s/%s' % (
-            DownloadService._interface,
-            KodiUtils.get_service_port(DownloadService.name, addonid),
-            DownloadService.name,
-            driveid, item_driveid, item_id, name
+        return "http://{host}:{port}/{service}/{driveid}/{item_driveid}/{item_id}/{name}".format(
+            host = DownloadService._interface,
+            port = KodiUtils.get_service_port(DownloadService.name, addonid),
+            service = DownloadService.name,
+            driveid = driveid,
+            item_driveid = item_driveid, 
+            item_id = item_id, 
+            name = name
         )

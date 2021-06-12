@@ -123,23 +123,19 @@ class ExportManager(object):
     def get_strm_link(driveid, item, content_type, addon_url):
         item_id = Utils.str(item['id'])
         item_drive_id = Utils.default(Utils.get_safe_value(item, 'drive_id'), driveid)
-        content = addon_url + '?' + urllib.urlencode(
+        content = addon_url + '?' + urllib.parse.urlencode(
                 {'action': 'play', 'content_type': content_type, 'item_driveid': item_drive_id, 'item_id': item_id,
                  'driveid': driveid})
         return Utils.str(content)
     
     @staticmethod
     def create_text_file(file_path, content):
-        f = None
         try:
-            f = KodiUtils.file(file_path, 'w')
-            f.write(Utils.str(content))
+            with KodiUtils.file(file_path, 'w') as f:
+                f.write(Utils.str(content))
         except Exception as e:
             ErrorReport.handle_exception(e)
             return False
-        finally:
-            if f:
-                f.close()
         return True
 
     @staticmethod
@@ -147,7 +143,7 @@ class ExportManager(object):
         url = item['download_info']['url']
         headers = None
         if provider.download_requires_auth:
-            headers = {"Authorization":"Bearer %s"%provider.get_access_tokens()['access_token']}
+            headers = {"authorization":"Bearer %s"%provider.get_access_tokens()['access_token']}
         try:
             req = Request(url, None, headers, download_path = download_path, on_update_download = on_update_download)
             req.request()
