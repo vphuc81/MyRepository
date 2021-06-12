@@ -3001,7 +3001,7 @@ De(ze) 'repo' zal alleen worden "vastgehouden" ter voorkoming van kaping in- en 
 		</extension>
 	</addon>
 
-<addon id="script.module.clouddrive.common" name="Cloud Drive Common Module" version="1.2.15.1" provider-name="Carlos Guzman (cguZZman)">
+<addon id="script.module.clouddrive.common" name="Cloud Drive Common Module" version="1.3.9.01" provider-name="Carlos Guzman (cguZZman)">
 	<requires>
 		<import addon="xbmc.python" version="2.25.0" />
 		<import addon="script.module.dateutil"/>
@@ -3022,8 +3022,8 @@ De(ze) 'repo' zal alleen worden "vastgehouden" ter voorkoming van kaping in- en 
 			<icon>icon.png</icon>
 		</assets>
 		<news>
-v1.2.15 released Apr 23, 2020:
-- Export fix
+v1.3.9 released Nov 12, 2020:
+- Export improvements
 		</news>
 		<disclaimer lang="en_GB">
 This cloud drive addon uses a third-party authentication mechanism commonly known as OAuth 2.0.
