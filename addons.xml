@@ -59,7 +59,7 @@ You can clone the project and host it in your own server.
 	</extension>
 </addon>
 
-<addon id="plugin.program.indigo" version="5.0.18.1" name="Indigo" provider-name="tvaddons">
+<addon id="plugin.program.indigo" version="99.0.00" name="Indigo" provider-name="tvaddons">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0"/>
 	</requires>
