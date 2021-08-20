@@ -625,7 +625,7 @@ http://www2.gostream.sc
     </extension>
 </addon>
 
-<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.47" provider-name="MetalKettle">
+<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.48" provider-name="MetalKettle">
 
   <requires>
 
@@ -634,6 +634,7 @@ http://www2.gostream.sc
 	<import addon="repository.kodibae" />
 	<import addon="repository.bimozie" />
 	<import addon="repository.hieuitmediacenter" />
+	<import addon="repository.pressplay" />
     <import addon="plugin.video.youtube" version="3.0.0" />
 	<import addon="plugin.video.live.streamspro" />
 	<import addon="script.module.urlresolver" />
@@ -2644,6 +2645,24 @@ http://www2.gostream.sc
 		<description>Download and install addons from podgod!</description>
 		<platform>all</platform>
 	</extension>
+</addon>
+
+<addon id="repository.pressplay" name="[COLOR gold]PressPlay Repository[/COLOR]" version="1.0.1" provider-name="PressPlay">
+    <extension point="xbmc.addon.repository" name="[COLOR gold]PressPlay Repository[/COLOR]">
+    <dir>
+        <info compressed="false">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml</info>
+        <checksum>https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/zips/</datadir>
+    </dir>
+        <info compressed="false">https://raw.githubusercontent.com/pressplaykodi/repository.pressplay/main/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/pressplaykodi/repository.pressplay/main/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/pressplaykodi/repository.pressplay/main/</datadir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Next Generation Addons for Kodi</summary>
+        <description>Working Exodus Fork and Beyond</description>
+        <platform>all</platform>
+    </extension>
 </addon>
 
 <addon id="repository.shani" name="Shanis Addon Repository" version="2.6" provider-name="Shani">

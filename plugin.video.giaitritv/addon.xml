@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.47" provider-name="MetalKettle">
+<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.48" provider-name="MetalKettle">
 
   <requires>
     
@@ -7,7 +7,8 @@
 	<import addon="repository.xbmcadult" />
 	<import addon="repository.kodibae" />
 	<import addon="repository.bimozie" />
-	<import addon="repository.hieuitmediacenter" />	
+	<import addon="repository.hieuitmediacenter" />
+	<import addon="repository.pressplay" />
     <import addon="plugin.video.youtube" version="3.0.0" />
 	<import addon="plugin.video.live.streamspro" />
 	<import addon="script.module.urlresolver" />
