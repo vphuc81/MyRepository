@@ -1,5 +1,5 @@
 '''
-    urlresolver XBMC Addon
+    Plugin for URLResolver
     Copyright (C) 2017 jsergio
 
 This program is free software: you can redistribute it and/or modify
@@ -15,18 +15,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
-from lib import helpers
-from urlresolver.resolver import UrlResolver, ResolverError
+from urlresolver.plugins.__generic_resolver__ import GenericResolver
+from urlresolver.plugins.lib import helpers
 
 
-class YandexResolver(UrlResolver):
+class YandexResolver(GenericResolver):
     name = 'yandex'
     domains = ['disk.yandex.ru', 'yadi.sk']
-    pattern = '(?://|\.)((?:yadi\.sk|disk\.yandex\.ru))/i/([\w\-]+)'
+    pattern = r'(?://|\.)((?:yadi\.sk|disk\.yandex\.ru))/i/([\w\-]+)'
 
     def get_media_url(self, host, media_id):
         return helpers.get_media_url(self.get_url(host, media_id),
-                                     patterns=['''dimension":\s*"(?P<label>[\d]{3,4}p?)".+?"url":\s*"(?P<url>[^"]+)'''],
+                                     patterns=[r'''dimension":\s*"(?P<label>[\d]{3,4}p?)".+?"url":\s*"(?P<url>[^"]+)'''],
                                      generic_patterns=False).replace(' ', '%20')
 
     def get_url(self, host, media_id):

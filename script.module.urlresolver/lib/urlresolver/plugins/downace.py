@@ -1,5 +1,5 @@
 """
-    Kodi urlresolver plugin
+    Plugin for URLResolver
     Copyright (C) 2016  script.module.urlresolver
 
     This program is free software: you can redistribute it and/or modify
@@ -15,12 +15,13 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-from __generic_resolver__ import GenericResolver
+from urlresolver.plugins.__generic_resolver__ import GenericResolver
+
 
 class DownaceResolver(GenericResolver):
     name = 'downace'
     domains = ['downace.com']
-    pattern = '(?://|\.)(downace\.com)/(?:embed/)?([0-9a-zA-Z]+)'
+    pattern = r'(?://|\.)(downace\.com)/(?:embed/)?([0-9a-zA-Z]+)'
 
     def get_url(self, host, media_id):
-        return 'https://www.downace.com/embed/%s' % (media_id)
+        return self._default_get_url(host, media_id, 'https://{host}/embed/{media_id}')

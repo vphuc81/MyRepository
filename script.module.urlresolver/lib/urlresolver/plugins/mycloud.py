@@ -1,5 +1,5 @@
 """
-    Kodi urlresolver plugin
+    Plugin for URLResolver
     Copyright (C) 2016  script.module.urlresolver
 
     This program is free software: you can redistribute it and/or modify
@@ -15,9 +15,10 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+
 import string
 from random import choice
-from lib import helpers
+from urlresolver.plugins.lib import helpers
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
 
@@ -25,10 +26,7 @@ from urlresolver.resolver import UrlResolver, ResolverError
 class MycloudResolver(UrlResolver):
     name = "mycloud"
     domains = ["mycloud.to", "mcloud.to"]
-    pattern = '(?://|\.)(my?cloud\.to)/embed/([\S]+)'
-
-    def __init__(self):
-        self.net = common.Net()
+    pattern = r'(?://|\.)(my?cloud\.to)/embed/([\S]+)'
 
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)

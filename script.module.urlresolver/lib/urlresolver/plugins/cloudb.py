@@ -1,6 +1,7 @@
 """
     Plugin for UrlResolver
     Copyright (C) 2019 twilight0
+    Copyright (C) 2020 gujal
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,19 +16,16 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-from __generic_resolver__ import GenericResolver
-from lib import helpers
+from urlresolver.plugins.__generic_resolver__ import GenericResolver
+from urlresolver.plugins.lib import helpers
 
 
 class CloudbResolver(GenericResolver):
     name = "cloudb"
-    domains = ['cloudb.me']
-    pattern = r'(?://|\.)(cloudb\.me)/(?:embed-)?(\w+)'
+    domains = ['cloudb.me', 'cloudb2.me']
+    pattern = r'(?://|\.)(cloudb2?\.me)/(?:embed-|emb.html\?)?([0-9a-zA-Z]+)'
 
     def get_media_url(self, host, media_id):
         return helpers.get_media_url(self.get_url(host, media_id),
                                      patterns=[r'''sources:\s*\["(?P<url>[^"]+)'''],
                                      generic_patterns=False)
-
-    def get_url(self, host, media_id):
-        return self._default_get_url(host, media_id, template='https://{host}/embed-{media_id}.html')

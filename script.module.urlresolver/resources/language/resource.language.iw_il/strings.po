@@ -273,4 +273,24 @@ msgstr "איפוס הרשאה ל-Debrid-Link"
 
 msgctxt "#33064"
 msgid "Debrid-Link Resolver Authorized"
-msgstr "הרשאה ל-Debrid-Link Resolver"
+msgstr "Debrid-Link מורשה פותר"
+
+msgctxt "#33065"
+msgid "Clear Finished torrents from account"
+msgstr "נקה טורנטים מוגמרים מחשבון"
+
+msgctxt "#33066"
+msgid "minutes"
+msgstr "דקות"
+
+msgctxt "#33067"
+msgid "hours"
+msgstr "שעה (ות"
+
+msgctxt "#33068"
+msgid "Uptobox Authorisation Reset"
+msgstr "איפוס הרשאה ל-Uptobox"
+
+msgctxt "#33069"
+msgid "Uptobox Resolver Authorised"
+msgstr "Uptobox מורשה פותר"

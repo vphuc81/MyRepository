@@ -1,5 +1,5 @@
 """
-    Kodi urlresolver plugin
+    Plugin for URLResolver
     Copyright (C) 2016  script.module.urlresolver
 
     This program is free software: you can redistribute it and/or modify
@@ -15,17 +15,21 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-from lib import helpers
-from urlresolver.resolver import UrlResolver, ResolverError
+
+from urlresolver.plugins.lib import helpers
+from urlresolver.plugins.__generic_resolver__ import GenericResolver
 
 
-class VidozaResolver(UrlResolver):
+class VidozaResolver(GenericResolver):
     name = 'vidoza'
-    domains = ['vidoza.net']
-    pattern = '(?://|\.)(vidoza\.net)/(?:embed-)?([0-9a-zA-Z]+)'
+    domains = ['vidoza.net', 'vidoza.co']
+    pattern = r'(?://|\.)(vidoza\.(?:net|co))/(?:embed-)?([0-9a-zA-Z]+)'
 
     def get_media_url(self, host, media_id):
-        return helpers.get_media_url(self.get_url(host, media_id), patterns=['''["']?\s*(?:file|src)\s*["']?\s*[:=,]?\s*["'](?P<url>[^"']+)(?:[^}>\]]+)["']?\s*res\s*["']?\s*[:=]\s*["']?(?P<label>[^"',]+)'''], generic_patterns=False).replace(' ', '%20')
+        return helpers.get_media_url(self.get_url(host, media_id),
+                                     patterns=[r'''["']?\s*(?:file|src)\s*["']?\s*[:=,]?\s*["'](?P<url>[^"']+)(?:[^}>\]]+)["']?\s*res\s*["']?\s*[:=]\s*["']?(?P<label>[^"',]+)'''],
+                                     generic_patterns=False,
+                                     referer=False).replace(' ', '%20')
 
     def get_url(self, host, media_id):
         return self._default_get_url(host, media_id, template='https://{host}/embed-{media_id}.html')

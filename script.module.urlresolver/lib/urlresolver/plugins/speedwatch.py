@@ -1,5 +1,5 @@
-'''
-SpeedWatch.io urlresolver plugin
+"""
+Plugin for UrlResolver
 Copyright (C) 2019 gujal
 
 This program is free software: you can redistribute it and/or modify
@@ -14,23 +14,23 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
-'''
+"""
 
-import re
-from lib import helpers
-from urlresolver import common
-from urlresolver.resolver import UrlResolver, ResolverError
+from urlresolver.plugins.lib import helpers
+from urlresolver.plugins.__generic_resolver__ import GenericResolver
 
-class SpeedWatchResolver(UrlResolver):
+
+class SpeedWatchResolver(GenericResolver):
     name = "speedwatch"
     domains = ["speedwatch.io"]
-    pattern = r'(?://|\.)(speedwatch\.io)/(?:plyr|e)/([0-9a-zA-Z]+)'
-
-    def __init__(self):
-        self.net = common.Net()
+    pattern = r'(?://|\.)(speedwatch\.io)/(?:plyr|e|play-embed|file)/([0-9a-zA-Z]+)'
 
     def get_media_url(self, host, media_id):
-        return helpers.get_media_url(self.get_url(host, media_id), patterns=[r'''sources\s*:\s*\["(?P<url>[^"]+)'''], generic_patterns=False)
+        return helpers.get_media_url(self.get_url(host, media_id),
+                                     patterns=[r'''href="(?P<url>[^"]+).*?>Download''',
+                                               r'''sources\s*:\s*\["(?P<url>[^"]+)''',
+                                               r'''id="videolink">(?P<url>[^<]+)'''],
+                                     generic_patterns=False)
 
     def get_url(self, host, media_id):
-        return self._default_get_url(host, media_id, template='https://www.{host}/e/{media_id}.html')
+        return self._default_get_url(host, media_id, template='https://www.{host}/play-embed/{media_id}.html')

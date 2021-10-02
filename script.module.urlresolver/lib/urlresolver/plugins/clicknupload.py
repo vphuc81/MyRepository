@@ -16,8 +16,8 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 import re
-from lib import helpers
-from lib import captcha_lib
+from urlresolver.plugins.lib import helpers
+from urlresolver.plugins.lib import captcha_lib
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
 
@@ -26,11 +26,8 @@ MAX_TRIES = 3
 
 class ClickNUploadResolver(UrlResolver):
     name = "clicknupload"
-    domains = ['clicknupload.co', 'clicknupload.com', 'clicknupload.me', 'clicknupload.link', 'clicknupload.org']
-    pattern = r'(?://|\.)(clicknupload\.(?:com?|me|link|org))/(?:f/)?([0-9A-Za-z]+)'
-
-    def __init__(self):
-        self.net = common.Net()
+    domains = ['clicknupload.cc', 'clicknupload.co', 'clicknupload.com', 'clicknupload.me', 'clicknupload.link', 'clicknupload.org']
+    pattern = r'(?://|\.)(clicknupload\.(?:com?|me|link|org|cc))/(?:f/)?([0-9A-Za-z]+)'
 
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)
@@ -44,15 +41,16 @@ class ClickNUploadResolver(UrlResolver):
             html = self.net.http_POST(web_url, data, headers=headers).content
             r = re.search(r'''class="downloadbtn"[^>]+onClick\s*=\s*\"window\.open\('([^']+)''', html)
             if r:
-                return r.group(1) + helpers.append_headers(headers)
+                headers.update({'verifypeer': 'false'})
+                return r.group(1).replace(' ', '%20') + helpers.append_headers(headers)
 
-            common.kodi.sleep(1000)
+            common.kodi.sleep(12000)
             tries = tries + 1
 
         raise ResolverError('Unable to locate link')
 
     def get_url(self, host, media_id):
-        return 'https://clicknupload.co/%s' % media_id
+        return self._default_get_url(host, media_id, template='https://clicknupload.cc/{media_id}')
 
     @classmethod
     def isPopup(self):

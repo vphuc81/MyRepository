@@ -272,3 +272,23 @@ msgstr "Debrid-Link resolver resetovaný"
 msgctxt "#33064"
 msgid "Debrid-Link Resolver Authorized"
 msgstr "Debrid-Link resolver autorizovaný"
+
+msgctxt "#33065"
+msgid "Clear Finished torrents from account"
+msgstr "Vymazať hotové torrenty z účtu"
+
+msgctxt "#33066"
+msgid "minutes"
+msgstr "minút"
+
+msgctxt "#33067"
+msgid "hours"
+msgstr "hodín"
+
+msgctxt "#33068"
+msgid "Uptobox Authorisation Reset"
+msgstr "Uptobox resolver resetovaný"
+
+msgctxt "#33069"
+msgid "Uptobox Resolver Authorised"
+msgstr "Uptobox resolver autorizovaný"

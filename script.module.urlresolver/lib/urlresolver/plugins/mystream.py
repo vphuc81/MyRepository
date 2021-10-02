@@ -1,35 +1,29 @@
 """
-    plugin for URLResolver
+    Plugin for URLResolver
     Copyright (C) 2019 gujal
     Copyright (C) 2020 eco-plus
-
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 import re
 from urlresolver import common
-from lib import helpers
+from urlresolver.plugins.lib import helpers
 from urlresolver.resolver import UrlResolver, ResolverError
 
 
 class MystreamResolver(UrlResolver):
     name = "mystream"
-    domains = ['mystream.la', 'mystream.to', 'mstream.xyz', 'mstream.cloud', 'mstream.fun']
-    pattern = r'(?://|\.)(my?stream\.(?:la|to|cloud|xyz|fun))/(?:external|watch/)?([0-9a-zA-Z_]+)'
-
-    def __init__(self):
-        self.net = common.Net()
+    domains = ['mystream.la', 'mystream.to', 'mstream.xyz', 'mstream.cloud', 'mstream.fun', 'mstream.press']
+    pattern = r'(?://|\.)(my?stream\.(?:la|to|cloud|xyz|fun|press))/(?:external|embed-|watch/)?([0-9a-zA-Z_]+)'
 
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)
@@ -39,12 +33,13 @@ class MystreamResolver(UrlResolver):
         if "unable to find the video" in html:
             raise ResolverError('The requested video was not found or may have been removed.')
 
-        match = re.search(r'(\$=.+?;)\s*<', html)
+        match = re.search(r'(\$=.+?;)\s*<', html, re.DOTALL)
         if match:
             sdata = self.decode(match.group(1))
-            s = re.search(r"src',\s*'([^']+)", sdata)
-            if s:
-                return s.group(1) + helpers.append_headers(headers)
+            if sdata:
+                s = re.search(r"src',\s*'([^']+)", sdata)
+                if s:
+                    return s.group(1) + helpers.append_headers(headers)
 
         raise ResolverError('Video Link Not Found')
 
@@ -87,7 +82,7 @@ class MystreamResolver(UrlResolver):
                     elif b == '(!""+"")[$]':
                         tmplist.append(("$.{}+".format(a), 'true'[i]))
 
-                tmplist = sorted(tmplist, key=lambda z: z[1])
+                tmplist = sorted(tmplist, key=lambda z: str(z[1]))
                 for x in tmplist:
                     first_group = first_group.replace(x[0], str(x[1]))
 
@@ -95,7 +90,7 @@ class MystreamResolver(UrlResolver):
                                          .replace('\\"', '\\').replace('"', '').replace("+", "")
 
             try:
-                final_data = first_group.decode('unicode-escape').decode('unicode-escape')
+                final_data = first_group.encode('ascii').decode('unicode-escape').encode('ascii').decode('unicode-escape')
                 return final_data
             except:
                 return False

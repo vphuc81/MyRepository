@@ -1,5 +1,5 @@
-'''
-    urlresolver Kodi plugin
+"""
+    Plugin for URLResolver
     Copyright (C) 2018 gujal
 
     This program is free software: you can redistribute it and/or modify
@@ -14,23 +14,22 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+"""
+
 import json
 import re
-from lib import helpers
+from urlresolver.plugins.lib import helpers
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
 
 
 class FembedResolver(UrlResolver):
     name = "fembed"
-    domains = ["fembed.com", "24hd.club", "vcdn.io", "sharinglink.club", "votrefiles.club", "there.to",
+    domains = ["fembed.com", "anime789.com", "24hd.club", "vcdn.io", "sharinglink.club", "votrefiles.club",
                "femoload.xyz", "feurl.com", "dailyplanet.pw", "jplayer.net", "xstreamcdn.com", "gcloud.live",
-               "vcdnplay.com", "vidohd.com", "vidsource.me", "votrefile.xyz", "zidiplay.com"]
-    pattern = r'(?://|\.)((?:fembed|feurl|24hd|vcdn|sharinglink|votrefiles?|femoload|dailyplanet|jplayer|there|gcloud|xstreamcdn|vcdnplay|vidohd|vidsource|zidiplay)\.(?:com|club|io|xyz|pw|net|to|live|me))/v/([a-zA-Z0-9-]+)'
-
-    def __init__(self):
-        self.net = common.Net()
+               "vcdnplay.com", "vidohd.com", "vidsource.me", "votrefile.xyz", "zidiplay.com", "fcdn.stream",
+               "mediashore.org", "there.to", "femax20.com", "sexhd.co", "viplayer.cc"]
+    pattern = r'(?://|\.)((?:fembed|feurl|femax20|24hd|anime789|[fv]cdn|sharinglink|votrefiles?|femoload|dailyplanet|jplayer|there|sexhd|gcloud|mediashore|xstreamcdn|vcdnplay|vidohd|vidsource|viplayer|zidiplay)\.(?:com|club|io|xyz|pw|net|to|live|me|stream|co|cc|org))/(?:v|f)/([a-zA-Z0-9-]+)'
 
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)

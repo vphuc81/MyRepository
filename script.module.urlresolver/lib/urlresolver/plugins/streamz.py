@@ -15,40 +15,37 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-from lib import helpers
+
+import re
+from urlresolver.plugins.lib import helpers
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
 
 
 class StreamzResolver(UrlResolver):
-    name = "streamz"
-    domains = ['streamz.cc']
-    pattern = r'(?://|\.)(streamz\.cc)/([0-9a-zA-Z]+)'
-
-    def __init__(self):
-        self.net = common.Net()
+    name = 'streamz'
+    domains = ['streamz.cc', 'streamz.vg', 'streamzz.to', 'streamz.ws']
+    pattern = r'(?://|\.)(streamzz?\.(?:cc|vg|to|ws))/([0-9a-zA-Z]+)'
 
     def get_media_url(self, host, media_id):
 
         web_url = self.get_url(host, media_id)
-        headers = {'User-Agent': common.RAND_UA}
+        headers = {'User-Agent': common.CHROME_USER_AGENT}
         html = self.net.http_GET(web_url, headers=headers).content
 
-        html += helpers.get_packed_data(html)
-        sources = helpers.scrape_sources(html)
+        if '<b>File not found, sorry!</b>' not in html:
+            html += helpers.get_packed_data(html)
+            sources = helpers.scrape_sources(html)
 
-        if sources:
+            if sources:
+                headers.update({'Referer': web_url})
+                vurl = helpers.pick_source(sources)
+                vurl = re.sub('get[a-zA-Z]{4}-', 'getlink-', vurl)
+                vurl = re.sub('get[a-zA-Z]{5}-', 'getlink-', vurl)
+                return helpers.get_redirect_url(vurl, headers) + helpers.append_headers(headers)
 
-            sources = [('mp4', self.net.http_HEAD(sources[0][1]).get_url())]
-
-            headers.update({'Referer': web_url})
-
-            return helpers.pick_source(sources) + helpers.append_headers(headers)
-
-        else:
-
-            raise ResolverError("Video not found")
+        raise ResolverError('Video not found or removed')
 
     def get_url(self, host, media_id):
 
-        return self._default_get_url(host, media_id, template='https://{host}/{media_id}')
+        return self._default_get_url(host, media_id, template='https://streamz.vg/{media_id}')

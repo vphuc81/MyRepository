@@ -273,3 +273,23 @@ msgstr "Resetare rezolver Debrid-Link"
 msgctxt "#33064"
 msgid "Debrid-Link Resolver Authorized"
 msgstr "Rezolver Debrid-Link autorizat"
+
+msgctxt "#33065"
+msgid "Clear Finished torrents from account"
+msgstr "Ștergeți torrentele finalizate din cont"
+
+msgctxt "#33066"
+msgid "minutes"
+msgstr "minute"
+
+msgctxt "#33067"
+msgid "hours"
+msgstr "ore"
+
+msgctxt "#33068"
+msgid "Uptobox Authorisation Reset"
+msgstr "Resetare rezolver Uptobox"
+
+msgctxt "#33069"
+msgid "Uptobox Resolver Authorised"
+msgstr "Rezolver Uptobox autorizat"

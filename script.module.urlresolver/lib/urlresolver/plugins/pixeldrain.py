@@ -1,5 +1,5 @@
 """
-    Kodi urlresolver plugin
+    Plugin for URLResolver
     Copyright (C) 2019  script.module.urlresolver
 
     This program is free software: you can redistribute it and/or modify
@@ -16,17 +16,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 import json
-from lib import helpers
+from urlresolver.plugins.lib import helpers
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
+
 
 class PixelDrainResolver(UrlResolver):
     name = 'pixeldrain'
     domains = ['pixeldrain.com']
-    pattern = '(?://|\.)(pixeldrain\.com)/(?:u|l)/([0-9a-zA-Z\-]+)'
+    pattern = r'(?://|\.)(pixeldrain\.com)/(?:u|l)/([0-9a-zA-Z\-]+)'
 
     def __init__(self):
-        self.net = common.Net()
         self.headers = {'User-Agent': common.RAND_UA}
 
     def get_host_and_id(self, url):
@@ -34,29 +34,29 @@ class PixelDrainResolver(UrlResolver):
         return super(PixelDrainResolver, self).get_host_and_id(url)
 
     def get_media_url(self, host, media_id):
-        if( '/l/' in self.web_url ):
-            response = self.get_media_url_list( host, media_id )
+        if('/l/' in self.web_url):
+            response = self.get_media_url_list(host, media_id)
         else:
-            response = self.get_media_url_file( host, media_id )
- 
-        if( response != False ):
+            response = self.get_media_url_file(host, media_id)
+
+        if(response is not False):
             return response
         raise ResolverError('Unable to locate video')
 
-    def get_media_url_file( self, host, media_id ):
-        file_info = json.loads( self.net.http_GET('https://' + host + '/api/file/' + media_id + '/info', headers=self.headers).content )
-        if( file_info['success'] == True and 'video' in file_info['mime_type'] ):
+    def get_media_url_file(self, host, media_id):
+        file_info = json.loads(self.net.http_GET('https://' + host + '/api/file/' + media_id + '/info', headers=self.headers).content)
+        if(file_info['success'] is True and 'video' in file_info['mime_type']):
             return 'http://' + host + '/api/file/' + media_id
         return False
 
-    def get_media_url_list( self, host, media_id ):
-        file_list = json.loads( self.net.http_GET('https://' + host + '/api/list/' + media_id, headers=self.headers).content )
-        if( file_list['success'] == True ):
+    def get_media_url_list(self, host, media_id):
+        file_list = json.loads(self.net.http_GET('https://' + host + '/api/list/' + media_id, headers=self.headers).content)
+        if(file_list['success'] is True):
             sources = []
-            if( file_list['files'] ):
+            if(file_list['files']):
                 for file in file_list['files']:
-                    sources += [( file['name'], 'http://' + host + '/api/file/' + file['id'] )]
-            return helpers.pick_source( sources, False )
+                    sources += [(file['name'], 'http://' + host + '/api/file/' + file['id'])]
+            return helpers.pick_source(sources, False)
         return False
 
     def get_url(self, host, media_id):

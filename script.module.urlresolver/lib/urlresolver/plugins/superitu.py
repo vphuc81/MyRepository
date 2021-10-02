@@ -1,5 +1,5 @@
 """
-    UrlResolver site plugin
+    Plugin for UrlResolver
     Copyright (C) 2018 gujal
 
     This program is free software: you can redistribute it and/or modify
@@ -15,16 +15,17 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-from __generic_resolver__ import GenericResolver
-from lib import helpers
+from urlresolver.plugins.__generic_resolver__ import GenericResolver
+from urlresolver.plugins.lib import helpers
+
 
 class SuperITUResolver(GenericResolver):
     name = 'superitu.com'
     domains = ['superitu.com']
-    pattern = '(?://|\.)(superitu\.com)/embed/redirector\.php\?id=([0-9a-zA-Z=]+)'
+    pattern = r'(?://|\.)(superitu\.com)/embed/redirector\.php\?id=([0-9a-zA-Z=]+)'
 
     def get_media_url(self, host, media_id):
-        return helpers.get_media_url(self.get_url(host, media_id), patterns=['''file:\s*['"](?P<url>[^'"]+)'''])
-        
+        return helpers.get_media_url(self.get_url(host, media_id), patterns=[r'''file:\s*['"](?P<url>[^'"]+)'''])
+
     def get_url(self, host, media_id):
         return self._default_get_url(host, media_id, 'http://%s/embed/redirector.php?id=%s' % (host, media_id))

@@ -1,5 +1,5 @@
 """
-Plugin for URLResolver 
+Plugin for URLResolver
 Copyright (C) 2019 gujal
 
 This program is free software: you can redistribute it and/or modify
@@ -16,8 +16,8 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-from __generic_resolver__ import GenericResolver
-from lib import helpers
+from urlresolver.plugins.__generic_resolver__ import GenericResolver
+from urlresolver.plugins.lib import helpers
 
 
 class ChromecastResolver(GenericResolver):

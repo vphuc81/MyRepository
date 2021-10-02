@@ -1,5 +1,5 @@
 '''
-    urlresolver XBMC Addon
+    Plugin for URLResolver
     Copyright (C) 2016 Gujal
 
     This program is free software: you can redistribute it and/or modify
@@ -15,9 +15,10 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
-from __generic_resolver__ import GenericResolver
+from urlresolver.plugins.__generic_resolver__ import GenericResolver
+
 
 class PutLoadResolver(GenericResolver):
     name = "putload.tv"
     domains = ["putload.tv", "shitmovie.com"]
-    pattern = '(?://|\.)(putload\.tv|shitmovie\.com)/(?:embed-)?([0-9a-zA-Z]+)'
+    pattern = r'(?://|\.)(putload\.tv|shitmovie\.com)/(?:embed-)?([0-9a-zA-Z]+)'

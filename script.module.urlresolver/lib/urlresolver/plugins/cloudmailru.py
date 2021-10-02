@@ -18,16 +18,13 @@
 import re
 from urlresolver import common
 from urlresolver.resolver import UrlResolver, ResolverError
-from lib import helpers
+from urlresolver.plugins.lib import helpers
 
 
 class MailRuResolver(UrlResolver):
     name = "cloud.mail.ru"
     domains = ['cloud.mail.ru']
     pattern = r'(?://|\.)(cloud\.mail\.ru)/public/([0-9A-Za-z]+/[^/]+)'
-
-    def __init__(self):
-        self.net = common.Net()
 
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)

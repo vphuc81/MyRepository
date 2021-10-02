@@ -18,8 +18,7 @@
 
 import re
 import json
-from urllib import quote
-from urllib2 import HTTPError
+from six.moves import urllib_parse, urllib_error
 from urlresolver import common
 from urlresolver.common import i18n
 from urlresolver.resolver import UrlResolver, ResolverError
@@ -31,13 +30,12 @@ CLIENT_ID = 'TH7yOa_pgRD1MRyIs6496Q'
 USER_AGENT = 'URLResolver for Kodi/{0}'.format(common.addon_version)
 FORMATS = common.VIDEO_FORMATS
 
-api_url = 'https://debrid-link.com/api/v2'
+api_url = 'https://debrid-link.fr/api/v2'
 
 
 class DebridLinkResolver(UrlResolver):
     name = "Debrid-Link.fr"
     domains = ["*"]
-    media_url = None
 
     def __init__(self):
         self.net = common.Net()
@@ -74,7 +72,7 @@ class DebridLinkResolver(UrlResolver):
             url = '{0}/downloader/add'.format(api_url)
             data = {'url': media_id}
             js_data = json.loads(self.net.http_POST(url, form_data=data, headers=self.headers).content)
-        except HTTPError as e:
+        except urllib_error.HTTPError as e:
             if not retry and e.code == 401:
                 if self.get_setting('refresh'):
                     self.refresh_token()
@@ -111,14 +109,14 @@ class DebridLinkResolver(UrlResolver):
         if media_id.startswith('magnet:'):
             media_id = re.findall('''magnet:.+?urn:[a-zA-Z0-9]+:([a-zA-Z0-9]+)''', media_id.lower(), re.I)[0]
         else:
-            media_id = quote(media_id)
+            media_id = urllib_parse.quote_plus(media_id)
         try:
             url = '{0}/seedbox/cached?url={1}'.format(api_url, media_id)
             result = json.loads(self.net.http_GET(url, headers=self.headers).content)
             if result.get('success', False):
-                if result.get('value', False):
+                if media_id in list(result.get('value').keys()):
                     return True
-        except HTTPError as e:
+        except urllib_error.HTTPError as e:
             if not retry and e.code == 401:
                 if self.get_setting('refresh'):
                     self.refresh_token()
@@ -137,7 +135,8 @@ class DebridLinkResolver(UrlResolver):
                     msg = 'Unknown Error (2)'
                 raise ResolverError('Debrid-Link Error: {0} ({1})'.format(msg, e.code))
         except Exception as e:
-            raise ResolverError('Unexpected Exception during DL Cache check: {0}'.format(e))
+            if "'list' object" not in e:
+                raise ResolverError('Unexpected Exception during DL Cache check: {0}'.format(e))
 
         return False
 
@@ -238,7 +237,7 @@ class DebridLinkResolver(UrlResolver):
                 logger.log_debug('Debrid-Link hosters : {0}'.format(len(hosters)))
             else:
                 logger.log_error('Error getting DL Hosters')
-        except HTTPError as e:
+        except urllib_error.HTTPError as e:
             if not retry and e.code == 401:
                 if self.get_setting('refresh'):
                     self.refresh_token()
@@ -269,7 +268,7 @@ class DebridLinkResolver(UrlResolver):
             if js_data.get('success', False):
                 hosts = js_data.get('value')
                 if self.get_setting('torrents') == 'true':
-                    hosts.extend([u'torrent', u'magnet'])
+                    hosts.extend(['torrent', 'magnet'])
                 logger.log_debug('Debrid-Link hosts : {0}'.format(hosts))
             else:
                 logger.log_error('Error getting DL Hosts')
@@ -317,12 +316,23 @@ class DebridLinkResolver(UrlResolver):
             js_result = json.loads(self.net.http_POST(url, form_data=data, headers=self.headers).content)
             if js_result.get('access_token', False):
                 self.set_setting('token', js_result.get('access_token'))
-                self.headers.update({'Authorization': 'Bearer {0}'.format(self.get_setting('token'))})
+                self.headers.update({'Authorization': 'Bearer {0}'.format(js_result.get('access_token'))})
                 return True
             else:
                 # empty all auth settings to force a re-auth on next use
                 self.reset_authorization()
                 raise ResolverError('Unable to Refresh Debrid-Link Token')
+        except urllib_error.HTTPError as e:
+            if e.code == 400:
+                js_data = json.loads(e.read())
+                if js_data.get('error') == 'invalid_request':
+                    logger.log_debug('Exception during DL auth: {0}'.format(js_data.get('error')))
+                    # empty all auth settings to force a re-auth on next use
+                    self.reset_authorization()
+                    raise ResolverError('Unknown error during Authorization')
+            else:
+                logger.log_debug('Exception during DL auth: {0}'.format(e))
+                raise ResolverError('Unknown error during Authorization')
         except Exception as e:
             self.reset_authorization()
             logger.log_debug('Debrid-Link Authorization Failed: {0}'.format(e))
@@ -360,8 +370,9 @@ class DebridLinkResolver(UrlResolver):
                 logger.log_debug('Authorizing Debrid-Link Result: |{0}|'.format(js_data))
                 activated = True
                 self.set_setting('token', js_data.get('access_token'))
+                self.set_setting('client_id', CLIENT_ID)
                 self.set_setting('refresh', js_data.get('refresh_token'))
-        except HTTPError as e:
+        except urllib_error.HTTPError as e:
             if e.code == 400:
                 js_data = json.loads(e.read())
                 if js_data.get('error') != 'authorization_pending':
@@ -379,10 +390,6 @@ class DebridLinkResolver(UrlResolver):
         self.set_setting('refresh', '')
 
     @classmethod
-    def _is_enabled(cls):
-        return cls.get_setting('enabled') == 'true' and cls.get_setting('token')
-
-    @classmethod
     def get_settings_xml(cls):
         xml = super(cls, cls).get_settings_xml()
         xml.append('<setting id="{0}_torrents" type="bool" label="{1}" default="true"/>'.format(cls.__name__, i18n('torrents')))
@@ -391,7 +398,12 @@ class DebridLinkResolver(UrlResolver):
         xml.append('<setting id="{0}_reset" type="action" label="{1}" action="RunPlugin(plugin://script.module.urlresolver/?mode=reset_dl)"/>'.format(cls.__name__, i18n('reset_my_auth')))
         xml.append('<setting id="{0}_token" visible="false" type="text" default=""/>'.format(cls.__name__))
         xml.append('<setting id="{0}_refresh" visible="false" type="text" default=""/>'.format(cls.__name__))
+        xml.append('<setting id="{0}_client_id" visible="false" type="text" default=""/>'.format(cls.__name__))
         return xml
+
+    @classmethod
+    def _is_enabled(cls):
+        return cls.get_setting('enabled') == 'true' and cls.get_setting('token')
 
     @classmethod
     def isUniversal(cls):

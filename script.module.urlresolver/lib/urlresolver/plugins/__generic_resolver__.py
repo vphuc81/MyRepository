@@ -1,5 +1,5 @@
 """
-    Kodi urlresolver plugin
+    Plugin for URLResolver
     Copyright (C) 2016  script.module.urlresolver
 
     This program is free software: you can redistribute it and/or modify
@@ -17,13 +17,13 @@
 """
 import re
 import abc
-from lib import helpers
+from urlresolver.plugins.lib import helpers
 from urlresolver.resolver import UrlResolver
 
 
 class GenericResolver(UrlResolver):
     __metaclass__ = abc.ABCMeta
-    
+
     """
     Generic Resolver
     ___
@@ -37,7 +37,7 @@ class GenericResolver(UrlResolver):
 
     def __init__(self):
         if self.pattern is None:
-            self.pattern = '(?://|\.)(%s)/(?:embed[/-])?([A-Za-z0-9]+)' % re.escape('|'.join(self.domains))
+            self.pattern = r'(?://|\.)(%s)/(?:embed[/-])?([A-Za-z0-9]+)' % re.escape('|'.join(self.domains))
 
     def get_media_url(self, host, media_id):
         """
