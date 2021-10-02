@@ -625,7 +625,7 @@ http://www2.gostream.sc
     </extension>
 </addon>
 
-<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.48" provider-name="MetalKettle">
+<addon id="plugin.video.giaitritv" name="**[COLOR yellow]Movies - HD[/COLOR]" version="1.0.49" provider-name="MetalKettle">
 
   <requires>
 
@@ -635,6 +635,7 @@ http://www2.gostream.sc
 	<import addon="repository.bimozie" />
 	<import addon="repository.hieuitmediacenter" />
 	<import addon="repository.pressplay" />
+	<import addon="repository.kodibae" />
     <import addon="plugin.video.youtube" version="3.0.0" />
 	<import addon="plugin.video.live.streamspro" />
 	<import addon="script.module.urlresolver" />
@@ -2443,17 +2444,27 @@ http://www2.gostream.sc
 	</extension>
 </addon>
 
-<addon id="repository.kodibae" name="[COLOR pink]Kodi Bae Repository[/COLOR]" version="3.0.0.01" provider-name="kodibae">
+<addon id="repository.kodibae" name="[COLOR pink]Kodi Bae Repository[/COLOR]" version="5.0.0" provider-name="kodibae">
     <extension point="xbmc.addon.repository" name="[COLOR pink]Kodi Bae Repository[/COLOR]">
     <dir>
         <info compressed="false">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml</info>
         <checksum>https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml.md5</checksum>
         <datadir zip="true">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/zips/</datadir>
     </dir>
-        <info compressed="false">https://raw.githubusercontent.com/kodibae/repository.kodibae/master/addons.xml</info>
-        <checksum>https://raw.githubusercontent.com/kodibae/repository.kodibae/master/addons.xml.md5</checksum>
-        <datadir zip="true">https://raw.githubusercontent.com/kodibae/repository.kodibae/master/</datadir>
+
+    <dir minversion="18.0" maxversion="18.9.0">
+		<info compressed="false">https://raw.githubusercontent.com/kodibae/repository.kodibae/master/leia/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/kodibae/repository.kodibae/master/leia/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/kodibae/repository.kodibae/master/leia/</datadir>
+    </dir>
+
+    <dir minversion="19.0">
+		<info compressed="false">https://raw.githubusercontent.com/kodibae/repository.kodibae/master/matrix/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/kodibae/repository.kodibae/master/matrix/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/kodibae/repository.kodibae/master/matrix/</datadir>
+    </dir>
     </extension>
+
     <extension point="xbmc.addon.metadata">
         <summary>Unofficial Addons for Kodi</summary>
         <description>Would you care for some salt with that fork?</description>

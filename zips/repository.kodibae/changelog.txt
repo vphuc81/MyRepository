@@ -1,5 +1,5 @@
 ------------------------
-Kodi Bae Repo 3.0.0 (05-Mar-19)
+Kodi Bae Repo 5.0.0 (11-Aug-21)
 ------------------------
 
-- Bugfix
+- Error Fix
