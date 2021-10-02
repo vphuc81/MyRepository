@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 '''
-    Covenant Add-on
+    exodus Add-on
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,9 +18,11 @@
 '''
 
 
-import urlparse,sys,urllib
+import sys
+from six.moves import urllib_parse
+import xbmcgui
 
-params = dict(urlparse.parse_qsl(sys.argv[2].replace('?','')))
+params = dict(urllib_parse.parse_qsl(sys.argv[2].replace('?','')))
 
 action = params.get('action')
 
@@ -65,8 +67,32 @@ windowedtrailer = int(windowedtrailer) if windowedtrailer in ("0","1") else 0
 if action == None:
     from resources.lib.indexers import navigator
     from resources.lib.modules import cache
+    from resources.lib.modules import control
     cache.cache_version_check()
+    if control.setting('startup.sync.trakt.status') == 'true':
+        from resources.lib.modules import trakt
+        trakt.syncTraktStatus()
     navigator.navigator().root()
+
+elif action == "furkNavigator":
+    from resources.lib.indexers import navigator
+    navigator.navigator().furk()
+
+elif action == "furkMetaSearch":
+    from resources.lib.indexers import furk
+    furk.furk().furk_meta_search(url)
+
+elif action == "furkSearch":
+    from resources.lib.indexers import furk
+    furk.furk().search()
+
+elif action == "furkUserFiles":
+    from resources.lib.indexers import furk
+    furk.furk().user_files()
+
+elif action == "furkSearchNew":
+    from resources.lib.indexers import furk
+    furk.furk().search_new()
 
 elif action == 'movieNavigator':
     from resources.lib.indexers import navigator
@@ -100,6 +126,26 @@ elif action == 'mytvliteNavigator':
     from resources.lib.indexers import navigator
     navigator.navigator().mytvshows(lite=True)
 
+elif action == 'customNavigator':
+    from resources.lib.indexers import navigator
+    navigator.navigator().custom()
+
+elif action == 'customliteNavigator':
+    from resources.lib.indexers import navigator
+    navigator.navigator().custom(lite=True)
+
+elif action == 'imdbLists':
+    from resources.lib.indexers import navigator
+    navigator.navigator().imdbLists()
+
+elif action == 'movieMosts':
+    from resources.lib.indexers import navigator
+    navigator.navigator().movieMosts()
+
+elif action == 'showMosts':
+    from resources.lib.indexers import navigator
+    navigator.navigator().showMosts()
+
 elif action == 'downloadNavigator':
     from resources.lib.indexers import navigator
     navigator.navigator().downloads()
@@ -124,9 +170,21 @@ elif action == 'clearCache':
     from resources.lib.indexers import navigator
     navigator.navigator().clearCache()
 
+elif action == 'clearCacheProviders':
+    from resources.lib.indexers import navigator
+    navigator.navigator().clearCacheProviders()
+
+elif action == 'clearDebridCheck':
+    from resources.lib.indexers import navigator
+    navigator.navigator().clearDebridCheck()
+
 elif action == 'clearCacheSearch':
     from resources.lib.indexers import navigator
     navigator.navigator().clearCacheSearch()
+
+elif action == 'clearAllCache':
+    from resources.lib.indexers import navigator
+    navigator.navigator().clearCacheAll()
 
 elif action == 'infoCheck':
     from resources.lib.indexers import navigator
@@ -176,6 +234,10 @@ elif action == 'movieYears':
     from resources.lib.indexers import movies
     movies.movies().years()
 
+elif action == 'movieDecades':
+    from resources.lib.indexers import movies
+    movies.movies().decades()
+
 elif action == 'moviePersons':
     from resources.lib.indexers import movies
     movies.movies().persons(url)
@@ -207,7 +269,7 @@ elif action == 'tvSearchnew':
 elif action == 'tvSearchterm':
     from resources.lib.indexers import tvshows
     tvshows.tvshows().search_term(name)
-
+    
 elif action == 'tvPerson':
     from resources.lib.indexers import tvshows
     tvshows.tvshows().person()
@@ -309,14 +371,40 @@ elif action == 'smuSettings':
     except: pass
     urlresolver.display_settings()
 
+elif action == 'playscrapersettings':
+    from resources.lib.modules import control
+    control.openSettings('0.0', 'script.module.playscrapers')
+
+elif action == 'installPlayscrapers':
+    from resources.lib.modules import control
+    control.installAddon('script.module.exoscrapers')
+    control.sleep(200)
+    control.refresh()
+
+elif action == 'openscrapersettings':
+    from resources.lib.modules import control
+    control.openSettings('0.0', 'script.module.exoscrapers')
+
+elif action == 'installOrion':
+    from resources.lib.modules import control
+    control.installAddon('script.module.orion')
+    control.sleep(200)
+    control.refresh()
+
+elif action == 'orionsettings':
+    from resources.lib.modules import control
+    control.openSettings('0.0', 'script.module.orion')
+
 elif action == 'download':
-    import json
+    import simplejson as json
     from resources.lib.modules import sources
     from resources.lib.modules import downloader
     try: downloader.download(name, image, sources.sources().sourcesResolve(json.loads(source)[0], True))
     except: pass
 
 elif action == 'play':
+    from resources.lib.modules import control
+    control.busy()
     from resources.lib.modules import sources
     sources.sources().play(title, year, imdb, tvdb, season, episode, tvshowtitle, premiered, meta, select)
 
@@ -354,29 +442,34 @@ elif action == 'random':
         from resources.lib.indexers import tvshows
         rlist = tvshows.tvshows().get(url, create_directory=False)
         r = sys.argv[0]+"?action=random&rtype=season"
-    from resources.lib.modules import control
     from random import randint
-    import json
+    import simplejson as json
     try:
+        from resources.lib.modules import control
         rand = randint(1,len(rlist))-1
         for p in ['title','year','imdb','tvdb','season','episode','tvshowtitle','premiered','select']:
             if rtype == "show" and p == "tvshowtitle":
-                try: r += '&'+p+'='+urllib.quote_plus(rlist[rand]['title'])
+                try: r += '&'+p+'='+urllib_parse.quote_plus(rlist[rand]['originaltitle'])
                 except: pass
             else:
-                try: r += '&'+p+'='+urllib.quote_plus(rlist[rand][p])
+                if rtype == "movie":
+                    rlist[rand]['title'] = rlist[rand]['originaltitle']
+                elif rtype == "episode":
+                    rlist[rand]['tvshowtitle'] = urllib_parse.unquote_plus(rlist[rand]['tvshowtitle'])
+                try: r += '&'+p+'='+urllib_parse.quote_plus(rlist[rand][p])
                 except: pass
-        try: r += '&meta='+urllib.quote_plus(json.dumps(rlist[rand]))
-        except: r += '&meta='+urllib.quote_plus("{}")
+        try: r += '&meta='+urllib_parse.quote_plus(json.dumps(rlist[rand]))
+        except: r += '&meta={}'
         if rtype == "movie":
-            try: control.infoDialog(rlist[rand]['title'], control.lang(32536).encode('utf-8'), time=30000)
+            try: control.infoDialog('%s (%s)' % (rlist[rand]['title'], rlist[rand]['year']), control.lang(32536), time=20000)
             except: pass
         elif rtype == "episode":
-            try: control.infoDialog(rlist[rand]['tvshowtitle']+" - Season "+rlist[rand]['season']+" - "+rlist[rand]['title'], control.lang(32536).encode('utf-8'), time=30000)
+            try: control.infoDialog('%s - %01dx%02d . %s' % (urllib_parse.unquote_plus(rlist[rand]['tvshowtitle']), int(rlist[rand]['season']), int(rlist[rand]['episode']), rlist[rand]['title']), control.lang(32536), time=20000)
             except: pass
         control.execute('RunPlugin(%s)' % r)
     except:
-        control.infoDialog(control.lang(32537).encode('utf-8'), time=8000)
+        from resources.lib.modules import control
+        control.infoDialog(control.lang(32537), time=8000)
 
 elif action == 'movieToLibrary':
     from resources.lib.modules import libtools
@@ -386,6 +479,10 @@ elif action == 'moviesToLibrary':
     from resources.lib.modules import libtools
     libtools.libmovies().range(url)
 
+elif action == 'moviesToLibrarySilent':
+    from resources.lib.modules import libtools
+    libtools.libmovies().silent(url)
+
 elif action == 'tvshowToLibrary':
     from resources.lib.modules import libtools
     libtools.libtvshows().add(tvshowtitle, year, imdb, tvdb)
@@ -394,6 +491,10 @@ elif action == 'tvshowsToLibrary':
     from resources.lib.modules import libtools
     libtools.libtvshows().range(url)
 
+elif action == 'tvshowsToLibrarySilent':
+    from resources.lib.modules import libtools
+    libtools.libtvshows().silent(url)
+
 elif action == 'updateLibrary':
     from resources.lib.modules import libtools
     libtools.libepisodes().update(query)
@@ -401,3 +502,15 @@ elif action == 'updateLibrary':
 elif action == 'service':
     from resources.lib.modules import libtools
     libtools.libepisodes().service()
+
+elif action == 'syncTraktStatus':
+    from resources.lib.modules import trakt
+    trakt.syncTraktStatus()
+
+elif action == 'changelog':
+    from resources.lib.modules import changelog
+    changelog.get()	
+
+elif action == 'cleanSettings':
+    from resources.lib.modules import control
+    control.clean_settings()

@@ -1,37 +1,17 @@
-[B]1.2.2[/B]
-- Updated providers
+[B][COLOR gold]v13.0.0[/COLOR][/B]
+- Dependency fix[
 
-[B]1.2.1[/B]
-- Updated indexers
-- Updated providers
-- Tweaked mismatch handling
-- Tweaked resolvering
-- Re-work of Trakt authorization
-- Fixed issue with RealDebrid authorization
-- Added option for flatten TV show seasons
-- Added Exuary theme
-- Updated translations
+B][COLOR gold]v12.0.0[/COLOR][/B]
+- Dependency fix
 
-[B]1.2.0[/B]
-- Updated indexers
-- Updated providers
-- Tweaked mismatch handling
-- Fixed urlresolver compatibility
-- Tweaked Trakt episodes
-- Updated translations
+[B][COLOR gold]v11.0.0[/COLOR][/B]
+- Small fixes
 
-[B]1.1.1[/B]
-- Updated translations
-- Updated providers
+[B][COLOR gold]v10.0.2[/COLOR][/B]
+- Slight name change
 
-[B]1.1.0[/B]
-- Updated indexers
-- Tweaked Trakt progress
-- Updated translations
-- Updated providers
+[B][COLOR gold]v10.0.1[/COLOR][/B]
+- Dependency correction
 
-[B]1.0.1[/B]
-- Code cosmetics
-
-[B]1.0.0[/B]
-- Initial version
+[B][COLOR gold]v10.0.0[/COLOR][/B]
+- Rebased code
