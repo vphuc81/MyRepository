@@ -2452,7 +2452,7 @@ http://www2.gostream.sc
 	</extension>
 </addon>
 
-<addon id="repository.kodibae" name="[COLOR pink]Kodi Bae Repository[/COLOR]" version="5.0.0.1" provider-name="kodibae">
+<addon id="repository.kodibae" name="[COLOR pink]Kodi Bae Repository[/COLOR]" version="5.0.0.2" provider-name="kodibae">
     <extension point="xbmc.addon.repository" name="[COLOR pink]Kodi Bae Repository[/COLOR]">
     <dir>
         <info compressed="false">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/addons.xml</info>
@@ -2460,7 +2460,7 @@ http://www2.gostream.sc
         <datadir zip="true">https://github.com/tvaddonsco/tva-resolvers-repo/raw/master/zips/</datadir>
     </dir>
 
-    <dir minversion="18.0" maxversion="18.9.0">
+    <dir minversion="17.0" maxversion="18.9.0">
 		<info compressed="false">https://raw.githubusercontent.com/kodibae/repository.kodibae/master/leia/addons.xml</info>
 		<checksum>https://raw.githubusercontent.com/kodibae/repository.kodibae/master/leia/addons.xml.md5</checksum>
 		<datadir zip="true">https://raw.githubusercontent.com/kodibae/repository.kodibae/master/leia/</datadir>
